@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="LoginPage.css">
+</head>
+<body>
+    <div class="main">
+        <div class="mainContainer">
+            <div class="split-screen">
+                <div class="left">
+                    <!-- <img src="Pictures/sample_pic.png"> -->
+                </div>
+
+                <!-- Login form -->
+                <div class="rightt show" id="loginForm">
+                    <div class="forms formLogin">
+                        <div class="forms">
+                            <div class="title-container forms">
+                                <span class="login-title">Login</span>
+
+                                <form class="login-forms">
+                                    <div class="login-input-field">
+                                        <input type="text" required="required" class="inputLogin">
+                                        <span>Username</span>
+                                        <img class="img-login" src="Pictures/usernameCap.png">
+                                    </div>
+                                    <div class="login-input-field">
+                                        <input type="password" required="required" class="password inputLogin">
+                                        <span>Password</span>
+                                    </div>
+
+                                    <div class="forgotpass-container">
+                                        <a href="#" class="forgot-text">Forgot Password?</a>
+                                    </div>
+
+                                    <div class="btn-login">
+                                        <button class="login-press">Login</button>
+                                    </div>
+
+                                    <div class="signtext-container">
+                                        <span class="login-signup">Don't have an account?
+                                            <a href="#" class="link signup-text" onclick="showSignUpForm()">Sign Up</a>
+                                        </span>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Login and Sign Up forms -->
+                <div class="rightt" id="signUpForm">
+                    <div class="formSignup">
+                        <span class="login-title"> Sign Up </span>
+
+                        <form class="signup-form">
+                            <div class="form first">
+                                <div class="details personal">
+                                    <span class="titleniyato"> Personal Details </span>
+
+                                    <div class="input-field">
+                                        <span> First Name </span>
+                                        <input type="text" placeholder="Enter Your First Name">
+                                    </div>
+        
+                                    <div class="input-field">
+                                        <span> Last Name </span>
+                                        <input type="text" placeholder="Enter Your Last Name">
+                                    </div>
+
+                                    <div class="input-field">
+                                        <span> Middle Name </span>
+                                        <input type="text" placeholder="Enter Your Middle Name">
+                                    </div>
+
+                                    <div class="rowFields">
+                                        <div class="input-field">
+                                            <span> Suffix </span>
+                                            <input type="text" placeholder="Enter Your Suffix">
+                                        </div>
+            
+                                        <div class="input-field">
+                                            <span> Gender </span>
+                                            <input type="text" placeholder="Gender">
+                                        </div>
+                                    </div>
+
+                                    <div class="details ID">
+                                        <span class="titleniyato"> Identity Details </span>
+
+                                        <div class="input-field">
+                                            <span> First Name </span>
+                                            <input type="text" placeholder="Enter Your First Name">
+                                        </div>
+            
+                                        <div class="input-field">
+                                            <span> Last Name </span>
+                                            <input type="text" placeholder="Enter Your Last Name">
+                                        </div>
+    
+                                        <div class="input-field">
+                                            <span> Middle Name </span>
+                                            <input type="text" placeholder="Enter Your Middle Name">
+                                        </div>
+    
+                                        <div class="rowFields">
+                                            <div class="input-field">
+                                                <span> Suffix </span>
+                                                <input type="text" placeholder="Enter Your Suffix">
+                                            </div>
+                
+                                            <div class="input-field">
+                                                <span> Gender </span>
+                                                <input type="text" placeholder="Gender">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <button class="nextBtn">
+                                        <span class="btnText"> Next </span>
+                                    </button>
+
+                                </div>
+                            </div>
+
+
+                            <div class="form second">
+                                <div class="details personal">
+                                    <span class="titleniyato"> Address </span>
+
+                                    <div class="input-field">
+                                        <span> First Name </span>
+                                        <input type="text" placeholder="Enter Your First Name">
+                                    </div>
+        
+                                    <div class="input-field">
+                                        <span> Last Name </span>
+                                        <input type="text" placeholder="Enter Your Last Name">
+                                    </div>
+
+                                    <div class="input-field">
+                                        <span> Middle Name </span>
+                                        <input type="text" placeholder="Enter Your Middle Name">
+                                    </div>
+
+                                    <div class="rowFields">
+                                        <div class="input-field">
+                                            <span> Suffix </span>
+                                            <input type="text" placeholder="Enter Your Suffix">
+                                        </div>
+            
+                                        <div class="input-field">
+                                            <span> Gender </span>
+                                            <input type="text" placeholder="Gender">
+                                        </div>
+                                    </div>
+
+                                    <div class="details ID">
+                                        <span class="titleniyato"> Identity Details </span>
+
+                                        <div class="input-field">
+                                            <span> First Name </span>
+                                            <input type="text" placeholder="Enter Your First Name">
+                                        </div>
+            
+                                        <div class="input-field">
+                                            <span> Last Name </span>
+                                            <input type="text" placeholder="Enter Your Last Name">
+                                        </div>
+    
+                                        <div class="input-field">
+                                            <span> Middle Name </span>
+                                            <input type="text" placeholder="Enter Your Middle Name">
+                                        </div>
+    
+                                        <div class="rowFields">
+                                            <div class="input-field">
+                                                <span> Suffix </span>
+                                                <input type="text" placeholder="Enter Your Suffix">
+                                            </div>
+                
+                                            <div class="input-field">
+                                                <span> Gender </span>
+                                                <input type="text" placeholder="Gender">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="buttonss">
+                                        <div class="backBtn">
+                                            <span class="btnText"> Back </span>
+                                        </div>
+
+                                        <button class="nextBtn">
+                                            <span class="btnText"> Next </span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!--- <div class="form third">
+                                <div class="details personal">
+                                    <span class="titleniyato"> Details Family </span>
+
+                                    <div class="input-field">
+                                        <span> First Name </span>
+                                        <input type="text" placeholder="Enter Your First Name">
+                                    </div>
+        
+                                    <div class="input-field">
+                                        <span> Last Name </span>
+                                        <input type="text" placeholder="Enter Your Last Name">
+                                    </div>
+
+                                    <div class="input-field">
+                                        <span> Middle Name </span>
+                                        <input type="text" placeholder="Enter Your Middle Name">
+                                    </div>
+
+                                    <div class="rowFields">
+                                        <div class="input-field">
+                                            <span> Suffix </span>
+                                            <input type="text" placeholder="Enter Your Suffix">
+                                        </div>
+            
+                                        <div class="input-field">
+                                            <span> Gender </span>
+                                            <input type="text" placeholder="Gender">
+                                        </div>
+                                    </div>
+
+                                    <div class="details ID">
+                                        <span class="titleniyato"> Identity Details </span>
+
+                                        <div class="input-field">
+                                            <span> First Name </span>
+                                            <input type="text" placeholder="Enter Your First Name">
+                                        </div>
+            
+                                        <div class="input-field">
+                                            <span> Last Name </span>
+                                            <input type="text" placeholder="Enter Your Last Name">
+                                        </div>
+    
+                                        <div class="input-field">
+                                            <span> Middle Name </span>
+                                            <input type="text" placeholder="Enter Your Middle Name">
+                                        </div>
+    
+                                        <div class="rowFields">
+                                            <div class="input-field">
+                                                <span> Suffix </span>
+                                                <input type="text" placeholder="Enter Your Suffix">
+                                            </div>
+                
+                                            <div class="input-field">
+                                                <span> Gender </span>
+                                                <input type="text" placeholder="Gender">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="buttonss">
+                                        <div class="backBtn">
+                                            <span class="btnText"> Back </span>
+                                        </div>
+
+                                        <button class="nextBtn">
+                                            <span class="btnText"> Next </span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div> --->
+                        </form>
+                    </div>
+                    <div class="signtext-container">
+                        <span class="login-signup">Already have an account?
+                            <a href="#" class="link signup-text" onclick="showLoginForm()">Login</a>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript logic
+        function showSignUpForm() {
+            document.getElementById("loginForm").classList.remove("show");
+            document.getElementById("signUpForm").classList.add("show");
+        }
+    
+        function showLoginForm() {
+            document.getElementById("signUpForm").classList.remove("show");
+            document.getElementById("loginForm").classList.add("show");
+        }
+    
+        const form = document.querySelector(".signup-form");
+        const nextBtn = form.querySelector(".nextBtn");
+        const backBtn = form.querySelector(".backBtn");
+        const allInput = form.querySelectorAll(".first input");
+
+        nextBtn.addEventListener("click", () => {
+            let allFilled = true;
+            allInput.forEach(input => {
+                if (input.getAttribute('placeholder') !== "Enter Your Suffix" && input.value === "") {
+                    allFilled = false;
+                }
+            });
+
+            if (allFilled) {
+                form.classList.add('secActive');
+            }
+        });
+
+        backBtn.addEventListener("click", () => {form.classList.remove('secActive');});
+    </script>      
+</body>
+</html>

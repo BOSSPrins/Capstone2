@@ -1,0 +1,406 @@
+:root{
+    --color-primary: #1828b8;
+    --color-danger: #ff7782;
+    --color-success: #41f1b6;
+    --color-warning: #ffbb55;
+    --color-white: #fff;
+    --color-info-dark: #1e1e1f;
+    --color-info-light: #939fb6;
+    --color-dark: #363949;
+    --color-light: rgba(61, 109, 176, 0.18);
+    --color-light-2: rgba(52, 58, 116, 0.20);
+    --color-primary-variant: #111e88;
+    --color-dark-variant: #677483;
+    --color-background: #f6f6f9;
+
+    --light: #f9f9f9;
+    --blue: #3c91e6;
+    --light-blue: #a9d5ff;
+    --light-red: #f38c8c;
+    --light-green: #a7f9d0;
+    --grey: #eee;
+    --dark-grey: #aaaaaa;
+    --drak: #342e37;
+    --red:  #d76161;
+    --green: rgb(94, 232, 129);
+    --color-info-dark: #919497;
+
+    --color-border-radius: 2rem;
+    --color-border-radius-1: 0.4rem;
+    --color-border-radius-2: 0.8rem;
+    --color-border-radius-3: 1.2rem;
+
+
+    --card-padding: 1.8rem;
+    --padding-1: 1.2rem;
+
+    --box-shadow: 0 2rem 3rem var(--color-light);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif , Arial;
+}
+
+.main {
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ===== LEFT DESIGN ===== */
+
+.split-screen {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+}
+
+.left {
+    position: relative;
+    background: #99b7d1;
+    width: 65%;
+    height: 100%;
+}
+
+.left img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* ===== RIGHT SIDE DESIGN ==== */
+
+.img-login {
+    width: 20px;
+}
+
+.rightt{
+    display: none; /* Hide the right side initially */
+    background: var(--color-background);
+    max-width: 35%;
+    width: 100%;
+    height: 100vh;
+    padding: 20px;
+    justify-content: center;
+    align-items: center;
+}
+
+.rightt.show {
+    display: flex; /* Show the right side when necessary */
+    flex-direction: column;
+}
+
+.login-title {
+    font-size: 28px;
+    font-weight: 600;
+    color: #232836;
+}
+
+/* form {
+    margin-top: 20px;
+} */
+
+/*========== LOGIN FORM DESIGN ========= */
+.formLogin {
+    max-width: 450px;
+    margin: 20px;
+    width: 100%;
+    /*border-radius: 5px;
+    background: white;
+    border-radius: var(--color-border-radius);
+    box-shadow: var(--box-shadow); */
+}
+
+.login-title{
+    display: flex;
+    justify-content: center;
+}
+
+.formLogin .forms {
+    padding: 10px;
+}
+
+.forms .login-input-field {
+    height: 40px;
+    width: 100px;
+    position: relative;
+    margin-top: 30px;
+    width: 100%
+}
+
+.login-input-field input {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    padding: 10px;
+    border: 1px solid rgba(118, 147, 193, 0.4);
+    background: var(--color-background);
+    border-radius: 5px;
+    outline: none;
+    color: black;
+    font-size: 1em;
+    transition: 0.5s;
+}
+
+.login-input-field span {
+    position: absolute;
+    left: 0;
+    padding: 10px;
+    pointer-events: none;
+    font-size: 1em;
+    color: rgba(118, 147, 193, 0.4);
+    text-transform: capitalize;
+    transition: 0.2s;
+}
+
+.login-input-field img {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    font-size: 20px;
+}
+
+.login-input-field input:valid~span,
+.login-input-field input:focus~span {
+    color: var(--color-primary);
+    transform: translateX(5px) translateY(-7px);
+    font-size: 0.70em;
+    padding: 0 3px;
+    background: var(--color-background);
+}
+
+.login-input-field input:valid,
+.login-input-field input:focus {
+    border: 1px solid var(--color-primary);
+}
+
+/* ==== ForgotPass Design ===== */
+
+.forgotpass-container {
+    display: flex;
+    margin-top: 7px;
+    justify-content: end;
+}
+
+.forgotpass-container a {
+    text-decoration: none;
+}
+
+.forgotpass-container a:hover {
+    text-decoration: underline;
+}
+
+.forgot-text {
+    color: var(--color-primary);
+}
+
+/* ===== Login Button Design ===== */
+
+.btn-login {
+    margin-top: 35px;
+}
+
+.login-press {
+    width: 100%;
+    height: 40px;
+    border: none;
+    font-size: 20px;
+    background: var(--color-primary);
+    color: var(--color-white);
+    border-radius: var(--color-border-radius-1);
+}
+
+/* ===== Sign Up link Design ===== */
+
+.signtext-container {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.login-signup a {
+    text-decoration: none;
+}
+
+.login-signup a:hover {
+    text-decoration: underline;
+}
+
+.signup-text {
+    color: var(--color-primary);
+
+}
+
+/* ========== SIGN UP FORM DESIGN ========== */
+.formSignup{
+    position: relative;
+    max-width: 470px;
+    width: 100%;
+    /* background-color: var(--color-white);
+    border-radius: var(--color-border-radius);
+    box-shadow: var(--box-shadow); */
+
+    margin: 0 15px;
+    overflow-y: auto;
+}
+
+.formSignup::-webkit-scrollbar{
+    display: none;
+}
+
+.formSignup .signup-form .titleniyato{
+    display: block;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    font-size: 17.5px;
+    font-weight: bold;
+    margin: 6px 0;
+    color: #333;
+}
+
+.formSignup .signup-form{
+    position: relative;
+    min-height: 380px;
+    background: var(--color-background);
+    margin-top: 10px;
+}
+
+.signup-form .input-field{
+    width: 100%;
+    margin-top: 10px;
+}
+
+.input-field span{
+    font-size: 14px;
+    color: #333;
+}
+
+.signup-form .input-field input{
+    position: relative;
+    height: 35px;
+    width: 100%;
+    outline: none;
+    font-size: 1rem;
+    color: #000000;
+    margin-top: 5px;
+    border: 1px solid rgba(62, 65, 71, 0.4);
+    border-radius: 5px;
+    background: transparent;
+    padding: 0 15px;
+}
+
+.signup-form .input-field input::placeholder{
+    color: rgba(71, 77, 86, 0.4);
+}
+
+.signup-form .input-field input:focus {
+    border-color: var(--color-primary);
+}
+
+.signup-form .input-field input:focus::placeholder {
+    color: var(--color-primary);
+}
+
+.signup-form .rowFields{
+    display: flex;
+    column-gap: 15px;
+}
+
+/* ====== OTHER SIGN UP FORM ==== */
+.formSignup .signup-form .form{
+    position: absolute;
+    max-width: 470px;
+    background: var(--color-background);
+}
+
+.formSignup .signup-form .form.second{
+    opacity: 0;
+    pointer-events: none;
+}
+
+.signup-form.secActive .form.first{
+    opacity: 0;
+    pointer-events: auto;
+}
+
+.signup-form.secActive .form.second{
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* ===== SIGNUP BUTTON ==== */
+.formSignup .signup-form button, .backBtn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 30px;
+    max-width: 65px;
+    width: 100%;
+    border: none;
+    outline: none;
+    color: #ffffff;
+    margin: 15px 0;
+    background: var(--color-primary);
+    border-radius: var(--color-border-radius-1);
+    cursor: pointer;
+}
+
+.formSignup .signup-form button,
+.formSignup .signup-form .backBtn{
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.signup-form button:hover{
+    background-color: #000759;
+}
+
+.signup-form .buttonss{
+    display: flex;
+    align-items: center;
+}
+
+.signup-form .buttonss button, .backBtn{
+    margin-right: 14px;
+}
+
+/* .signup-form .input-field input:is(:focus, :valid){
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.13);
+} */
+
+@media screen and (max-width: 850px){
+    .signup-form .rowFields{
+        flex-wrap: wrap;
+    }
+}
+
+@media screen and (max-width: 769px){
+    .signup-form .rowFields{
+        flex-wrap: nowrap;
+    }
+}
+    
+
+/* ========== MEDIA ========== */
+@media screen and (max-width: 768px) {
+    .split-screen {
+        flex-direction: column;
+    }
+
+    .left {
+        width: 100%;
+    }
+
+    .rightt{
+        max-width: 100%;
+        height: 70%;
+    }
+}

@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  overflow-y: hidden; /* Hide vertical scrollbar for the entire page */
+}
+
+.messenger-container {
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.message-display {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.input-container {
+  display: flex;
+}
+
+.input-container {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-top: 1px solid #ccc;
+}
+
+.message-input {
+  flex: 1;
+  width: calc(100% - 90px); /* Set width to 100% */
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px 0 0 5px;
+  font-size: 16px;
+  max-height: 200px;
+  resize: none;
+  overflow-y: auto;
+}
+
+.send-btn {
+  padding: 10px 20px;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.send-btn:hover {
+  background-color: #0056b3;
+}
+
+/* ========== MAIN CHAT ITEMS DESIGN ========== */
+.imgMores,
+.forwardImg,
+.deleteImg{
+    width: 17px;
+    margin-right: 10px;
+}
+
+.katawanNgChat{
+    overflow-y: auto;
+    height: 100%;
+    height: 515px;
+    margin-left: 10px;
+    padding: 10px;
+}
+
+.katawanNgChat::-webkit-scrollbar{
+    display: none;
+}
+
+.chatRaps{
+   list-style-type: none; 
+   padding: 0;
+   margin: 0;
+}
+
+.chatItems{
+    display: flex;
+    align-items: flex-end;
+    flex-direction: row-reverse;
+    margin-bottom: 16px;
+}
+
+.chatItemsGilid{
+    margin-left: 8px;
+}
+
+.chatItemsGimage{
+    display: block;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.ItemsConsts{
+    width: 100%;
+}
+
+.ItemsWrapper:not(:last-child){
+    margin-bottom: 8px;
+}
+
+.ItemBoxes{
+    position: relative;
+    max-width: 720px;
+    margin-left: auto;
+}
+
+.ItemBoxTexts{
+    padding: 12px 16px 8px;
+    background: var(--color-white);
+    box-shadow: 0 2px 8px -2px rgba(0, 0, 0, 0.1);
+    color: rgb(45, 45, 45);
+    font-size: 14px;
+    border-radius: 6px;
+    line-height: 1.5;
+}
+
+.ItemBoxTime{
+    display: block;
+    text-align: right;
+    margin-top: 4px;
+    font-size: 10px;
+    color: var(--color-info-dark);
+    line-height: 1;
+}
+
+.ItemsDropDown{
+    position: absolute;
+    top: 0;
+    right: calc(100% + 8px);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.15 ease-in-out;
+}
+
+.ItemsWrapper:hover .ItemsDropDown{
+    opacity: 1;
+    visibility: visible;
+}
+
+.ItemDrop-btn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: rgb(238, 235, 235);
+    cursor: pointer;
+    outline: none;
+    border: none;
+    transition: all 0.15s ease-in-out;
+    padding-left: 10px;
+}
+
+.ItemDrop-btn:hover{
+    background: var(--color-light);
+    box-shadow: 0 2px 8px -2px var(--color-primary);
+}
+
+.ItemDrop-btn.active{
+    background-color: var(--background-active);
+}
+
+.ItemsDropDownList{
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: rgb(238, 235, 235);
+    z-index: 10;
+    box-shadow: 0 2px 8px -2px var(--color-primary);
+    border-radius: 4px 0;
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(.9);
+    transform-origin: left top;
+    transition: all 0.15s ease-in-out;
+}
+
+.ItemsDropDown.active .ItemsDropDownList{
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1);
+}
+
+.ItemsDropDownList a{
+    display: flex;
+    align-items: center;
+    color: rgb(81, 81, 81);
+    font-size: 13px;
+    padding: 6px 12px;
+}
+
+.ItemsDropDownList a:hover{
+    background: var(--color-light);
+}
+
+.ItemsDropDownList a.active{
+    background: var(--background-active);
+}
+
+.ItemsDropDownList a i{
+    font-size: 16px;
+    margin-right: 8px;
+}
+
+.dividerngKatawan{
+    position: relative;
+    text-align: center;
+    font-size: 13px;
+    color: rgb(141, 140, 140);
+    margin-bottom: 10px;
+}
+
+.dividerngKatawan::before{
+    content: '';
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 0;
+    width: 100%;
+    height: 0;
+    border-bottom: 1px solid rgb(141, 140, 140);
+}
+
+.dividerngKatawan span{
+    position: relative;
+    display: inline-block;
+    padding: 0 8px;
+    background-color: var(--color-background);
+    z-index: 1;
+}
+
+/* THIS IS THE OTHER SIDE REPLYING */
+.chatItems.ehe{
+    flex-direction: row;
+}
+
+.chatItems.ehe .ItemBoxes{
+    margin-left: unset;
+}
+
+.chatItems.ehe .chatItemsGilid{
+    margin-right: 8px;
+}
+
+.chatItems.ehe .ItemsDropDown{
+    left: calc(100% + 8px);
+    right: unset;
+}
+
+.chatItems.ehe .ItemBoxTexts{
+    background: rgb(111, 168, 233);
+    box-shadow: 0 2px 8px -2px var(--color-primary);
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.chatItems.ehe .ItemBoxTime{
+    color: rgba(255, 255, 255, .7);
+}
+    </style>
+</head>
+<body>
+    <div class="containerChat">
+        <div class="messenger-container">
+            <div id="message-display" class="message-display">
+                <ul class="chatRaps">
+                    <li class="dividerngKatawan">
+                        <span> Today </span>
+                    </li>
+                    <li class="chatItems ehe">
+                        <div class="chatItemsGilid">
+                            <img class="chatItemsGimage" src="Pictures/sample_pic.png">
+                        </div>
+                        <div class="ItemsConsts">
+                            <div class="ItemsWrapper">
+                                <div class="ItemBoxes">
+                                    <div class="ItemBoxTexts">
+                                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. 
+                                            Repellat laboriosam doloremque quisquam minima facilis delectus 
+                                            quasi nemo, ullam, sapiente repudiandae unde porro vitae? Iste 
+                                            aperiam voluptatum cumque, similique eligendi repellendus?</p>
+                                        <div class="ItemBoxTime"> 02:23</div>
+                                    </div>
+                                    <div class="ItemsDropDown">
+                                        <button type="button" class="ItemDrop-btn">
+                                            <img class="imgMores" src="Pictures/MoreDots.png">
+                                        </button>
+                                        <ul class="ItemsDropDownList">
+                                            <li>
+                                                <a href="#">
+                                                    <img class="forwardImg" src="Pictures/forward.png">
+                                                    Forward
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#">
+                                                    <img class="deleteImg" src="Pictures/trashButton.png">
+                                                    Delete
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="chatItems">
+                        <div class="chatItemsGilid">
+                            <img class="chatItemsGimage" src="Pictures/sample_pic.png">
+                        </div>
+                        <div class="ItemsConsts">
+                            <div class="ItemsWrapper">
+                                <div class="ItemBoxes">
+                                    <div class="ItemBoxTexts">
+                                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. 
+                                            Repellat laboriosam doloremque quisquam minima facilis delectus 
+                                            quasi nemo, ullam, sapiente repudiandae unde porro vitae? Iste 
+                                            aperiam voluptatum cumque, similique eligendi repellendus?</p>
+                                        <div class="ItemBoxTime"> 02:23</div>
+                                    </div>
+                                    <div class="ItemsDropDown">
+                                        <button type="button" class="ItemDrop-btn">
+                                            <img class="imgMores" src="Pictures/MoreDots.png">
+                                        </button>
+                                        <ul class="ItemsDropDownList">
+                                            <li>
+                                                <a href="#">
+                                                    <img class="forwardImg" src="Pictures/forward.png">
+                                                    Forward
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#">
+                                                    <img class="deleteImg" src="Pictures/trashButton.png">
+                                                    Delete
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="input-container">
+              <textarea id="message-input" rows="1" class="message-input" placeholder="Type your message..."></textarea>
+              <button id="send-btn" class="send-btn">Send</button>
+            </div>
+          </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+  const messageDisplay = document.getElementById("message-display");
+  const messageInput = document.getElementById("message-input");
+
+  messageInput.addEventListener("input", function() {
+    adjustTextareaHeight();
+  });
+
+  function adjustTextareaHeight() {
+    // Reset the height to auto to calculate the content height
+    messageInput.style.height = "auto";
+    // Set the height to the scrollHeight of the content
+    messageInput.style.height = messageInput.scrollHeight + "px";
+  }
+});
+
+    </script>
+</body>
+</html>

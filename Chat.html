@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Chat </title>
+    <link rel="stylesheet" href="CSS/Chat.css">
+</head>
+<body>
+    <div class="mainCoversationChatContainer">
+        <div class="secMainDash">
+            <div class="headerTop">
+                <div class="leftSection">
+                    <img class="menu" src="Pictures/menu-hamburger.png">
+                    <img class="img-logo" src="Pictures/Dasma_City_Logo.png">
+                    <h2> Mabuhay Homes 2000 </h2>
+                </div>
+                <div class="rightSection">
+                    <div class="user-img"> </div>
+                    <div class="eme3"></div>
+                </div>
+            </div>
+
+            <div class="sidebarContainer sideActive" id="sidebar">
+                <a href="DashBoard.html" class="sideside">
+                    <img class="img-sideboard" src="Pictures/Dashboard2.png">
+                    <span> Dasboard </span>
+                </a>
+                <a href="#" class="sideside">
+                    <img class="img-sideboard" src="Pictures/Officials.png">
+                    <span> HOA Officials </span>
+                </a>
+                <a href="#" class="sideside">
+                    <img class="img-sideboard" src="Pictures/Residents2.png">
+                    <span> Residents </span>
+                </a>
+                <a href="#" class="sideside">
+                    <img class="img-sideboard" src="Pictures/Documents2.png">
+                    <span> Documents </span>
+                </a>
+                <a href="#" class="sideside">
+                    <img class="img-sideboard" src="Pictures/Request2.png">
+                    <span> Online Request </span>
+                </a>
+                <div class="complaintsContainer">
+                    <a href="#" class="sideside" id="complaintsDropdown">
+                        <img class="img-sideboard" src="Pictures/ComplaintsCap.png">
+                        <span> Complaints </span>
+                        <div class="eme2"></div> 
+                    </a>  
+                    <ul class="subMenuComp" id="complaintsSubMenu">
+                        <li> 
+                            <a href="#" class="active">
+                                <img class="img-subMenu" src="Pictures/Chat.png">
+                                <label class="sub-spa"> Chat </label>
+                            </a> 
+                        </li>
+                        <li> <a href="#"> Sub Menu 2 </a> </li>
+                        <li> <a href="#"> Sub Menu 3 </a> </li>
+                    </ul>
+                </div>
+                <a href="#" class="sideside">
+                    <img class="img-sideboard" src="Pictures/Announcement.png">
+                    <span> Announcement </span>
+                </a>
+                <a href="#" class="sideside">
+                    <img class="img-sideboard" src="Pictures/Accounts2.png">
+                    <span> Accounts </span>
+                </a>
+                <a href="#" class="sideside">
+                    <img class="img-sideboard" src="Pictures/logout.png">
+                    <span> Logout </span>
+                </a>
+            </div>
+
+            <div class="mainChatContainerr mainChathConActivee">
+                <div class="chatContentSidebar">
+                    <div class="chatContentSidebarTitle"> Chats </div>
+                    <form action="#" class="chatContentSidebarForm">
+                        <input type="search" class="chatContentSidebarInput" placeholder="Search...">
+                        <button type="submit" class="chatContentSubmit">
+                            <img class="chatSearch" src="Pictures/search.png">
+                        </button>
+                    </form>
+                    <div class="contentMessages">
+                        <ul class="messagesList">
+                            <li class="messageTitle"> 
+                                <span> Recently </span>
+                            </li>
+                            <li class="active">
+                                <a href="#">
+                                    <img class="messagesImages" src="Pictures/sample_pic.png">
+                                    <span class="conMessagesInfo">
+                                        <span class="mesageName"> Ruella </span>
+                                        <span class="mesageText"> Lorem, ipsum dolor sit amet consectetur Lorem </span>
+                                    </span>
+                                    <span class="messagesAtIbapa">
+                                        <span class="messageUnread"> 2 </span>
+                                        <span class="messageTime"> 2:02 </span>
+                                    </span>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="#">
+                                    <img class="messagesImages" src="Pictures/sample_pic.png">
+                                    <span class="conMessagesInfo">
+                                        <span class="mesageName"> Ruella </span>
+                                        <span class="mesageText"> Lorem, ipsum dolor sit amet consectetur Lorem </span>
+                                    </span>
+                                    <span class="messagesAtIbapa">
+                                        <span class="messageUnread"> 2 </span>
+                                        <span class="messageTime"> 2:02 </span>
+                                    </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="conChatConversation">
+                    <div class="TopngConversation">
+                        <button type="button" class="conversationBack">
+                            <img class="img-kaliwa" src="Pictures/arrowLeft.png">
+                        </button>
+                        <div class="mgaKausap">
+                            <img class="mgaKausapImages" src="Pictures/sample_pic.png">
+                            <div>
+                                <div class="mgaKausapNames"> Prince </div>
+                                <div class="mgaKausapStatus online"> Online </div>
+                            </div>
+                        </div>
+                        <div class="mgaPipindutin">
+                            <button type="button">
+                                <img class="imgPhone" src="Pictures/PhoneCall.png">
+                            </button>
+                            <button type="button">
+                                <img class="imgPhone" src="Pictures/videoCall.png">
+                            </button> 
+                            <button type="button">
+                                <img class="imgPhone" src="Pictures/info.png">
+                            </button> 
+                        </div>
+                    </div>
+                    <div class="containerChat">
+                        <div class="messenger-container">
+                            <div id="message-display" class="message-display">
+                                <ul class="chatRaps">
+                                    <li class="dividerngKatawan">
+                                        <span> Today </span>
+                                    </li>
+                                    <li class="chatItems ehe">
+                                        <div class="chatItemsGilid">
+                                            <img class="chatItemsGimage" src="Pictures/sample_pic.png">
+                                        </div>
+                                        <div class="ItemsConsts">
+                                            <div class="ItemsWrapper">
+                                                <div class="ItemBoxes">
+                                                    <div class="ItemBoxTexts">
+                                                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. 
+                                                            Repellat laboriosam doloremque quisquam minima facilis delectus 
+                                                            quasi nemo, ullam, sapiente repudiandae unde porro vitae? Iste 
+                                                            aperiam voluptatum cumque, similique eligendi repellendus?</p>
+                                                        <div class="ItemBoxTime"> 02:23</div>
+                                                    </div>
+                                                    <div class="ItemsDropDown">
+                                                        <button type="button" class="ItemDrop-btn">
+                                                            <img class="imgMores" src="Pictures/MoreDots.png">
+                                                        </button>
+                                                        <ul class="ItemsDropDownList">
+                                                            <li>
+                                                                <a href="#">
+                                                                    <img class="forwardImg" src="Pictures/forward.png">
+                                                                    Forward
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="#">
+                                                                    <img class="deleteImg" src="Pictures/trashButton.png">
+                                                                    Delete
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="chatItems">
+                                        <div class="chatItemsGilid">
+                                            <img class="chatItemsGimage" src="Pictures/sample_pic.png">
+                                        </div>
+                                        <div class="ItemsConsts">
+                                            <div class="ItemsWrapper">
+                                                <div class="ItemBoxes">
+                                                    <div class="ItemBoxTexts">
+                                                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. 
+                                                            Repellat laboriosam doloremque quisquam minima facilis delectus 
+                                                            quasi nemo, ullam, sapiente repudiandae unde porro vitae? Iste 
+                                                            aperiam voluptatum cumque, similique eligendi repellendus?</p>
+                                                        <div class="ItemBoxTime"> 02:23</div>
+                                                    </div>
+                                                    <div class="ItemsDropDown">
+                                                        <button type="button" class="ItemDrop-btn">
+                                                            <img class="imgMores" src="Pictures/MoreDots.png">
+                                                        </button>
+                                                        <ul class="ItemsDropDownList">
+                                                            <li>
+                                                                <a href="#">
+                                                                    <img class="forwardImg" src="Pictures/forward.png">
+                                                                    Forward
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="#">
+                                                                    <img class="deleteImg" src="Pictures/trashButton.png">
+                                                                    Delete
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="input-container">
+                                <button id="send-btn" class="send-btn">
+                                    <img class="imgSendImg-btn" src="Pictures/send-image.png">
+                                  </button>
+                              <textarea id="message-input" rows="1" class="message-input" placeholder="Type your message..."></textarea>
+                              <button id="send-btn" class="send-btn">
+                                <img class="imgSend-btn" src="Pictures/Send.png">
+                              </button>
+                            </div>
+                          </div>
+                        </div> 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="JS/Chat.js"></script>
+</body>
+</html>
