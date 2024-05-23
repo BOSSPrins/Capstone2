@@ -445,6 +445,11 @@ html{
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
+   
+}
+
+.bold {
+    font-weight: bold;                        /*  testing ng font sa userlist sana gumana bukas */
 }
 
 .messagesAtIbapa{
@@ -524,24 +529,23 @@ html{
     font-size: 17px;
 }
 
-.mgaKausapStatus{
-    font-size: 13px;
-    color: rgb(141, 140, 140);
-}
 
-.mgaKausapStatus::before{
+.mgaKausapStatus::after{
     content: '';
-    width: 10px;
-    height: 10px;
-    background: rgb(211, 211, 211);
-    border-radius: 50%;
-    vertical-align: middle;
-    display: inline-block;
+     width: 10px;
+     height: 10px;
+     border-radius: 50%;
+     vertical-align: middle;
+     display: inline-block;
+ }
+.mgaKausapStatus.offline::after{
+    background: rgb(211, 211, 211); /* Offline color */
 }
 
-.mgaKausapStatus.online::before{
-    background: green;
+.mgaKausapStatus.online::after {
+    background: rgb(1, 207, 36); /* Online color */
 }
+
 
 /* === MGA TATANGGALIN */
 .imgPhone{
@@ -667,10 +671,12 @@ html{
   }
   
   .chatItems{
-      display: flex;
-      align-items: flex-end;
-      flex-direction: row-reverse;
-      margin-bottom: 16px;
+    display: flex;
+    align-items: flex-end;
+    flex-direction: row-reverse;
+    margin-bottom: 16px;
+    word-wrap: break-word; 
+      
   }
   
   .chatItemsGilid{
@@ -694,9 +700,10 @@ html{
   }
   
   .ItemBoxes{
-      position: relative;
-      max-width: 720px;
-      margin-left: auto;
+    position: relative;
+    max-width: 720px;
+    margin-left: auto;
+    
   }
   
   .ItemBoxTexts{
@@ -833,6 +840,7 @@ html{
   
   .chatItems.ehe .ItemBoxes{
       margin-left: unset;
+      
   }
   
   .chatItems.ehe .chatItemsGilid{

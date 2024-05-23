@@ -463,6 +463,12 @@ html{
 }
 
 /* ===== MAIN TABLE DESIGN ===== */
+.tb-btn{
+    border-radius: 5px;
+    padding: 0.4rem 2rem;
+    cursor: pointer;
+}
+
 .table-container{
     margin-top: 50px;
 }
@@ -498,13 +504,13 @@ td{
 }
 
 /* ===== TABLE BUTTON DESIGN ===== */
-.edit-btn{
-    background-color: var(--light-green);
-    color: green;
+.view-btn{
+    color: rgb(17, 94, 119);
+    background: rgb(173, 234, 255);
 }
 
-.edit-btn:hover{
-    background: var(--green);
+.view-btn:hover{
+    background: rgb(95, 201, 236);
 }
 
 .delete-btn{
@@ -514,6 +520,142 @@ td{
 
 .delete-btn:hover{
     background: var(--red);
+}
+
+/* ========== EDIT MODAL DESIGN ========== */
+.containerNgEditModal{
+    display: none;
+}
+
+.subContainerEditModal{
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    font-family: Arial, sans-serif;
+}
+
+.editItongmodal{
+    position: relative;
+    max-width: 600px;
+    width: 100%;
+    margin-top: 10px;
+    height: 590px;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
+.editItongmodal hr {
+    border: none;
+    height: 1px;
+    background-color: #ccc;
+    margin: 15px 0;
+}
+
+.editItongmodal::-webkit-scrollbar{
+    display: none;
+}
+
+.titleHeaderEdit{
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.edit-form h4{
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.closeEditModal{
+    height: 30px;
+    font-size: 28px;
+    font-weight: bold;
+    outline: none;
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+.edit-form .inputbox-edit{
+    width: 100%;
+}
+
+.edit-form .inputbox-edit .inputngEditModalTo{
+    position: relative;
+    display: inline-block;
+    height: 30px;
+    width: 100%;
+    font-size: small;
+    outline: none;
+    /* background: rgb(234, 240, 245);
+    border: 1px solid rgb(203, 214, 220); */
+    border-radius: 4px;
+    padding: 0 10px;
+    margin-top: 3px;
+}
+
+.inputbox-edit select{
+    position: relative;
+    height: 30px;
+    width: 100%;
+    outline: none;
+    /* background: rgb(234, 240, 245);
+    border: 1px solid rgb(203, 214, 220); */
+    border-radius: 4px;
+    padding: 0 10px;
+    margin-top: 3px;
+}
+
+.edit-form .inputbox-edit label{
+    font-weight: 550;
+}
+
+.edit-form .row{
+    display: flex;
+    column-gap: 15px;
+    margin-bottom: 13px;
+}
+
+.edit-form .row1{
+    display: grid;
+    grid-template-columns: 1fr 250px 1fr;
+    column-gap: 15px;
+    margin-bottom: 13px;
+}
+
+.edit-form .row2{
+    display: flex;
+    column-gap: 15px;
+    padding-bottom: 10px;
+}
+
+.edit-form .row3{
+    display: grid;
+    grid-template-columns: 1fr 1fr 250px;
+    column-gap: 15px;
+    padding-bottom: 10px;
+}
+
+.edit-form .row5{
+    display: flex;
+    column-gap: 15px;
+    margin-top: 13px;
+}
+
+.edit-form .row6{
+    margin-top: 10px;
+    padding-bottom: 10px;
 }
 
 /* ========== MEDIA QUERIES ========== */

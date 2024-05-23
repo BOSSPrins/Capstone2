@@ -77,7 +77,52 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   });
 
+// Backend ni Chat
+const usersList = document.querySelector(".userslisto"),
+searchBar = document.querySelector(".sertslist");
 
+searchBar.onkeyup = ()=>{
+    let searchTerm = searchBar.value;
+    if(searchTerm != ""){
+        searchBar.classList.add("active");
+    }else {
+        searchBar.classList.remove("active");
+    }
+    let xhr = new XMLHttpRequest();      //start ajax creating XML object
+    xhr.open("POST", "PHPBackend/Search.php", true);
+    xhr.onload = ()=>{  
+        if(xhr.readyState === XMLHttpRequest.DONE){
+          if(xhr.status === 200){
+              let data = xhr.response;
+              console.log(data);
+              usersList.innerHTML = data;
+            } 
+        }
+    }
+    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhr.send("searchTerm=" + searchTerm);
+}
+
+
+setInterval(()=>{
+
+    let xhr = new XMLHttpRequest();      //start ajax creating XML object
+    xhr.open("GET", "PHPBackend/Chat.php", true);
+    xhr.onload = ()=>{  
+        if(xhr.readyState === XMLHttpRequest.DONE){
+          if(xhr.status === 200){
+              let data = xhr.response;
+              console.log(data);
+              if(!searchBar.classList.contains("active")){
+                usersList.innerHTML = data;
+              }
+            } 
+        }
+    }
+    xhr.send();
+}, 500); // magarun ito nang tuloy tuloy after 500 ms
+
+// NAKA BOLD NA YUNG TEXT NG RECEIVER PERO HINDI ITIM
 
 
 

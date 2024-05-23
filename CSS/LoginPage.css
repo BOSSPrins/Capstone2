@@ -122,6 +122,18 @@
 .login-title{
     display: flex;
     justify-content: center;
+    margin-bottom: 40px;
+}
+
+.iror{
+    color: #721c24;
+    padding: 8px 10px;
+    text-align: center;
+    border-radius: 5px;
+    background: #f8d7da;
+    border: 1px solid #f5c6cb;
+    margin-bottom: 10px;
+    display: none;
 }
 
 .formLogin .forms {
@@ -240,10 +252,19 @@
 }
 
 /* ========== SIGN UP FORM DESIGN ========== */
+.signUp-title{
+    padding-bottom: 30px;
+    font-size: 28px;
+    font-weight: 600;
+    color: #232836;
+
+}
+
 .formSignup{
     position: relative;
     max-width: 470px;
     width: 100%;
+    margin-top: 20px;
     /* background-color: var(--color-white);
     border-radius: var(--color-border-radius);
     box-shadow: var(--box-shadow); */

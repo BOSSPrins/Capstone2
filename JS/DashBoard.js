@@ -99,3 +99,38 @@ eme2.addEventListener('click', function(event) {
     toggleSubMenu(); // Toggle the submenu visibility and rotate eme2
 });
 
+//FUNCTION SA PAGPAPALABAS NG MODAL SA EDIT BUTTON
+document.addEventListener('DOMContentLoaded', function() {
+    const editModal = document.getElementById('Dash_Edit_Modal'); // Corrected selector
+    const closeModalButton = document.getElementById('Dash_Close_Modal');
+
+    function showEditModal() {
+        if (editModal) {
+            editModal.style.display = 'flex'; // Change to 'flex' to align with the CSS display setting
+            console.log("Modal opened");
+        } else {
+            console.error("Modal element not found");
+        }
+    }
+
+    function hideEditModal() {
+        if (editModal) {
+            editModal.style.display = 'none';
+        } else {
+            console.error("Modal element not found");
+        }
+    }
+
+    // Attach event listeners to all buttons with class 'dashModal'
+    const editButtons = document.querySelectorAll('.dashModal');
+    editButtons.forEach(button => {
+        button.addEventListener('click', showEditModal);
+    });
+
+    if (closeModalButton) {
+        closeModalButton.addEventListener('click', hideEditModal);
+        console.log("Modal Closed");
+    } else {
+        console.error("Close button not found");
+    }
+});
