@@ -504,22 +504,13 @@ td{
 }
 
 /* ===== TABLE BUTTON DESIGN ===== */
-.view-btn{
+.dashView{
     color: rgb(17, 94, 119);
     background: rgb(173, 234, 255);
 }
 
-.view-btn:hover{
+.dashView:hover{
     background: rgb(95, 201, 236);
-}
-
-.delete-btn{
-    background: var(--light-red);
-    color: rgb(158, 0, 0);
-}
-
-.delete-btn:hover{
-    background: var(--red);
 }
 
 /* ========== EDIT MODAL DESIGN ========== */

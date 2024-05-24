@@ -29,7 +29,7 @@ if(!isset($_SESSION['unique_id'])){
                     <img class="img-sideboard" src="Pictures/Dashboard2.png">
                     <span> Dasboard </span>
                 </a>
-                <a href="#" class="sideside">
+                <a href="HoaOfficials.php" class="sideside">
                     <img class="img-sideboard" src="Pictures/Officials.png">
                     <span> HOA Officials </span>
                 </a>

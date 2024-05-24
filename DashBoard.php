@@ -1,5 +1,5 @@
 <?php
-include_once "Header.php";
+include_once "Header.php"; 
 session_start();
 
 if(!isset($_SESSION['unique_id'])) {
@@ -8,7 +8,7 @@ if(!isset($_SESSION['unique_id'])) {
 include "Connect/Connection.php";
 
 ?>
-<!-- <head>
+<head>
     <style>
         .containerNgEditModal{
     display: none;
@@ -144,31 +144,24 @@ include "Connect/Connection.php";
     margin-top: 10px;
     padding-bottom: 10px;
 }
-.view-btn{
+.dashView{
     color: rgb(17, 94, 119);
     background: rgb(173, 234, 255);
 }
 
-.view-btn:hover{
+.dashView:hover{
     background: rgb(95, 201, 236);
 }
 
-.delete-btn{
-    background: var(--light-red);
-    color: rgb(158, 0, 0);
-}
-
-.delete-btn:hover{
-    background: var(--red);
-}
-    </style>
-</head> -->
+</style>
+</head>
 <body>
     <div class="containerNgEditModal" id="Dash_Edit_Modal">
         <div class="subContainerEditModal">
             <div class="editItongmodal">
                 <div class="titleHeaderEdit">
                     <h2 id="modal_title"> Resident's Information </h2>
+                    <input type="text" id="userID" hidden>
                     <span class="closeEditModal" id="Dash_Close_Modal">&times;</span>
                 </div>
                 <hr>
@@ -207,7 +200,7 @@ include "Connect/Connection.php";
                     <div class="row2">
                         <div class="inputbox-edit">
                             <label> Contact Number: </label>
-                            <input class="inputngEditModalTo" type="text" id="ContNum" name="contNum">
+                            <input class="inputngEditModalTo" type="text" id="PhoneNum" name="contNum">
                         </div>
                         <div class="inputbox-edit">
                             <label> Citizenship: </label>
@@ -239,7 +232,7 @@ include "Connect/Connection.php";
                     <div class="row4">
                         <div class="inputbox-edit">
                             <label> Name: </label>
-                            <input class="inputngEditModalTo" type="text" id="Name" name="emName">
+                            <input class="inputngEditModalTo" type="text" id="ecName" name="emName">
                         </div>
                     </div>
                     <div class="row5">
@@ -255,7 +248,7 @@ include "Connect/Connection.php";
                     <div class="row6">
                         <div class="inputbox-edit">
                             <label id="Address_label"> Address: </label>
-                            <input class="inputngEditModalTo" type="text" id="Address" name="emAddress">
+                            <input class="inputngEditModalTo" type="text" id="ecAddress" name="emAddress">
                         </div>
                     </div>
                     <!-- <hr>
@@ -287,7 +280,7 @@ include "Connect/Connection.php";
                     <img class="img-sideboard" src="Pictures/Dashboard2.png">
                     <span> Dasboard </span>
                 </a>
-                <a href="#" class="sideside">
+                <a href="HoaOfficials.php" class="sideside">
                     <img class="img-sideboard" src="Pictures/Officials.png">
                     <span> HOA Officials </span>
                 </a>
@@ -443,11 +436,11 @@ include "Connect/Connection.php";
                             <div class="dropDownContents">
                                 <div class="dropDown">  
                                     <div class="selectContainer">
-                                        <span class="selected"> Filter </span>
+                                        <span class="selected"> Select </span>
                                         <div class="eme"></div>
                                     </div>
                                     <ul class="selectMenu" name="filter_option">
-                                        <li><input class="selectActive"> Filter </li>
+                                        <li><input class="selectActive"> Select </li>
                                         <li><input type="checkbox" value="1" name="filter_option">Block 1</li>
                                         <li><input type="checkbox" value="2" name="filter_option">Block 2</li>
                                         <li><input type="checkbox" value="3" name="filter_option">Block 3</li>
@@ -482,7 +475,7 @@ include "Connect/Connection.php";
                                     <th> Name </th>
                                     <th> Address </th>
                                     <th> Contact Number </th>
-                                    <th colspan="2"> Action </th>
+                                    <th> Action </th>
                                 </tr>
     
                                 <tbody>
@@ -513,17 +506,12 @@ include "Connect/Connection.php";
                                                 while ($row = mysqli_fetch_assoc($result)) {
                                                     ?>
                                                         <tr>
+                                                            <td class="user_id" hidden><?php echo $row['user_id'] ?></td>
                                                             <td><?php echo $row['first_name'] . " " . $row['middle_name'] . " " . $row['last_name']; ?></td>
                                                             <td><?php echo "Block " . $row['block'] . " Lot " . $row['lot'] ?></td>
                                                             <td><?php echo $row['phone_number'] ?></td>
-                                                            <!-- <td>
-                                                                <button class="view-btn tb"> View </button>
-                                                            </td> -->
                                                             <td>
-                                                                <button class="view-btn tb-btn dashModal"> View </button>
-                                                            </td>
-                                                            <td>
-                                                                <button class="delete-btn tb"> Delete </button>
+                                                                <button class="dashView tb-btn dashModal BiyuModal"> View </button>
                                                             </td>
                                                         </tr>
                                                     <?php

@@ -1007,9 +1007,9 @@ td{
 
 .successButtons {
   display: flex;
-  justify-content: flex-end; /* Align buttons to the right */
+  justify-content: center;
   width: 100%;
-  padding-right: 10px; /* Optional: Add some padding to the right */
+  
 }
 
 .successImg {

@@ -1,5 +1,5 @@
 <?php 
-include "Header.php"; 
+include_once "Header.php"; 
 include_once "Connect/Connection.php";
 session_start();
 
@@ -9,12 +9,12 @@ if(!isset($_SESSION['unique_id'])){
 
 ?>
 <body>
- <div class="SuccessModalIto" id="successModal"> <!--style="display: none;" -->
+ <div class="SuccessModalIto" id="successModal">
         <div class="subSuccessModalContent">
             <div class="successModalContent">
                 <div class="successText">
                     <img class="successImg" src="Pictures/success.png">
-                    <h2 class="paragSuccess">Operation completed successfully!</h2>
+                    <h2 class="paragSuccess">New Announcement Posted!</h2>
                 </div>
                 <hr class="hrSuccess"> 
                 <div class="successButtons">
@@ -155,7 +155,7 @@ if(!isset($_SESSION['unique_id'])){
                     <img class="img-sideboard" src="Pictures/Dashboard2.png">
                     <span> Dasboard </span>
                 </a>
-                <a href="#" class="sideside">
+                <a href="HoaOfficials.php" class="sideside">
                     <img class="img-sideboard" src="Pictures/Officials.png">
                     <span> HOA Officials </span>
                 </a>

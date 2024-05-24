@@ -1,0 +1,597 @@
+:root{
+  --color-primary: #1828b8;
+  --color-danger: #ff7782;
+  --color-success: #41f1b6;
+  --color-warning: #ffbb55;
+  --color-white: #fff;
+  --color-info-dark: #1e1e1f;
+  --color-info-light: #939fb6;
+  --color-dark: #363949;
+  --color-light: rgba(61, 109, 176, 0.18);
+  --color-light-2: rgba(52, 58, 116, 0.20);
+  --color-primary-variant: #111e88;
+  --color-dark-variant: #677483;
+  --color-background: #f6f6f9;
+
+  --light: #f9f9f9;
+  --blue: #3c91e6;
+  --light-blue: #a9d5ff;
+  --light-red: #f38c8c;
+  --light-green: #a7f9d0;
+  --grey: #eee;
+  --dark-grey: #aaaaaa;
+  --drak: #342e37;
+  --red:  #e88383;
+  --green: rgb(94, 232, 129);
+  --color-info-dark: #919497;
+
+  --color-border-radius: 2rem;
+  --color-border-radius-1: 0.4rem;
+  --color-border-radius-2: 0.8rem;
+  --color-border-radius-3: 1.2rem;
+
+
+  --card-padding: 1.8rem;
+  --padding-1: 1.2rem;
+
+  --box-shadow: 0 2rem 3rem var(--color-light);
+}
+
+*{
+  margin: 0;
+  padding: 0;
+  outline: none;
+  appearance: none;
+  border: 0;
+  text-decoration: none;
+  list-style: none;
+  box-sizing: border-box;
+}
+
+html{
+  font-size: 14px;
+}
+
+.mainDashboardContainer{
+  width: 100vw;
+  height: 100vh;
+  font-family: Arial, sans-serif;
+  font-size: 0.88rem;
+  background: var(--color-background);
+  user-select: none;
+  overflow-x: hidden;
+  color: var(--color-dark);
+}
+
+/* ===== HEADER DESIGN ===== */
+.headerTop{
+  height: 50px;
+  /* background: rgb(255, 255, 255); */
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  position: fixed;
+  top: 5px;
+  left: 5px;
+  right: 5px;
+  z-index: 1;
+}
+
+.leftSection{
+  background-color: rgb(255, 255, 255);
+  width: 250px ;
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
+  /* border-bottom-width: 2px;
+  border-bottom-style: solid;
+  border-bottom-color: rgb(161, 161, 161); */
+}
+
+.rightSection{
+  background-color: transparent;
+  width: 250px ;
+  display: flex;
+  align-items: center;
+  justify-content: end;
+}
+
+.headerTop h2{
+  margin-left: 15px;
+}
+
+/* ===== HEADER IMAGE SIZE ===== */ 
+.profileBtn{
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.profileBtn label{
+  cursor: pointer;
+}
+
+.menu{
+  width: 25px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.user-img{
+  width: 30px;
+  height: 30px;
+  background: rgb(0, 0, 0);
+  border-radius: 20px;
+}
+
+/*.eme3{
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 6px solid #000000;
+  transition: 0.3s;
+  margin-left: 10px;
+  margin-right: 10px;
+} */
+
+.img-logo{
+  width: 3.5rem;
+  height: 3.5rem;
+}
+
+/* ===== PROFILE MODAL DESIGN ===== */
+.modal{
+  display: none;
+}
+
+.subModal{
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  font-family: Arial, sans-serif;
+}
+
+.modal-content {
+  display: flex;
+  background: var(--color-background);
+  width: 800px;
+  height: 500px; /* Set the desired height */
+  overflow: hidden; /* Hide overflow */
+  border-radius: 10px;
+}
+
+.profileSidebar{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  width: 175px;
+  height: 100%;
+  border-radius: 10px;
+}
+
+.profileSidebar a{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 4rem;
+  margin-bottom: 5px;
+  /* background: rgb(192, 184, 184); */
+  color: var(--color-info-dark);
+}
+
+.profileSidebar a:hover{
+  color: var(--color-primary);
+}
+
+.profilePages{
+  width: 100%;
+  height: 100%;
+  margin-left: 10px;
+}
+
+.closeProf{
+  display: flex;
+  justify-content: end;
+  margin-right: 5px;
+  color: #000000;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* Hide all pages initially */
+.page {
+  display: none;
+  height: calc(100% - 35px);
+}
+
+/* Show active page */
+.activeProfModal{
+  display: block;
+}
+
+/* ===== CHANGING PASSWORD ===== */
+.changingPassword {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 20px;
+  margin-left: 50px;
+  margin-right: 50px;
+}
+
+.changingInputBox{
+  width: 100%;
+  margin-bottom: 50px;
+}
+
+.changingInputBoxLast{
+  width: 100%;
+}
+
+.changingInputBox .inputngChanging,
+.changingInputBoxLast .inputngChanging{
+  width: 100%;
+  padding: 15px;
+  font-size: 20px;
+  border-radius: 10px;
+  border: 1px solid rgba(62, 65, 71, 0.4);
+}
+
+.changingInputBox .inputngChanging:focus,
+.changingInputBoxLast .inputngChanging:focus{
+  border-color: var(--color-primary);
+}
+
+.changingForgotPass {
+  display: flex;
+  justify-content: end;
+  margin-top: 15px;
+  font-size: 17.5px;
+  width: 100%;
+}
+
+.forgotpassAs{
+  color: var(--color-primary);
+}
+
+.forgotpassAs:hover{
+  text-decoration: underline;
+}
+
+.paragChange{
+  margin-top: 10px;
+}
+
+.buttonSapagPalit{
+  margin-top: 10px;
+  width: 100%;
+  padding: 15px;
+  background: var(--color-primary);
+  color: white;
+  font-size: 17.5px;
+  cursor: pointer;
+}
+
+/* ===== SIDEBAR DESIGN ===== */
+.sidebarContainer{
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  left: 5px;
+  bottom: 5px;
+  top: 55px;
+  background-color:  rgb(255, 255, 255);
+  width: 250px;
+  margin-top: 7px;
+  transition: all 0.3s;
+  z-index: 1;
+}
+
+.sidebarContainer span{
+  font-size: 14.5px;
+  font-weight: 500;
+}
+
+.sidebarContainer .sideside{
+  display: flex;
+  color: var(--color-info-dark);
+  margin-left: 2rem;
+  gap: 1rem;
+  align-items: center;
+  position: relative;
+  height: 4rem;
+  transition: all 300ms ease;
+}
+
+.sidebarContainer .sideside .img-sideboard{
+  font-size: 1.6rem;
+  transition: all 300ms ease;
+}
+
+.sidebarContainer .sideside:last-child{
+  position: absolute;
+  bottom: 2rem;
+  width: 100%;
+}
+
+.sidebarContainer .sideside.active{
+  background: var(--color-light);
+  color: var(--color-primary);
+  margin-left: 5px;
+}
+
+.sidebarContainer .sideside.active::before{
+  content: '';
+  width: 6px;
+  height: 100%;
+  background: var(--color-primary);
+}
+
+.sidebarContainer .sideside.active .img-sideboard{
+  margin-left: calc(1rem -3rem);
+}
+
+.sidebarContainer .sideside:hover{
+  color: var(--color-primary);
+}
+
+.sidebarContainer .sideside:hover .img-sideboard{
+  margin-left: 1rem;
+}
+
+/* ===== SIDEBAR IMAGE SIZE ===== */
+.img-sideboard{
+  width: 30px;
+}
+
+/* ========== SIDEBAR ACTIVE ========== */
+.sidebarContainer.sideActive{
+  width: 110px;
+}
+
+.sidebarContainer.sideActive .eme2 {
+  display: none;
+}
+
+.sidebarContainer.sideActive .subMenuComp{
+  margin-left: 0;
+}
+
+.sidebarContainer.sideActive span{
+  display: none;
+}
+
+.HOAContainerr.HOAConActivee{
+  margin-left: 130px;
+}
+
+/* ========== SUB MENU SIDEBAR ========== */
+.subMenuComp{
+  display: none;
+  margin-left: 35px;
+  transition: all 0.3s;
+}
+
+.submenu-visible {
+  display: block; 
+}
+
+.subMenuComp li a{
+  position: relative;
+  display: flex;
+  color: var(--color-info-dark);
+  padding: 10px;
+  position: relative;
+  transition: all 300ms ease;
+}
+
+.eme2{
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 6px solid #aeaeae;
+  transition: 0.3s;
+  margin-left: 40px;
+}
+
+.eme2-rotate{
+  transform: rotate(180deg);
+}
+
+.subMenuComp li a.active{
+  background: var(--color-light);
+  color: var(--color-primary);
+  height: 100%;
+  margin-left: 5px;
+}
+
+.sidebarContainer li a:hover{
+  color: var(--color-primary);
+  margin-left: 1rem;
+}
+
+.subMenuComp li a.active::before {
+  content: '';
+  width: 4px;
+  height: 100%;
+  background: var(--color-primary);
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+/* ===== SUB MENU CHAT IMAGE ==== */
+.img-subMenu{
+  width: 20px;
+  margin-right: 5px;
+}
+
+.sub-spa{
+  margin-top: 5px;
+}
+
+/* ========== MAIN DASHBOARD DESIGN ========== */
+.HOAContainerr{
+  position: relative;
+  margin-left: 265px;
+  margin-top: 65px;
+}
+
+.officialsConCards{
+  height: 100%;
+  width: 100%;
+  overflow-y: auto;
+}
+
+.subofficialCards{
+  display: grid;
+  padding-left: var(--card-padding);
+  padding-right: var(--card-padding);
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.6rem;
+  margin-bottom: 50px;
+}
+
+.everyConOfficial {
+  display: flex;
+  flex-direction: column;
+  background: var(--color-white);
+  padding: 15px;
+  border-radius: var(--color-border-radius);
+  box-shadow: var(--box-shadow);
+  transition: all 300ms ease;
+  height: 400px;
+}
+
+.officialLaman {
+  height: 260px; /* Set a fixed height */
+  width: 100%;
+  border: 2px rgb(3, 1, 139) solid;
+  overflow: hidden; /* Ensure overflow is hidden to contain images */
+}
+
+.officialLaman img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensure the image fits without stretching */
+}
+
+.UpoName{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 15px;
+}
+
+.LabelUpo{
+  font-size: 17px;
+}
+
+.inputNgUUpo{
+  width: 100%;
+  margin: 10px;
+  border: 2px rgb(3, 1, 139) solid;
+  padding: 5px;
+  font-size: 17px;
+}
+
+.buttonsNgOffi{
+  display: flex;
+  justify-content: space-between;
+}
+
+.butonSiv{
+  padding: 5px 30px;
+  font-size: medium;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.inputts{
+  position: absolute;
+  visibility: hidden;
+}
+
+/* ===== MODAL SA SUCCESS */
+.SuccessModalIto {
+  display: none;
+}
+
+.subSuccessModalContent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  z-index: 2;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.successModalContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  background: white;
+  border-radius: 10px;
+  width: 400px;
+  height: 150px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.paragSuccess {
+  margin-top: 5px;
+}
+
+.successText {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.successButtons {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  
+}
+
+.successImg {
+  width: 50px;
+  display: block;
+  margin: 0 auto;
+}
+
+.buttonSuccess {
+  padding: 10px 45px;
+  cursor: pointer;
+  border-radius: 4px;
+  margin: 10px;
+  margin-top: 10px;
+}
+
+.okButn {
+  background: rgb(76, 175, 80);
+  color: white;
+}
+
+.okButn:hover {
+  background: rgb(56, 142, 60);
+}

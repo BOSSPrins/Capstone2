@@ -121,6 +121,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    hideEditModal();
     // Attach event listeners to all buttons with class 'dashModal'
     const editButtons = document.querySelectorAll('.dashModal');
     editButtons.forEach(button => {
@@ -133,4 +134,49 @@ document.addEventListener('DOMContentLoaded', function() {
     } else {
         console.error("Close button not found");
     }
+});
+
+$(document).ready(function () {
+            
+    $('.BiyuModal').click(function (e) { 
+        e.preventDefault();
+        
+     var  user_id = $(this).closest('tr').find('.user_id').text();
+       
+        $.ajax({
+            method: "POST",
+            url: "PHPBackend/DashProcess.php",
+            data: {
+                'click_BiyuModal': true,
+                'user_id':user_id,
+            },
+
+             success: function (response) {
+
+                $.each(response, function (Key, value) { 
+
+                    $('#userID').val(value['user_id']);
+                    $('#Lname').val(value['last_name']);
+                    $('#Fname').val(value['first_name']);
+                    $('#Mname').val(value['middle_name']);
+                    $('#Bday').val(value['birthday']);
+                    $('#Bplace').val(value['birthplace']);
+                    $('#Sex').val(value['sex']);
+                    $('#PhoneNum').val(value['phone_number']);
+                    $('#CitizShip').val(value['citizenship']);
+                    $('#Blk').val(value['block']);
+                    $('#Lot').val(value['lot']);
+                    $('#ecName').val(value['ec_name']);
+                    $('#ecRel').val(value['ec_relship']);
+                    $('#ecNum').val(value['ec_phone_num']);
+                    //$('#STName').val(value['street_name']);
+                    $('#ecAddress').val("Blk " + value['block'] + " Lot " + value['lot']);
+                    // + "  " + value['street_name'] + " St."
+                });
+
+
+             }
+        });
+    })
+
 });
