@@ -288,7 +288,7 @@ include "Connect/Connection.php";
                     <img class="img-sideboard" src="Pictures/Residents2.png">
                     <span> Residents </span>
                 </a>
-                <a href="#" class="sideside">
+                <a href="Documents.php" class="sideside">
                     <img class="img-sideboard" src="Pictures/Documents2.png">
                     <span> Documents </span>
                 </a>

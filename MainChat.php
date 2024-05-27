@@ -37,7 +37,7 @@ if(!isset($_SESSION['unique_id'])){
                     <img class="img-sideboard" src="Pictures/Residents2.png">
                     <span> Residents </span>
                 </a>
-                <a href="#" class="sideside">
+                <a href="Documents.php" class="sideside">
                     <img class="img-sideboard" src="Pictures/Documents2.png">
                     <span> Documents </span>
                 </a>
@@ -53,7 +53,7 @@ if(!isset($_SESSION['unique_id'])){
                     </a>  
                     <ul class="subMenuComp" id="complaintsSubMenu">
                         <li> 
-                            <a href="#" class="active">
+                            <a href="MainChat.php" class="active">
                                 <img class="img-subMenu" src="Pictures/Chat.png">
                                 <label class="sub-spa"> Chat </label>
                             </a> 

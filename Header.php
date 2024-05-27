@@ -10,5 +10,7 @@
     <link rel="stylesheet" href="CSS/LoginPage.css">
     <link rel="stylesheet" href="CSS/Announcement.css"> 
     <link rel="stylesheet" href="CSS/HoaOfficials.css">
+    <link rel="stylesheet" href="CSS/Documents.css">
+    <link rel="stylesheet" href="CSS/index.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>

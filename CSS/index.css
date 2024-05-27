@@ -1,0 +1,268 @@
+:root{
+  --color-primary: #1828b8;
+  --color-danger: #ff7782;
+  --color-success: #41f1b6;
+  --color-warning: #ffbb55;
+  --color-white: #fff;
+  --color-info-dark: #1e1e1f;
+  --color-info-light: #939fb6;
+  --color-dark: #363949;
+  --color-light: rgba(61, 109, 176, 0.18);
+  --color-light-2: rgba(52, 58, 116, 0.20);
+  --color-primary-variant: #111e88;
+  --color-dark-variant: #677483;
+  --color-background: #f6f6f9;
+
+  --light: #f9f9f9;
+  --blue: #3c91e6;
+  --light-blue: #a9d5ff;
+  --light-red: #f38c8c;
+  --light-green: #a7f9d0;
+  --grey: #eee;
+  --dark-grey: #aaaaaa;
+  --drak: #342e37;
+  --red:  #e88383;
+  --green: rgb(94, 232, 129);
+  --color-info-dark: #919497;
+
+  --color-border-radius: 2rem;
+  --color-border-radius-1: 0.4rem;
+  --color-border-radius-2: 0.8rem;
+  --color-border-radius-3: 1.2rem;
+
+  --card-padding: 1.8rem;
+  --padding-1: 1.2rem;
+
+  --box-shadow: 0 2rem 3rem var(--color-light);
+}
+
+*{
+  margin: 0;
+  padding: 0;
+  outline: none;
+  appearance: none;
+  border: 0;
+  scroll-padding-top: 2rem;
+  text-decoration: none;
+  list-style: none;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+  font-size: 14px;
+  font-family: Arial, sans-serif;
+}
+
+section{
+  padding: 50px 10%;
+}
+
+img{
+  width: 100%;
+}
+
+.arawAtOras{
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 20px;
+  background-color: rgb(0, 0, 0);
+  color: rgb(246, 246, 246);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add box shadow */
+}
+
+.Logoo{
+  width: 60px;
+}
+
+.HeaderWithLogo{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgb(255, 255, 255);
+  padding: 5px 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add box shadow */
+}
+
+.HeaderWithLogo.hiddenHeader{
+  position: fixed;
+  top: 0;
+  width: 100%;
+  transform: translateY(-100%);
+  z-index: 1;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add box shadow */
+}
+
+.HeaderWithLogo.hiddenHeader.visible{
+  transform: translateY(0);
+}
+
+.MhNavv{
+  display: flex;
+}
+
+.MhNavv a{
+  font-size: 13px;
+  padding: 11px 20px;
+  color: black;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.MhNavv a:hover{
+  color: var(--color-primary);
+}
+
+.ContainerNgImages{
+  width: 100%; /* Changed width to 100% */
+  height: 550px; /* Added fixed height */
+  overflow: hidden;
+  position: relative;
+  background: rgb(0, 103, 199); /* Added background color */
+}
+
+.imagesSliding{
+  width: 500%; /* Adjusted width to accommodate all images */
+  display: flex;
+  animation: slide 16s infinite;
+}
+
+img{
+  width: 20%; /* Adjusted width to 20% to fit five images in the container */
+  height: 100%; /* Added height to maintain aspect ratio */
+  object-fit: cover; /* Added object-fit property */
+}
+
+@keyframes slide{
+  0%{
+      transform: translateX(0);
+  }
+
+  25%{
+      transform: translateX(0);
+  }
+
+  30%{
+      transform: translateX(-20%);
+  }
+
+  50%{
+      transform: translateX(-20%);
+  }
+
+  55%{
+      transform: translateX(-40%);
+  }
+
+  75%{
+      transform: translateX(-40%);
+  }
+
+  80%{
+      transform: translateX(-60%);
+  }
+
+  100%{
+      transform: translateX(-60%);
+  }
+}
+
+.footerngLandingPage{
+  background-color: #282c34;
+  color: white;
+  bottom: 0;
+  width: 100%;
+  height: 200px;
+}
+
+.LogoLandingPage{
+  display: flex;
+  align-items: center;
+}
+
+.NameOfSubdi{
+  margin-left: 8px;
+}
+
+.NameOfSubdi h1{
+  font-size: 25px;
+  font-weight: 800;
+  font-family: Tahoma;
+}
+
+.NameOfSubdi H4{
+  font-weight: lighter;
+}
+
+/* DESIGN SA HOA OFFICERS */
+.ContentsOfSubdi {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: auto; 
+  margin-bottom: 30px;
+}
+
+.HoaPresident1 {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+.HoaPresidentLaman {
+  display: flex;
+  flex-direction: column;
+  height: 310px;
+  width: 300px;
+  padding: 15px;
+  /* background: rgb(152, 144, 142); */
+  margin: 10px;
+  /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); Add box shadow */
+}
+
+.MgaLamanContainer{
+  height: 200px; /* Set a fixed height */
+  width: 100%;
+  border: 3px rgb(3, 1, 139) solid;
+  overflow: hidden; /* Ensure overflow is hidden to contain images */
+}
+
+.ContainerNgDalawa{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.pangalanNgBawatIsa,
+.inputNilaBawat{
+  width: 100%;
+}
+
+.inputNilaBawat{
+  padding: 5px;
+  font-size: 17px;
+}
+
+.pangalanNgBawatIsa,
+.LabelNgBawatIsa{
+  margin-top: 15px;
+}
+
+/* Media query for smaller screens */
+@media screen and (max-width: 1200px) {
+  .NagIisangContainer {
+      width: calc(25% - 20px); /* Adjust container width for smaller screens */
+  }
+}
+
+/* Media query for even smaller screens */
+@media screen and (max-width: 900px) {
+  .NagIisangContainer {
+      width: calc(33.33% - 20px); /* Adjust container width for even smaller screens */
+  }
+}
+
+/* Media query for mobile screens */
+@media screen and (max-width: 600px) {
+  .NagIisangContainer {
+      width: calc(50% - 20px); /* Adjust container width for mobile screens */
+  }
+}

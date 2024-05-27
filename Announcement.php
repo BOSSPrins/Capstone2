@@ -163,7 +163,7 @@ if(!isset($_SESSION['unique_id'])){
                     <img class="img-sideboard" src="Pictures/Residents2.png">
                     <span> Residents </span>
                 </a>
-                <a href="#" class="sideside">
+                <a href="Documents.php" class="sideside">
                     <img class="img-sideboard" src="Pictures/Documents2.png">
                     <span> Documents </span>
                 </a>
@@ -188,7 +188,7 @@ if(!isset($_SESSION['unique_id'])){
                         <li> <a href="#"> Sub Menu 3 </a> </li>
                     </ul>
                 </div>
-                <a href="" class="sideside">
+                <a href="Announcement.php" class="sideside">
                     <img class="img-sideboard" src="Pictures/Announcement.png">
                     <span> Announcement </span>
                 </a>
