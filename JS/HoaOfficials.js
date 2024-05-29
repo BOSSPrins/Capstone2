@@ -502,7 +502,7 @@ $(document).ready(function () {
     });
 
     // Event listener for the save buttons
-    $('.butonSiv').on('click', function () {
+    $('.SaveBtn').on('click', function () {
         var container = $(this).closest('.everyConOfficial');
         var roleLabel = container.find('.LabelUpo').attr('value');
         var name = container.find('.inputNgUUpo').val();

@@ -167,7 +167,7 @@ include "Connect/Connection.php";
                                     <input class="inputFileCert inputts" type="file" id="PresPic">
                                 </div>
                                 <div class="btnTwo">
-                                    <button class="butonSiv"> Save </button>
+                                    <button class="butonSiv SaveBtn"> Save </button>
                                 </div>
                             </div>
                         </div>
@@ -188,7 +188,7 @@ include "Connect/Connection.php";
                                     <input class="inputFileCert2 inputts" type="file" id="VicePic">
                                 </div>
                                 <div class="btnTwo">
-                                    <button class="butonSiv"> Save </button>
+                                    <button class="butonSiv SaveBtn"> Save </button>
                                 </div>
                             </div>
                         </div>
@@ -209,7 +209,7 @@ include "Connect/Connection.php";
                                     <input class="inputFileCert3 inputts" type="file" id="SecPic">
                                 </div>
                                 <div class="btnTwo">
-                                    <button class="butonSiv"> Save </button>
+                                    <button class="butonSiv SaveBtn"> Save </button>
                                 </div>
                             </div>
                         </div>
@@ -230,7 +230,7 @@ include "Connect/Connection.php";
                                     <input class="inputFileCert4 inputts" type="file" id="TresPic">
                                 </div>
                                 <div class="btnTwo">
-                                    <button class="butonSiv"> Save </button>
+                                    <button class="butonSiv SaveBtn"> Save </button>
                                 </div>
                             </div>
                         </div>
@@ -251,7 +251,7 @@ include "Connect/Connection.php";
                                     <input class="inputFileCert5 inputts" type="file" id="AudPic">
                                 </div>
                                 <div class="btnTwo">
-                                    <button class="butonSiv"> Save </button>
+                                    <button class="butonSiv SaveBtn"> Save </button>
                                 </div>
                             </div>
                         </div>
@@ -272,7 +272,7 @@ include "Connect/Connection.php";
                                     <input class="inputFileCert6 inputts" type="file" id="PeacePic"> 
                                 </div>
                                 <div class="btnTwo">
-                                    <button class="butonSiv"> Save </button>
+                                    <button class="butonSiv SaveBtn"> Save </button>
                                 </div>
                             </div>
                         </div>
@@ -293,7 +293,7 @@ include "Connect/Connection.php";
                                     <input class="inputFileCert7 inputts" type="file" id="Direc1Pic">
                                 </div>
                                 <div class="btnTwo">
-                                    <button class="butonSiv"> Save </button>
+                                    <button class="butonSiv SaveBtn"> Save </button>
                                 </div>
                             </div>
                         </div>
@@ -314,7 +314,7 @@ include "Connect/Connection.php";
                                     <input class="inputFileCert8 inputts" type="file" id="Direc2Pic">
                                 </div>
                                 <div class="btnTwo">
-                                    <button class="butonSiv"> Save </button>
+                                    <button class="butonSiv SaveBtn"> Save </button>
                                 </div>
                             </div>
                         </div>
@@ -335,7 +335,7 @@ include "Connect/Connection.php";
                                     <input class="inputFileCert9 inputts" type="file" id="Direc3Pic">
                                 </div>
                                 <div class="btnTwo">
-                                    <button class="butonSiv"> Save </button>
+                                    <button class="butonSiv SaveBtn"> Save </button>
                                 </div>
                             </div>
                         </div>
