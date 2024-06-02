@@ -7,8 +7,16 @@ if(!isset($_SESSION['unique_id'])){
 }
 
 ?>
-
-<?php include_once "Header.php"; ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Mabuhay Website </title>
+    <link rel="icon" type="image/x-icon" href="Pictures/Dasma_City_Icon.ico">
+    <link rel="stylesheet" href="CSS/Chat.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
 <body>
     <div class="mainCoversationChatContainer">
         <div class="secMainDash">
@@ -141,7 +149,7 @@ if(!isset($_SESSION['unique_id'])){
                         <button type="button" class="conversationBack">
                             <img class="img-kaliwa" src="Pictures/arrowLeft.png">
                         </button>
-                        <div class="mgaKausap">
+                        <div class="mgaKausap IntervalStats">
                             <img class="mgaKausapImages" src="Pictures/<?php echo $row['img']; ?>">
                             <div>
                                 <div class="mgaKausapNames"> <?php echo $row['first_name'] ." ". $row['last_name']?> </div>

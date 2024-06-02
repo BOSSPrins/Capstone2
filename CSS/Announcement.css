@@ -669,6 +669,15 @@ section .fileRoww .fileContent{
   cursor: pointer;
 }
 
+.edit-btn {
+  color: rgb(255, 255, 255); /* White text color */
+  background: rgb(0, 180, 0); /* Green background */
+}
+
+.edit-btn:hover {
+  background: rgb(0, 128, 0); /* Lighter green for hover effect */
+}
+
 .tableContent{
   width: 100%;
   padding-top: 5px;

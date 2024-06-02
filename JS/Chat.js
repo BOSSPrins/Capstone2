@@ -77,6 +77,27 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   });
 
+  document.addEventListener('DOMContentLoaded', function () {
+    const mgaKausapDiv = document.querySelector('.IntervalStats');
+    let interval;
+
+    function startInterval() {
+        interval = setInterval(function () {
+            console.log('Interval runninggggggggggggg');
+            // Place your interval logic here
+        }, 500);
+    }
+
+    function stopInterval() {
+        clearInterval(interval);
+    }
+
+    mgaKausapDiv.addEventListener('mouseenter', stopInterval);
+    mgaKausapDiv.addEventListener('mouseleave', startInterval);
+
+    startInterval();  // Start the interval when the page loads
+});
+
 // Backend ni Chat
 const usersList = document.querySelector(".userslisto"),
 searchBar = document.querySelector(".sertslist");
@@ -123,6 +144,7 @@ setInterval(()=>{
 }, 500); // magarun ito nang tuloy tuloy after 500 ms
 
 // NAKA BOLD NA YUNG TEXT NG RECEIVER PERO HINDI ITIM
+
 
 
 

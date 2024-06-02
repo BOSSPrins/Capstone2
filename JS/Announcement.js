@@ -533,6 +533,7 @@ $(document).ready(function () {
 
                         $("tr:has(td.news_id:contains('" + delete_newsID + "'))").remove(); 
                         closeModal();
+                        location.reload();
                     } else {
                         console.error('Failed to delete record:', jsonData.error);
                     }
