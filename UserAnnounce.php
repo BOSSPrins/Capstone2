@@ -85,6 +85,15 @@ $encoded_id = urlencode($admin_unique_id);
                                 <label class="LabelNamePost"> HOA Admin </label>
                             </div>
                         </div>
+
+                        <?php 
+                        
+                        if ($encoded_id) {
+                           
+                            
+                        }
+                        
+                        ?>
                         <div class="PostingAnnouncemntPost">
                             <div id="containerForPostNa">
                                 <div class="TitlePostedNaUser">
