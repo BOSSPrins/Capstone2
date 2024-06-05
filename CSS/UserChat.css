@@ -1,0 +1,783 @@
+:root{
+  --color-primary: #1828b8;
+  --color-danger: #ff7782;
+  --color-success: #41f1b6;
+  --color-warning: #ffbb55;
+  --color-white: #fff;
+  --color-info-dark: #1e1e1f;
+  --color-info-light: #939fb6;
+  --color-dark: #363949;
+  --color-light: rgba(61, 109, 176, 0.18);
+  --color-light-2: rgba(52, 58, 116, 0.20);
+  --color-primary-variant: #111e88;
+  --color-dark-variant: #677483;
+  --color-background: #f6f6f9;
+
+  --light: #f9f9f9;
+  --blue: #3c91e6;
+  --light-blue: #a9d5ff;
+  --light-red: #f38c8c;
+  --light-green: #a7f9d0;
+  --grey: #eee;
+  --dark-grey: #aaaaaa;
+  --drak: #342e37;
+  --red:  #e88383;
+  --green: rgb(94, 232, 129);
+  --color-info-dark: #919497;
+
+  --color-border-radius: 2rem;
+  --color-border-radius-1: 0.4rem;
+  --color-border-radius-2: 0.8rem;
+  --color-border-radius-3: 1.2rem;
+
+
+  --card-padding: 1.8rem;
+  --padding-1: 1.2rem;
+
+  --box-shadow: 0 2rem 3rem var(--color-light);
+
+  --backgound-hover: rgb(234, 233, 233);
+  --background-hover2: rgba(192, 212, 241, 0.18);
+  --background-active: rgb(147, 200, 245);
+}
+
+*{
+  margin: 0;
+  padding: 0;
+  outline: none;
+  appearance: none;
+  border: 0;
+  text-decoration: none;
+  list-style: none;
+  box-sizing: border-box;
+}
+
+html{
+  font-size: 14px;
+}
+
+.mainCoversationChatContainer{
+  width: 100vw;
+  max-height: 100vh;
+  font-family: Arial, sans-serif;
+  font-size: 0.88rem;
+  background: var(--color-background);
+  user-select: none;
+  overflow-x: hidden;
+  overflow-y: auto; /* Change to 'auto' */
+  color: var(--color-dark);
+}
+
+/* ===== HEADER DESIGN ===== */
+.headerTop{
+  height: 50px;
+  /* background: rgb(255, 255, 255); */
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  position: fixed;
+  top: 5px;
+  left: 5px;
+  right: 5px;
+  z-index: 1100; /* Increase z-index to ensure it's above the sidebar */
+}
+
+.leftSection{
+  background-color: rgb(255, 255, 255);
+  width: 250px ;
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
+  /* border-bottom-width: 2px;
+  border-bottom-style: solid;
+  border-bottom-color: rgb(161, 161, 161); */
+}
+
+.rightSection{
+  background-color: transparent;
+  width: 250px ;
+  display: flex;
+  align-items: center;
+  justify-content: end;
+}
+
+.headerTop h2{
+  margin-left: 15px;
+}
+
+/* ===== HEADER IMAGE SIZE ===== */ 
+.profileBtn{
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.profileBtn label{
+  cursor: pointer;
+}
+
+.menu{
+  width: 25px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.user-img{
+  width: 30px;
+  height: 30px;
+  background: rgb(0, 0, 0);
+  border-radius: 20px;
+}
+
+.img-logo{
+  width: 3.5rem;
+  height: 3.5rem;
+}
+
+/* ===== SIDEBAR DESIGN ===== */
+.sidebarContainer{
+  position: fixed; /* Change position to fixed */
+  display: flex;
+  flex-direction: column;
+  left: 5px;
+  bottom: 5px;
+  top: 55px;
+  background-color:  rgb(255, 255, 255);
+  width: 250px;
+  margin-top: 4px;
+  transition: all 0.3s;
+  z-index: 1000; /* Ensure the sidebar is above other content */
+}
+
+.sidebarContainer span{
+  font-size: 14.5px;
+  font-weight: 500;
+}
+
+.sidebarContainer .sideside{
+  display: flex;
+  color: var(--color-info-dark);
+  margin-left: 2rem;
+  gap: 1rem;
+  align-items: center;
+  position: relative;
+  height: 4rem;
+  transition: all 300ms ease;
+}
+
+.sidebarContainer .sideside .img-sideboard{
+  font-size: 1.6rem;
+  transition: all 300ms ease;
+}
+
+.sidebarContainer .sideside:last-child{
+  position: absolute;
+  bottom: 2rem;
+  width: 100%;
+}
+
+.sidebarContainer .sideside.active{
+  background: var(--color-light);
+  color: var(--color-primary);
+  margin-left: 5px;
+}
+
+.sidebarContainer .sideside.active::before{
+  content: '';
+  width: 6px;
+  height: 100%;
+  background: var(--color-primary);
+}
+
+.sidebarContainer .sideside.active .img-sideboard{
+  margin-left: calc(1rem -3rem);
+}
+
+.sidebarContainer .sideside:hover{
+  color: var(--color-primary);
+}
+
+.sidebarContainer .sideside:hover .img-sideboard{
+  margin-left: 1rem;
+}
+
+/* ===== SIDEBAR IMAGE SIZE ===== */
+.img-sideboard{
+  width: 30px;
+}
+
+/* ========== MAIN CHAT TOP CONTENT DESIGN ========== */
+.UserChatContainerr{
+  position: relative;
+  padding-left: 255px;
+  margin-top: 59px;
+  height: calc(100vh - 59px);
+}
+
+.UserChatSidebar{
+  position: absolute;
+  width: 280px;
+  display: flex;
+  flex-direction: column;
+  height: 100%; /* Adjusted height to fit within viewport minus header height */
+  top: 0;
+  margin-left: 4px;
+}
+
+.UserChatSearch{
+  width: 20px;
+}
+
+.UserChatSidebarTitle{
+  font-size: 25px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  padding-bottom: 12.5px;
+  padding-top: 15px;
+  padding-left: 2px;
+  background:  rgb(255, 255, 255);
+  box-shadow: 0 2px 8px -2px rgb(172, 172, 172);
+}
+
+.UserChatSidebarForm{
+  position: relative;
+  margin-bottom: 10px;
+}
+
+.UserchatSidebarInput{
+  display: block;
+  padding: 8px 10px;
+  background-color: white;
+  border: 1px solid rgba(62, 65, 71, 0.4);
+  outline: none;
+  width: 100%;
+  border-radius: 5px;
+  padding-right: 36px;
+  /* font-size: 14px; */
+}
+
+.UserchatSidebarInput:focus{
+  border-color: var(--color-primary);
+}
+
+.UserChatSubmit{
+  position: absolute;
+  top: 55%;
+  transform: translateY(-50%);
+  right: 16px;
+  background-color: transparent;
+  outline: transparent;
+  border: none;
+  cursor: pointer;
+  transform: color .15s ease-in-out;
+}
+
+/* ========== SIDE CHAT DESIGN ==========
+.UsertMessages{
+  overflow-y: auto;
+}
+
+.UsertMessages::-webkit-scrollbar{
+  display: none;
+}
+
+.UserMessagesList {
+  list-style-type: none;
+  padding: 8px 0;
+}
+
+.UserMessagesList > * > a{
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: black;
+  padding: 8px 10px;
+}
+
+.UserMessagesList > * > a:hover{
+  background-color: rgba(192, 212, 241, 0.18);
+}
+
+.UserMessagesList > .active > a{
+  background: var(--color-light);
+}
+
+.UserMessageTitle{
+  position: relative;
+  /* margin-right: 16px;
+  color: rgb(141, 140, 140);
+  font-size: 13px;
+  font-weight: 500;
+  margin-bottom: 2px;
+}
+
+.UserMessageTitle > *{
+  position: relative;
+  z-index: 1;
+  padding: 0 4px 0 0;
+  background-color: var(--color-background);
+}
+
+.UserMessageTitle::before{
+  content: '';
+  position: absolute;
+  top: 55%;
+  transform: translateY(-50%);
+  left: 0;
+  width: 100%;
+  height: 0;
+  border-bottom: 1px solid rgb(165, 165, 165);
+  z-index: 0;
+}
+
+.messagesImages{
+  width: 40px;
+  height: 40px ;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+  margin-right: 12px;
+}
+
+.conMessagesInfo{
+  display: grid;
+  margin-right: 12px;
+  width: 100%;
+}
+
+.mesageName{
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 2px;
+}
+
+.mesageText{
+  font-size: 13px;
+  color: rgb(141, 140, 140);
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+ 
+}
+
+.bold {
+  font-weight: bold;  
+}
+
+.messagesAtIbapa{
+  text-align: right;
+}
+
+.messageUnread{
+  font-size: 13px;
+  font-weight: 500;
+  color: white;
+  background-color: red;
+  padding: 2px 5px;
+  border-radius: 50%;
+}
+
+.messageTime{
+  font-size: 12px;
+  color: rgb(118, 115, 115);
+  font-weight: 500;
+} */
+
+/* ========== CHAT MESSAGES CONTENTS ========== */
+.conChatConversation{
+  /* margin-left: 286px;
+  background: gray; */
+  height: 100%;
+  margin-right: 5px;
+  padding-left: 4px;
+}
+
+.img-kaliwa{
+  width: 35px;
+}
+
+.TopngConversation{
+  padding: 8px 16px;
+  display: flex;
+  align-items: center;
+  background-color: rgb(251, 251, 251);
+  box-shadow: 0 2px 8px -2px rgb(172, 172, 172);
+}
+
+.conversationBack{
+  background: transparent;
+  border: none;
+  outline: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 12px;
+  cursor: pointer;
+}
+
+.conversationBack:hover{
+  background: var(--backgound-hover);
+  border-radius: 50%;
+}
+
+.conversationBack:active{
+  background: var(--color-light);
+}
+
+.mgaKausap{
+  display: flex;
+  align-items: center;
+}
+
+.mgaKausapImages{
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 8px;
+}
+
+.mgaKausapNames{
+  font-weight: 500;
+  font-size: 17px;
+}
+
+
+.mgaKausapStatus::after{
+  content: '';
+   width: 10px;
+   height: 10px;
+   border-radius: 50%;
+   vertical-align: middle;
+   display: inline-block;
+}
+.mgaKausapStatus.offline::after{
+  background: rgb(211, 211, 211); /* Offline color */
+}
+
+.mgaKausapStatus.online::after {
+  background: rgb(1, 207, 36); /* Online color */
+}
+
+
+/* === MGA TATANGGALIN */
+.imgPhone{
+  width: 20px;
+} 
+
+.mgaPipindutin{
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+}
+
+.mgaPipindutin > *{
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.mgaPipindutin > :hover{
+  background: rgb(234, 233, 233);
+}
+
+.mgaPipindutin > :active{
+  background: var(--color-light);
+}
+
+/* ====== CONVERSATION DESIGN ===== */
+.imgSendImg-btn{
+  width: 30px;
+  margin-right: 5px;
+}
+
+.UserImgSend-btn{
+  width: 30px;
+}
+
+.UserSendBtn{
+  padding: 10px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+}
+
+.UserSendBtn:hover{
+  background: var(--background-hover2);
+}
+
+.UserSendBtn:active{
+  background: var(--background-active);
+}
+
+.messenger-container {
+  height: calc(100vh - 118px);
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.message-display {
+      flex: 1;
+      overflow-y: auto;
+      overflow-x: hidden;
+}
+
+.input-container {
+  display: flex;
+}
+
+.input-container {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-top: 1px solid #ccc;
+}
+
+.UserMessageInput {
+  flex: 1;
+  width: calc(100% - 90px); /* Set width to 100% */
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px 0 0 5px;
+  font-size: 16px;
+  max-height: 200px;
+  resize: none;
+  overflow-y: auto;
+}
+
+.UserMessageInput::-webkit-scrollbar{
+  display: none;
+}
+
+/* ========== MAIN CHAT ITEMS DESIGN ========== */
+.imgMores,
+.forwardImg,
+.deleteImg{
+    width: 17px;
+    margin-right: 10px;
+}
+
+.katawanNgChat{
+    overflow-y: auto;
+    height: 100%;
+    height: 515px;
+    margin-left: 10px;
+    padding: 10px;
+}
+
+.katawanNgChat::-webkit-scrollbar{
+    display: none;
+}
+
+.chatRaps{
+   list-style-type: none; 
+   padding: 0;
+   margin: 0;
+}
+
+.chatItems{
+  display: flex;
+  align-items: flex-end;
+  flex-direction: row-reverse;
+  margin-bottom: 16px;
+  word-wrap: break-word; 
+    
+}
+
+.chatItemsGilid{
+    margin-left: 8px;
+}
+
+.chatItemsGimage{
+    display: block;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.ItemsConsts{
+    width: 100%;
+}
+
+.ItemsWrapper:not(:last-child){
+    margin-bottom: 8px;
+}
+
+.ItemBoxes{
+  position: relative;
+  max-width: 720px;
+  margin-left: auto;
+  
+}
+
+.ItemBoxTexts{
+    padding: 12px 16px 8px;
+    background: var(--color-white);
+    box-shadow: 0 2px 8px -2px rgba(0, 0, 0, 0.1);
+    color: rgb(45, 45, 45);
+    font-size: 14px;
+    border-radius: 6px;
+    line-height: 1.5;
+}
+
+.ItemBoxTime{
+    display: block;
+    text-align: right;
+    margin-top: 4px;
+    font-size: 10px;
+    color: var(--color-info-dark);
+    line-height: 1;
+}
+
+.ItemsDropDown{
+    position: absolute;
+    top: 0;
+    right: calc(100% + 8px);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.15 ease-in-out;
+}
+
+.ItemsWrapper:hover .ItemsDropDown{
+    opacity: 1;
+    visibility: visible;
+}
+
+.ItemDrop-btn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: rgb(238, 235, 235);
+    cursor: pointer;
+    outline: none;
+    border: none;
+    transition: all 0.15s ease-in-out;
+    padding-left: 10px;
+}
+
+.ItemDrop-btn:hover{
+    background: var(--color-light);
+    box-shadow: 0 2px 8px -2px var(--color-primary);
+}
+
+.ItemDrop-btn.active{
+    background-color: var(--background-active);
+}
+
+.ItemsDropDownList{
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: rgb(238, 235, 235);
+    z-index: 10;
+    box-shadow: 0 2px 8px -2px var(--color-primary);
+    border-radius: 4px 0;
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(.9);
+    transform-origin: left top;
+    transition: all 0.15s ease-in-out;
+}
+
+.ItemsDropDown.active .ItemsDropDownList{
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1);
+}
+
+.ItemsDropDownList a{
+    display: flex;
+    align-items: center;
+    color: rgb(81, 81, 81);
+    font-size: 13px;
+    padding: 6px 12px;
+}
+
+.ItemsDropDownList a:hover{
+    background: var(--color-light);
+}
+
+.ItemsDropDownList a.active{
+    background: var(--background-active);
+}
+
+.ItemsDropDownList a i{
+    font-size: 16px;
+    margin-right: 8px;
+}
+
+.dividerngKatawan{
+    position: relative;
+    text-align: center;
+    font-size: 13px;
+    color: rgb(141, 140, 140);
+    margin-bottom: 10px;
+    margin-top: 20px;
+}
+
+.dividerngKatawan::before{
+    content: '';
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 0;
+    width: 100%;
+    height: 0;
+    border-bottom: 1px solid rgb(141, 140, 140);
+}
+
+.dividerngKatawan span{
+    position: relative;
+    display: inline-block;
+    padding: 0 8px;
+    background-color: var(--color-background);
+    z-index: 1;
+}
+
+/* THIS IS THE OTHER SIDE REPLYING */
+.chatItems.ehe{
+    flex-direction: row;
+}
+
+.chatItems.ehe .ItemBoxes{
+    margin-left: unset;
+    
+}
+
+.chatItems.ehe .chatItemsGilid{
+    margin-right: 8px;
+}
+
+.chatItems.ehe .ItemsDropDown{
+    left: calc(100% + 8px);
+    right: unset;
+}
+
+.chatItems.ehe .ItemBoxTexts{
+    background: rgb(111, 168, 233);
+    box-shadow: 0 2px 8px -2px var(--color-primary);
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.chatItems.ehe .ItemBoxTime{
+  color: rgba(255, 255, 255, .7);
+}

@@ -2,8 +2,11 @@
 include_once "Connect/Connection.php";
 session_start();
 
-if(!isset($_SESSION['unique_id'])){
-    header("location: LoginPage.php");
+if (isset($_SESSION['unique_id'])) {
+  if ($_SESSION['role'] == 'user') {
+      header("Location: LoginPage.php");
+      exit();
+  }
 }
 
 ?>
@@ -85,6 +88,10 @@ if(!isset($_SESSION['unique_id'])){
                             
                         </div>
                     </div>
+                    <!-- <div class="buttonsSubmitInPostingAnnounce">
+                        <button class="buttonInCancelPosting btn-PostingModal" onclick="closeDetails()"> Cancel </button>
+                        <button class="buttonInUpdatePosting btn-PostingModal" id="Apdeyt"> Update </button>
+                    </div> -->
                 </div>
             </div>
         </div>

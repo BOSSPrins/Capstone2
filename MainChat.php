@@ -2,8 +2,11 @@
 include_once "Connect/Connection.php";
 session_start();
 
-if(!isset($_SESSION['unique_id'])){
-    header("location: LoginPage.php");
+if (isset($_SESSION['unique_id'])) {
+  if ($_SESSION['role'] == 'user') {
+      header("Location: LoginPage.php");
+      exit();
+  }
 }
 
 ?>
@@ -126,7 +129,7 @@ if(!isset($_SESSION['unique_id'])){
                                     $user_id = mysqli_real_escape_string($conn, $_GET['user_id']);
                                     
                                     // Perform the query
-                                    $sql = mysqli_query($conn, "SELECT tblaccounts.unique_id, tblaccounts.img, tblaccounts.status, 
+                                    $sql = mysqli_query($conn, "SELECT tblaccounts.unique_id, tblaccounts.img,  tblaccounts.status, 
                                                                         tblresident.first_name, tblresident.last_name
                                                                 FROM tblaccounts
                                                                 INNER JOIN tblresident ON tblaccounts.user_id = tblresident.user_id
@@ -143,7 +146,7 @@ if(!isset($_SESSION['unique_id'])){
                                     }
                                 } else {
                                     // Handle the case where 'user_id' parameter is not present in the URL
-                                    echo "User ID parameter is missing in the UR.";
+                                    echo "User ID parameter is missing in the URL.";
                                 }
                             ?>
                         <button type="button" class="conversationBack">

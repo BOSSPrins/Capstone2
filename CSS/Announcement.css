@@ -220,6 +220,40 @@ html{
   display: block;
 }
 
+/* UPDATE BUTTON IN MODAL POSTING */
+.buttonsSubmitInPostingAnnounce{
+  display: flex;
+  justify-content: end;
+  margin-top: 10px;
+}
+
+.buttonInCancelPosting{
+  font-size: medium;
+  border: 1px solid rgb(173, 173, 173);
+  background: transparent;
+  margin-right: 10px;
+  border-radius: 5px;
+}
+
+.buttonInCancelPosting:hover{
+  background: rgb(180, 180, 180);
+}
+
+.buttonInUpdatePosting{
+  font-size: medium;
+  color: rgb(246, 245, 245);
+  border-radius: 5px;
+  background: rgb(0, 174, 78);
+}
+
+.buttonInUpdatePosting:hover{
+  background: rgb(0, 201, 90);
+}
+
+.btn-PostingModal{
+  padding: 10px 40px;
+}
+
 /* ===== SIDEBAR DESIGN ===== */
 .sidebarContainer{
   position: fixed;
@@ -517,10 +551,12 @@ html{
   width: 70px;
 }
 
-.creatingAnnounceRap{
+.creatingAnnounceRap {
   width: 100%;
-  height: 510px;
-}    
+  min-height: 100px; /* Set a minimum height */
+  max-height: 100vh; /* Set a maximum height */
+  overflow-y: auto; /* Allow scrolling if content exceeds the max-height */
+}  
 
 .creatingAnnounceRap h3{
   color: #3056b5;
@@ -739,7 +775,7 @@ td{
 
 .viewDetailsModal{
   background: white;
-  height: 450px;
+  height: 525px;
   width: 1000px;
   border-radius: 10px;
 }

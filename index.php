@@ -76,7 +76,7 @@ include "Connect/Connection.php";
                     <a href="#AboutUs"> About Us </a>
                 </li>
                 <li>
-                    <a href="#Services"> Services </a>
+                    <a href="LoginPage.php"> Services </a>
                 </li>
                 <li>
                     <a href="#HOAOfficials"> HOA Officials </a>
@@ -87,11 +87,11 @@ include "Connect/Connection.php";
 
     <div class="ContainerNgImages">
         <div class="imagesSliding">
-            <img src="Pictures/sample_pic.png"> <!-- SAMPLE IMAGES -->
-            <img src="Pictures/uppermoons.png"> <!-- SAMPLE IMAGES -->
-            <img src="Pictures/sample_pic.png"> <!-- SAMPLE IMAGES -->
-            <img src="Pictures/uppermoons.png"> <!-- SAMPLE IMAGES -->
-            <img src="Pictures/sample_pic.png"> <!-- SAMPLE IMAGES -->
+            <img src="Pictures/435422549_403877862400828_4775813149732484992_n.png"> <!-- SAMPLE IMAGES -->
+            <img src="Pictures/Dasma_City_Logo.png"> <!-- SAMPLE IMAGES -->
+            <img src="Pictures/435422549_403877862400828_4775813149732484992_n.png"> <!-- SAMPLE IMAGES -->
+            <img src="Pictures/Dasma_City_Logo.png"> <!-- SAMPLE IMAGES -->
+            <img src="Pictures/435422549_403877862400828_4775813149732484992_n.png"> <!-- SAMPLE IMAGES -->
         </div>
     </div>
     
@@ -231,7 +231,7 @@ include "Connect/Connection.php";
     </div>
 
     <footer class="footerngLandingPage">
-        shbdsdbsbjd
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
     </footer>
     <script src="JS/index.js"></script>
 </body>

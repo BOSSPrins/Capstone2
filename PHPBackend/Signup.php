@@ -20,7 +20,8 @@
     $GrdnAdress = mysqli_real_escape_string($conn, $_POST['GrdnAdress']);  
     
     $email = mysqli_real_escape_string($conn, $_POST['email']);
-    $password = mysqli_real_escape_string($conn, $_POST['password']);             //Getting Inputs for accounts
+    $password = mysqli_real_escape_string($conn, $_POST['password']);
+    $role = "user";             //Getting Inputs for accounts
   
     
     function isGmailOrYahoo($email) {
@@ -71,17 +72,17 @@
 
                                 if(move_uploaded_file($tmp_name,"../Pictures/".$new_img_name)){      //if nagupload na si user lilipat na si file sa specific folder
                                     $ran_id = rand(time(), 100000000);                          // random id para kay user
-                                    $status = "Active now";                 //kapag nagsign in na si user maga active na to
+                                    $status = "Pending";                 //kapag nagsign in na si user maga active na to
                                     $encrypt_pass = md5($password);         // naka md5 para 
 
                                     //insert na ang data ni user para sa resident data
-                                    $insert_query_data = mysqli_query($conn, "INSERT INTO tblresident (first_name, middle_name, last_name, suffix, sex, age, phone_number, block, lot, grdn_name, grdn_phone_num, grdn_relship, grdn_address)
+                                    $insert_query_data = mysqli_query($conn, "INSERT INTO tblresident (first_name, middle_name, last_name, suffix, sex, age, phone_number, block, lot, ec_name, ec_phone_num, ec_relship, ec_address)
                                     VALUES ('{$fname}', '{$mname}', '{$lname}', '{$suffix}', '{$gender}', '{$age}', '{$phonenum}', '{$block}', 
                                     '{$lot}', '{$GrdnName}', '{$GrdnNumber}', '{$GrdnRelship}', '{$GrdnAdress}')");
 
                                     //eto naman ay para sa kanilang account
-                                    $insert_query_account = mysqli_query($conn, "INSERT INTO tblaccounts (unique_id, email, password, img, status)
-                                    VALUES ({$ran_id}, '{$email}', '{$encrypt_pass}', '{$new_img_name}', '{$status}')");
+                                    $insert_query_account = mysqli_query($conn, "INSERT INTO tblaccounts (unique_id, email, password, img, status, role)
+                                    VALUES ({$ran_id}, '{$email}', '{$encrypt_pass}', '{$new_img_name}', '{$status}', '{$role}' )");
 
 
                                     if($insert_query_account){

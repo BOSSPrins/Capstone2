@@ -1,11 +1,13 @@
 <?php
+include_once "Connect/Connection.php";
 session_start();
 
-if(!isset($_SESSION['unique_id'])) {
-    header("location: LoginPage.php");
+if (isset($_SESSION['unique_id'])) {
+  if ($_SESSION['role'] == 'user') {
+      header("Location: LoginPage.php");
+      exit();
+  }
 }
-include "Connect/Connection.php";
-
 ?>
 <!DOCTYPE html>
 <html lang="en">

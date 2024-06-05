@@ -1,25 +1,82 @@
 <?php
-
 session_start();
-if(isset($_SESSION['unique_id'])){
-  include_once "Connect/Connection.php";
 
-  $logout_id = mysqli_real_escape_string($conn, $_SESSION['unique_id']);
+echo "<pre>";
+echo "Session before logout:\n";
+print_r($_SESSION);
+echo "</pre>";
 
-    if(isset($logout_id)){          // pang bago ng status kapag naglogout 
+// Flush the output to ensure it is sent to the browser
+ob_flush();
+flush();
+
+// Check if unique_id is set
+if (isset($_SESSION['unique_id'])) {
+    include_once "Connect/Connection.php";
+    $conn = connection();
+
+    $unique_id = mysqli_real_escape_string($conn, $_SESSION['unique_id']);
+    
+    echo "Unique ID: " . $unique_id . "<br>";
+
+    // Flush the output to ensure it is sent to the browser
+    ob_flush();
+    flush();
+
+    if (isset($unique_id)) {
+        // Change the status
         $status = "Offline now";    
-        $sql = mysqli_query($conn , "UPDATE tblaccounts SET status = '{$status}' WHERE unique_id = {$logout_id}");
-        if($sql){
-          session_unset();
-          session_destroy();
-          header("Location: LoginPage.php");
-          
+        $sql = "UPDATE tblaccounts SET status = '{$status}' WHERE unique_id = '{$unique_id}'";
+        echo "SQL Query: " . $sql . "<br>"; // Check if the SQL query is constructed correctly
+        $result = mysqli_query($conn, $sql);
+
+        // Flush the output to ensure it is sent to the browser
+        ob_flush();
+        flush();
+        
+        if ($result) {
+            // Unset and destroy session
+            session_unset();
+            session_destroy();
+            echo "Session destroyed.<br>";
+            echo "Session after destroy:<br>";
+            echo "<pre>";
+            print_r($_SESSION); // This should be empty
+            echo "</pre>";
+
+            // Flush the output to ensure it is sent to the browser
+            ob_flush();
+            flush();
+
+            // Use JavaScript to redirect after a delay
+            echo '<script>';
+            echo 'setTimeout(function(){ window.location.href = "LoginPage.php"; }, 5000);'; // 5-second delay
+            echo '</script>';
+            exit(); // Ensure no further code execution after redirection
+        } else {
+            // Handle SQL error
+            echo "Error: " . mysqli_error($conn); // Check for SQL errors
+
+            // Flush the output to ensure it is sent to the browser
+            ob_flush();
+            flush();
+            exit();
         }
     } else {
-      header("Location: DashBoard.php");
-      
+        echo "Unique ID not set properly.";
+        exit();
     }
 } else {
-header("Location: LoginPage.php");
+    echo "Session does not have unique_id.";
+
+    // Flush the output to ensure it is sent to the browser
+    ob_flush();
+    flush();
+
+    // Use JavaScript to redirect after a delay
+    echo '<script>';
+    echo 'setTimeout(function(){ window.location.href = "LoginPage.php"; }, 5000);'; // 5-second delay
+    echo '</script>';
+    exit(); // Ensure no further code execution after redirection
 }
 ?>

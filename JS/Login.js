@@ -1,34 +1,38 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const form = document.querySelector(".lagin"), 
-  continueBtn = form.querySelector(".laginbtn"),
-  errorText = form.querySelector(".iror");
-  
-  form.onsubmit = (e)=>{ //preventing the form from submitting
-      e.preventDefault();
-  }
+  const form = document.querySelector(".lagin");
+  const continueBtn = form.querySelector(".laginbtn");
+  const errorText = form.querySelector(".iror");
+
+  form.onsubmit = (e) => {
+    // Prevent the form from submitting normally
+    e.preventDefault();
+  };
+
   if (continueBtn) {
-   continueBtn.onclick = ()=>{   
-            
-      let xhr = new XMLHttpRequest();      //start ajax creating XML object
+    continueBtn.onclick = () => {
+      let xhr = new XMLHttpRequest();
       xhr.open("POST", "PHPBackend/Login.php", true);
-      xhr.onload = ()=>{  
-        if(xhr.readyState === XMLHttpRequest.DONE){
-            if(xhr.status === 200){
-                let data = xhr.response;
-                console.log(data);
-                if(data === "success"){
-                  location.href="DashBoard.php";
-                }else{
-                  errorText.textContent = data;
-                  errorText.style.display = "block";
-                  console.log(data);
-                }
+      xhr.onload = () => {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+          if (xhr.status === 200) {
+            let data = xhr.response;
+            console.log(data);
+
+            if (data === "admin") {
+              window.location.href = "DashBoard.php";
+            } else if (data === "user") {
+              window.location.href = "UserRequest.php";
+            } else {
+              errorText.textContent = data;
+              errorText.style.display = "block";
+              console.log(data);
             }
+          }
         }
-      }
-      // sending data through ajax to php
-      let formData = new FormData(form); //creating new formData object
-      xhr.send(formData); //sending the form data to php
-    };    
+      };
+
+      let formData = new FormData(form);
+      xhr.send(formData);
+    };
   }
-  });
+});

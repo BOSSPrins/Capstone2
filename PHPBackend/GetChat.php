@@ -60,9 +60,13 @@ if(isset($_SESSION['unique_id'])){
                         </li>';
           } else {      // matik eto yung receiver
               $output .= '<li class="chatItems ehe tridot istap">
-                            <div class="chatItemsGilid">
-                                <img class="chatItemsGimage" src="Pictures/'.$row['img'].'">
-                            </div>
+                            <div class="chatItemsGilid">';
+                            if ($row['role'] === 'user') {
+                                $output .= '<img class="chatItemsGimage" src="Pictures/' . $row['img'] . '">';
+                              } else {
+                                $output .= '<img class="chatItemsGimage" src="Pictures/Dasma_City_Logo.png">';
+                              }
+              $output .=  '</div>
                             <div class="ItemsConsts tridot">
                                 <div class="ItemsWrapper">
                                     <div class="ItemBoxes">

@@ -1,11 +1,36 @@
 <?php
-if (!isset($_SESSION)){
-    session_start();
-}
-if (isset($_SESSION['unique_id'])){
-    header("location: DashBoard.php");
-}
 include "Connect/Connection.php";
+session_start();
+
+if(isset($_SESSION['unique_id'])){
+    // Perform logout actions
+    // Redirect to login page only if the user is not already on the login page
+    if(basename($_SERVER['PHP_SELF']) !== 'LoginPage.php') {
+        header("Location: LoginPage.php");
+        exit();
+    }
+}
+
+if (isset($_SESSION['unique_id'])) {
+    if ($_SESSION['role'] == 'admin') {
+        header("Location: DashBoard.php");
+        exit(); 
+    } elseif ($_SESSION['role'] == 'user') {
+        header("Location: UserRequest.php");
+        exit();
+    }
+}
+
+if (isset($_SESSION['role'])) {
+    echo '<script>';
+    echo 'const sessionRole = "' . $_SESSION['role'] . '";';
+    echo '</script>';
+} else {
+    echo '<script>';
+    echo 'const sessionRole = null;';
+    echo '</script>';
+}
+
 ?>
 
 <!DOCTYPE html>

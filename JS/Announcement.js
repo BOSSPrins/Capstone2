@@ -146,10 +146,10 @@ function closeDetails() {
 //FUNCTION SA TEXTAREA MODAL
 const DetailsTextarea = document.querySelector(".modalTextInputIto");
 DetailsTextarea.addEventListener("input", function() {
-    adjustTextareaHeight();
+    ModalAdjustTextareaHeight();
 });
 
-function adjustTextareaHeight() {
+function ModalAdjustTextareaHeight() {
     DetailsTextarea.style.height = "auto";
     DetailsTextarea.style.height = DetailsTextarea.scrollHeight + "px";
 }

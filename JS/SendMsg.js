@@ -12,6 +12,7 @@ function scrollToBottom() {
 form.onsubmit = (e)=>{ //preventing the form from submitting
   e.preventDefault();
 }
+
 function getFormattedTimestamp() {
   const now = new Date();
   const year = now.getFullYear();
