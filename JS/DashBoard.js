@@ -159,11 +159,15 @@ $(document).ready(function () {
                     $('#Lname').val(value['last_name']);
                     $('#Fname').val(value['first_name']);
                     $('#Mname').val(value['middle_name']);
-                    $('#Bday').val(value['birthday']);
-                    $('#Bplace').val(value['birthplace']);
+                    console.log("Before setting value to #Age:", value['sex']);
+                    $('#Age').val(value['age']);
+                    console.log("After setting value to #Age:", $('#Age').val());
+                    console.log("Value of value['age']:", value['age']);
+                    console.log("End of code execution");
+                    // $('#Bplace').val(value['birthplace']);
                     $('#Sex').val(value['sex']);
                     $('#PhoneNum').val(value['phone_number']);
-                    $('#CitizShip').val(value['citizenship']);
+                    // $('#CitizShip').val(value['citizenship']);
                     $('#Blk').val(value['block']);
                     $('#Lot').val(value['lot']);
                     $('#ecName').val(value['ec_name']);

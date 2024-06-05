@@ -1,0 +1,735 @@
+:root{
+  --color-primary: #1828b8;
+  --color-danger: #ff7782;
+  --color-success: #41f1b6;
+  --color-warning: #ffbb55;
+  --color-white: #fff;
+  --color-info-dark: #1e1e1f;
+  --color-info-light: #939fb6;
+  --color-dark: #363949;
+  --color-light: rgba(61, 109, 176, 0.18);
+  --color-light-2: rgba(52, 58, 116, 0.20);
+  --color-primary-variant: #111e88;
+  --color-dark-variant: #677483;
+  --color-background: #f6f6f9;
+
+  --light: #f9f9f9;
+  --blue: #3c91e6;
+  --light-blue: #a9d5ff;
+  --light-red: #f38c8c;
+  --light-green: #a7f9d0;
+  --grey: #eee;
+  --dark-grey: #aaaaaa;
+  --drak: #342e37;
+  --red:  #e88383;
+  --green: rgb(94, 232, 129);
+  --color-info-dark: #919497;
+
+  --color-border-radius: 2rem;
+  --color-border-radius-1: 0.4rem;
+  --color-border-radius-2: 0.8rem;
+  --color-border-radius-3: 1.2rem;
+
+
+  --card-padding: 1.8rem;
+  --padding-1: 1.2rem;
+
+  --box-shadow: 0 2rem 3rem var(--color-light);
+}
+
+*{
+  margin: 0;
+  padding: 0;
+  outline: none;
+  appearance: none;
+  border: 0;
+  text-decoration: none;
+  list-style: none;
+  box-sizing: border-box;
+}
+
+html{
+  font-size: 14px;
+}
+
+.mainDashboardContainer{
+  width: 100vw;
+  height: 100vh;
+  font-family: Arial, sans-serif;
+  font-size: 0.88rem;
+  background: var(--color-background);
+  user-select: none;
+  overflow-x: hidden;
+  color: var(--color-dark);
+}
+
+/* ===== HEADER DESIGN ===== */
+.headerTop{
+  height: 50px;
+  /* background: rgb(255, 255, 255); */
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  position: fixed;
+  top: 5px;
+  left: 5px;
+  right: 5px;
+  z-index: 1;
+}
+
+.leftSection{
+  background-color: rgb(255, 255, 255);
+  width: 250px ;
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
+  /* border-bottom-width: 2px;
+  border-bottom-style: solid;
+  border-bottom-color: rgb(161, 161, 161); */
+}
+
+.rightSection{
+  background-color: transparent;
+  width: 250px ;
+  display: flex;
+  align-items: center;
+  justify-content: end;
+}
+
+.headerTop h2{
+  margin-left: 15px;
+}
+
+/* ===== HEADER IMAGE SIZE ===== */ 
+.profileBtn{
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.profileBtn label{
+  cursor: pointer;
+}
+
+.menu{
+  width: 25px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.user-img{
+  width: 30px;
+  height: 30px;
+  background: rgb(0, 0, 0);
+  border-radius: 20px;
+}
+
+/*.eme3{
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 6px solid #000000;
+  transition: 0.3s;
+  margin-left: 10px;
+  margin-right: 10px;
+} */
+
+.img-logo{
+  width: 3.5rem;
+  height: 3.5rem;
+}
+
+/* ===== PROFILE MODAL DESIGN ===== */
+.modal{
+  display: none;
+}
+
+.subModal{
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  font-family: Arial, sans-serif;
+}
+
+.modal-content {
+  display: flex;
+  background: var(--color-background);
+  width: 800px;
+  height: 500px; /* Set the desired height */
+  overflow: hidden; /* Hide overflow */
+  border-radius: 10px;
+}
+
+.profileSidebar{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  width: 175px;
+  height: 100%;
+  border-radius: 10px;
+}
+
+.profileSidebar a{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 4rem;
+  margin-bottom: 5px;
+  /* background: rgb(192, 184, 184); */
+  color: var(--color-info-dark);
+}
+
+.profileSidebar a:hover{
+  color: var(--color-primary);
+}
+
+.profilePages{
+  width: 100%;
+  height: 100%;
+  margin-left: 10px;
+}
+
+.closeProf{
+  display: flex;
+  justify-content: end;
+  margin-right: 5px;
+  color: #000000;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* Hide all pages initially */
+.page {
+  display: none;
+  height: calc(100% - 35px);
+}
+
+/* Show active page */
+.activeProfModal{
+  display: block;
+}
+
+/* ===== CHANGING PASSWORD ===== */
+.changingPassword {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 20px;
+  margin-left: 50px;
+  margin-right: 50px;
+}
+
+.changingInputBox{
+  width: 100%;
+  margin-bottom: 50px;
+}
+
+.changingInputBoxLast{
+  width: 100%;
+}
+
+.changingInputBox .inputngChanging,
+.changingInputBoxLast .inputngChanging{
+  width: 100%;
+  padding: 15px;
+  font-size: 20px;
+  border-radius: 10px;
+  border: 1px solid rgba(62, 65, 71, 0.4);
+}
+
+.changingInputBox .inputngChanging:focus,
+.changingInputBoxLast .inputngChanging:focus{
+  border-color: var(--color-primary);
+}
+
+.changingForgotPass {
+  display: flex;
+  justify-content: end;
+  margin-top: 15px;
+  font-size: 17.5px;
+  width: 100%;
+}
+
+.forgotpassAs{
+  color: var(--color-primary);
+}
+
+.forgotpassAs:hover{
+  text-decoration: underline;
+}
+
+.paragChange{
+  margin-top: 10px;
+}
+
+.buttonSapagPalit{
+  margin-top: 10px;
+  width: 100%;
+  padding: 15px;
+  background: var(--color-primary);
+  color: white;
+  font-size: 17.5px;
+  cursor: pointer;
+}
+
+/* ===== SIDEBAR DESIGN ===== */
+.sidebarContainer{
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  left: 5px;
+  bottom: 5px;
+  top: 55px;
+  background-color:  rgb(255, 255, 255);
+  width: 250px;
+  margin-top: 7px;
+  transition: all 0.3s;
+  z-index: 1;
+}
+
+.sidebarContainer span{
+  font-size: 14.5px;
+  font-weight: 500;
+}
+
+.sidebarContainer .sideside{
+  display: flex;
+  color: var(--color-info-dark);
+  margin-left: 2rem;
+  gap: 1rem;
+  align-items: center;
+  position: relative;
+  height: 4rem;
+  transition: all 300ms ease;
+}
+
+.sidebarContainer .sideside .img-sideboard{
+  font-size: 1.6rem;
+  transition: all 300ms ease;
+}
+
+.sidebarContainer .sideside:last-child{
+  position: absolute;
+  bottom: 2rem;
+  width: 100%;
+}
+
+.sidebarContainer .sideside.active{
+  background: var(--color-light);
+  color: var(--color-primary);
+  margin-left: 5px;
+}
+
+.sidebarContainer .sideside.active::before{
+  content: '';
+  width: 6px;
+  height: 100%;
+  background: var(--color-primary);
+}
+
+.sidebarContainer .sideside.active .img-sideboard{
+  margin-left: calc(1rem -3rem);
+}
+
+.sidebarContainer .sideside:hover{
+  color: var(--color-primary);
+}
+
+.sidebarContainer .sideside:hover .img-sideboard{
+  margin-left: 1rem;
+}
+
+/* ===== SIDEBAR IMAGE SIZE ===== */
+.img-sideboard{
+  width: 30px;
+}
+
+/* ========== SIDEBAR ACTIVE ========== */
+.sidebarContainer.sideActive{
+  width: 110px;
+}
+
+.sidebarContainer.sideActive .eme2 {
+  display: none;
+}
+
+.sidebarContainer.sideActive .subMenuComp{
+  margin-left: 0;
+}
+
+.sidebarContainer.sideActive span{
+  display: none;
+}
+
+.AccountsssContainerr.AccountsssConActivee{
+  margin-left: 130px;
+}
+
+/* ========== SUB MENU SIDEBAR ========== */
+.subMenuComp{
+  display: none;
+  margin-left: 35px;
+  transition: all 0.3s;
+}
+
+.submenu-visible {
+  display: block; 
+}
+
+.subMenuComp li a{
+  position: relative;
+  display: flex;
+  color: var(--color-info-dark);
+  padding: 10px;
+  position: relative;
+  transition: all 300ms ease;
+}
+
+.eme2{
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 6px solid #aeaeae;
+  transition: 0.3s;
+  margin-left: 40px;
+}
+
+.eme2-rotate{
+  transform: rotate(180deg);
+}
+
+.subMenuComp li a.active{
+  background: var(--color-light);
+  color: var(--color-primary);
+  height: 100%;
+  margin-left: 5px;
+}
+
+.sidebarContainer li a:hover{
+  color: var(--color-primary);
+  margin-left: 1rem;
+}
+
+.subMenuComp li a.active::before {
+  content: '';
+  width: 4px;
+  height: 100%;
+  background: var(--color-primary);
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+/* ===== SUB MENU CHAT IMAGE ==== */
+.img-subMenu{
+  width: 20px;
+  margin-right: 5px;
+}
+
+.sub-spa{
+  margin-top: 5px;
+}
+
+/* ===== MODAL SA CONFIRM */
+.ConfirmModalIto{
+  display: none;
+}
+
+.subConfirmModalContent{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  z-index: 2;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.confirmModalContent{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  background: white;
+  border-radius: 10px;
+  width: 400px;
+  height: 150px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.paragConfirm{
+  margin-top: 5px;
+}
+
+.confirmText{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.confirmButtons {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.confirmImg{
+  width: 50px;
+  display: block;
+  margin: 0 auto;
+}
+
+.buttonConfirm{
+  padding: 10px 45px;
+  cursor: pointer;
+  border-radius: 4px;
+  margin: 10px;
+  margin-top: 10px;
+}
+
+.cancelButn{
+  background: transparent;
+  border: 1px solid var(--color-light-2);
+  border-radius: var(--color-border-radius-1);
+}
+
+.cancelButn:hover{
+  background: rgb(215, 214, 214);
+}
+
+.confirmButn {
+  background: rgb(0, 128, 0); /* Green */
+  color: white;
+}
+
+.confirmButn:hover {
+  background: rgb(0, 100, 0); /* Darker green */
+}
+
+/* ========== MAIN DASHBOARD DESIGN ========== */
+.AccountsssContainerr{
+  margin-left: 265px;
+  margin-top: 65px;
+}
+
+/* ===== ACCOUNTS TABLE DESIGN */
+.AccountTableConTop{
+  width: 100%;
+}
+
+.AccSearchContainer{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-right: 15px;
+  margin-bottom: 6px;
+}
+
+.AccSearchInputDes{
+  height:  30px;
+  padding: 0.5em;
+  width: 250px;
+  box-sizing: border-box;
+  border: 1px solid var(--color-light-2);
+  border-radius: var(--color-border-radius-1);
+}
+
+.AccSearchInputDes:focus{
+  border-color: var(--color-primary);
+}
+
+.ACCTb-btn{
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+  background: #caf2ff;
+}
+
+.AccountsTableContent{
+  width: 100%;
+  padding-top: 5px;
+  padding-right: 15px;
+}
+
+table{
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead{
+  background: var(--color-primary);
+  color: white;
+}
+
+th{
+  padding: 10px;
+  border: 1px solid rgb(179, 172, 172); /* Outline partition */
+}
+
+td{
+  padding: 5px;
+  border: 1px solid rgb(179, 172, 172); /* Outline partition */
+}
+
+tbody{
+  background: var(--color-white);
+  text-align: center;
+}
+
+td{
+  color: #000000;
+}
+
+/* MODAL SA PAG VIEW */
+/* ========== EDIT MODAL DESIGN ========== */
+.containerNgEditModal{
+  display: none;
+}
+
+.subContainerEditModal{
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  font-family: Arial, sans-serif;
+}
+
+.editItongmodal{
+  position: relative;
+  max-width: 600px;
+  width: 100%;
+  margin-top: 10px;
+  height: 590px;
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  overflow: hidden;
+  overflow-y: scroll;
+}
+
+.editItongmodal hr {
+  border: none;
+  height: 1px;
+  background-color: #ccc;
+  margin: 15px 0;
+}
+
+.editItongmodal::-webkit-scrollbar{
+  display: none;
+}
+
+.titleHeaderEdit{
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.edit-form h4{
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.closeEditModal{
+  height: 30px;
+  font-size: 28px;
+  font-weight: bold;
+  outline: none;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.edit-form .inputbox-edit{
+  width: 100%;
+}
+
+.edit-form .inputbox-edit .inputngEditModalTo{
+  position: relative;
+  display: inline-block;
+  height: 30px;
+  width: 100%;
+  font-size: small;
+  outline: none;
+  /* background: rgb(234, 240, 245);
+  border: 1px solid rgb(203, 214, 220); */
+  border-radius: 4px;
+  padding: 0 10px;
+  margin-top: 3px;
+}
+
+.inputbox-edit select{
+  position: relative;
+  height: 30px;
+  width: 100%;
+  outline: none;
+  /* background: rgb(234, 240, 245);
+  border: 1px solid rgb(203, 214, 220); */
+  border-radius: 4px;
+  padding: 0 10px;
+  margin-top: 3px;
+}
+
+.edit-form .inputbox-edit label{
+  font-weight: 550;
+}
+
+.edit-form .row{
+  display: flex;
+  column-gap: 15px;
+  margin-bottom: 13px;
+}
+
+.edit-form .row1{
+  display: grid;
+  grid-template-columns: 1fr 250px 1fr;
+  column-gap: 15px;
+  margin-bottom: 13px;
+}
+
+.edit-form .row2{
+  display: flex;
+  column-gap: 15px;
+  padding-bottom: 10px;
+}
+
+.edit-form .row3{
+  display: grid;
+  grid-template-columns: 1fr 1fr 250px;
+  column-gap: 15px;
+  padding-bottom: 10px;
+}
+
+.edit-form .row5{
+  display: flex;
+  column-gap: 15px;
+  margin-top: 13px;
+}
+
+.edit-form .row6{
+  margin-top: 10px;
+  padding-bottom: 10px;
+}

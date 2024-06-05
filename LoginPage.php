@@ -11,15 +11,17 @@ if(isset($_SESSION['unique_id'])){
     }
 }
 
-if (isset($_SESSION['unique_id'])) {
-    if ($_SESSION['role'] == 'admin') {
-        header("Location: DashBoard.php");
-        exit(); 
-    } elseif ($_SESSION['role'] == 'user') {
-        header("Location: UserRequest.php");
-        exit();
-    }
-}
+// if (isset($_SESSION['unique_id'])) {
+//     if ($_SESSION['role'] == 'admin') {
+//         header("Location: DashBoard.php");
+//         exit(); 
+//     } elseif ($_SESSION['role'] == 'user') {
+//         header("Location: UserRequest.php");
+//         exit();
+//     }
+// }
+
+// echo $_SESSION['unique_id'];
 
 if (isset($_SESSION['role'])) {
     echo '<script>';
@@ -122,9 +124,19 @@ if (isset($_SESSION['role'])) {
                                             <input type="text" placeholder="Enter Your Suffix" name="suffix">
                                         </div>
             
-                                        <div class="input-field">
+                                        <!-- <div class="input-field">
                                             <span> Sex </span>
-                                            <input type="text" placeholder="Gender" name="gender">
+                                            <input type="text" placeholder="Enter your Sex" name="gender">
+                                        </div> -->
+                                        <div class="input-field">
+                                            <span> Gender </span>
+                                            <select name="gender" id="gender">
+                                                <option value="" disabled selected>Choose an option</option>
+                                                <option value="Male">Male</option>
+                                                <option value="Female">Female</option>
+                                                <option value="Preferred Not to Say">Preferred Not to Say</option>
+                                                <option value="Others">Others</option>
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="rowFields">
@@ -133,17 +145,17 @@ if (isset($_SESSION['role'])) {
                                             <input type="text" placeholder="Enter Your Age" name="age">
                                         </div>
             
-                                        <div class="input-field">
+                                        <!-- <div class="input-field">
                                             <span> PWD </span>
-                                             <input type="text" placeholder="Enter if you are PWD" > <!--lalagyan ng checkbox -->
+                                             <input type="text" placeholder="" name="pwd" id="pwd">
+                                        </div> -->
+                                    
+
+                                        <div class="input-field">
+                                            <span> Phone Number </span>
+                                            <input type="text" placeholder="Enter Your Phone Number" name="phonenum">
                                         </div>
                                     </div>
-
-                                    <div class="input-field">
-                                        <span> Phone Number </span>
-                                        <input type="text" placeholder="Enter Your Phone Number" name="phonenum">
-                                    </div>
-
                                     <div class="rowFields">
                                         <div class="input-field">
                                             <span> Block </span>
@@ -157,29 +169,29 @@ if (isset($_SESSION['role'])) {
                                     </div>
 
 
-                                    <div class="details ID">
+                                    <!-- <div class="details ID">
                                         <span class="titleniyato">Emergency Contacts </span>
 
                                         <div class="input-field">
-                                            <span> Guardian's Name </span>
-                                            <input type="text" placeholder="Enter Your Guradian Name" name="GrdnName">
+                                            <span> Name </span>
+                                            <input type="text" placeholder="Enter their Full Name" name="GrdnName" id="GrdnName">
                                         </div>
 
                                         <div class="input-field">
-                                            <span> Guardian's Contact Number </span>
-                                            <input type="text" placeholder="Enter Your Guardian Number" name="GrdnNumber">
+                                            <span> Contact Number </span>
+                                            <input type="text" placeholder="Enter their Contact Number" name="GrdnNumber" id="GrdnNumber">
                                         </div>
             
                                         <div class="input-field">
                                             <span> Relationship </span>
-                                            <input type="text" placeholder="Enter relationship to Guardian" name="GrdnRelship">
+                                            <input type="text" placeholder="Enter your Relationship" name="GrdnRelship" id="GrdnRelship">
                                         </div>
     
                                         <div class="input-field">
-                                            <span> Guardian's Address </span>
-                                            <input type="text" placeholder="Enter your Guardian Address" name="GrdnAdress">
+                                            <span> Address </span>
+                                            <input type="text" placeholder="Enter their Address" name="GrdnAdress" id="GrdnAdress">
                                         </div>
-                                    </div>
+                                    </div> -->
 
                                     <button class="nextBtn">
                                         <span class="btnText"> Next </span>
@@ -248,13 +260,55 @@ if (isset($_SESSION['role'])) {
         const backBtn = form.querySelector(".backBtn");
         const allInput = form.querySelectorAll(".first input");
 
+        const genderSelect = form.querySelector("#gender");
+        const PWD = form.querySelector("#pwd"); 
+        // const ecNamee = form.querySelector("#GrdnName");
+        // const ecNumb = form.querySelector("#GrdnNumber");
+        // const ecRels = form.querySelector("#GrdnRelship");
+        // const ecAddr = form.querySelector("#GrdnAdress");
+
+
+
         nextBtn.addEventListener("click", () => {
             let allFilled = true;
             allInput.forEach(input => {
                 if (input.getAttribute('placeholder') !== "Enter Your Suffix" && input.value === "") {
                     allFilled = false;
                 }
+                
             });
+
+            console.log("All input fields filled:", allFilled);
+
+            // ganto kapag pwede walang laman
+            // if (PWD.value === "") {
+            //     allFilled = true;
+            // }
+            // console.log("pwd field filled:", allFilled);
+
+            // ganto kapag bawal walang laman
+            if (genderSelect.value === "") {
+                allFilled = false;
+            }
+            console.log("Gender select filled:", allFilled);
+
+            // Sa emergency contacts itinago na kasi
+            // if (ecNamee.value === "") {
+            //     allFilled = true;
+            // }
+            // console.log("ecNamee select filled:", allFilled);
+            // if (ecNumb.value === "") {
+            //     allFilled = true;
+            // }
+            // console.log("ecNumb select filled:", allFilled);
+            // if (ecRels.value === "") {
+            //     allFilled = true;
+            // }
+            // console.log("ecRels select filled:", allFilled);
+            // if (ecAddr.value === "") {
+            //     allFilled = true;
+            // }
+            // console.log("ecAddr select filled:", allFilled);
 
             if (allFilled) {
                 form.classList.add('secActive');

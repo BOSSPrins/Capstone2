@@ -194,27 +194,31 @@ if (isset($_SESSION['unique_id'])) {
                     </div>
                     <div class="row1">
                         <div class="inputbox-edit">
-                            <label> Date Of Birth: </label>
-                            <input class="inputngEditModalTo"  type="text" id="Bday" name="birthday">
+                            <label> Age: </label>
+                            <input class="inputngEditModalTo"  type="text" id="Age" name="age">
                         </div>
-                        <div class="inputbox-edit">
+                        <!-- <div class="inputbox-edit">
                             <label> Place Of Birth: </label>
                             <input class="inputngEditModalTo"  type="text" id="Bplace" name="birthplace">
-                        </div>
-                        <div class="inputbox-edit">
-                            <label> Sex: </label>
-                            <input class="inputngEditModalTo"  type="text" id="Sex" name="gender">
-                        </div>
-                    </div>
-                    <div class="row2">
+                        </div> -->
                         <div class="inputbox-edit">
                             <label> Contact Number: </label>
                             <input class="inputngEditModalTo" type="text" id="PhoneNum" name="contNum">
                         </div>
                         <div class="inputbox-edit">
+                            <label> Gender: </label>
+                            <input class="inputngEditModalTo"  type="text" id="Sex" name="gender">
+                        </div>
+                    </div>
+                    <div class="row2">
+                        <!-- <div class="inputbox-edit">
+                            <label> Contact Number: </label>
+                            <input class="inputngEditModalTo" type="text" id="PhoneNum" name="contNum">
+                        </div> -->
+                        <!-- <div class="inputbox-edit">
                             <label> Citizenship: </label>
                             <input class="inputngEditModalTo" type="text" id="CitizShip" name="citizShip">
-                        </div>
+                        </div> -->
                     </div>
                     <hr>
                     <div class="header-row">
@@ -301,10 +305,10 @@ if (isset($_SESSION['unique_id'])) {
                     <img class="img-sideboard" src="Pictures/Documents2.png">
                     <span> Documents </span>
                 </a>
-                <a href="#" class="sideside">
+                <!-- <a href="#" class="sideside">
                     <img class="img-sideboard" src="Pictures/Request2.png">
                     <span> Online Request </span>
-                </a>
+                </a> -->
                 <div class="complaintsContainer">
                     <a href="#" class="sideside" id="complaintsDropdown">
                         <img class="img-sideboard" src="Pictures/ComplaintsCap.png">
@@ -318,17 +322,21 @@ if (isset($_SESSION['unique_id'])) {
                                 <label class="sub-spa"> Chat </label>
                             </a> 
                         </li>
-                        <li> <a href="#"> Sub Menu 2 </a> </li>
-                        <li> <a href="#"> Sub Menu 3 </a> </li>
+                        <!-- <li> <a href="#"> Sub Menu 2 </a> </li>
+                        <li> <a href="#"> Sub Menu 3 </a> </li> -->
                     </ul>
                 </div>
                 <a href="Announcement.php" class="sideside">
                     <img class="img-sideboard" src="Pictures/Announcement.png">
                     <span> Announcement </span>
                 </a>
-                <a href="#" class="sideside">
+                <a href="Accounts.php" class="sideside">
                     <img class="img-sideboard" src="Pictures/Accounts2.png">
                     <span> Accounts </span>
+                </a>
+                <a href="#" class="sideside">
+                    <img class="img-sideboard" src="Pictures/MonthlyDue.png">
+                    <span> Monthly Due </span>
                 </a>
                 <a href="Logout.php" class="sideside">
                     <img class="img-sideboard" src="Pictures/logout.png">
@@ -493,7 +501,7 @@ if (isset($_SESSION['unique_id'])) {
                                         $filterOption = isset($_GET['filter_option']) ? $_GET['filter_option'] : '';
                                         $searchQuery = isset($_GET['search_query']) ? $_GET['search_query'] : '';
 
-                                        $query = "SELECT * FROM tblresident";
+                                        $query = "SELECT * FROM tblresident WHERE access != 'Pending' OR access = 'Approved'";
 
                                         if (!empty($filterOption)) {
                                             $query .= " WHERE block = '" . mysqli_real_escape_string($conn, $filterOption) . "'";

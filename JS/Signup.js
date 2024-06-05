@@ -18,6 +18,7 @@ if (continueBtn) {
               console.log(data);
               if(data === "success"){
                 location.href="LoginPage.php";
+                location.reload();
               }else{
                 errorText.textContent = data;
                 errorText.style.display = "block";

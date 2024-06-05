@@ -3,21 +3,22 @@
     include_once "../Connect/Connection.php";
     $conn = connection();
 
+    $access = "Pending";
     $fname = mysqli_real_escape_string($conn, $_POST['fname']);
     $mname = mysqli_real_escape_string($conn, $_POST['mname']);
     $lname = mysqli_real_escape_string($conn, $_POST['lname']);
     $suffix = mysqli_real_escape_string($conn, $_POST['suffix']);       //Getting Inputs For Admin Residents data
     $gender = mysqli_real_escape_string($conn, $_POST['gender']);
     $age = mysqli_real_escape_string($conn, $_POST['age']);  
-    //PWD
+    // $pwd = mysqli_real_escape_string($conn, $_POST['pwd']); 
     $phonenum = mysqli_real_escape_string($conn, $_POST['phonenum']);         
     $block = mysqli_real_escape_string($conn, $_POST['block']);
     $lot = mysqli_real_escape_string($conn, $_POST['lot']);
     
-    $GrdnName = mysqli_real_escape_string($conn, $_POST['GrdnName']);
-    $GrdnNumber = mysqli_real_escape_string($conn, $_POST['GrdnNumber']);
-    $GrdnRelship = mysqli_real_escape_string($conn, $_POST['GrdnRelship']);             //Getting Emergency contacts
-    $GrdnAdress = mysqli_real_escape_string($conn, $_POST['GrdnAdress']);  
+    // $GrdnName = mysqli_real_escape_string($conn, $_POST['GrdnName']);
+    // $GrdnNumber = mysqli_real_escape_string($conn, $_POST['GrdnNumber']);
+    // $GrdnRelship = mysqli_real_escape_string($conn, $_POST['GrdnRelship']);   //Getting Emergency contacts
+    // $GrdnAdress = mysqli_real_escape_string($conn, $_POST['GrdnAdress']);  
     
     $email = mysqli_real_escape_string($conn, $_POST['email']);
     $password = mysqli_real_escape_string($conn, $_POST['password']);
@@ -35,7 +36,7 @@
         return in_array($domain, $allowedDomains);
     }
 
-    if(!empty($fname) && !empty($mname) && !empty($lname) && !empty($gender) && !empty($age) && !empty($phonenum) && !empty($block) &&  !empty($lot) && !empty($GrdnName) && !empty($GrdnNumber) && !empty($GrdnRelship) && !empty($GrdnAdress) && !empty($email) && !empty($password)){
+    if(!empty($access) && !empty($fname) && !empty($mname) && !empty($lname) && !empty($gender) && !empty($age) && !empty($phonenum) && !empty($block) &&  !empty($lot) && !empty($email) && !empty($password) && !empty($role)){
 
         if(!isGmailOrYahoo($email)) {
             echo "Only Yahoo or Gmail can be used.";
@@ -76,13 +77,13 @@
                                     $encrypt_pass = md5($password);         // naka md5 para 
 
                                     //insert na ang data ni user para sa resident data
-                                    $insert_query_data = mysqli_query($conn, "INSERT INTO tblresident (first_name, middle_name, last_name, suffix, sex, age, phone_number, block, lot, ec_name, ec_phone_num, ec_relship, ec_address)
-                                    VALUES ('{$fname}', '{$mname}', '{$lname}', '{$suffix}', '{$gender}', '{$age}', '{$phonenum}', '{$block}', 
-                                    '{$lot}', '{$GrdnName}', '{$GrdnNumber}', '{$GrdnRelship}', '{$GrdnAdress}')");
+                                    $insert_query_data = mysqli_query($conn, "INSERT INTO tblresident (access, first_name, middle_name, last_name, suffix, sex, age, phone_number, block, lot)
+                                    VALUES ('{$access}','{$fname}', '{$mname}', '{$lname}', '{$suffix}', '{$gender}', '{$age}', '{$phonenum}', '{$block}', '{$lot}')");
+                                    
 
                                     //eto naman ay para sa kanilang account
-                                    $insert_query_account = mysqli_query($conn, "INSERT INTO tblaccounts (unique_id, email, password, img, status, role)
-                                    VALUES ({$ran_id}, '{$email}', '{$encrypt_pass}', '{$new_img_name}', '{$status}', '{$role}' )");
+                                    $insert_query_account = mysqli_query($conn, "INSERT INTO tblaccounts (unique_id, email, password, img, status, role, access)
+                                    VALUES ({$ran_id}, '{$email}', '{$encrypt_pass}', '{$new_img_name}', '{$status}', '{$role}', '{$access}')");
 
 
                                     if($insert_query_account){
