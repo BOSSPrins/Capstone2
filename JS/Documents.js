@@ -104,3 +104,37 @@ document.addEventListener("DOMContentLoaded", function () {
       certificateModal.style.display = "none";
   });
 });
+
+$(document).ready(function () {
+            
+  $('.docsModal').click(function (e) { 
+      e.preventDefault();
+      
+   var  forms_id = $(this).closest('tr').find('.forms_id').text();
+    console.log(forms_id);
+     
+      $.ajax({
+          method: "POST",
+          url: "PHPBackend/DocsProcess.php",
+          data: {
+              'click_DocsModal': true,
+              'forms_id':forms_id,
+          },
+
+           success: function (response) {
+
+              $.each(response, function (Key, value) { 
+
+                  $('#forms_id').val(value['forms_id']);
+                  $('#fullName').val(value['first_name'] + " " + value['middle_name'] + " " + value['last_name']);
+                  $('#fullAddress').val("Block" + value['block'] + "Lot" + value['lot']);
+                  $('#purpose').val(value['form_name']);
+                  
+              });
+
+
+           }
+      });
+  })
+
+});

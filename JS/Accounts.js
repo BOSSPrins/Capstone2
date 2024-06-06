@@ -201,6 +201,7 @@ $(document).ready(function () {
                     if (jsonData.success) {
                         console.log('User confirmed successfully');
 
+                        // sendConfirmationEmail(confirm_userID);
                         $("tr:has(td.user_id:contains('" + confirm_userID + "'))").remove(); 
                         closeModal();
                         location.reload();
@@ -217,4 +218,24 @@ $(document).ready(function () {
             }
         });
     });
+
+    function sendConfirmationEmail(user_id) {
+        $.ajax({
+            type: "POST",
+            url: "ConfirmEmail.php",
+            data: {
+                'user_id': user_id,
+            },
+            success: function (response) {
+                console.log('Confirmation email sent successfully');
+                // Display success message
+                $('#emailStatus').text('Email sent successfully');
+            },
+            error: function(xhr, status, error) {
+                console.error('Failed to send confirmation email:', error);
+                // Display error message
+                $('#emailStatus').text('Failed to send email: ' + error);
+            }
+        });
+    }
 });

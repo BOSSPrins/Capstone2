@@ -16,6 +16,43 @@ if ($admin_sql && mysqli_num_rows($admin_sql) > 0) {
     $admin_unique_id = $admin_row['unique_id'];
 }
 $encoded_id = urlencode($admin_unique_id);
+
+function getUserNameFromDatabase() {
+    $conn = connection(); // Establish database connection
+
+    // Your SQL query to select the user's name from the tblresident table
+     $query = "SELECT * FROM tblresident"; // WHERE user_id = '{$_SESSION['user_id']}'
+
+    // Execute the query
+    $result = mysqli_query($conn, $query);
+
+    // Check if the query was successful
+    if ($result && mysqli_num_rows($result) > 0) {
+        // Fetch the row as an associative array
+        $row = mysqli_fetch_assoc($result);
+        // Return the user's name
+        $firstName = $row['first_name']; 
+        $midName = $row['middle_name']; 
+        $lastName = $row['last_name'];
+        $block = $row['block'];  
+        $lot = $row['lot'];
+        return array('first_name' => $firstName, 'middle_name' => $midName, 'last_name' =>  $lastName, 'block' => $block, 'lot' => $lot);
+    } else {
+        // If the query fails or no results found, return a default name and address
+        return array('firstName' => 'Default Fname', 'midName' => 'Default Midname', 'lastName' => 'Default Lname', 'block' => 'Default block', 'lot' => 'Default lot');
+    }
+}
+
+// Get the user's name from the database
+$userData = getUserNameFromDatabase();
+
+// Store the user's name in the session variable
+$_SESSION['Fname'] = $userData['first_name'];
+$_SESSION['Mname'] = $userData['middle_name'];
+$_SESSION['Lname'] = $userData['last_name'];
+$_SESSION['block'] = $userData['block'];
+$_SESSION['lot'] = $userData['lot'];
+
 ?>
 
 <!DOCTYPE html>
@@ -81,40 +118,54 @@ $encoded_id = urlencode($admin_unique_id);
 
                 <div class="eachConReqForm">
                     <div class="RequestingDocuCon">
-                        <div class="ContainersNgRequestForms" onclick="FirstDocu()">
+                        <div class="ContainersNgRequestForms" onclick="FirstDocu()" >
                             <div class="ModalForEachReqForm">
                                 <div class="SubModalForEachReqForm">
-                                    <div class="nasaLoobNgModalReq">
-                                        <div class="ReqNamecloseContainer">
-                                            <div class="ReqFormName">
-                                                <h1>Certificate Modal </h1> <!--  (Name to ng Document na nirerequest) -->
+                                    <form action="PHPBackend/UserFormReq.php" method="post">
+                                        <div class="nasaLoobNgModalReq">
+                                          
+                                            <div class="ReqNamecloseContainer">
+                                                <div class="ReqFormName">
+                                                    <h1>Certificate Modal </h1> <!--  (Name to ng Document na nirerequest) -->
+                                                </div>
+                                                <div class="ReqCloseContainer">
+                                                    <span class="ReqCertClose">&times;</span>
+                                                </div>
                                             </div>
-                                            <div class="ReqCloseContainer">
-                                                <span class="ReqCertClose">&times;</span>
+                                            <hr class="hrRequest">
+                                            <div class="RequestInput">
+                                                <input type="text" id="MubAwt" name="MubAwt" value="Move Out" hidden>
+                                                <input type="text" id="Stats" name="Stats" value="Pending" hidden>
+
+                                                <label class="labelReq"> First Name: </label>
+                                                    <input class="inputReq" type="text" id="Fname" name="Fname" value="<?php echo $_SESSION['Fname'];?>">
+
+                                                <label class="labelReq"> Middle Name: </label>
+                                                    <input class="inputReq" type="text" id="Mname" name="Mname" value="<?php echo $_SESSION['Mname'];?>">
+
+                                                <label class="labelReq"> Last Name: </label>
+                                                    <input class="inputReq" type="text" id="Lname" name="Lname" value="<?php echo $_SESSION['Lname'];?>">
+                                            </div>
+                                            <div class="RequestInput">
+                                                <label class="labelReq"> Block: </label>
+                                                <input class="inputReq" type="text" id="block" name="block" value="<?php echo $_SESSION['block'];?>">
+                                                <label class="labelReq"> Lot: </label>
+                                                <input class="inputReq" type="text" id="lot" name="lot" value="<?php echo $_SESSION['lot'];?>">
+                                            </div>
+                                            <!-- <div class="RequestInput">
+                                                <label class="labelReq"> Purpose: </label>
+                                                <input class="inputReq" type="text">
+                                            </div> -->
+                                            <div class="buttonsInRequest">
+                                                <button class="cancelReqBtn RBtn">
+                                                    Cancel
+                                                </button>
+                                                <button class="submitReqtBtn RBtn" type="submit">
+                                                    Submit
+                                                </button>
                                             </div>
                                         </div>
-                                        <hr class="hrRequest">
-                                        <div class="RequestInput">
-                                            <label class="labelReq"> Full Name: </label>
-                                            <input class="inputReq" type="text">
-                                        </div>
-                                        <div class="RequestInput">
-                                            <label class="labelReq"> Address: </label>
-                                            <input class="inputReq" type="text">
-                                        </div>
-                                        <div class="RequestInput">
-                                            <label class="labelReq"> Purpose: </label>
-                                            <input class="inputReq" type="text">
-                                        </div>
-                                        <div class="buttonsInRequest">
-                                            <button class="cancelReqBtn RBtn">
-                                                Cancel
-                                            </button>
-                                            <button class="submitReqtBtn RBtn">
-                                                Submit
-                                            </button>
-                                        </div>
-                                    </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -125,9 +176,83 @@ $encoded_id = urlencode($admin_unique_id);
                         <div class="ContainersNgRequestForms"> f </div>
                     </div>
                 </div>
-            </div>
+                <div class="TableParaSaReq">
+                        <div class="tableContainerTopp">
+                            <div class="table-container">
+                                <div class="searchContainer">
+                                    <div class="searchFilterLeft">
+                                        
+                                    </div>
+                                    <div class="searchRight">
+                                        <label> Search: </label>
+                                    <input class="searchInputDes" type="search">
+                                    </div>
+                                </div>
+        
+                                <div class="tableContent">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th> Form Type </th>
+                                                <th hidden> Address </th>
+                                                <th> Status </th>
+                                            </tr>
+                        
+                                            <tbody>
+                                                <?php    
+                                                    $query = "SELECT tblresident.first_name, tblresident.middle_name, tblresident.last_name,
+                                                    forms.form_name, forms.block, forms.lot, forms.status, forms.forms_id
+                                                    FROM tblresident 
+                                                    JOIN forms   ON tblresident.first_name = forms.first_name
+                                                                AND tblresident.middle_name = forms.middle_name
+                                                                AND tblresident.last_name = forms.last_name; ";
+                                                   
+                                                  
+                                                  
+                                                  $result = mysqli_query($conn, $query);
+
+                                                if($result){
+                                                if (mysqli_num_rows($result) > 0) {
+                                                    while ($row = mysqli_fetch_assoc($result)) {
+                                                   
+                                                ?>
+                                                <tr>
+                                                    <td class="forms_id" hidden><?php echo $row['forms_id'] ?></td>
+                                                    <td><?php echo $row['form_name']; ?></td>
+                                                    <td hidden><?php echo "Block " . $row['block'] . " Lot " . $row['lot'] ?></td>
+                                                    <td hidden><?php echo $row['status']; ?></td>
+                                                    <td>
+                                                        <!-- <button class="RequstingBtn tb-btn" value="<?php echo $row['status']; ?>"> 
+                                                         </button> -->
+                                                        <span><?php echo $row['status']; ?> </span> 
+                                                    </td>
+                                                </tr>
+                                                <?php
+                                                        }
+                                                    } else {
+                                                    ?>
+                                                        <tr>
+                                                            <td colspan="2">No data found.</td>
+                                                        </tr>
+                                                    <?php
+                                                    }
+                                                    } else {
+                                                        echo "Query failed: " . mysqli_error($conn);
+                                                    }    
+                                    
+                                                mysqli_close($conn);
+                                                ?>
+                                            </tbody>
+                                        </thead>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>    
         </div>
-    </div>    
+    </div>
 
     <script src="JS/UserRequest.js"></script>
 </body>

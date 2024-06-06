@@ -217,6 +217,12 @@ html{
 .UserSidehContainerr{
   margin-left: 265px;
   padding-top: 65px;
+  /*height: 100vh;
+  width: 100vw;*/
+}
+
+.RquestingContainer{
+  display: flex;
 }
 
 .RequestingDocuCon{
@@ -224,7 +230,7 @@ html{
   width: 100%;
   padding-left: var(--card-padding);
   padding-right: var(--card-padding);
-  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 15px;
 }
 
@@ -234,7 +240,7 @@ html{
   border-radius: var(--color-border-radius);
   box-shadow: var(--box-shadow);
   transition: all 300ms ease;
-  height: 250px;
+  height: 150px;
   cursor: pointer;
   margin-bottom: 20px;
   margin-top: 10px;
@@ -279,7 +285,7 @@ html{
 .nasaLoobNgModalReq{
   background-color: white;
   width: 700px;
-  height: 410px;
+  height: 320px;
   border-radius: 5px;
   padding: 15px;
   display: flex;
@@ -304,6 +310,11 @@ html{
   background: rgb(167, 167, 167);
   padding: 0.4px;
   margin-bottom: 20px;
+}
+
+.rowNgBlkLot{
+  display: flex;
+  gap: 20px;
 }
 
 .labelReq{
@@ -335,4 +346,76 @@ html{
   background: var(--color-primary);
   cursor: pointer;
   border-radius: 5px;
+}
+
+.eachConReqForm,
+.TableParaSaReq{
+  width: 50%;
+}
+
+.tableContainerTopp{
+  width: 100%;
+}
+
+.searchContainer{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-right: 15px;
+  margin-bottom: 6px;
+}
+
+.searchInputDes{
+  height:  30px;
+  padding: 0.5em;
+  width: 250px;
+  box-sizing: border-box;
+  border: 1px solid var(--color-light-2);
+  border-radius: var(--color-border-radius-1);
+}
+
+.searchInputDes:focus{
+  border-color: var(--color-primary);
+}
+
+.tb-btn{
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+  background: #caf2ff;
+}
+
+.tableContent{
+  width: 100%;
+  padding-top: 5px;
+  padding-right: 15px;
+}
+
+table{
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead{
+  background: var(--color-primary);
+  color: white;
+}
+
+th{
+  padding: 10px;
+  border: 1px solid rgb(179, 172, 172); /* Outline partition */
+}
+
+td{
+  padding: 5px;
+  border: 1px solid rgb(179, 172, 172); /* Outline partition */
+}
+
+tbody{
+  background: var(--color-white);
+  text-align: center;
+}
+
+td{
+  color: #000000;
 }

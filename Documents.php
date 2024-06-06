@@ -187,16 +187,41 @@ if (isset($_SESSION['unique_id'])) {
                                         </tr>
                     
                                         <tbody>
+                                        <?php 
+                                            $query = "SELECT * FROM forms";
+
+                                            $result = mysqli_query($conn, $query);
+                                            if($result){
+                                                if (mysqli_num_rows($result) > 0) {
+                                                    while ($row = mysqli_fetch_assoc($result)) {
+
+                                                ?>
+                                                    <tr>
+                                                        <td class="forms_id" hidden><?php echo $row['forms_id'] ?></td>
+                                                        <td><?php echo $row['first_name'] . " " . $row['middle_name'] . " " . $row['last_name']; ?></td>
+                                                        <td><?php echo "Block " . $row['block'] . " Lot " . $row['lot'] ?></td>
+                                                        <td> <?php echo $row['form_name'] ?></td>
+                                                        <td> 02:02 </td>
+                                                        <td> 02:02 </td>
+                                                        <td>
+                                                            <button class="GenerateBtn tb-btn docsModal"> Generate Certificate </button>
+                                                        </td>
+                                                    </tr>
+                                                <?php
+                                                    }
+                                                } else {
+                                        ?>
                                             <tr>
-                                                <td> Prince </td>
-                                                <td> Blk 02 Lot 23 </td>
-                                                <td> Scholarship </td>
-                                                <td> 02:02 </td>
-                                                <td> 02:02 </td>
-                                                <td>
-                                                    <button class="GenerateBtn tb-btn"> Generate Certificate </button>
-                                                </td>
+                                                <td colspan="4">No data found.</td>
                                             </tr>
+                                          <?php
+                                                }
+                                            } else {
+                                                echo "Query failed: " . mysqli_error($conn);
+                                            }    
+                           
+                                            mysqli_close($conn);
+                                            ?>
                                         </tbody>
                                     </thead>
                                 </table>
@@ -205,35 +230,38 @@ if (isset($_SESSION['unique_id'])) {
                             <div id="certificateModal" class="certificateModal">
                                 <div class="subCertificateModal">
                                     <div class="certificateModalCon">
-                                        <div class="NamecloseContainer">
-                                            <div class="FormName">
-                                                <h1>Certificate Modal</h1>
+                                        <form action="" method="post">
+                                            <div class="NamecloseContainer">
+                                                <div class="FormName">
+                                                    <h1>Certificate Modal</h1>
+                                                </div>
+                                                <div class="closeContainer">
+                                                    <span class="CertClose">&times;</span>
+                                                </div>
                                             </div>
-                                            <div class="closeContainer">
-                                                <span class="CertClose">&times;</span>
+                                            <hr class="hrInNameClose">
+                                            <div class="InputContainerCert">
+                                                <label class="labelInCert"> Full Name: </label>
+                                                <input class="inputperCert" type="text" id="fullName" name="fullName">
                                             </div>
-                                        </div>
-                                        <hr class="hrInNameClose">
-                                        <div class="InputContainerCert">
-                                            <label class="labelInCert"> Full Name: </label>
-                                            <input class="inputperCert" type="text">
-                                        </div>
-                                        <div class="InputContainerCert">
-                                            <label class="labelInCert"> Address: </label>
-                                            <input class="inputperCert" type="text">
-                                        </div>
-                                        <div class="InputContainerCert">
-                                            <label class="labelInCert"> Purpose: </label>
-                                            <input class="inputperCert" type="text">
-                                        </div>
-                                        <div class="buttonsInCerti">
-                                            <button class="cancelCertBtn CBtn">
-                                                Cancel
-                                            </button>
-                                            <button class="confirmCertBtn CBtn">
-                                                Confirm
-                                            </button>
-                                        </div>
+                                            <div class="InputContainerCert">
+                                                <label class="labelInCert"> Address: </label>
+                                                <input class="inputperCert" type="text" id="fullAddress" name="fullAddress">
+                                            </div>
+                                            <div class="InputContainerCert">
+                                                <label class="labelInCert"> Purpose: </label>
+                                                <input class="inputperCert" type="text" id="purpose" name="purpose">
+                                            </div>
+                                            <div class="buttonsInCerti">
+                                                <input type="text" name="forms_id" id="forms_id">
+                                                <button class="cancelCertBtn CBtn">
+                                                    Cancel
+                                                </button>
+                                                <button class="confirmCertBtn CBtn">
+                                                    Confirm
+                                                </button>
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
                             </div>

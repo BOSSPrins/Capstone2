@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 05, 2024 at 10:35 PM
+-- Generation Time: Jun 06, 2024 at 10:08 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -59,6 +59,40 @@ INSERT INTO `announcements` (`news_id`, `title`, `context`, `start_date`, `start
 (37, 'EETO NA', 'ufvuyfkuvghb', '2024-05-23', '08:38', '2024-05-23', '07:38', 'Calcu.png,arle.png,arle.png,Calcu.png'),
 (39, 'testingi', 'tye', '2024-05-23', '16:16', '2024-05-24', '16:16', ''),
 (40, 'BAGO TO ', 'kiss mo ko ', '2024-06-02', '02:05', '2024-06-03', '04:05', 'vermo1.jpg,vermo2.jpg,pusi.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `forms`
+--
+
+CREATE TABLE `forms` (
+  `forms_id` int(11) NOT NULL,
+  `form_name` varchar(255) NOT NULL,
+  `first_name` varchar(255) NOT NULL,
+  `middle_name` varchar(255) NOT NULL,
+  `last_name` varchar(255) NOT NULL,
+  `block` varchar(255) NOT NULL,
+  `lot` varchar(255) NOT NULL,
+  `status` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `forms`
+--
+
+INSERT INTO `forms` (`forms_id`, `form_name`, `first_name`, `middle_name`, `last_name`, `block`, `lot`, `status`) VALUES
+(1, 'Move Out', 'Prince ', 'Cutie ', 'Cervantes', '2', '2', 'Pending'),
+(2, 'Move Out', 'Prince', 'Cutie', 'Cervantes', '1', '18', 'Pending'),
+(3, 'Move Out', 'Prince', 'Cutie', 'Cervantes', '1', '18', 'Pending'),
+(4, 'Move Out', 'Prince', 'Cutie', 'Cervantes', '11', '18', 'Pending'),
+(5, 'Move Out', 'Prince', 'Cutie', 'Cervantes', '1', '18', 'Pending'),
+(6, 'Move Out', 'Prince', 'Cutie', 'Cervantes', '1', '18', 'Pending'),
+(7, 'Move Out', 'Prince', 'Cutie', 'Cervantes', '1', '18', 'Pending'),
+(8, 'Move Out', 'Prince', 'Cutie', 'Cervantes', '1', '18', 'Pending'),
+(9, 'Move Out', 'Prince', 'Cutie', 'Cervantes', '111', '18', 'Pending'),
+(10, 'Move Out', 'Prince', 'Cutie', 'Cervantes', '1', '18', 'Pending'),
+(11, 'Move Out', 'Prince', 'Cutie', 'Cervantes', '1', '18', 'Pending');
 
 -- --------------------------------------------------------
 
@@ -223,7 +257,7 @@ INSERT INTO `tblaccounts` (`user_id`, `unique_id`, `email`, `password`, `img`, `
 (3, 730027935, 'welacakes@gmail.com', 'f9395f741e6f4da0f873c08008ed5760', '1715100256330940285_2340469369455107_2269788843175983818_n.jpg', 'Offline now', '', ''),
 (4, 1357825271, 'senpai@gmail.com', '1e5db03ce967cfef4e21ada16da09b06', '1715105349271713718_1999144396919159_608519389647854942_n.jpg', 'Offline now', 'user', ''),
 (5, 1474265465, 'mamako@gmail.com', 'eeafbf4d9b3957b139da7b7f2e7f2d4a', '1715845102bike.jpg', 'Offline now', '', ''),
-(6, 1163083331, 'prnccrvnts@gmail.com', '4297f44b13955235245b2497399d7a93', '1715849553bike.jpg', 'Offline now', '', ''),
+(6, 1163083331, 'pr@gmail.com', '4297f44b13955235245b2497399d7a93', '1715849553bike.jpg', 'Offline now', '', ''),
 (7, 1079432394, 'test@gmail.com', '098f6bcd4621d373cade4e832627b4f6', '1717432294bike.jpg', 'Offline now', '', ''),
 (8, 754920518, 'test2@gmail.com', '098f6bcd4621d373cade4e832627b4f6', '1717432677ble.png', 'Offline now', 'pending', ''),
 (9, 1445165714, 'Chap@gmail.com', '79bdc2757415b12d9f62183d6e60b657', '1717589216Calcu.png', 'Offline now', 'user', ''),
@@ -233,7 +267,8 @@ INSERT INTO `tblaccounts` (`user_id`, `unique_id`, `email`, `password`, `img`, `
 (13, 373821860, 'bago@gmail.com', '002fd9bc0b24de3b80ce1efd7bc4dc19', '1717595498pitikvermo.jpg', 'Offline now', 'user', 'Pending'),
 (14, 446429328, 'New@gmail.com', '03c2e7e41ffc181a4e84080b4710e81e', '1717600789kandes.png', 'Pending', 'user', 'Approved'),
 (15, 638234533, 'Mas@gmail.com', 'b58c2d4a810e07b2d853f8b6f565c630', '1717619258flrmeouv.png', 'Offline now', 'user', ''),
-(16, 643959833, 'Etona@gmail.com', '783bd6100dfaefa4cf08a47010bd9537', '1717619611received_737091231046329.jpg', 'Active now', 'user', 'Approved');
+(16, 643959833, 'prnccrvnts@gmail.com', '783bd6100dfaefa4cf08a47010bd9537', '1717619611received_737091231046329.jpg', 'Offline now', 'user', 'Approved'),
+(17, 162346469, 'tnjrdlcrz@gmail.com', '2820b6251c43f472b2f3ca5417a3c33c', '1717622406kandes.png', 'Offline now', 'user', 'Approved');
 
 -- --------------------------------------------------------
 
@@ -284,7 +319,8 @@ INSERT INTO `tblresident` (`user_id`, `access`, `first_name`, `middle_name`, `la
 (13, '', 'bago', 'bago', 'bago', '', 'Preferred Not to Say', 33, '', '', '', '', 33, 33, '', 33, '', 0, '', ''),
 (14, 'Approved', 'New', 'New', 'New', '', 'Male', 123, '', '', '', '', 123, 123, '', 123, '', 0, '', ''),
 (15, 'Pending', 'Mas ', 'Bago ', 'pa', '', 'Others', 11, '', '', '', '', 2, 2, '', 123, '', 0, '', ''),
-(16, 'Approved', 'Etona', 'talagang ', 'talaga', '', 'Male', 13, '', '', '', '', 3, 3, '', 909, '', 0, '', '');
+(16, 'Approved', 'Etona', 'talagang ', 'talaga', '', 'Male', 13, '', '', '', '', 3, 3, '', 909, '', 0, '', ''),
+(17, 'Approved', 'Tanjiro', 'KUnnnn ', 'nnnnn', '', 'Male', 14, '', '', '', '', 2, 2, '', 123, '', 0, '', '');
 
 --
 -- Indexes for dumped tables
@@ -295,6 +331,12 @@ INSERT INTO `tblresident` (`user_id`, `access`, `first_name`, `middle_name`, `la
 --
 ALTER TABLE `announcements`
   ADD PRIMARY KEY (`news_id`);
+
+--
+-- Indexes for table `forms`
+--
+ALTER TABLE `forms`
+  ADD PRIMARY KEY (`forms_id`);
 
 --
 -- Indexes for table `messages`
@@ -331,6 +373,12 @@ ALTER TABLE `announcements`
   MODIFY `news_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
+-- AUTO_INCREMENT for table `forms`
+--
+ALTER TABLE `forms`
+  MODIFY `forms_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
 -- AUTO_INCREMENT for table `messages`
 --
 ALTER TABLE `messages`
@@ -346,13 +394,13 @@ ALTER TABLE `officials`
 -- AUTO_INCREMENT for table `tblaccounts`
 --
 ALTER TABLE `tblaccounts`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `tblresident`
 --
 ALTER TABLE `tblresident`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
