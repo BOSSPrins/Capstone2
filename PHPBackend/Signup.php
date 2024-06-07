@@ -77,8 +77,8 @@
                                     $encrypt_pass = md5($password);         // naka md5 para 
 
                                     //insert na ang data ni user para sa resident data
-                                    $insert_query_data = mysqli_query($conn, "INSERT INTO tblresident (access, first_name, middle_name, last_name, suffix, sex, age, phone_number, block, lot)
-                                    VALUES ('{$access}','{$fname}', '{$mname}', '{$lname}', '{$suffix}', '{$gender}', '{$age}', '{$phonenum}', '{$block}', '{$lot}')");
+                                    $insert_query_data = mysqli_query($conn, "INSERT INTO tblresident (unique_id, access, first_name, middle_name, last_name, suffix, sex, age, phone_number, block, lot)
+                                    VALUES ({$ran_id}, '{$access}','{$fname}', '{$mname}', '{$lname}', '{$suffix}', '{$gender}', '{$age}', '{$phonenum}', '{$block}', '{$lot}')");
                                     
 
                                     //eto naman ay para sa kanilang account

@@ -1,9 +1,22 @@
+<?php
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $fullName = htmlspecialchars($_POST['fullName']);
+    $Lot = htmlspecialchars($_POST['lot']);
+    $Block = htmlspecialchars($_POST['block']);
+    $purpose = htmlspecialchars($_POST['purpose']);
+    $forms_id = htmlspecialchars($_POST['forms_id']);
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Mve-Out Clearance </title>
+    <title> Move-Out Clearance </title>
+    <script>
+        window.print();
+    </script>
     <style>
         body {
             background: rgb(204,204,204); 

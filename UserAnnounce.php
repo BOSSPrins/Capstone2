@@ -64,7 +64,7 @@ $encoded_id = urlencode($admin_unique_id);
                     <span> Chat </span>
                 </a>   
                 </a>
-                <a href="#" class="sideside">
+                <a href="UserPayments.php" class="sideside">
                     <img class="img-sideboard" src="Pictures/MonthlyDue.png">
                     <span> Monthly Due </span>
                 </a>

@@ -134,7 +134,7 @@ if (isset($_SESSION['unique_id'])) {
                     <img class="img-sideboard" src="Pictures/Accounts2.png">
                     <span> Accounts </span>
                 </a>
-                <a href="#" class="sideside">
+                <a href="Payments.php" class="sideside">
                     <img class="img-sideboard" src="Pictures/MonthlyDue.png">
                     <span> Monthly Due </span>
                 </a>
@@ -194,6 +194,8 @@ if (isset($_SESSION['unique_id'])) {
                                             if($result){
                                                 if (mysqli_num_rows($result) > 0) {
                                                     while ($row = mysqli_fetch_assoc($result)) {
+                                                         // Determine the background color based on the status
+                                                        
 
                                                 ?>
                                                     <tr>
@@ -247,18 +249,21 @@ if (isset($_SESSION['unique_id'])) {
                                             <div class="InputContainerCert">
                                                 <label class="labelInCert"> Address: </label>
                                                 <input class="inputperCert" type="text" id="fullAddress" name="fullAddress">
+
+                                                <input class="inputperCert" type="text" id="block" name="block" hidden>
+                                                <input class="inputperCert" type="text" id="lot" name="lot" hidden>
                                             </div>
                                             <div class="InputContainerCert">
                                                 <label class="labelInCert"> Purpose: </label>
                                                 <input class="inputperCert" type="text" id="purpose" name="purpose">
                                             </div>
                                             <div class="buttonsInCerti">
-                                                <input type="text" name="forms_id" id="forms_id">
+                                                <input type="text" name="forms_id" id="forms_id" hidden>
                                                 <button class="cancelCertBtn CBtn">
                                                     Cancel
                                                 </button>
-                                                <button class="confirmCertBtn CBtn">
-                                                    Confirm
+                                                <button class="confirmCertBtn CBtn confirmBtn">
+                                                    Print
                                                 </button>
                                             </div>
                                         </form>

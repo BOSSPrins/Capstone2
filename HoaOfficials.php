@@ -149,7 +149,7 @@ if (isset($_SESSION['unique_id'])) {
                     <img class="img-sideboard" src="Pictures/Accounts2.png">
                     <span> Accounts </span>
                 </a>
-                <a href="#" class="sideside">
+                <a href="Payments.php" class="sideside">
                     <img class="img-sideboard" src="Pictures/MonthlyDue.png">
                     <span> Monthly Due </span>
                 </a>

@@ -3,26 +3,23 @@ session_start();
 include_once "../Connect/Connection.php";
 $conn = connection();
 
-if (isset($_POST['click_DocsModal'])) {
 
-    $id = $_POST['forms_id'];
-    $arrayresult = [];
+header('Content-Type: application/json');
 
-    $retrieve_query = mysqli_query($conn,"SELECT * FROM forms WHERE forms_id = '$id'");
+if (isset($_POST['click_DocsModal']) && $_POST['click_DocsModal'] == true) {
+    $forms_id = $_POST['forms_id'];
 
-    if (mysqli_num_rows($retrieve_query) > 0 ){ 
-        // Set header outside the loop
-        header('content-type: application/json');
+    // Assuming $conn is your database connection
+    $query = "SELECT * FROM forms WHERE forms_id = '$forms_id'";
+    $result = mysqli_query($conn, $query);
 
-        while ($row = mysqli_fetch_assoc($retrieve_query)) {
-            array_push($arrayresult, $row);
-        }
-        
-        // Send JSON data
-        echo json_encode($arrayresult);
-        exit(); // Exit after sending JSON data
+    if ($result) {
+        $data = mysqli_fetch_assoc($result);
+        echo json_encode([$data]);
     } else {
-        echo '<h4>No Data Found</h4>';
+        echo json_encode(['error' => 'No data found']);
     }
+} else {
+    echo json_encode(['error' => 'Invalid request']);
 }
 ?>

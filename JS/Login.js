@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if (data === "admin") {
               window.location.href = "DashBoard.php";
             } else if (data === "user") {
-              window.location.href = "UserRequest.php";
+              window.location.href = "UserAnnounce.php";
             } else {
               errorText.textContent = data;
               errorText.style.display = "block";

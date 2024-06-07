@@ -7,7 +7,11 @@ $email = mysqli_real_escape_string($conn, $_POST['email']);
 $password = mysqli_real_escape_string($conn, $_POST['loginpassword']);
 
 if (!empty($email) && !empty($password)) {
-    $sql = mysqli_query($conn, "SELECT * FROM tblaccounts WHERE email = '{$email}'");
+                        $sql = mysqli_query($conn, "SELECT tblaccounts.*, tblaccounts.user_id AS acc_userID, tblresident.user_id AS res_userID, tblresident.first_name, tblresident.middle_name, tblresident.last_name, tblresident.block, tblresident.lot
+                        FROM tblaccounts 
+                        INNER JOIN tblresident ON tblaccounts.user_id = tblresident.user_id
+                        WHERE tblaccounts.email = '{$email}'");
+    
 
     if (mysqli_num_rows($sql) > 0) {
         $row = mysqli_fetch_assoc($sql);
@@ -24,6 +28,16 @@ if (!empty($email) && !empty($password)) {
 
             if ($sql2) {
                 $_SESSION['unique_id'] = $row['unique_id'];
+                $_SESSION['res_userID'] = $row['res_userID'];
+                $_SESSION['acc_userID'] = $row['acc_userID'];
+                $_SESSION['block'] = $row['block'];
+                $_SESSION['first_name'] = $row['first_name'];
+                $_SESSION['middle_name'] = $row['middle_name'];
+                $_SESSION['last_name'] = $row['last_name'];
+                $_SESSION['block'] = $row['block'];
+                $_SESSION['lot'] = $row['lot'];
+
+
                 // Check if role exists before setting the session
                 if (isset($row['role'])) {
                     $_SESSION['role'] = $row['role'];

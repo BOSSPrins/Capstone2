@@ -66,7 +66,7 @@
                         <img class="img-sideboard" src="Pictures/Chat.png"> 
                      <span> Chat </span>
                     </a>  
-                    <a href="#" class="sideside">
+                    <a href="UserPayments.php" class="sideside">
                         <img class="img-sideboard" src="Pictures/MonthlyDue.png">
                         <span> Monthly Due </span>
                     </a>

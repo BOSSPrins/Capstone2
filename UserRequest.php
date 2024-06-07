@@ -17,18 +17,31 @@ if ($admin_sql && mysqli_num_rows($admin_sql) > 0) {
 }
 $encoded_id = urlencode($admin_unique_id);
 
-function getUserNameFromDatabase() {
+//Mga session para sa request 
+$res_userID  = $_SESSION['res_userID'];
+$acc_userID  = $_SESSION['acc_userID']; 
+$block       = $_SESSION['block']; 
+$first_name  = $_SESSION['first_name']; 
+$middle_name = $_SESSION['middle_name']; 
+$last_name   = $_SESSION['last_name']; 
+$block       = $_SESSION['block']; 
+$lot         = $_SESSION['lot']; 
+
+function getUserNameFromDatabase($res_userID) {
     $conn = connection(); // Establish database connection
 
     // Your SQL query to select the user's name from the tblresident table
-     $query = "SELECT * FROM tblresident"; // WHERE user_id = '{$_SESSION['user_id']}'
+     $query = " SELECT tblresident.*
+                FROM tblresident
+                INNER JOIN tblaccounts ON tblresident.user_id = tblaccounts.user_id
+                WHERE tblaccounts.user_id = $res_userID";
 
-    // Execute the query
+    
     $result = mysqli_query($conn, $query);
 
-    // Check if the query was successful
+    
     if ($result && mysqli_num_rows($result) > 0) {
-        // Fetch the row as an associative array
+        
         $row = mysqli_fetch_assoc($result);
         // Return the user's name
         $firstName = $row['first_name']; 
@@ -44,7 +57,7 @@ function getUserNameFromDatabase() {
 }
 
 // Get the user's name from the database
-$userData = getUserNameFromDatabase();
+$userData = getUserNameFromDatabase($res_userID);
 
 // Store the user's name in the session variable
 $_SESSION['Fname'] = $userData['first_name'];
@@ -101,7 +114,7 @@ $_SESSION['lot'] = $userData['lot'];
                     <span> Chat </span>
                 </a>   
                 </a>
-                <a href="#" class="sideside">
+                <a href="UserPayments.php" class="sideside">
                     <img class="img-sideboard" src="Pictures/MonthlyDue.png">
                     <span> Monthly Due </span>
                 </a>
@@ -215,6 +228,15 @@ $_SESSION['lot'] = $userData['lot'];
                                                 if (mysqli_num_rows($result) > 0) {
                                                     while ($row = mysqli_fetch_assoc($result)) {
                                                    
+                                                        $backgroundColor = '';
+                                                        $textColor = 'black';
+                                                        if ($row['status'] == 'Pending' || $row['status'] == 'Verifying') {
+                                                            $backgroundColor = 'background-color: #FFFF99;';
+                                                        } else if ($row['status'] == 'Ready to Pick Up') {
+                                                            $backgroundColor = 'background-color: #66CC66;';
+                                                            $textColor = 'color: black;';
+                                                        }
+                                                        // echo "Status: " . $row['status'] . " - Background color: " . $backgroundColor . " - Text color: " . $textColor . "<br>";
                                                 ?>
                                                 <tr>
                                                     <td class="forms_id" hidden><?php echo $row['forms_id'] ?></td>
@@ -222,9 +244,7 @@ $_SESSION['lot'] = $userData['lot'];
                                                     <td hidden><?php echo "Block " . $row['block'] . " Lot " . $row['lot'] ?></td>
                                                     <td hidden><?php echo $row['status']; ?></td>
                                                     <td>
-                                                        <!-- <button class="RequstingBtn tb-btn" value="<?php echo $row['status']; ?>"> 
-                                                         </button> -->
-                                                        <span><?php echo $row['status']; ?> </span> 
+                                                        <span style=" padding: 5px 10px; border-radius: 5px; <?php echo $backgroundColor;?> <?php echo $textColor; ?>"><?php echo $row['status']; ?> </span> 
                                                     </td>
                                                 </tr>
                                                 <?php
