@@ -6,7 +6,7 @@
   $sql = mysqli_query($conn, "SELECT tblaccounts.*, tblresident.first_name, tblresident.last_name
                               FROM tblaccounts
                               INNER JOIN tblresident ON tblaccounts.user_id = tblresident.user_id
-                              WHERE NOT unique_id = {$outgoing_id}");
+                              WHERE NOT tblaccounts.unique_id = {$outgoing_id} AND tblaccounts.access != 'Pending' AND tblaccounts.status != 'Pending'");
   $output = "";
 
   if(mysqli_num_rows($sql) == 1){

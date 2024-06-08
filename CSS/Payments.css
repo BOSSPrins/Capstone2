@@ -734,3 +734,14 @@ td{
   max-width: 100%;
   height: auto;
 }
+
+/* Design ng status sa monthlydue */
+.status-delinquent {
+  color: red; /* Font color for delinquent status */
+  font-weight: bold; /* Make the text bold */
+}
+
+.status-good-standing {
+  color: darkgreen; /* Font color for good standing status */
+  font-weight: bold; /* Make the text bold */
+}

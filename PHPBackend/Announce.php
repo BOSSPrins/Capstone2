@@ -21,7 +21,7 @@ if(!empty($start_date) && !empty($start_time) && !empty($end_date) && !empty($en
 
   $sql2 = mysqli_query($conn, "SELECT * FROM announcements WHERE title = '{$title_name}'");
 
-    if(mysqli_num_rows($sql2) > 0){
+    if(mysqli_num_rows($sql2) > 0){ 
       echo "This Announcement already exist!";
       exit;
     } else {

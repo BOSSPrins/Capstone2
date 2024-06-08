@@ -1,149 +1,55 @@
 <?php
-// session_start();
-// include_once "../Connect/Connection.php";
-// $conn = connection();
-
-// // $total = mysqli_real_escape_string($conn, $_POST['total']);
-// $pay = mysqli_real_escape_string($conn, $_POST['pay']);
-// // $proof = mysqli_real_escape_string($conn, $_POST['proof']);
-
-// if(!empty($pay)){
-
-//   // $sql2 = mysqli_query($conn, "SELECT * FROM payments");
-
-//   if (isset($_FILES['proof']) && !empty($_FILES['proof']['tmp_name'][0])) {
-//     $errors = [];
-
-//     $num_uploaded_images = count($_FILES['proof']['tmp_name']);
-//           // if($num_uploaded_images > 1) {
-//           //     echo "You can upload up to 1 image only.";
-              
-//           // }if ($num_uploaded_images == 0) {
-//           //     echo "You need to present a screenshot of payment";
-//           // }
-
-//         foreach($_FILES['proof']['tmp_name'] as $key => $tmp_name) {
-//           $img_name = $_FILES['proof']['name'][$key];            // getting user uploaded img name
-//           $img_type = $_FILES['proof']['type'][$key];            // img type na binigay ni user
-//           $tmp_name = $_FILES['proof']['tmp_name'][$key]; // tmp name temporary name for save/move file to folder
-                
-//           $img_ext = strtolower(pathinfo($img_name, PATHINFO_EXTENSION)); 
-//           $extensions = ["jpeg", "png", "jpg"];   
-
-//           if($img_ext === 'mp4') {
-//             $errors[] = "MP4 is not supported for file: $img_name";
-//             continue;
-//           } else {
-  
-//             if(in_array($img_ext, $extensions) === true){
-//               $types = ["image/jpeg", "image/jpg", "image/png"];
-
-//               if(in_array($img_type, $types) === true){                          
-//                 $new_img_name = $_FILES['proof']['name'][$key]; // Use original filename
-//                 if(move_uploaded_file($tmp_name,"../Pictures/".$new_img_name)){
-//                   $image_names[] = $new_img_name;
-              
-//                 } else {
-//                   $errors[] = "Failed to move uploaded file: $img_name";
-//                 }
-//               } else {
-//                 $errors[] = "Please upload an image file - jpeg, png, jpg for file: $img_name";
-//               }
-//             } else {
-//               $errors[] = "Please upload an image file - jpeg, png, jpg for file: $img_name";
-//             }
-//           }
-//         }
-//       foreach($errors as $message) {
-//         echo "$message<br>";
-//       }              
-
-//       // if(count($image_names) == 1) {
-//         $img_column_value = implode(',', $image_names);
-//         $insert_payment = mysqli_query($conn, "INSERT INTO payments (money, proof) VALUES ('{$pay}', '{$img_column_value}')");
-
-//           if($insert_payment) {
-//             echo "success";
-//           } else {
-//             echo "Error inserting payment with images: " . mysqli_error($conn);
-//           }
-//         // } else {
-//         //   echo "You can upload up to 1 image only.";
-    
-//         // }
-//   }
-// }else{
-//   echo "All input is required!";
-// }
-
-
-
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-
 session_start();
 include_once "../Connect/Connection.php";
 $conn = connection();
 
-$pay = isset($_POST['pay']) ? mysqli_real_escape_string($conn, $_POST['pay']) : '';
+$response = array();
 
-if(!empty($pay)) {
-    $errors = [];
-    $image_names = [];
+$paydate = mysqli_real_escape_string($conn, $_POST['paydate']);
+$pay = mysqli_real_escape_string($conn, $_POST['pay']);
+$unique_id = mysqli_real_escape_string($conn, $_POST['UID']);
 
-    var_dump($_FILES); // Add this line to check the contents of $_FILES array
+// Check if file upload is set and not empty
+if (isset($_FILES["proof"]) && !empty($_FILES["proof"]["tmp_name"])) {
+    $target_dir = "../Pictures/"; // Directory where the file will be saved
+    $target_file = $target_dir . basename($_FILES["proof"]["name"]);
+    $uploadOk = 1;
+    $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
 
-    if (isset($_FILES['proof']) && !empty($_FILES['proof']['tmp_name'][0])) {
-        foreach($_FILES['proof']['tmp_name'] as $key => $tmp_name) {
-            $img_name = $_FILES['proof']['name'][$key];
-            $img_type = $_FILES['proof']['type'][$key];
-            $tmp_name = $_FILES['proof']['tmp_name'][$key];
-            
-            $img_ext = strtolower(pathinfo($img_name, PATHINFO_EXTENSION)); 
-            $extensions = ["jpeg", "png", "jpg"];   
+    // Check if file already exists
+    $i = 1;
+    while (file_exists($target_file)) {
+        $filename = pathinfo($target_file, PATHINFO_FILENAME);
+        $extension = pathinfo($target_file, PATHINFO_EXTENSION);
+        $target_file = $target_dir . $filename . "_$i." . $extension;
+        $i++;
+    }
 
-            if(in_array($img_ext, $extensions)) {
-                $types = ["image/jpeg", "image/jpg", "image/png"];
+    // Continue with file upload and database update
+    if (move_uploaded_file($_FILES["proof"]["tmp_name"], $target_file)) {
+        // File uploaded successfully
+        $proof = basename($target_file); // Get the filename
 
-                if(in_array($img_type, $types)) {                          
-                    $new_img_name = $_FILES['proof']['name'][$key];
-                    if(move_uploaded_file($tmp_name,"../Pictures/".$new_img_name)){
-                        $image_names[] = $new_img_name;
-                    } else {
-                        $errors[] = "Failed to move uploaded file: $img_name";
-                    }
-                } else {
-                    $errors[] = "Please upload an image file - jpeg, png, jpg for file: $img_name";
-                }
-            } else {
-                $errors[] = "Please upload an image file - jpeg, png, jpg for file: $img_name";
-            }
+        // Check if paydate and pay are set
+        if (isset($paydate) && isset($pay)) {
+            $update_payment_query = mysqli_query($conn, "UPDATE payments SET money = '$pay', proof = '$proof', paydate = '$paydate' WHERE unique_id = '$unique_id'");
+        } else {
+            $update_payment_query = mysqli_query($conn, "UPDATE payments SET proof = '$proof' WHERE unique_id = '$unique_id'");
         }
 
-        foreach($errors as $message) {
-            echo "$message<br>";
-        }              
-
-        if(count($image_names) == 1) {
-            $img_column_value = implode(',', $image_names);
-            $insert_payment = mysqli_query($conn, "INSERT INTO payments (first_name, middle_name, last_name, month_due, water_bill, due_date, overdue, money, proof) VALUES (NULL, NULL, NULL, NULL, NULL, NULL, NULL, '{$pay}', '{$img_column_value}')");
-
-            if($insert_payment) {
-                echo "success";
-            } else {
-                echo "Error inserting payment with images: " . mysqli_error($conn);
-            }
+        if ($update_payment_query) {
+            // Payment updated successfully
+            $response['success'] = "Payment updated successfully.";
         } else {
-            echo "You can upload up to 1 image only.";
+            $response['error'] = "Error updating payment: " . mysqli_error($conn);
         }
     } else {
-        echo "No files uploaded.";
+        $response['error'] = "Sorry, there was an error uploading your file.";
     }
 } else {
-    echo "Payment amount is required!";
+    $response['error'] = "Proof of payment file is required.";
 }
+
+// Return the response as JSON
+echo json_encode($response);
 ?>
-
-
-
-

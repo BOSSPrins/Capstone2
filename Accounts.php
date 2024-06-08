@@ -323,7 +323,7 @@ $conn = connection();
                                             }
                                           } else {
                                           ?>
-                                            <tr>
+                                            <tr>    
                                                 <td colspan="4">No data found.</td>
                                             </tr>
                                           <?php
@@ -349,5 +349,46 @@ $conn = connection();
     </div>
 
     <script src="JS/Accounts.js"></script>
+    <script>
+      function openConfirmModal(button) {
+            // Get the user_id from the data-news-id attribute
+            var userId = button.getAttribute('data-news-id');
+            
+            // Log the user_id to the console for debugging purposes
+            console.log("User ID:", userId);
+            
+            // Check if userId is empty
+            if (!userId) {
+                alert("User ID is not set.");
+                return;
+            }
+            
+            // Example: Make an AJAX call to send the user_id to the PHP script
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "ConfirmEmail.php", true); // Ensure this path is correct
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                    if (xhr.status === 200) {
+                        // Handle the response from the server
+                        console.log(xhr.responseText);
+                        try {
+                            var response = JSON.parse(xhr.responseText);
+                            if (response.error) {
+                                alert("Error: " + response.error);
+                            } else {
+                                alert("Email sent successfully.");
+                            }
+                        } catch (e) {
+                            alert("Failed to parse JSON response: " + xhr.responseText);
+                        }
+                    } else {
+                        alert("Failed to communicate with the server. Status: " + xhr.status);
+                    }
+                }
+            };
+            xhr.send("user_id=" + encodeURIComponent(userId));
+        }
+</script>
 </body>
 </html>

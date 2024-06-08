@@ -1,4 +1,6 @@
 <?php
+// sendEmail.php
+
 require 'vendor/autoload.php'; // Include PHPMailer
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
@@ -7,6 +9,11 @@ use PHPMailer\PHPMailer\SMTP;
 session_start();
 include_once "Connect/Connection.php";
 
+// Enable error reporting
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 // Function to send confirmation email
 function sendConfirmationEmail($user_email) {
     // Create a new PHPMailer instance
@@ -14,7 +21,7 @@ function sendConfirmationEmail($user_email) {
 
     try {
         // Server settings
-        $mail->SMTPDebug = 2;                                     
+        $mail->SMTPDebug = SMTP::DEBUG_SERVER;                                      
         $mail->isSMTP();    
         $mail->Host       = 'smtp.gmail.com';  // Gmail SMTP server
         $mail->SMTPAuth   = true;
@@ -22,13 +29,12 @@ function sendConfirmationEmail($user_email) {
         $mail->Password   = 'sizv upme csoz cile'; // Your Gmail password
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS; 
         $mail->Port       = 587;
-        $mail->SMTPDebug = SMTP::DEBUG_SERVER;
         $mail->Debugoutput = function($str, $level) {
-            echo "debug level $level; message: $str\n";
+            error_log("SMTP debug level $level; message: $str\n");
         };
 
         // Recipients
-        $mail->setFrom('Mabuhay Homes 2000', 'Admin');
+        $mail->setFrom('prnccrvnts@gmail.com', 'Admin');
         $mail->addAddress($user_email); // User's email address
 
         // Content
@@ -46,32 +52,50 @@ function sendConfirmationEmail($user_email) {
     }
 }
 
-// Validate if user_id is set
-if(isset($_POST['user_id'])) {
+// Start output buffering to prevent any unexpected output
+ob_start();
+
+// Set error reporting to catch any potential issues
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+$response = [];
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['user_id'])) {
     $user_id = $_POST['user_id'];
 
-    // Fetch user email from database
-    $conn = connection();
-    $query = "SELECT email FROM tblaccounts WHERE user_id = '$user_id'";
-    $result = mysqli_query($conn, $query);
-    if($result && mysqli_num_rows($result) > 0) {
-        $row = mysqli_fetch_assoc($result);
-        $user_email = $row['email'];
-
-        // Send confirmation email
-        if(sendConfirmationEmail($user_email)) {
-            // Email sent successfully
-            echo json_encode(array('success' => true));
-        } else {
-            // Failed to send email
-            echo json_encode(array('error' => 'Failed to send confirmation email'));
-        }
+    // Check if user_id is not empty
+    if (empty($user_id)) {
+        $response = ['error' => 'User ID is empty'];
     } else {
-        // User not found in database
-        echo json_encode(array('error' => 'User not found'));
+        // Fetch user email from database
+        $conn = connection();
+        $query = "SELECT email FROM tblaccounts WHERE user_id = '$user_id'";
+        $result = mysqli_query($conn, $query);
+        if ($result && mysqli_num_rows($result) > 0) {
+            $row = mysqli_fetch_assoc($result);
+            $user_email = $row['email'];
+
+            // Send confirmation email
+            if (sendConfirmationEmail($user_email)) {
+                // Email sent successfully
+                $response = ['success' => true];
+            } else {
+                // Failed to send email
+                $response = ['error' => 'Failed to send confirmation email'];
+            }
+        } else {
+            // User not found in database
+            $response = ['error' => 'User not found'];
+        }
     }
 } else {
     // Invalid request
-    echo json_encode(array('error' => 'Invalid Request'));
+    $response = ['error' => 'Invalid Request'];
 }
+
+// Clear the output buffer and send JSON response
+ob_end_clean();
+header('Content-Type: application/json');
+echo json_encode($response);
 ?>

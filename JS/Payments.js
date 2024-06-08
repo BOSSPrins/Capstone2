@@ -130,6 +130,7 @@ document.addEventListener("DOMContentLoaded", () => {
 const form = document.querySelector(".adminBayad"),
 SendBtn = form.querySelector(".SendBtn");
 
+
 form.onsubmit = (e) => {
     // Prevent the form from submitting normally
     e.preventDefault();
@@ -146,12 +147,12 @@ if (SendBtn) {
             console.log(data);
 
             if (data === "success") {
-              alert("Nice");
-
+              alert("Setting Dues Completed");
+                form.reset();
             } else {
             //   errorText.textContent = data;
             //   errorText.style.display = "block";
-              console.log(data);
+              alert(data);
             }
           }
         }
@@ -161,6 +162,79 @@ if (SendBtn) {
       xhr.send(formData);
     };
   }
-
-
 });
+
+
+// ajax nung second modal 
+document.addEventListener("DOMContentLoaded", () => {
+    $(document).on("click", ".viewBOTON", function() {
+        var unique_id = $(this).closest('tr').find('.unique_id').text();
+        $('.View_dueID').val(unique_id);
+
+        $.ajax({
+            type: "POST",
+            url: "PHPBackend/PaymentProcess.php",
+            data: { 'action': 'getDetails', 'UID': unique_id },
+            success: function(response) {
+                try {
+                    var jsonData = JSON.parse(response);
+                    if (jsonData.money) {
+                        $('#userBayad').val(jsonData.money);
+                    }
+                    if (jsonData.proof) {
+                        $('#userPic').attr('src', 'Pictures/' + jsonData.proof).show();
+                    } else if (jsonData.error) {
+                        console.error('Error:', jsonData.error);
+                    }
+                } catch (error) {
+                    console.error('Error parsing response:', error);
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error('AJAX error:', error);
+            }
+        });
+    });
+
+    window.closeModal = function() {
+        $('#SikandModal').hide();
+    };
+
+    $('.SabmitBtn').click(function(e) {
+        e.preventDefault();
+
+        var formData = new FormData();
+        formData.append('action', 'updatePayment');
+        formData.append('userBayad', $('#userBayad').val());
+        formData.append('UID', $('.View_dueID').val());
+        formData.append('userRefer', $('#userRefer').val());
+
+        $.ajax({
+            type: "POST",
+            url: "PHPBackend/PaymentProcess.php",
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function(response) {
+                try {
+                    var jsonData = JSON.parse(response);
+                    if (jsonData.success) {
+                        console.log('Payment updated successfully');
+                        alert("Payment updated successfully");
+                        closeModal();
+                        location.reload();
+                    } else {
+                        console.error('Error:', jsonData.error);
+                    }
+                } catch (error) {
+                    console.error('Error parsing response:', error);
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error('AJAX error:', error);
+            }
+        });
+    });
+});
+
+

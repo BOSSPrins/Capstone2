@@ -50,7 +50,7 @@ if (isset($_SESSION['unique_id'])) {
 
             // Use JavaScript to redirect after a delay
             echo '<script>';
-            echo 'setTimeout(function(){ window.location.href = "LoginPage.php"; }, 5000);'; // 5-second delay
+            echo 'setTimeout(function(){ window.location.href = "LoginPage.php"; });'; // 5-second delay
             echo '</script>';
             exit(); // Ensure no further code execution after redirection
         } else {
@@ -75,7 +75,7 @@ if (isset($_SESSION['unique_id'])) {
 
     // Use JavaScript to redirect after a delay
     echo '<script>';
-    echo 'setTimeout(function(){ window.location.href = "LoginPage.php"; }, 5000);'; // 5-second delay
+    echo 'setTimeout(function(){ window.location.href = "LoginPage.php"; });'; // 5-second delay
     echo '</script>';
     exit(); // Ensure no further code execution after redirection
 }

@@ -27,44 +27,4 @@ const previewImage = (event) => {
 }
 
 
-document.addEventListener("DOMContentLoaded", () => {
-const form = document.querySelector(".userBayad");
-const sabmitBoton = document.getElementById("sabmitBoton");
-// errorText = form.querySelector(".iror");
 
-form.onsubmit = (e) => {
-  // Prevent the form from submitting normally
-  e.preventDefault();
-};
-
-
-if (sabmitBoton) { 
-  sabmitBoton.onclick = () => {
-      let xhr = new XMLHttpRequest();
-      xhr.open("POST", "PHPBackend/PayProcess.php", true);
-      xhr.onload = () => {
-          if (xhr.readyState === XMLHttpRequest.DONE) {
-              if (xhr.status === 200) {
-                let data = xhr.response.trim();  // Trim any extra spaces
-                console.log("Response from server:", data);
-
-                if (data === "success") {
-                  console.log("Data is 'success'");
-
-                  alert("Payment Success");
-                  // location.reload();
-                
-                } else {
-                  // errorText.textContent = data;
-                  // errorText.style.display = "block";
-                  console.log("Error:", data);
-                }
-              
-            }
-        };
-        let formData = new FormData(form);
-        xhr.send(formData);
-      };
-    }
-  }
-});

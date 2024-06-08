@@ -16,6 +16,24 @@ if ($admin_sql && mysqli_num_rows($admin_sql) > 0) {
     $admin_unique_id = $admin_row['unique_id'];
 }
 $encoded_id = urlencode($admin_unique_id);
+
+$uniks_id = $_SESSION['unique_id'];
+
+$sql = "SELECT water_bill, month_due FROM payments WHERE unique_id = '$uniks_id'"; // Replace <condition> with your actual condition
+$result = mysqli_query($conn, $sql);
+
+if ($result) {
+    // Fetch the row as an associative array
+    $row = mysqli_fetch_assoc($result);
+    
+    // Assign values to variables
+    $waterBill = $row['water_bill'];
+    $monthDue = $row['month_due'];
+} else {
+    // Handle query error
+    echo "Error: " . mysqli_error($conn);
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -90,20 +108,18 @@ $encoded_id = urlencode($admin_unique_id);
                                         <th> Water Bill <br>
                                             Amount </th>
                                         <th> Due Date </th>
-                                        <th> Overdue </th>
+                                        <th> Status </th>
                                     </tr>
                 
                                     <tbody>
 
                                     <?php
 
-                                      $query = "SELECT tblresident.*, payments.*                                                   
-                                                    FROM tblresident 
-                                                    JOIN payments   ON tblresident.first_name = payments.first_name
-                                                                AND tblresident.middle_name = payments.middle_name
-                                                                AND tblresident.last_name = payments.last_name; ";
-
-                                      
+                                        $query = "SELECT tblresident.*, payments.*
+                                        FROM tblresident 
+                                        INNER JOIN payments ON tblresident.unique_id = payments.unique_id
+                                        WHERE payments.unique_id IS NOT NULL AND payments.unique_id != ''";
+                                  
                                       $result = mysqli_query($conn, $query);
 
                                       if($result){
@@ -114,17 +130,17 @@ $encoded_id = urlencode($admin_unique_id);
 
                                         <tr>
                                             <td class="due_id" hidden><?php echo $row['due_id'] ?></td>
-                                            <td> <?php echo "₱ " . $row['month_due'] ?> </td>
-                                            <td> <?php echo "₱ " . $row['water_bill'] ?> </td>
-                                            <td> <?php echo $row['due_date'] ?> </td>
-                                            <td> <?php echo $row['overdue'] ?> </td>
+                                            <td> <?php echo "₱ " . number_format($row['month_due'], 2) ?> </td>
+                                            <td> <?php echo "₱ " . number_format($row['water_bill'], 2) ?> </td>
+                                            <td> <?php echo date('F j, Y', strtotime($row['due_date'])); ?> </td>
+                                            <td> <?php echo "₱ " . number_format($row['pending'], 2) ?> </td>
                                         </tr>
                                         <?php
                                             }
                                             } else {
                                             ?>
                                                 <tr>
-                                                    <td colspan="2">No data found.</td>
+                                                    <td colspan="4">No data found.</td>
                                                 </tr>
                                             <?php
                                             }
@@ -138,16 +154,18 @@ $encoded_id = urlencode($admin_unique_id);
                                 </thead>
                             </table>
                         </div>
-                        <div class="PaymentContainerrr">
+                        <div class="PaymentContainerrr" id="bayadModal">
                             <div class="SubPaymentConss">
-                                <form class="userBayad" enctype="multipart/form-data" method="post">
+                                <form class="userbayad" enctype="multipart/form-data" method="post">
                                   <div class="totalInputUser">
                                       <label class="LabelUserPay"> Total Amounts: </label>
-                                       <input class="intUser" type="text" name="total" id="total"> <!--value="<?php echo "₱ " . $row['month_due'] + $row['water_bill'] ?>"> -->
+                                      <input class="intUser" type="number" step="0.01" name="total" id="total" value="<?php echo number_format($waterBill + $monthDue, 2); ?>" readonly>
                                   </div>
                                   <div class="PayyInputUser">
                                       <label class="LabelUserPay"> Pay: </label>
-                                      <input class="intUser" type="text" name="pay" id="pay">
+                                      <input class="intUser" type="number" name="pay" id="pay" step="0.01" min="0">
+                                      <input type="text" name="UID" id="UID" value="<?php echo $_SESSION['unique_id'] ?>" hidden>
+                                      <input type="text" name="paydate" id="paydate" value="<?php echo date('Y-m-d H:i:s'); ?>" hidden>
                                   </div>
                                   <div class="ProofPicture">
                                       <label class="LabelUserPay"> Proof of Payment: </label>
@@ -155,7 +173,7 @@ $encoded_id = urlencode($admin_unique_id);
                                       <img id="preview" src="#" alt="Preview" style="width: 100%; max-height: 700px; margin-top: 10px; display: none;">
                                   </div>
                                   <div class="ButtonProcess">
-                                      <button class="ProcessBtn" id="sabmitBoton"> Process Payment </button>
+                                      <button type="submit" class="ProcessBtn" id="sabmitBoton"> Process Payment </button>
                                   </div>
                                 </form>             
                             </div>
@@ -171,5 +189,46 @@ $encoded_id = urlencode($admin_unique_id);
     </div>
 
     <script src="JS/UserPayments.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+        const form = document.querySelector(".userbayad");
+        const submitButton = document.getElementById("sabmitBoton");
+
+            if (form) {
+            form.onsubmit = (e) => {
+                e.preventDefault();
+                };
+            }
+
+        if (submitButton) {
+            submitButton.onclick = () => {
+                let xhr = new XMLHttpRequest();
+                xhr.open("POST", "PHPBackend/PayProcess.php", true);
+                xhr.onload = () => {
+                    if (xhr.readyState === XMLHttpRequest.DONE) {
+                        if (xhr.status === 200) {
+                            let data = xhr.responseText.trim();  // Trim any extra spaces
+                            console.log("Response from server:", data);
+
+                            if (data === "success") {
+                                console.log("Data is 'success'");
+                                alert("Payment Success");
+                                location.reload();
+                                pay.value = '';
+                                proof.value = '';
+                                form.reset();
+                            } else {
+                                console.log("Error:", data);
+                                alert(data);
+                            }
+                        }
+                    }
+                };
+                let formData = new FormData(form);
+                xhr.send(formData);
+            };
+        }
+        });
+</script>
 </body>
 </html>

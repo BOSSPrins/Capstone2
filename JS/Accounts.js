@@ -200,11 +200,12 @@ $(document).ready(function () {
                     var jsonData = JSON.parse(response);
                     if (jsonData.success) {
                         console.log('User confirmed successfully');
-
+                        sendConfirmationEmail(user_id)
                         // sendConfirmationEmail(confirm_userID);
                         $("tr:has(td.user_id:contains('" + confirm_userID + "'))").remove(); 
                         closeModal();
                         location.reload();
+                       
                     } else {
                         console.error('Failed to remove record:', jsonData.error);
                     }

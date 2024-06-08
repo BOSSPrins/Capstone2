@@ -15,7 +15,7 @@ if(isset($_POST['Confirm_conf'])){
      $confirm_userID_query_run_accounts = mysqli_query($conn, $confirm_userID_query_accounts);
  
      if ($confirm_userID_query_run_resident && $confirm_userID_query_run_accounts) {
-      // sendConfirmationEmail($confirm_userID);
+      sendConfirmationEmail($confirm_userID);
     
         echo json_encode(array('success' => true));
     } else {
