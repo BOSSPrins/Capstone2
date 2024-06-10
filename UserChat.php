@@ -3,11 +3,14 @@
     session_start();
 
     if (isset($_SESSION['unique_id'])) {
-    if ($_SESSION['role'] == 'admin') {
+        if ($_SESSION['role'] == 'admin') {
+            header("Location: LoginPage.php");
+            exit();
+        }
+      } else {
         header("Location: LoginPage.php");
         exit();
-        }
-    }
+      }
 
     // Fetch the unique_id of an admin
     $admin_unique_id = ''; // Default value if no admin found

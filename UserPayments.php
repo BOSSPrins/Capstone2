@@ -3,11 +3,14 @@ include_once "Connect/Connection.php";
 session_start();
 
 if (isset($_SESSION['unique_id'])) {
-  if ($_SESSION['role'] == 'admin') {
-      header("Location: LoginPage.php");
-      exit();
+    if ($_SESSION['role'] == 'admin') {
+        header("Location: LoginPage.php");
+        exit();
+    }
+  } else {
+    header("Location: LoginPage.php");
+    exit();
   }
-}
 
 $admin_unique_id = ''; // Default value if no admin found
 $admin_sql = mysqli_query($conn, "SELECT unique_id FROM tblaccounts WHERE role = 'admin' LIMIT 1");
@@ -133,7 +136,7 @@ if ($result) {
                                             <td> <?php echo "₱ " . number_format($row['month_due'], 2) ?> </td>
                                             <td> <?php echo "₱ " . number_format($row['water_bill'], 2) ?> </td>
                                             <td> <?php echo date('F j, Y', strtotime($row['due_date'])); ?> </td>
-                                            <td> <?php echo "₱ " . number_format($row['pending'], 2) ?> </td>
+                                            <td> <?php echo $row['status'] ?> </td>
                                         </tr>
                                         <?php
                                             }
@@ -163,14 +166,14 @@ if ($result) {
                                   </div>
                                   <div class="PayyInputUser">
                                       <label class="LabelUserPay"> Pay: </label>
-                                      <input class="intUser" type="number" name="pay" id="pay" step="0.01" min="0">
+                                      <input class="intUser" type="number" name="pay" id="pay" step="0.01" min="0" placeholder="0.00">
                                       <input type="text" name="UID" id="UID" value="<?php echo $_SESSION['unique_id'] ?>" hidden>
                                       <input type="text" name="paydate" id="paydate" value="<?php echo date('Y-m-d H:i:s'); ?>" hidden>
                                   </div>
                                   <div class="ProofPicture">
                                       <label class="LabelUserPay"> Proof of Payment: </label>
                                       <input class="intUserrPic" type="file" onchange="previewImage(event)" name="proof" id="proof">
-                                      <img id="preview" src="#" alt="Preview" style="width: 100%; max-height: 700px; margin-top: 10px; display: none;">
+                                      <img id="preview" src="#" name="preview" alt="Preview" style="width: 100%; max-height: 700px; margin-top: 10px; display: none;">
                                   </div>
                                   <div class="ButtonProcess">
                                       <button type="submit" class="ProcessBtn" id="sabmitBoton"> Process Payment </button>
@@ -191,8 +194,8 @@ if ($result) {
     <script src="JS/UserPayments.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", () => {
-        const form = document.querySelector(".userbayad");
-        const submitButton = document.getElementById("sabmitBoton");
+            const form = document.querySelector(".userbayad");
+            const submitButton = document.getElementById("sabmitBoton");
 
             if (form) {
             form.onsubmit = (e) => {
@@ -200,34 +203,45 @@ if ($result) {
                 };
             }
 
-        if (submitButton) {
-            submitButton.onclick = () => {
-                let xhr = new XMLHttpRequest();
-                xhr.open("POST", "PHPBackend/PayProcess.php", true);
-                xhr.onload = () => {
-                    if (xhr.readyState === XMLHttpRequest.DONE) {
-                        if (xhr.status === 200) {
-                            let data = xhr.responseText.trim();  // Trim any extra spaces
-                            console.log("Response from server:", data);
+            if (submitButton) {
+                submitButton.onclick = () => {
+                    let xhr = new XMLHttpRequest();
+                    xhr.open("POST", "PHPBackend/PayProcess.php", true);
+                    xhr.onload = () => {
+                        if (xhr.readyState === XMLHttpRequest.DONE) {
+                            if (xhr.status === 200) {
+                                let data = xhr.responseText.trim();  // Trim any extra spaces
+                                console.log("Response from server:", data);
 
-                            if (data === "success") {
-                                console.log("Data is 'success'");
-                                alert("Payment Success");
-                                location.reload();
-                                pay.value = '';
-                                proof.value = '';
-                                form.reset();
-                            } else {
-                                console.log("Error:", data);
-                                alert(data);
+                                if (data === data) {
+                                    console.log("Data is 'success'");
+                                    alert("Payment Success");
+                                    // location.reload();
+                                    pay.value = '';
+                                    proof.value = '';
+                                    form.reset();
+
+                                    var previewImages = document.getElementsByName("preview");
+    
+    // Loop through each preview image and toggle its display style
+    for (var i = 0; i < previewImages.length; i++) {
+        if (previewImages[i].style.display === "none") {
+            previewImages[i].style.display = "block"; // Display the image
+        } else {
+            previewImages[i].style.display = "none"; // Hide the image
+        }
+    }
+                                } else {
+                                    console.log("Error:", data);
+                                    alert(data);
+                                }
                             }
                         }
-                    }
+                    };
+                    let formData = new FormData(form);
+                    xhr.send(formData);
                 };
-                let formData = new FormData(form);
-                xhr.send(formData);
-            };
-        }
+            }
         });
 </script>
 </body>

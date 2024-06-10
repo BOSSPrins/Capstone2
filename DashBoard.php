@@ -3,11 +3,14 @@ include_once "Connect/Connection.php";
 session_start();
 
 if (isset($_SESSION['unique_id'])) {
-  if ($_SESSION['role'] == 'user') {
-      header("Location: LoginPage.php");
-      exit();
+    if ($_SESSION['role'] == 'user') {
+        header("Location: LoginPage.php");
+        exit();
+    }
+  } else {
+    header("Location: LoginPage.php");
+    exit();
   }
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -297,7 +300,7 @@ if (isset($_SESSION['unique_id'])) {
                     <img class="img-sideboard" src="Pictures/Officials.png">
                     <span> HOA Officials </span>
                 </a>
-                <a href="#" class="sideside">
+                <a href="Residents.php" class="sideside">
                     <img class="img-sideboard" src="Pictures/Residents2.png">
                     <span> Residents </span>
                 </a>

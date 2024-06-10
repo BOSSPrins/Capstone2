@@ -3,11 +3,15 @@ include_once "Connect/Connection.php";
 session_start();
 
 if (isset($_SESSION['unique_id'])) {
-  if ($_SESSION['role'] == 'user') {
-      header("Location: LoginPage.php");
-      exit();
+    if ($_SESSION['role'] == 'user') {
+        header("Location: LoginPage.php");
+        exit();
+    }
+  } else {
+    header("Location: LoginPage.php");
+    exit();
   }
-}
+  
 $conn = connection();
 ?>
 
@@ -350,9 +354,11 @@ $conn = connection();
 
     <script src="JS/Accounts.js"></script>
     <script>
-      function openConfirmModal(button) {
+
+      function sendConfirmationEmail(userId) {
             // Get the user_id from the data-news-id attribute
-            var userId = button.getAttribute('data-news-id');
+            // var userId = button.getAttribute('data-news-id');
+            console.log("Sending email to user with ID:", userId);
             
             // Log the user_id to the console for debugging purposes
             console.log("User ID:", userId);
@@ -365,7 +371,7 @@ $conn = connection();
             
             // Example: Make an AJAX call to send the user_id to the PHP script
             var xhr = new XMLHttpRequest();
-            xhr.open("POST", "ConfirmEmail.php", true); // Ensure this path is correct
+            xhr.open("POST", "Emailer/ConfirmEmail.php", true); // Ensure this path is correct
             xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
             xhr.onreadystatechange = function () {
                 if (xhr.readyState === 4) {
@@ -377,7 +383,7 @@ $conn = connection();
                             if (response.error) {
                                 alert("Error: " + response.error);
                             } else {
-                                alert("Email sent successfully.");
+                                alert("Email sent successfullyyyyyyyyyyyy.");
                             }
                         } catch (e) {
                             alert("Failed to parse JSON response: " + xhr.responseText);
@@ -389,6 +395,148 @@ $conn = connection();
             };
             xhr.send("user_id=" + encodeURIComponent(userId));
         }
+
+
+
+    const editModal = document.getElementById('Accs_Edit_Modal'); // Corrected selector
+    const closeModalButton = document.getElementById('Accs_Close_Modal');
+
+            function showEditModal() {
+                if (editModal) {
+                    editModal.style.display = 'flex'; // Change to 'flex' to align with the CSS display setting
+                    console.log("Modal opened");
+                } else {
+                    console.error("Modal element not found");
+                }
+            }
+
+            function hideEditModal() {
+                if (editModal) {
+                    editModal.style.display = 'none';
+                } else {
+                    console.error("Modal element not found");
+                }
+            }
+
+            hideEditModal();
+            // Attach event listeners to all buttons with class 'dashModal'
+            const editButtons = document.querySelectorAll('.AccsModal');
+            editButtons.forEach(button => {
+                button.addEventListener('click', showEditModal);
+            });
+
+            if (closeModalButton) {
+                closeModalButton.addEventListener('click', hideEditModal);
+                console.log("Modal Closed");
+            } else {
+                console.error("Close button not found");
+            }
+
+
+        // FUNCTION NG MODAL NG CONFIRM 
+        const confModal = document.getElementById("confirmModal");
+
+        function openConfirmModal() {
+            confModal.style.display = "block";
+        }
+
+        function closeModal() {
+            confModal.style.display = "none";
+        }
+
+
+        $(document).ready(function () {
+                    
+        $('.BiyuModal').click(function (e) { 
+            e.preventDefault();
+            
+        var  user_id = $(this).closest('tr').find('.user_id').text();
+            
+            $.ajax({
+                method: "POST",
+                url: "PHPBackend/AccProcess.php",
+                data: {
+                    'click_BiyuModal': true,
+                    'user_id':user_id,
+                },
+
+                success: function (response) {
+
+                    $.each(response, function (Key, value) { 
+
+                        $('#userID').val(value['user_id']);
+                        $('#conf_userID').val(value['user_id']);
+                        $('#Lname').val(value['last_name']);
+                        $('#Fname').val(value['first_name']);
+                        $('#Mname').val(value['middle_name']);
+                        // $('#Bday').val(value['birthday']);
+                        // $('#Bplace').val(value['birthplace']);
+                        $('#Sex').val(value['sex']);
+                        $('#Age').val(value['age']);
+                        $('#ContNum').val(value['phone_number']);
+                        // $('#CitizShip').val(value['citizenship']);
+                        $('#Blk').val(value['block']);
+                        $('#Lot').val(value['lot']);
+                        // $('#ecName').val(value['ec_name']);
+                        // $('#ecRel').val(value['ec_relship']);
+                        // $('#ecNum').val(value['ec_phone_num']);
+                        //$('#STName').val(value['street_name']);
+                        $('#ecAddress').val("Blk " + value['block'] + " Lot " + value['lot']);
+                        // + "  " + value['street_name'] + " St."
+                    });
+
+
+                }
+            });
+        })
+
+            // Button ng delete sa table
+            $(document).on("click", ".confBOTON", function(){
+                var user_id = $(this).closest('tr').find('.user_id').text();
+                $('.confirm_userID').val(user_id);               
+            });
+
+            window.closeModal = function() {
+                $('#confirmModal').hide();
+            };
+
+            $('.ConfirmSaModal').click(function (e) { 
+                e.preventDefault();
+                var confirm_userID = $('.confirm_userID').val(); 
+                console.log('confirm_userID:', confirm_userID);
+                
+                $.ajax({
+                    type: "POST",
+                    url: "PHPBackend/ConfirmProcess.php",
+                    data: {
+                        'Confirm_conf': true,
+                        'confirm_userID': confirm_userID,
+                    },
+                    success: function (response) {
+                        try {
+                            var jsonData = JSON.parse(response);
+                            if (jsonData.success) {
+                                console.log('User confirmed successfully po');
+                                console.log('User confirmed successfully');
+                                    sendConfirmationEmail(confirm_userID);
+                                    $("tr:has(td.user_id:contains('" + confirm_userID + "'))").remove(); 
+                                    closeModal();
+                                    location.reload();
+                        
+                            } else {
+                                console.error('Failed to remove record:', jsonData.error);
+                            }
+                        } catch (error) {
+                            console.error('Error parsing remove response:', error);
+                        }
+                        
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Delete AJAX error:', error);
+                    }
+                });
+            });  
+        });
 </script>
 </body>
 </html>

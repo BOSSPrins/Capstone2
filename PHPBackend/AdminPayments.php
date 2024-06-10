@@ -5,9 +5,9 @@ $conn = connection();
 
 $due_date = mysqli_real_escape_string($conn, $_POST['Ddate']);
 // $over_date = mysqli_real_escape_string($conn, $_POST['Ovdate']);
-$month_due = mysqli_real_escape_string($conn, $_POST['MDue']);
-$water_bill = mysqli_real_escape_string($conn, $_POST['WBill']); 
-$totalAmount = mysqli_real_escape_string($conn, $_POST['totalAmount']);      //Getting Inputs For Admin Residents data
+$month_due = floatval(mysqli_real_escape_string($conn, $_POST['MDue']));
+$water_bill = floatval(mysqli_real_escape_string($conn, $_POST['WBill'])); 
+$totalAmount = floatval(mysqli_real_escape_string($conn, $_POST['totalAmount']));      //Getting Inputs For Admin Residents data
 $unique_id = mysqli_real_escape_string($conn, $_POST['UID']);
 
 if (!empty($due_date) && empty($over_date) && !empty($month_due) && !empty($water_bill) && !empty($totalAmount) && !empty($unique_id)) {

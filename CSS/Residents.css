@@ -1,0 +1,787 @@
+:root{
+  --color-primary: #1828b8;
+  --color-danger: #ff7782;
+  --color-success: #41f1b6;
+  --color-warning: #ffbb55;
+  --color-white: #fff;
+  --color-info-dark: #1e1e1f;
+  --color-info-light: #939fb6;
+  --color-dark: #363949;
+  --color-light: rgba(61, 109, 176, 0.18);
+  --color-light-2: rgba(52, 58, 116, 0.20);
+  --color-primary-variant: #111e88;
+  --color-dark-variant: #677483;
+  --color-background: #f0f0f0;
+
+  --light: #f9f9f9;
+  --blue: #3c91e6;
+  --light-blue: #a9d5ff;
+  --light-red: #f38c8c;
+  --light-green: #a7f9d0;
+  --grey: #eee;
+  --dark-grey: #aaaaaa;
+  --drak: #342e37;
+  --red:  #e88383;
+  --green: rgb(94, 232, 129);
+  --color-info-dark: #919497;
+
+  --color-border-radius: 2rem;
+  --color-border-radius-1: 0.4rem;
+  --color-border-radius-2: 0.8rem;
+  --color-border-radius-3: 1.2rem;
+
+
+  --card-padding: 1.8rem;
+  --padding-1: 1.2rem;
+
+  --box-shadow: 0 2rem 3rem var(--color-light);
+}
+
+*{
+  margin: 0;
+  padding: 0;
+  outline: none;
+  appearance: none;
+  border: 0;
+  text-decoration: none;
+  list-style: none;
+  box-sizing: border-box;
+}
+
+html{
+  font-size: 14px;
+}
+
+.mainDashboardContainer{
+  width: 100vw;
+  height: 100vh;
+  font-family: Arial, sans-serif;
+  font-size: 0.88rem;
+  background: var(--color-background);
+  user-select: none;
+  overflow-x: hidden;
+  color: var(--color-dark);
+}
+
+/* ===== SIDEBAR DESIGN ===== */
+.sidebarContainer {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  /* left: 5px; */
+  bottom: 0;
+  top: 0;
+  background-color:  rgb(255, 255, 255);
+  width: 250px;
+  /* margin-top: 7px; */
+  transition: all 0.3s;
+}
+
+.sidebarContainer span{
+  font-size: 14.5px;
+  font-weight: 500;
+}
+
+.sidebarContainer .sideside{
+  display: flex;
+  color: var(--color-info-dark);
+  padding-left: 25px;
+  gap: 1rem;
+  align-items: center;
+  position: relative;
+  height: 4rem;
+  transition: all 300ms ease;
+}
+
+.sidebarContainer .sideside .img-sideboard{
+  font-size: 1.6rem;
+  transition: all 300ms ease;
+}
+
+.sidebarContainer .sideside:last-child{
+  position: absolute;
+  bottom: 1px;
+  width: 100%;
+}
+
+.sidebarContainer .sideside.baractive{
+  background: var(--color-light);
+  color: var(--color-primary);
+}
+
+.sidebarContainer .sideside.baractive .img-sideboard{
+  margin-left: calc(1rem -3rem);
+}
+
+.sidebarContainer .sideside:hover{
+  color: var(--color-primary);
+}
+
+.sidebarContainer .sideside:hover .img-sideboard{
+  margin-left: 1rem;
+}
+
+/* SIDEBAR ACTIVE */
+.sidebarActive {
+  transform: translateX(250px); /* Move sidebar into view */
+}
+
+/* .MonthlyDuessContainerr.MonthlyDuessConActivee {
+  margin-left: 5px;
+} */
+
+/* ===== SIDEBAR IMAGE SIZE ===== */
+.img-sideboard{
+  width: 20px;
+}
+
+/* ========== SUB MENU SIDEBAR ========== */
+.subMenuComp{
+  display: none;
+  margin-left: 35px;
+  transition: all 0.3s;
+}
+
+.submenu-visible {
+  display: block; 
+}
+
+.subMenuComp li a{
+  position: relative;
+  display: flex;
+  color: var(--color-info-dark);
+  padding: 10px;
+  position: relative;
+  transition: all 300ms ease;
+}
+
+.eme2{
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 6px solid #aeaeae;
+  transition: 0.3s;
+}
+
+.buttonEme2{
+  padding: 10px 15px;
+  margin-left: 45px;
+  cursor: pointer;
+}
+
+.eme2-rotate{
+  transform: rotate(180deg);
+}
+
+.subMenuComp li a.active{
+  background: var(--color-light);
+  color: var(--color-primary);
+  height: 100%;
+  margin-left: 5px;
+}
+
+.sidebarContainer li a:hover{
+  color: var(--color-primary);
+  margin-left: 1rem;
+}
+
+.subMenuComp li a.active::before {
+  content: '';
+  width: 4px;
+  height: 100%;
+  background: var(--color-primary);
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+/* ===== SUB MENU CHAT IMAGE ==== */
+.img-subMenu{
+  width: 20px;
+  margin-right: 5px;
+}
+
+.sub-spa{
+  margin-top: 5px;
+}
+
+/* ========== MAIN DASHBOARD DESIGN ========== */
+.MainBodyContainerr{
+  padding-left: 250px;
+  /* margin-top: 57px; */
+}
+
+.MainContainerForTables{
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  /* background: gray; */
+}
+
+.TablessContainer{
+  width: 100%;
+  padding: 10px;
+  background-color: #ffffff;
+  height: 620px;
+  overflow:hidden;
+  padding: 30px 40px;
+  border: 1px solid rgb(179, 172, 172);
+  margin: 15px;
+}
+
+/* DESIGN FOR DROPDOWN */
+
+.TableHeaderr{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.itemsController,
+.searchTablee{
+display: flex;
+  align-items: center;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  margin: 0 7px;
+}
+
+.ArrowandPlace{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.selected {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  width: 70px;
+  user-select: none;
+}
+
+.options {
+  display: none;
+  position: absolute;
+  background-color: #fff;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.1);
+  top: 100%;
+  left: 0;
+  width: 70px;
+}
+
+.option {
+  text-align: center;
+  padding: 8px;
+  cursor: pointer;
+  border-top: 1px solid #ccc;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.open .options {
+  display: block;
+}
+
+.inputSearchhh{
+  padding: 5px;
+  font-size: 16px;
+  width: 300px;
+  margin-left: 5px;
+}
+
+/* DESIGN FOR TABLE */
+
+.TablesContainer{
+  height: 520px;
+  width: 100%;
+  overflow: hidden;
+  overflow-y: auto;
+}
+
+table{
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+thead{
+  background: var(--color-primary);
+  color: white;
+}
+
+th{
+  padding: 20px;
+  cursor: pointer;
+  position: relative;
+  font-size: 12px;
+  white-space: nowrap;
+  user-select: none;
+  transition: all linear 0.16s;
+  border: 1px solid rgb(179, 172, 172); /* Outline partition */
+}
+
+table th.asc,
+table th.desc {
+  border-bottom-color: rgb(255, 255, 255);
+}
+
+table th[data-sort]::before,
+table th[data-sort]::after {
+  content: '';
+  position: absolute;
+  height: 0;
+  width: 0;
+  right: 10%;
+  opacity: 0.3;
+  margin-top: 12px;
+  border: 4px solid transparent;
+}
+
+table th[data-sort]::before {
+  top: 6px;
+  border-bottom-color: rgb(255, 255, 255);
+}
+
+table th[data-sort]::after {
+  top: 16px;
+  border-top-color: rgb(255, 255, 255);
+}
+
+table th.asc::before,
+table th.desc::after {
+  opacity: 1;
+}
+
+table td {
+  font-size: 14px;
+  border-bottom: 1px solid #576574;
+  padding: 10px 12px;
+}
+
+td{
+  padding: 5px;
+  border: 1px solid rgb(179, 172, 172); /* Outline partition */
+}
+
+tbody{
+  background: var(--color-white);
+  text-align: center;
+}
+
+td{
+  color: #000000;
+}
+
+tr:nth-child(even){
+  background: var(--color-light);
+}
+
+/* DESIGN PARA SA PAGINATION */
+
+.bottom-field{
+  width: 100%;
+  margin-top: 10px;
+}
+.pagination{
+display: flex;
+justify-content: end;
+align-items: center;
+}
+
+.pagination li{
+list-style: none;
+flex-shrink: 0;
+text-align: center;
+border: 1px solid #999;
+color: #000000;
+}
+
+.pagination a.Pageactive{
+  background: #04007a;
+  color: white;
+  border-color: #32d6aa;
+}
+
+.pagination li a{
+text-decoration: none;
+padding: 3px 8px;
+color: inherit;
+display: block;
+font-family: sans-serif;
+font-size: 13px;
+}
+
+.prevv:hover,
+.nextt:hover{
+  background: rgb(182, 182, 182);
+}
+
+/* DESIGN PARA TO SA HEADER NG SIDEBAR AT SA MAIN */
+.headerTop{
+  align-items: center;
+  text-align: center;
+  background: rgb(229, 229, 229);
+  height: 160px;
+  width: 100%;
+  padding-top: 10px;
+  box-shadow: 0 8px 8px -10px #888888;
+}
+
+.img-logo{
+  width: 100px;
+}
+
+.headerTopMain{
+  position: sticky;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 50px;
+  width: 100%;
+  background: rgb(255, 255, 255);
+  padding: 20px;
+  top: 0;
+  box-shadow: 5px 10px 18px #888888;
+  box-shadow: 0 8px 8px -10px black;
+  z-index: 1;
+}
+
+.HamburgerandOthers{
+  display: flex;
+  align-items: center;
+}
+
+.namePerModule{
+  padding-left: 20px;
+}
+
+.menu{
+  width: 25px;
+  cursor: pointer;
+}
+
+.ProfileViewww{
+  display: flex;
+  align-items: center;
+}
+
+.user-img{
+  width: 30px;
+  height: 30px;
+  background: rgb(0, 0, 0);
+  border-radius: 20px;
+}
+
+.profileBtn{
+  padding: 5px 20px;
+  margin-right: 5px;
+}
+
+.profileBtn label{
+  cursor: pointer;
+}
+
+/* ===== PROFILE MODAL DESIGN ===== */
+.modal{
+  display: none;
+}
+
+.subModal{
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+  display: flex;
+  background: var(--color-background);
+  width: 800px;
+  height: 500px; /* Set the desired height */
+  overflow: hidden; /* Hide overflow */
+  border-radius: 10px;
+}
+
+.profileSidebar{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  width: 150px;
+  height: 100%;
+  border-radius: 10px;
+}
+
+.profileSidebar a{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 4rem;
+  margin-bottom: 5px;
+  /* background: rgb(192, 184, 184); */
+  color: var(--color-info-dark);
+}
+
+.profileSidebar a:hover{
+  color: var(--color-primary);
+}
+
+.profilePages{
+  width: 100%;
+  margin-left: 10px;
+}
+
+.closeProf{
+  display: flex;
+  justify-content: end;
+  margin-right: 5px;
+  color: #000000;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* Hide all pages initially */
+.page {
+  display: none;
+}
+
+/* Show active page */
+.activeProfModal{
+  display: block;
+}
+
+/* ===== CHANGING PASSWORD ===== */
+.changingPassword {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 20px;
+  margin-left: 50px;
+  margin-right: 50px;
+}
+
+.changingInputBox{
+  width: 100%;
+  margin-bottom: 50px;
+}
+
+.changingInputBoxLast{
+  width: 100%;
+}
+
+.changingInputBox .inputngChanging,
+.changingInputBoxLast .inputngChanging{
+  width: 100%;
+  padding: 15px;
+  font-size: 20px;
+  border-radius: 10px;
+  border: 1px solid rgba(62, 65, 71, 0.4);
+}
+
+.changingInputBox .inputngChanging:focus,
+.changingInputBoxLast .inputngChanging:focus{
+  border-color: var(--color-primary);
+}
+
+.changingForgotPass {
+  display: flex;
+  justify-content: end;
+  margin-top: 15px;
+  font-size: 17.5px;
+  width: 100%;
+}
+
+.forgotpassAs{
+  color: var(--color-primary);
+}
+
+.forgotpassAs:hover{
+  text-decoration: underline;
+}
+
+.paragChange{
+  margin-top: 10px;
+}
+
+.buttonSapagPalit{
+  margin-top: 10px;
+  width: 100%;
+  padding: 15px;
+  background: var(--color-primary);
+  color: white;
+  font-size: 17.5px;
+  cursor: pointer;
+}
+
+.containerNgViewModal{
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+
+.subContainerViewModal{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.viewItongmodal{
+  position: relative;
+  max-width: 600px;
+  width: 100%;
+  margin-top: 10px;
+  height: 590px;
+  background: #fff;
+  border-radius: 8px;
+}
+
+.titleHeaderView{
+  display: flex;
+  align-items: center;
+  justify-content: space-between
+  ;
+  background: rgb(229, 229, 229);
+  /* border-bottom: 1px solid gray; */
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.closeViewModal{
+  color: #000000;
+  font-size: 22px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.emeeeee{
+  height: 465px;
+  padding: 10px;
+  overflow-y: auto;
+}
+
+.footerNgViewModal{
+  background: gray;
+}
+
+.headerModalRow{
+  text-align: center;
+}
+
+.ViewForm .inputboxView{
+  width: 100%;
+}
+
+.ViewForm .inputboxView .inputngViewModalTo{
+  width: 100%;
+  border: 1px solid rgb(203, 214, 220);
+  font-size: 15px;
+  padding: 7px;
+  margin-top: 3px;
+  border-radius: 2px;
+}
+
+.ViewForm .inputboxView label{
+  font-weight: 550;
+  font-size: 14px;
+}
+
+.ViewForm .row{
+  display: flex;
+  column-gap: 15px;
+  margin-top: 10px;
+  margin-bottom: 13px;
+}
+
+select{
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 100%;
+  border: 1px solid rgb(203, 214, 220);
+  font-size: 15px;
+  padding: 8px;
+  margin-top: 3px;
+  border-radius: 2px;
+}
+
+select::-ms-expand{
+  display: none;
+}
+
+hr{
+  border: none;
+  height: 1px;
+  background-color: #8e8e8e;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.dropdownFilter {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdownFiltercontent {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  max-height: 200px; /* Set your desired max-height */
+  overflow-y: auto; /* Enable vertical scroll if content exceeds max-height */
+}
+
+.dropdownFilter:hover .dropdownFiltercontent {
+  display: block;
+}
+
+.dropdownFilter label {
+  display: block;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.dropdownFilter label:hover {
+  background-color: #ddd; /* Change background color on hover */
+}
+
+.DropFilterInput[type="radio"] {
+  display: none;
+}
+
+.DropFilterInput[type="radio"] + label {
+  display: block;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.DropFilterInput[type="radio"]:checked + label {
+  background-color: #f0f0f0; /* Change background color for checked state */
+}

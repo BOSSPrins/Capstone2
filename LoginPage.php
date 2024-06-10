@@ -134,8 +134,7 @@ if (isset($_SESSION['role'])) {
                                                 <option value="" disabled selected>Choose an option</option>
                                                 <option value="Male">Male</option>
                                                 <option value="Female">Female</option>
-                                                <option value="Preferred Not to Say">Preferred Not to Say</option>
-                                                <option value="Others">Others</option>
+                                                <option value="Rather not say">Rather not say</option>
                                             </select>
                                         </div>
                                     </div>

@@ -169,6 +169,7 @@ if (SendBtn) {
 document.addEventListener("DOMContentLoaded", () => {
     $(document).on("click", ".viewBOTON", function() {
         var unique_id = $(this).closest('tr').find('.unique_id').text();
+        console.log("unique_id sa table", unique_id );
         $('.View_dueID').val(unique_id);
 
         $.ajax({
@@ -183,7 +184,20 @@ document.addEventListener("DOMContentLoaded", () => {
                     }
                     if (jsonData.proof) {
                         $('#userPic').attr('src', 'Pictures/' + jsonData.proof).show();
-                    } else if (jsonData.error) {
+                    }
+                    if (jsonData.money) {
+                        $('#totals').val(jsonData.total);
+                    }
+                    if (jsonData.unique_id) {
+                        $('#secUID').val(jsonData.unique_id);
+                    }
+                    if (jsonData.current_pending !== undefined) {
+                        console.log('Current Pending Amount:', jsonData.current_pending);
+                    }
+                    if (jsonData.current_money !== undefined) {
+                        console.log('Current Money:', jsonData.current_money);
+                    }
+                    if (jsonData.error) {
                         console.error('Error:', jsonData.error);
                     }
                 } catch (error) {
@@ -205,8 +219,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
         var formData = new FormData();
         formData.append('action', 'updatePayment');
-        formData.append('userBayad', $('#userBayad').val());
-        formData.append('UID', $('.View_dueID').val());
+        formData.append('userBayad', parseFloat($('#userBayad').val()));
+        formData.append('UID', $('#secUID').val());
         formData.append('userRefer', $('#userRefer').val());
 
         $.ajax({
@@ -219,19 +233,25 @@ document.addEventListener("DOMContentLoaded", () => {
                 try {
                     var jsonData = JSON.parse(response);
                     if (jsonData.success) {
-                        console.log('Payment updated successfully');
+
+                        console.log('Payment updated successfully');    
+                        console.log('Current Pending Amount:', jsonData.current_pending);
                         alert("Payment updated successfully");
                         closeModal();
                         location.reload();
                     } else {
                         console.error('Error:', jsonData.error);
+                        alert('Error: ' + jsonData.error);
                     }
                 } catch (error) {
                     console.error('Error parsing response:', error);
+                    console.error('Response received:', response);
+                    alert('An error occurred while processing the response.');
                 }
             },
             error: function(xhr, status, error) {
                 console.error('AJAX error:', error);
+                alert('AJAX error: ' + error);
             }
         });
     });

@@ -4,11 +4,14 @@ session_start();
 $conn = connection();
 
 if (isset($_SESSION['unique_id'])) {
-  if ($_SESSION['role'] == 'user') {
-      header("Location: LoginPage.php");
-      exit();
+    if ($_SESSION['role'] == 'user') {
+        header("Location: LoginPage.php");
+        exit();
+    }
+  } else {
+    header("Location: LoginPage.php");
+    exit();
   }
-}
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['unique_id'])) {
     $unique_id = $_POST['unique_id'];
@@ -317,11 +320,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['unique_id'])) {
                                                     <div class="InputAmountsContainer">
                                                         <div class="InputAmounts">
                                                             <label class="LabelSend"> Monthly Due Amount: </label>
-                                                            <input class="InputAm" type="text" id="MDue" name="MDue">
+                                                            <input class="InputAm" type="number" id="MDue" name="MDue"step="0.01" min="0" placeholder="0.00">
                                                         </div>
                                                         <div class="InputAmounts">
                                                             <label class="LabelSend"> Water Bill Amount: </label>
-                                                            <input class="InputAm" type="text" id="WBill" name="WBill">
+                                                            <input class="InputAm" type="number" id="WBill" name="WBill" step="0.01" min="0" placeholder="0.00">
                                                         </div>
                                                         <div class="InputAmounts">
                                                             <label class="LabelSend"> Total Amount: </label>
@@ -398,7 +401,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['unique_id'])) {
                                             <div class="PaymentFromUser">
                                                 <div class="AmountPay">
                                                     <label class="LabelNames"> Payment: </label>
-                                                    <input class="InputPayFromUser int" type="text" id="userBayad" name="userBayad">
+                                                    <input class="InputPayFromUser int" type="number" id="userBayad" name="userBayad" step="0.01" min="0">
                                                 </div>
                                                 <div class="ProofPic">
                                                     <div class="ProofTop">
@@ -410,10 +413,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['unique_id'])) {
                                                 </div>
                                                 <div class="BottomRef">
                                                     <div class="RefNo">
-                                                        <label class="LabelNames"> Reference No. </label>
+                                                        <label class="LabelNames"> Reference No. </label> <input type="text"  id="secUID" > 
+                                                        <input type="number"  id="totals" >
                                                         <input class="int" type="text" id="userRefer" name="userRefer">
                                                     </div>
-                                                    <div class="buttonP">
+                                                    <div class="buttonP">            
                                                         <button type="submit" class="btnPaid SabmitBtn"> Accept </button>
                                                     </div>
                                                 </div>
@@ -458,7 +462,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['unique_id'])) {
                 if (response.error) {
                     alert(response.error);
                 } else {
-                    // alert("First Name: " + response.first_name + "\nLast Name: " + response.last_name); 
+                     console.log("First Name: " + response.first_name + "\nLast Name: " + response.last_name); 
                 }
             }
         };

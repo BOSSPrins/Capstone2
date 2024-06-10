@@ -6,7 +6,7 @@ $conn = connection();
 $response = array();
 
 $paydate = mysqli_real_escape_string($conn, $_POST['paydate']);
-$pay = mysqli_real_escape_string($conn, $_POST['pay']);
+$pay = floatval(mysqli_real_escape_string($conn, $_POST['pay']));
 $unique_id = mysqli_real_escape_string($conn, $_POST['UID']);
 
 // Check if file upload is set and not empty
@@ -40,6 +40,7 @@ if (isset($_FILES["proof"]) && !empty($_FILES["proof"]["tmp_name"])) {
         if ($update_payment_query) {
             // Payment updated successfully
             $response['success'] = "Payment updated successfully.";
+            
         } else {
             $response['error'] = "Error updating payment: " . mysqli_error($conn);
         }
