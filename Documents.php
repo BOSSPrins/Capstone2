@@ -191,7 +191,8 @@ if (isset($_SESSION['unique_id'])) {
                     
                                         <tbody>
                                         <?php 
-                                            $query = "SELECT * FROM forms";
+                                            $query = "SELECT * FROM forms WHERE unique_id IS NOT NULL AND unique_id != ''";
+
 
                                             $result = mysqli_query($conn, $query);
                                             if($result){
@@ -209,7 +210,7 @@ if (isset($_SESSION['unique_id'])) {
                                                         <td> 02:02 </td>
                                                         <td> 02:02 </td>
                                                         <td>
-                                                            <button class="GenerateBtn tb-btn docsModal"> Generate Certificate </button>
+                                                            <button class="GenerateBtn tb-btn docsModal"> View </button>
                                                         </td>
                                                     </tr>
                                                 <?php
@@ -257,13 +258,21 @@ if (isset($_SESSION['unique_id'])) {
                                                 <input class="inputperCert" type="text" id="lot" name="lot" hidden>
                                             </div>
                                             <div class="InputContainerCert">
-                                                <label class="labelInCert"> Purpose: </label>
+                                                <label class="labelInCert"> Purpose: </label><input type="text" name="id_unique" id="id_unique" >
                                                 <input class="inputperCert" type="text" id="purpose" name="purpose">
+                                                
                                             </div>
                                             <div class="buttonsInCerti">
-                                                <input type="text" name="forms_id" id="forms_id" hidden>
-                                                <button class="cancelCertBtn CBtn">
+                                                <input type="text" name="forms_id" id="forms_id" >
+                                                
+                                                <!-- <button class="confirmCertBtn CBtn denyModal">
                                                     Cancel
+                                                </button>
+                                                <button class="denyModal">
+                                                    Reject
+                                                </button> -->
+                                                <button class="confirmCertBtn CBtn denyModal">
+                                                    Reject
                                                 </button>
                                                 <button class="confirmCertBtn CBtn confirmBtn">
                                                     Print

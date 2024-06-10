@@ -21,6 +21,7 @@ if ($admin_sql && mysqli_num_rows($admin_sql) > 0) {
 $encoded_id = urlencode($admin_unique_id);
 
 //Mga session para sa request 
+$unique_ID  = $_SESSION['unique_id'];
 $res_userID  = $_SESSION['res_userID'];
 $acc_userID  = $_SESSION['acc_userID']; 
 $block       = $_SESSION['block']; 
@@ -47,15 +48,16 @@ function getUserNameFromDatabase($res_userID) {
         
         $row = mysqli_fetch_assoc($result);
         // Return the user's name
+        $UID = $row['unique_id']; 
         $firstName = $row['first_name']; 
         $midName = $row['middle_name']; 
         $lastName = $row['last_name'];
         $block = $row['block'];  
         $lot = $row['lot'];
-        return array('first_name' => $firstName, 'middle_name' => $midName, 'last_name' =>  $lastName, 'block' => $block, 'lot' => $lot);
+        return array('unique_id' => $UID, 'first_name' => $firstName, 'middle_name' => $midName, 'last_name' =>  $lastName, 'block' => $block, 'lot' => $lot);
     } else {
         // If the query fails or no results found, return a default name and address
-        return array('firstName' => 'Default Fname', 'midName' => 'Default Midname', 'lastName' => 'Default Lname', 'block' => 'Default block', 'lot' => 'Default lot');
+        return array('unique_id' => 'Default UID', 'firstName' => 'Default Fname', 'midName' => 'Default Midname', 'lastName' => 'Default Lname', 'block' => 'Default block', 'lot' => 'Default lot');
     }
 }
 
@@ -63,11 +65,14 @@ function getUserNameFromDatabase($res_userID) {
 $userData = getUserNameFromDatabase($res_userID);
 
 // Store the user's name in the session variable
+$_SESSION['UID'] = $userData['unique_id'];
 $_SESSION['Fname'] = $userData['first_name'];
 $_SESSION['Mname'] = $userData['middle_name'];
 $_SESSION['Lname'] = $userData['last_name'];
 $_SESSION['block'] = $userData['block'];
 $_SESSION['lot'] = $userData['lot'];
+
+
 
 ?>
 
@@ -142,7 +147,8 @@ $_SESSION['lot'] = $userData['lot'];
                                           
                                             <div class="ReqNamecloseContainer">
                                                 <div class="ReqFormName">
-                                                    <h1>Certificate Modal </h1> <!--  (Name to ng Document na nirerequest) -->
+                                                    <h1>Certificate Modal </h1>
+                                                     <!--  (Name to ng Document na nirerequest) -->
                                                 </div>
                                                 <div class="ReqCloseContainer">
                                                     <span class="ReqCertClose">&times;</span>
@@ -153,7 +159,8 @@ $_SESSION['lot'] = $userData['lot'];
                                                 <input type="text" id="MubAwt" name="MubAwt" value="Move Out" hidden>
                                                 <input type="text" id="Stats" name="Stats" value="Pending" hidden>
 
-                                                <label class="labelReq"> First Name: </label>
+                                                <label class="labelReq"> First Name: </label> 
+                                                <input class="inputReq" type="text" id="UID" name="UID" value="<?php echo $_SESSION['UID'];?>" hidden>
                                                     <input class="inputReq" type="text" id="Fname" name="Fname" value="<?php echo $_SESSION['Fname'];?>">
 
                                                 <label class="labelReq"> Middle Name: </label>
@@ -163,10 +170,10 @@ $_SESSION['lot'] = $userData['lot'];
                                                     <input class="inputReq" type="text" id="Lname" name="Lname" value="<?php echo $_SESSION['Lname'];?>">
                                             </div>
                                             <div class="RequestInput">
-                                                <label class="labelReq"> Block: </label>
-                                                <input class="inputReq" type="text" id="block" name="block" value="<?php echo $_SESSION['block'];?>">
-                                                <label class="labelReq"> Lot: </label>
-                                                <input class="inputReq" type="text" id="lot" name="lot" value="<?php echo $_SESSION['lot'];?>">
+                                                <input class="inputReq" type="text" id="block" name="block" value="<?php echo $_SESSION['block'];?>" hidden>                                               
+                                                <input class="inputReq" type="text" id="lot" name="lot" value="<?php echo $_SESSION['lot'];?>" hidden>
+                                                <label class="labelReq"> Address: </label>
+                                                <input class="inputReq" type="text" value="<?php echo "Block " . $_SESSION['block'] .  " Lot " . $_SESSION['lot']; ?>">
                                             </div>
                                             <!-- <div class="RequestInput">
                                                 <label class="labelReq"> Purpose: </label>
@@ -219,27 +226,19 @@ $_SESSION['lot'] = $userData['lot'];
                                                     $query = "SELECT tblresident.first_name, tblresident.middle_name, tblresident.last_name,
                                                     forms.form_name, forms.block, forms.lot, forms.status, forms.forms_id
                                                     FROM tblresident 
-                                                    JOIN forms   ON tblresident.first_name = forms.first_name
-                                                                AND tblresident.middle_name = forms.middle_name
-                                                                AND tblresident.last_name = forms.last_name; ";
-                                                   
-                                                  
-                                                  
+                                                    INNER JOIN forms ON tblresident.unique_id = forms.unique_id WHERE forms.unique_id = '$unique_ID'";
+                                                                 
+                                                                                         
                                                   $result = mysqli_query($conn, $query);
 
                                                 if($result){
                                                 if (mysqli_num_rows($result) > 0) {
                                                     while ($row = mysqli_fetch_assoc($result)) {
-                                                   
-                                                        $backgroundColor = '';
-                                                        $textColor = 'black';
-                                                        if ($row['status'] == 'Pending' || $row['status'] == 'Verifying') {
-                                                            $backgroundColor = 'background-color: #FFFF99;';
-                                                        } else if ($row['status'] == 'Ready to Pick Up') {
-                                                            $backgroundColor = 'background-color: #66CC66;';
-                                                            $textColor = 'color: black;';
+                                                        $textColor = '';
+                                                        $fontWeight = 'font-weight: normal;'; // Default to normal weight
+                                                        if ($row['status'] == 'Pending' || $row['status'] == 'Verifying' || $row['status'] == 'Ready to Pick Up') {
+                                                            $fontWeight = 'font-weight: bold;'; // Set font weight to bold for specific statuses
                                                         }
-                                                        // echo "Status: " . $row['status'] . " - Background color: " . $backgroundColor . " - Text color: " . $textColor . "<br>";
                                                 ?>
                                                 <tr>
                                                     <td class="forms_id" hidden><?php echo $row['forms_id'] ?></td>

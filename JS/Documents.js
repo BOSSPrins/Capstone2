@@ -157,6 +157,7 @@ $(document).ready(function () {
                         $('#purpose').val(value['form_name']);
                         $('#block').val(value['block']);
                         $('#lot').val(value['lot']);
+                        $('#id_unique').val(value['unique_id']);
 
                     });
                 } catch (e) {
@@ -209,38 +210,44 @@ $(document).ready(function () {
         const d = new Date();;
         const formattedDate = monthNames[d.getMonth()] + ', ' + d.getDate() + ' ' + d.getFullYear();;
         
-     
-
         // Send the data to PrintDocs.php using AJAX
-        $.ajax({
-            method: "POST",
-            url: "PHPBackend/PrintDocs.php",
-            data: {
-                'fullName': fullName,
-                'block': block,
-                'lot': lot,
-                'purpose': purpose,
-                'forms_id': forms_id,
-                'dateIssued': formattedDate
-            },
-            success: function (response) {
-                // Optionally handle the response
-                console.log(response);
+            $.ajax({
+                method: "POST",
+                url: "PHPBackend/PrintDocs.php",
+                data: {
+                    'fullName': fullName,
+                    'block': block,
+                    'lot': lot,
+                    'purpose': purpose,
+                    'forms_id': forms_id,
+                    'dateIssued': formattedDate
+                },
+                success: function (response) {
+                    // Optionally handle the response
+                    console.log(response);
 
-                // Open a new window with the generated document
-                var newWindow = window.open("", "Print Document");
-                newWindow.document.write(response);
-                newWindow.document.close();
-                newWindow.print();
-            },
-            error: function (xhr, status, error) {
-                console.error("Error: " + error);
-                console.error("Status: " + status);
-                console.dir(xhr);
-            }
-        });
-
-        
-     
+                    // Open a new window with the generated document
+                    var newWindow = window.open("", "Print Document");
+                    newWindow.document.write(response);
+                    newWindow.document.close();
+                    newWindow.print();
+                },
+                error: function (xhr, status, error) {
+                    console.error("Error: " + error);
+                    console.error("Status: " + status);
+                    console.dir(xhr);
+                }
+            });   
       });
+
+
+       // Email pagreject 
+    $(document).on("click", ".denyModal", function(){
+        var unique_id = $('#id_unique').val();
+        
+        $('.reject_userID').val(unique_id);
+        console.log("Unique ID:", unique_id);   
+    });
+
+
 });

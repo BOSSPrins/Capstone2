@@ -413,8 +413,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['unique_id'])) {
                                                 </div>
                                                 <div class="BottomRef">
                                                     <div class="RefNo">
-                                                        <label class="LabelNames"> Reference No. </label> <input type="text"  id="secUID" > 
-                                                        <input type="number"  id="totals" >
+                                                        <label class="LabelNames"> Reference No. </label> <input type="text"  id="secUID" hidden> 
+                                                        <input type="number"  id="totals" hidden>
                                                         <input class="int" type="text" id="userRefer" name="userRefer">
                                                     </div>
                                                     <div class="buttonP">            

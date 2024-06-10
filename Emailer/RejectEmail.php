@@ -15,7 +15,7 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 // Function to send confirmation email
-function sendConfirmationEmail($user_email) {
+function sendRejectingEmail($user_email) {
     // Create a new PHPMailer instance
     //$otp = generateOTP(); // Generate OTP
    // $_SESSION['otp'] = $otp; // Store OTP in session (temporary storage)
@@ -41,15 +41,16 @@ function sendConfirmationEmail($user_email) {
 
         // Content
         $mail->isHTML(true);
-        $mail->Subject = 'Account Confirmation';
         $mail->addEmbeddedImage('../Pictures/Dasma_City_Logo.png', 'logo_cid');
+
+        $mail->Subject = 'Failed Account Confirmation';
         $mail->Body = '
                     <!DOCTYPE html>
                     <html lang="en">
                     <head>
                         <meta charset="UTF-8">
                         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                        <title>Account Confirmation</title>
+                        <title>Failed Account Confirmation</title>
                         <style>
                             body {
                                 font-family: Arial, sans-serif;
@@ -90,34 +91,17 @@ function sendConfirmationEmail($user_email) {
                                 line-height: 1.6;
                                 text-align: left;
                             }
-
-                            a.button {
-                                display: inline-block;  
-                                background-color: #007bff;
-                                color: #fff;
-                                text-decoration: none;
-                                padding: 10px 20px;
-                                border-radius: 4px;
-                                border: none; /* Added to remove any default border */
-                                cursor: pointer; /* Added to show pointer on hover */
-                            }
-
-                            .button:hover {
-                                background-color: #0056b3;
-                            }
+                            
                         </style>
-                       
                     </head>
                     <body>
                         <div class="modal">
                           <div class="logo">
                             <img src="cid:logo_cid" alt="Logo">
                           </div>
-                            <h1>Account Confirmation</h1>
+                            <h1> Failed Account Confirmation</h1>
                             <p>Hello,</p>
-                            <p>Your account has been confirmed. You can now access the website. Thank you!</p>
-                            <p>If you have any questions, feel free to contact us at out website.</p>
-                            <p><a href="http://localhost/Mabuhay/LoginPage.php" class="button">Go to Login Page </a></p>
+                            <p>Im sorry your account has been rejected. Due to a lack of accuracy in your personal information based on our data, if you have any concerns, feel free to visit our HOA office.. Thank you!</p>
                         </div>
                     </body>
                     </html>
@@ -158,12 +142,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['user_id'])) {
             $user_email = $row['email'];
 
             // Send confirmation email
-            if (sendConfirmationEmail($user_email)) {
+            if (sendRejectingEmail($user_email)) {
                 // Email sent successfully
                 $response = ['success' => true];
             } else {
                 // Failed to send email
-                $response = ['error' => 'Failed to send confirmation email'];
+                $response = ['error' => 'Failed to send rejecting email'];
             }
         } else {
             // User not found in database

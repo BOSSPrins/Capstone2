@@ -194,12 +194,12 @@ if ($result) {
     <script src="JS/UserPayments.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", () => {
-            const form = document.querySelector(".userbayad");
-            const submitButton = document.getElementById("sabmitBoton");
+            const form = document.querySelector(".userbayad"),
+            submitButton = document.getElementById("sabmitBoton");
 
             if (form) {
-            form.onsubmit = (e) => {
-                e.preventDefault();
+                form.onsubmit = (e) => {
+                    e.preventDefault();
                 };
             }
 
@@ -210,35 +210,31 @@ if ($result) {
                     xhr.onload = () => {
                         if (xhr.readyState === XMLHttpRequest.DONE) {
                             if (xhr.status === 200) {
-                                let data = xhr.responseText.trim();  // Trim any extra spaces
-                                console.log("Response from server:", data);
-
-                                if (data === data) {
-                                    console.log("Data is 'success'");
-                                    alert("Payment Success");
-                                    // location.reload();
-                                    pay.value = '';
-                                    proof.value = '';
-                                    form.reset();
-
-                                    var previewImages = document.getElementsByName("preview");
-    
-    // Loop through each preview image and toggle its display style
-    for (var i = 0; i < previewImages.length; i++) {
-        if (previewImages[i].style.display === "none") {
-            previewImages[i].style.display = "block"; // Display the image
-        } else {
-            previewImages[i].style.display = "none"; // Hide the image
-        }
-    }
-                                } else {
-                                    console.log("Error:", data);
-                                    alert(data);
+                                try {
+                                    let jsonData = JSON.parse(xhr.responseText.trim()); // Trim any extra spaces
+                                    if (jsonData.success) {
+                                        console.log("Payment updated successfully");
+                                        alert("Payment updated successfully");
+                                        
+                                        location.reload();
+                                        form.reset();
+                                    } else {
+                                        console.error("Error:", jsonData.error);
+                                        alert("Error: " + jsonData.error);
+                                    }
+                                } catch (error) {
+                                    console.error("Error parsing response:", error);
+                                    console.error("Response received:", xhr.responseText);
+                                    alert("An error occurred while processing the responseeee.");
                                 }
+                            } else {
+                                console.error("Server responded with status:", xhr.status);
+                                alert("Server error: " + xhr.status);
                             }
                         }
                     };
                     let formData = new FormData(form);
+                    formData.append('action', 'updatePayment');
                     xhr.send(formData);
                 };
             }

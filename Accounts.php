@@ -283,11 +283,12 @@ $conn = connection();
                 <div class="AccountTableConTop">
                     <div class="AccTable-container">
                         <div class="AccSearchContainer">
+                        
                             <div class="searchFilterLeft">
                                 
                             </div>
                             <div class="searchRight">
-                                <label> Search: </label>
+                            <input type="text" id="reject_userID" class="reject_userID" hidden>  <label> Search: </label>
                             <input class="AccSearchInputDes" type="search">
                             </div>
                         </div>
@@ -298,13 +299,13 @@ $conn = connection();
                                     <tr>
                                         <th> Resident's Name </th>
                                         <th> Address </th>
-                                        <th colspan="2"> Action </th>
+                                        <th colspan="3"> Action </th>
                                     </tr>
                 
                                     <tbody>
                                       <?php
 
-                                        $query = "SELECT * FROM tblresident WHERE access = 'Pending'";
+                                        $query = "SELECT * FROM tblresident WHERE access = 'Pending' "; 
                                       
                                         $result = mysqli_query($conn, $query);
 
@@ -320,6 +321,10 @@ $conn = connection();
                                                         <button class="AccViewBtn ACCTb-btn BiyuModal AccsModal"> View </button>
                                                     </td>
                                                     <td>
+                                                        <button class="AccConfirmBtn ACCTb-btn rejBOTON" data-news-id="<?php echo $row['user_id'] ?>"> Reject </button>
+                                                        
+                                                    </td>
+                                                    <td>
                                                         <button class="AccConfirmBtn ACCTb-btn confBOTON" data-news-id="<?php echo $row['user_id'] ?>" onclick="openConfirmModal(this)"> Confirm </button>
                                                     </td>
                                                 </tr>
@@ -328,7 +333,7 @@ $conn = connection();
                                           } else {
                                           ?>
                                             <tr>    
-                                                <td colspan="4">No data found.</td>
+                                                <td colspan="4">No pending account found.</td>
                                             </tr>
                                           <?php
                                           }
@@ -383,7 +388,7 @@ $conn = connection();
                             if (response.error) {
                                 alert("Error: " + response.error);
                             } else {
-                                alert("Email sent successfullyyyyyyyyyyyy.");
+                                alert("Rejecting Email sent successfully.");
                             }
                         } catch (e) {
                             alert("Failed to parse JSON response: " + xhr.responseText);
@@ -450,45 +455,45 @@ $conn = connection();
         $('.BiyuModal').click(function (e) { 
             e.preventDefault();
             
-        var  user_id = $(this).closest('tr').find('.user_id').text();
+            var  user_id = $(this).closest('tr').find('.user_id').text();
             
-            $.ajax({
-                method: "POST",
-                url: "PHPBackend/AccProcess.php",
-                data: {
-                    'click_BiyuModal': true,
-                    'user_id':user_id,
-                },
+                $.ajax({
+                    method: "POST",
+                    url: "PHPBackend/AccProcess.php",
+                    data: {
+                        'click_BiyuModal': true,
+                        'user_id':user_id,
+                    },
 
-                success: function (response) {
+                    success: function (response) {
 
-                    $.each(response, function (Key, value) { 
+                        $.each(response, function (Key, value) { 
 
-                        $('#userID').val(value['user_id']);
-                        $('#conf_userID').val(value['user_id']);
-                        $('#Lname').val(value['last_name']);
-                        $('#Fname').val(value['first_name']);
-                        $('#Mname').val(value['middle_name']);
-                        // $('#Bday').val(value['birthday']);
-                        // $('#Bplace').val(value['birthplace']);
-                        $('#Sex').val(value['sex']);
-                        $('#Age').val(value['age']);
-                        $('#ContNum').val(value['phone_number']);
-                        // $('#CitizShip').val(value['citizenship']);
-                        $('#Blk').val(value['block']);
-                        $('#Lot').val(value['lot']);
-                        // $('#ecName').val(value['ec_name']);
-                        // $('#ecRel').val(value['ec_relship']);
-                        // $('#ecNum').val(value['ec_phone_num']);
-                        //$('#STName').val(value['street_name']);
-                        $('#ecAddress').val("Blk " + value['block'] + " Lot " + value['lot']);
-                        // + "  " + value['street_name'] + " St."
-                    });
+                            $('#userID').val(value['user_id']);
+                            $('#conf_userID').val(value['user_id']);
+                            $('#Lname').val(value['last_name']);
+                            $('#Fname').val(value['first_name']);
+                            $('#Mname').val(value['middle_name']);
+                            // $('#Bday').val(value['birthday']);
+                            // $('#Bplace').val(value['birthplace']);
+                            $('#Sex').val(value['sex']);
+                            $('#Age').val(value['age']);
+                            $('#ContNum').val(value['phone_number']);
+                            // $('#CitizShip').val(value['citizenship']);
+                            $('#Blk').val(value['block']);
+                            $('#Lot').val(value['lot']);
+                            // $('#ecName').val(value['ec_name']);
+                            // $('#ecRel').val(value['ec_relship']);
+                            // $('#ecNum').val(value['ec_phone_num']);
+                            //$('#STName').val(value['street_name']);
+                            $('#ecAddress').val("Blk " + value['block'] + " Lot " + value['lot']);
+                            // + "  " + value['street_name'] + " St."
+                        });
 
 
-                }
-            });
-        })
+                    }
+                });
+            })
 
             // Button ng delete sa table
             $(document).on("click", ".confBOTON", function(){
@@ -536,6 +541,100 @@ $conn = connection();
                     }
                 });
             });  
+
+            // email ng reejct
+            function sendRejectingEmail(userId) {
+            // Get the user_id from the data-news-id attribute
+            // var userId = button.getAttribute('data-news-id');
+            console.log("Sending email to user with ID:", userId);
+            
+            // Log the user_id to the console for debugging purposes
+            console.log("User ID:", userId);
+            
+            // Check if userId is empty
+            if (!userId) {
+                alert("User ID is not set.");
+                return;
+            }
+            
+            // Example: Make an AJAX call to send the user_id to the PHP script
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "Emailer/RejectEmail.php", true); // Ensure this path is correct
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                    if (xhr.status === 200) {
+                        // Handle the response from the server
+                        console.log(xhr.responseText);
+                        try {
+                            var response = JSON.parse(xhr.responseText);
+                            if (response.error) {
+                                alert("Error: " + response.error);
+                            } else {
+                                alert("Rejecting Email sent successfully.");
+                            }
+                        } catch (e) {
+                            alert("Failed to parse JSON response: " + xhr.responseText);
+                        }
+                    } else {
+                        alert("Failed to communicate with the server. Status: " + xhr.status);
+                    }
+                }
+            };
+            xhr.send("user_id=" + encodeURIComponent(userId));
+        }
+
+            // Pagbago ng access ni user to reject
+            $(document).on("click", ".rejBOTON", function(){
+                var user_id = $(this).closest('tr').find('.user_id').text();
+                
+                $('.reject_userID').val(user_id);
+                console.log("Hilo", user_id);               
+            });
+
+            $(document).on("click", ".rejBOTON", function(e) {
+                e.preventDefault();
+                
+                // Get the user ID from the input with the class 'reject_userID'
+                var reject_userID = $('.reject_userID').val();
+                console.log('reject_userID:', reject_userID);
+                
+                // Perform the AJAX request
+                $.ajax({
+                    type: "POST",
+                    url: "PHPBackend/RejectProcess.php",
+                    data: {
+                        'reject_user': true,
+                        'reject_userID': reject_userID
+                    },
+                    success: function(response) {
+                        try {
+                            var jsonData = JSON.parse(response);
+                            if (jsonData.success) {
+                                console.log('User rejected successfully');
+                                
+                                // Remove the table row containing the rejected user ID
+                                sendRejectingEmail(reject_userID)
+                                $("tr:has(td.user_id:contains('" + reject_userID + "'))").remove(); 
+                                // Optionally close the modal or reload the page
+                                // closeModal();
+                                location.reload();
+                            } else {
+                                console.error('Failed to remove record:', jsonData.error);
+                            }
+                        } catch (error) {
+                            console.error('Error parsing remove response:', error);
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Delete AJAX error:', error);
+                    }
+                });
+            }); 
+
+
+
+
         });
 </script>
 </body>
