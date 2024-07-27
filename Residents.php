@@ -1,3 +1,18 @@
+<?php
+include_once "Connect/Connection.php";
+session_start();
+
+if (isset($_SESSION['unique_id'])) {
+    if ($_SESSION['role'] == 'user') {
+        header("Location: LoginPage.php");
+        exit();
+    }
+  } else {
+    header("Location: LoginPage.php");
+    exit();
+  }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,42 +20,29 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title> Residents </title>
   <link rel="stylesheet" href="CSS/Residents.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
 <div class="mainDashboardContainer">
         <div class="secMainDash">
-            <!-- <div class="headerTop">
-                <div class="leftSection">
-                    <img id="menuBtn" class="menu" src="Pictures/menu-hamburger.png">
-                    <img class="img-logo" src="Pictures/Dasma_City_Logo.png">
-                    <h2 class="MabuhayName"> Mabuhay Homes 2000 </h2>
-                </div>
-                <div class="rightSection">
-                    <button id="myProfileBtn" type="button" class="profileBtn">
-                        <div class="user-img"></div>
-                        <label> Profile </label>
-                    </button>
-                </div>
-            </div> -->
-
             <div class="sidebarContainer sideActive" id="sidebar">
                 <div class="headerTop">
                     <img class="img-logo" src="Pictures/Dasma_City_Logo.png">
                     <h2 class="MabuhayName"> Mabuhay Homes 2000 Phase 5 </h2>
                 </div>
-                <a href="Dash.html" class="sideside baractive">
+                <a href="DashBoard.php" class="sideside baractive">
                     <img class="img-sideboard" src="Pictures/Dashboard2.png">
                     <span> Dasboard </span>
                 </a>
-                <a href="HoaOfficials.html" class="sideside">
+                <a href="HoaOfficials.php" class="sideside">
                     <img class="img-sideboard" src="Pictures/Officials.png">
                     <span> HOA Officials </span>
                 </a>
-                <a href="#" class="sideside">
+                <a href="Residents.php" class="sideside">
                     <img class="img-sideboard" src="Pictures/Residents2.png">
                     <span> Residents </span>
                 </a>
-                <a href="Documents.html" class="sideside">
+                <a href="Documents.php" class="sideside">
                     <img class="img-sideboard" src="Pictures/Documents2.png">
                     <span> Documents </span>
                 </a>
@@ -54,24 +56,28 @@
                     </a>  
                     <ul class="subMenuComp" id="complaintsSubMenu">
                         <li> 
-                            <a href="Chat.html">
+                            <a href="Chat.php">
                                 <img class="img-subMenu" src="Pictures/Chat.png">
                                 <label class="sub-spa"> Chat </label>
                             </a> 
                         </li>
                     </ul>
                 </div>
-                <a href="Announcement.html" class="sideside">
+                <a href="Announcement.php" class="sideside">
                     <img class="img-sideboard" src="Pictures/Announcement.png">
                     <span> Announcement </span>
                 </a>
-                <a href="Accounts.html" class="sideside">
+                <a href="Accounts.php" class="sideside">
                     <img class="img-sideboard" src="Pictures/Accounts2.png">
                     <span> Accounts </span>
                 </a>
-                <a href="MonthlyDue.html" class="sideside">
+                <a href="MonthlyDue.php" class="sideside">
                     <img class="img-sideboard" src="Pictures/MonthlyDue.png">
                     <span> Monthly Due </span>
+                </a>
+                <a href="Voting.php" class="sideside">
+                    <img class="img-sideboard" src="Pictures/voting.png">
+                    <span> Voting </span>
                 </a>
                 <a href="#" class="sideside">
                     <img class="img-sideboard" src="Pictures/logout.png">
@@ -176,131 +182,73 @@
                                     <label><input class="DropFilterInput" type="radio" value="3" name="filter_option">Block 3</label>
                                     <label><input class="DropFilterInput" type="radio" value="3" name="filter_option">Block 3</label>
                                     <label><input class="DropFilterInput" type="radio" value="3" name="filter_option">Block 3</label>
-
-                                    <label><input class="DropFilterInput" type="radio" value="3" name="filter_option">Block 3</label><label><input class="DropFilterInput" type="radio" value="3" name="filter_option">Block 3</label>
-                                    <label><input class="DropFilterInput" type="radio" value="3" name="filter_option">Block 3</label>
-                                    <label><input class="DropFilterInput" type="radio" value="3" name="filter_option">Block 3</label>
-                                    <label><input class="DropFilterInput" type="radio" value="3" name="filter_option">Block 3</label>
-                                    <label><input class="DropFilterInput" type="radio" value="3" name="filter_option">Block 3</label>
-                                    <label><input class="DropFilterInput" type="radio" value="3" name="filter_option">Block 3</label>
-                                    <label><input class="DropFilterInput" type="radio" value="3" name="filter_option">Block 3</label>
-                                    <label><input class="DropFilterInput" type="radio" value="3" name="filter_option">Block 3</label>
-                                    <label><input class="DropFilterInput" type="radio" value="3" name="filter_option">Block 3</label>
-                                    <label><input class="DropFilterInput" type="radio" value="3" name="filter_option">Block 3</label>
-                                    <label><input class="DropFilterInput" type="radio" value="3" name="filter_option">Block 3</label>
-                                    
                                   </div>
                                 </div>
                                 <h3>Search:</h3>
-                                <input class="inputSearchhh" type="text" name="" id="search" placeholder="search">
+                                <input class="inputSearchhh" type="search" name="search_query" id="search" placeholder="search">
                             </div>
                         </header>
                         <div class="TablesContainer">
                             <table>
                                 <thead>
                                     <tr>
-                                        <th data-sort onclick="sortTable(0, event)"> Name </th>
-                                        <th data-sort onclick="sortTable(1, event)"> Age </th>
-                                        <th> Action </th>
+                                        <th style="width:400px" data-sort onclick="sortTable(0, event)"> Name </th>
+                                        <th data-sort onclick="sortTable(1, event)"> Address </th>
+                                        <th style="width:200px"> Contact Number </th>
+                                        <th style="width:200px"> Action </th>
                                     </tr>
+
+                                    <tbody>
+                                        <?php
+                                            $filterOption = isset($_GET['filter_option']) ? $_GET['filter_option'] : '';
+                                            $searchQuery = isset($_GET['search_query']) ? $_GET['search_query'] : '';
+
+                                            $query = "SELECT * FROM tblresident WHERE access != 'Pending' OR access = 'Approved'";
+
+                                            if (!empty($filterOption)) {
+                                                $query .= " WHERE block = '" . mysqli_real_escape_string($conn, $filterOption) . "'";
+                                            }
+
+                                            if (!empty($searchQuery)) {
+                                                if (!empty($filterOption)) {
+                                                    $query .= " AND ";
+                                                } else {
+                                                    $query .= " WHERE ";
+                                                }
+                                                $query .= "CONCAT(first_name,middle_name,last_name,block,lot,phone_number) LIKE '%" . mysqli_real_escape_string($conn, $searchQuery) . "%'";
+                                            }
+
+                                            $result = mysqli_query($conn, $query);
+
+                                            if ($result) {
+                                                if (mysqli_num_rows($result) > 0) {
+                                                    while ($row = mysqli_fetch_assoc($result)) {
+                                                        ?>
+                                                            <tr>
+                                                                <td class="user_id" hidden><?php echo $row['user_id'] ?></td>
+                                                                <td><?php echo $row['first_name'] . " " . $row['middle_name'] . " " . $row['last_name']; ?></td>
+                                                                <td><?php echo "Block " . $row['block'] . " Lot " . $row['lot'] ?></td>
+                                                                <td><?php echo $row['phone_number'] ?></td>
+                                                                <td>
+                                                                    <button class="ResidentsViewBtn BiyuModal"> View </button>
+                                                                </td>
+                                                            </tr>
+                                                        <?php
+                                                    }
+                                                    } else {
+                                                    ?>
+                                                        <tr>
+                                                            <td colspan="4">No data found.</td>
+                                                        </tr>
+                                                    <?php
+                                                    }
+                                            } else {
+                                                echo "Query failed: " . mysqli_error($conn);
+                                            }
+                                        mysqli_close($conn);
+                                        ?>
+                                    </tbody>
                                 </thead>
-                                <tbody>
-                                    <tr>
-                                        <td> b </td>
-                                        <td> 25 </td>
-                                        <td>
-                                            <button> View </button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td> c </td>
-                                        <td> 12 </td>
-                                    </tr>
-                                    <tr>
-                                        <td> d</td>
-                                        <td> 34 </td>
-                                    </tr>
-                                    <tr>
-                                        <td> f </td>
-                                        <td> 45 </td>
-                                    </tr>
-                                    <tr>
-                                        <td> h </td>
-                                        <td> 56 </td>
-                                    </tr>
-                                    <tr>
-                                        <td> j </td>
-                                        <td> 67 </td>
-                                    </tr>
-                                    <tr>
-                                        <td> L </td>
-                                        <td> 78 </td>
-                                    </tr>
-                                    <tr>
-                                        <td> N </td>
-                                        <td> 89 </td>
-                                    </tr>
-                                    <tr>
-                                        <td> O</td>
-                                        <td> 98 </td>
-                                    </tr>
-                                    <tr>
-                                        <td> Q </td>
-                                        <td> 87 </td>
-                                    </tr>
-                                    <tr>
-                                        <td> R </td>
-                                        <td> 76 </td>
-                                    </tr>
-                                    <tr>
-                                        <td> T </td>
-                                        <td> 65 </td>
-                                    </tr>
-                                    <tr>
-                                        <td> U </td>
-                                        <td> 54 </td>
-                                    </tr>
-                                    <tr>
-                                        <td> S </td>
-                                        <td> 43 </td>
-                                    </tr>
-                                    <tr>
-                                        <td> P </td>
-                                        <td> 32 </td>
-                                    </tr>
-                                    <tr>
-                                        <td> O </td>
-                                        <td> 21 </td>
-                                    </tr>
-                                    <tr>
-                                        <td> M </td>
-                                        <td> 77 </td>
-                                    </tr>
-                                    <tr>
-                                        <td> K </td>
-                                        <td> 88 </td>
-                                    </tr>
-                                    <tr>
-                                        <td> i </td>
-                                        <td> 99 </td>
-                                    </tr>
-                                    <tr>
-                                        <td> g </td>
-                                        <td> 44 </td>
-                                    </tr>
-                                    <tr>
-                                        <td> e </td>
-                                        <td> 55 </td>
-                                    </tr>
-                                    <tr>
-                                        <td> c </td>
-                                        <td> 11 </td>
-                                    </tr>
-                                    <tr>
-                                        <td> a </td>
-                                        <td> 900 </td>
-                                    </tr>
-                                </tbody>
                             </table>
                         </div>
                         <footer class="bottom-field">
@@ -314,12 +262,13 @@
                                 </li>
                             </ul>
                         </footer>
-                        <div class="containerNgViewModal">
+                        <div class="containerNgViewModal" id="ViewModalResidents">
                             <div class="subContainerViewModal">
                                 <div class="viewItongmodal">
                                     <header class="titleHeaderView">
                                         <h1 id="modalViewtitle"> Resident's Information </h1>
-                                        <span class="closeViewModal">&times;</span>
+                                        <input type="text" id="userID" hidden>
+                                        <span class="closeViewModal" id="ViewCloseModalResidents">&times;</span>
                                     </header>
                                     <div class="emeeeee">
                                         <form class="ViewForm">
@@ -339,21 +288,21 @@
                                             <div class="row">
                                                 <div class="inputboxView">
                                                     <label> Last Name: </label>
-                                                    <input class="inputngViewModalTo" type="text" id="Fname" name="firstName">
+                                                    <input class="inputngViewModalTo" type="text" id="Lname" name="lasttName">
                                                 </div>
                                                 <div class="inputboxView">
                                                     <label> Suffix: </label>
-                                                    <input class="inputngViewModalTo"  type="text" id="Mname" name="middleName">
+                                                    <input class="inputngViewModalTo"  type="text" id="Suffix" name="">
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="inputboxView">
                                                     <label> Date of Birth: </label>
-                                                    <input class="inputngViewModalTo" type="text" id="Fname" name="firstName">
+                                                    <input class="inputngViewModalTo" type="text" id="" name="">
                                                 </div>
                                                 <div class="inputboxView">
                                                     <label> Age: </label>
-                                                    <input class="inputngViewModalTo"  type="text" id="Mname" name="middleName">
+                                                    <input class="inputngViewModalTo"  type="text" id="Age" name="age">
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -367,7 +316,7 @@
                                                 </div>
                                                 <div class="inputboxView">
                                                     <label> Contact Number: </label>
-                                                    <input class="inputngViewModalTo"  type="text" id="Mname" name="middleName">
+                                                    <input class="inputngViewModalTo"  type="text" id="PhoneNum" name="contNum">
                                                 </div>
                                             </div>
                                             <hr>
@@ -377,15 +326,15 @@
                                             <div class="row">
                                                 <div class="inputboxView">
                                                     <label> Block: </label>
-                                                    <input class="inputngViewModalTo" type="text" id="Fname" name="firstName">
+                                                    <input class="inputngViewModalTo" type="text" id="Blk" name="block">
                                                 </div>
                                                 <div class="inputboxView">
                                                     <label> Lot: </label>
-                                                    <input class="inputngViewModalTo"  type="text" id="Mname" name="middleName">
+                                                    <input class="inputngViewModalTo"  type="text" id="Lot" name="lot">
                                                 </div>
                                                 <div class="inputboxView">
                                                     <label> Street: </label>
-                                                    <input class="inputngViewModalTo"  type="text" id="Mname" name="middleName">
+                                                    <input class="inputngViewModalTo"  type="text" id="STName" name="streetname">
                                                 </div>
                                             </div>
                                             <hr>
@@ -394,21 +343,21 @@
                                             </div>
                                             <div class="inputboxView">
                                                 <label> Name: </label>
-                                                <input class="inputngViewModalTo"  type="text" id="Mname" name="middleName">
+                                                <input class="inputngViewModalTo"  type="text" id="ecName" name="emName">
                                             </div>
                                             <div class="row">
                                                 <div class="inputboxView">
                                                     <label> Contact Number: </label>
-                                                    <input class="inputngViewModalTo" type="text" id="Fname" name="firstName">
+                                                    <input class="inputngViewModalTo" type="text" id="ecNum" name="emNumber">
                                                 </div>
                                                 <div class="inputboxView">
                                                     <label> Relationship: </label>
-                                                    <input class="inputngViewModalTo"  type="text" id="Mname" name="middleName">
+                                                    <input class="inputngViewModalTo"  type="text" id="ecRel" name="emRelationship">
                                                 </div>
                                             </div>
                                             <div class="inputboxView">
                                                 <label> Address: </label>
-                                                <input class="inputngViewModalTo"  type="text" id="Mname" name="middleName">
+                                                <input class="inputngViewModalTo"  type="text" id="ecAddress" name="emAddress">
                                             </div>
                                         </form>
                                     </div>
@@ -423,5 +372,7 @@
             </div>
         </div>
     </div>
+
+    <script src="JS/Residents.js"></script>
 </body>
 </html>

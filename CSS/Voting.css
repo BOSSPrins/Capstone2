@@ -1,0 +1,1148 @@
+:root{
+    --color-primary: #1828b8;
+    --color-danger: #ff7782;
+    --color-success: #41f1b6;
+    --color-warning: #ffbb55;
+    --color-white: #fff;
+    --color-info-dark: #1e1e1f;
+    --color-info-light: #939fb6;
+    --color-dark: #363949;
+    --color-light: rgba(61, 109, 176, 0.18);
+    --color-light-2: rgba(52, 58, 116, 0.20);
+    --color-primary-variant: #111e88;
+    --color-dark-variant: #677483;
+    --color-background: #f0f0f0;
+
+    --light: #f9f9f9;
+    --blue: #3c91e6;
+    --light-blue: #a9d5ff;
+    --light-red: #f38c8c;
+    --light-green: #a7f9d0;
+    --grey: #eee;
+    --dark-grey: #aaaaaa;
+    --drak: #342e37;
+    --red:  #e88383;
+    --green: rgb(94, 232, 129);
+    --color-info-dark: #919497;
+
+    --color-border-radius: 2rem;
+    --color-border-radius-1: 0.4rem;
+    --color-border-radius-2: 0.8rem;
+    --color-border-radius-3: 1.2rem;
+
+
+    --card-padding: 1.8rem;
+    --padding-1: 1.2rem;
+
+    --box-shadow: 0 2rem 3rem var(--color-light);
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    outline: none;
+    appearance: none;
+    border: 0;
+    text-decoration: none;
+    list-style: none;
+    box-sizing: border-box;
+}
+
+html{
+    font-size: 14px;
+}
+
+.mainDashboardContainer{
+    width: 100vw;
+    height: 100vh;
+    font-family: Arial, sans-serif;
+    font-size: 0.88rem;
+    background: var(--color-background);
+    user-select: none;
+    overflow-x: hidden;
+    color: var(--color-dark);
+}
+
+/* ===== SIDEBAR DESIGN ===== */
+.sidebarContainer {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    /* left: 5px; */
+    bottom: 0;
+    top: 0;
+    background-color:  rgb(255, 255, 255);
+    width: 250px;
+    /* margin-top: 7px; */
+    transition: all 0.3s;
+}
+
+.sidebarContainer span{
+    font-size: 14.5px;
+    font-weight: 500;
+}
+
+.sidebarContainer .sideside{
+    display: flex;
+    color: var(--color-info-dark);
+    padding-left: 25px;
+    gap: 1rem;
+    align-items: center;
+    position: relative;
+    height: 3.6rem;
+    transition: all 300ms ease;
+}
+
+.sidebarContainer .sideside .img-sideboard{
+    font-size: 1.6rem;
+    transition: all 300ms ease;
+}
+
+.sidebarContainer .sideside:last-child{
+    position: absolute;
+    bottom: 1px;
+    width: 100%;
+}
+
+.sidebarContainer .sideside.baractive{
+    background: var(--color-light);
+    color: var(--color-primary);
+}
+
+.sidebarContainer .sideside.baractive .img-sideboard{
+    margin-left: calc(1rem -3rem);
+}
+
+.sidebarContainer .sideside:hover{
+    color: var(--color-primary);
+}
+
+.sidebarContainer .sideside:hover .img-sideboard{
+    margin-left: 1rem;
+}
+
+/* SIDEBAR ACTIVE */
+.sidebarActive {
+    transform: translateX(250px); /* Move sidebar into view */
+}
+
+/* .MonthlyDuessContainerr.MonthlyDuessConActivee {
+    margin-left: 5px;
+} */
+
+/* ===== SIDEBAR IMAGE SIZE ===== */
+.img-sideboard{
+    width: 20px;
+}
+
+/* ========== SUB MENU SIDEBAR ========== */
+.subMenuComp{
+    display: none;
+    margin-left: 35px;
+    transition: all 0.3s;
+}
+
+.submenu-visible {
+    display: block; 
+}
+
+.subMenuComp li a{
+    position: relative;
+    display: flex;
+    color: var(--color-info-dark);
+    padding: 10px;
+    position: relative;
+    transition: all 300ms ease;
+}
+
+.eme2{
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 6px solid #aeaeae;
+    transition: 0.3s;
+}
+
+.buttonEme2{
+    padding: 10px 15px;
+    margin-left: 45px;
+    cursor: pointer;
+}
+
+.eme2-rotate{
+    transform: rotate(180deg);
+}
+
+.subMenuComp li a.Subactive{
+    background: var(--color-light);
+    color: var(--color-primary);
+    height: 100%;
+    margin-left: 5px;
+}
+
+.sidebarContainer li a:hover{
+    color: var(--color-primary);
+    margin-left: 1rem;
+}
+
+.subMenuComp li a.Subactive::before {
+    content: '';
+    width: 4px;
+    height: 100%;
+    background: var(--color-primary);
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+/* ===== SUB MENU CHAT IMAGE ==== */
+.img-subMenu{
+    width: 20px;
+    margin-right: 5px;
+}
+
+.sub-spa{
+    margin-top: 5px;
+}
+
+/* ========== MAIN DASHBOARD DESIGN ========== */
+.MainBodyContainerr{
+    padding-left: 250px;
+    /* margin-top: 57px; */
+}
+
+.MainContainerForTables{
+    display: flex;
+    /* justify-content: center; */
+    width: 100%;
+    height: 100%;
+    /* background: gray; */
+}
+
+/* .TablessContainer{
+    width: 100%;
+    padding: 10px;
+    background-color: #ffffff;
+    height: 620px;
+    overflow:hidden;
+    padding: 30px 40px;
+    border: 1px solid rgb(179, 172, 172);
+    margin: 15px;
+} */
+
+/* DESIGN PARA SA PAGINATION */
+
+.bottom-field{
+    width: 100%;
+    margin-top: 10px;
+}
+.pagination{
+  display: flex;
+  justify-content: end;
+  align-items: center;
+}
+
+.pagination li{
+  list-style: none;
+  flex-shrink: 0;
+  text-align: center;
+  border: 1px solid #999;
+  color: #000000;
+}
+
+.pagination a.Pageactive{
+    background: #04007a;
+    color: white;
+    border-color: #32d6aa;
+}
+
+.pagination li a{
+  text-decoration: none;
+  padding: 3px 8px;
+  color: inherit;
+  display: block;
+  font-family: sans-serif;
+  font-size: 13px;
+}
+
+.prevv:hover,
+.nextt:hover{
+    background: rgb(182, 182, 182);
+}
+
+/* DESIGN PARA TO SA HEADER NG SIDEBAR AT SA MAIN */
+.headerTop{
+    align-items: center;
+    text-align: center;
+    background: rgb(229, 229, 229);
+    height: 160px;
+    width: 100%;
+    padding-top: 10px;
+    box-shadow: 0 8px 8px -10px #888888;
+}
+
+.img-logo{
+    width: 100px;
+}
+
+.headerTopMain{
+    position: sticky;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 50px;
+    width: 100%;
+    background: rgb(255, 255, 255);
+    padding: 20px;
+    top: 0;
+    box-shadow: 5px 10px 18px #888888;
+    box-shadow: 0 8px 8px -10px black;
+    z-index: 1;
+}
+
+.HamburgerandOthers{
+    display: flex;
+    align-items: center;
+}
+
+.namePerModule{
+    padding-left: 20px;
+}
+
+.menu{
+    width: 25px;
+    cursor: pointer;
+}
+
+.ProfileViewww{
+    display: flex;
+    align-items: center;
+}
+
+.user-img{
+    width: 30px;
+    height: 30px;
+    background: rgb(0, 0, 0);
+    border-radius: 20px;
+}
+
+.profileBtn{
+    padding: 5px 20px;
+    margin-right: 5px;
+}
+
+.profileBtn label{
+    cursor: pointer;
+}
+
+/* ===== PROFILE MODAL DESIGN ===== */
+.modal{
+    display: none;
+}
+
+.subModal{
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+    display: flex;
+    background: var(--color-background);
+    width: 800px;
+    height: 500px; /* Set the desired height */
+    overflow: hidden; /* Hide overflow */
+    border-radius: 10px;
+}
+
+.profileSidebar{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    width: 150px;
+    height: 100%;
+    border-radius: 10px;
+}
+
+.profileSidebar a{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 4rem;
+    margin-bottom: 5px;
+    /* background: rgb(192, 184, 184); */
+    color: var(--color-info-dark);
+}
+
+.profileSidebar a:hover{
+    color: var(--color-primary);
+}
+
+.profilePages{
+    width: 100%;
+    margin-left: 10px;
+}
+
+.closeProf{
+    display: flex;
+    justify-content: end;
+    margin-right: 5px;
+    color: #000000;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+  /* Hide all pages initially */
+.page {
+    display: none;
+}
+
+/* Show active page */
+.activeProfModal{
+    display: block;
+}
+
+/* ===== CHANGING PASSWORD ===== */
+.changingPassword {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 20px;
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+.changingInputBox{
+    width: 100%;
+    margin-bottom: 50px;
+}
+
+.changingInputBoxLast{
+    width: 100%;
+}
+
+.changingInputBox .inputngChanging,
+.changingInputBoxLast .inputngChanging{
+    width: 100%;
+    padding: 15px;
+    font-size: 20px;
+    border-radius: 10px;
+    border: 1px solid rgba(62, 65, 71, 0.4);
+}
+
+.changingInputBox .inputngChanging:focus,
+.changingInputBoxLast .inputngChanging:focus{
+    border-color: var(--color-primary);
+}
+
+.changingForgotPass {
+    display: flex;
+    justify-content: end;
+    margin-top: 15px;
+    font-size: 17.5px;
+    width: 100%;
+}
+
+.forgotpassAs{
+    color: var(--color-primary);
+}
+
+.forgotpassAs:hover{
+    text-decoration: underline;
+}
+
+.paragChange{
+    margin-top: 10px;
+}
+
+.buttonSapagPalit{
+    margin-top: 10px;
+    width: 100%;
+    padding: 15px;
+    background: var(--color-primary);
+    color: white;
+    font-size: 17.5px;
+    cursor: pointer;
+}
+
+/* DESIGN PARA SA VOTING NAVIGATION */
+.NavBarSaLoob{
+    /* background: gray; */
+    width: 100%;
+    margin: 15px;
+    height: 627px;
+}
+
+.VotingNavv{
+    font-size: 0; /* Fixes inline-block gap issue by setting font-size to 0 */
+}
+
+.VotingNavv a {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #ffcccc;
+    color: black;
+    text-decoration: none;
+    font-size: 16px; /* Reset font-size for anchor tags */
+}
+
+
+.VotingNavv a:nth-child(1){
+    background: rgb(255, 255, 255);
+    border-radius: 7px 7px 0 0;
+    border: 1px solid gray;
+    border-bottom: none;
+}
+
+.VotingNavv a:nth-child(2){
+    background: rgb(255, 255, 255);
+    border-radius: 7px 7px 0 0;
+    border: 1px solid gray;
+    border-bottom: none;
+}
+
+.VotingNavv a:nth-child(3){
+    background: rgb(255, 255, 255);
+    border-radius: 7px 7px 0 0;
+    border: 1px solid gray;
+    border-bottom: none;
+}
+
+.EachContentsMonth {
+    display: none;
+    height: 100%;
+    background: rgb(255, 255, 255);
+    border: 1px solid gray;
+    padding: 10px;
+    overflow-y: auto;
+}
+
+.ContainerOfEachhh{
+    height: 589px;
+}
+
+.btnAndTimer{
+    height: 525px;
+}
+
+.btnAndTimerTwo{
+    height: 525px;
+}
+
+/* DESIGN PARA SA LAHAT LAHAT NA NASA LOOB */
+.timerVote{
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+
+.timerVote h2{
+    margin-right: 10px;
+}
+
+.spanNumberTime{
+    font-size: 30px;
+}
+
+/*DESIGN FOR TABLE RANKING */
+table{
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+thead{
+    background: var(--color-primary);
+    color: white;
+}
+
+tr:nth-child(even){
+    background: var(--color-light);
+}
+
+th{
+    padding: 20px;
+    border: 1px solid rgb(179, 172, 172); /* Outline partition */
+}
+
+td{
+    padding: 10px;
+    border: 1px solid rgb(179, 172, 172); /* Outline partition */
+}
+
+tbody{
+    background: var(--color-white);
+    text-align: center;
+}
+
+td{
+    color: #000000;
+}
+
+/* DESIGN PARA SA DROPDOWN PANG SET NG TIMER */
+.dropSetTimer{
+    padding: 10px 15px;
+    margin-left: 15px;
+    cursor: pointer;
+}
+
+.emeSet{
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 6px solid #aeaeae;
+    margin-top: 1.5px;
+    transition: 0.3s;
+}
+
+.timerContent{
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    width: 300px;
+    height: 410px;
+    right: 25px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.show {
+    display:block;
+}
+
+.rotateSet {
+    transform: rotate(180deg); 
+}
+
+/* DESIGN SA LOOB NG DROPDOWN */
+.timer-controls input{
+    width: 100%;
+    padding: 5px;
+    margin-bottom: 10px;
+    font-size: 25px;
+}
+
+.timer{
+    margin: 20px;
+}
+
+.btnsForTimer button{
+    width: 100%;
+    /* margin-top: 15px; */
+    margin-bottom: 15px;
+    padding: 10px 0;
+    font-size: 20px;
+    cursor: pointer;
+    color: white;
+}
+
+#start{
+    background: green;
+}
+
+#start:hover{
+    background: rgb(1, 178, 1);
+}
+
+#stop{
+    background: rgb(165, 0, 0);
+}
+
+#stop:hover{
+    background: rgb(219, 0, 0);
+}
+
+#reset{
+    background: rgb(0, 0, 128);
+}
+
+#reset:hover{
+    background: rgb(0, 0, 197);
+}
+
+
+/* DESIGN PARA SA GENERATE BUTTON */
+.BtnGeneratee{
+    font-size: 15px;
+    padding: 10px 30px;
+    cursor: pointer;
+    background: rgb(198, 230, 240);
+}
+
+.BtnGeneratee:hover{
+    background: lightblue;
+}
+
+/* DESIGN PARA SA SUMMARY MODAL */
+.SummaryViewModal{
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.summary-Modal{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.SubSummary{
+    position: relative;
+    max-width: 450px;
+    width: 100%;
+    margin-top: 10px;
+    height: 590px;
+    background: #fff;
+    border-radius: 8px;
+}
+
+.headerForSummary{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgb(229, 229, 229);
+    /* border-bottom: 1px solid gray; */
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.LamanLoobSummary{
+    height: 500px;
+    padding: 10px;
+    overflow-y: auto;
+}
+
+.closeSummary{
+    color: #000000;
+    font-size: 22px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.footerSummary{
+    display: flex;
+    background: rgb(229, 229, 229);
+    /* border-bottom: 1px solid gray; */
+    padding: 20px;
+    border-radius: 5px;
+}
+
+/* DESIGN PARA SA CANDIDATE SUMARRY */
+.candidates{
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.PictureCan1{
+    width: 80px;
+    height: 80px;
+    border: 3px solid var(--color-primary);
+    margin-right: 10px;
+}
+
+.NameAndPosition{
+    width: 100%;
+    margin-top: 10px;
+}
+
+.NameAndPosition label{
+    display: flex;
+    justify-content: center;
+    font-size: 15px;
+    font-weight: bold;
+    font-style: italic;
+    color: var(--color-primary);
+}
+
+.inputCan{
+    width: 100%;
+    padding: 5px;
+    font-size: 20px;
+    margin-top: 13px;
+}
+
+
+
+/* PANGALAWANG DESIGN PARA SA LAHAT LAHAT NA NASA LOOB */
+.timerVoteTwo{
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+
+.timerVoteTwo h2{
+    margin-right: 10px;
+}
+
+.spanNumberTimeTwo{
+    font-size: 30px;
+}
+
+/*DESIGN FOR TABLE RANKING */
+table{
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+thead{
+    background: var(--color-primary);
+    color: white;
+}
+
+tr:nth-child(even){
+    background: var(--color-light);
+}
+
+th{
+    padding: 20px;
+    border: 1px solid rgb(179, 172, 172); /* Outline partition */
+}
+
+td{
+    padding: 10px;
+    border: 1px solid rgb(179, 172, 172); /* Outline partition */
+}
+
+tbody{
+    background: var(--color-white);
+    text-align: center;
+}
+
+td{
+    color: #000000;
+}
+
+/* DESIGN PARA SA DROPDOWN PANG SET NG TIMER */
+.dropSetTimerTwo{
+    padding: 10px 15px;
+    margin-left: 15px;
+    cursor: pointer;
+}
+
+.emeSetTwo{
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 6px solid #aeaeae;
+    margin-top: 1.5px;
+    transition: 0.3s;
+}
+
+.timerContentTwo{
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    width: 300px;
+    height: 410px;
+    right: 25px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.showTwo{
+    display:block;
+}
+
+.rotateSetTwo{
+    transform: rotate(180deg); 
+}
+
+/* DESIGN SA LOOB NG DROPDOWN */
+.timer-controlsTwo input{
+    width: 100%;
+    padding: 5px;
+    margin-bottom: 10px;
+    font-size: 25px;
+}
+
+.timerTwo{
+    margin: 20px;
+}
+
+.btnsForTimerTwo button{
+    width: 100%;
+    /* margin-top: 15px; */
+    margin-bottom: 15px;
+    padding: 10px 0;
+    font-size: 20px;
+    cursor: pointer;
+    color: white;
+}
+
+#startTwo{
+    background: green;
+}
+
+#startTwo:hover{
+    background: rgb(1, 178, 1);
+}
+
+#stopTwo{
+    background: rgb(165, 0, 0);
+}
+
+#stopTwo:hover{
+    background: rgb(219, 0, 0);
+}
+
+#resetTwo{
+    background: rgb(0, 0, 128);
+}
+
+#resetTwo:hover{
+    background: rgb(0, 0, 197);
+}
+
+
+/* DESIGN PARA SA GENERATE BUTTON */
+.BtnGenerateeTwo{
+    font-size: 15px;
+    padding: 10px 30px;
+    cursor: pointer;
+    background: rgb(198, 230, 240);
+}
+
+.BtnGenerateeTwo:hover{
+    background: lightblue;
+}
+
+/* DESIGN PARA SA SUMMARY MODAL */
+.SummaryViewModalTwo{
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.summary-ModalTwo{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.SubSummaryTwo{
+    position: relative;
+    max-width: 450px;
+    width: 100%;
+    margin-top: 10px;
+    height: 590px;
+    background: #fff;
+    border-radius: 8px;
+}
+
+.headerForSummaryTwo{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgb(229, 229, 229);
+    /* border-bottom: 1px solid gray; */
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.LamanLoobSummaryTwo{
+    height: 500px;
+    padding: 10px;
+    overflow-y: auto;
+}
+
+.closeSummaryTwo{
+    color: #000000;
+    font-size: 22px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.footerSummaryTwo{
+    display: flex;
+    background: rgb(229, 229, 229);
+    /* border-bottom: 1px solid gray; */
+    padding: 20px;
+    border-radius: 5px;
+}
+
+/* DESIGN PARA SA CANDIDATE SUMARRY */
+.candidatesTwo{
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.PictureCan1Two{
+    width: 80px;
+    height: 80px;
+    border: 3px solid var(--color-primary);
+    margin-right: 10px;
+}
+
+.NameAndPositionTwo{
+    width: 100%;
+    margin-top: 10px;
+}
+
+.NameAndPositionTwo label{
+    display: flex;
+    justify-content: center;
+    font-size: 15px;
+    font-weight: bold;
+    font-style: italic;
+    color: var(--color-primary);
+}
+
+.inputCanTwo{
+    width: 100%;
+    padding: 5px;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+
+/* Pagination controls */
+.pagination {
+    text-align: center;
+    /* margin-top: 20px; */
+}
+
+.pagination button {
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    padding: 10px 20px;
+    margin-left: 10px;
+    /* margin: 0 5px; */
+    cursor: pointer;
+}
+
+.pagination button:hover {
+    background-color: #a9a9a9;
+}
+
+.page-btn.Paginationnactive {
+    background-color: #007bff;
+    color: white;
+}
+
+/* .page-btn2.Paginationnactive2 {
+    background-color: #007bff;
+    color: white;
+} */
+
+/* DESIGN PARA SA ADDING DIVS */
+.AddingDivsForCandidates{
+    display: flex;
+    justify-content: end;
+}
+
+.addingDivsBtn{
+    padding: 10px 30px;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+
+/* DESIGN PARA SA OFFICIALS DIVS */
+.containerDivss{
+    display: grid;
+    padding-left: 10px;
+    padding-right: 10px;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.6rem;
+    padding-bottom: 20px;
+    padding-top: 20px;
+    overflow-y: auto; /* Add this */
+    height: 529px;
+}
+
+.CandidatesCon {
+    position: relative; /* Needed for absolute positioning of CloseButton */
+    display: flex;
+    flex-direction: column;
+    background: var(--color-white);
+    padding: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    transition: all 300ms ease;
+    height: 360px;
+}
+
+.CandiImageContainer{
+    display: flex;
+    justify-content: center;
+    height: 260px; /* Set a fixed height */
+    width: 100%;
+    border: 2px rgb(3, 1, 139) solid;
+    overflow: hidden; /* Ensure overflow is hidden to contain images */
+}
+
+.buttonsNgCandidates{
+    display: flex;
+    justify-content: space-between;
+}
+
+.NameCandiInput{
+    border: 2px rgb(3, 1, 139) solid;
+    padding: 5px;
+    font-size: 17px;
+    margin-top: 10px;
+}
+
+.buttonSivv{
+    margin-top: 10px;
+    padding: 5px 30px;
+    font-size: medium;
+    border-radius: 5px;
+    cursor: pointer;
+}
+  
+.inputts{
+    position: absolute;
+    visibility: hidden;
+}
+
+
+.CloseButton {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 18px;
+    color: red;
+    background: white;
+    border: none;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+.CloseButton:hover {
+    background: #f5f5f5;
+}

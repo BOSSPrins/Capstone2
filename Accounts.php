@@ -18,218 +18,29 @@ $conn = connection();
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Mabuhay Website </title>
-    <link rel="icon" type="image/x-icon" href="Pictures/Dasma_City_Icon.ico">
-    <link rel="stylesheet" href="CSS/Accounts.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> Accounts </title>
+  <link rel="stylesheet" href="CSS/Accounts.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
-    <div class="ConfirmModalIto" id="confirmModal">
-        <div class="subConfirmModalContent">
-            <div class="confirmModalContent">
-                <input type="text" id="conf_userID" class="confirm_userID" hidden>
-                <div class="confirmText">
-                    <img class="confirmImg" src="Pictures/success.png">
-                    <h2 class="paragConfirm">Are you sure you want to confirm this?</h2>
-                </div>
-                <hr class="hrConfirm"> 
-                <div class="confirmButtons">
-                    <button class="buttonConfirm cancelButn" id="klowsmodal" onclick="closeModal()">Cancel</button>
-                    <button class="buttonConfirm confirmButn ConfirmSaModal">Confirm</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- eto namang sa taas modal ng confirm -->
-
-    <!-- View modal to -->
-    <div class="containerNgEditModal" id="Accs_Edit_Modal">
-        <div class="subContainerEditModal">
-            <div class="editItongmodal">
-                <div class="titleHeaderEdit">
-                    <h2 id="modal_title"> Resident's Information </h2>
-                    <input type="text" id="userID" hidden>
-                    <span class="closeEditModal" id="Accs_Close_Modal">&times;</span>
-                </div>
-                <hr>
-                <form class="edit-form">
-                    <div class="header-row">
-                        <h4> Profile </h4>
-                    </div>
-                    <div class="row">
-                        <div class="inputbox-edit">
-                            <label> Last Name: </label>
-                            <input class="inputngEditModalTo" type="text" id="Lname" name="lastName">
-                        </div>
-                        <div class="inputbox-edit">
-                            <label> First Name: </label>
-                            <input class="inputngEditModalTo" type="text" id="Fname" name="firstName">
-                        </div>
-                        <div class="inputbox-edit">
-                            <label> Middle Name: </label>
-                            <input class="inputngEditModalTo"  type="text" id="Mname" name="middleName">
-                        </div>
-                    </div>
-                    <div class="row1">
-                        <div class="inputbox-edit">
-                            <label> Age: </label>
-                            <input class="inputngEditModalTo"  type="text" id="Age" name="birthday">
-                        </div>
-                        <!-- <div class="inputbox-edit">
-                            <label> Place Of Birth: </label>
-                            <input class="inputngEditModalTo"  type="text" id="Bplace" name="birthplace">
-                        </div> -->
-                        <div class="inputbox-edit">
-                            <label> Contact Number: </label>
-                            <input class="inputngEditModalTo" type="text" id="ContNum" name="contNum">
-                        </div>
-                        <div class="inputbox-edit">
-                            <label> Gender: </label>
-                            <input class="inputngEditModalTo"  type="text" id="Sex" name="gender">
-                        </div>
-                        
-                    </div>
-                    <div class="row2">
-                        <!-- <div class="inputbox-edit">
-                            <label> Contact Number: </label>
-                            <input class="inputngEditModalTo" type="text" id="ContNum" name="contNum">
-                        </div> -->
-                        <!-- <div class="inputbox-edit">
-                            <label> Citizenship: </label>
-                            <input class="inputngEditModalTo" type="text" id="CitizShip" name="citizShip">
-                        </div> -->
-                    </div>
-                    <hr>
-                    <div class="header-row">
-                        <h4> Address </h4>
-                    </div>
-                    <div class="row3">
-                        <div class="inputbox-edit">
-                            <label> Block: </label>
-                            <input class="inputngEditModalTo" type="text" id="Blk" name="block">
-                        </div>
-                        <div class="inputbox-edit">
-                            <label> Lot: </label>
-                            <input class="inputngEditModalTo" type="text" id="Lot" name="lot"> 
-                        </div>
-                        <div class="inputbox-edit">
-                            <label> Street: </label>
-                            <input class="inputngEditModalTo" type="text" id="STName" name="streetname">
-                        </div>
-                    </div>
-                    <hr>
-                    <!-- <div class="header-row">
-                        <h4> Emergency Contact </h4>
-                    </div>
-                    <div class="row4">
-                        <div class="inputbox-edit">
-                            <label> Name: </label>
-                            <input class="inputngEditModalTo" type="text" id="Name" name="emName">
-                        </div>
-                    </div>
-                    <div class="row5">
-                        <div class="inputbox-edit">
-                            <label> Contact Number: </label>
-                            <input class="inputngEditModalTo" type="text" id="ecNum" name="emNumber">
-                        </div>
-                        <div class="inputbox-edit">
-                            <label> Relationship: </label>
-                            <input class="inputngEditModalTo" type="text" id="ecRel" name="emRelationship">
-                        </div>
-                    </div>
-                    <div class="row6">
-                        <div class="inputbox-edit">
-                            <label id="Address_label"> Address: </label>
-                            <input class="inputngEditModalTo" type="text" id="Address" name="emAddress">
-                        </div>
-                    </div> -->
-                    <!-- <hr>
-                    <div class="save-btn"> 
-                        <button class="CancelButton" type="button"> Cancel </button>
-                        <button class="saveButton" type="button"> Save </button>
-                    </div> -->
-                </form>
-            </div>
-        </div>
-    </div>
-    <div id="profileModal" class="modal">
-        <div class="subModal">
-            <div class="modal-content">
-                <div class="profileSidebar">
-                    <a href="#" onclick="openPage('Edit Profile')"> Edit Profile </a>
-                    <a href="#" onclick="openPage('Edit Email')"> Edit Email </a>
-                    <a href="#" onclick="openPage('Change Password')"> Change Password </a>
-                </div>
-
-                <div class="profilePages">
-                    <span class="closeProf">&times;</span>
-                    <div id="Edit Profile" class="page">
-                        <h2>Edit Profile Page</h2>
-                        <p>Welcome to the Edit Profile page.</p>
-                    </div>
-                    <div id="Edit Email" class="page">
-                        <h2>Edit Email Page</h2>
-                        <p>Welcome to the Edit Email page.</p>
-                    </div>
-                    <div id="Change Password" class="page">
-                        <h2> Change Password </h2>
-                        <p class="paragChange">
-                            Your password must be at least 6 character and should include a 
-                            combination of numbers, letters and special characters (&#33; &#36; &#64; &#37;)
-                        </p>
-
-                        <div class="changingPassword">
-                            <div class="changingInputBox">
-                                <input class="inputngChanging" type="password" placeholder="Current Password">
-                            </div>
-                            <div class="changingInputBox">
-                                <input class="inputngChanging" type="password" placeholder="New Password">
-                            </div>
-                            <div class="changingInputBoxLast">
-                                <input class="inputngChanging" type="password" placeholder="Re-type Password">
-                            </div>
-                            <div class="changingForgotPass">
-                                <a class="forgotpassAs" href="#"> Forgot Password? </a>
-                            </div>
-                            <div class="changingButton">
-                                <button class="buttonSapagPalit" type="submit"> Change Password </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="mainDashboardContainer">
+<div class="mainDashboardContainer">
         <div class="secMainDash">
-            <div class="headerTop">
-                <div class="leftSection">
-                    <img class="menu" src="Pictures/menu-hamburger.png">
-                    <img class="img-logo" src="Pictures/Dasma_City_Logo.png">
-                    <h2> Mabuhay Homes 2000 </h2>
-                </div>
-                <div class="rightSection">
-                    <button id="myProfileBtn" type="button" class="profileBtn">
-                        <div class="user-img"></div>
-                        <label> Profile </label>
-                    </button>
-                    <!-- <div class="eme3"></div> -->
-                </div>
-            </div>
-
             <div class="sidebarContainer sideActive" id="sidebar">
-                <a href="DashBoard.php" class="sideside active">
+                <div class="headerTop">
+                    <img class="img-logo" src="Pictures/Dasma_City_Logo.png">
+                    <h2 class="MabuhayName"> Mabuhay Homes 2000 Phase 5 </h2>
+                </div>
+                <a href="DashBoard.php" class="sideside baractive">
                     <img class="img-sideboard" src="Pictures/Dashboard2.png">
                     <span> Dasboard </span>
                 </a>
                 <a href="HoaOfficials.php" class="sideside">
                     <img class="img-sideboard" src="Pictures/Officials.png">
-                    <span> HOA Officials </span>
+                    <span> Hoa Officials </span>
                 </a>
-                <a href="#" class="sideside">
+                <a href="Residents.php" class="sideside">
                     <img class="img-sideboard" src="Pictures/Residents2.png">
                     <span> Residents </span>
                 </a>
@@ -237,25 +48,21 @@ $conn = connection();
                     <img class="img-sideboard" src="Pictures/Documents2.png">
                     <span> Documents </span>
                 </a>
-                <!-- <a href="#" class="sideside">
-                    <img class="img-sideboard" src="Pictures/Request2.png">
-                    <span> Online Request </span>
-                </a> -->
                 <div class="complaintsContainer">
-                    <a href="" class="sideside" id="complaintsDropdown">
+                    <a href="#" class="sideside" id="complaintsDropdown">
                         <img class="img-sideboard" src="Pictures/ComplaintsCap.png">
                         <span> Complaints </span>
-                        <div class="eme2"></div> 
+                        <button class="buttonEme2">
+                            <div class="eme2"></div>
+                        </button> 
                     </a>  
                     <ul class="subMenuComp" id="complaintsSubMenu">
                         <li> 
-                            <a href="MainChat.php">
+                            <a href="Chat.php">
                                 <img class="img-subMenu" src="Pictures/Chat.png">
                                 <label class="sub-spa"> Chat </label>
                             </a> 
                         </li>
-                        <!-- <li> <a href="#"> Sub Menu 2 </a> </li>
-                        <li> <a href="#"> Sub Menu 3 </a> </li> -->
                     </ul>
                 </div>
                 <a href="Announcement.php" class="sideside">
@@ -266,376 +73,255 @@ $conn = connection();
                     <img class="img-sideboard" src="Pictures/Accounts2.png">
                     <span> Accounts </span>
                 </a>
-                <a href="Payments.php" class="sideside">
+                <a href="MonthlyDue.php" class="sideside">
                     <img class="img-sideboard" src="Pictures/MonthlyDue.png">
                     <span> Monthly Due </span>
                 </a>
-                <a href="Logout.php" class="sideside">
+                <a href="Voting.php" class="sideside">
+                    <img class="img-sideboard" src="Pictures/voting.png">
+                    <span> Voting </span>
+                </a>
+                <a href="#" class="sideside">
                     <img class="img-sideboard" src="Pictures/logout.png">
                     <span> Logout </span>
                 </a>
             </div>
 
-            <div class="AccountsssContainerr AccountsssConActivee">
-                <div class="AccTopNamePage">
-                    <h1> Accounts </h1>
-                </div>
-                <div class="AccountTableConTop">
-                    <div class="AccTable-container">
-                        <div class="AccSearchContainer">
-                        
-                            <div class="searchFilterLeft">
-                                
+            <div id="profileModal" class="modal">
+                <div class="subModal">
+                    <div class="modal-content">
+                        <div class="profileSidebar">
+                            <a href="#" onclick="openPage('Edit Profile')"> Edit Profile </a>
+                            <a href="#" onclick="openPage('Edit Email')"> Edit Email </a>
+                            <a href="#" onclick="openPage('Change Password')"> Change Password </a>
+                        </div>
+        
+                        <div class="profilePages">
+                            <span class="closeProf">&times;</span>
+                            <div id="Edit Profile" class="page">
+                                <h2>Edit Profile Page</h2>
+                                <p>Welcome to the Edit Profile page.</p>
                             </div>
-                            <div class="searchRight">
-                            <input type="text" id="reject_userID" class="reject_userID" hidden>  <label> Search: </label>
-                            <input class="AccSearchInputDes" type="search">
+                            <div id="Edit Email" class="page">
+                                <h2>Edit Email Page</h2>
+                                <p>Welcome to the Edit Email page.</p>
+                            </div>
+                            <div id="Change Password" class="page">
+                                <h2> Change Password </h2>
+                                <p class="paragChange">
+                                    Your password must be at least 6 character and should include a 
+                                    combination of numbers, letters and special characters (&#33; &#36; &#64; &#37;)
+                                </p>
+
+                                <div class="changingPassword">
+                                    <div class="changingInputBox">
+                                        <input class="inputngChanging" type="password" placeholder="Current Password">
+                                    </div>
+                                    <div class="changingInputBox">
+                                        <input class="inputngChanging" type="password" placeholder="New Password">
+                                    </div>
+                                    <div class="changingInputBoxLast">
+                                        <input class="inputngChanging" type="password" placeholder="Re-type Password">
+                                    </div>
+                                    <div class="changingForgotPass">
+                                        <a class="forgotpassAs" href="#"> Forgot Password? </a>
+                                    </div>
+                                    <div class="changingButton">
+                                        <button class="buttonSapagPalit" type="submit"> Change Password </button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
 
-                        <div class="AccountsTableContent">
+            <div class="MainBodyContainerr MainBodyConActivee">
+                <div class="headerTopMain">
+                    <div class="HamburgerandOthers">
+                        <div class="memuIcon">
+                            <img id="menuBtn" class="menu" src="Pictures/menu-hamburger.png">
+                        </div>
+                        <div class="NamesModuleCon">
+                            <h2 class="namePerModule"> Accounts </h2>
+                        </div>
+                    </div>
+                    <div class="ProfileViewww">
+                        <button id="myProfileBtn" type="button" class="profileBtn">
+                            <label> Profile </label>
+                        </button>
+                        <div class="user-img"></div>
+                    </div>
+                </div>
+                <div class="MainContainerForTables">
+                    <div class="MainContainerAll">
+                        <div class="SearchInAccounts">
+                            <h3> Search: </h3>
+                            <input type="search">
+                        </div>
+                        <div class="AccountsTableContainer">
                             <table>
                                 <thead>
                                     <tr>
-                                        <th> Resident's Name </th>
-                                        <th> Address </th>
-                                        <th colspan="3"> Action </th>
+                                        <th style="width:45%"> Resident's Name </th>
+                                        <th style="width:45%"> Address </th>
+                                        <th style="width:10%"> Action </th>
                                     </tr>
-                
+
                                     <tbody>
-                                      <?php
+                                        <?php
+                                            $query = "SELECT * FROM tblresident WHERE access = 'Pending' ";
 
-                                        $query = "SELECT * FROM tblresident WHERE access = 'Pending' "; 
-                                      
-                                        $result = mysqli_query($conn, $query);
+                                            $result = mysqli_query($conn, $query);
 
-                                        if($result){
-                                          if (mysqli_num_rows($result) > 0) {
-                                            while ($row = mysqli_fetch_assoc($result)) {
-                                              ?>
-                                                <tr>
-                                                    <td class="user_id" hidden><?php echo $row['user_id'] ?></td>
-                                                    <td><?php echo $row['first_name'] . " " . $row['middle_name'] . " " . $row['last_name']; ?></td>
-                                                    <td><?php echo "Block " . $row['block'] . " Lot " . $row['lot'] ?></td>
-                                                    <td>
-                                                        <button class="AccViewBtn ACCTb-btn BiyuModal AccsModal"> View </button>
-                                                    </td>
-                                                    <td>
-                                                        <button class="AccConfirmBtn ACCTb-btn rejBOTON" data-news-id="<?php echo $row['user_id'] ?>"> Reject </button>
-                                                        
-                                                    </td>
-                                                    <td>
-                                                        <button class="AccConfirmBtn ACCTb-btn confBOTON" data-news-id="<?php echo $row['user_id'] ?>" onclick="openConfirmModal(this)"> Confirm </button>
-                                                    </td>
-                                                </tr>
-                                              <?php
+                                            if($result){
+                                                if (mysqli_num_rows($result) > 0) {
+                                                  while ($row = mysqli_fetch_assoc($result)) {
+                                                    ?>
+                                                      <tr>
+                                                          <td class="user_id" hidden><?php echo $row['user_id'] ?></td>
+                                                          <td><?php echo $row['first_name'] . " " . $row['middle_name'] . " " . $row['last_name']; ?></td>
+                                                          <td><?php echo "Block " . $row['block'] . " Lot " . $row['lot'] ?></td>
+                                                          <td>
+                                                              <button class="AccViewBtn BiyuModal"> View </button>
+                                                          </td>
+                                                          <!-- <td>
+                                                              <button class="AccConfirmBtn ACCTb-btn rejBOTON" data-news-id="<?php echo $row['user_id'] ?>"> Reject </button>
+                                                              
+                                                          </td>
+                                                          <td>
+                                                              <button class="AccConfirmBtn ACCTb-btn confBOTON" data-news-id="<?php echo $row['user_id'] ?>" onclick="openConfirmModal(this)"> Confirm </button>
+                                                          </td> -->
+                                                      </tr>
+                                                    <?php
+                                                  }
+                                                } else {
+                                                ?>
+                                                  <tr>    
+                                                      <td colspan="4">No pending account found.</td>
+                                                  </tr>
+                                                <?php
+                                                }
+                                            } else {
+                                                echo "Query failed: " . mysqli_error($conn);
                                             }
-                                          } else {
-                                          ?>
-                                            <tr>    
-                                                <td colspan="4">No pending account found.</td>
-                                            </tr>
-                                          <?php
-                                          }
-                                        } else {
-                                            echo "Query failed: " . mysqli_error($conn);
-                                        }    
-                           
-                                       mysqli_close($conn);
-                                      ?>
+                                        mysqli_close($conn);
+                                        ?>
                                     </tbody>
                                 </thead>
                             </table>
+
+                            <div class="containerNgViewModalAcc" id="ViewModalReqAccounts">
+                                <div class="subContainerViewModal">
+                                    <div class="viewItongmodal">
+                                        <header class="titleHeaderView">
+                                            <h1 id="modalViewtitle"> Resident's Information </h1>
+                                            <input type="text" id="userID" hidden>
+                                            <span class="closeViewModal" id="ViewCloseModalReqAccounts">&times;</span>
+                                        </header>
+                                        <div class="emeeeee">
+                                            <form class="ViewForm">
+                                                <div class="headerModalRow">
+                                                    <h2> Personal Information </h2>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="inputboxView">
+                                                        <label> First Name: </label>
+                                                        <input class="inputngViewModalTo" type="text" id="Fname" name="firstName">
+                                                    </div>
+                                                    <div class="inputboxView">
+                                                        <label> Middle Name: </label>
+                                                        <input class="inputngViewModalTo"  type="text" id="Mname" name="middleName">
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="inputboxView">
+                                                        <label> Last Name: </label>
+                                                        <input class="inputngViewModalTo" type="text" id="Lname" name="lasttName">
+                                                    </div>
+                                                    <div class="inputboxView">
+                                                        <label> Suffix: </label>
+                                                        <input class="inputngViewModalTo"  type="text" id="Suffix" name="">
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="inputboxView">
+                                                        <label> Date of Birth: </label>
+                                                        <input class="inputngViewModalTo" type="text" id="" name="">
+                                                    </div>
+                                                    <div class="inputboxView">
+                                                        <label> Age: </label>
+                                                        <input class="inputngViewModalTo"  type="text" id="Age" name="age">
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="inputboxView">
+                                                        <label> Gender: </label>
+                                                        <select class="simpleOption">
+                                                            <option> Female </option>
+                                                            <option> Male </option>
+                                                            <option> Rather not to say </option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="inputboxView">
+                                                        <label> Contact Number: </label>
+                                                        <input class="inputngViewModalTo"  type="text" id="PhoneNum" name="contNum">
+                                                    </div>
+                                                </div>
+                                                <hr>
+                                                <div class="headerModalRow">
+                                                    <h2> Address </h2>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="inputboxView">
+                                                        <label> Block: </label>
+                                                        <input class="inputngViewModalTo" type="text" id="Blk" name="block">
+                                                    </div>
+                                                    <div class="inputboxView">
+                                                        <label> Lot: </label>
+                                                        <input class="inputngViewModalTo"  type="text" id="Lot" name="lot">
+                                                    </div>
+                                                    <div class="inputboxView">
+                                                        <label> Street: </label>
+                                                        <input class="inputngViewModalTo"  type="text" id="STName" name="streetname">
+                                                    </div>
+                                                </div>
+                                                <!-- <hr>
+                                                <div class="headerModalRow">
+                                                    <h2> Emergency Address </h2>
+                                                </div>
+                                                <div class="inputboxView">
+                                                    <label> Name: </label>
+                                                    <input class="inputngViewModalTo"  type="text" id="ecName" name="emName">
+                                                </div>
+                                                <div class="row">
+                                                    <div class="inputboxView">
+                                                        <label> Contact Number: </label>
+                                                        <input class="inputngViewModalTo" type="text" id="ecNum" name="emNumber">
+                                                    </div>
+                                                    <div class="inputboxView">
+                                                        <label> Relationship: </label>
+                                                        <input class="inputngViewModalTo"  type="text" id="ecRel" name="emRelationship">
+                                                    </div>
+                                                </div>
+                                                <div class="inputboxView">
+                                                    <label> Address: </label>
+                                                    <input class="inputngViewModalTo"  type="text" id="ecAddress" name="emAddress">
+                                                </div> -->
+                                            </form>
+                                        </div>
+                                        <footer class="footerNgViewModal">
+                                            fsfdfad
+                                        </footer>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <!-- Modal for generating certificate
-                        <div id="certificateModal" class="certificateModal">
-                            
-                        </div> -->
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
     <script src="JS/Accounts.js"></script>
-    <script>
-
-      function sendConfirmationEmail(userId) {
-            // Get the user_id from the data-news-id attribute
-            // var userId = button.getAttribute('data-news-id');
-            console.log("Sending email to user with ID:", userId);
-            
-            // Log the user_id to the console for debugging purposes
-            console.log("User ID:", userId);
-            
-            // Check if userId is empty
-            if (!userId) {
-                alert("User ID is not set.");
-                return;
-            }
-            
-            // Example: Make an AJAX call to send the user_id to the PHP script
-            var xhr = new XMLHttpRequest();
-            xhr.open("POST", "Emailer/ConfirmEmail.php", true); // Ensure this path is correct
-            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState === 4) {
-                    if (xhr.status === 200) {
-                        // Handle the response from the server
-                        console.log(xhr.responseText);
-                        try {
-                            var response = JSON.parse(xhr.responseText);
-                            if (response.error) {
-                                alert("Error: " + response.error);
-                            } else {
-                                alert("Rejecting Email sent successfully.");
-                            }
-                        } catch (e) {
-                            alert("Failed to parse JSON response: " + xhr.responseText);
-                        }
-                    } else {
-                        alert("Failed to communicate with the server. Status: " + xhr.status);
-                    }
-                }
-            };
-            xhr.send("user_id=" + encodeURIComponent(userId));
-        }
-
-
-
-    const editModal = document.getElementById('Accs_Edit_Modal'); // Corrected selector
-    const closeModalButton = document.getElementById('Accs_Close_Modal');
-
-            function showEditModal() {
-                if (editModal) {
-                    editModal.style.display = 'flex'; // Change to 'flex' to align with the CSS display setting
-                    console.log("Modal opened");
-                } else {
-                    console.error("Modal element not found");
-                }
-            }
-
-            function hideEditModal() {
-                if (editModal) {
-                    editModal.style.display = 'none';
-                } else {
-                    console.error("Modal element not found");
-                }
-            }
-
-            hideEditModal();
-            // Attach event listeners to all buttons with class 'dashModal'
-            const editButtons = document.querySelectorAll('.AccsModal');
-            editButtons.forEach(button => {
-                button.addEventListener('click', showEditModal);
-            });
-
-            if (closeModalButton) {
-                closeModalButton.addEventListener('click', hideEditModal);
-                console.log("Modal Closed");
-            } else {
-                console.error("Close button not found");
-            }
-
-
-        // FUNCTION NG MODAL NG CONFIRM 
-        const confModal = document.getElementById("confirmModal");
-
-        function openConfirmModal() {
-            confModal.style.display = "block";
-        }
-
-        function closeModal() {
-            confModal.style.display = "none";
-        }
-
-
-        $(document).ready(function () {
-                    
-        $('.BiyuModal').click(function (e) { 
-            e.preventDefault();
-            
-            var  user_id = $(this).closest('tr').find('.user_id').text();
-            
-                $.ajax({
-                    method: "POST",
-                    url: "PHPBackend/AccProcess.php",
-                    data: {
-                        'click_BiyuModal': true,
-                        'user_id':user_id,
-                    },
-
-                    success: function (response) {
-
-                        $.each(response, function (Key, value) { 
-
-                            $('#userID').val(value['user_id']);
-                            $('#conf_userID').val(value['user_id']);
-                            $('#Lname').val(value['last_name']);
-                            $('#Fname').val(value['first_name']);
-                            $('#Mname').val(value['middle_name']);
-                            // $('#Bday').val(value['birthday']);
-                            // $('#Bplace').val(value['birthplace']);
-                            $('#Sex').val(value['sex']);
-                            $('#Age').val(value['age']);
-                            $('#ContNum').val(value['phone_number']);
-                            // $('#CitizShip').val(value['citizenship']);
-                            $('#Blk').val(value['block']);
-                            $('#Lot').val(value['lot']);
-                            // $('#ecName').val(value['ec_name']);
-                            // $('#ecRel').val(value['ec_relship']);
-                            // $('#ecNum').val(value['ec_phone_num']);
-                            //$('#STName').val(value['street_name']);
-                            $('#ecAddress').val("Blk " + value['block'] + " Lot " + value['lot']);
-                            // + "  " + value['street_name'] + " St."
-                        });
-
-
-                    }
-                });
-            })
-
-            // Button ng delete sa table
-            $(document).on("click", ".confBOTON", function(){
-                var user_id = $(this).closest('tr').find('.user_id').text();
-                $('.confirm_userID').val(user_id);               
-            });
-
-            window.closeModal = function() {
-                $('#confirmModal').hide();
-            };
-
-            $('.ConfirmSaModal').click(function (e) { 
-                e.preventDefault();
-                var confirm_userID = $('.confirm_userID').val(); 
-                console.log('confirm_userID:', confirm_userID);
-                
-                $.ajax({
-                    type: "POST",
-                    url: "PHPBackend/ConfirmProcess.php",
-                    data: {
-                        'Confirm_conf': true,
-                        'confirm_userID': confirm_userID,
-                    },
-                    success: function (response) {
-                        try {
-                            var jsonData = JSON.parse(response);
-                            if (jsonData.success) {
-                                console.log('User confirmed successfully po');
-                                console.log('User confirmed successfully');
-                                    sendConfirmationEmail(confirm_userID);
-                                    $("tr:has(td.user_id:contains('" + confirm_userID + "'))").remove(); 
-                                    closeModal();
-                                    location.reload();
-                        
-                            } else {
-                                console.error('Failed to remove record:', jsonData.error);
-                            }
-                        } catch (error) {
-                            console.error('Error parsing remove response:', error);
-                        }
-                        
-                    },
-                    error: function(xhr, status, error) {
-                        console.error('Delete AJAX error:', error);
-                    }
-                });
-            });  
-
-            // email ng reejct
-            function sendRejectingEmail(userId) {
-            // Get the user_id from the data-news-id attribute
-            // var userId = button.getAttribute('data-news-id');
-            console.log("Sending email to user with ID:", userId);
-            
-            // Log the user_id to the console for debugging purposes
-            console.log("User ID:", userId);
-            
-            // Check if userId is empty
-            if (!userId) {
-                alert("User ID is not set.");
-                return;
-            }
-            
-            // Example: Make an AJAX call to send the user_id to the PHP script
-            var xhr = new XMLHttpRequest();
-            xhr.open("POST", "Emailer/RejectEmail.php", true); // Ensure this path is correct
-            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState === 4) {
-                    if (xhr.status === 200) {
-                        // Handle the response from the server
-                        console.log(xhr.responseText);
-                        try {
-                            var response = JSON.parse(xhr.responseText);
-                            if (response.error) {
-                                alert("Error: " + response.error);
-                            } else {
-                                alert("Rejecting Email sent successfully.");
-                            }
-                        } catch (e) {
-                            alert("Failed to parse JSON response: " + xhr.responseText);
-                        }
-                    } else {
-                        alert("Failed to communicate with the server. Status: " + xhr.status);
-                    }
-                }
-            };
-            xhr.send("user_id=" + encodeURIComponent(userId));
-        }
-
-            // Pagbago ng access ni user to reject
-            $(document).on("click", ".rejBOTON", function(){
-                var user_id = $(this).closest('tr').find('.user_id').text();
-                
-                $('.reject_userID').val(user_id);
-                console.log("Hilo", user_id);               
-            });
-
-            $(document).on("click", ".rejBOTON", function(e) {
-                e.preventDefault();
-                
-                // Get the user ID from the input with the class 'reject_userID'
-                var reject_userID = $('.reject_userID').val();
-                console.log('reject_userID:', reject_userID);
-                
-                // Perform the AJAX request
-                $.ajax({
-                    type: "POST",
-                    url: "PHPBackend/RejectProcess.php",
-                    data: {
-                        'reject_user': true,
-                        'reject_userID': reject_userID
-                    },
-                    success: function(response) {
-                        try {
-                            var jsonData = JSON.parse(response);
-                            if (jsonData.success) {
-                                console.log('User rejected successfully');
-                                
-                                // Remove the table row containing the rejected user ID
-                                sendRejectingEmail(reject_userID)
-                                $("tr:has(td.user_id:contains('" + reject_userID + "'))").remove(); 
-                                // Optionally close the modal or reload the page
-                                // closeModal();
-                                location.reload();
-                            } else {
-                                console.error('Failed to remove record:', jsonData.error);
-                            }
-                        } catch (error) {
-                            console.error('Error parsing remove response:', error);
-                        }
-                    },
-                    error: function(xhr, status, error) {
-                        console.error('Delete AJAX error:', error);
-                    }
-                });
-            }); 
-
-
-
-
-        });
-</script>
 </body>
 </html>

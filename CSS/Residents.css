@@ -89,7 +89,7 @@ html{
   gap: 1rem;
   align-items: center;
   position: relative;
-  height: 4rem;
+  height: 3.6rem;
   transition: all 300ms ease;
 }
 
@@ -224,9 +224,9 @@ html{
   width: 100%;
   padding: 10px;
   background-color: #ffffff;
-  height: 620px;
+  height: 615px;
   overflow:hidden;
-  padding: 30px 40px;
+  padding: 20px;
   border: 1px solid rgb(179, 172, 172);
   margin: 15px;
 }
@@ -241,7 +241,7 @@ html{
 
 .itemsController,
 .searchTablee{
-display: flex;
+  display: flex;
   align-items: center;
 }
 
@@ -300,7 +300,6 @@ display: flex;
 }
 
 /* DESIGN FOR TABLE */
-
 .TablesContainer{
   height: 520px;
   width: 100%;
@@ -386,16 +385,22 @@ tr:nth-child(even){
   background: var(--color-light);
 }
 
-/* DESIGN PARA SA PAGINATION */
+.ResidentsViewBtn{
+    border-radius: 5px;
+    padding: 0.4rem 2rem;
+    cursor: pointer;
+}
 
+
+/* DESIGN PARA SA PAGINATION */
 .bottom-field{
   width: 100%;
   margin-top: 10px;
 }
 .pagination{
-display: flex;
-justify-content: end;
-align-items: center;
+  display: flex;
+  justify-content: end;
+  align-items: center;
 }
 
 .pagination li{
@@ -632,6 +637,8 @@ font-size: 13px;
   cursor: pointer;
 }
 
+
+/* DESIGN PARA SA VIEW MODAL */
 .containerNgViewModal{
   display: none;
   position: fixed;
