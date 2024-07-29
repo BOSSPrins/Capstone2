@@ -451,8 +451,37 @@
                         
                             <div id="History" class="EachContentsMonth">
                                 <header class="AddingDivsForCandidates">
-                                    <button type="submit" class="addingDivsBtn"> Add </button>
+                                    <button type="button" class="addingDivsBtn"> Add </button>
                                 </header>
+                                <div class="addingcanditatesDivCon" id="addingCandidatesContainer">
+                                    <div class="SubAddingCandiCon">
+                                        <div class="addingCandidatesLoob">
+                                            <header class="headerNgAdding">
+                                                <h2> Add Candidate </h2>
+                                                <span class="CloseAdding">&times;</span>
+                                            </header>
+                                            <div class="AddingNewCandidateLoob">
+                                                <div class="NameOfCandidateNew">
+                                                    <h2> Name: </h2>
+                                                    <input class="NameNewCandi" type="text">
+                                                </div>
+                                                <div class="FileUploadPicNewCandi">
+                                                    <div class="file-upload">
+                                                        <label for="fileInput" class="file-upload-label">
+                                                            <div class="file-upload-icon">+</div>
+                                                            <div class="file-upload-text">Upload Image</div>
+                                                        </label>
+                                                        <input type="file" id="fileInput" class="file-upload-input">
+                                                    </div>
+                                                    <img id="previewImage" src="#" alt="Image Preview" style="display: none; max-width: 100%; max-height: 200px;">
+                                                </div>
+                                            </div>
+                                            <footer class="AddingNewCandi">
+                                                <button type="button"> Add </button>
+                                            </footer>
+                                        </div>
+                                    </div>
+                                </div> 
                                 <div class="containerDivss">
                                     <div class="CandidatesCon">
                                         <div class="CandiImageContainer" id="CandiImageContainer">

@@ -1146,3 +1146,125 @@ td{
 .CloseButton:hover {
     background: #f5f5f5;
 }
+
+
+/* DESIGN PARA SA ADDING CANDIDATES */
+.addingcanditatesDivCon{
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.SubAddingCandiCon{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.addingCandidatesLoob{
+    position: relative;
+    max-width: 450px;
+    width: 100%;
+    margin-top: 10px;
+    height: 450px;
+    background: #fff;
+    border-radius: 8px;
+}
+
+.headerNgAdding{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgb(229, 229, 229);
+    /* border-bottom: 1px solid gray; */
+    padding: 15px;
+    border-radius: 5px;
+}
+
+.CloseAdding{
+    color: #000000;
+    font-size: 22px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.AddingNewCandidateLoob{
+    height: 350px;
+    padding: 10px;
+}
+
+.AddingNewCandi{
+    display: flex;
+    justify-content: end;
+    background: rgb(229, 229, 229);
+    /* border-bottom: 1px solid gray; */
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.AddingNewCandi button{
+    padding: 10px 40px;
+    font-size: large;
+    cursor: pointer;
+}
+
+.NameNewCandi{
+    width: 100%;
+    font-size: 17px;
+    padding: 5px;
+    border: 1px solid rgb(164, 164, 164);
+    margin-bottom: 10px;
+}
+
+.FileUploadPicNewCandi {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/* New CSS for file upload button */
+.file-upload {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+    cursor: pointer;
+    background-color: #f0f0f0;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.file-upload-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    cursor: pointer;
+}
+
+.file-upload-icon {
+    font-size: 24px;
+    margin-right: 8px;
+}
+
+.file-upload-text {
+    font-size: 16px;
+}
+
+.file-upload-input {
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    cursor: pointer;
+}
