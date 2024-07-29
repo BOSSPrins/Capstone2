@@ -579,125 +579,167 @@ inputFile9.addEventListener("change", function() {
 
 
 
+// document.addEventListener('DOMContentLoaded', function() {
+//     const addButton = document.querySelector('.addingDivsBtn');
+//     const container = document.querySelector('.containerDivss');
+//     let counter = 10; // Start counting from 10 to avoid id conflicts
+
+//     addButton.addEventListener('click', function() {
+//         counter++;
+//         const newCandidateCon = document.createElement('div');
+//         newCandidateCon.classList.add('CandidatesCon');
+        
+//         // Create the close button
+//         const closeButton = document.createElement('div');
+//         closeButton.classList.add('CloseButton');
+//         closeButton.textContent = 'X'; // You can use an icon here if preferred
+        
+//         // Create the image container
+//         const imageContainer = document.createElement('div');
+//         imageContainer.classList.add('CandiImageContainer');
+//         imageContainer.id = `CandiImageContainer${counter}`;
+        
+//         // Create the name input
+//         const nameInput = document.createElement('input');
+//         nameInput.classList.add('NameCandiInput');
+//         nameInput.type = 'text';
+//         nameInput.placeholder = 'Enter Candidate Name';
+        
+//         // Create the buttons container
+//         const buttonsContainer = document.createElement('div');
+//         buttonsContainer.classList.add('buttonsNgCandidates');
+        
+//         // Create upload button container
+//         const uploadButtonContainer = document.createElement('div');
+//         uploadButtonContainer.classList.add('btCandii');
+        
+//         // Create upload button
+//         const uploadButton = document.createElement('button');
+//         uploadButton.classList.add('buttonSivv');
+//         uploadButton.classList.add(`UploadPics${counter}`);
+//         uploadButton.textContent = 'Upload Picture';
+        
+//         // Create file input
+//         const fileInput = document.createElement('input');
+//         fileInput.classList.add('inputFileCert');
+//         fileInput.classList.add('inputts');
+//         fileInput.classList.add(`inputFileCert${counter}`);
+//         fileInput.type = 'file';
+//         fileInput.id = `PresPic${counter}`;
+//         fileInput.style.display = 'none';
+        
+//         // Append upload button and file input to the container
+//         uploadButtonContainer.appendChild(uploadButton);
+//         uploadButtonContainer.appendChild(fileInput);
+        
+//         // Create save button container
+//         const saveButtonContainer = document.createElement('div');
+//         saveButtonContainer.classList.add('btCandiiTwo');
+        
+//         // Create save button
+//         const saveButton = document.createElement('button');
+//         saveButton.classList.add('buttonSivv');
+//         saveButton.classList.add('SaveBtn');
+//         saveButton.textContent = 'Save';
+        
+//         // Append save button to the container
+//         saveButtonContainer.appendChild(saveButton);
+        
+//         // Append all created elements to the newCandidatesCon
+//         newCandidateCon.appendChild(closeButton);
+//         newCandidateCon.appendChild(imageContainer);
+//         newCandidateCon.appendChild(nameInput);
+//         newCandidateCon.appendChild(buttonsContainer);
+        
+//         // Append buttonsContainer to the newCandidateCon
+//         buttonsContainer.appendChild(uploadButtonContainer);
+//         buttonsContainer.appendChild(saveButtonContainer);
+        
+//         // Add event listener to the close button
+//         closeButton.addEventListener('click', function() {
+//             container.removeChild(newCandidateCon);
+//         });
+
+//         // Add event listener to the upload button
+//         uploadButton.addEventListener('click', function() {
+//             fileInput.click(); // Trigger file input click
+//         });
+
+//         // Add event listener to the file input
+//         fileInput.addEventListener('change', function() {
+//             const file = this.files[0];
+//             if (file) {
+//                 const reader = new FileReader();
+
+//                 reader.onload = function(event) {
+//                     const imageUrl = event.target.result;
+//                     const img = new Image();
+//                     img.src = imageUrl;
+
+//                     img.onload = function() {
+//                         // Find the correct image container for this candidate
+//                         const imageContainer = newCandidateCon.querySelector('.CandiImageContainer');
+
+//                         // Clear existing content
+//                         imageContainer.innerHTML = "";
+
+//                         // Set max-width and max-height to ensure the image fits within the container
+//                         img.style.maxWidth = "100%";
+//                         img.style.maxHeight = "100%";
+
+//                         // Append the image to the container
+//                         imageContainer.appendChild(img);
+//                     };
+//                 };
+
+//                 reader.readAsDataURL(file);
+//             }
+//         });
+
+//         // Append the new candidate section to the container
+//         container.appendChild(newCandidateCon);
+//     });
+// });
+
+
+
 document.addEventListener('DOMContentLoaded', function() {
     const addButton = document.querySelector('.addingDivsBtn');
-    const container = document.querySelector('.containerDivss');
-    let counter = 10; // Start counting from 10 to avoid id conflicts
+    const closeButton = document.querySelector('.CloseAdding');
+    const candidatesContainer = document.getElementById('addingCandidatesContainer');
+    const fileInput = document.getElementById('fileInput');
+    const previewImage = document.getElementById('previewImage');
 
+    // Show the candidate addition form
     addButton.addEventListener('click', function() {
-        counter++;
-        const newCandidateCon = document.createElement('div');
-        newCandidateCon.classList.add('CandidatesCon');
-        
-        // Create the close button
-        const closeButton = document.createElement('div');
-        closeButton.classList.add('CloseButton');
-        closeButton.textContent = 'X'; // You can use an icon here if preferred
-        
-        // Create the image container
-        const imageContainer = document.createElement('div');
-        imageContainer.classList.add('CandiImageContainer');
-        imageContainer.id = `CandiImageContainer${counter}`;
-        
-        // Create the name input
-        const nameInput = document.createElement('input');
-        nameInput.classList.add('NameCandiInput');
-        nameInput.type = 'text';
-        nameInput.placeholder = 'Enter Candidate Name';
-        
-        // Create the buttons container
-        const buttonsContainer = document.createElement('div');
-        buttonsContainer.classList.add('buttonsNgCandidates');
-        
-        // Create upload button container
-        const uploadButtonContainer = document.createElement('div');
-        uploadButtonContainer.classList.add('btCandii');
-        
-        // Create upload button
-        const uploadButton = document.createElement('button');
-        uploadButton.classList.add('buttonSivv');
-        uploadButton.classList.add(`UploadPics${counter}`);
-        uploadButton.textContent = 'Upload Picture';
-        
-        // Create file input
-        const fileInput = document.createElement('input');
-        fileInput.classList.add('inputFileCert');
-        fileInput.classList.add('inputts');
-        fileInput.classList.add(`inputFileCert${counter}`);
-        fileInput.type = 'file';
-        fileInput.id = `PresPic${counter}`;
-        fileInput.style.display = 'none';
-        
-        // Append upload button and file input to the container
-        uploadButtonContainer.appendChild(uploadButton);
-        uploadButtonContainer.appendChild(fileInput);
-        
-        // Create save button container
-        const saveButtonContainer = document.createElement('div');
-        saveButtonContainer.classList.add('btCandiiTwo');
-        
-        // Create save button
-        const saveButton = document.createElement('button');
-        saveButton.classList.add('buttonSivv');
-        saveButton.classList.add('SaveBtn');
-        saveButton.textContent = 'Save';
-        
-        // Append save button to the container
-        saveButtonContainer.appendChild(saveButton);
-        
-        // Append all created elements to the newCandidatesCon
-        newCandidateCon.appendChild(closeButton);
-        newCandidateCon.appendChild(imageContainer);
-        newCandidateCon.appendChild(nameInput);
-        newCandidateCon.appendChild(buttonsContainer);
-        
-        // Append buttonsContainer to the newCandidateCon
-        buttonsContainer.appendChild(uploadButtonContainer);
-        buttonsContainer.appendChild(saveButtonContainer);
-        
-        // Add event listener to the close button
-        closeButton.addEventListener('click', function() {
-            container.removeChild(newCandidateCon);
-        });
+        candidatesContainer.style.display = 'block';
+    });
 
-        // Add event listener to the upload button
-        uploadButton.addEventListener('click', function() {
-            fileInput.click(); // Trigger file input click
-        });
+    // Close the candidate addition form
+    closeButton.addEventListener('click', function() {
+        candidatesContainer.style.display = 'none';
+        // Reset file input and image preview
+        fileInput.value = ''; // Clear the selected file
+        previewImage.style.display = 'none'; // Hide the preview image
+    });
 
-        // Add event listener to the file input
-        fileInput.addEventListener('change', function() {
-            const file = this.files[0];
-            if (file) {
-                const reader = new FileReader();
+    // Add event listener to the file input element
+    fileInput.addEventListener('change', function() {
+        const file = this.files[0]; // Get the selected file
 
-                reader.onload = function(event) {
-                    const imageUrl = event.target.result;
-                    const img = new Image();
-                    img.src = imageUrl;
+        if (file) {
+            const reader = new FileReader(); // Initialize FileReader object
 
-                    img.onload = function() {
-                        // Find the correct image container for this candidate
-                        const imageContainer = newCandidateCon.querySelector('.CandiImageContainer');
+            // Set onload event handler
+            reader.onload = function(e) {
+                previewImage.src = e.target.result; // Set image source to the FileReader result
+                previewImage.style.display = 'block'; // Display the preview image
+            };
 
-                        // Clear existing content
-                        imageContainer.innerHTML = "";
-
-                        // Set max-width and max-height to ensure the image fits within the container
-                        img.style.maxWidth = "100%";
-                        img.style.maxHeight = "100%";
-
-                        // Append the image to the container
-                        imageContainer.appendChild(img);
-                    };
-                };
-
-                reader.readAsDataURL(file);
-            }
-        });
-
-        // Append the new candidate section to the container
-        container.appendChild(newCandidateCon);
+            // Read the file as Data URL (base64 format)
+            reader.readAsDataURL(file);
+        } else {
+            previewImage.style.display = 'none'; // Hide the preview image if no file selected
+        }
     });
 });
-
