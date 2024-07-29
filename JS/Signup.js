@@ -1,13 +1,13 @@
 document.addEventListener("DOMContentLoaded", () => {
 const form = document.querySelector(".saynap"),
-continueBtn = form.querySelector(".bttn"),
+SaynapBtn = form.querySelector(".SaynapBtn"),
 errorText = form.querySelector(".iror");
 
 form.onsubmit = (e)=>{ //preventing the form from submitting
     e.preventDefault();
 }
-if (continueBtn) {
- continueBtn.onclick = ()=>{   
+if (SaynapBtn) {
+  SaynapBtn.onclick = ()=>{   
           
     let xhr = new XMLHttpRequest();      //start ajax creating XML object
     xhr.open("POST", "PHPBackend/Signup.php", true);

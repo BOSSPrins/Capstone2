@@ -195,7 +195,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Close the modal if the user clicks outside of it
     window.addEventListener("click", function (event) {
-        if (event.target === modal) {
+        if (event.target === modalTwo) {
             modalTwo.style.display = "none";
         }
     });
@@ -579,93 +579,423 @@ inputFile9.addEventListener("change", function() {
 
 
 
+// document.addEventListener('DOMContentLoaded', function() {
+//     const addButton = document.querySelector('.addingDivsBtn');
+//     const container = document.querySelector('.containerDivss');
+//     let counter = 10; // Start counting from 10 to avoid id conflicts
+
+//     addButton.addEventListener('click', function() {
+//         counter++;
+//         const newCandidateCon = document.createElement('div');
+//         newCandidateCon.classList.add('CandidatesCon');
+        
+//         // Create the close button
+//         const closeButton = document.createElement('div');
+//         closeButton.classList.add('CloseButton');
+//         closeButton.textContent = 'X'; // You can use an icon here if preferred
+        
+//         // Create the image container
+//         const imageContainer = document.createElement('div');
+//         imageContainer.classList.add('CandiImageContainer');
+//         imageContainer.id = `CandiImageContainer${counter}`;
+        
+//         // Create the name input
+//         const nameInput = document.createElement('input');
+//         nameInput.classList.add('NameCandiInput');
+//         nameInput.type = 'text';
+//         nameInput.placeholder = 'Enter Candidate Name';
+        
+//         // Create the buttons container
+//         const buttonsContainer = document.createElement('div');
+//         buttonsContainer.classList.add('buttonsNgCandidates');
+        
+//         // Create upload button container
+//         const uploadButtonContainer = document.createElement('div');
+//         uploadButtonContainer.classList.add('btCandii');
+        
+//         // Create upload button
+//         const uploadButton = document.createElement('button');
+//         uploadButton.classList.add('buttonSivv');
+//         uploadButton.classList.add(`UploadPics${counter}`);
+//         uploadButton.textContent = 'Upload Picture';
+        
+//         // Create file input
+//         const fileInput = document.createElement('input');
+//         fileInput.classList.add('inputFileCert');
+//         fileInput.classList.add('inputts');
+//         fileInput.classList.add(`inputFileCert${counter}`);
+//         fileInput.type = 'file';
+//         fileInput.id = `PresPic${counter}`;
+//         fileInput.style.display = 'none';
+        
+//         // Append upload button and file input to the container
+//         uploadButtonContainer.appendChild(uploadButton);
+//         uploadButtonContainer.appendChild(fileInput);
+        
+//         // Create save button container
+//         const saveButtonContainer = document.createElement('div');
+//         saveButtonContainer.classList.add('btCandiiTwo');
+        
+//         // Create save button
+//         const saveButton = document.createElement('button');
+//         saveButton.classList.add('buttonSivv');
+//         saveButton.classList.add('SaveBtn');
+//         saveButton.textContent = 'Save';
+        
+//         // Append save button to the container
+//         saveButtonContainer.appendChild(saveButton);
+        
+//         // Append all created elements to the newCandidatesCon
+//         newCandidateCon.appendChild(closeButton);
+//         newCandidateCon.appendChild(imageContainer);
+//         newCandidateCon.appendChild(nameInput);
+//         newCandidateCon.appendChild(buttonsContainer);
+        
+//         // Append buttonsContainer to the newCandidateCon
+//         buttonsContainer.appendChild(uploadButtonContainer);
+//         buttonsContainer.appendChild(saveButtonContainer);
+        
+//         // Add event listener to the close button
+//         closeButton.addEventListener('click', function() {
+//             container.removeChild(newCandidateCon);
+//         });
+
+//         // Add event listener to the upload button
+//         uploadButton.addEventListener('click', function() {
+//             fileInput.click(); // Trigger file input click
+//         });
+
+//         // Add event listener to the file input
+//         fileInput.addEventListener('change', function() {
+//             const file = this.files[0];
+//             if (file) {
+//                 const reader = new FileReader();
+
+//                 reader.onload = function(event) {
+//                     const imageUrl = event.target.result;
+//                     const img = new Image();
+//                     img.src = imageUrl;
+
+//                     img.onload = function() {
+//                         // Find the correct image container for this candidate
+//                         const imageContainer = newCandidateCon.querySelector('.CandiImageContainer');
+
+//                         // Clear existing content
+//                         imageContainer.innerHTML = "";
+
+//                         // Set max-width and max-height to ensure the image fits within the container
+//                         img.style.maxWidth = "100%";
+//                         img.style.maxHeight = "100%";
+
+//                         // Append the image to the container
+//                         imageContainer.appendChild(img);
+//                     };
+//                 };
+
+//                 reader.readAsDataURL(file);
+//             }
+//         });
+
+//         // Append the new candidate section to the container
+//         container.appendChild(newCandidateCon);
+//     });
+// });
+
+// document.addEventListener('DOMContentLoaded', function() {
+//     const addButton = document.querySelector('.addingDivsBtn');
+//     const container = document.querySelector('.containerDivss');
+//     let counter = 10; // Start counting from 10 to avoid id conflicts
+
+//     // Function to save the current state to localStorage
+//     function saveState() {
+//         const candidates = Array.from(container.children).map(candidateCon => {
+//             const name = candidateCon.querySelector('.NameCandiInput').value;
+//             const imgSrc = candidateCon.querySelector('.CandiImageContainer img')?.src || '';
+//             const id = candidateCon.querySelector('.btCandiiTwo input[type="hidden"]').value;
+//             return { name, imgSrc, id };
+//         });
+//         localStorage.setItem('candidates', JSON.stringify(candidates));
+//     }
+
+//     // Function to restore the state from localStorage
+//     function restoreState() {
+//         const candidates = JSON.parse(localStorage.getItem('candidates') || '[]');
+//         candidates.forEach(candidate => {
+//             addCandidate(candidate.name, candidate.imgSrc, candidate.id);
+//         });
+//     }
+
+//     // Function to add a candidate container
+//     function addCandidate(name = '', imgSrc = '', id = Math.floor(Math.random() * (100000000 - Date.now()) + Date.now())) {
+//         counter++;
+//         const newCandidateCon = document.createElement('div');
+//         newCandidateCon.classList.add('CandidatesCon');
+        
+//         // Create the close button
+//         const closeButton = document.createElement('div');
+//         closeButton.classList.add('CloseButton');
+//         closeButton.textContent = 'X';
+        
+//         // Create the image container
+//         const imageContainer = document.createElement('div');
+//         imageContainer.classList.add('CandiImageContainer');
+//         imageContainer.id = `CandiImageContainer${counter}`;
+        
+//         if (imgSrc) {
+//             const img = new Image();
+//             img.src = imgSrc;
+//             img.style.maxWidth = "100%";
+//             img.style.maxHeight = "100%";
+//             imageContainer.appendChild(img);
+//         }
+        
+//         // Create the name input
+//         const nameInput = document.createElement('input');
+//         nameInput.classList.add('NameCandiInput');
+//         nameInput.type = 'text';
+//         nameInput.placeholder = 'Enter Candidate Name';
+//         nameInput.value = name;
+        
+//         // Create the buttons container
+//         const buttonsContainer = document.createElement('div');
+//         buttonsContainer.classList.add('buttonsNgCandidates');
+        
+//         // Create upload button container
+//         const uploadButtonContainer = document.createElement('div');
+//         uploadButtonContainer.classList.add('btCandii');
+        
+//         // Create upload button
+//         const uploadButton = document.createElement('button');
+//         uploadButton.classList.add('buttonSivv');
+//         uploadButton.classList.add(`UploadPics${counter}`);
+//         uploadButton.textContent = 'Upload Picture';
+        
+//         // Create file input
+//         const fileInput = document.createElement('input');
+//         fileInput.classList.add('inputFileCert');
+//         fileInput.classList.add('inputts');
+//         fileInput.classList.add(`inputFileCert${counter}`);
+//         fileInput.type = 'file';
+//         fileInput.id = `PresPic${counter}`;
+//         fileInput.style.display = 'none';
+        
+//         // Append upload button and file input to the container
+//         uploadButtonContainer.appendChild(uploadButton);
+//         uploadButtonContainer.appendChild(fileInput);
+        
+//         // Create save button container
+//         const saveButtonContainer = document.createElement('div');
+//         saveButtonContainer.classList.add('btCandiiTwo');
+        
+//         // Create save button
+//         const saveButton = document.createElement('button');
+//         saveButton.classList.add('buttonSivv');
+//         saveButton.classList.add('SaveBtn');
+//         saveButton.textContent = 'Save';
+
+//         // Create hidden input with provided id
+//         const hiddenInput = document.createElement('input');
+//         hiddenInput.type = 'hidden';
+//         hiddenInput.value = id;
+        
+//         // Append save button and hidden input to the container
+//         saveButtonContainer.appendChild(saveButton);
+//         saveButtonContainer.appendChild(hiddenInput);
+        
+//         // Append all created elements to the newCandidatesCon
+//         newCandidateCon.appendChild(closeButton);
+//         newCandidateCon.appendChild(imageContainer);
+//         newCandidateCon.appendChild(nameInput);
+//         newCandidateCon.appendChild(buttonsContainer);
+        
+//         // Append buttonsContainer to the newCandidateCon
+//         buttonsContainer.appendChild(uploadButtonContainer);
+//         buttonsContainer.appendChild(saveButtonContainer);
+        
+//         // Add event listener to the close button
+//         closeButton.addEventListener('click', function() {
+//             container.removeChild(newCandidateCon);
+//             saveState();
+//         });
+
+//         // Add event listener to the upload button
+//         uploadButton.addEventListener('click', function() {
+//             fileInput.click(); // Trigger file input click
+//         });
+
+//         // Add event listener to the file input
+//         fileInput.addEventListener('change', function() {
+//             const file = this.files[0];
+//             if (file) {
+//                 const reader = new FileReader();
+
+//                 reader.onload = function(event) {
+//                     const imageUrl = event.target.result;
+//                     const img = new Image();
+//                     img.src = imageUrl;
+
+//                     img.onload = function() {
+//                         // Find the correct image container for this candidate
+//                         const imageContainer = newCandidateCon.querySelector('.CandiImageContainer');
+
+//                         // Clear existing content
+//                         imageContainer.innerHTML = "";
+
+//                         // Set max-width and max-height to ensure the image fits within the container
+//                         img.style.maxWidth = "100%";
+//                         img.style.maxHeight = "100%";
+
+//                         // Append the image to the container
+//                         imageContainer.appendChild(img);
+//                         saveState();
+//                     };
+//                 };
+
+//                 reader.readAsDataURL(file);
+//             }
+//         });
+
+//         // Append the new candidate section to the container
+//         container.appendChild(newCandidateCon);
+//         saveState();
+//     }
+
+//     // Restore state on page load
+//     restoreState();
+
+//     // Add new candidate on button click
+//     addButton.addEventListener('click', function() {
+//         addCandidate();
+//     });
+// });
+
 document.addEventListener('DOMContentLoaded', function() {
     const addButton = document.querySelector('.addingDivsBtn');
     const container = document.querySelector('.containerDivss');
-    let counter = 10; // Start counting from 10 to avoid id conflicts
 
-    addButton.addEventListener('click', function() {
-        counter++;
+    function generateNumericID() {
+        return Math.floor(Date.now() + Math.random() * 100000000);
+    }
+
+    function saveState() {
+        try {
+            const candidates = Array.from(container.children).map(candidateCon => {
+                const nameInput = candidateCon.querySelector('.NameCandiInput');
+                const imgContainer = candidateCon.querySelector('.CandiImageContainer img');
+                const hiddenInput = candidateCon.querySelector('.hiddenIDInput');
+
+                if (!nameInput) {
+                    console.error('Missing NameCandiInput in:', candidateCon);
+                    throw new Error("Missing NameCandiInput");
+                }
+                if (!hiddenInput) {
+                    console.error('Missing hiddenIDInput in:', candidateCon);
+                    throw new Error("Missing hiddenIDInput");
+                }
+
+                const name = nameInput.value;
+                const imgSrc = imgContainer ? imgContainer.src : '';
+                const id = hiddenInput.value;
+
+                return { name, imgSrc, id };
+            });
+
+            localStorage.setItem('candidates', JSON.stringify(candidates));
+            console.log('State saved:', candidates);
+        } catch (error) {
+            console.error('Error saving state:', error);
+        }
+    }
+
+    function restoreState() {
+        try {
+            const candidates = JSON.parse(localStorage.getItem('candidates') || '[]');
+            console.log('State restored:', candidates);
+            candidates.forEach(candidate => {
+                addCandidate(candidate.name, candidate.imgSrc, candidate.id);
+            });
+        } catch (error) {
+            console.error('Error restoring state:', error);
+        }
+    }
+
+    function addCandidate(name = '', imgSrc = '', id = generateNumericID()) {
         const newCandidateCon = document.createElement('div');
         newCandidateCon.classList.add('CandidatesCon');
-        
-        // Create the close button
+
         const closeButton = document.createElement('div');
         closeButton.classList.add('CloseButton');
-        closeButton.textContent = 'X'; // You can use an icon here if preferred
-        
-        // Create the image container
+        closeButton.textContent = 'X';
+
         const imageContainer = document.createElement('div');
         imageContainer.classList.add('CandiImageContainer');
-        imageContainer.id = `CandiImageContainer${counter}`;
-        
-        // Create the name input
+
+        if (imgSrc) {
+            const img = new Image();
+            img.src = imgSrc;
+            img.style.maxWidth = "100%";
+            img.style.maxHeight = "100%";
+            imageContainer.appendChild(img);
+        }
+
         const nameInput = document.createElement('input');
         nameInput.classList.add('NameCandiInput');
         nameInput.type = 'text';
         nameInput.placeholder = 'Enter Candidate Name';
-        
-        // Create the buttons container
+        nameInput.value = name;
+
         const buttonsContainer = document.createElement('div');
         buttonsContainer.classList.add('buttonsNgCandidates');
-        
-        // Create upload button container
+
         const uploadButtonContainer = document.createElement('div');
         uploadButtonContainer.classList.add('btCandii');
-        
-        // Create upload button
+
         const uploadButton = document.createElement('button');
         uploadButton.classList.add('buttonSivv');
-        uploadButton.classList.add(`UploadPics${counter}`);
         uploadButton.textContent = 'Upload Picture';
-        
-        // Create file input
+
         const fileInput = document.createElement('input');
         fileInput.classList.add('inputFileCert');
         fileInput.classList.add('inputts');
-        fileInput.classList.add(`inputFileCert${counter}`);
         fileInput.type = 'file';
-        fileInput.id = `PresPic${counter}`;
         fileInput.style.display = 'none';
-        
-        // Append upload button and file input to the container
+
         uploadButtonContainer.appendChild(uploadButton);
         uploadButtonContainer.appendChild(fileInput);
-        
-        // Create save button container
+
         const saveButtonContainer = document.createElement('div');
         saveButtonContainer.classList.add('btCandiiTwo');
-        
-        // Create save button
+
         const saveButton = document.createElement('button');
         saveButton.classList.add('buttonSivv');
         saveButton.classList.add('SaveBtn');
         saveButton.textContent = 'Save';
-        
-        // Append save button to the container
+
+        const hiddenInput = document.createElement('input');
+        hiddenInput.type = 'hidden';
+        hiddenInput.classList.add('hiddenIDInput');
+        hiddenInput.value = id;
+
         saveButtonContainer.appendChild(saveButton);
-        
-        // Append all created elements to the newCandidatesCon
+        saveButtonContainer.appendChild(hiddenInput);
+
         newCandidateCon.appendChild(closeButton);
         newCandidateCon.appendChild(imageContainer);
         newCandidateCon.appendChild(nameInput);
         newCandidateCon.appendChild(buttonsContainer);
-        
-        // Append buttonsContainer to the newCandidateCon
+
         buttonsContainer.appendChild(uploadButtonContainer);
         buttonsContainer.appendChild(saveButtonContainer);
-        
-        // Add event listener to the close button
+
         closeButton.addEventListener('click', function() {
             container.removeChild(newCandidateCon);
+            saveState();
         });
 
-        // Add event listener to the upload button
         uploadButton.addEventListener('click', function() {
-            fileInput.click(); // Trigger file input click
+            fileInput.click();
         });
 
-        // Add event listener to the file input
         fileInput.addEventListener('change', function() {
             const file = this.files[0];
             if (file) {
@@ -677,18 +1007,15 @@ document.addEventListener('DOMContentLoaded', function() {
                     img.src = imageUrl;
 
                     img.onload = function() {
-                        // Find the correct image container for this candidate
                         const imageContainer = newCandidateCon.querySelector('.CandiImageContainer');
 
-                        // Clear existing content
                         imageContainer.innerHTML = "";
 
-                        // Set max-width and max-height to ensure the image fits within the container
                         img.style.maxWidth = "100%";
                         img.style.maxHeight = "100%";
 
-                        // Append the image to the container
                         imageContainer.appendChild(img);
+                        saveState();
                     };
                 };
 
@@ -696,8 +1023,35 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
 
-        // Append the new candidate section to the container
         container.appendChild(newCandidateCon);
+        console.log('Candidate added with ID:', id, newCandidateCon);
+
+        // Verify the hidden input exists after appending to container
+        const hiddenInputCheck = newCandidateCon.querySelector('.hiddenIDInput');
+        if (!hiddenInputCheck) {
+            console.error('Hidden input not found immediately after appending to container:', newCandidateCon);
+        } else {
+            console.log('Hidden input successfully added:', hiddenInputCheck);
+        }
+
+        // Ensure the hidden input is detected before calling saveState
+        setTimeout(() => {
+            const hiddenInputCheckTimeout = newCandidateCon.querySelector('.hiddenIDInput');
+            if (!hiddenInputCheckTimeout) {
+                console.error('Hidden input not found after timeout:', newCandidateCon);
+            } else {
+                console.log('Hidden input found after timeout:', hiddenInputCheckTimeout);
+                // Save state only after confirming hidden input exists
+                saveState();
+            }
+        }, 0);
+    }
+
+    // Restore state on page load
+    restoreState();
+
+    // Add candidate on button click
+    addButton.addEventListener('click', function() {
+        addCandidate();
     });
 });
-

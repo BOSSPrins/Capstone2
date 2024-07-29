@@ -27,7 +27,7 @@ $encoded_id = urlencode($admin_unique_id);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> Mabuhay Website </title>
-    <link rel="icon" type="image/x-icon" href="Pictures/Dasma_City_Icon.ico">
+    <link rel="icon" type="image/x-icon" href="Pictures/Mabuhay_Logo.ico">
     <link rel="stylesheet" href="CSS/UserAnnounce.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
@@ -37,7 +37,7 @@ $encoded_id = urlencode($admin_unique_id);
             <div class="headerTop">
                 <div class="leftSection">
                     <img class="menu" src="Pictures/menu-hamburger.png">
-                    <img class="img-logo" src="Pictures/Dasma_City_Logo.png">
+                    <img class="img-logo" src="Pictures/Mabuhay_Logo.png">
                     <!-- <h2> Mabuhay Homes 2000 </h2> -->
                 </div>
                 <div class="rightSection">
@@ -71,6 +71,10 @@ $encoded_id = urlencode($admin_unique_id);
                     <img class="img-sideboard" src="Pictures/MonthlyDue.png">
                     <span> Monthly Due </span>
                 </a>
+                <a href="UserVoting.php" class="sideside">
+                    <img class="img-sideboard" src="">
+                    <span> Voting </span>
+                </a>
                 <a href="Logout.php" class="sideside">
                     <img class="img-sideboard" src="Pictures/logout.png">
                     <span> Logout </span>
@@ -82,7 +86,7 @@ $encoded_id = urlencode($admin_unique_id);
                     <div class="postingAnnouncementFeed">
                         <div class="NameandPicture">
                             <div class="pictureSaposting">
-                                <img class="pictureNagPost" src="Pictures/Dasma_City_Logo.png">
+                                <img class="pictureNagPost" src="Pictures/Mabuhay_Logo.png">
                             </div>
                             <div class="PangalanSaPosting">
                                 <label class="LabelNamePost"> HOA Admin </label>

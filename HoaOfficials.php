@@ -16,18 +16,20 @@ if (isset($_SESSION['unique_id'])) {
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title> Dashboard </title>
-  <link rel="stylesheet" href="CSS/HoaOfficials.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Mabuhay Website </title>
+    <link rel="icon" type="image/x-icon" href="Pictures/Mabuhay_Logo.ico">
+    <link rel="stylesheet" href="CSS/HoaOfficials.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
 </head>
 <body>
 <div class="mainDashboardContainer">
         <div class="secMainDash">
             <div class="sidebarContainer sideActive" id="sidebar">
                 <div class="headerTop">
-                    <img class="img-logo" src="Pictures/Dasma_City_Logo.png">
+                    <img class="img-logo" src="Pictures/Mabuhay_Logo.png">
                     <h2 class="MabuhayName"> Mabuhay Homes 2000 Phase 5 </h2>
                 </div>
                 <a href="DashBoard.php" class="sideside baractive">
@@ -79,7 +81,7 @@ if (isset($_SESSION['unique_id'])) {
                     <img class="img-sideboard" src="Pictures/voting.png">
                     <span> Voting </span>
                 </a>
-                <a href="#" class="sideside">
+                <a href="Logout.php" class="sideside">
                     <img class="img-sideboard" src="Pictures/logout.png">
                     <span> Logout </span>
                 </a>

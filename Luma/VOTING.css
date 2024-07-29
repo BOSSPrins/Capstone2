@@ -1,0 +1,1013 @@
+:root{
+  --color-primary: #1828b8;
+  --color-danger: #ff7782;
+  --color-success: #41f1b6;
+  --color-warning: #ffbb55;
+  --color-white: #fff;
+  --color-info-dark: #1e1e1f;
+  --color-info-light: #939fb6;
+  --color-dark: #363949;
+  --color-light: rgba(61, 109, 176, 0.18);
+  --color-light-2: rgba(52, 58, 116, 0.20);
+  --color-primary-variant: #111e88;
+  --color-dark-variant: #677483;
+  --color-background: #f0f0f0;
+
+  --light: #f9f9f9;
+  --blue: #3c91e6;
+  --light-blue: #a9d5ff;
+  --light-red: #f38c8c;
+  --light-green: #a7f9d0;
+  --grey: #eee;
+  --dark-grey: #aaaaaa;
+  --drak: #342e37;
+  --red:  #e88383;
+  --green: rgb(94, 232, 129);
+  --color-info-dark: #919497;
+
+  --color-border-radius: 2rem;
+  --color-border-radius-1: 0.4rem;
+  --color-border-radius-2: 0.8rem;
+  --color-border-radius-3: 1.2rem;
+
+
+  --card-padding: 1.8rem;
+  --padding-1: 1.2rem;
+
+  --box-shadow: 0 2rem 3rem var(--color-light);
+}
+
+*{
+  margin: 0;
+  padding: 0;
+  /* outline: none;
+  appearance: none; */
+  border: 0;
+  text-decoration: none;
+  list-style: none;
+  box-sizing: border-box;
+}
+
+html{
+  font-size: 14px;
+}
+
+.mainDashboardContainer{
+  width: 100vw;
+  height: 100vh;
+  font-family: Arial, sans-serif;
+  font-size: 0.88rem;
+  background: var(--color-background);
+  user-select: none;
+  overflow-x: hidden;
+  color: var(--color-dark);
+}
+
+/* ===== SIDEBAR DESIGN ===== */
+.sidebarContainer {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  /* left: 5px; */
+  bottom: 0;
+  top: 0;
+  background-color:  rgb(255, 255, 255);
+  width: 250px;
+  /* margin-top: 7px; */
+  transition: all 0.3s;
+}
+
+.sidebarContainer span{
+  font-size: 14.5px;
+  font-weight: 500;
+}
+
+.sidebarContainer .sideside{
+  display: flex;
+  color: var(--color-info-dark);
+  padding-left: 25px;
+  gap: 1rem;
+  align-items: center;
+  position: relative;
+  height: 3.6rem;
+  transition: all 300ms ease;
+}
+
+.sidebarContainer .sideside .img-sideboard{
+  font-size: 1.6rem;
+  transition: all 300ms ease;
+}
+
+.sidebarContainer .sideside:last-child{
+  position: absolute;
+  bottom: 1px;
+  width: 100%;
+}
+
+.sidebarContainer .sideside.baractive{
+  background: var(--color-light);
+  color: var(--color-primary);
+}
+
+.sidebarContainer .sideside.baractive .img-sideboard{
+  margin-left: calc(1rem -3rem);
+}
+
+.sidebarContainer .sideside:hover{
+  color: var(--color-primary);
+}
+
+.sidebarContainer .sideside:hover .img-sideboard{
+  margin-left: 1rem;
+}
+
+/* SIDEBAR ACTIVE */
+.sidebarActive {
+  transform: translateX(250px); /* Move sidebar into view */
+}
+
+/* .MonthlyDuessContainerr.MonthlyDuessConActivee {
+  margin-left: 5px;
+} */
+
+/* ===== SIDEBAR IMAGE SIZE ===== */
+.img-sideboard{
+  width: 20px;
+}
+
+/* ========== SUB MENU SIDEBAR ========== */
+.subMenuComp{
+  display: none;
+  margin-left: 35px;
+  transition: all 0.3s;
+}
+
+.submenu-visible {
+  display: block; 
+}
+
+.subMenuComp li a{
+  position: relative;
+  display: flex;
+  color: var(--color-info-dark);
+  padding: 10px;
+  position: relative;
+  transition: all 300ms ease;
+}
+
+.eme2{
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 6px solid #aeaeae;
+  transition: 0.3s;
+}
+
+.buttonEme2{
+  padding: 10px 15px;
+  margin-left: 45px;
+  cursor: pointer;
+}
+
+.eme2-rotate{
+  transform: rotate(180deg);
+}
+
+.subMenuComp li a.active{
+  background: var(--color-light);
+  color: var(--color-primary);
+  height: 100%;
+  margin-left: 5px;
+}
+
+.sidebarContainer li a:hover{
+  color: var(--color-primary);
+  margin-left: 1rem;
+}
+
+.subMenuComp li a.active::before {
+  content: '';
+  width: 4px;
+  height: 100%;
+  background: var(--color-primary);
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+/* ===== SUB MENU CHAT IMAGE ==== */
+.img-subMenu{
+  width: 20px;
+  margin-right: 5px;
+}
+
+.sub-spa{
+  margin-top: 5px;
+}
+
+/* ========== MAIN DASHBOARD DESIGN ========== */
+.MainBodyContainerr{
+  padding-left: 250px;
+  /* margin-top: 57px; */
+}
+
+.MainContainerForTables {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  /* background: gray; */
+}
+
+.MainContainerAllOne {
+  /* display: none; */
+  width: 100%;
+  padding: 10px;
+  background-color: #ffffff;
+  /* height: 625px; Remove this */
+  overflow: hidden; /* Remove overflow-y: auto; */
+  /* padding: 30px 40px; */
+  border: 1px solid rgb(179, 172, 172);
+  margin: 10px;
+}
+
+.MainContainerAll{
+  display: none;
+  width: 100%;
+  padding: 10px;
+  background-color: #ffffff;
+  height: 635px; 
+  overflow: hidden; /* Remove overflow-y: auto; */
+  /* padding: 30px 40px; */
+  border: 1px solid rgb(179, 172, 172);
+  margin: 10px;
+}
+
+/* DESIGN PARA TO SA HEADER NG SIDEBAR AT SA MAIN */
+.headerTop{
+  align-items: center;
+  text-align: center;
+  background: rgb(229, 229, 229);
+  height: 160px;
+  width: 100%;
+  padding-top: 10px;
+  box-shadow: 0 8px 8px -10px #888888;
+}
+
+.img-logo{
+  width: 100px;
+}
+
+.headerTopMain{
+  position: sticky;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 50px;
+  width: 100%;
+  background: rgb(255, 255, 255);
+  padding: 20px;
+  top: 0;
+  box-shadow: 5px 10px 18px #888888;
+  box-shadow: 0 8px 8px -10px black;
+  z-index: 1;
+}
+
+.HamburgerandOthers{
+  display: flex;
+  align-items: center;
+}
+
+.namePerModule{
+  padding-left: 20px;
+}
+
+.menu{
+  width: 25px;
+  cursor: pointer;
+}
+
+.ProfileViewww{
+  display: flex;
+  align-items: center;
+}
+
+.user-img{
+  width: 30px;
+  height: 30px;
+  background: rgb(0, 0, 0);
+  border-radius: 20px;
+}
+
+.profileBtn{
+  padding: 5px 20px;
+  margin-right: 5px;
+  cursor: pointer;
+}
+
+.profileBtn label{
+  cursor: pointer;
+}
+
+/* ===== PROFILE MODAL DESIGN ===== */
+.modal{
+  display: none;
+}
+
+.subModal{
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+  display: flex;
+  background: var(--color-background);
+  width: 800px;
+  height: 500px; /* Set the desired height */
+  overflow: hidden; /* Hide overflow */
+  border-radius: 10px;
+}
+
+.profileSidebar{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  width: 150px;
+  height: 100%;
+  border-radius: 10px;
+}
+
+.profileSidebar a{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 4rem;
+  margin-bottom: 5px;
+  /* background: rgb(192, 184, 184); */
+  color: var(--color-info-dark);
+}
+
+.profileSidebar a:hover{
+  color: var(--color-primary);
+}
+
+.profilePages{
+  width: 100%;
+  margin-left: 10px;
+}
+
+.closeProf{
+  display: flex;
+  justify-content: end;
+  margin-right: 5px;
+  color: #000000;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* Hide all pages initially */
+.page {
+  display: none;
+}
+
+/* Show active page */
+.activeProfModal{
+  display: block;
+}
+
+/* ===== CHANGING PASSWORD ===== */
+.changingPassword {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 20px;
+  margin-left: 50px;
+  margin-right: 50px;
+}
+
+.changingInputBox{
+  width: 100%;
+  margin-bottom: 50px;
+}
+
+.changingInputBoxLast{
+  width: 100%;
+}
+
+.changingInputBox .inputngChanging,
+.changingInputBoxLast .inputngChanging{
+  width: 100%;
+  padding: 15px;
+  font-size: 20px;
+  border-radius: 10px;
+  border: 1px solid rgba(62, 65, 71, 0.4);
+}
+
+.changingInputBox .inputngChanging:focus,
+.changingInputBoxLast .inputngChanging:focus{
+  border-color: var(--color-primary);
+}
+
+.changingForgotPass {
+  display: flex;
+  justify-content: end;
+  margin-top: 15px;
+  font-size: 17.5px;
+  width: 100%;
+}
+
+.forgotpassAs{
+  color: var(--color-primary);
+}
+
+.forgotpassAs:hover{
+  text-decoration: underline;
+}
+
+.paragChange{
+  margin-top: 10px;
+}
+
+.buttonSapagPalit{
+  margin-top: 10px;
+  width: 100%;
+  padding: 15px;
+  background: var(--color-primary);
+  color: white;
+  font-size: 17.5px;
+  cursor: pointer;
+}
+
+/* DESIGN PARA SA BILANG NG IBOBOTO */
+.CountsVote{
+  display: flex;
+  justify-content: space-between;
+}
+
+.bilangNgBinoto{
+  display: flex;
+}
+
+.bilangNgBinoto input{
+  width: 40px;
+  font-size: 25px;
+  font-weight: bold;
+  text-align: center;
+}
+
+/* DESIGN PARA SA MGA IBOBOTONG CANDIDATES */
+.User_containerDivss {
+  display: grid;
+  padding-left: 10px;
+  padding-right: 10px;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.6rem;
+  padding-bottom: 20px;
+  padding-top: 20px;
+  overflow-y: auto; /* Add this */
+  height: 541px;
+}
+
+.User_CandidatesCon {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: var(--color-white);
+  padding: 10px;
+  /* border-radius: var(--color-border-radius); */
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  transition: all 300ms ease;
+  height: 330px;
+}
+
+.User_CandiImageContainer{
+  display: flex;
+  justify-content: center;
+  height: 260px; /* Set a fixed height */
+  width: 100%;
+  /* border: 2px rgb(3, 1, 139) solid; */
+  overflow: hidden; /* Ensure overflow is hidden to contain images */
+}
+
+/* Form element styles */
+.form-element {
+  width: 100%;
+  height: 100%;
+}
+
+.form-element .checkboxx {
+  display: none;
+}
+
+.form-element label {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  border: 2px solid #ddd;
+  background: #fff;
+  box-shadow: 0px 5px 20px 2px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: 200ms ease-in-out;
+  border-radius: 5px;
+}
+
+.form-element .title {
+  font-size: 15px;
+  color: #555;
+  padding: 5px 0px;
+  transition: all 200ms ease-in-out;
+}
+
+.form-element label:before {
+  content: "✓";
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #0d0df1;
+  color: #fff;
+  text-align: center;
+  line-height: 110px;
+  font-size: 100px;
+  font-weight: 600;
+  border-radius: 50%;
+  opacity: 0;
+  transition: all 200ms ease-in-out;
+}
+
+.form-element .checkboxx:checked + label:before {
+  opacity: 1;
+}
+
+.form-element .checkboxx:checked + label .title {
+  color: #0d0df1;
+}
+
+.form-element .checkboxx:checked + label {
+  border: 2px solid #0d0df1;
+  background: rgba(0, 0, 0, 0.1); /* More greyish background when checked */
+}
+
+.CandidatesName{
+  border: 1px solid black;
+  width: 100%;
+}
+
+.footerCandidatesSubmit{
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  padding-top: 5px;      
+}
+
+.buttonSubmitBoto{
+  padding: 10px 40px;
+  font-size: medium;
+  cursor: pointer;
+  background: blue;
+  color: white;
+}
+
+.buttonSubmitBoto:hover{
+  background: rgb(50, 141, 245);
+}
+
+/* DESIGN PARA SA SUMMARY MODAL */
+.UsersSummaryModal{
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.UsersSummaryModalBaba{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.UsersSubSummary{
+  position: relative;
+  max-width: 450px;
+  width: 100%;
+  margin-top: 10px;
+  height: 590px;
+  background: #fff;
+  border-radius: 8px;
+}
+
+.UsersHeaderForSummary{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgb(229, 229, 229);
+  /* border-bottom: 1px solid gray; */
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.UsersLamanLoobSummary{
+  height: 500px;
+  padding: 10px;
+  overflow-y: auto;
+}
+
+.UsersCloseSummary{
+  color: #000000;
+  font-size: 22px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.UsersFooterSummary{
+  display: flex;
+  background: rgb(229, 229, 229);
+  /* border-bottom: 1px solid gray; */
+  padding: 10px;
+  border-radius: 5px;
+}
+
+/* DESIGN PARA SA CANDIDATE SUMARRY */
+.UsersCandidates{
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.UsersPictureCan1{
+  width: 80px;
+  height: 80px;
+  border: 3px solid var(--color-primary);
+  margin-right: 10px;
+  overflow: hidden; /* Ensure the image does not overflow */
+}
+
+.UsersPictureCan1 img {
+  width: 100%; /* Make the image fill its container */
+  height: 100%;
+  object-fit: cover; /* Maintain aspect ratio and cover entire div */
+}
+
+.UsersNameAndPosition{
+  width: 100%;
+  margin-top: 10px;
+}
+
+.UsersNameAndPosition label{
+  display: flex;
+  justify-content: center;
+  font-size: 15px;
+  font-weight: bold;
+  font-style: italic;
+  color: var(--color-primary);
+}
+
+.UsersInputCan{
+  width: 100%;
+  padding: 5px;
+  font-size: 20px;
+  margin-top: 13px;
+}
+
+/* DESIGN SA BUTTON SUMMARY USER */
+.UsersFooterSummary{
+  display: flex;
+  justify-content: end;
+}
+
+.btnSubmitNaSaAdmin{
+  /* width: 100%; */
+  padding: 10px 20px ;
+  cursor: pointer;
+  background: blue;
+  color: white;
+  font-size: medium;
+}
+
+/* DESIGN PARA SA SUCCESSFUL VOTE */
+.SuccessfulVoteUser{
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.SubSucessLaman{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.SuccessContainer{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  max-width: 450px;
+  width: 100%;
+  margin-top: 10px;
+  height: 400px;
+  background: #fff;
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.FingerPrint{
+  width: 200px;
+}
+
+.refNumber{
+  width: 100%;
+  font-size: 25px;
+  text-align: center;
+  padding: 5px;
+  margin-bottom: 10px;
+}
+
+.OkInSuccess{
+  width: 100%;
+  padding: 10px 0;
+  font-size: 20px;
+  cursor: pointer;
+  background: rgb(0, 0, 172);
+  color: white;
+}
+
+.OkInSuccess:hover{
+  background: rgb(0, 0, 255);
+}
+
+
+/* PANGALAWANG DESIGN PARA SA OFFICIALS DIVS */
+.containerDivssPangalawa {
+  display: grid;
+  padding-left: 10px;
+  padding-right: 10px;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.6rem;
+  padding-top: 20px;
+  overflow-y: auto; /* Add this */
+  height: 585px;
+}
+
+.CandidatesConPangalawa {
+  position: relative; 
+  display: flex;
+  flex-direction: column;
+  background: var(--color-white);
+  padding: 10px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  transition: all 300ms ease;
+  height: 390px;
+}
+
+.CandiImageContainerPangalawa {
+  display: flex;
+  justify-content: center;
+  height: 260px; 
+  width: 100%;
+  border: 2px rgb(3, 1, 139) solid;
+  overflow: hidden;
+}
+
+.inputAndDropdownContainer {
+  position: relative;
+  display: flex;
+  width: 100%; 
+  align-items: center; 
+}
+
+.text{
+  font-size: 17px;
+  padding: 5px;
+  margin-top: 10px;
+}
+
+.inputAndDropdownContainer input[type="text"] {
+  width: 100%; 
+  border: 2px rgb(3, 1, 139) solid;
+  font-size: 15px;
+  margin-top: 10px;
+  padding: 8px; 
+  box-sizing: border-box; 
+}
+
+/* .inputAndDropdownContainer .ArrowDown {
+  display: flex;
+  justify-content: center; /* Center horizontally
+  align-items: center; /* Center vertically 
+  font-size: 30px;
+  cursor: pointer;
+  margin-top: 10px;
+  margin-left: 5px;
+  background: gray;
+  width: 50px;
+  transition: 0.3s ease; 
+} */
+
+.btnPosDrop{
+  padding: 10px 15px;
+  cursor: pointer;
+  margin-top: 10px;
+  margin-left: 10px;
+}
+
+.emeDropPos{
+  width: 0;
+  height: 0;
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  border-top: 8px solid #aeaeae;
+  transition: 0.3s;
+}
+
+.emeDropPos.rotateOption {
+  transform: translateY(-50%) rotate(180deg); /* Rotate arrow 180 degrees */
+}
+
+.OptionDropDown input[type="radio"] {
+  display: none;
+}
+
+.OptionDropDown {
+  background-color: #fff;
+  padding: 10px;
+  position: absolute;
+  top: calc(100%); /* Position dropdown below inputAndDropdownContainer */
+  left: 40%;
+  z-index: 1; /* Ensure dropdown is above other content */
+  width: 60%; /* Make dropdown full width */
+  height: 110px;
+  overflow-y: auto;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2); /* Add shadow for styling */
+  display: none;
+}
+
+.OptionDropDown label {
+  display: block;
+  cursor: pointer;
+  padding: 8px;
+}
+
+.OptionDropDown label:hover {
+  background-color: #f0f0f0;
+}
+
+.OptionDropDown.open {
+  display: block; /* Show dropdown when container has 'open' class */
+}
+
+.buttonsNgOffiPangal{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 5px;
+}
+
+.footerCandidatesSubmit2{
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  padding-top: 5px;      
+}
+
+.buttonSubmitBoto2{
+  padding: 5px 40px;
+  font-size: medium;
+  cursor: pointer;
+  background: blue;
+  color: white;
+}
+
+.buttonSubmitBoto2:hover{
+  background: rgb(50, 141, 245);
+}
+
+/* DESIGN PARA SA SUMMARY MODAL */
+.SummaryViewModalTwo{
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.summary-ModalTwo{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.SubSummaryTwo{
+  position: relative;
+  max-width: 450px;
+  width: 100%;
+  margin-top: 10px;
+  height: 590px;
+  background: #fff;
+  border-radius: 8px;
+}
+
+.headerForSummaryTwo{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgb(229, 229, 229);
+  /* border-bottom: 1px solid gray; */
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.LamanLoobSummaryTwo{
+  height: 500px;
+  padding: 10px;
+  overflow-y: auto;
+}
+
+.closeSummaryTwo{
+  color: #000000;
+  font-size: 22px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.footerSummaryTwo{
+  display: flex;
+  justify-content: end;
+  background: rgb(229, 229, 229);
+  /* border-bottom: 1px solid gray; */
+  padding: 10px;
+  border-radius: 5px;
+}
+
+/* DESIGN PARA SA CANDIDATE SUMARRY */
+.candidatesTwo{
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.PictureCan1Two{
+  width: 80px;
+  height: 80px;
+  border: 3px solid var(--color-primary);
+  margin-right: 10px;
+}
+
+.NameAndPositionTwo{
+  width: 100%;
+  margin-top: 10px;
+}
+
+.NameAndPositionTwo label{
+  display: flex;
+  justify-content: center;
+  font-size: 15px;
+  font-weight: bold;
+  font-style: italic;
+  color: var(--color-primary);
+}
+
+.inputCanTwo{
+  width: 100%;
+  padding: 5px;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.AcceptBtn{
+  padding: 10px 20px;
+  cursor: pointer;
+}

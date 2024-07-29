@@ -2,18 +2,16 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Mabuhay Website </title>
-    <link rel="icon" type="image/x-icon" href="Pictures/Mabuhay_Logo.ico">
-    <link rel="stylesheet" href="CSS/UserVoting.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> User Vote </title>
+  <link rel="stylesheet" href="VOTING.CSS">
 </head>
 <body>
 <div class="mainDashboardContainer">
         <div class="secMainDash">
             <div class="sidebarContainer sideActive" id="sidebar">
                 <div class="headerTop">
-                    <img class="img-logo" src="Pictures/Mabuhay_Logo.png">
+                    <img class="img-logo" src="Pictures/Dasma_City_Logo.png">
                     <h2 class="MabuhayName"> Mabuhay Homes 2000 Phase 5 </h2>
                 </div>
                 <a href="DashBoard.php" class="sideside baractive">
@@ -34,22 +32,22 @@
                     </a>  
                     <ul class="subMenuComp" id="complaintsSubMenu">
                         <li> 
-                            <a href="UserChat.php">
+                            <a href="Chat.php">
                                 <img class="img-subMenu" src="Pictures/Chat.png">
                                 <label class="sub-spa"> Chat </label>
                             </a> 
                         </li>
                     </ul>
                 </div>
-                <a href="UserPayments.php" class="sideside">
+                <a href="MonthlyDue.php" class="sideside">
                     <img class="img-sideboard" src="Pictures/MonthlyDue.png">
                     <span> Monthly Due </span>
                 </a>
-                <a href="UserVoting.php" class="sideside">
+                <a href="USER_VOTING.HTML" class="sideside">
                     <img class="img-sideboard" src="Pictures/voting.png">
                     <span> Voting </span>
                 </a>
-                <a href="Logout.php" class="sideside">
+                <a href="#" class="sideside">
                     <img class="img-sideboard" src="Pictures/logout.png">
                     <span> Logout </span>
                 </a>
@@ -780,6 +778,6 @@
             </div>
         </div>
     </div>
-    <script src="JS/UserVoting.js"></script>
+    <script src="VOTING.JS"></script>
 </body>
 </html>

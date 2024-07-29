@@ -36,3 +36,43 @@ if (!dropdownButton.contains(event.target) && !dropdownContent.contains(event.ta
 }
 });
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+    const form = document.querySelector(".lagin");
+    const errorText = form.querySelector(".iror");
+    const LoginBtn = form.querySelector(".laginbtn");
+  
+    form.onsubmit = (e) => {
+      // Prevent the form from submitting normally
+      e.preventDefault();
+    };
+  
+    if (LoginBtn) {
+      LoginBtn.onclick = () => {
+        let xhr = new XMLHttpRequest();
+        xhr.open("POST", "PHPBackend/Login.php", true);
+        xhr.onload = () => {
+          if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+              let data = xhr.response;
+              console.log(data);
+  
+              if (data === "admin") {
+                window.location.href = "DashBoard.php";
+              } else if (data === "user") {
+                window.location.href = "UserAnnounce.php";
+              } else {
+                errorText.textContent = data;
+                errorText.style.display = "block";
+                console.log(data);
+              }
+            }
+          }
+        };
+  
+        let formData = new FormData(form);
+        xhr.send(formData);
+      };
+    }
+  });
+  

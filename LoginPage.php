@@ -1,10 +1,36 @@
+<?php 
+include "Connect/Connection.php";
+session_start();
+
+if(isset($_SESSION['unique_id'])){
+    // Perform logout actions
+    // Redirect to login page only if the user is not already on the login page
+    if(basename($_SERVER['PHP_SELF']) !== 'LoginPage.php') {
+        header("Location: LoginPage.php");
+        exit();
+    }
+}
+
+if (isset($_SESSION['role'])) {
+    echo '<script>';
+    echo 'const sessionRole = "' . $_SESSION['role'] . '";';
+    echo '</script>';
+} else {
+    echo '<script>';
+    echo 'const sessionRole = null;';
+    echo '</script>';
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Page</title>
+    <title> Mabuhay Website </title>
+    <link rel="icon" type="image/x-icon" href="Pictures/Mabuhay_Logo.ico">
     <link rel="stylesheet" href="CSS/LoginPage.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
     <div class="main">
@@ -21,14 +47,15 @@
                             <div class="title-container forms">
                                 <span class="login-title">Login</span>
 
-                                <form class="login-forms">
+                                <form class="login-forms lagin" action="" method="POST">
+                                    <div class="iror"></div>
                                     <div class="login-input-field">
-                                        <input type="text" required="required" class="inputLogin">
-                                        <span>Username</span>
+                                        <input type="text" required="required" class="inputLogin" name="email">
+                                        <span>Email Address</span>
                                         <img class="img-login" src="Pictures/usernameCap.png">
                                     </div>
                                     <div class="login-input-field">
-                                        <input type="password" required="required" class="password inputLogin">
+                                        <input type="password" required="required" class="password inputLogin" name="loginpassword">
                                         <span>Password</span>
                                     </div>
 
@@ -37,7 +64,7 @@
                                     </div>
 
                                     <div class="btn-login">
-                                        <button class="login-press">Login</button>
+                                        <button class="login-press laginbtn">Login</button>
                                     </div>
 
                                     <div class="signtext-container">
@@ -56,30 +83,32 @@
                     <span class="signUp-title"> Sign Up </span>
                     <div class="formSignup">
                         
-                        <form class="signup-form">
+                        <form class="signup-form saynap" enctype="multipart/form-data">
+                        <div class="iror"></div>
                             <div class="form first">
                                 <div class="details personal">
                                     <span class="titleniyato"> Personal Details </span>
 
                                     <div class="input-field">
                                         <span> First Name </span>
-                                        <input type="text" placeholder="Enter Your First Name">
+                                        <input type="text" placeholder="Enter Your First Name" name="fname">
                                     </div>
 
                                     <div class="input-field">
                                         <span> Middle Name </span>
-                                        <input type="text" placeholder="Enter Your Middle Name">
+                                        <input type="text" placeholder="Enter Your Middle Name" name="mname">
                                     </div>
         
                                     <div class="input-field">
                                         <span> Last Name </span>
-                                        <input type="text" placeholder="Enter Your Last Name">
+                                        <input type="text" placeholder="Enter Your Last Name" name="lname">
                                     </div>
 
                                     <div class="rowFields">
                                         <div class="input-field">
                                             <span> Suffix </span>
-                                            <input type="text" placeholder="Enter Your Suffix">
+                                            <input type="text" placeholder="Enter Your Suffix"
+                                            name="suffix">
                                         </div>
             
                                         <div class="input-field dropdown">
@@ -112,7 +141,7 @@
                                     </div> -->
 
                                     <div class="btnNgSubmit">
-                                        <button class="SumbitSignUp-Btn">
+                                        <button class="SumbitSignUp-Btn SaynapBtn">
                                             Submit
                                         </button>
                                     </div>
@@ -128,6 +157,34 @@
                 </div>
             </div>
         </div>
-    </div>     
+    </div>  
+    
+    <!-- <script>
+        // JavaScript logic
+        function showSignUpForm() {
+            document.getElementById("loginForm").classList.remove("show");
+            document.getElementById("signUpForm").classList.add("show");
+        }
+    
+        function showLoginForm() {
+            document.getElementById("signUpForm").classList.remove("show");
+            document.getElementById("loginForm").classList.add("show");
+        }
+    
+        const form = document.querySelector(".signup-form");
+        const nextBtn = form.querySelector(".nextBtn");
+        const backBtn = form.querySelector(".backBtn");
+        const allInput = form.querySelectorAll(".first input");
+
+        const genderSelect = form.querySelector("#gender");
+        const PWD = form.querySelector("#pwd"); 
+        // const ecNamee = form.querySelector("#GrdnName");
+        // const ecNumb = form.querySelector("#GrdnNumber");
+        // const ecRels = form.querySelector("#GrdnRelship");
+        // const ecAddr = form.querySelector("#GrdnAdress");
+
+    </script>  -->
+    <script src="JS/Signup.js"></script>     
+    <script src="JS/Login.js"></script>  
 </body>
 </html>
