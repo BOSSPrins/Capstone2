@@ -1,3 +1,18 @@
+<?php
+include_once "Connect/Connection.php";
+session_start();
+
+if (isset($_SESSION['unique_id'])) {
+    if ($_SESSION['role'] == 'user') {
+        header("Location: LoginPage.php");
+        exit();
+    }
+    } else {
+    header("Location: LoginPage.php");
+    exit();
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -264,7 +279,7 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr>
+                                                    <!-- <tr>
                                                         <td> 1 </td>
                                                         <td> Prince </td>
                                                         <td> 1000 </td>
@@ -278,7 +293,7 @@
                                                         <td> 3 </td>
                                                         <td> Jefferson </td>
                                                         <td> 899 </td>
-                                                    </tr>
+                                                    </tr> -->
                                                 </tbody>
                                             </table>
                                         </div>
@@ -449,39 +464,47 @@
                                 </footer>
                             </div>
                         
+                            <!-- Modal ng add candidate -->
                             <div id="History" class="EachContentsMonth">
                                 <header class="AddingDivsForCandidates">
                                     <button type="button" class="addingDivsBtn"> Add </button>
                                 </header>
-                                <div class="addingcanditatesDivCon" id="addingCandidatesContainer">
-                                    <div class="SubAddingCandiCon">
-                                        <div class="addingCandidatesLoob">
-                                            <header class="headerNgAdding">
-                                                <h2> Add Candidate </h2>
-                                                <span class="CloseAdding">&times;</span>
-                                            </header>
-                                            <div class="AddingNewCandidateLoob">
-                                                <div class="NameOfCandidateNew">
-                                                    <h2> Name: </h2>
-                                                    <input class="NameNewCandi" type="text">
-                                                </div>
-                                                <div class="FileUploadPicNewCandi">
-                                                    <div class="file-upload">
-                                                        <label for="fileInput" class="file-upload-label">
-                                                            <div class="file-upload-icon">+</div>
-                                                            <div class="file-upload-text">Upload Image</div>
-                                                        </label>
-                                                        <input type="file" id="fileInput" class="file-upload-input">
+                                    <form class="bowting" id="candidateForm"  method="POST" enctype="multipart/form-data">
+                                        <div class="addingcanditatesDivCon" id="addingCandidatesContainer">
+                                            <div class="SubAddingCandiCon">
+                                                <div class="addingCandidatesLoob">
+                                                    <header class="headerNgAdding">
+                                                        <h2> Add Candidate </h2>
+                                                        <span class="CloseAdding">&times;</span>
+                                                    </header>
+                                                    <div class="AddingNewCandidateLoob">
+                                                        <div class="NameOfCandidateNew">
+                                                            <h2> Name: </h2>
+                                                            <input class="NameNewCandi" type="text" placeholder="Enter full name" id="candi_Name" name="candi_Name" oninput="fetchResidentID()">
+                                                        </div>
+                                                        <div class="FileUploadPicNewCandi">
+                                                            <div class="file-upload">
+                                                                <label for="fileInput" class="file-upload-label">
+                                                                    <div class="file-upload-icon">+</div>
+                                                                    <div class="file-upload-text">Upload Image</div>
+                                                                </label>
+                                                                <input type="file" id="fileInput" class="file-upload-input" id="candi_IMG" name="candi_IMG">
+                                                            </div>
+                                                            <img id="previewImage" src="#" alt="Image Preview" style="display: none; max-width: 100%; max-height: 200px;">
+                                                        </div>
+                                                        <div class="iror" id="iror"></div>
+                                                        <div class="sakses" id="sakses"></div> 
+                                                        <div class="NameOfCandidateNew">
+                                                            <input class="NameNewCandi" type="hidden" id="candi_ID" name="candi_ID"> 
+                                                        </div>
                                                     </div>
-                                                    <img id="previewImage" src="#" alt="Image Preview" style="display: none; max-width: 100%; max-height: 200px;">
+                                                    <footer class="AddingNewCandi">
+                                                        <button type="button addCandi" onclick="submitForm(event)"> Add </button>
+                                                    </footer>
                                                 </div>
                                             </div>
-                                            <footer class="AddingNewCandi">
-                                                <button type="button"> Add </button>
-                                            </footer>
-                                        </div>
-                                    </div>
-                                </div> 
+                                        </div> 
+                                    </form>
                                 <div class="containerDivss">
                                     <div class="CandidatesCon">
                                         <div class="CandiImageContainer" id="CandiImageContainer">

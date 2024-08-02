@@ -1,3 +1,30 @@
+<?php
+include_once "Connect/Connection.php";
+session_start();
+
+if (isset($_SESSION['unique_id'])) {
+    if ($_SESSION['role'] == 'admin') {
+        header("Location: LoginPage.php");
+        exit();
+    }
+    } else {
+    header("Location: LoginPage.php");
+    exit();
+    }
+$user_UID = $_SESSION['unique_id'];
+
+
+// //Check if unique_id is set in the session
+// if (isset($_SESSION['unique_id'])) {
+//     echo "Unique ID in session: " . $_SESSION['unique_id'] . "\n";
+// } else {
+//     echo "No unique_id found in session\n";
+// }
+// // Output all session data for debugging purposes
+// echo "Full session data:\n";
+// print_r($_SESSION);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -133,11 +160,11 @@
                             </div>
                         </header>
                         <div class="User_containerDivss">
-                            <div class="User_CandidatesCon form-element">
+                            <!-- <div class="User_CandidatesCon form-element">
                                 <input class="checkboxx" type="checkbox" name="platform" value="Candidate1" id="Candidate1">
                                 <label for="Candidate1">
                                     <div class="User_CandiImageContainer">
-                                        <img src="Pictures/malit.jpg">
+                                        <img src="Pictures/Mabuhay_Logo.png">
                                     </div>
                                     <div class="title">
                                         <span> Enter Candidate Name </span>
@@ -311,7 +338,7 @@
                                         <span> Enter Candidate Name </span>
                                     </div>
                                 </label>
-                            </div>
+                            </div> -->
                         </div>
                         <footer class="footerCandidatesSubmit">
                             <button class="buttonSubmitBoto" type="submit"> Submit </button>
@@ -584,97 +611,109 @@
                 </div>
                 <div class="UsersSummaryModal" id="UsersSummaryModal">
                     <div class="UsersSummaryModalBaba">
-                        <div class="UsersSubSummary">
-                            <header class="UsersHeaderForSummary">
-                                <h2> SUMMARY </h2>
-                                <span class="UsersCloseSummary">&times;</span>
-                            </header>
-                            <div class="UsersLamanLoobSummary">
-                                <div class="UsersCandidates">
-                                    <div class="UsersPictureCan1">
-                                        <img src="Pictures/malit.jpg">
+                        <form method="POST">
+                            <div class="UsersSubSummary">
+                                <header class="UsersHeaderForSummary">
+                                    <h2> SUMMARY </h2>
+                                    <span class="UsersCloseSummary">&times;</span>
+                                </header>                           
+                                <div class="UsersLamanLoobSummary">
+                                    <div class="UsersCandidates">
+                                        <div class="UsersPictureCan1" id="candi1_img" name="candi1_img">
+                                            <!-- Image here -->
+                                        </div>
+                                        <div class="UsersNameAndPosition">
+                                            <input class="UsersInputCan" type="text" id="candi1_name" name="candi1_name">
+                                            <input class="UsersInputCan" type="hidden" id="candi1_ID" name="candi1_ID">
+                                        </div>
                                     </div>
-                                    <div class="UsersNameAndPosition">
-                                        <input class="UsersInputCan" type="text">
-                                    </div>
-                                </div>
 
-                                <div class="UsersCandidates">
-                                    <div class="UsersPictureCan1">
-                                        <!-- Image here -->
+                                    <div class="UsersCandidates">
+                                        <div class="UsersPictureCan1" id="candi2_img" name="candi2_img">
+                                            <!-- Image here -->
+                                        </div>
+                                        <div class="UsersNameAndPosition">
+                                            <input class="UsersInputCan" type="text" id="candi2_name" name="candi2_name">
+                                            <input class="UsersInputCan" type="hidden" id="candi2_ID" name="candi2_ID">
+                                        </div>
                                     </div>
-                                    <div class="UsersNameAndPosition">
-                                        <input class="UsersInputCan" type="text">
-                                    </div>
-                                </div>
 
-                                <div class="UsersCandidates">
-                                    <div class="UsersPictureCan1">
-                                        <!-- Image here -->
+                                    <div class="UsersCandidates">
+                                        <div class="UsersPictureCan1" id="candi3_img" name="candi3_img">
+                                            <!-- Image here -->
+                                        </div>
+                                        <div class="UsersNameAndPosition">
+                                            <input class="UsersInputCan" type="text" id="candi3_name" name="candi3_name">
+                                            <input class="UsersInputCan" type="hidden" id="candi3_ID" name="candi3_ID">
+                                        </div>
                                     </div>
-                                    <div class="UsersNameAndPosition">
-                                        <input class="UsersInputCan" type="text">
-                                    </div>
-                                </div>
 
-                                <div class="UsersCandidates">
-                                    <div class="UsersPictureCan1">
-                                        <!-- Image here -->
+                                    <div class="UsersCandidates">
+                                        <div class="UsersPictureCan1" id="candi4_img" name="candi4_img">
+                                            <!-- Image here -->
+                                        </div>
+                                        <div class="UsersNameAndPosition">
+                                            <input class="UsersInputCan" type="text" id="candi4_name" name="candi4_name">
+                                            <input class="UsersInputCan" type="hidden" id="candi4_ID" name="candi4_ID">
+                                        </div>
                                     </div>
-                                    <div class="UsersNameAndPosition">
-                                        <input class="UsersInputCan" type="text">
-                                    </div>
-                                </div>
 
-                                <div class="UsersCandidates">
-                                    <div class="UsersPictureCan1">
-                                        <!-- Image here -->
+                                    <div class="UsersCandidates">
+                                        <div class="UsersPictureCan1" id="candi5_img" name="candi5_img">
+                                            <!-- Image here -->
+                                        </div>
+                                        <div class="UsersNameAndPosition">
+                                            <input class="UsersInputCan" type="text" id="candi5_name" name="candi5_name">
+                                            <input class="UsersInputCan" type="hidden" id="candi5_ID" name="candi5_ID">
+                                        </div>
                                     </div>
-                                    <div class="UsersNameAndPosition">
-                                        <input class="UsersInputCan" type="text">
-                                    </div>
-                                </div>
 
-                                <div class="UsersCandidates">
-                                    <div class="UsersPictureCan1">
-                                        <!-- Image here -->
+                                    <div class="UsersCandidates">
+                                        <div class="UsersPictureCan1" id="candi6_img" name="candi6_img">
+                                            <!-- Image here -->
+                                        </div>
+                                        <div class="UsersNameAndPosition">
+                                            <input class="UsersInputCan" type="text" id="candi6_name" name="candi6_name">
+                                            <input class="UsersInputCan" type="hidden" id="candi6_ID" name="candi6_ID">
+                                        </div>
                                     </div>
-                                    <div class="UsersNameAndPosition">
-                                        <input class="UsersInputCan" type="text">
-                                    </div>
-                                </div>
 
-                                <div class="UsersCandidates">
-                                    <div class="UsersPictureCan1">
-                                        <!-- Image here -->
+                                    <div class="UsersCandidates">
+                                        <div class="UsersPictureCan1" id="candi7_img" name="candi7_img">
+                                            <!-- Image here -->
+                                        </div>
+                                        <div class="UsersNameAndPosition">
+                                            <input class="UsersInputCan" type="text" id="candi7_name" name="candi7_name">
+                                            <input class="UsersInputCan" type="hidden" id="candi7_ID" name="candi7_ID">
+                                        </div>
                                     </div>
-                                    <div class="UsersNameAndPosition">
-                                        <input class="UsersInputCan" type="text">
-                                    </div>
-                                </div>
 
-                                <div class="UsersCandidates">
-                                    <div class="UsersPictureCan1">
-                                        <!-- Image here -->
+                                    <div class="UsersCandidates">
+                                        <div class="UsersPictureCan1" id="candi8_img" name="candi8_img">
+                                            <!-- Image here -->
+                                        </div>
+                                        <div class="UsersNameAndPosition">
+                                            <input class="UsersInputCan" type="text" id="candi8_name" name="candi8_name">
+                                            <input class="UsersInputCan" type="hidden" id="candi8_ID" name="candi8_ID">
+                                        </div>
                                     </div>
-                                    <div class="UsersNameAndPosition">
-                                        <input class="UsersInputCan" type="text">
-                                    </div>
-                                </div>
 
-                                <div class="UsersCandidates">
-                                    <div class="UsersPictureCan1">
-                                        <!-- Image here -->
+                                    <div class="UsersCandidates">
+                                        <div class="UsersPictureCan1" id="candi9_img" name="candi9_img">
+                                            <!-- Image here -->
+                                        </div>
+                                        <div class="UsersNameAndPosition">
+                                            <input class="UsersInputCan" type="text" id="candi9_name" name="candi9_name">
+                                            <input class="UsersInputCan" type="hidden" id="candi9_ID" name="candi9_ID">
+                                        </div>
                                     </div>
-                                    <div class="UsersNameAndPosition">
-                                        <input class="UsersInputCan" type="text">
-                                    </div>
-                                </div>
+                                </div>                                                     
+                                <footer class="UsersFooterSummary">
+                                    <input type="hidden" name="user_ID" id="user_ID" value="<?php echo $user_UID ?>">
+                                    <button type="submit" class="btnSubmitNaSaAdmin" id="submitVoteButton" name="submitVoteButton"> Submit </button>
+                                </footer>
                             </div>
-                            <footer class="UsersFooterSummary">
-                                <button class="btnSubmitNaSaAdmin"> Submit </button>
-                            </footer>
-                        </div>
+                        </form>
                     </div>
                 </div>
 

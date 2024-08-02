@@ -11,6 +11,8 @@ if (isset($_SESSION['unique_id'])) {
     header("Location: LoginPage.php");
     exit();
   }
+
+
 ?>
 
 <!DOCTYPE html>

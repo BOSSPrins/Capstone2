@@ -231,7 +231,11 @@ document.addEventListener("DOMContentLoaded", function () {
 // }
 
 
+
+
 //FUNCTION SA PAG PILI NG PICTURES 
+
+
 const uploadButton = document.querySelector(".UploadPics");
 const inputFile = document.querySelector(".inputFileCert");
 
@@ -579,6 +583,220 @@ inputFile9.addEventListener("change", function() {
 
 
 
+
+function fetchResidentID() {
+    // Get the full name from the input
+    var fullName = document.getElementById("candi_Name").value.trim();
+    
+    // If the input is empty, clear the unique ID and error message
+    if (!fullName) {
+        document.getElementById("candi_ID").value = "";
+        document.getElementById("iror").innerText = "";
+        document.getElementById("iror").style.display = "none";
+        return;
+    }
+
+    // Split the full name into parts (assuming format: Firstname Middlename Lastname)
+    var nameParts = fullName.split(" ");
+    
+    // Check if name parts are valid
+    if (nameParts.length < 3) {
+        document.getElementById("iror").innerText = "Incomplete name";
+        document.getElementById("iror").style.display = "block";
+        console.log("Incomplete name");
+        return;
+    }
+
+    var firstName = nameParts[0];
+    var middleName = nameParts[1];
+    var lastName = nameParts.slice(2).join(" ");
+
+    console.log("First Name:", firstName);
+    console.log("Middle Name:", middleName);
+    console.log("Last Name:", lastName);
+
+    // Create a new XMLHttpRequest object
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "PHPBackend/VotingProcess.php", true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+    // Define the callback for when the request completes
+    xhr.onload = function() {
+        if (xhr.status >= 200 && xhr.status < 300) {
+            var response = JSON.parse(xhr.responseText);
+            console.log("Response Data:", response);
+            if (response.success) {
+                document.getElementById("candi_ID").value = response.unique_id;
+                document.getElementById("iror").innerText = "";
+                document.getElementById("iror").style.display = "none";
+            } else {
+                document.getElementById("iror").innerText = "Not found";
+                document.getElementById("iror").style.display = "block";
+                document.getElementById("candi_ID").value = "";
+            }
+        } else {
+            console.error("Request failed with status:", xhr.status);
+        }
+    };
+
+    // Define the data to send
+    var data = "firstname=" + encodeURIComponent(firstName) +
+               "&middlename=" + encodeURIComponent(middleName) +
+               "&lastname=" + encodeURIComponent(lastName);
+
+    // Send the request
+    xhr.send(data);
+}
+
+
+// Fetch and render candidates on page load
+document.addEventListener('DOMContentLoaded', function() {
+    fetchCandidates();
+});
+
+function fetchCandidates() {
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", "PHPBackend/VotingProcess.php", true);
+    xhr.onload = function() {
+        if (xhr.status >= 200 && xhr.status < 300) {
+            try {
+                console.log("xhr.responseText:", xhr.responseText);
+                var response = JSON.parse(xhr.responseText);
+                if (response.success) {
+                    response.candidates.forEach(function(candidate) {
+                        addCandidateToGeneratedDiv(candidate);
+                    });
+                } else {
+                    console.error("Error fetching candidates:", response.error);
+                }
+            } catch (e) {
+                console.error("Failed to parse JSON response:", e);
+            }
+        } else {
+            console.error("Request failed with status:", xhr.status);
+        }
+    };
+    xhr.send();
+}
+
+function addCandidateToGeneratedDiv(candidate) {
+    console.log("Adding candidate to generated div:", candidate);
+    
+    const container = document.querySelector('.containerDivss');
+    if (!container) {
+        console.error("Container not found");
+        return;
+    }
+    
+    // Gawaan ng buong div 
+    const newCandidateCon = document.createElement('div');
+    newCandidateCon.classList.add('CandidatesCon');
+
+    // At yung div ng pic
+    const imageContainer = document.createElement('div');
+    imageContainer.classList.add('CandiImageContainer');
+
+    // Lagayan ng pic
+    const img = document.createElement('img');
+    img.src = `Pictures/${candidate.img}`; 
+    img.alt = candidate.candidate_name;
+    img.style.maxWidth = "100%";
+    img.style.maxHeight = "100%"; 
+    imageContainer.appendChild(img);
+
+    // Eto naman sa pangalan ng candi
+    const nameElement = document.createElement('p');
+    nameElement.textContent = candidate.candidate_name;
+    nameElement.classList.add('NameCandiInput');
+
+    // Yung X sa gilid
+    const closeButton = document.createElement('button');
+    closeButton.classList.add('CloseButton');
+    closeButton.textContent = 'X';
+
+    closeButton.addEventListener('click', function() {
+        container.removeChild(newCandidateCon);
+    });
+
+    newCandidateCon.appendChild(imageContainer);
+    newCandidateCon.appendChild(nameElement);
+    newCandidateCon.appendChild(closeButton);
+
+    container.appendChild(newCandidateCon);
+    console.log("New candidate div added to container.");
+}
+
+document.getElementById("candidateForm").onsubmit = submitForm;
+
+function submitForm(event) {
+    event.preventDefault();
+    
+    var form = document.getElementById("candidateForm");
+    var formData = new FormData(form);
+
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "PHPBackend/VotingProcess.php", true);
+
+    xhr.onload = function() {
+        var irorDiv = document.getElementById("iror");
+        var saksesDiv = document.getElementById("sakses");
+        console.log("xhr.status:", xhr.status);
+        if (xhr.status >= 200 && xhr.status < 300) {
+        try {
+            console.log("xhr.responseText:", xhr.responseText);
+            var response = JSON.parse(xhr.responseText);  
+            console.log("Parsed response:", response);
+            
+                if (response.success) {
+                    saksesDiv.innerText = "Candidate added successfully!";
+                    saksesDiv.style.display = "block";
+
+                    // Add new candidate div
+                    addCandidateToGeneratedDiv(response.candidate);
+
+                    // Hide the success message after 5 seconds
+                    setTimeout(function() {
+                        saksesDiv.style.display = "none";
+                        document.getElementById("candi_Name").value = ''; // Clear the name input
+                        document.getElementById("previewImage").style.display = 'none'; // Hide the image preview
+                        document.getElementById("candi_ID").style.display = 'none';
+                    }, 5000);
+               
+                } else {
+                    irorDiv.innerText = response.error || "Error adding candidate.";
+                    irorDiv.style.display = "block";
+
+                    // Hide the error message after 5 seconds
+                    setTimeout(function() {
+                        irorDiv.style.display = "none";
+                    }, 5000);
+                }
+            } catch (e) {
+                console.error("Failed to parse JSON response:", e);          
+                irorDiv.innerText = "Server error.";
+                irorDiv.style.display = "block";
+
+                // Hide the error message after 5 seconds
+                setTimeout(function() {
+                    irorDiv.style.display = "none";
+                }, 5000);
+            }
+        } else {
+            console.error("Request failed with status:", xhr.status);
+            irorDiv.innerText = "Invalid response format.";
+            irorDiv.style.display = "block";
+
+            // Hide the error message after 5 seconds
+            setTimeout(function() {
+                irorDiv.style.display = "none";
+            }, 5000);
+        }
+    };
+
+    xhr.send(formData);
+}
+
+// lumang pang generate ng div
 // document.addEventListener('DOMContentLoaded', function() {
 //     const addButton = document.querySelector('.addingDivsBtn');
 //     const container = document.querySelector('.containerDivss');
@@ -617,7 +835,7 @@ inputFile9.addEventListener("change", function() {
 //         const uploadButton = document.createElement('button');
 //         uploadButton.classList.add('buttonSivv');
 //         uploadButton.classList.add(`UploadPics${counter}`);
-//         uploadButton.textContent = 'Upload Picture';
+//         uploadButton.textContent = ''; // Upload Picture inalis ko kasi di pa alam gagawin sa button
         
 //         // Create file input
 //         const fileInput = document.createElement('input');
@@ -640,7 +858,7 @@ inputFile9.addEventListener("change", function() {
 //         const saveButton = document.createElement('button');
 //         saveButton.classList.add('buttonSivv');
 //         saveButton.classList.add('SaveBtn');
-//         saveButton.textContent = 'Save';
+//         saveButton.textContent = ''; // Save inalis ko kasi di pa alam gagawin sa button
         
 //         // Append save button to the container
 //         saveButtonContainer.appendChild(saveButton);
@@ -701,8 +919,7 @@ inputFile9.addEventListener("change", function() {
 //     });
 // });
 
-
-
+// modal nung add new candidate
 document.addEventListener('DOMContentLoaded', function() {
     const addButton = document.querySelector('.addingDivsBtn');
     const closeButton = document.querySelector('.CloseAdding');
@@ -743,3 +960,50 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+
+
+function fetchTableData() {
+    console.log('Fetching table data...');
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', 'PHPBackend/VotingProcess.php', true);
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            console.log('XHR ReadyState:', xhr.readyState);
+            console.log('XHR Status:', xhr.status);
+            if (xhr.status === 200) {
+                console.log('Response received:', xhr.responseText);
+                var response = JSON.parse(xhr.responseText);
+                if (response.success) {
+                    console.log('Response candidates:', response.candidates);
+                    var tableBody = document.querySelector('.TableContainerRank tbody');
+                    tableBody.innerHTML = ''; // Clear existing rows
+
+                    // Check if the candidates data is available
+                    if (response.candidates && response.candidates.length > 0) {
+                        response.candidates.forEach(function(candidate, index) {
+                            console.log('Candidate:', candidate); // Debugging candidate data
+                            var tr = document.createElement('tr');
+                            tr.innerHTML = '<td>' + (index + 1) + '</td><td>' + candidate.candidate_name + '</td><td>' + (candidate.votes !== undefined ? candidate.votes : 0) + '</td>';
+                            tableBody.appendChild(tr);
+                        });
+                    } else {
+                        var tr = document.createElement('tr');
+                        tr.innerHTML = '<td colspan="3">No candidates found</td>';
+                        tableBody.appendChild(tr);
+                    }
+                } else {
+                    console.log('Error:', response.error);
+                }
+            } else {
+                console.error('Request failed with status:', xhr.status);
+            }
+        }
+    };
+    xhr.send();
+}
+
+// Fetch data initially
+fetchTableData();
+
+// Set interval to refresh table every 5 seconds
+setInterval(fetchTableData, 5000);

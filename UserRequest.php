@@ -73,7 +73,6 @@ $_SESSION['block'] = $userData['block'];
 $_SESSION['lot'] = $userData['lot'];
 
 
-
 ?>
 
 <!DOCTYPE html>
