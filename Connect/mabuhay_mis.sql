@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 10, 2024 at 09:20 PM
+-- Generation Time: Aug 02, 2024 at 08:31 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -208,7 +208,10 @@ INSERT INTO `messages` (`msg_id`, `incoming_msg_id`, `outgoing_msg_id`, `msg`, `
 (91, 1589571584, 1357825271, 'heelo', '2024-06-05 13:20:44'),
 (92, 1589571584, 1662732210, 'Test', '2024-06-07 02:56:40'),
 (93, 1662732210, 1589571584, 'Test 123', '2024-06-07 02:57:08'),
-(94, 1662732210, 1589571584, 'test', '2024-06-07 02:57:23');
+(94, 1662732210, 1589571584, 'test', '2024-06-07 02:57:23'),
+(95, 1357825271, 1589571584, 'Test', '2024-07-01 06:11:02'),
+(96, 1589571584, 1357825271, 'Complaints \r\n', '2024-07-01 14:48:14'),
+(97, 1589571584, 1357825271, 'Concern', '2024-07-01 14:48:18');
 
 -- --------------------------------------------------------
 
@@ -372,7 +375,7 @@ CREATE TABLE `tblresident` (
 INSERT INTO `tblresident` (`user_id`, `unique_id`, `access`, `first_name`, `middle_name`, `last_name`, `suffix`, `sex`, `age`, `pwd`, `birthday`, `birthplace`, `citizenship`, `block`, `lot`, `street_name`, `phone_number`, `ec_name`, `ec_phone_num`, `ec_relship`, `ec_address`) VALUES
 (1, '', 'Rejected', 'Prince', 'Cutie', 'Cervantes', '', 'Male', 0, '', '09-02-2002', 'Las Pinas ', 'Filipino', 1, 18, 'Mabolo', 912345678, 'Leng Cervantes', 24357345745, 'Mother', 'Blk 9 Lot 18 Mabolo St.'),
 (2, '', 'Approved', 'Prince', 'P.', 'Cervantes', '', 'Female', 0, '', '05-21-2003', 'Manila', 'Filipino', 1, 9, 'Mabolo', 912345678, 'Tita nels', 4357345773, 'Mother', 'Blk 18 Lot 9 Kamagong St.'),
-(3, '', 'Approved', 'Welacakes', 'Magsino', 'Cervantes', '', 'Female', 20, '', '', '', '', 3, 18, '', 9434763913, 'Prince Jefferson P. Cervantes', 9666676033, 'Asawa', 'BLK 9 LOT 18 Ville de Palme Brgy. Santiago, General Trias, Cavite'),
+(3, '020223', 'Approved', 'Welacakes', 'Magsino', 'Cervantes', '', 'Female', 20, '', '', '', '', 3, 18, '', 9434763913, 'Prince Jefferson P. Cervantes', 9666676033, 'Asawa', 'BLK 9 LOT 18 Ville de Palme Brgy. Santiago, General Trias, Cavite'),
 (4, '1357825271', 'Rejected', 'Wela', 'Aguilar', 'Magsino', '', 'Male', 21, '', '', '', '', 3, 23, '', 9434763913, 'Arlenin', 24357345745, 'Secret', 'Blk 9 Lot 18 Anahaw St.'),
 (5, '', 'Rejected', 'Franky', 'Minskie', 'Skirt', '', 'Male', 99, '', '', '', '', 9, 99, '', 123132, 'Mama mo', 1231123, 'Mama ko', 'Sa bahay'),
 (6, '', '', 'Prins', 'Midname', 'Cervantes', '', 'Male', 21, '', '', '', '', 9, 18, '', 909090909, 'Mother', 9090909, 'Mother', 'BLK 9 LOT 18 Ville de Palme Brgy. Santiago, General Trias, Cavite'),
@@ -390,6 +393,59 @@ INSERT INTO `tblresident` (`user_id`, `unique_id`, `access`, `first_name`, `midd
 (19, '112466338', 'Approved', 'Prins', 'P', 'Cervs', '', 'Male', 23, '', '', '', '', 4, 3, '', 123, '', 0, '', ''),
 (20, '1509850339', 'Approved', 'TEst', 'TEst', 'TEst', '', 'Female', 123, '', '', '', '', 1, 1, '', 123, '', 0, '', ''),
 (21, '1017731196', 'Approved', 'bago', 'bago', 'bago', '', 'Rather not say', 123, '', '', '', '', 1, 2, '', 123123, '', 0, '', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_voting`
+--
+
+CREATE TABLE `user_voting` (
+  `vote_id` int(11) NOT NULL,
+  `unique_id` int(11) NOT NULL,
+  `candidate1` int(11) NOT NULL,
+  `candidate2` int(11) NOT NULL,
+  `candidate3` int(11) NOT NULL,
+  `candidate4` int(11) NOT NULL,
+  `candidate5` int(11) NOT NULL,
+  `candidate6` int(11) NOT NULL,
+  `candidate7` int(11) NOT NULL,
+  `candidate8` int(11) NOT NULL,
+  `candidate9` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `user_voting`
+--
+
+INSERT INTO `user_voting` (`vote_id`, `unique_id`, `candidate1`, `candidate2`, `candidate3`, `candidate4`, `candidate5`, `candidate6`, `candidate7`, `candidate8`, `candidate9`) VALUES
+(1, 1357825271, 112466338, 1509850339, 1357825271, 0, 0, 0, 0, 0, 0),
+(2, 1357825271, 1357825271, 112466338, 1509850339, 0, 0, 0, 0, 0, 0),
+(3, 1357825271, 112466338, 20223, 1357825271, 0, 0, 0, 0, 0, 0),
+(4, 1357825271, 112466338, 20223, 1357825271, 0, 0, 0, 0, 0, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `voting`
+--
+
+CREATE TABLE `voting` (
+  `vote_id` int(11) NOT NULL,
+  `unique_id` int(11) NOT NULL,
+  `candidate_name` varchar(255) NOT NULL,
+  `img` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `voting`
+--
+
+INSERT INTO `voting` (`vote_id`, `unique_id`, `candidate_name`, `img`) VALUES
+(1, 112466338, 'Prins P Cervs', 'ble.png'),
+(2, 1357825271, 'Wela Aguilar Magsino', 'logo2.png'),
+(3, 20223, 'Welacakes Magsino Cervantes', 'bebetime.jpg'),
+(4, 0, 'bago bago bago', 'toji.png');
 
 --
 -- Indexes for dumped tables
@@ -444,6 +500,18 @@ ALTER TABLE `tblresident`
   ADD PRIMARY KEY (`user_id`);
 
 --
+-- Indexes for table `user_voting`
+--
+ALTER TABLE `user_voting`
+  ADD PRIMARY KEY (`vote_id`);
+
+--
+-- Indexes for table `voting`
+--
+ALTER TABLE `voting`
+  ADD PRIMARY KEY (`vote_id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -451,7 +519,7 @@ ALTER TABLE `tblresident`
 -- AUTO_INCREMENT for table `announcements`
 --
 ALTER TABLE `announcements`
-  MODIFY `news_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `news_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT for table `forms`
@@ -463,7 +531,7 @@ ALTER TABLE `forms`
 -- AUTO_INCREMENT for table `messages`
 --
 ALTER TABLE `messages`
-  MODIFY `msg_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=95;
+  MODIFY `msg_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=98;
 
 --
 -- AUTO_INCREMENT for table `officials`
@@ -494,6 +562,18 @@ ALTER TABLE `tblaccounts`
 --
 ALTER TABLE `tblresident`
   MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+
+--
+-- AUTO_INCREMENT for table `user_voting`
+--
+ALTER TABLE `user_voting`
+  MODIFY `vote_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `voting`
+--
+ALTER TABLE `voting`
+  MODIFY `vote_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
