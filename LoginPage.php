@@ -179,9 +179,21 @@ if (isset($_SESSION['role'])) {
                                     </div>
 
                                     <div class="input-field">
-                                            <span> Street </span>
-                                            <input class="SUF" type="text">
-                                        </div>
+                                        <span> Street </span>
+                                        <input class="SUF" type="text">
+                                    </div>
+
+                                    <span class="titleniyato"> Create Account </span>
+
+                                    <div class="input-field">
+                                        <span> Email </span>
+                                        <input class="SUF" type="text">
+                                    </div>
+
+                                    <div class="input-field">
+                                        <span> Password </span>
+                                        <input class="SUF" type="text">
+                                    </div>
 
                                     <!-- <div class="rowFields">
                                         <div class="input-field">
