@@ -80,6 +80,11 @@ if (isset($_SESSION['role'])) {
 
                 <!-- Login and Sign Up forms -->
                 <div class="rightt" id="signUpForm">
+
+                    <div class="LogoSign-Up">
+                        <img class="imgLogo" src="Pictures/Mabuhay_Logo.png">
+                    </div>
+
                     <span class="signUp-title"> Sign Up </span>
                     <div class="formSignup">
                         
@@ -91,24 +96,23 @@ if (isset($_SESSION['role'])) {
 
                                     <div class="input-field">
                                         <span> First Name </span>
-                                        <input type="text" placeholder="Enter Your First Name" name="fname">
+                                        <input class="SUF" type="text" placeholder="Enter Your First Name" name="fname">
                                     </div>
 
                                     <div class="input-field">
                                         <span> Middle Name </span>
-                                        <input type="text" placeholder="Enter Your Middle Name" name="mname">
+                                        <input class="SUF" type="text" placeholder="Enter Your Middle Name" name="mname">
                                     </div>
         
                                     <div class="input-field">
                                         <span> Last Name </span>
-                                        <input type="text" placeholder="Enter Your Last Name" name="lname">
+                                        <input class="SUF" type="text" placeholder="Enter Your Last Name" name="lname">
                                     </div>
 
                                     <div class="rowFields">
                                         <div class="input-field">
                                             <span> Suffix </span>
-                                            <input type="text" placeholder="Enter Your Suffix"
-                                            name="suffix">
+                                            <input class="SUF" type="text" placeholder="Enter Your Suffix" name="suffix">
                                         </div>
             
                                         <div class="input-field dropdown">
@@ -116,17 +120,68 @@ if (isset($_SESSION['role'])) {
                                             <div class="dropdown-button">Select Option</div>
                                             <div class="dropdown-content">
                                                 <label class="option" data-value="male">
-                                                    <input class="pagpipilianKasarian" type="radio" name="gender" value="male"> Male
+                                                    <input class="pagpipilianKasarian SUF" type="radio" name="gender" value="male"> Male
                                                 </label>
                                                 <label class="option" data-value="female">
-                                                    <input class="pagpipilianKasarian" type="radio" name="gender" value="female"> Female
+                                                    <input class="pagpipilianKasarian SUF" type="radio" name="gender" value="female"> Female
                                                 </label>
                                                 <label class="option" data-value="other">
-                                                    <input class="pagpipilianKasarian" type="radio" name="gender" value="other"> Other
+                                                    <input class="pagpipilianKasarian SUF" type="radio" name="gender" value="other"> Other
                                                 </label>
                                             </div>
                                         </div>                                        
                                     </div>
+
+                                    <div class="rowFields">
+                                        <div class="input-field">
+                                            <span> Date Of Birth </span>
+                                            <input class="SUF" type="date">
+                                        </div>
+
+                                        <div class="input-field">
+                                            <span> Age </span>
+                                            <input class="SUF" type="text">
+                                        </div>
+                                    </div>
+
+                                    <div class="input-field">
+                                        <span> Contact No. </span>
+                                        <input class="SUF" type="text" placeholder="Enter Your Number" name="lname">
+                                    </div>
+
+                                    <div class="input-field">
+                                        <span> Do you have disabilities? </span>
+                                        <div class="radioButtonPwd">
+                                            <div class="check1">
+                                                <span class="spanCheck"> Yes </span>
+                                                <input type="checkbox">
+                                            </div>
+
+                                            <div class="check2">
+                                                <span class="spanCheck"> No </span>
+                                                <input type="checkbox">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <span class="titleniyato"> Address Details </span>
+
+                                    <div class="rowFields">
+                                        <div class="input-field">
+                                            <span> Block </span>
+                                            <input class="SUF" type="text">
+                                        </div>
+
+                                        <div class="input-field">
+                                            <span> Lot </span>
+                                            <input class="SUF" type="text">
+                                        </div>
+                                    </div>
+
+                                    <div class="input-field">
+                                            <span> Street </span>
+                                            <input class="SUF" type="text">
+                                        </div>
 
                                     <!-- <div class="rowFields">
                                         <div class="input-field">
