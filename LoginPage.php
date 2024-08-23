@@ -45,6 +45,11 @@ if (isset($_SESSION['role'])) {
                     <div class="forms formLogin">
                         <div class="forms">
                             <div class="title-container forms">
+
+                                <div class="LogoLog-In">
+                                    <img class="imgLogo" src="Pictures/Mabuhay_Logo.png">
+                                </div>
+
                                 <span class="login-title">Login</span>
 
                                 <form class="login-forms lagin" action="" method="POST">
@@ -96,7 +101,8 @@ if (isset($_SESSION['role'])) {
 
                                     <div class="input-field">
                                         <span> First Name </span>
-                                        <input class="SUF" type="text" placeholder="Enter Your First Name" name="fname">
+                                        <span style="color:red"> &#42; </span>
+                                        <input class="SUF" type="text" placeholder="Enter Your First Name" name="fname"> 
                                     </div>
 
                                     <div class="input-field">
@@ -106,6 +112,7 @@ if (isset($_SESSION['role'])) {
         
                                     <div class="input-field">
                                         <span> Last Name </span>
+                                        <span style="color:red"> &#42; </span>
                                         <input class="SUF" type="text" placeholder="Enter Your Last Name" name="lname">
                                     </div>
 
@@ -117,6 +124,7 @@ if (isset($_SESSION['role'])) {
             
                                         <div class="input-field dropdown">
                                             <span>Gender</span>
+                                            <span style="color:red"> &#42; </span>
                                             <div class="dropdown-button">Select Option</div>
                                             <div class="dropdown-content">
                                                 <label class="option" data-value="male">
@@ -135,17 +143,20 @@ if (isset($_SESSION['role'])) {
                                     <div class="rowFields">
                                         <div class="input-field">
                                             <span> Date Of Birth </span>
+                                            <span style="color:red"> &#42; </span>
                                             <input class="SUF" type="date">
                                         </div>
 
                                         <div class="input-field">
                                             <span> Age </span>
+                                            <span style="color:red"> &#42; </span>
                                             <input class="SUF" type="text">
                                         </div>
                                     </div>
 
                                     <div class="input-field">
                                         <span> Contact No. </span>
+                                        <span style="color:red"> &#42; </span>
                                         <input class="SUF" type="text" placeholder="Enter Your Number" name="lname">
                                     </div>
 
@@ -169,17 +180,20 @@ if (isset($_SESSION['role'])) {
                                     <div class="rowFields">
                                         <div class="input-field">
                                             <span> Block </span>
+                                            <span style="color:red"> &#42; </span>
                                             <input class="SUF" type="text">
                                         </div>
 
                                         <div class="input-field">
                                             <span> Lot </span>
+                                            <span style="color:red"> &#42; </span>
                                             <input class="SUF" type="text">
                                         </div>
                                     </div>
 
                                     <div class="input-field">
                                         <span> Street </span>
+                                        <span style="color:red"> &#42; </span>
                                         <input class="SUF" type="text">
                                     </div>
 
@@ -187,11 +201,13 @@ if (isset($_SESSION['role'])) {
 
                                     <div class="input-field">
                                         <span> Email </span>
+                                        <span style="color:red"> &#42; </span>
                                         <input class="SUF" type="text">
                                     </div>
 
                                     <div class="input-field">
                                         <span> Password </span>
+                                        <span style="color:red"> &#42; </span>
                                         <input class="SUF" type="text">
                                     </div>
 

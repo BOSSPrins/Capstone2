@@ -232,7 +232,6 @@ html{
 }
 
 /* DESIGN FOR DROPDOWN */
-
 .TableHeaderr{
   display: flex;
   justify-content: space-between;
@@ -267,6 +266,7 @@ html{
   background-color: #fff;
   width: 70px;
   user-select: none;
+  z-index: 1;
 }
 
 .options {
@@ -277,6 +277,7 @@ html{
   top: 100%;
   left: 0;
   width: 70px;
+  z-index: 1;
 }
 
 .option {
@@ -286,6 +287,7 @@ html{
   border-top: 1px solid #ccc;
   width: 100%;
   box-sizing: border-box;
+  z-index: 1;
 }
 
 .open .options {
@@ -671,9 +673,9 @@ font-size: 13px;
 .titleHeaderView{
   display: flex;
   align-items: center;
-  justify-content: space-between
-  ;
-  background: rgb(229, 229, 229);
+  justify-content: space-between;
+  /* background: rgb(30, 0, 224);
+  color: white; */
   /* border-bottom: 1px solid gray; */
   padding: 20px;
   border-radius: 5px;
@@ -687,14 +689,33 @@ font-size: 13px;
 }
 
 .emeeeee{
-  height: 465px;
+  height: 510px;
   padding: 10px;
   overflow-y: auto;
 }
 
-.footerNgViewModal{
+/* .footerNgViewModal{
   background: gray;
+  display: flex;
+  justify-content: end;
+  margin: 10px;
 }
+
+.AcceptBtn{
+  margin-right: 20px;
+  background: green;
+}
+
+.DecBtn{
+  background: rgb(195, 0, 0);
+}
+
+.ResPindot{
+  font-size: 20px;
+  padding: 10px 30px;
+  color: white;
+  border-radius: 5px;
+} */
 
 .headerModalRow{
   text-align: center;

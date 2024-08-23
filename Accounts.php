@@ -259,11 +259,7 @@ $conn = connection();
                                                 <div class="row">
                                                     <div class="inputboxView">
                                                         <label> Gender: </label>
-                                                        <select class="simpleOption">
-                                                            <option> Female </option>
-                                                            <option> Male </option>
-                                                            <option> Rather not to say </option>
-                                                        </select>
+                                                        <input class="inputngViewModalTo"  type="text" id="Gender" name="gender">
                                                     </div>
                                                     <div class="inputboxView">
                                                         <label> Contact Number: </label>
@@ -313,7 +309,8 @@ $conn = connection();
                                             </form>
                                         </div>
                                         <footer class="footerNgViewModal">
-                                            fsfdfad
+                                            <button class="AcceptBtn ResPindot"> Accept </button>
+                                            <button class="DecBtn ResPindot"> Decline </button>
                                         </footer>
                                     </div>
                                 </div>
