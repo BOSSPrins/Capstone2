@@ -159,13 +159,13 @@ if (isset($_SESSION['unique_id'])) {
                             <div class="itemsController">
                                 <h3>Show</h3>
                                 <div class="dropdown" id="itemPerpage">
-                                    <div class="selected" id="dropdownSelected"> 23 </div>
-                                    <div class="options">
-                                        <div class="option" data-value="4">04</div>
-                                        <div class="option" data-value="5">05</div>
-                                        <div class="option" data-value="8">08</div>
-                                        <div class="option" data-value="10">10</div>
-                                        <div class="option" data-value="23">15</div>
+                                    <div class="selected" style="z-index: 1;" id="dropdownSelected"> 23 </div>
+                                    <div class="options" style="z-index: 1;">
+                                        <div class="option" style="z-index: 1;" data-value="4">04</div>
+                                        <div class="option" style="z-index: 1;" data-value="5">05</div>
+                                        <div class="option" style="z-index: 1;" data-value="8">08</div>
+                                        <div class="option" style="z-index: 1;" data-value="10">10</div>
+                                        <div class="option" style="z-index: 1;" data-value="23">15</div>
                                     </div>
                                 </div>
                                 <h3>Per Page</h3>
@@ -310,11 +310,7 @@ if (isset($_SESSION['unique_id'])) {
                                             <div class="row">
                                                 <div class="inputboxView">
                                                     <label> Gender: </label>
-                                                    <select class="simpleOption">
-                                                        <option> Female </option>
-                                                        <option> Male </option>
-                                                        <option> Rather not to say </option>
-                                                    </select>
+                                                    <input class="inputngViewModalTo"  type="text" id="Gender" name="gender">
                                                 </div>
                                                 <div class="inputboxView">
                                                     <label> Contact Number: </label>
@@ -363,9 +359,10 @@ if (isset($_SESSION['unique_id'])) {
                                             </div>
                                         </form>
                                     </div>
-                                    <footer class="footerNgViewModal">
-                                        fsfdfad
-                                    </footer>
+                                    <!-- <footer class="footerNgViewModal">
+                                        <button class="AcceptBtn ResPindot"> Accept </button>
+                                        <button class="DecBtn ResPindot"> Decline </button>
+                                    </footer> -->
                                 </div>
                             </div>
                         </div>

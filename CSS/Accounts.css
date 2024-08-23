@@ -591,7 +591,26 @@ tr:nth-child(even){
   }
   
   .footerNgViewModal{
-    background: gray;
+    /* background: gray; */
+    display: flex;
+    justify-content: end;
+    margin: 10px;
+  }
+  
+  .AcceptBtn{
+    margin-right: 20px;
+    background: green;
+  }
+  
+  .DecBtn{
+    background: rgb(195, 0, 0);
+  }
+  
+  .ResPindot{
+    font-size: 20px;
+    padding: 10px 30px;
+    color: white;
+    border-radius: 5px;
   }
   
   .headerModalRow{

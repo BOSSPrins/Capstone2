@@ -109,6 +109,11 @@
 } */
 
 /*========== LOGIN FORM DESIGN ========= */
+.LogoLog-In{
+    display: flex;
+    justify-content: center;
+}
+
 .formLogin {
     max-width: 450px;
     margin: 20px;
@@ -415,6 +420,10 @@
 
 .spanCheck{
     font-size: 20px;
+}
+
+.ashte{
+    color: red;
 }
 
 @media screen and (max-width: 850px){
