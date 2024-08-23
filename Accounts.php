@@ -243,13 +243,13 @@ $conn = connection();
                                                     </div>
                                                     <div class="inputboxView">
                                                         <label> Suffix: </label>
-                                                        <input class="inputngViewModalTo"  type="text" id="Suffix" name="">
+                                                        <input class="inputngViewModalTo"  type="text" id="Suffix" name="suffix">
                                                     </div>
                                                 </div>
                                                 <div class="row">
                                                     <div class="inputboxView">
                                                         <label> Date of Birth: </label>
-                                                        <input class="inputngViewModalTo" type="text" id="" name="">
+                                                        <input class="inputngViewModalTo" type="text" id="dob" name="dob">
                                                     </div>
                                                     <div class="inputboxView">
                                                         <label> Age: </label>

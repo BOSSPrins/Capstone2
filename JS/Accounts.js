@@ -157,7 +157,7 @@ const complaintsSubMenu = document.getElementById('complaintsSubMenu');
                         $('#Lname').val(value['last_name']);
                         $('#Fname').val(value['first_name']);
                         $('#Mname').val(value['middle_name']);
-                        // $('#Bday').val(value['birthday']);
+                        $('#dob').val(value['birthday']);
                         // $('#Bplace').val(value['birthplace']);
                         $('#Sex').val(value['sex']);
                         $('#Age').val(value['age']);
@@ -168,7 +168,7 @@ const complaintsSubMenu = document.getElementById('complaintsSubMenu');
                         // $('#ecName').val(value['ec_name']);
                         // $('#ecRel').val(value['ec_relship']);
                         // $('#ecNum').val(value['ec_phone_num']);
-                        //$('#STName').val(value['street_name']);
+                        $('#STName').val(value['street_name']);
                         $('#ecAddress').val("Blk " + value['block'] + " Lot " + value['lot']);
                         // + "  " + value['street_name'] + " St."
                     });

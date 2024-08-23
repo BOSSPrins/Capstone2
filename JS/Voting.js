@@ -965,7 +965,7 @@ document.addEventListener('DOMContentLoaded', function() {
 function fetchTableData() {
     console.log('Fetching table data...');
     var xhr = new XMLHttpRequest();
-    xhr.open('GET', 'PHPBackend/VotingProcess.php', true);
+    xhr.open('GET', 'PHPBackend/VotingProcess.php?votes=true', true); // Include the 'votes' parameter to fetch by votes
     xhr.onreadystatechange = function() {
         if (xhr.readyState === XMLHttpRequest.DONE) {
             console.log('XHR ReadyState:', xhr.readyState);
@@ -982,8 +982,14 @@ function fetchTableData() {
                     if (response.candidates && response.candidates.length > 0) {
                         response.candidates.forEach(function(candidate, index) {
                             console.log('Candidate:', candidate); // Debugging candidate data
+                            var votesCount = parseInt(candidate.votes_count, 10); // Convert votes_count to integer
+                            // Check if votesCount is a valid number
+                            if (isNaN(votesCount)) {
+                                votesCount = 0; // Set to 0 if NaN
+                                console.error('Invalid votes_count:', candidate.votes_count);
+                            }
                             var tr = document.createElement('tr');
-                            tr.innerHTML = '<td>' + (index + 1) + '</td><td>' + candidate.candidate_name + '</td><td>' + (candidate.votes !== undefined ? candidate.votes : 0) + '</td>';
+                            tr.innerHTML = '<td>' + (index + 1) + '</td><td>' + candidate.candidate + '</td><td>' + votesCount + '</td>';
                             tableBody.appendChild(tr);
                         });
                     } else {
@@ -1007,3 +1013,66 @@ fetchTableData();
 
 // Set interval to refresh table every 5 seconds
 setInterval(fetchTableData, 5000);
+
+
+
+
+
+
+
+
+
+
+
+
+// function fetchTableData() {
+//     console.log('Fetching table data...');
+//     var xhr = new XMLHttpRequest();
+//     xhr.open('GET', 'PHPBackend/VotingProcess.php', true);
+//     xhr.onreadystatechange = function() {
+//         if (xhr.readyState === XMLHttpRequest.DONE) {
+//             console.log('XHR ReadyState:', xhr.readyState);
+//             console.log('XHR Status:', xhr.status);
+//             if (xhr.status === 200) {
+//                 console.log('Response received:', xhr.responseText);
+//                 var response = JSON.parse(xhr.responseText);
+//                 if (response.success) {
+//                     console.log('Response candidates:', response.candidates);
+//                     var tableBody = document.querySelector('.TableContainerRank tbody');
+//                     tableBody.innerHTML = ''; // Clear existing rows
+
+//                     // Check if the candidates data is available
+//                     if (response.candidates && response.candidates.length > 0) {
+//                         response.candidates.forEach(function(candidate, index) {
+//                             console.log('Candidate:', candidate); // Debugging candidate data
+//                             var votesCount = parseInt(candidate.votes_count, 10); // Convert votes_count to integer
+//                             // Check if votesCount is a valid number
+//                             if (isNaN(votesCount)) {
+//                                 votesCount = 0; // Set to 0 if NaN
+//                                 console.error('Invalid votes_count:', candidate.votes_count);
+//                             }
+//                             var tr = document.createElement('tr');
+//                             tr.innerHTML = '<td>' + (index + 1) + '</td><td>' + candidate.candidate_name + '</td><td>' + votesCount + '</td>';
+//                             tableBody.appendChild(tr);
+//                         });
+//                     } else {
+//                         var tr = document.createElement('tr');
+//                         tr.innerHTML = '<td colspan="3">No candidates found</td>';
+//                         tableBody.appendChild(tr);
+//                     }
+//                 } else {
+//                     console.log('Error:', response.error);
+//                 }
+//             } else {
+//                 console.error('Request failed with status:', xhr.status);
+//             }
+//         }
+//     };
+//     xhr.send();
+// }
+
+// // Fetch data initially
+// fetchTableData();
+
+// // Set interval to refresh table every 5 seconds
+// setInterval(fetchTableData, 5000);

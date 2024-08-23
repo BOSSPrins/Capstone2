@@ -88,7 +88,7 @@ if (isset($_SESSION['role'])) {
                     <span class="signUp-title"> Sign Up </span>
                     <div class="formSignup">
                         
-                        <form class="signup-form saynap" enctype="multipart/form-data">
+                        <form class="signup-form saynap" enctype="multipart/form-data" method="POST">
                         <div class="iror"></div>
                             <div class="form first">
                                 <div class="details personal">
@@ -135,18 +135,18 @@ if (isset($_SESSION['role'])) {
                                     <div class="rowFields">
                                         <div class="input-field">
                                             <span> Date Of Birth </span>
-                                            <input class="SUF" type="date">
+                                            <input id="dob" name="dob" class="SUF" type="date" onchange="calculateAge()">
                                         </div>
 
                                         <div class="input-field">
                                             <span> Age </span>
-                                            <input class="SUF" type="text">
+                                            <input id="age" name="age" class="SUF" type="text" readonly>
                                         </div>
                                     </div>
 
                                     <div class="input-field">
                                         <span> Contact No. </span>
-                                        <input class="SUF" type="text" placeholder="Enter Your Number" name="lname">
+                                        <input class="SUF" type="text" placeholder="Enter Your Number" id="phonenum" name="phonenum">
                                     </div>
 
                                     <div class="input-field">
@@ -154,12 +154,12 @@ if (isset($_SESSION['role'])) {
                                         <div class="radioButtonPwd">
                                             <div class="check1">
                                                 <span class="spanCheck"> Yes </span>
-                                                <input type="checkbox">
+                                                <input type="checkbox" id="checkYes" name="disabilities" value="Yes">
                                             </div>
 
                                             <div class="check2">
                                                 <span class="spanCheck"> No </span>
-                                                <input type="checkbox">
+                                                <input type="checkbox" id="checkNo" name="disabilities" value="No">
                                             </div>
                                         </div>
                                     </div>
@@ -169,30 +169,30 @@ if (isset($_SESSION['role'])) {
                                     <div class="rowFields">
                                         <div class="input-field">
                                             <span> Block </span>
-                                            <input class="SUF" type="text">
+                                            <input class="SUF" type="text" id="block" name="block">
                                         </div>
 
                                         <div class="input-field">
                                             <span> Lot </span>
-                                            <input class="SUF" type="text">
+                                            <input class="SUF" type="text" id="lot" name="lot">
                                         </div>
                                     </div>
 
                                     <div class="input-field">
                                         <span> Street </span>
-                                        <input class="SUF" type="text">
+                                        <input class="SUF" type="text" id="street" name="street">
                                     </div>
 
                                     <span class="titleniyato"> Create Account </span>
 
                                     <div class="input-field">
                                         <span> Email </span>
-                                        <input class="SUF" type="text">
+                                        <input class="SUF" type="text" id="email" name="email">
                                     </div>
 
                                     <div class="input-field">
                                         <span> Password </span>
-                                        <input class="SUF" type="text">
+                                        <input class="SUF" type="text" id="password" name="password">
                                     </div>
 
                                     <!-- <div class="rowFields">
@@ -253,5 +253,9 @@ if (isset($_SESSION['role'])) {
     </script>  -->
     <script src="JS/Signup.js"></script>     
     <script src="JS/Login.js"></script>  
+    <script>
+
+
+    </script>
 </body>
 </html>

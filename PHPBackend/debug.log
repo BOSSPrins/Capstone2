@@ -1,0 +1,44 @@
+POST data: Array
+(
+    [fname] => p
+    [mname] => p
+    [lname] => p
+    [suffix] => p
+    [gender] => male
+    [dob] => 2024-08-18
+    [age] => 0
+    [phonenum] => 12313
+    [disabilities] => Yes
+    [block] => 13123
+    [lot] => 132
+    [street] => khkeeghg
+    [email] => jvahjavaf@gmail.com
+    [password] => adaddadada
+)
+
+Files data: Array
+(
+)
+
+POST data: Array
+(
+    [fname] => dwadadadad
+    [mname] => dadadadad
+    [lname] => dadaadada
+    [suffix] => addada
+    [gender] => male
+    [dob] => 2024-08-18
+    [age] => 0
+    [phonenum] => 1231131
+    [disabilities] => Yes
+    [block] => 123
+    [lot] => 13
+    [street] => adwdaawda
+    [email] => gusg@gmail.com
+    [password] => adidaudhaudhaa
+)
+
+Files data: Array
+(
+)
+
