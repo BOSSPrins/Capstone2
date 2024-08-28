@@ -766,15 +766,12 @@ html{
     background: rgb(0, 0, 255);
 }
 
-
 /* PANGALAWANG DESIGN PARA SA OFFICIALS DIVS */
 .containerDivssPangalawa {
     display: grid;
-    padding-left: 10px;
-    padding-right: 10px;
+    padding: 20px 10px;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 1.6rem;
-    padding-top: 20px;
     overflow-y: auto; /* Add this */
     height: 585px;
 }
@@ -821,27 +818,14 @@ html{
     box-sizing: border-box; 
 }
 
-/* .inputAndDropdownContainer .ArrowDown {
-    display: flex;
-    justify-content: center; /* Center horizontally
-    align-items: center; /* Center vertically 
-    font-size: 30px;
-    cursor: pointer;
-    margin-top: 10px;
-    margin-left: 5px;
-    background: gray;
-    width: 50px;
-    transition: 0.3s ease; 
-} */
-
-.btnPosDrop{
+.btnPosDrop {
     padding: 10px 15px;
     cursor: pointer;
     margin-top: 10px;
     margin-left: 10px;
 }
 
-.emeDropPos{
+.Emeposs {
     width: 0;
     height: 0;
     border-left: 7px solid transparent;
@@ -850,15 +834,15 @@ html{
     transition: 0.3s;
 }
 
-.emeDropPos.rotateOption {
+.Emeposs.rotateOption {
     transform: translateY(-50%) rotate(180deg); /* Rotate arrow 180 degrees */
 }
 
-.OptionDropDown input[type="radio"] {
+.Optioo input[type="radio"] {
     display: none;
 }
 
-.OptionDropDown {
+.Optioo {
     background-color: #fff;
     padding: 10px;
     position: absolute;
@@ -872,18 +856,50 @@ html{
     display: none;
 }
 
-.OptionDropDown label {
+.Optioo label {
     display: block;
     cursor: pointer;
     padding: 8px;
 }
 
-.OptionDropDown label:hover {
+.Optioo label:hover {
     background-color: #f0f0f0;
 }
 
 .OptionDropDown.open {
-    display: block; /* Show dropdown when container has 'open' class */
+    display: block; 
+}
+
+.OptionDropDown2.open2 {
+    display: block; 
+}
+
+.OptionDropDown3.open3 {
+    display: block; 
+}
+
+.OptionDropDown4.open4 {
+    display: block; 
+}
+
+.OptionDropDown5.open5 {
+    display: block; 
+}
+
+.OptionDropDown6.open6 {
+    display: block; 
+}
+
+.OptionDropDown7.open7 {
+    display: block; 
+}
+
+.OptionDropDown8.open8 {
+    display: block; 
+}
+
+.OptionDropDown9.open9 {
+    display: block; 
 }
 
 .buttonsNgOffiPangal{

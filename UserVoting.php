@@ -347,7 +347,7 @@ $user_UID = $_SESSION['unique_id'];
 
                     <div class="MainContainerAll">
                         <div class="containerDivssPangalawa">
-                            <div class="CandidatesConPangalawa">
+                        <div class="CandidatesConPangalawa">
                                 <div class="CandiImageContainerPangalawa" id="CandiImageContainerPangalawa">
                                     <!-- Image will be displayed here -->
                                 </div>
@@ -355,253 +355,203 @@ $user_UID = $_SESSION['unique_id'];
                                 <div class="inputAndDropdownContainer">
                                     <input type="text" placeholder="Select an option" class="dropdown-input">
                                     <button class="btnPosDrop" onclick="toggleDropOpsPos()">
-                                        <div class="emeDropPos"> </div>
+                                        <div class="Emeposs emeDropPos"> </div>
                                     </button>
-                                    <div class="OptionDropDown">
-                                      <!-- Dropdown options using labels -->
-                                      <label><input type="radio" name="option" value="option1"> President </label>
-                                      <label><input type="radio" name="option" value="option2"> Vice President </label>
-                                      <label><input type="radio" name="option" value="option3"> Secretary </label>
-                                      <label><input type="radio" name="option" value="option3"> Treasurer </label>
-                                      <label><input type="radio" name="option" value="option3"> Auditor </label>
-                                      <label><input type="radio" name="option" value="option3"> Peace In Order </label>
-                                      <label><input type="radio" name="option" value="option3"> Director </label>
-                                      <label><input type="radio" name="option" value="option3"> Director </label>
-                                      <label><input type="radio" name="option" value="option3"> Director </label>
+                                    <div class="Optioo OptionDropDown">
+                                        <!-- Dropdown options using labels -->
+                                        <label><input type="radio" name="option1" value="option1"> President </label>
+                                        <label><input type="radio" name="option1" value="option2"> Vice President </label>
+                                        <label><input type="radio" name="option1" value="option3"> Secretary </label>
+                                        <label><input type="radio" name="option1" value="option4"> Treasurer </label>
+                                        <label><input type="radio" name="option1" value="option5"> Auditor </label>
+                                        <label><input type="radio" name="option1" value="option6"> Peace In Order </label>
+                                        <label><input type="radio" name="option1" value="option7"> Director </label>
                                     </div>
                                 </div>
-                                <!-- <div class="buttonsNgOffiPangal">
-                                    <div class="btnOnee">
-                                        <button class="btnSiv Larawan"> Upload Picture </button>
-                                        <input class="inputFileCandi Lagayann" type="file" id="PresPic" style="display: none;">
+                            </div>
+                            
+                            <div class="CandidatesConPangalawa">
+                                <div class="CandiImageContainerPangalawa" id="CandiImageContainerPangalawa2">
+                                    <!-- Image will be displayed here -->
+                                </div>
+                                <input class="text" type="text">
+                                <div class="inputAndDropdownContainer">
+                                    <input type="text" placeholder="Select an option" class="dropdown-input">
+                                    <button class="btnPosDrop" onclick="toggleDropOpsPos2()">
+                                        <div class="Emeposs emeDropPos2"> </div>
+                                    </button>
+                                    <div class="Optioo OptionDropDown2">
+                                        <!-- Dropdown options using labels -->
+                                        <label><input type="radio" name="option2" value="option1"> President </label>
+                                        <label><input type="radio" name="option2" value="option2"> Vice President </label>
+                                        <label><input type="radio" name="option2" value="option3"> Secretary </label>
+                                        <label><input type="radio" name="option2" value="option4"> Treasurer </label>
+                                        <label><input type="radio" name="option2" value="option5"> Auditor </label>
+                                        <label><input type="radio" name="option2" value="option6"> Peace In Order </label>
+                                        <label><input type="radio" name="option2" value="option7"> Director </label>
                                     </div>
-                                    <div class="btnTwoo">
-                                        <button class="btnSiv SaveBtn2">Save</button>
+                                </div>
+                            </div>
+                            
+                            <div class="CandidatesConPangalawa">
+                                <div class="CandiImageContainerPangalawa" id="CandiImageContainerPangalawa3">
+                                    <!-- Image will be displayed here -->
+                                </div>
+                                <input class="text" type="text">
+                                <div class="inputAndDropdownContainer">
+                                    <input type="text" placeholder="Select an option" class="dropdown-input">
+                                    <button class="btnPosDrop" onclick="toggleDropOpsPos3()">
+                                        <div class="Emeposs emeDropPos3"> </div>
+                                    </button>
+                                    <div class="Optioo OptionDropDown3">
+                                        <!-- Dropdown options using labels -->
+                                        <label><input type="radio" name="option2" value="option1"> President </label>
+                                        <label><input type="radio" name="option2" value="option2"> Vice President </label>
+                                        <label><input type="radio" name="option2" value="option3"> Secretary </label>
+                                        <label><input type="radio" name="option2" value="option4"> Treasurer </label>
+                                        <label><input type="radio" name="option2" value="option5"> Auditor </label>
+                                        <label><input type="radio" name="option2" value="option6"> Peace In Order </label>
+                                        <label><input type="radio" name="option2" value="option7"> Director </label>
                                     </div>
-                                </div> -->
+                                </div>
                             </div>
 
                             <div class="CandidatesConPangalawa">
-                                <div class="CandiImageContainerPangalawa" id="CandiImageContainerPangalawa">
+                                <div class="CandiImageContainerPangalawa" id="CandiImageContainerPangalawa4">
                                     <!-- Image will be displayed here -->
                                 </div>
                                 <input class="text" type="text">
                                 <div class="inputAndDropdownContainer">
                                     <input type="text" placeholder="Select an option" class="dropdown-input">
-                                    <button class="btnPosDrop" onclick="toggleDropOpsPos()">
-                                        <div class="emeDropPos"> </div>
+                                    <button class="btnPosDrop" onclick="toggleDropOpsPos4()">
+                                        <div class="Emeposs emeDropPos4"> </div>
                                     </button>
-                                    <div class="OptionDropDown">
-                                      <!-- Dropdown options using labels -->
-                                      <label><input type="radio" name="option" value="option1"> Option 1</label>
-                                      <label><input type="radio" name="option" value="option2"> Option 2</label>
-                                      <label><input type="radio" name="option" value="option3"> Option 3</label>
+                                    <div class="Optioo OptionDropDown4">
+                                        <!-- Dropdown options using labels -->
+                                        <label><input type="radio" name="option2" value="option1"> President </label>
+                                        <label><input type="radio" name="option2" value="option2"> Vice President </label>
+                                        <label><input type="radio" name="option2" value="option3"> Secretary </label>
+                                        <label><input type="radio" name="option2" value="option4"> Treasurer </label>
+                                        <label><input type="radio" name="option2" value="option5"> Auditor </label>
+                                        <label><input type="radio" name="option2" value="option6"> Peace In Order </label>
+                                        <label><input type="radio" name="option2" value="option7"> Director </label>
                                     </div>
                                 </div>
-                                <!-- <div class="buttonsNgOffiPangal">
-                                    <div class="btnOnee">
-                                        <button class="btnSiv Larawan"> Upload Picture </button>
-                                        <input class="inputFileCandi Lagayann" type="file" id="PresPic" style="display: none;">
-                                    </div>
-                                    <div class="btnTwoo">
-                                        <button class="btnSiv SaveBtn2">Save</button>
-                                    </div>
-                                </div> -->
-                            </div>
-                            <div class="CandidatesConPangalawa">
-                                <div class="CandiImageContainerPangalawa" id="CandiImageContainerPangalawa">
-                                    <!-- Image will be displayed here -->
-                                </div>
-                                <input class="text" type="text">
-                                <div class="inputAndDropdownContainer">
-                                    <input type="text" placeholder="Select an option" class="dropdown-input">
-                                    <button class="btnPosDrop" onclick="toggleDropOpsPos()">
-                                        <div class="emeDropPos"> </div>
-                                    </button>
-                                    <div class="OptionDropDown">
-                                      <!-- Dropdown options using labels -->
-                                      <label><input type="radio" name="option" value="option1"> Option 1</label>
-                                      <label><input type="radio" name="option" value="option2"> Option 2</label>
-                                      <label><input type="radio" name="option" value="option3"> Option 3</label>
-                                    </div>
-                                </div>
-                                <!-- <div class="buttonsNgOffiPangal">
-                                    <div class="btnOnee">
-                                        <button class="btnSiv Larawan"> Upload Picture </button>
-                                        <input class="inputFileCandi Lagayann" type="file" id="PresPic" style="display: none;">
-                                    </div>
-                                    <div class="btnTwoo">
-                                        <button class="btnSiv SaveBtn2">Save</button>
-                                    </div>
-                                </div> -->
                             </div>
 
                             <div class="CandidatesConPangalawa">
-                                <div class="CandiImageContainerPangalawa" id="CandiImageContainerPangalawa">
+                                <div class="CandiImageContainerPangalawa" id="CandiImageContainerPangalawa5">
                                     <!-- Image will be displayed here -->
                                 </div>
                                 <input class="text" type="text">
                                 <div class="inputAndDropdownContainer">
                                     <input type="text" placeholder="Select an option" class="dropdown-input">
-                                    <button class="btnPosDrop" onclick="toggleDropOpsPos()">
-                                        <div class="emeDropPos"> </div>
+                                    <button class="btnPosDrop" onclick="toggleDropOpsPos5()">
+                                        <div class="Emeposs emeDropPos5"> </div>
                                     </button>
-                                    <div class="OptionDropDown">
-                                      <!-- Dropdown options using labels -->
-                                      <label><input type="radio" name="option" value="option1"> Option 1</label>
-                                      <label><input type="radio" name="option" value="option2"> Option 2</label>
-                                      <label><input type="radio" name="option" value="option3"> Option 3</label>
+                                    <div class="Optioo OptionDropDown5">
+                                        <!-- Dropdown options using labels -->
+                                        <label><input type="radio" name="option2" value="option1"> President </label>
+                                        <label><input type="radio" name="option2" value="option2"> Vice President </label>
+                                        <label><input type="radio" name="option2" value="option3"> Secretary </label>
+                                        <label><input type="radio" name="option2" value="option4"> Treasurer </label>
+                                        <label><input type="radio" name="option2" value="option5"> Auditor </label>
+                                        <label><input type="radio" name="option2" value="option6"> Peace In Order </label>
+                                        <label><input type="radio" name="option2" value="option7"> Director </label>
                                     </div>
                                 </div>
-                                <!-- <div class="buttonsNgOffiPangal">
-                                    <div class="btnOnee">
-                                        <button class="btnSiv Larawan"> Upload Picture </button>
-                                        <input class="inputFileCandi Lagayann" type="file" id="PresPic" style="display: none;">
-                                    </div>
-                                    <div class="btnTwoo">
-                                        <button class="btnSiv SaveBtn2">Save</button>
-                                    </div>
-                                </div> -->
                             </div>
 
                             <div class="CandidatesConPangalawa">
-                                <div class="CandiImageContainerPangalawa" id="CandiImageContainerPangalawa">
+                                <div class="CandiImageContainerPangalawa" id="CandiImageContainerPangalawa6">
                                     <!-- Image will be displayed here -->
                                 </div>
                                 <input class="text" type="text">
                                 <div class="inputAndDropdownContainer">
                                     <input type="text" placeholder="Select an option" class="dropdown-input">
-                                    <button class="btnPosDrop" onclick="toggleDropOpsPos()">
-                                        <div class="emeDropPos"> </div>
+                                    <button class="btnPosDrop" onclick="toggleDropOpsPos6()">
+                                        <div class="Emeposs emeDropPos6"> </div>
                                     </button>
-                                    <div class="OptionDropDown">
-                                      <!-- Dropdown options using labels -->
-                                      <label><input type="radio" name="option" value="option1"> Option 1</label>
-                                      <label><input type="radio" name="option" value="option2"> Option 2</label>
-                                      <label><input type="radio" name="option" value="option3"> Option 3</label>
+                                    <div class="Optioo OptionDropDown6">
+                                        <!-- Dropdown options using labels -->
+                                        <label><input type="radio" name="option2" value="option1"> President </label>
+                                        <label><input type="radio" name="option2" value="option2"> Vice President </label>
+                                        <label><input type="radio" name="option2" value="option3"> Secretary </label>
+                                        <label><input type="radio" name="option2" value="option4"> Treasurer </label>
+                                        <label><input type="radio" name="option2" value="option5"> Auditor </label>
+                                        <label><input type="radio" name="option2" value="option6"> Peace In Order </label>
+                                        <label><input type="radio" name="option2" value="option7"> Director </label>
                                     </div>
                                 </div>
-                                <!-- <div class="buttonsNgOffiPangal">
-                                    <div class="btnOnee">
-                                        <button class="btnSiv Larawan"> Upload Picture </button>
-                                        <input class="inputFileCandi Lagayann" type="file" id="PresPic" style="display: none;">
-                                    </div>
-                                    <div class="btnTwoo">
-                                        <button class="btnSiv SaveBtn2">Save</button>
-                                    </div>
-                                </div> -->
                             </div>
 
                             <div class="CandidatesConPangalawa">
-                                <div class="CandiImageContainerPangalawa" id="CandiImageContainerPangalawa">
+                                <div class="CandiImageContainerPangalawa" id="CandiImageContainerPangalawa7">
                                     <!-- Image will be displayed here -->
                                 </div>
                                 <input class="text" type="text">
                                 <div class="inputAndDropdownContainer">
                                     <input type="text" placeholder="Select an option" class="dropdown-input">
-                                    <button class="btnPosDrop" onclick="toggleDropOpsPos()">
-                                        <div class="emeDropPos"> </div>
+                                    <button class="btnPosDrop" onclick="toggleDropOpsPos7()">
+                                        <div class="Emeposs emeDropPos7"> </div>
                                     </button>
-                                    <div class="OptionDropDown">
-                                      <!-- Dropdown options using labels -->
-                                      <label><input type="radio" name="option" value="option1"> Option 1</label>
-                                      <label><input type="radio" name="option" value="option2"> Option 2</label>
-                                      <label><input type="radio" name="option" value="option3"> Option 3</label>
+                                    <div class="Optioo OptionDropDown7">
+                                        <!-- Dropdown options using labels -->
+                                        <label><input type="radio" name="option2" value="option1"> President </label>
+                                        <label><input type="radio" name="option2" value="option2"> Vice President </label>
+                                        <label><input type="radio" name="option2" value="option3"> Secretary </label>
+                                        <label><input type="radio" name="option2" value="option4"> Treasurer </label>
+                                        <label><input type="radio" name="option2" value="option5"> Auditor </label>
+                                        <label><input type="radio" name="option2" value="option6"> Peace In Order </label>
+                                        <label><input type="radio" name="option2" value="option7"> Director </label>
                                     </div>
                                 </div>
-                                <!-- <div class="buttonsNgOffiPangal">
-                                    <div class="btnOnee">
-                                        <button class="btnSiv Larawan"> Upload Picture </button>
-                                        <input class="inputFileCandi Lagayann" type="file" id="PresPic" style="display: none;">
-                                    </div>
-                                    <div class="btnTwoo">
-                                        <button class="btnSiv SaveBtn2">Save</button>
-                                    </div>
-                                </div> -->
                             </div>
 
                             <div class="CandidatesConPangalawa">
-                                <div class="CandiImageContainerPangalawa" id="CandiImageContainerPangalawa">
+                                <div class="CandiImageContainerPangalawa" id="CandiImageContainerPangalawa8">
                                     <!-- Image will be displayed here -->
                                 </div>
                                 <input class="text" type="text">
                                 <div class="inputAndDropdownContainer">
                                     <input type="text" placeholder="Select an option" class="dropdown-input">
-                                    <button class="btnPosDrop" onclick="toggleDropOpsPos()">
-                                        <div class="emeDropPos"> </div>
+                                    <button class="btnPosDrop" onclick="toggleDropOpsPos8()">
+                                        <div class="Emeposs emeDropPos8"> </div>
                                     </button>
-                                    <div class="OptionDropDown">
-                                      <!-- Dropdown options using labels -->
-                                      <label><input class="DropdownRadio" type="radio" name="option" value="option1"> Option 1</label>
-                                      <label><input class="DropdownRadio" type="radio" name="option" value="option2"> Option 2</label>
-                                      <label><input class="DropdownRadio" type="radio" name="option" value="option3"> Option 3</label>
+                                    <div class="Optioo OptionDropDown8">
+                                        <!-- Dropdown options using labels -->
+                                        <label><input type="radio" name="option2" value="option1"> President </label>
+                                        <label><input type="radio" name="option2" value="option2"> Vice President </label>
+                                        <label><input type="radio" name="option2" value="option3"> Secretary </label>
+                                        <label><input type="radio" name="option2" value="option4"> Treasurer </label>
+                                        <label><input type="radio" name="option2" value="option5"> Auditor </label>
+                                        <label><input type="radio" name="option2" value="option6"> Peace In Order </label>
+                                        <label><input type="radio" name="option2" value="option7"> Director </label>
                                     </div>
                                 </div>
-                                <!-- <div class="buttonsNgOffiPangal">
-                                    <div class="btnOnee">
-                                        <button class="btnSiv Larawan"> Upload Picture </button>
-                                        <input class="inputFileCandi Lagayann" type="file" id="PresPic" style="display: none;">
-                                    </div>
-                                    <div class="btnTwoo">
-                                        <button class="btnSiv SaveBtn2">Save</button>
-                                    </div>
-                                </div> -->
                             </div>
 
                             <div class="CandidatesConPangalawa">
-                                <div class="CandiImageContainerPangalawa" id="CandiImageContainerPangalawa">
+                                <div class="CandiImageContainerPangalawa" id="CandiImageContainerPangalawa9">
                                     <!-- Image will be displayed here -->
                                 </div>
                                 <input class="text" type="text">
                                 <div class="inputAndDropdownContainer">
                                     <input type="text" placeholder="Select an option" class="dropdown-input">
-                                    <button class="btnPosDrop" onclick="toggleDropOpsPos()">
-                                        <div class="emeDropPos"> </div>
+                                    <button class="btnPosDrop" onclick="toggleDropOpsPos9()">
+                                        <div class="Emeposs emeDropPos9"> </div>
                                     </button>
-                                    <div class="OptionDropDown">
-                                      <!-- Dropdown options using labels -->
-                                      <label><input type="radio" name="option" value="option1"> Option 1</label>
-                                      <label><input type="radio" name="option" value="option2"> Option 2</label>
-                                      <label><input type="radio" name="option" value="option3"> Option 3</label>
+                                    <div class="Optioo OptionDropDown9">
+                                        <!-- Dropdown options using labels -->
+                                        <label><input type="radio" name="option2" value="option1"> President </label>
+                                        <label><input type="radio" name="option2" value="option2"> Vice President </label>
+                                        <label><input type="radio" name="option2" value="option3"> Secretary </label>
+                                        <label><input type="radio" name="option2" value="option4"> Treasurer </label>
+                                        <label><input type="radio" name="option2" value="option5"> Auditor </label>
+                                        <label><input type="radio" name="option2" value="option6"> Peace In Order </label>
+                                        <label><input type="radio" name="option2" value="option7"> Director </label>
                                     </div>
                                 </div>
-                                <!-- <div class="buttonsNgOffiPangal">
-                                    <div class="btnOnee">
-                                        <button class="btnSiv Larawan"> Upload Picture </button>
-                                        <input class="inputFileCandi Lagayann" type="file" id="PresPic" style="display: none;">
-                                    </div>
-                                    <div class="btnTwoo">
-                                        <button class="btnSiv SaveBtn2">Save</button>
-                                    </div>
-                                </div> -->
-                            </div>
-
-                            <div class="CandidatesConPangalawa">
-                                <div class="CandiImageContainerPangalawa" id="CandiImageContainerPangalawa">
-                                    <!-- Image will be displayed here -->
-                                </div>
-                                <input class="text" type="text">
-                                <div class="inputAndDropdownContainer">
-                                    <input type="text" placeholder="Select an option" class="dropdown-input">
-                                    <button class="btnPosDrop" onclick="toggleDropOpsPos()">
-                                        <div class="emeDropPos"> </div>
-                                    </button>
-                                    <div class="OptionDropDown">
-                                      <!-- Dropdown options using labels -->
-                                      <label><input type="radio" name="option" value="option1"> Option 1</label>
-                                      <label><input type="radio" name="option" value="option2"> Option 2</label>
-                                      <label><input type="radio" name="option" value="option3"> Option 3</label>
-                                    </div>
-                                </div>
-                                <!-- <div class="buttonsNgOffiPangal">
-                                    <div class="btnOnee">
-                                        <button class="btnSiv Larawan"> Upload Picture </button>
-                                        <input class="inputFileCandi Lagayann" type="file" id="PresPic" style="display: none;">
-                                    </div>
-                                    <div class="btnTwoo">
-                                        <button class="btnSiv SaveBtn2">Save</button>
-                                    </div>
-                                </div> -->
                             </div>
                         </div> 
                         <footer class="footerCandidatesSubmit2">

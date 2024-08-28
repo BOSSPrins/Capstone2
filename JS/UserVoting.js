@@ -266,10 +266,6 @@ document.getElementById('submitVoteButton').addEventListener('click', function(e
 });
 
 
-
-
-
-
 // // Function to check unique_id in session
 // function checkUniqueIdInSession() {
 //     var xhr = new XMLHttpRequest();
@@ -318,19 +314,102 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 //PANGALAWANG MGA DIVS NA PAG EEDITAN //
+// 1ST
 function toggleDropOpsPos() {
     const PositionDropDown = document.querySelector(".OptionDropDown");
-    PositionDropDown .classList.toggle("open");
+    PositionDropDown.classList.toggle("open");
 
     // Rotate the emeSet element
     const emeDropPos = document.querySelector('.emeDropPos');
     emeDropPos.classList.toggle('rotateOption');
 }
 
+// 2ND
+function toggleDropOpsPos2() {
+    const PositionDropDown2 = document.querySelector(".OptionDropDown2");
+    PositionDropDown2.classList.toggle("open2");
+
+    // Rotate the emeSet element
+    const emeDropPos2 = document.querySelector('.emeDropPos2');
+    emeDropPos2.classList.toggle('rotateOption');
+}
+
+// 3RD
+function toggleDropOpsPos3() {
+    const PositionDropDown3 = document.querySelector(".OptionDropDown3");
+    PositionDropDown3.classList.toggle("open3");
+
+    // Rotate the emeSet element
+    const emeDropPos3 = document.querySelector('.emeDropPos3');
+    emeDropPos3.classList.toggle('rotateOption');
+}
+
+// 4TH
+function toggleDropOpsPos4() {
+    const PositionDropDown4 = document.querySelector(".OptionDropDown4");
+    PositionDropDown4.classList.toggle("open4");
+
+    // Rotate the emeSet element
+    const emeDropPos4 = document.querySelector('.emeDropPos4');
+    emeDropPos4.classList.toggle('rotateOption');
+}
+
+// 5TH
+function toggleDropOpsPos5() {
+    const PositionDropDown5 = document.querySelector(".OptionDropDown5");
+    PositionDropDown5.classList.toggle("open5");
+
+    // Rotate the emeSet element
+    const emeDropPos5 = document.querySelector('.emeDropPos5');
+    emeDropPos5.classList.toggle('rotateOption');
+}
+
+// 6TH
+function toggleDropOpsPos6() {
+    const PositionDropDown6 = document.querySelector(".OptionDropDown6");
+    PositionDropDown6.classList.toggle("open6");
+
+    // Rotate the emeSet element
+    const emeDropPos6 = document.querySelector('.emeDropPos6');
+    emeDropPos6.classList.toggle('rotateOption');
+}
+
+// 7TH
+function toggleDropOpsPos7() {
+    const PositionDropDown7 = document.querySelector(".OptionDropDown7");
+    PositionDropDown7.classList.toggle("open7");
+
+    // Rotate the emeSet element
+    const emeDropPos7 = document.querySelector('.emeDropPos7');
+    emeDropPos7.classList.toggle('rotateOption');
+}
+
+// 8TH
+function toggleDropOpsPos8() {
+    const PositionDropDown8 = document.querySelector(".OptionDropDown8");
+    PositionDropDown8.classList.toggle("open8");
+
+    // Rotate the emeSet element
+    const emeDropPos8 = document.querySelector('.emeDropPos8');
+    emeDropPos8.classList.toggle('rotateOption');
+}
+
+// 9TH
+function toggleDropOpsPos9() {
+    const PositionDropDown9 = document.querySelector(".OptionDropDown9");
+    PositionDropDown9.classList.toggle("open9");
+
+    // Rotate the emeSet element
+    const emeDropPos9 = document.querySelector('.emeDropPos9');
+    emeDropPos9.classList.toggle('rotateOption');
+}
+
+
+// FUNCTION PARA SA SUMMARY MODAL 
 document.addEventListener('DOMContentLoaded', function() {
-    var modal = document.getElementById('summaryModalTwo');
-    var btn = document.querySelector('.buttonSubmitBoto2');
-    var span = document.querySelector('.closeSummaryTwo');
+    const modal = document.getElementById('summaryModalTwo');
+    const btn = document.querySelector('.buttonSubmitBoto2');
+    const span = document.querySelector('.closeSummaryTwo');
 
     // Show the modal
     btn.onclick = function() {
