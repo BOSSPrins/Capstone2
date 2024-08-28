@@ -100,7 +100,7 @@ if (isset($_SESSION['unique_id'])) {
                     include_once "Connect/Connection.php";
                     $sql = mysqli_query($conn, "SELECT tblaccounts.unique_id, tblresident.first_name, tblresident.last_name
                                                 FROM tblaccounts
-                                                INNER JOIN tblresident ON tblaccounts.user_id = tblresident.user_id
+                                                INNER JOIN tblresident ON tblaccounts.unique_id = tblresident.unique_id
                                                 WHERE tblaccounts.unique_id = '{$_SESSION['unique_id']}';");
                                                 
                     if(mysqli_num_rows($sql) > 0){
@@ -139,7 +139,7 @@ if (isset($_SESSION['unique_id'])) {
                                     $sql = mysqli_query($conn, "SELECT tblaccounts.unique_id, tblaccounts.img,  tblaccounts.status, 
                                                                         tblresident.first_name, tblresident.last_name
                                                                 FROM tblaccounts
-                                                                INNER JOIN tblresident ON tblaccounts.user_id = tblresident.user_id
+                                                                INNER JOIN tblresident ON tblaccounts.unique_id = tblresident.unique_id
                                                                 WHERE tblaccounts.unique_id ='" . $user_id . "'");
                                     
                                     // Check if rows were returned

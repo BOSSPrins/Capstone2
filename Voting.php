@@ -174,7 +174,7 @@ if (isset($_SESSION['unique_id'])) {
                                                     <div class="emeSet"></div>
                                                 </button>
                                                 <div id="SetTimerDropDownn" class="timerContent">
-                                                    <div class="timer">
+                                                    <div class="timer"> 
                                                         <div class="timer-controls">
                                                             <h2 for="input-hours">Hours:</h2>
                                                             <input type="number" id="input-hours" min="0" step="1">

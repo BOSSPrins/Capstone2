@@ -135,7 +135,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['user_id'])) {
     } else {
         // Fetch user email from database
         $conn = connection();
-        $query = "SELECT email FROM tblaccounts WHERE user_id = '$user_id'";
+        $query = "SELECT email FROM tblaccounts WHERE unique_id = '$user_id'"; // yung user_id dito unique_id talaga laman di ko pinalitan ng variable
         $result = mysqli_query($conn, $query);
         if ($result && mysqli_num_rows($result) > 0) {
             $row = mysqli_fetch_assoc($result);

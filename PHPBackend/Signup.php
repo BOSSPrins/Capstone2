@@ -10,16 +10,16 @@ error_log("Starting PHP script");
 
 $access = "Pending";
 $fname = mysqli_real_escape_string($conn, $_POST['fname']);
-$mname = mysqli_real_escape_string($conn, $_POST['mname']);
+$mname = isset($_POST['mname']) ? mysqli_real_escape_string($conn, $_POST['mname']) : '';
 $lname = mysqli_real_escape_string($conn, $_POST['lname']);
-$suffix = mysqli_real_escape_string($conn, $_POST['suffix']);
+$suffix = isset($_POST['suffix']) ? mysqli_real_escape_string($conn, $_POST['suffix']) : '';
 $gender = mysqli_real_escape_string($conn, $_POST['gender']);
 $dob = mysqli_real_escape_string($conn, $_POST['dob']);
 $age = mysqli_real_escape_string($conn, $_POST['age']);
 $phonenum = mysqli_real_escape_string($conn, $_POST['phonenum']);
 $block = mysqli_real_escape_string($conn, $_POST['block']);
 $lot = mysqli_real_escape_string($conn, $_POST['lot']);
-$street = mysqli_real_escape_string($conn, $_POST['street']);
+$street = isset($_POST['street']) ? mysqli_real_escape_string($conn, $_POST['street']) : '';
 $email = mysqli_real_escape_string($conn, $_POST['email']);
 $password = mysqli_real_escape_string($conn, $_POST['password']);
 $role = "user";
@@ -41,7 +41,7 @@ function isGmailOrYahoo($email) {
     return in_array($domain, $allowedDomains);
 }
 
-if(!empty($access) && !empty($fname) && !empty($mname) && !empty($lname) && !empty($suffix) && !empty($gender) && !empty($age) && !empty($disabilities) && !empty($dob) && !empty($phonenum) && !empty($block) && !empty($lot) && !empty($street) && !empty($email) && !empty($password) && !empty($role)) {
+if(!empty($access) && !empty($fname) && !empty($lname) && !empty($gender) && !empty($age) && !empty($disabilities) && !empty($dob) && !empty($phonenum) && !empty($block) && !empty($lot) && !empty($email) && !empty($password) && !empty($role)) {
 
     if(!isGmailOrYahoo($email)) {
         echo "Only Yahoo or Gmail can be used.";
@@ -58,7 +58,7 @@ if(!empty($access) && !empty($fname) && !empty($mname) && !empty($lname) && !emp
             $img_name = isset($_FILES['image']['name']) && !empty($_FILES['image']['name']) ? $_FILES['image']['name'] : $default_image_path;
 
             $ran_id = rand(time(), 100000000);
-            $status = "Pending";
+            $status = "Offline now";
             $encrypt_pass = md5($password);
 
             // Insert user data into tblresident

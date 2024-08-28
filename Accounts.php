@@ -309,8 +309,8 @@ $conn = connection();
                                             </form>
                                         </div>
                                         <footer class="footerNgViewModal">
-                                            <button class="AcceptBtn ResPindot"> Accept </button>
-                                            <button class="DecBtn ResPindot"> Decline </button>
+                                            <button class="DecBtn ResPindot RejBtn"> Decline </button>
+                                            <button class="AcceptBtn ResPindot ConfBtn"> Accept </button>                                           
                                         </footer>
                                     </div>
                                 </div>

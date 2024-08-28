@@ -598,18 +598,19 @@ function fetchResidentID() {
 
     // Split the full name into parts (assuming format: Firstname Middlename Lastname)
     var nameParts = fullName.split(" ");
+
+    // Handle cases with and without middle name
+    var firstName = nameParts[0];
+    var lastName = nameParts[nameParts.length - 1];
+    var middleName = nameParts.length > 2 ? nameParts.slice(1, -1).join(" ") : "";
     
     // Check if name parts are valid
-    if (nameParts.length < 3) {
-        document.getElementById("iror").innerText = "Incomplete name";
+    if (nameParts.length < 2 || nameParts.length > 3) {
+        document.getElementById("iror").innerText = "Incomplete name or Too many names";
         document.getElementById("iror").style.display = "block";
         console.log("Incomplete name");
         return;
     }
-
-    var firstName = nameParts[0];
-    var middleName = nameParts[1];
-    var lastName = nameParts.slice(2).join(" ");
 
     console.log("First Name:", firstName);
     console.log("Middle Name:", middleName);
@@ -627,6 +628,16 @@ function fetchResidentID() {
             console.log("Response Data:", response);
             if (response.success) {
                 document.getElementById("candi_ID").value = response.unique_id;
+
+                var successElem = document.getElementById("sakses");
+                successElem.style.display = "block";
+                successElem.innerText = "User found";
+
+                // Hide the success message after 3 seconds
+                setTimeout(function() {
+                    successElem.style.display = "none";
+                }, 5000);
+                
                 document.getElementById("iror").innerText = "";
                 document.getElementById("iror").style.display = "none";
             } else {
@@ -760,7 +771,7 @@ function submitForm(event) {
                         document.getElementById("candi_Name").value = ''; // Clear the name input
                         document.getElementById("previewImage").style.display = 'none'; // Hide the image preview
                         document.getElementById("candi_ID").style.display = 'none';
-                    }, 5000);
+                    }, 3000);
                
                 } else {
                     irorDiv.innerText = response.error || "Error adding candidate.";
@@ -1017,6 +1028,106 @@ setInterval(fetchTableData, 5000);
 
 
 
+document.addEventListener("DOMContentLoaded", function() {
+    let countdownInterval;
+    const startButton = document.getElementById('start');
+    const stopButton = document.getElementById('stop');
+    const resetButton = document.getElementById('reset');
+    
+    let remainingTime = 0; // Total remaining time in seconds
+
+    let isRequestSent = false;
+
+function startCountdown() {
+    if (countdownInterval) clearInterval(countdownInterval);
+
+    // Set the remaining time based on input values (in seconds)
+    remainingTime = parseInt(document.getElementById('input-hours').value || 0) * 3600 +
+                    parseInt(document.getElementById('input-minutes').value || 0) * 60 +
+                    parseInt(document.getElementById('input-seconds').value || 0);
+
+    console.log("Starting countdown with remaining time: " + remainingTime + " seconds");
+
+    updateDisplay(); // Update the display initially
+
+    countdownInterval = setInterval(function() {
+        remainingTime--;
+        updateDisplay();
+
+        if (remainingTime <= 0 && !isRequestSent) {
+            clearInterval(countdownInterval);
+            alert("Time's up! Determining the winners...");
+
+            console.log("Countdown finished. Sending AJAX request to declare winners...");
+            isRequestSent = true;  // Ensure only one request is sent
+
+            // AJAX request to update database
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "PHPBackend/VotingProcess.php", true);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    console.log("AJAX request completed. Status: " + xhr.status);
+                    console.log("Response: " + xhr.responseText);
+
+                    if (xhr.status === 200) {
+                        let response = JSON.parse(xhr.responseText);
+                        if (response.success) {
+                            console.log("Winners successfully declared.");
+                            alert("Top 9 candidates have been declared winners!");
+                        } else {
+                            console.error("Error: " + response.error);
+                            alert("Error: " + response.error);
+                        }
+                    } else {
+                        console.error("Server error: " + xhr.status);
+                        alert("Failed to declare winners. Server error.");
+                    }
+                }
+            };
+
+            xhr.send("action=declare_winner");
+        }
+    }, 1000); // Update every second
+}   
+
+    function updateDisplay() {
+        let hours = Math.floor(remainingTime / 3600);
+        let minutes = Math.floor((remainingTime % 3600) / 60);
+        let seconds = remainingTime % 60;
+
+        document.getElementById('hours').textContent = hours.toString().padStart(2, '0') + ':';
+        document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0') + ':';
+        document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+
+        console.log("Updated display: " + hours + ":" + minutes + ":" + seconds);
+    }
+
+    startButton.addEventListener('click', startCountdown);
+    stopButton.addEventListener('click', function() {
+        console.log("Countdown stopped.");
+        clearInterval(countdownInterval);
+    });
+    resetButton.addEventListener('click', function() {
+        console.log("Countdown reset.");
+        clearInterval(countdownInterval);
+        remainingTime = 0;
+        updateDisplay();
+
+        // Clear input values
+        document.getElementById('input-hours').value = '';
+        document.getElementById('input-minutes').value = '';
+        document.getElementById('input-seconds').value = '';
+    });
+});
+
+
+
+
+
+
+
 
 
 
@@ -1028,7 +1139,7 @@ setInterval(fetchTableData, 5000);
 // function fetchTableData() {
 //     console.log('Fetching table data...');
 //     var xhr = new XMLHttpRequest();
-//     xhr.open('GET', 'PHPBackend/VotingProcess.php', true);
+//     xhr.open('GET', 'PHPBackend/VotingProcess.php?votes=true', true); // Include the 'votes' parameter to fetch by votes
 //     xhr.onreadystatechange = function() {
 //         if (xhr.readyState === XMLHttpRequest.DONE) {
 //             console.log('XHR ReadyState:', xhr.readyState);
@@ -1052,7 +1163,7 @@ setInterval(fetchTableData, 5000);
 //                                 console.error('Invalid votes_count:', candidate.votes_count);
 //                             }
 //                             var tr = document.createElement('tr');
-//                             tr.innerHTML = '<td>' + (index + 1) + '</td><td>' + candidate.candidate_name + '</td><td>' + votesCount + '</td>';
+//                             tr.innerHTML = '<td>' + (index + 1) + '</td><td>' + candidate.candidate + '</td><td>' + votesCount + '</td>';
 //                             tableBody.appendChild(tr);
 //                         });
 //                     } else {
@@ -1071,8 +1182,98 @@ setInterval(fetchTableData, 5000);
 //     xhr.send();
 // }
 
-// // Fetch data initially
-// fetchTableData();
+// document.addEventListener("DOMContentLoaded", function() {
+//     let countdownInterval;
+//     let tableDataInterval;
+//     const startButton = document.getElementById('start');
+//     const stopButton = document.getElementById('stop');
+//     const resetButton = document.getElementById('reset');
+    
+//     let remainingTime = 0; // Total remaining time in seconds
+//     let isRequestSent = false;
 
-// // Set interval to refresh table every 5 seconds
-// setInterval(fetchTableData, 5000);
+//     function startCountdown() {
+//         if (countdownInterval) clearInterval(countdownInterval);
+//         if (tableDataInterval) clearInterval(tableDataInterval);
+
+//         // Set the remaining time based on input values (in seconds)
+//         remainingTime = parseInt(document.getElementById('input-hours').value || 0) * 3600 +
+//                         parseInt(document.getElementById('input-minutes').value || 0) * 60 +
+//                         parseInt(document.getElementById('input-seconds').value || 0);
+
+//         console.log("Starting countdown with remaining time: " + remainingTime + " seconds");
+
+//         updateDisplay(); // Update the display initially
+
+//         // Start the interval for fetching table data every 5 seconds
+//         tableDataInterval = setInterval(fetchTableData, 5000);
+
+//         countdownInterval = setInterval(function() {
+//             remainingTime--;
+//             updateDisplay();
+
+//             if (remainingTime <= 0 && !isRequestSent) {
+//                 clearInterval(countdownInterval);
+//                 clearInterval(tableDataInterval); // Stop the table data interval when countdown reaches zero
+//                 alert("Time's up! Determining the winners...");
+
+//                 console.log("Countdown finished. Sending AJAX request to declare winners...");
+//                 isRequestSent = true;  // Ensure only one request is sent
+
+//                 // AJAX request to update database
+//                 var xhr = new XMLHttpRequest();
+//                 xhr.open("POST", "PHPBackend/VotingProcess.php", true);
+//                 xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+//                 xhr.onreadystatechange = function() {
+//                     if (xhr.readyState === XMLHttpRequest.DONE) {
+//                         console.log("AJAX request completed. Status: " + xhr.status);
+//                         console.log("Response: " + xhr.responseText);
+
+//                         if (xhr.status === 200) {
+//                             let response = JSON.parse(xhr.responseText);
+//                             if (response.success) {
+//                                 console.log("Winners successfully declared.");
+//                                 alert("Top 9 candidates have been declared winners!");
+//                             } else {
+//                                 console.error("Error: " + response.error);
+//                                 alert("Error: " + response.error);
+//                             }
+//                         } else {
+//                             console.error("Server error: " + xhr.status);
+//                             alert("Failed to declare winners. Server error.");
+//                         }
+//                     }
+//                 };
+
+//                 xhr.send("action=declare_winner");
+//             }
+//         }, 1000); // Update every second
+//     }
+
+//     startButton.addEventListener("click", startCountdown);
+//     stopButton.addEventListener("click", function() {
+//         clearInterval(countdownInterval);
+//         clearInterval(tableDataInterval); // Optionally stop the table data interval when the countdown is stopped
+//     });
+//     resetButton.addEventListener("click", function() {
+//         clearInterval(countdownInterval);
+//         clearInterval(tableDataInterval); // Optionally stop the table data interval when resetting
+//         remainingTime = 0;
+//         isRequestSent = false;
+//         updateDisplay(); // Reset display to initial state
+//     });
+// });
+
+// function updateDisplay() {
+//     const hours = Math.floor(remainingTime / 3600);
+//     const minutes = Math.floor((remainingTime % 3600) / 60);
+//     const seconds = remainingTime % 60;
+
+//     document.getElementById('hours').textContent = String(hours).padStart(2, '0') + ':';
+//     document.getElementById('minutes').textContent = String(minutes).padStart(2, '0') + ':';
+//     document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+// }
+
+// // Initial fetch of table data when the page loads
+// fetchTableData();

@@ -128,13 +128,13 @@ if (isset($_SESSION['role'])) {
                                             <div class="dropdown-button">Select Option</div>
                                             <div class="dropdown-content">
                                                 <label class="option" data-value="male">
-                                                    <input class="pagpipilianKasarian SUF" type="radio" name="gender" value="male"> Male
+                                                    <input class="pagpipilianKasarian SUF" type="radio" name="gender" value="Male"> Male
                                                 </label>
                                                 <label class="option" data-value="female">
-                                                    <input class="pagpipilianKasarian SUF" type="radio" name="gender" value="female"> Female
+                                                    <input class="pagpipilianKasarian SUF" type="radio" name="gender" value="Female"> Female
                                                 </label>
                                                 <label class="option" data-value="other">
-                                                    <input class="pagpipilianKasarian SUF" type="radio" name="gender" value="other"> Other
+                                                    <input class="pagpipilianKasarian SUF" type="radio" name="gender" value="Preferred not to say"> Preferred not to say
                                                 </label>
                                             </div>
                                         </div>                                        

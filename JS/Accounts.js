@@ -107,7 +107,7 @@ const complaintsSubMenu = document.getElementById('complaintsSubMenu');
                         if (response.error) {
                             alert("Error: " + response.error);
                         } else {
-                            alert("Rejecting Email sent successfully.");
+                            alert("Confirmation Email sent successfully.");
                         }
                     } catch (e) {
                         alert("Failed to parse JSON response: " + xhr.responseText);
@@ -117,6 +117,7 @@ const complaintsSubMenu = document.getElementById('complaintsSubMenu');
                 }
             }
         };
+        console.log("Sending user_id:", userId);
         xhr.send("user_id=" + encodeURIComponent(userId));
     }
 
@@ -152,25 +153,45 @@ const complaintsSubMenu = document.getElementById('complaintsSubMenu');
 
                     $.each(response, function (Key, value) { 
 
-                        $('#userID').val(value['user_id']);
+                        $('#userID').val(value['unique_id']); // ginawa kong unique_id kasi di tugma si user_id sa database ng tblacc at tblresident
                         $('#conf_userID').val(value['user_id']);
                         $('#Lname').val(value['last_name']);
                         $('#Fname').val(value['first_name']);
-                        $('#Mname').val(value['middle_name']);
-                        $('#dob').val(value['birthday']);
+
+                        // pang display ng N/A kapag walang laman talaga
+                        var middleName = value['middle_name'] ? value['middle_name'] : 'N/A';
+                        $('#Mname').val(middleName);
+
+                        var suffix = value['suffix'] ? value['suffix'] : 'N/A';
+                        $('#Suffix').val(suffix);
+
+                        //pang lagay ng formated na bertdey (May 21, 2003)
+                        var dob = new Date(value['birthday']);
+                        var options = { year: 'numeric', month: 'long', day: 'numeric' };
+                        var formattedDOB = dob.toLocaleDateString('en-US', options);
+                        $('#dob').val(formattedDOB);
+
+                        // $('#dob').val(value['birthday']);
                         // $('#Bplace').val(value['birthplace']);
-                        $('#Sex').val(value['sex']);
+                        $('#Gender').val(value['sex']);
                         $('#Age').val(value['age']);
-                        $('#ContNum').val(value['phone_number']);
+                        $('#PhoneNum').val(value['phone_number']);
                         // $('#CitizShip').val(value['citizenship']);
                         $('#Blk').val(value['block']);
                         $('#Lot').val(value['lot']);
                         // $('#ecName').val(value['ec_name']);
                         // $('#ecRel').val(value['ec_relship']);
                         // $('#ecNum').val(value['ec_phone_num']);
-                        $('#STName').val(value['street_name']);
+
+                        var street = value['street_name'] ? value['street_name'] : 'N/A';
+                        $('#STName').val(street);
+                        
+                        // $('#STName').val(value['street_name']);
                         $('#ecAddress').val("Blk " + value['block'] + " Lot " + value['lot']);
                         // + "  " + value['street_name'] + " St."
+
+                        $('.footerNgViewModal .DecBtn').data('news-id', value['user_id']);
+                        $('.footerNgViewModal .AcceptBtn').data('news-id', value['user_id']);
                     });
 
 
@@ -178,19 +199,19 @@ const complaintsSubMenu = document.getElementById('complaintsSubMenu');
             });
         })
 
-        // Button ng delete sa table
-        $(document).on("click", ".confBOTON", function(){
-            var user_id = $(this).closest('tr').find('.user_id').text();
-            $('.confirm_userID').val(user_id);               
-        });
+        // // Button ng confirm sa table
+        // $(document).on("click", ".confBOTON", function(){
+        //     var user_id = $(this).closest('tr').find('.user_id').text();
+        //     $('.confirm_userID').val(user_id);               
+        // });
 
         window.closeModal = function() {
             $('#confirmModal').hide();
         };
 
-        $('.ConfirmSaModal').click(function (e) { 
+        $('.ConfBtn').click(function (e) { 
             e.preventDefault();
-            var confirm_userID = $('.confirm_userID').val(); 
+            var confirm_userID = $('#userID').val(); 
             console.log('confirm_userID:', confirm_userID);
             
             $.ajax({
@@ -254,7 +275,7 @@ const complaintsSubMenu = document.getElementById('complaintsSubMenu');
                         if (response.error) {
                             alert("Error: " + response.error);
                         } else {
-                            alert("Rejecting Email sent successfully.");
+                            alert("Rejection Email sent successfully.");
                         }
                     } catch (e) {
                         alert("Failed to parse JSON response: " + xhr.responseText);
@@ -268,18 +289,18 @@ const complaintsSubMenu = document.getElementById('complaintsSubMenu');
     }
 
         // Pagbago ng access ni user to reject
-        $(document).on("click", ".rejBOTON", function(){
-            var user_id = $(this).closest('tr').find('.user_id').text();
+        // $(document).on("click", ".rejBOTON", function(){
+        //     var user_id = $(this).closest('tr').find('.user_id').text();
             
-            $('.reject_userID').val(user_id);
-            console.log("Hilo", user_id);               
-        });
+        //     $('.reject_userID').val(user_id);
+        //     console.log("Hilo", user_id);               
+        // });
 
-        $(document).on("click", ".rejBOTON", function(e) {
+        $(document).on("click", ".DecBtn", function(e) {
             e.preventDefault();
             
             // Get the user ID from the input with the class 'reject_userID'
-            var reject_userID = $('.reject_userID').val();
+            var reject_userID = $('#userID').val();
             console.log('reject_userID:', reject_userID);
             
             // Perform the AJAX request

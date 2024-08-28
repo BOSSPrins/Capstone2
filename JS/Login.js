@@ -75,4 +75,37 @@ document.addEventListener("DOMContentLoaded", () => {
       };
     }
   });
+
+
+//   function fetchAccountsData() {
+//     console.log('Fetching accounts data...');
+//     var xhr = new XMLHttpRequest();
+//     xhr.open('GET', 'PHPBackend/Login.php', true); // Point to the PHP script
+
+//     xhr.onreadystatechange = function() {
+//         if (xhr.readyState === XMLHttpRequest.DONE) {
+//             console.log('XHR ReadyState:', xhr.readyState);
+//             console.log('XHR Status:', xhr.status);
+
+//             if (xhr.status === 200) {
+//                 console.log('Response received:', xhr.responseText);
+//                 var response = JSON.parse(xhr.responseText);
+
+//                 if (response.success) {
+//                     console.log('Accounts data:', response.accounts);
+//                 } else {
+//                     console.error('Error:', response.error);
+//                 }
+//             } else {
+//                 console.error('Request failed with status:', xhr.status);
+//             }
+//         }
+//     };
+
+//     xhr.send();
+// }
+
+// // Call the function to fetch and log the accounts data
+// fetchAccountsData();
+
   

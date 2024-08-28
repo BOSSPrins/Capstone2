@@ -110,7 +110,7 @@
                                         // Perform the query
                                         $sql = mysqli_query($conn, "SELECT tblaccounts.unique_id, tblaccounts.user_id, tblaccounts.status, tblaccounts.role
                                         FROM tblaccounts
-                                        INNER JOIN tblresident ON tblaccounts.user_id = tblresident.user_id
+                                        INNER JOIN tblresident ON tblaccounts.unique_id = tblresident.unique_id
                                         WHERE tblaccounts.unique_id ='" . $user_id . "' AND tblaccounts.role = 'admin'");
                                         
                                         // Check if rows were returned

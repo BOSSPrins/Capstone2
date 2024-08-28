@@ -7,7 +7,7 @@
   $output = "";
   $sql = mysqli_query($conn, "SELECT tblaccounts.*, tblresident.first_name, tblresident.last_name  
                               FROM tblaccounts
-                              INNER JOIN tblresident ON tblaccounts.user_id = tblresident.user_id
+                              INNER JOIN tblresident ON tblaccounts.unique_id = tblresident.unique_id
                               WHERE (tblresident.first_name LIKE '%{$searchTerm}%'
                               OR tblresident.last_name LIKE '%{$searchTerm}%')
                               AND NOT tblaccounts.unique_id = {$outgoing_id}");

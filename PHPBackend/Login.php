@@ -6,10 +6,16 @@ $conn = connection();
 $email = mysqli_real_escape_string($conn, $_POST['email']);
 $password = mysqli_real_escape_string($conn, $_POST['loginpassword']);
 
+function closeConnectionAndRespond($conn, $response) {
+    $conn->close();
+    echo json_encode($response);
+    exit();
+}
+
 if (!empty($email) && !empty($password)) {
                         $sql = mysqli_query($conn, "SELECT tblaccounts.*, tblaccounts.user_id AS acc_userID, tblresident.user_id AS res_userID, tblresident.first_name, tblresident.middle_name, tblresident.last_name, tblresident.block, tblresident.lot
                         FROM tblaccounts 
-                        INNER JOIN tblresident ON tblaccounts.user_id = tblresident.user_id
+                        INNER JOIN tblresident ON tblaccounts.unique_id = tblresident.unique_id
                         WHERE tblaccounts.email = '{$email}'");
     
 
@@ -59,4 +65,18 @@ if (!empty($email) && !empty($password)) {
 } else {
     echo "All input fields are required!";
 }
+
+
+// $sql = "SELECT * FROM tblaccounts";
+// $result = $conn->query($sql);
+
+// if ($result->num_rows > 0) {
+//     $accounts = [];
+//     while ($row = $result->fetch_assoc()) {
+//         $accounts[] = $row;
+//     }
+//     closeConnectionAndRespond($conn, ['success' => true, 'accounts' => $accounts]);
+// } else {
+//     closeConnectionAndRespond($conn, ['success' => false, 'error' => 'No accounts found']);
+// }
 ?>

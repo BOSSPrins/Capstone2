@@ -5,6 +5,8 @@ ini_set('display_errors', 1);
 ini_set('log_errors', 1);
 ini_set('error_log', 'C:\xampp\apache\logs\error.log');
 
+error_log('Received POST data: ' . print_r($_POST, true)); 
+
 header('Content-Type: application/json');
 session_start();
 include_once "../Connect/Connection.php";
@@ -221,6 +223,58 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && !isset($_GET['id']) && isset($_GET['
 }
 
 
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'declare_war') {
+    error_log('POST request received.');
+
+    // Log exact value of 'action' and its length
+    $action = isset($_POST['action']) ? trim($_POST['action']) : null;
+
+    // Debugging: Output the action variable and log it
+    var_dump($action); // Outputs the exact string and its details
+    error_log('Var dump of action: ' . var_export($action, true));
+
+    error_log('Exact value of action parameter: "' . $action . '" with length: ' . strlen($action));
+
+    // Log full POST data to verify it is being sent correctly
+    error_log('Full POST data: ' . print_r($_POST, true));
+
+    if (strcasecmp($action, 'declare_winner') === 0) {
+        error_log('Action parameter is correct.');
+
+        // SQL to update the top 9 candidates by votes to "winner"
+        $sql = "UPDATE user_votes
+                SET status = 'Winner'
+                WHERE unique_id IN (
+                    SELECT unique_id 
+                    FROM (
+                        SELECT unique_id 
+                        FROM user_votes 
+                        ORDER BY votes DESC 
+                        LIMIT 9
+                    ) AS TopCandidates
+                )";
+
+        if ($conn->query($sql) === TRUE) {
+            $response = ['success' => true];
+            error_log('Query successful.');
+        } else {
+            error_log("SQL Error: " . $conn->error);
+            $response = ['success' => false, 'error' => "Database error occurred"];
+        }
+
+        closeConnectionAndRespond($conn, $response);
+    } else {
+        error_log('Invalid action parameter: "' . $action . '" with length: ' . strlen($action));
+        $response = ['success' => false, 'error' => 'Invalid request'];
+        closeConnectionAndRespond($conn, $response);
+    }
+} else {
+    error_log('Invalid request method: ' . $_SERVER['REQUEST_METHOD']);
+    $response = ['success' => false, 'error' => 'Invalid request method'];
+    closeConnectionAndRespond($conn, $response);
+}
+echo "PHP script is working.";
+echo 'Error log path: ' . ini_get('error_log');
 
 
 
@@ -228,66 +282,62 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && !isset($_GET['id']) && isset($_GET['
 
 
 
+// Eto yung panglagay ng winner sa mga candidate kapag tapos ng countdown
+// Eto yung panglagay ng winner sa mga candidate kapag tapos ng countdown
+// error_log('Debugging started.');
 
+// if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+//     error_log('POST request received.');
 
+//     // Log exact value of 'action' and its length
+//     $action = isset($_POST['action']) ? trim($_POST['action']) : null;
 
-// if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-//     // Fetch candidate data based on candidate ID
-//     if (isset($_GET['id'])) {
-//         $candidateId = $_GET['id'];
+//     // Debugging: Output the action variable and log it
+//     var_dump($action); // Outputs the exact string and its details
+//     error_log('Var dump of action: ' . var_export($action, true));
 
-//         $stmt = $conn->prepare("SELECT unique_id, candidate_name, img FROM voting WHERE unique_id = ?");
-//         if (!$stmt) {
-//             error_log("Statement prepare error: " . $conn->error);
-//             closeConnectionAndRespond($conn, ['success' => false, 'error' => $conn->error]);
-//         }
+//     error_log('Exact value of action parameter: "' . $action . '" with length: ' . strlen($action));
 
-//         $stmt->bind_param("s", $candidateId);
+//     // Log full POST data to verify it is being sent correctly
+//     error_log('Full POST data: ' . print_r($_POST, true));
 
-//         if (!$stmt->execute()) {
-//             error_log("Statement execute error: " . $stmt->error);
-//             closeConnectionAndRespond($conn, ['success' => false, 'error' => $stmt->error]);
-//         }
+//     if (strcasecmp($action, 'declare_winner') === 0) {
+//         error_log('Action parameter is correct.');
 
-//         $result = $stmt->get_result();
-//         if ($result->num_rows > 0) {
-//             $candidate = $result->fetch_assoc();
-//             closeConnectionAndRespond($conn, ['success' => true, 'candidate' => $candidate]);
+//         // SQL to update the top 9 candidates by votes to "winner"
+//         $sql = "UPDATE user_votes
+//                 SET status = 'Winner'
+//                 WHERE unique_id IN (
+//                     SELECT unique_id 
+//                     FROM (
+//                         SELECT unique_id 
+//                         FROM user_votes 
+//                         ORDER BY votes DESC 
+//                         LIMIT 9
+//                     ) AS TopCandidates
+//                 )";
+
+//         if ($conn->query($sql) === TRUE) {
+//             $response = ['success' => true];
+//             error_log('Query successful.');
 //         } else {
-//             closeConnectionAndRespond($conn, ['success' => false, 'error' => 'Candidate not found']);
+//             error_log("SQL Error: " . $conn->error);
+//             $response = ['success' => false, 'error' => "Database error occurred"];
 //         }
 
-//     // Fetch candidate data based on votes ito yung pangtable ng mga votes
-//     } elseif (isset($_GET['votes'])) {
-//         $sql = "SELECT candidate_name, votes AS votes_count FROM voting ORDER BY votes DESC";
-//         $result = $conn->query($sql);
-
-//         if ($result) {
-//             $candidates = [];
-//             while ($row = $result->fetch_assoc()) {
-//                 $candidates[] = $row;
-//             }
-//             closeConnectionAndRespond($conn, ['success' => true, 'candidates' => $candidates]);
-//         } else {
-//             closeConnectionAndRespond($conn, ['success' => false, 'error' => 'Query failed']);
-//         }
-
-//     // Fetch all candidates ordered by vote_id ng pagbobotohan ng user
+//         closeConnectionAndRespond($conn, $response);
 //     } else {
-//         $sql = "SELECT unique_id, candidate_name, img FROM voting ORDER BY vote_id DESC";
-//         $result = $conn->query($sql);
-
-//         if ($result) {
-//             $candidates = [];
-//             while ($candidate = $result->fetch_assoc()) {
-//                 $candidates[] = $candidate;
-//             }
-//             closeConnectionAndRespond($conn, ['success' => true, 'candidates' => $candidates]);
-//         } else {
-//             closeConnectionAndRespond($conn, ['success' => false, 'error' => 'No candidates found']);
-//         }
+//         error_log('Invalid action parameter: "' . $action . '" with length: ' . strlen($action));
+//         $response = ['success' => false, 'error' => 'Invalid request'];
+//         closeConnectionAndRespond($conn, $response);
 //     }
+// } else {
+//     error_log('Invalid request method: ' . $_SERVER['REQUEST_METHOD']);
+//     $response = ['success' => false, 'error' => 'Invalid request method'];
+//     closeConnectionAndRespond($conn, $response);
 // }
+// echo "PHP script is working.";
+// echo 'Error log path: ' . ini_get('error_log');
 
 
 

@@ -598,7 +598,7 @@ tr:nth-child(even){
   }
   
   .AcceptBtn{
-    margin-right: 20px;
+    margin-left: 20px;
     background: green;
   }
   
