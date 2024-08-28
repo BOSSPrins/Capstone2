@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 02, 2024 at 08:31 PM
+-- Generation Time: Aug 28, 2024 at 10:09 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -318,25 +318,26 @@ CREATE TABLE `tblaccounts` (
 --
 
 INSERT INTO `tblaccounts` (`user_id`, `unique_id`, `email`, `password`, `img`, `status`, `role`, `access`) VALUES
-(1, 1173092218, 'master@gmail.com', 'eb0a191797624dd3a48fa681d3061212', '1715083895flrmeouv.png', 'Offline now', '', 'Rejected'),
-(2, 1589571584, 'admin@gmail.com', '21232f297a57a5a743894a0e4a801fc3', '1715091144pusi.jpg', 'Offline now', 'admin', 'Approved'),
-(3, 730027935, 'welacakes@gmail.com', 'f9395f741e6f4da0f873c08008ed5760', '1715100256330940285_2340469369455107_2269788843175983818_n.jpg', 'Offline now', '', 'Approved'),
-(4, 1357825271, 'senpai@gmail.com', '1e5db03ce967cfef4e21ada16da09b06', '1715105349271713718_1999144396919159_608519389647854942_n.jpg', 'Active now', 'user', 'Rejected'),
-(5, 1474265465, 'mamako@gmail.com', 'eeafbf4d9b3957b139da7b7f2e7f2d4a', '1715845102bike.jpg', 'Offline now', '', 'Rejected'),
-(6, 1163083331, 'pr@gmail.com', '4297f44b13955235245b2497399d7a93', '1715849553bike.jpg', 'Offline now', '', ''),
-(7, 1079432394, 'test@gmail.com', '098f6bcd4621d373cade4e832627b4f6', '1717432294bike.jpg', 'Offline now', '', ''),
-(8, 754920518, 'test2@gmail.com', '098f6bcd4621d373cade4e832627b4f6', '1717432677ble.png', 'Offline now', 'pending', ''),
-(9, 1445165714, 'Chap@gmail.com', '79bdc2757415b12d9f62183d6e60b657', '1717589216Calcu.png', 'Offline now', 'user', ''),
-(10, 757420171, 'first@gmail.com', '8b04d5e3775d298e78455efc5ca404d5', '1717589824ef25eb26e652151992087d450fa721e2.jpg', 'Offline now', 'user', ''),
-(11, 1356008498, 'cutie@gmail.com', '05f3672ba34409136aa71b8d00070d1b', '1717593202pitikvermo.jpg', 'Offline now', 'user', 'Approved'),
-(12, 755154771, 'bakit@gmail.com', 'abc1f79e5a5db78b137c663f8fa8c037', '1717595059ble.png', 'Offline now', 'user', ''),
-(13, 373821860, 'bago@gmail.com', '002fd9bc0b24de3b80ce1efd7bc4dc19', '1717595498pitikvermo.jpg', 'Offline now', 'user', 'Pending'),
-(14, 446429328, 'New@gmail.com', '03c2e7e41ffc181a4e84080b4710e81e', '1717600789kandes.png', 'Pending', 'user', 'Approved'),
-(15, 638234533, 'Mas@gmail.com', 'b58c2d4a810e07b2d853f8b6f565c630', '1717619258flrmeouv.png', 'Offline now', 'user', 'Approved'),
-(16, 643959833, 'prnccrvnts@gmail.com', '783bd6100dfaefa4cf08a47010bd9537', '1717619611received_737091231046329.jpg', 'Offline now', 'user', 'Rejected'),
-(18, 1662732210, 'PRINCE@gmail.com', 'a63b03e7579810222265eb0e0db35fdc', '1717728951catto.jpg', 'Offline now', 'user', 'Pending'),
+(2, 1589571584, 'admin@gmail.com', '21232f297a57a5a743894a0e4a801fc3', '1715091144pusi.jpg', 'Active now', 'admin', 'Approved'),
+(4, 1357825271, 'senpai@gmail.com', '1e5db03ce967cfef4e21ada16da09b06', '1715105349271713718_1999144396919159_608519389647854942_n.jpg', 'Offline now', 'user', 'Rejected'),
 (19, 112466338, 'Prins@gmail.com', '0a9e0db6e95c394ee792ecbc6e510791', '1717745936pitikvermo.jpg', 'Pending', 'user', 'Approved'),
-(21, 1017731196, 'tnjrdlcrz@gmail.com', '202cb962ac59075b964b07152d234b70', '1717937589pitikvermo.jpg', 'Pending', 'user', 'Approved');
+(21, 1017731196, 'tnjrdlcrz@gmail.com', '202cb962ac59075b964b07152d234b70', '1717937589pitikvermo.jpg', 'Pending', 'user', 'Approved'),
+(22, 1593518745, 'aawafawf@gmail.com', '2310553235ab181ae0c551c242988734', 'Pictures/Mabuhay_Logo.png', 'Pending', 'user', 'Pending'),
+(23, 1469021725, 'adadawda@gmail.com', '32db117b68ab7598389c18b68f721116', 'Mabuhay_Logo.png', 'Pending', 'user', 'Pending'),
+(24, 1433443368, 'waeaewea@gmail.com', '458e5a124f7ed72d143d837a9a3bd76e', 'Mabuhay_Logo.png', 'Pending', 'user', 'Pending'),
+(25, 1095492376, 'daadaaw@gmail.com', 'f2a85c6878e7978563609d089ee1173a', 'Mabuhay_Logo.png', 'Pending', 'user', 'Pending'),
+(26, 911851766, 'aSbkghjgsghj@gmail.com', '4e3b9566b4b9abfd8f6671f7b4e423a7', 'Mabuhay_Logo.png', 'Pending', 'user', 'Pending'),
+(27, 509858760, 'Tiklop@gmail.com', '9f4a66a0bac35d6f7f25b5fd931c7abe', 'Mabuhay_Logo.png', 'Pending', 'user', 'Pending'),
+(28, 1581632830, 'wela@gmail.com', 'f9395f741e6f4da0f873c08008ed5760', 'Mabuhay_Logo.png', 'Active now', 'user', 'Approved'),
+(29, 821155870, 'Renz@gmail.com', 'b55dc472db84256de67972b96657e7b9', 'Mabuhay_Logo.png', 'Offline now', 'user', 'Approved'),
+(30, 776313154, 'Pat@gmail.com', '532762fa5a5b7169aa4dd24717ba9df9', 'Mabuhay_Logo.png', 'Offline now', 'user', 'Approved'),
+(31, 1590469844, 'Pao@gmail.com', '1b6203e2e1b7e63e7b3677cdd932001f', 'Mabuhay_Logo.png', 'Offline now', 'user', 'Approved'),
+(32, 1308040957, 'John@gmail.com', '61409aa1fd47d4a5332de23cbf59a36f', 'Mabuhay_Logo.png', 'Offline now', 'user', 'Approved'),
+(33, 931588206, 'Jane@gmail.com', '2b95993380f8be6bd4bd46bf44f98db9', 'Mabuhay_Logo.png', 'Offline now', 'user', 'Approved'),
+(34, 662462528, 'Hev@gmail.com', '84f60ea382314109784cb42b9b4b8e42', 'Mabuhay_Logo.png', 'Offline now', 'user', 'Approved'),
+(35, 499733408, 'Ethan@gmail.com', 'e05699b45eae134804f4419d3fbb3139', 'Mabuhay_Logo.png', 'Offline now', 'user', 'Approved'),
+(36, 1434008263, 'Rose@gmail.com', '0df4dccc4aac3f6f36e00ef2a6a4bfac', 'Mabuhay_Logo.png', 'Offline now', 'user', 'Approved'),
+(37, 1195874011, 'Mia@gmail.com', '46e6f8781dd60e2635430b61db511262', 'Mabuhay_Logo.png', 'Offline now', 'user', 'Approved');
 
 -- --------------------------------------------------------
 
@@ -373,56 +374,56 @@ CREATE TABLE `tblresident` (
 --
 
 INSERT INTO `tblresident` (`user_id`, `unique_id`, `access`, `first_name`, `middle_name`, `last_name`, `suffix`, `sex`, `age`, `pwd`, `birthday`, `birthplace`, `citizenship`, `block`, `lot`, `street_name`, `phone_number`, `ec_name`, `ec_phone_num`, `ec_relship`, `ec_address`) VALUES
-(1, '', 'Rejected', 'Prince', 'Cutie', 'Cervantes', '', 'Male', 0, '', '09-02-2002', 'Las Pinas ', 'Filipino', 1, 18, 'Mabolo', 912345678, 'Leng Cervantes', 24357345745, 'Mother', 'Blk 9 Lot 18 Mabolo St.'),
-(2, '', 'Approved', 'Prince', 'P.', 'Cervantes', '', 'Female', 0, '', '05-21-2003', 'Manila', 'Filipino', 1, 9, 'Mabolo', 912345678, 'Tita nels', 4357345773, 'Mother', 'Blk 18 Lot 9 Kamagong St.'),
-(3, '020223', 'Approved', 'Welacakes', 'Magsino', 'Cervantes', '', 'Female', 20, '', '', '', '', 3, 18, '', 9434763913, 'Prince Jefferson P. Cervantes', 9666676033, 'Asawa', 'BLK 9 LOT 18 Ville de Palme Brgy. Santiago, General Trias, Cavite'),
+(3, '1589571584', 'Approved', 'Welacakes', 'Magsino', 'Cervantes', '', 'Female', 20, '', '', '', '', 3, 18, '', 9434763913, 'Prince Jefferson P. Cervantes', 9666676033, 'Asawa', 'BLK 9 LOT 18 Ville de Palme Brgy. Santiago, General Trias, Cavite'),
 (4, '1357825271', 'Rejected', 'Wela', 'Aguilar', 'Magsino', '', 'Male', 21, '', '', '', '', 3, 23, '', 9434763913, 'Arlenin', 24357345745, 'Secret', 'Blk 9 Lot 18 Anahaw St.'),
-(5, '', 'Rejected', 'Franky', 'Minskie', 'Skirt', '', 'Male', 99, '', '', '', '', 9, 99, '', 123132, 'Mama mo', 1231123, 'Mama ko', 'Sa bahay'),
-(6, '', '', 'Prins', 'Midname', 'Cervantes', '', 'Male', 21, '', '', '', '', 9, 18, '', 909090909, 'Mother', 9090909, 'Mother', 'BLK 9 LOT 18 Ville de Palme Brgy. Santiago, General Trias, Cavite'),
-(7, '', '', 'p', 'p', 'p', 'pp', 'pp', 0, '', '', '', '', 0, 0, '', 0, 'p', 0, 'p', 'p'),
-(8, '', '', 'p', 'p', 'p', 'p', 'p', 0, '', '', '', '', 0, 0, '', 0, 'Prince Jefferson P. Cervantes', 0, 'p', 'p'),
-(9, '', '', 'Chap', 'oks', 'cats', 'jr', 'male', 33, '', '', '', '', 1, 1, '', 123123, 'Madir', 123123, 'Mother', 'BLK 9 LOT 18 Ville de Palme Brgy. Santiago, General Trias, Cavite'),
-(10, '', '', 'First', 'Midname', 'Last', 'Suff', 'SEx', 18, '', '', '', '', 3, 3, '', 123123, 'emer', 0, 'Brader', 'Test strreett blk 9 '),
-(11, '', 'Approved', 'p', 'p', 'p', '', 'male', 33, '', '', '', '', 0, 0, '', 0, 'p', 0, 'p', 'p'),
-(12, '', '', 'pers ', 'mid ', 'secs', '', 'male', 33, '', '', '', '', 1, 1, '', 123123, '', 0, '', ''),
-(13, '', '', 'bago', 'bago', 'bago', '', 'Preferred Not to Say', 33, '', '', '', '', 33, 33, '', 33, '', 0, '', ''),
-(14, '', 'Approved', 'New', 'New', 'New', '', 'Male', 123, '', '', '', '', 123, 123, '', 123, '', 0, '', ''),
-(15, '', 'Approved', 'Mas ', 'Bago ', 'pa', '', 'Others', 11, '', '', '', '', 2, 2, '', 123, '', 0, '', ''),
-(16, '', 'Rejected', 'Etona', 'talagang ', 'talaga', '', 'Male', 13, '', '', '', '', 3, 3, '', 909, '', 0, '', ''),
-(18, '', 'Approved', 'PRINCE JEFFERSON', 'PAGAOA', 'CERVANTES', '', 'Male', 21, '', '', '', '', 9, 18, '', 9123123123123, '', 0, '', ''),
 (19, '112466338', 'Approved', 'Prins', 'P', 'Cervs', '', 'Male', 23, '', '', '', '', 4, 3, '', 123, '', 0, '', ''),
-(20, '1509850339', 'Approved', 'TEst', 'TEst', 'TEst', '', 'Female', 123, '', '', '', '', 1, 1, '', 123, '', 0, '', ''),
-(21, '1017731196', 'Approved', 'bago', 'bago', 'bago', '', 'Rather not say', 123, '', '', '', '', 1, 2, '', 123123, '', 0, '', '');
+(21, '1017731196', 'Approved', 'bago', 'bago', 'bago', '', 'Rather not say', 123, '', '', '', '', 1, 2, '', 123123, '', 0, '', ''),
+(23, '1593518745', 'Pending', 'eae', 'eaeaea', 'eaeaawea', 'eaweae', 'male', 3, 'Yes', '2021-02-02', '', '', 2132, 131, 'aweaeaweaea', 1312131313131, '', 0, '', ''),
+(24, '1469021725', 'Pending', 'adwdad', 'daddaddwd', 'adadadad', 'eawdadadasd', 'male', 5, 'Yes', '2019-02-18', '', '', 123, 123, 'dadadadad', 31231331, '', 0, '', ''),
+(25, '1433443368', 'Pending', 'sakses', 'qew', 'qweqwe', 'qwe', 'female', 8, 'Yes', '2016-02-18', '', '', 213, 1231, 'wdadsdasd', 12131313, '', 0, '', ''),
+(26, '1095492376', 'Pending', 'eaaeaaea', 'aaeaaea', 'aeaeaaea', 'awe', 'male', 12, 'No', '2012-02-25', '', '', 132, 132, 'aweaeaa', 131213312, '', 0, '', ''),
+(27, '911851766', 'Pending', 'waedsdadadadwadadada', 'ddadadadada', 'dadadadadada', 'dadadaddada', 'male', 8, 'No', '2016-02-18', '', '', 123, 123, 'awdadadadasdada', 1231313123, '', 0, '', ''),
+(28, '509858760', 'Pending', 'New ', 'Bagong', 'Account', 'Wala', 'male', 29, 'Yes', '1995-02-20', '', '', 1, 1, 'Test', 123123123, '', 0, '', ''),
+(30, '1581632830', 'Approved', 'Wela', 'A', 'Magsino', 'N/A', 'female', 21, 'No', '2003-05-21', '', '', 9, 18, 'Mabolo', 9123412313, '', 0, '', ''),
+(31, '821155870', 'Approved', 'Jhonrenz', '', 'Berbano', '', 'Male', 1, 'Yes', '2023-07-24', '', '', 1, 1, '', 2131231, '', 0, '', ''),
+(32, '776313154', 'Approved', 'Patrick', 'B', 'Bayona', '', 'Male', 4, 'Yes', '2020-01-20', '', '', 2, 2, '', 12313133, '', 0, '', ''),
+(33, '1590469844', 'Approved', 'Paolo', 'M', 'Murillo', '', 'Male', 21, 'Yes', '2003-01-11', '', '', 3, 3, '', 123123123, '', 0, '', ''),
+(34, '1308040957', 'Approved', 'John', '', 'Doe', '', 'Male', 1, 'No', '2023-06-14', '', '', 4, 4, '', 1231231231, '', 0, '', ''),
+(35, '931588206', 'Approved', 'Jane', '', 'Doe', '', 'Female', 3, 'Yes', '2021-08-20', '', '', 5, 5, '', 112312313, '', 0, '', ''),
+(36, '662462528', 'Approved', 'Hev', '', 'Alvin', '', 'Male', 4, 'No', '2020-02-24', '', '', 6, 6, '', 1231312313, '', 0, '', ''),
+(37, '499733408', 'Approved', 'Ethan', '', 'Winters', '', 'Male', 7, 'Yes', '2017-02-24', '', '', 1, 1, '', 131132123, '', 0, '', ''),
+(38, '1434008263', 'Approved', 'Rose', '', 'Winters', '', 'Female', 3, 'No', '2021-02-25', '', '', 2, 2, '', 123123123, '', 0, '', ''),
+(39, '1195874011', 'Approved', 'Mia', '', 'Winters', '', 'Female', 5, 'Yes', '2019-03-01', '', '', 6, 6, 'Mold', 312313132313, '', 0, '', '');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user_voting`
+-- Table structure for table `user_votes`
 --
 
-CREATE TABLE `user_voting` (
+CREATE TABLE `user_votes` (
   `vote_id` int(11) NOT NULL,
   `unique_id` int(11) NOT NULL,
-  `candidate1` int(11) NOT NULL,
-  `candidate2` int(11) NOT NULL,
-  `candidate3` int(11) NOT NULL,
-  `candidate4` int(11) NOT NULL,
-  `candidate5` int(11) NOT NULL,
-  `candidate6` int(11) NOT NULL,
-  `candidate7` int(11) NOT NULL,
-  `candidate8` int(11) NOT NULL,
-  `candidate9` int(11) NOT NULL
+  `candidate` varchar(255) NOT NULL,
+  `votes` int(11) NOT NULL,
+  `status` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `user_voting`
+-- Dumping data for table `user_votes`
 --
 
-INSERT INTO `user_voting` (`vote_id`, `unique_id`, `candidate1`, `candidate2`, `candidate3`, `candidate4`, `candidate5`, `candidate6`, `candidate7`, `candidate8`, `candidate9`) VALUES
-(1, 1357825271, 112466338, 1509850339, 1357825271, 0, 0, 0, 0, 0, 0),
-(2, 1357825271, 1357825271, 112466338, 1509850339, 0, 0, 0, 0, 0, 0),
-(3, 1357825271, 112466338, 20223, 1357825271, 0, 0, 0, 0, 0, 0),
-(4, 1357825271, 112466338, 20223, 1357825271, 0, 0, 0, 0, 0, 0);
+INSERT INTO `user_votes` (`vote_id`, `unique_id`, `candidate`, `votes`, `status`) VALUES
+(2, 1581632830, 'Wela A Magsino', 3, 'Winner'),
+(3, 821155870, 'Jhonrenz Berbano', 0, ''),
+(4, 776313154, 'Patrick B Bayona', 3, 'Winner'),
+(5, 1590469844, 'Paolo M Murillo', 3, 'Winner'),
+(6, 1308040957, 'John Doe', 3, 'Winner'),
+(7, 931588206, 'Jane Doe', 3, 'Winner'),
+(8, 662462528, 'Hev Alvin', 3, 'Winner'),
+(9, 499733408, 'Ethan Winters', 3, 'Winner'),
+(10, 1434008263, 'Rose Winters', 3, 'Winner'),
+(11, 1195874011, 'Mia Winters', 3, 'Winner');
 
 -- --------------------------------------------------------
 
@@ -442,10 +443,45 @@ CREATE TABLE `voting` (
 --
 
 INSERT INTO `voting` (`vote_id`, `unique_id`, `candidate_name`, `img`) VALUES
-(1, 112466338, 'Prins P Cervs', 'ble.png'),
-(2, 1357825271, 'Wela Aguilar Magsino', 'logo2.png'),
-(3, 20223, 'Welacakes Magsino Cervantes', 'bebetime.jpg'),
-(4, 0, 'bago bago bago', 'toji.png');
+(10, 1581632830, 'Wela A Magsino', 'kasal.jpeg'),
+(11, 821155870, 'Jhonrenz Berbano', 'bossing.jpg'),
+(12, 776313154, 'Patrick B Bayona', 'malupiton2.png'),
+(13, 1590469844, 'Paolo M Murillo', 'malupiton.png'),
+(14, 1308040957, 'John Doe', 'ble.png'),
+(15, 931588206, 'Jane Doe', 'wolXdead.jpg'),
+(16, 662462528, 'Hev Alvin', 'maxresdefault.jpg'),
+(17, 499733408, 'Ethan Winters', 'Screenshot 2023-11-03 210151.png'),
+(18, 1434008263, 'Rose Winters', '183726533_469980844255676_8094931697298234118_n.jpg'),
+(19, 1195874011, 'Mia Winters', 'Screenshot 2023-10-03 215143.png');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `voting_history`
+--
+
+CREATE TABLE `voting_history` (
+  `vote_id` int(11) NOT NULL,
+  `unique_id` int(11) NOT NULL,
+  `candidate1` int(11) NOT NULL,
+  `candidate2` int(11) NOT NULL,
+  `candidate3` int(11) NOT NULL,
+  `candidate4` int(11) NOT NULL,
+  `candidate5` int(11) NOT NULL,
+  `candidate6` int(11) NOT NULL,
+  `candidate7` int(11) NOT NULL,
+  `candidate8` int(11) NOT NULL,
+  `candidate9` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `voting_history`
+--
+
+INSERT INTO `voting_history` (`vote_id`, `unique_id`, `candidate1`, `candidate2`, `candidate3`, `candidate4`, `candidate5`, `candidate6`, `candidate7`, `candidate8`, `candidate9`) VALUES
+(15, 1357825271, 1195874011, 1434008263, 662462528, 499733408, 1308040957, 931588206, 1590469844, 776313154, 1581632830),
+(16, 1357825271, 1195874011, 1434008263, 662462528, 499733408, 1308040957, 931588206, 1590469844, 776313154, 1581632830),
+(17, 1357825271, 1195874011, 1434008263, 662462528, 499733408, 1308040957, 931588206, 1590469844, 776313154, 1581632830);
 
 --
 -- Indexes for dumped tables
@@ -500,15 +536,21 @@ ALTER TABLE `tblresident`
   ADD PRIMARY KEY (`user_id`);
 
 --
--- Indexes for table `user_voting`
+-- Indexes for table `user_votes`
 --
-ALTER TABLE `user_voting`
+ALTER TABLE `user_votes`
   ADD PRIMARY KEY (`vote_id`);
 
 --
 -- Indexes for table `voting`
 --
 ALTER TABLE `voting`
+  ADD PRIMARY KEY (`vote_id`);
+
+--
+-- Indexes for table `voting_history`
+--
+ALTER TABLE `voting_history`
   ADD PRIMARY KEY (`vote_id`);
 
 --
@@ -555,25 +597,31 @@ ALTER TABLE `payment_history`
 -- AUTO_INCREMENT for table `tblaccounts`
 --
 ALTER TABLE `tblaccounts`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `tblresident`
 --
 ALTER TABLE `tblresident`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
--- AUTO_INCREMENT for table `user_voting`
+-- AUTO_INCREMENT for table `user_votes`
 --
-ALTER TABLE `user_voting`
-  MODIFY `vote_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+ALTER TABLE `user_votes`
+  MODIFY `vote_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `voting`
 --
 ALTER TABLE `voting`
-  MODIFY `vote_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `vote_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+
+--
+-- AUTO_INCREMENT for table `voting_history`
+--
+ALTER TABLE `voting_history`
+  MODIFY `vote_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
