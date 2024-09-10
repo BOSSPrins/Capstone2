@@ -52,7 +52,7 @@ $user_UID = $_SESSION['unique_id'];
                     <span> Announcement </span>
                 </a>
                 <div class="complaintsContainer">
-                    <a href="#" class="sideside" id="complaintsDropdown">
+                    <a href="UserComplaints.php" class="sideside" id="complaintsDropdown">
                         <img class="img-sideboard" src="Pictures/ComplaintsCap.png">
                         <span> Complaints </span>
                         <button class="buttonEme2">

@@ -209,9 +209,9 @@ html{
 /* ========== MAIN DASHBOARD DESIGN ========== */
 .MainBodyContainerr {
   padding-left: 250px;
-  display: flex; 
-  flex-direction: column; 
-  height: 100vh; 
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
 }
 
 .MainContainerForTables {
@@ -219,17 +219,214 @@ html{
   justify-content: center;
   width: 100%;
   flex: 1;
-  overflow: hidden; 
+  overflow: hidden;
 }
 
-.MainContainerAll {
+.TablessContainer {
+  display: flex;
+  flex-direction: column; 
   width: 100%;
   padding: 10px;
   background-color: #ffffff;
   border: 1px solid rgb(179, 172, 172);
   margin: 10px;
-  flex: 1; 
-  overflow-y: auto;
+  flex: 1;
+}
+
+/* DESIGN FOR DROPDOWN */
+.TableHeaderr{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.itemsController,
+.searchTablee{
+display: flex;
+  align-items: center;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  margin: 0 7px;
+}
+
+.ArrowandPlace{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.selected {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  width: 70px;
+  user-select: none;
+  z-index: 1;
+}
+
+.options {
+  display: none;
+  position: absolute;
+  background-color: #fff;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.1);
+  top: 100%;
+  left: 0;
+  width: 70px;
+  z-index: 1;
+}
+
+.option {
+  text-align: center;
+  padding: 8px;
+  cursor: pointer;
+  border-top: 1px solid #ccc;
+  width: 100%;
+  box-sizing: border-box;
+  z-index: 1;
+}
+
+.open .options {
+  display: block;
+}
+
+.inputSearchhh{
+  padding: 5px;
+  font-size: 16px;
+  width: 300px;
+  margin-left: 5px;
+}
+
+/* DESIGN FOR TABLE */
+.TablesContainer {
+  flex: 1; /* Grow to fill available space */
+  width: 100%;
+  overflow-y: auto; /* Scroll if content overflows */
+}
+
+table{
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+thead{
+  background: var(--color-primary);
+  color: white;
+}
+
+th{
+  padding: 20px;
+  cursor: pointer;
+  position: relative;
+  font-size: 12px;
+  white-space: nowrap;
+  user-select: none;
+  transition: all linear 0.16s;
+  border: 1px solid rgb(179, 172, 172); /* Outline partition */
+}
+
+table th.asc,
+table th.desc {
+  border-bottom-color: rgb(255, 255, 255);
+}
+
+table th[data-sort]::before,
+table th[data-sort]::after {
+  content: '';
+  position: absolute;
+  height: 0;
+  width: 0;
+  right: 10%;
+  opacity: 0.3;
+  margin-top: 12px;
+  border: 4px solid transparent;
+}
+
+table th[data-sort]::before {
+  top: 6px;
+  border-bottom-color: rgb(255, 255, 255);
+}
+
+table th[data-sort]::after {
+  top: 16px;
+  border-top-color: rgb(255, 255, 255);
+}
+
+table th.asc::before,
+table th.desc::after {
+  opacity: 1;
+}
+
+table td {
+  font-size: 14px;
+  border-bottom: 1px solid #576574;
+  padding: 10px 12px;
+}
+
+td{
+  padding: 5px;
+  border: 1px solid rgb(179, 172, 172); /* Outline partition */
+}
+
+tbody{
+  background: var(--color-white);
+  text-align: center;
+}
+
+td{
+  color: #000000;
+}
+
+tr:nth-child(even){
+  background: var(--color-light);
+}
+
+/* DESIGN PARA SA PAGINATION */
+
+.bottom-field{
+  width: 100%;
+  margin-top: 10px;
+}
+.pagination{
+display: flex;
+justify-content: end;
+align-items: center;
+}
+
+.pagination li{
+list-style: none;
+flex-shrink: 0;
+text-align: center;
+border: 1px solid #999;
+color: #000000;
+}
+
+.pagination a.Pageactive{
+  background: #04007a;
+  color: white;
+  border-color: #32d6aa;
+}
+
+.pagination li a{
+text-decoration: none;
+padding: 3px 8px;
+color: inherit;
+display: block;
+font-family: sans-serif;
+font-size: 13px;
+}
+
+.prevv:hover,
+.nextt:hover{
+  background: rgb(182, 182, 182);
 }
   
   /* DESIGN PARA TO SA HEADER NG SIDEBAR AT SA MAIN */
@@ -438,3 +635,250 @@ html{
     font-size: 17.5px;
     cursor: pointer;
   }
+
+/* DESIGN PARA SA PAGINATION */
+
+.bottom-field{
+  width: 100%;
+  margin-top: 10px;
+}
+.pagination{
+display: flex;
+justify-content: end;
+align-items: center;
+}
+
+.pagination li{
+list-style: none;
+flex-shrink: 0;
+text-align: center;
+border: 1px solid #999;
+color: #000000;
+}
+
+.pagination a.Pageactive{
+  background: #04007a;
+  color: white;
+  border-color: #32d6aa;
+}
+
+.pagination li a{
+text-decoration: none;
+padding: 3px 8px;
+color: inherit;
+display: block;
+font-family: sans-serif;
+font-size: 13px;
+}
+
+.prevv:hover,
+.nextt:hover{
+  background: rgb(182, 182, 182);
+}
+
+/* DESIGN PARA SA MODAL VIEW */
+.ViewBtnCom{
+  border-radius: 5px;
+  padding: 0.4rem 2rem;
+  cursor: pointer;
+}
+
+.ModalNgComplain{
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.SubModalComplain{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.LamanNgViewCom{
+  position: relative;
+  max-width: 600px;
+  width: 100%;
+  margin-top: 10px;
+  height: 500px;
+  background: #f7f7f7;
+  border-radius: 8px;
+}
+
+.titleHeaderView{
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.closeViewModal{
+  color: #000000;
+  font-size: 22px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.boxsaLoob{
+  /* display: none; */
+  height: 450px;
+  padding: 10px;
+  overflow-y: auto;
+}
+
+.inputComplaintss{
+  width: 82%;
+  font-size: medium;
+  border-radius: 5px;
+  border: 1px solid rgba(62, 65, 71, 0.4);
+  padding: 5px 10px;
+}
+
+.divssComp{
+  margin-bottom: 10px;
+}
+
+.DescriTextArea{
+  resize: none;
+  height: 300px;
+  width: 100%;
+  border-radius: 5px;
+  border: 1px solid rgba(62, 65, 71, 0.4);
+  margin-top: 10px;
+  font-size: medium;
+  font-family: Arial;
+  padding: 5px;
+}
+
+.LagayanPictureComp{
+  display: flex;
+  justify-content: center;
+  height: 300px;
+  width: 100%;
+  border-radius: 5px;
+  border: 1px solid rgba(62, 65, 71, 0.4);
+  background: white;
+}
+
+.BotonDalawa{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.MessComp{
+ background: rgb(0, 0, 149);
+}
+
+.MessComp:hover{
+  background: blue; 
+}
+
+.repsComp{
+  background: rgb(172, 0, 0);
+}
+
+.repsComp:hover{
+  background: rgb(255, 0, 0);
+}
+
+.Compsss{
+  font-size: 15px;
+  padding: 10px 30px;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.BackBtn{
+  color: #000000;
+  background: rgb(207, 207, 207);
+}
+
+/* DESIGN PARA SA RESPONDS */
+.boxLoobReply{
+  display: none;
+  padding: 10px;
+  overflow-y: auto;
+}
+
+
+.ComplaintName{
+  width: 81%;
+  font-size: medium;
+  border-radius: 5px;
+  border: 1px solid rgba(62, 65, 71, 0.4);
+  padding: 5px 10px;
+}
+
+.textAreaComp{
+  resize: none;
+  height: 340px;
+  width: 100%;
+  border-radius: 5px;
+  border: 1px solid rgba(62, 65, 71, 0.4);
+  margin-top: 10px;
+  font-size: medium;
+  font-family: Arial;
+  margin-bottom: 10px;
+  padding: 5px;
+}
+
+.footerRespo, .footerRespo2{
+  display: flex;
+  justify-content: space-between;
+}
+
+.SubmitRespo{
+  background: rgb(0, 0, 164);
+  font-size: 17px;
+  padding: 10px 30px;
+  color: white;
+  border-radius: 5px;
+}
+
+/* DESIGN PARA SA RESPONDS MESSAGING */
+.boxLoobReply2{
+  display: none;
+  padding: 10px;
+  overflow-y: auto;
+}
+
+
+.ComplaintName2{
+  width: 81%;
+  font-size: medium;
+  border-radius: 5px;
+  border: 1px solid rgba(62, 65, 71, 0.4);
+  padding: 5px 10px;
+}
+
+.textAreaComp2{
+  resize: none;
+  height: 300px;
+  width: 100%;
+  border-radius: 5px;
+  border: 1px solid rgba(62, 65, 71, 0.4);
+  margin-top: 10px;
+  font-size: medium;
+  font-family: Arial;
+  margin-bottom: 10px;
+  padding: 5px;
+}
+
+
+.SubmitRespo2{
+  background: rgb(0, 0, 164);
+  font-size: 17px;
+  padding: 10px 30px;
+  color: white;
+  border-radius: 5px;
+}

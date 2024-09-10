@@ -209,15 +209,17 @@ html{
 /* ========== MAIN DASHBOARD DESIGN ========== */
 .MainBodyContainerr{
     padding-left: 250px;
-    /* margin-top: 57px; */
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
 }
 
 .MainContainerForTables{
     display: flex;
-    /* justify-content: center; */
+    justify-content: center;
     width: 100%;
-    height: 100%;
-    /* background: gray; */
+    flex: 1;
+    overflow: hidden;
 }
 
 /* .TablessContainer{
@@ -557,6 +559,12 @@ html{
 }
 
 /*DESIGN FOR TABLE RANKING */
+.TableContainerRank{
+    flex: 1; /* Grow to fill available space */
+    width: 100%;
+    overflow-y: auto; /* Scroll if content overflows */
+}
+
 table{
     width: 100%;
     border-collapse: collapse;

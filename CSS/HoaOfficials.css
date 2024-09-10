@@ -208,28 +208,29 @@ html{
   
 /* ========== MAIN DASHBOARD DESIGN ========== */
 .MainBodyContainerr{
-    padding-left: 250px;
-    /* margin-top: 57px; */
+  padding-left: 250px;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
 }
   
 .MainContainerForTables{
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
-    /* background: gray; */
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  flex: 1;
+  overflow: hidden;
 }
   
 .MainContainerAll{
-    width: 100%;
-    padding: 10px;
-    background-color: #ffffff;
-    height: 625px;
-    overflow: hidden;
-    overflow-y: auto;
-    /* padding: 30px 40px; */
-    border: 1px solid rgb(179, 172, 172);
-    margin: 10px;
+  display: flex;
+  flex-direction: column; /* Stack children vertically */
+  width: 100%;
+  padding: 10px;
+  background-color: #ffffff;
+  border: 1px solid rgb(179, 172, 172);
+  margin: 10px;
+  flex: 1; /* Allow it to grow and take available space */
 }
   
   /* DESIGN PARA TO SA HEADER NG SIDEBAR AT SA MAIN */
@@ -442,12 +443,14 @@ html{
 
   /* DESIGN PARA SA OFFICIALS DIVS */
 .subofficialCards{
-    display: grid;
-    padding-left: 10px;
-    padding-right: 10px;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 1.6rem;
-    margin-bottom: 20px;
+  display: grid;
+  padding: 10px;
+  /* padding-right: 10px; */
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.6rem;
+  /* margin-bottom: 20px; */
+  overflow-y: auto; 
+  flex: 1; 
 }
 
 .everyConOfficial {
