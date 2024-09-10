@@ -236,339 +236,339 @@ document.addEventListener("DOMContentLoaded", function () {
 //FUNCTION SA PAG PILI NG PICTURES 
 
 
-const uploadButton = document.querySelector(".UploadPics");
-const inputFile = document.querySelector(".inputFileCert");
-
-uploadButton.addEventListener("click", function() {
-    inputFile.click(); // Trigger file input click
-});
-
-inputFile.addEventListener("change", function() {
-    const file = this.files[0];
-    if (file) {
-        const reader = new FileReader();
+// const uploadButton = document.querySelector(".UploadPics");
+// const inputFile = document.querySelector(".inputFileCert");
+
+// uploadButton.addEventListener("click", function() {
+//     inputFile.click(); // Trigger file input click
+// });
+
+// inputFile.addEventListener("change", function() {
+//     const file = this.files[0];
+//     if (file) {
+//         const reader = new FileReader();
 
-        reader.onload = function(event) {
-            const imageUrl = event.target.result;
-            const img = new Image();
-            img.src = imageUrl;
+//         reader.onload = function(event) {
+//             const imageUrl = event.target.result;
+//             const img = new Image();
+//             img.src = imageUrl;
 
-            img.onload = function() {
-                const imageContainer = document.getElementById("CandiImageContainer");
+//             img.onload = function() {
+//                 const imageContainer = document.getElementById("CandiImageContainer");
 
-                // Clear existing content
-                imageContainer.innerHTML = "";
-
-                // Set max-width and max-height to ensure the image fits within the container
-                img.style.maxWidth = "100%";
-                img.style.maxHeight = "100%";
-
-                // Append the image to the container
-                imageContainer.appendChild(img);
-            };
-        };
-
-        reader.readAsDataURL(file);
-    }
-});
+//                 // Clear existing content
+//                 imageContainer.innerHTML = "";
+
+//                 // Set max-width and max-height to ensure the image fits within the container
+//                 img.style.maxWidth = "100%";
+//                 img.style.maxHeight = "100%";
+
+//                 // Append the image to the container
+//                 imageContainer.appendChild(img);
+//             };
+//         };
+
+//         reader.readAsDataURL(file);
+//     }
+// });
 
-// 2ND 
-const uploadButton2 = document.querySelector(".UploadPics2");
-const inputFile2 = document.querySelector(".inputFileCert2");
+// // 2ND 
+// const uploadButton2 = document.querySelector(".UploadPics2");
+// const inputFile2 = document.querySelector(".inputFileCert2");
 
-uploadButton2.addEventListener("click", function() {
-    inputFile2.click(); // Trigger file input click
-});
-
-inputFile2.addEventListener("change", function() {
-    const file2 = this.files[0];
-    if (file2) {
-        const reader2 = new FileReader();
+// uploadButton2.addEventListener("click", function() {
+//     inputFile2.click(); // Trigger file input click
+// });
+
+// inputFile2.addEventListener("change", function() {
+//     const file2 = this.files[0];
+//     if (file2) {
+//         const reader2 = new FileReader();
 
-        reader2.onload = function(event) {
-            const imageUrl2 = event.target.result;
-            const img2 = new Image();
-            img2.src = imageUrl2;
-
-            img2.onload = function() {
-                const imageContainer2 = document.getElementById("CandiImageContainer2");
+//         reader2.onload = function(event) {
+//             const imageUrl2 = event.target.result;
+//             const img2 = new Image();
+//             img2.src = imageUrl2;
+
+//             img2.onload = function() {
+//                 const imageContainer2 = document.getElementById("CandiImageContainer2");
 
-                // Clear existing content
-                imageContainer2.innerHTML = "";
-
-                // Set max-width and max-height to ensure the image fits within the container
-                img2.style.maxWidth = "100%";
-                img2.style.maxHeight = "100%";
-
-                // Append the image to the container
-                imageContainer2.appendChild(img2);
-            };
-        };
-
-        reader2.readAsDataURL(file2);
-    }
-});
+//                 // Clear existing content
+//                 imageContainer2.innerHTML = "";
+
+//                 // Set max-width and max-height to ensure the image fits within the container
+//                 img2.style.maxWidth = "100%";
+//                 img2.style.maxHeight = "100%";
+
+//                 // Append the image to the container
+//                 imageContainer2.appendChild(img2);
+//             };
+//         };
+
+//         reader2.readAsDataURL(file2);
+//     }
+// });
 
-//3RD
-const uploadButton3 = document.querySelector(".UploadPics3");
-const inputFile3 = document.querySelector(".inputFileCert3");
+// //3RD
+// const uploadButton3 = document.querySelector(".UploadPics3");
+// const inputFile3 = document.querySelector(".inputFileCert3");
 
-uploadButton3.addEventListener("click", function() {
-    inputFile3.click(); // Trigger file input click
-});
-
-inputFile3.addEventListener("change", function() {
-    const file3 = this.files[0];
-    if (file3) {
-        const reader3 = new FileReader();
-
-        reader3.onload = function(event) {
-            const imageUrl3 = event.target.result;
-            const img3 = new Image();
-            img3.src = imageUrl3;
-
-            img3.onload = function() {
-                const imageContainer3 = document.getElementById("CandiImageContainer3");
-
-                // Clear existing content
-                imageContainer3.innerHTML = "";
-
-                // Set max-width and max-height to ensure the image fits within the container
-                img3.style.maxWidth = "100%";
-                img3.style.maxHeight = "100%";
-
-                // Append the image to the container
-                imageContainer3.appendChild(img3);
-            };
-        };
-
-        reader3.readAsDataURL(file3);
-    }
-});
+// uploadButton3.addEventListener("click", function() {
+//     inputFile3.click(); // Trigger file input click
+// });
+
+// inputFile3.addEventListener("change", function() {
+//     const file3 = this.files[0];
+//     if (file3) {
+//         const reader3 = new FileReader();
+
+//         reader3.onload = function(event) {
+//             const imageUrl3 = event.target.result;
+//             const img3 = new Image();
+//             img3.src = imageUrl3;
+
+//             img3.onload = function() {
+//                 const imageContainer3 = document.getElementById("CandiImageContainer3");
+
+//                 // Clear existing content
+//                 imageContainer3.innerHTML = "";
+
+//                 // Set max-width and max-height to ensure the image fits within the container
+//                 img3.style.maxWidth = "100%";
+//                 img3.style.maxHeight = "100%";
+
+//                 // Append the image to the container
+//                 imageContainer3.appendChild(img3);
+//             };
+//         };
+
+//         reader3.readAsDataURL(file3);
+//     }
+// });
 
 
-//4TH
-const uploadButton4 = document.querySelector(".UploadPics4");
-const inputFile4 = document.querySelector(".inputFileCert4");
+// //4TH
+// const uploadButton4 = document.querySelector(".UploadPics4");
+// const inputFile4 = document.querySelector(".inputFileCert4");
 
-uploadButton4.addEventListener("click", function() {
-    inputFile4.click(); // Trigger file input click
-});
+// uploadButton4.addEventListener("click", function() {
+//     inputFile4.click(); // Trigger file input click
+// });
 
-inputFile4.addEventListener("change", function() {
-    const file4 = this.files[0];
-    if (file4) {
-        const reader4 = new FileReader();
+// inputFile4.addEventListener("change", function() {
+//     const file4 = this.files[0];
+//     if (file4) {
+//         const reader4 = new FileReader();
 
-        reader4.onload = function(event) {
-            const imageUrl4 = event.target.result;
-            const img4 = new Image();
-            img4.src = imageUrl4;
+//         reader4.onload = function(event) {
+//             const imageUrl4 = event.target.result;
+//             const img4 = new Image();
+//             img4.src = imageUrl4;
 
-            img4.onload = function() {
-                const imageContainer4 = document.getElementById("CandiImageContainer4");
+//             img4.onload = function() {
+//                 const imageContainer4 = document.getElementById("CandiImageContainer4");
 
-                // Clear existing content
-                imageContainer4.innerHTML = "";
-
-                // Set max-width and max-height to ensure the image fits within the container
-                img4.style.maxWidth = "100%";
-                img4.style.maxHeight = "100%";
-
-                // Append the image to the container
-                imageContainer4.appendChild(img4);
-            };
-        };
+//                 // Clear existing content
+//                 imageContainer4.innerHTML = "";
+
+//                 // Set max-width and max-height to ensure the image fits within the container
+//                 img4.style.maxWidth = "100%";
+//                 img4.style.maxHeight = "100%";
+
+//                 // Append the image to the container
+//                 imageContainer4.appendChild(img4);
+//             };
+//         };
 
-        reader4.readAsDataURL(file4);
-    }
-});
+//         reader4.readAsDataURL(file4);
+//     }
+// });
 
-//5TH
-const uploadButton5 = document.querySelector(".UploadPics5");
-const inputFile5 = document.querySelector(".inputFileCert5");
+// //5TH
+// const uploadButton5 = document.querySelector(".UploadPics5");
+// const inputFile5 = document.querySelector(".inputFileCert5");
 
-uploadButton5.addEventListener("click", function() {
-    inputFile5.click(); // Trigger file input click
-});
+// uploadButton5.addEventListener("click", function() {
+//     inputFile5.click(); // Trigger file input click
+// });
 
-inputFile5.addEventListener("change", function() {
-    const file5 = this.files[0];
-    if (file5) {
-        const reader5 = new FileReader();
+// inputFile5.addEventListener("change", function() {
+//     const file5 = this.files[0];
+//     if (file5) {
+//         const reader5 = new FileReader();
 
-        reader5.onload = function(event) {
-            const imageUrl5 = event.target.result;
-            const img5 = new Image();
-            img5.src = imageUrl5;
+//         reader5.onload = function(event) {
+//             const imageUrl5 = event.target.result;
+//             const img5 = new Image();
+//             img5.src = imageUrl5;
 
-            img5.onload = function() {
-                const imageContainer5 = document.getElementById("CandiImageContainer5");
+//             img5.onload = function() {
+//                 const imageContainer5 = document.getElementById("CandiImageContainer5");
 
-                // Clear existing content
-                imageContainer5.innerHTML = "";
+//                 // Clear existing content
+//                 imageContainer5.innerHTML = "";
 
-                // Set max-width and max-height to ensure the image fits within the container
-                img5.style.maxWidth = "100%";
-                img5.style.maxHeight = "100%";
+//                 // Set max-width and max-height to ensure the image fits within the container
+//                 img5.style.maxWidth = "100%";
+//                 img5.style.maxHeight = "100%";
 
-                // Append the image to the container
-                imageContainer5.appendChild(img5);
-            };
-        };
+//                 // Append the image to the container
+//                 imageContainer5.appendChild(img5);
+//             };
+//         };
 
-        reader5.readAsDataURL(file5);
-    }
-});
+//         reader5.readAsDataURL(file5);
+//     }
+// });
 
-//6TH
-const uploadButton6 = document.querySelector(".UploadPics6");
-const inputFile6 = document.querySelector(".inputFileCert6");
+// //6TH
+// const uploadButton6 = document.querySelector(".UploadPics6");
+// const inputFile6 = document.querySelector(".inputFileCert6");
 
-uploadButton6.addEventListener("click", function() {
-    inputFile6.click(); // Trigger file input click
-});
+// uploadButton6.addEventListener("click", function() {
+//     inputFile6.click(); // Trigger file input click
+// });
 
-inputFile6.addEventListener("change", function() {
-    const file6 = this.files[0];
-    if (file6) {
-        const reader6 = new FileReader();
+// inputFile6.addEventListener("change", function() {
+//     const file6 = this.files[0];
+//     if (file6) {
+//         const reader6 = new FileReader();
 
-        reader6.onload = function(event) {
-            const imageUrl6 = event.target.result;
-            const img6 = new Image();
-            img6.src = imageUrl6;
+//         reader6.onload = function(event) {
+//             const imageUrl6 = event.target.result;
+//             const img6 = new Image();
+//             img6.src = imageUrl6;
 
-            img6.onload = function() {
-                const imageContainer6 = document.getElementById("CandiImageContainer6");
+//             img6.onload = function() {
+//                 const imageContainer6 = document.getElementById("CandiImageContainer6");
 
-                // Clear existing content
-                imageContainer6.innerHTML = "";
+//                 // Clear existing content
+//                 imageContainer6.innerHTML = "";
 
-                // Set max-width and max-height to ensure the image fits within the container
-                img6.style.maxWidth = "100%";
-                img6.style.maxHeight = "100%";
+//                 // Set max-width and max-height to ensure the image fits within the container
+//                 img6.style.maxWidth = "100%";
+//                 img6.style.maxHeight = "100%";
 
-                // Append the image to the container
-                imageContainer6.appendChild(img6);
-            };
-        };
-
-        reader6.readAsDataURL(file6);
-    }
-});
+//                 // Append the image to the container
+//                 imageContainer6.appendChild(img6);
+//             };
+//         };
+
+//         reader6.readAsDataURL(file6);
+//     }
+// });
 
-//7TH
-const uploadButton7 = document.querySelector(".UploadPics7");
-const inputFile7 = document.querySelector(".inputFileCert7");
+// //7TH
+// const uploadButton7 = document.querySelector(".UploadPics7");
+// const inputFile7 = document.querySelector(".inputFileCert7");
 
-uploadButton7.addEventListener("click", function() {
-    inputFile7.click(); // Trigger file input click
-});
-
-inputFile7.addEventListener("change", function() {
-    const file7 = this.files[0];
-    if (file7) {
-        const reader7 = new FileReader();
-
-        reader7.onload = function(event) {
-            const imageUrl7 = event.target.result;
-            const img7 = new Image();
-            img7.src = imageUrl7;
-
-            img7.onload = function() {
-                const imageContainer7 = document.getElementById("CandiImageContainer7");
-
-                // Clear existing content
-                imageContainer7.innerHTML = "";
-
-                // Set max-width and max-height to ensure the image fits within the container
-                img7.style.maxWidth = "100%";
-                img7.style.maxHeight = "100%";
-
-                // Append the image to the container
-                imageContainer7.appendChild(img7);
-            };
-        };
-
-        reader7.readAsDataURL(file7);
-    }
-});
-
-
-//8TH
-const uploadButton8 = document.querySelector(".UploadPics8");
-const inputFile8 = document.querySelector(".inputFileCert8");
-
-uploadButton8.addEventListener("click", function() {
-    inputFile8.click(); // Trigger file input click
-});
-
-inputFile8.addEventListener("change", function() {
-    const file8 = this.files[0];
-    if (file8) {
-        const reader8 = new FileReader();
-
-        reader8.onload = function(event) {
-            const imageUrl8 = event.target.result;
-            const img8 = new Image();
-            img8.src = imageUrl8;
-
-            img8.onload = function() {
-                const imageContainer8 = document.getElementById("CandiImageContainer8");
-
-                // Clear existing content
-                imageContainer8.innerHTML = "";
-
-                // Set max-width and max-height to ensure the image fits within the container
-                img8.style.maxWidth = "100%";
-                img8.style.maxHeight = "100%";
-
-                // Append the image to the container
-                imageContainer8.appendChild(img8);
-            };
-        };
-
-        reader8.readAsDataURL(file8);
-    }
-});
-
-//9TH
-const uploadButton9 = document.querySelector(".UploadPics9");
-const inputFile9 = document.querySelector(".inputFileCert9");
-
-uploadButton9.addEventListener("click", function() {
-    inputFile9.click(); // Trigger file input click
-});
-
-inputFile9.addEventListener("change", function() {
-    const file9 = this.files[0];
-    if (file9) {
-        const reader9 = new FileReader();
-
-        reader9.onload = function(event) {
-            const imageUrl9 = event.target.result;
-            const img9 = new Image();
-            img9.src = imageUrl9;
-
-            img9.onload = function() {
-                const imageContainer9 = document.getElementById("CandiImageContainer9");
-
-                // Clear existing content
-                imageContainer9.innerHTML = "";
-
-                // Set max-width and max-height to ensure the image fits within the container
-                img9.style.maxWidth = "100%";
-                img9.style.maxHeight = "100%";
-
-                // Append the image to the container
-                imageContainer9.appendChild(img9);
-            };
-        };
-
-        reader9.readAsDataURL(file9);
-    }
-});
+// uploadButton7.addEventListener("click", function() {
+//     inputFile7.click(); // Trigger file input click
+// });
+
+// inputFile7.addEventListener("change", function() {
+//     const file7 = this.files[0];
+//     if (file7) {
+//         const reader7 = new FileReader();
+
+//         reader7.onload = function(event) {
+//             const imageUrl7 = event.target.result;
+//             const img7 = new Image();
+//             img7.src = imageUrl7;
+
+//             img7.onload = function() {
+//                 const imageContainer7 = document.getElementById("CandiImageContainer7");
+
+//                 // Clear existing content
+//                 imageContainer7.innerHTML = "";
+
+//                 // Set max-width and max-height to ensure the image fits within the container
+//                 img7.style.maxWidth = "100%";
+//                 img7.style.maxHeight = "100%";
+
+//                 // Append the image to the container
+//                 imageContainer7.appendChild(img7);
+//             };
+//         };
+
+//         reader7.readAsDataURL(file7);
+//     }
+// });
+
+
+// //8TH
+// const uploadButton8 = document.querySelector(".UploadPics8");
+// const inputFile8 = document.querySelector(".inputFileCert8");
+
+// uploadButton8.addEventListener("click", function() {
+//     inputFile8.click(); // Trigger file input click
+// });
+
+// inputFile8.addEventListener("change", function() {
+//     const file8 = this.files[0];
+//     if (file8) {
+//         const reader8 = new FileReader();
+
+//         reader8.onload = function(event) {
+//             const imageUrl8 = event.target.result;
+//             const img8 = new Image();
+//             img8.src = imageUrl8;
+
+//             img8.onload = function() {
+//                 const imageContainer8 = document.getElementById("CandiImageContainer8");
+
+//                 // Clear existing content
+//                 imageContainer8.innerHTML = "";
+
+//                 // Set max-width and max-height to ensure the image fits within the container
+//                 img8.style.maxWidth = "100%";
+//                 img8.style.maxHeight = "100%";
+
+//                 // Append the image to the container
+//                 imageContainer8.appendChild(img8);
+//             };
+//         };
+
+//         reader8.readAsDataURL(file8);
+//     }
+// });
+
+// //9TH
+// const uploadButton9 = document.querySelector(".UploadPics9");
+// const inputFile9 = document.querySelector(".inputFileCert9");
+
+// uploadButton9.addEventListener("click", function() {
+//     inputFile9.click(); // Trigger file input click
+// });
+
+// inputFile9.addEventListener("change", function() {
+//     const file9 = this.files[0];
+//     if (file9) {
+//         const reader9 = new FileReader();
+
+//         reader9.onload = function(event) {
+//             const imageUrl9 = event.target.result;
+//             const img9 = new Image();
+//             img9.src = imageUrl9;
+
+//             img9.onload = function() {
+//                 const imageContainer9 = document.getElementById("CandiImageContainer9");
+
+//                 // Clear existing content
+//                 imageContainer9.innerHTML = "";
+
+//                 // Set max-width and max-height to ensure the image fits within the container
+//                 img9.style.maxWidth = "100%";
+//                 img9.style.maxHeight = "100%";
+
+//                 // Append the image to the container
+//                 imageContainer9.appendChild(img9);
+//             };
+//         };
+
+//         reader9.readAsDataURL(file9);
+//     }
+// });
 
 
 // //PANGALAWANG MGA DIVS NA PAG EEDITAN //
@@ -593,6 +593,7 @@ function fetchResidentID() {
         document.getElementById("candi_ID").value = "";
         document.getElementById("iror").innerText = "";
         document.getElementById("iror").style.display = "none";
+        document.getElementById("suggestions").innerHTML = "";
         return;
     }
 
@@ -601,20 +602,8 @@ function fetchResidentID() {
 
     // Handle cases with and without middle name
     var firstName = nameParts[0];
-    var lastName = nameParts[nameParts.length - 1];
+    var lastName = nameParts.length > 1 ? nameParts[nameParts.length - 1] : '';
     var middleName = nameParts.length > 2 ? nameParts.slice(1, -1).join(" ") : "";
-    
-    // Check if name parts are valid
-    if (nameParts.length < 2 || nameParts.length > 3) {
-        document.getElementById("iror").innerText = "Incomplete name or Too many names";
-        document.getElementById("iror").style.display = "block";
-        console.log("Incomplete name");
-        return;
-    }
-
-    console.log("First Name:", firstName);
-    console.log("Middle Name:", middleName);
-    console.log("Last Name:", lastName);
 
     // Create a new XMLHttpRequest object
     var xhr = new XMLHttpRequest();
@@ -626,23 +615,32 @@ function fetchResidentID() {
         if (xhr.status >= 200 && xhr.status < 300) {
             var response = JSON.parse(xhr.responseText);
             console.log("Response Data:", response);
-            if (response.success) {
+            if (response.success && response.suggestions.length > 0) {
                 document.getElementById("candi_ID").value = response.unique_id;
 
-                var successElem = document.getElementById("sakses");
-                successElem.style.display = "block";
-                successElem.innerText = "User found";
+                var suggestionsDiv = document.getElementById("suggestions");
+                suggestionsDiv.innerHTML = "";
 
-                // Hide the success message after 3 seconds
-                setTimeout(function() {
-                    successElem.style.display = "none";
-                }, 5000);
-                
-                document.getElementById("iror").innerText = "";
+                response.suggestions.forEach(function(item) {
+                    var suggestionItem = document.createElement("div");
+                    suggestionItem.className = "suggestion-item";
+                    suggestionItem.textContent = item.full_name; // Display full name
+
+                    // When a suggestion is clicked, fill the input with the selected name
+                    suggestionItem.addEventListener("click", function() {
+                        document.getElementById("candi_Name").value = item.full_name;
+                        document.getElementById("candi_ID").value = item.unique_id;
+                        suggestionsDiv.innerHTML = ""; // Clear suggestions after selection
+                    });
+
+                    suggestionsDiv.appendChild(suggestionItem);
+                });
+
                 document.getElementById("iror").style.display = "none";
             } else {
-                document.getElementById("iror").innerText = "Not found";
+                document.getElementById("iror").innerText = "No results found";
                 document.getElementById("iror").style.display = "block";
+                document.getElementById("suggestions").innerHTML = ""; // Clear suggestions
                 document.getElementById("candi_ID").value = "";
             }
         } else {
@@ -771,6 +769,8 @@ function submitForm(event) {
                         document.getElementById("candi_Name").value = ''; // Clear the name input
                         document.getElementById("previewImage").style.display = 'none'; // Hide the image preview
                         document.getElementById("candi_ID").style.display = 'none';
+                        document.getElementsByName("addingCandidatesContainer")[0].style.display = 'none';
+                        location.reload();
                     }, 3000);
                
                 } else {
@@ -780,6 +780,9 @@ function submitForm(event) {
                     // Hide the error message after 5 seconds
                     setTimeout(function() {
                         irorDiv.style.display = "none";
+                        document.getElementById("candi_Name").value = ''; // Clear the name input
+                        document.getElementById("previewImage").style.display = 'none'; // Hide the image preview
+                        document.getElementById("candi_ID").style.display = 'none';
                     }, 5000);
                 }
             } catch (e) {
@@ -1028,99 +1031,322 @@ setInterval(fetchTableData, 5000);
 
 
 
+
+
+
+
+
 document.addEventListener("DOMContentLoaded", function() {
     let countdownInterval;
     const startButton = document.getElementById('start');
     const stopButton = document.getElementById('stop');
     const resetButton = document.getElementById('reset');
-    
+    // const setEndTimeButton = document.getElementById('setEndTime'); // Button to manually set end time
+    const dateTimeInput = document.getElementById('input-datetime');
+
     let remainingTime = 0; // Total remaining time in seconds
+    let startTime = null; // To store the start time fetched from the server
+    let endTime = null; // To store the end time fetched from the server
+    let votingStatus = null; // To store the voting status
 
-    let isRequestSent = false;
+    // Fetch start and end times from the server
+    function fetchTimes() {
+        var xhrFetchTimes = new XMLHttpRequest();
+        xhrFetchTimes.open("POST", "PHPBackend/DeclareWinner.php", true);
+        xhrFetchTimes.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 
-function startCountdown() {
-    if (countdownInterval) clearInterval(countdownInterval);
+        xhrFetchTimes.onreadystatechange = function() {
+            if (xhrFetchTimes.readyState === XMLHttpRequest.DONE) {
+                if (xhrFetchTimes.status === 200) {
+                    try {
+                        let response = JSON.parse(xhrFetchTimes.responseText);
+                        console.log("Response from server:", response);
 
-    // Set the remaining time based on input values (in seconds)
-    remainingTime = parseInt(document.getElementById('input-hours').value || 0) * 3600 +
-                    parseInt(document.getElementById('input-minutes').value || 0) * 60 +
-                    parseInt(document.getElementById('input-seconds').value || 0);
+                        if (response.success && response.start_time && response.end_time && response.voting_status) {
+                            startTime = new Date(response.start_time).getTime();
+                             endTime = new Date(response.end_time).getTime();
+                            votingStatus = response.voting_status;
 
-    console.log("Starting countdown with remaining time: " + remainingTime + " seconds");
+                            console.log("Start time:", startTime);
+                            console.log("End Time:", endTime);
+                            console.log("Voting Status:", votingStatus);    
 
-    updateDisplay(); // Update the display initially
+                            const now = new Date().getTime();
+                            console.log("Current time (now):", now);
+                            console.log("Is voting still active:", now < endTime);
 
-    countdownInterval = setInterval(function() {
-        remainingTime--;
-        updateDisplay();
-
-        if (remainingTime <= 0 && !isRequestSent) {
-            clearInterval(countdownInterval);
-            alert("Time's up! Determining the winners...");
-
-            console.log("Countdown finished. Sending AJAX request to declare winners...");
-            isRequestSent = true;  // Ensure only one request is sent
-
-            // AJAX request to update database
-            var xhr = new XMLHttpRequest();
-            xhr.open("POST", "PHPBackend/VotingProcess.php", true);
-            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState === XMLHttpRequest.DONE) {
-                    console.log("AJAX request completed. Status: " + xhr.status);
-                    console.log("Response: " + xhr.responseText);
-
-                    if (xhr.status === 200) {
-                        let response = JSON.parse(xhr.responseText);
-                        if (response.success) {
-                            console.log("Winners successfully declared.");
-                            alert("Top 9 candidates have been declared winners!");
+                            if (votingStatus === "VotingStarted" && now < endTime) {
+                                remainingTime = Math.floor((endTime - now) / 1000);
+                                startCountdown();
+                            } else {
+                                // If voting has ended or is not started
+                                remainingTime = 0;
+                                updateDisplay();
+                            }
                         } else {
-                            console.error("Error: " + response.error);
-                            alert("Error: " + response.error);
+                            // Missing required data
+                            console.log("Required data is missing.");
+                            console.log("Response received:", response);
+                            endTime = null;
+                            remainingTime = 0;
+                            votingStatus = "VotingNotStarted";
+                            updateDisplay();
                         }
-                    } else {
-                        console.error("Server error: " + xhr.status);
-                        alert("Failed to declare winners. Server error.");
+                    } catch (e) {
+                        console.error("Failed to parse JSON: ", e);
+                        console.error("Raw response from server:", xhrFetchTimes.responseText);  // Log the raw response
                     }
+                } else {
+                    console.error("Error in response: ", xhrFetchTimes.statusText);
                 }
-            };
+            }
+        };
 
-            xhr.send("action=declare_winner");
-        }
-    }, 1000); // Update every second
-}   
+        console.log("Sending request to fetch times...");
+        xhrFetchTimes.send("action=fetch_times");
+    }
 
+    // Start or resume the countdown
+    function startCountdown() {
+        clearInterval(countdownInterval); // Clear any existing interval
+        updateDisplay(); // Update the display initially
+
+        countdownInterval = setInterval(function() {
+            if (remainingTime <= 0) {
+                clearInterval(countdownInterval);
+                alert("Time's up! Determining the winners...");
+                declareWinners();
+            } else {
+                remainingTime--;
+                updateDisplay();
+            }
+        }, 1000); // Update every second
+    }
+
+    // Declare winners
+    function declareWinners() {
+        var xhrDeclareWinners = new XMLHttpRequest();
+        xhrDeclareWinners.open("POST", "PHPBackend/DeclareWinner.php", true);
+        xhrDeclareWinners.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+        xhrDeclareWinners.onreadystatechange = function() {
+            if (xhrDeclareWinners.readyState === XMLHttpRequest.DONE) {
+                if (xhrDeclareWinners.status === 200) {
+                    try {
+                        let response = JSON.parse(xhrDeclareWinners.responseText);
+                        console.log("Winners declaration response:", response);
+                        if (response.success) {
+                            alert("Winners declared successfully.");
+                            console.log("Winners declared successfully.");
+                        } else {
+                            console.error("Failed to declare winners: ", response.error);
+                        }
+                    } catch (e) {
+                        console.error("Failed to parse JSON: ", e);
+                    }
+                } else {
+                    console.error("Error in response: ", xhrDeclareWinners.statusText);
+                }
+            }
+        };
+
+        xhrDeclareWinners.send("action=declare_winner");
+    }
+
+    // Update countdown display
     function updateDisplay() {
         let hours = Math.floor(remainingTime / 3600);
         let minutes = Math.floor((remainingTime % 3600) / 60);
         let seconds = remainingTime % 60;
 
-        document.getElementById('hours').textContent = hours.toString().padStart(2, '0') + ':';
-        document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0') + ':';
-        document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+        let hoursFormatted = hours.toString().padStart(2, '0');
+        let minutesFormatted = minutes.toString().padStart(2, '0');
+        let secondsFormatted = seconds.toString().padStart(2, '0');
 
-        console.log("Updated display: " + hours + ":" + minutes + ":" + seconds);
+        // Update display elements
+        document.getElementById('hours').textContent = hoursFormatted;
+        document.getElementById('minutes').textContent = minutesFormatted;
+        document.getElementById('seconds').textContent = secondsFormatted;
+
+            console.log("Updated display: " + hours + ":" + minutes + ":" + seconds);
+        }
+
+    function formatDateToMySQL(date) {
+        // Format the date to 'YYYY-MM-DD HH:MM:SS'
+        return date.getFullYear() + '-' +
+            ('0' + (date.getMonth() + 1)).slice(-2) + '-' +
+            ('0' + date.getDate()).slice(-2) + ' ' +
+            ('0' + date.getHours()).slice(-2) + ':' +
+            ('0' + date.getMinutes()).slice(-2) + ':' +
+            ('0' + date.getSeconds()).slice(-2);
+    }
+    
+    // Function to send the new start time, end time, and voting status to the server
+    function storeStartAndEndTimes(startTime, endTime, votingStatus) {
+        var xhrStoreTimes = new XMLHttpRequest();
+        xhrStoreTimes.open("POST", "PHPBackend/DeclareWinner.php", true);
+        xhrStoreTimes.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+        xhrStoreTimes.onreadystatechange = function() {
+            if (xhrStoreTimes.readyState === XMLHttpRequest.DONE) {
+                if (xhrStoreTimes.status === 200) {
+                    try {
+                        let response = JSON.parse(xhrStoreTimes.responseText);
+                        if (response.success) {
+                            console.log("Start and end times stored successfully.");
+                            updateDisplay();
+                            startCountdown();
+                        } else {
+                            console.error("Failed to store times: ", response.error);
+                        }
+                    } catch (e) {
+                        console.error("Failed to parse JSON: ", e);
+                    }
+                } else {
+                    console.error("Error in response: ", xhrStoreTimes.statusText);
+                }
+            }
+        };
+
+         // Convert startTime and endTime to MySQL-compatible format
+        let formattedStartTime = formatDateToMySQL(new Date(startTime));
+        let formattedEndTime = formatDateToMySQL(new Date(endTime));
+
+        let params = `action=store_end_time&start_time=${encodeURIComponent(formattedStartTime)}&end_time=${encodeURIComponent(formattedEndTime)}&voting_status=${encodeURIComponent(votingStatus)}`;
+        xhrStoreTimes.send(params);
     }
 
-    startButton.addEventListener('click', startCountdown);
-    stopButton.addEventListener('click', function() {
-        console.log("Countdown stopped.");
-        clearInterval(countdownInterval);
+    function resetVotingStatus() {
+        var xhrResetVoting = new XMLHttpRequest();
+        xhrResetVoting.open("POST", "PHPBackend/DeclareWinner.php", true);
+        xhrResetVoting.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    
+        xhrResetVoting.onreadystatechange = function() {
+            if (xhrResetVoting.readyState === XMLHttpRequest.DONE) {
+                if (xhrResetVoting.status === 200) {
+                    try {
+                        let response = JSON.parse(xhrResetVoting.responseText);
+                        if (response.success) {
+                            console.log("Voting status reset successfully.");
+                        } else {
+                            console.error("Failed to reset voting status: ", response.error);
+                        }
+                    } catch (e) {
+                        console.error("Failed to parse JSON: ", e);
+                    }
+                } else {
+                    console.error("Error in response: ", xhrResetVoting.statusText);
+                }
+            }
+        };
+    
+        // Send the request to the PHP script
+        xhrResetVoting.send("action=delete_voting_started");
+    }
+    
+
+    // Fetch start and end times on page load
+    window.onload = function() {
+        fetchTimes(); // This will run fetchTimes when the window has fully loaded.
+    };
+
+    // Variable to track if the countdown is paused
+    let isPaused = false;
+
+    // Function to update the start button text
+    function updateStartButtonText() {
+        if (isPaused) {
+            startButton.textContent = 'Resume';
+        } else {
+            startButton.textContent = 'Start';
+        }
+    }
+
+    // Event listeners for start, stop, and reset buttons
+    startButton.addEventListener('click', function() {
+        const startBTN = startButton.textContent;
+        const selectedDateTime = dateTimeInput.value;
+        const Timenow = new Date().getTime(); // Get the value from the datetime-local input
+
+        if (!selectedDateTime && startBTN == 'Start') {
+            alert("Please select an end time.");
+            return;
+        }
+
+        endTime = new Date(selectedDateTime).getTime();
+
+        if (endTime <= Timenow) {
+            alert("End time cannot be in the past. Please select a future time.");
+            return;  // Exit if the end time is invalid
+        }
+
+        if (isPaused) {
+            // If paused, resume the countdown
+            location.reload();
+            startCountdown();
+            isPaused = false;
+            updateStartButtonText(); // Change button text back to "Start"
+        } else {
+
+            if (endTime > Timenow && votingStatus === "VotingStarted") {
+                startCountdown();
+            } else {
+                if (startTime === null || endTime === null || votingStatus !== "VotingStarted") {
+                
+                    // Check if the start and end times are missing or invalid
+                    if (confirm("Start or end time is invalid or voting is not active. Would you like to set a new start time?")) {
+                        // Option to manually set a new start time and end time for testing
+                        let newStartTime = new Date(); // Set the start time to the current time
+                        startTime = newStartTime.getTime(); // Convert to timestamp
+
+                        remainingTime = Math.floor((endTime - new Date().getTime()) / 1000); // Calculate remaining time
+                        votingStatus = "VotingStarted"; // Set status to active for testing
+        
+                        updateDisplay();
+                        startCountdown();
+                        storeStartAndEndTimes(startTime, endTime, votingStatus);
+                    }
+                } else {
+                    alert("End time is not set, countdown already ended, or voting is not active.");
+                }
+            }
+        }    
     });
+    
+
+    // Stop button functionality
+    stopButton.addEventListener('click', function() {
+        if (remainingTime > 0) { // Check if there’s an ongoing countdown
+            console.log("Countdown stopped.");
+            console.log("remainingTime:",remainingTime );
+            clearInterval(countdownInterval);
+            isPaused = true; // Set the countdown state to paused
+            updateStartButtonText(); // Change the start button text to "Resume"
+        } else {
+            console.log("No countdown is ongoing.");
+        }
+    });
+
+
     resetButton.addEventListener('click', function() {
         console.log("Countdown reset.");
         clearInterval(countdownInterval);
         remainingTime = 0;
+        isPaused = false; // Reset the paused state
+        updateStartButtonText(); // Change the button text back to "Start"
         updateDisplay();
 
-        // Clear input values
-        document.getElementById('input-hours').value = '';
-        document.getElementById('input-minutes').value = '';
-        document.getElementById('input-seconds').value = '';
+        // Trigger the deletion of voting status
+        resetVotingStatus();
     });
 });
+
+
+
+
+
+
+
 
 
 

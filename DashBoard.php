@@ -228,7 +228,7 @@ if (isset($_SESSION['unique_id'])) {
                                 </div> 
                             </div>
 
-                            <div class="TotalResidents">
+                            <!-- <div class="TotalResidents">
                                 <div class="center">
                                     <div class="left-per-card">
                                         <img class="img-cards" src="Pictures/Accounts2.png">
@@ -250,7 +250,7 @@ if (isset($_SESSION['unique_id'])) {
                                         <h4 class="info-card"> Total Number of Residents </h4>
                                     </div>
                                 </div> 
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 28, 2024 at 10:09 AM
+-- Generation Time: Sep 10, 2024 at 09:40 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -318,7 +318,7 @@ CREATE TABLE `tblaccounts` (
 --
 
 INSERT INTO `tblaccounts` (`user_id`, `unique_id`, `email`, `password`, `img`, `status`, `role`, `access`) VALUES
-(2, 1589571584, 'admin@gmail.com', '21232f297a57a5a743894a0e4a801fc3', '1715091144pusi.jpg', 'Active now', 'admin', 'Approved'),
+(2, 1589571584, 'admin@gmail.com', '21232f297a57a5a743894a0e4a801fc3', '1715091144pusi.jpg', 'Offline now', 'admin', 'Approved'),
 (4, 1357825271, 'senpai@gmail.com', '1e5db03ce967cfef4e21ada16da09b06', '1715105349271713718_1999144396919159_608519389647854942_n.jpg', 'Offline now', 'user', 'Rejected'),
 (19, 112466338, 'Prins@gmail.com', '0a9e0db6e95c394ee792ecbc6e510791', '1717745936pitikvermo.jpg', 'Pending', 'user', 'Approved'),
 (21, 1017731196, 'tnjrdlcrz@gmail.com', '202cb962ac59075b964b07152d234b70', '1717937589pitikvermo.jpg', 'Pending', 'user', 'Approved'),
@@ -414,16 +414,15 @@ CREATE TABLE `user_votes` (
 --
 
 INSERT INTO `user_votes` (`vote_id`, `unique_id`, `candidate`, `votes`, `status`) VALUES
-(2, 1581632830, 'Wela A Magsino', 3, 'Winner'),
-(3, 821155870, 'Jhonrenz Berbano', 0, ''),
-(4, 776313154, 'Patrick B Bayona', 3, 'Winner'),
-(5, 1590469844, 'Paolo M Murillo', 3, 'Winner'),
-(6, 1308040957, 'John Doe', 3, 'Winner'),
-(7, 931588206, 'Jane Doe', 3, 'Winner'),
-(8, 662462528, 'Hev Alvin', 3, 'Winner'),
-(9, 499733408, 'Ethan Winters', 3, 'Winner'),
-(10, 1434008263, 'Rose Winters', 3, 'Winner'),
-(11, 1195874011, 'Mia Winters', 3, 'Winner');
+(2, 1581632830, 'Wela A Magsino', 5, 'Winner'),
+(3, 821155870, 'Jhonrenz Berbano', 5, 'Winner'),
+(4, 776313154, 'Patrick B Bayona', 9, 'Winner'),
+(5, 1590469844, 'Paolo M Murillo', 9, 'Winner'),
+(6, 1308040957, 'John Doe', 9, 'Winner'),
+(7, 931588206, 'Jane Doe', 9, 'Winner'),
+(8, 662462528, 'Hev Alvin', 9, 'Winner'),
+(10, 1434008263, 'Rose Winters', 10, 'Winner'),
+(11, 1195874011, 'Mia Winters', 9, 'Winner');
 
 -- --------------------------------------------------------
 
@@ -450,9 +449,40 @@ INSERT INTO `voting` (`vote_id`, `unique_id`, `candidate_name`, `img`) VALUES
 (14, 1308040957, 'John Doe', 'ble.png'),
 (15, 931588206, 'Jane Doe', 'wolXdead.jpg'),
 (16, 662462528, 'Hev Alvin', 'maxresdefault.jpg'),
-(17, 499733408, 'Ethan Winters', 'Screenshot 2023-11-03 210151.png'),
 (18, 1434008263, 'Rose Winters', '183726533_469980844255676_8094931697298234118_n.jpg'),
 (19, 1195874011, 'Mia Winters', 'Screenshot 2023-10-03 215143.png');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `voting_countdown`
+--
+
+CREATE TABLE `voting_countdown` (
+  `countdown_id` int(11) NOT NULL,
+  `start_id` int(11) NOT NULL,
+  `start_time` varchar(20) NOT NULL,
+  `end_id` int(11) NOT NULL,
+  `end_time` datetime NOT NULL,
+  `voting_status` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `voting_countdown`
+--
+
+INSERT INTO `voting_countdown` (`countdown_id`, `start_id`, `start_time`, `end_id`, `end_time`, `voting_status`) VALUES
+(2, 0, '2024-09-08 10:00:00', 0, '2024-09-08 18:00:00', 'VotingEnded'),
+(5, 5694, '2024-09-09T09:10:58.', 5694, '2024-09-09 09:12:00', 'VotingActive'),
+(6, 7804, '2024-09-09T10:10:49.', 7804, '2024-09-09 10:12:00', 'VotingEnded'),
+(7, 6564, '2024-09-09T10:12:17.', 6564, '2024-09-09 10:13:00', 'VotingEnded'),
+(9, 3655, '2024-09-09T11:28:16.', 3655, '2024-09-09 11:29:00', 'VotingEnded'),
+(10, 2166, '2024-09-09T11:31:43.', 2166, '2024-09-08 11:31:00', 'VotingEnded'),
+(11, 2055, '2024-09-09T11:34:30.', 2055, '2024-09-08 11:34:00', 'VotingEnded'),
+(12, 2773, '2024-09-09T11:35:32.', 2773, '2024-09-08 11:35:00', 'VotingEnded'),
+(13, 8246, '2024-09-09T11:39:57.', 8246, '2024-09-08 11:39:00', 'VotingEnded'),
+(14, 8331, '2024-09-09T11:42:44.', 8331, '2024-09-08 11:42:00', 'VotingEnded'),
+(17, 4525, '2024-09-09T13:45:57.', 4525, '2024-09-09 13:46:00', 'VotingEnded');
 
 -- --------------------------------------------------------
 
@@ -471,17 +501,36 @@ CREATE TABLE `voting_history` (
   `candidate6` int(11) NOT NULL,
   `candidate7` int(11) NOT NULL,
   `candidate8` int(11) NOT NULL,
-  `candidate9` int(11) NOT NULL
+  `candidate9` int(11) NOT NULL,
+  `vote_status` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `voting_history`
 --
 
-INSERT INTO `voting_history` (`vote_id`, `unique_id`, `candidate1`, `candidate2`, `candidate3`, `candidate4`, `candidate5`, `candidate6`, `candidate7`, `candidate8`, `candidate9`) VALUES
-(15, 1357825271, 1195874011, 1434008263, 662462528, 499733408, 1308040957, 931588206, 1590469844, 776313154, 1581632830),
-(16, 1357825271, 1195874011, 1434008263, 662462528, 499733408, 1308040957, 931588206, 1590469844, 776313154, 1581632830),
-(17, 1357825271, 1195874011, 1434008263, 662462528, 499733408, 1308040957, 931588206, 1590469844, 776313154, 1581632830);
+INSERT INTO `voting_history` (`vote_id`, `unique_id`, `candidate1`, `candidate2`, `candidate3`, `candidate4`, `candidate5`, `candidate6`, `candidate7`, `candidate8`, `candidate9`, `vote_status`) VALUES
+(15, 1357825271, 1195874011, 1434008263, 662462528, 499733408, 1308040957, 931588206, 1590469844, 776313154, 1581632830, ''),
+(16, 1357825271, 1195874011, 1434008263, 662462528, 499733408, 1308040957, 931588206, 1590469844, 776313154, 1581632830, ''),
+(17, 1357825271, 1195874011, 1434008263, 662462528, 499733408, 1308040957, 931588206, 1590469844, 776313154, 1581632830, ''),
+(18, 1581632830, 1434008263, 662462528, 499733408, 931588206, 1308040957, 776313154, 1590469844, 1581632830, 821155870, ''),
+(19, 1581632830, 1195874011, 1434008263, 499733408, 931588206, 662462528, 1590469844, 1308040957, 821155870, 776313154, ''),
+(20, 1581632830, 1195874011, 1434008263, 499733408, 931588206, 662462528, 1590469844, 1308040957, 821155870, 776313154, ''),
+(21, 1581632830, 499733408, 1195874011, 0, 0, 0, 0, 0, 0, 0, ''),
+(22, 1581632830, 0, 0, 0, 0, 0, 0, 0, 0, 0, ''),
+(23, 1581632830, 0, 0, 0, 0, 0, 0, 0, 0, 0, ''),
+(24, 1581632830, 499733408, 0, 0, 0, 0, 0, 0, 0, 0, 'UnderVote'),
+(25, 1581632830, 499733408, 1195874011, 662462528, 1434008263, 1308040957, 931588206, 776313154, 1590469844, 1581632830, 'Voted'),
+(26, 1581632830, 499733408, 0, 0, 0, 0, 0, 0, 0, 0, 'UnderVote'),
+(27, 1581632830, 499733408, 1195874011, 662462528, 1434008263, 931588206, 1308040957, 776313154, 1590469844, 821155870, 'Voted'),
+(28, 1581632830, 499733408, 0, 0, 0, 0, 0, 0, 0, 0, 'UnderVote'),
+(29, 1581632830, 499733408, 0, 0, 0, 0, 0, 0, 0, 0, 'UnderVote'),
+(30, 1581632830, 499733408, 0, 0, 0, 0, 0, 0, 0, 0, 'UnderVote'),
+(31, 1581632830, 499733408, 0, 0, 0, 0, 0, 0, 0, 0, 'UnderVote'),
+(32, 1581632830, 499733408, 0, 0, 0, 0, 0, 0, 0, 0, 'UnderVote'),
+(33, 1581632830, 499733408, 0, 0, 0, 0, 0, 0, 0, 0, 'UnderVote'),
+(34, 1581632830, 499733408, 1195874011, 662462528, 1434008263, 931588206, 1308040957, 1590469844, 776313154, 821155870, 'Voted'),
+(35, 1581632830, 1434008263, 0, 0, 0, 0, 0, 0, 0, 0, 'UnderVote');
 
 --
 -- Indexes for dumped tables
@@ -548,6 +597,12 @@ ALTER TABLE `voting`
   ADD PRIMARY KEY (`vote_id`);
 
 --
+-- Indexes for table `voting_countdown`
+--
+ALTER TABLE `voting_countdown`
+  ADD PRIMARY KEY (`countdown_id`);
+
+--
 -- Indexes for table `voting_history`
 --
 ALTER TABLE `voting_history`
@@ -609,19 +664,25 @@ ALTER TABLE `tblresident`
 -- AUTO_INCREMENT for table `user_votes`
 --
 ALTER TABLE `user_votes`
-  MODIFY `vote_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `vote_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `voting`
 --
 ALTER TABLE `voting`
-  MODIFY `vote_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `vote_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+
+--
+-- AUTO_INCREMENT for table `voting_countdown`
+--
+ALTER TABLE `voting_countdown`
+  MODIFY `countdown_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `voting_history`
 --
 ALTER TABLE `voting_history`
-  MODIFY `vote_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `vote_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
