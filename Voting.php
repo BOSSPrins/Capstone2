@@ -191,8 +191,7 @@ if (isset($_SESSION['unique_id'])) {
                                                             <h2>Select date:</h2>
                                                             <input class="dateTime" type="datetime-local" id="input-datetime" placeholder="Select a date and time">
                         
-                                                            <div class="btnsForTimer">
-                                                                <!-- <button id="setEndTime">Set End Time</button> pang testing ng declare winner -->
+                                                            <div class="btnsForTimer">                                                               
                                                                 <button id="start">Start</button>
                                                                 <button id="stop">Stop</button>
                                                                 <button id="reset">Reset</button>

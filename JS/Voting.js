@@ -1106,34 +1106,6 @@ document.addEventListener("DOMContentLoaded", function() {
         xhrFetchTimes.send("action=fetch_times");
     }
 
-    // Handle voting status based on time
-    // function handleVotingStatus() {
-    //     const now = new Date().getTime();
-    //     console.log("Current time:", now);
-    //     console.log("Start time:", startTime);
-    //     console.log("End time:", endTime);
-
-    //     if (endTime && now < endTime) {
-    //         if (now >= startTime && votingStatus === "VotingStarted") {
-    //             remainingTime = Math.floor((endTime - now) / 1000);
-    //             startCountdown();
-    //         } else {
-    //             console.log("Voting status is not active or current time is outside voting period.");
-    //             if (votingStatus === "VotingEnded") {
-    //                 remainingTime = 0;
-    //                 updateDisplay();
-    //             }
-    //         }
-    //     } else {
-    //         // Outside the active voting period or no end time set
-    //         console.log("Current time is outside the voting period or end time is not set.");
-    //         endTime = null;
-    //         remainingTime = 0;
-    //         votingStatus = "VotingNotStarted";
-    //         updateDisplay();
-    //     }
-    // }
-
     // Start or resume the countdown
     function startCountdown() {
         clearInterval(countdownInterval); // Clear any existing interval
@@ -1199,16 +1171,6 @@ document.addEventListener("DOMContentLoaded", function() {
             console.log("Updated display: " + hours + ":" + minutes + ":" + seconds);
         }
 
-    // Manually set end time (for testing purposes)
-    // setEndTimeButton.addEventListener('click', function() {
-    //     // Example of setting the end time manually (for testing)
-    //     endTime = new Date().getTime() + 5000; // 1 hour from now
-    //     remainingTime = Math.floor((endTime - new Date().getTime()) / 1000);
-    //     votingStatus = "VotingStarted"; // Set status to active for testing
-    //     updateDisplay();
-    //     startCountdown();
-    // });
-
     function formatDateToMySQL(date) {
         // Format the date to 'YYYY-MM-DD HH:MM:SS'
         return date.getFullYear() + '-' +
@@ -1219,7 +1181,6 @@ document.addEventListener("DOMContentLoaded", function() {
             ('0' + date.getSeconds()).slice(-2);
     }
     
-
     // Function to send the new start time, end time, and voting status to the server
     function storeStartAndEndTimes(startTime, endTime, votingStatus) {
         var xhrStoreTimes = new XMLHttpRequest();
@@ -1255,17 +1216,59 @@ document.addEventListener("DOMContentLoaded", function() {
         xhrStoreTimes.send(params);
     }
 
+    function resetVotingStatus() {
+        var xhrResetVoting = new XMLHttpRequest();
+        xhrResetVoting.open("POST", "PHPBackend/DeclareWinner.php", true);
+        xhrResetVoting.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    
+        xhrResetVoting.onreadystatechange = function() {
+            if (xhrResetVoting.readyState === XMLHttpRequest.DONE) {
+                if (xhrResetVoting.status === 200) {
+                    try {
+                        let response = JSON.parse(xhrResetVoting.responseText);
+                        if (response.success) {
+                            console.log("Voting status reset successfully.");
+                        } else {
+                            console.error("Failed to reset voting status: ", response.error);
+                        }
+                    } catch (e) {
+                        console.error("Failed to parse JSON: ", e);
+                    }
+                } else {
+                    console.error("Error in response: ", xhrResetVoting.statusText);
+                }
+            }
+        };
+    
+        // Send the request to the PHP script
+        xhrResetVoting.send("action=delete_voting_started");
+    }
+    
+
     // Fetch start and end times on page load
     window.onload = function() {
         fetchTimes(); // This will run fetchTimes when the window has fully loaded.
     };
 
+    // Variable to track if the countdown is paused
+    let isPaused = false;
+
+    // Function to update the start button text
+    function updateStartButtonText() {
+        if (isPaused) {
+            startButton.textContent = 'Resume';
+        } else {
+            startButton.textContent = 'Start';
+        }
+    }
+
     // Event listeners for start, stop, and reset buttons
     startButton.addEventListener('click', function() {
+        const startBTN = startButton.textContent;
         const selectedDateTime = dateTimeInput.value;
         const Timenow = new Date().getTime(); // Get the value from the datetime-local input
 
-        if (!selectedDateTime) {
+        if (!selectedDateTime && startBTN == 'Start') {
             alert("Please select an end time.");
             return;
         }
@@ -1277,41 +1280,64 @@ document.addEventListener("DOMContentLoaded", function() {
             return;  // Exit if the end time is invalid
         }
 
-        if (endTime > Timenow && votingStatus === "VotingStarted") {
+        if (isPaused) {
+            // If paused, resume the countdown
+            location.reload();
             startCountdown();
+            isPaused = false;
+            updateStartButtonText(); // Change button text back to "Start"
         } else {
-            if (startTime === null || endTime === null || votingStatus !== "VotingStarted") {
-               
-                // Check if the start and end times are missing or invalid
-                if (confirm("Start or end time is invalid or voting is not active. Would you like to set a new start time?")) {
-                    // Option to manually set a new start time and end time for testing
-                    let newStartTime = new Date(); // Set the start time to the current time
-                    startTime = newStartTime.getTime(); // Convert to timestamp
 
-                    remainingTime = Math.floor((endTime - new Date().getTime()) / 1000); // Calculate remaining time
-                    votingStatus = "VotingStarted"; // Set status to active for testing
-    
-                    updateDisplay();
-                    startCountdown();
-                    storeStartAndEndTimes(startTime, endTime, votingStatus);
-                }
+            if (endTime > Timenow && votingStatus === "VotingStarted") {
+                startCountdown();
             } else {
-                alert("End time is not set, countdown already ended, or voting is not active.");
+                if (startTime === null || endTime === null || votingStatus !== "VotingStarted") {
+                
+                    // Check if the start and end times are missing or invalid
+                    if (confirm("Start or end time is invalid or voting is not active. Would you like to set a new start time?")) {
+                        // Option to manually set a new start time and end time for testing
+                        let newStartTime = new Date(); // Set the start time to the current time
+                        startTime = newStartTime.getTime(); // Convert to timestamp
+
+                        remainingTime = Math.floor((endTime - new Date().getTime()) / 1000); // Calculate remaining time
+                        votingStatus = "VotingStarted"; // Set status to active for testing
+        
+                        updateDisplay();
+                        startCountdown();
+                        storeStartAndEndTimes(startTime, endTime, votingStatus);
+                    }
+                } else {
+                    alert("End time is not set, countdown already ended, or voting is not active.");
+                }
             }
+        }    
+    });
+    
+
+    // Stop button functionality
+    stopButton.addEventListener('click', function() {
+        if (remainingTime > 0) { // Check if there’s an ongoing countdown
+            console.log("Countdown stopped.");
+            console.log("remainingTime:",remainingTime );
+            clearInterval(countdownInterval);
+            isPaused = true; // Set the countdown state to paused
+            updateStartButtonText(); // Change the start button text to "Resume"
+        } else {
+            console.log("No countdown is ongoing.");
         }
     });
-    
 
-    stopButton.addEventListener('click', function() {
-        console.log("Countdown stopped.");
-        clearInterval(countdownInterval);
-    });
 
     resetButton.addEventListener('click', function() {
         console.log("Countdown reset.");
         clearInterval(countdownInterval);
         remainingTime = 0;
+        isPaused = false; // Reset the paused state
+        updateStartButtonText(); // Change the button text back to "Start"
         updateDisplay();
+
+        // Trigger the deletion of voting status
+        resetVotingStatus();
     });
 });
 

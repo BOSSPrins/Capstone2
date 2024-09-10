@@ -68,6 +68,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         closeConnectionAndRespond($conn, $response);
+
     } elseif ($action === 'fetch_times') {
         $sql = "SELECT start_time, end_time, voting_status FROM voting_countdown WHERE voting_status = 'VotingStarted' ORDER BY start_time DESC LIMIT 1";
         
@@ -118,6 +119,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         closeConnectionAndRespond($conn, $response);
+
     } elseif ($action === 'declare_winner') {
         $sql = "UPDATE user_votes
                 SET status = 'Winner'
@@ -147,6 +149,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         closeConnectionAndRespond($conn, $response);
+
+    } elseif ($action === 'delete_voting_started') {
+        // SQL query to delete voting record where status is 'VotingStarted'
+        $sql = "DELETE FROM voting_countdown WHERE voting_status = 'VotingStarted'";
+
+        if ($conn->query($sql) === TRUE) {
+            $response = ['success' => true, 'message' => 'Voting status reset successfully.'];
+            error_log('Voting status reset successfully.');
+        } else {
+            error_log("SQL Error: " . $conn->error);
+            $response = ['success' => false, 'error' => "Failed to reset voting status."];
+        }
+
+        closeConnectionAndRespond($conn, $response);
+
     } else {
         $response = ['success' => false, 'error' => 'Invalid request'];
         closeConnectionAndRespond($conn, $response);
