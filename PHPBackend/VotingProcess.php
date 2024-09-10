@@ -30,34 +30,48 @@ function closeConnectionAndRespond($conn, $response) {
 // Debugging: Output POST data
 error_log('POST Data: ' . print_r($_POST, true));
 
-// Handle AJAX request for fetching resident ID
+// Handle AJAX request for fetching resident ID sa smart search
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['firstname'])) {
     // Retrieve the input data
     $firstname = isset($_POST['firstname']) ? $_POST['firstname'] : '';
     $middlename = isset($_POST['middlename']) ? $_POST['middlename'] : '';
     $lastname = isset($_POST['lastname']) ? $_POST['lastname'] : '';
 
-    // Prepare and bind
-    $stmt = $conn->prepare("SELECT unique_id FROM tblresident WHERE first_name = ? AND middle_name = ? AND last_name = ?");
+     // Prepare the SQL query using LIKE for partial matching
+     $stmt = $conn->prepare("SELECT unique_id, CONCAT(first_name, ' ', middle_name, ' ', last_name) AS full_name 
+                            FROM tblresident 
+                            WHERE first_name LIKE ? AND middle_name LIKE ? AND last_name LIKE ?");
+
     if (!$stmt) {
         closeConnectionAndRespond($conn, ['success' => false, 'error' => $conn->error]);
     }
-    
+
+    // Add wildcards (%) for partial matching
+    $firstname = '%' . $firstname . '%';
+    $middlename = '%' . $middlename . '%';
+    $lastname = '%' . $lastname . '%';
+
     $stmt->bind_param("sss", $firstname, $middlename, $lastname);
-    
+
     // Execute the query
     if (!$stmt->execute()) {
         closeConnectionAndRespond($conn, ['success' => false, 'error' => $stmt->error]);
     }
-    
-    $stmt->bind_result($unique_id);
-    $stmt->fetch();
-    
-    if ($unique_id) {
-         
-        // Store the unique_id in the session
-        // $_SESSION['unique_id'] = $unique_id;
-        closeConnectionAndRespond($conn, ['success' => true, 'unique_id' => $unique_id]);
+
+    $result = $stmt->get_result();
+    $suggestions = [];
+
+    // Fetch the results
+    while ($row = $result->fetch_assoc()) {
+        $suggestions[] = [
+            'unique_id' => $row['unique_id'],
+            'full_name' => $row['full_name'] // Concatenated full name
+        ];
+    }
+
+    // Return the suggestions as JSON
+    if (count($suggestions) > 0) {
+        closeConnectionAndRespond($conn, ['success' => true, 'suggestions' => $suggestions]);
     } else {
         closeConnectionAndRespond($conn, ['success' => false, 'error' => 'Resident not found']);
     }
@@ -68,6 +82,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['candi_IMG'])) {
     $candi_ID = isset($_POST['candi_ID']) ? $_POST['candi_ID'] : '';
     $candi_Name = isset($_POST['candi_Name']) ? $_POST['candi_Name'] : '';
     $candi_IMG = $_FILES['candi_IMG'];
+
+    // Check if the candidate already exists
+    $checkStmt = $conn->prepare("SELECT COUNT(*) FROM voting WHERE unique_id = ? OR candidate_name = ?");
+    $checkStmt->bind_param("ss", $candi_ID, $candi_Name);
+    $checkStmt->execute();
+    $checkStmt->bind_result($count);
+    $checkStmt->fetch();
+    $checkStmt->close();
+
+    if ($count > 0) {
+        // Candidate already exists, return error
+        closeConnectionAndRespond($conn, ['success' => false, 'error' => 'Candidate already exists']);
+        exit; // Stop further processing
+    }
 
     // Define the upload directory
     $uploadDir = '../Pictures/';
@@ -157,6 +185,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($data['voter_id']) && isset($data['candidate_ids'])) {
         $voter_id = $data['voter_id'];
         $candidate_ids = $data['candidate_ids'];
+        $voteStatus = $data['voteStatus'];
 
         // Ensure there are exactly 9 candidate IDs
             // if (count($candidate_ids) !== 9) {
@@ -167,8 +196,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $params = array_pad($candidate_ids, 9, '');
 
         // Prepare SQL statement for inserting votes into voting history
-        $sql_insert = "INSERT INTO voting_history (unique_id, candidate1, candidate2, candidate3, candidate4, candidate5, candidate6, candidate7, candidate8, candidate9) 
-                       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $sql_insert = "INSERT INTO voting_history (unique_id, candidate1, candidate2, candidate3, candidate4, candidate5, candidate6, candidate7, candidate8, candidate9, vote_status) 
+                       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         $stmt_insert = $conn->prepare($sql_insert);
         if (!$stmt_insert) {
@@ -176,7 +205,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         // Use variables for bind_param
-        $stmt_insert->bind_param("ssssssssss", $voter_id, $params[0], $params[1], $params[2], $params[3], $params[4], $params[5], $params[6], $params[7], $params[8]);
+        $stmt_insert->bind_param("sssssssssss", $voter_id, $params[0], $params[1], $params[2], $params[3], $params[4], $params[5], $params[6], $params[7], $params[8], $voteStatus);
 
         if (!$stmt_insert->execute()) {
             closeConnectionAndRespond($conn, ['success' => false, 'error' => $stmt_insert->error]);
@@ -222,122 +251,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && !isset($_GET['id']) && isset($_GET['
     }
 }
 
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'declare_war') {
-    error_log('POST request received.');
-
-    // Log exact value of 'action' and its length
-    $action = isset($_POST['action']) ? trim($_POST['action']) : null;
-
-    // Debugging: Output the action variable and log it
-    var_dump($action); // Outputs the exact string and its details
-    error_log('Var dump of action: ' . var_export($action, true));
-
-    error_log('Exact value of action parameter: "' . $action . '" with length: ' . strlen($action));
-
-    // Log full POST data to verify it is being sent correctly
-    error_log('Full POST data: ' . print_r($_POST, true));
-
-    if (strcasecmp($action, 'declare_winner') === 0) {
-        error_log('Action parameter is correct.');
-
-        // SQL to update the top 9 candidates by votes to "winner"
-        $sql = "UPDATE user_votes
-                SET status = 'Winner'
-                WHERE unique_id IN (
-                    SELECT unique_id 
-                    FROM (
-                        SELECT unique_id 
-                        FROM user_votes 
-                        ORDER BY votes DESC 
-                        LIMIT 9
-                    ) AS TopCandidates
-                )";
-
-        if ($conn->query($sql) === TRUE) {
-            $response = ['success' => true];
-            error_log('Query successful.');
-        } else {
-            error_log("SQL Error: " . $conn->error);
-            $response = ['success' => false, 'error' => "Database error occurred"];
-        }
-
-        closeConnectionAndRespond($conn, $response);
-    } else {
-        error_log('Invalid action parameter: "' . $action . '" with length: ' . strlen($action));
-        $response = ['success' => false, 'error' => 'Invalid request'];
-        closeConnectionAndRespond($conn, $response);
-    }
-} else {
-    error_log('Invalid request method: ' . $_SERVER['REQUEST_METHOD']);
-    $response = ['success' => false, 'error' => 'Invalid request method'];
-    closeConnectionAndRespond($conn, $response);
-}
-echo "PHP script is working.";
-echo 'Error log path: ' . ini_get('error_log');
-
-
-
-
-
-
-
-// Eto yung panglagay ng winner sa mga candidate kapag tapos ng countdown
-// Eto yung panglagay ng winner sa mga candidate kapag tapos ng countdown
-// error_log('Debugging started.');
-
-// if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-//     error_log('POST request received.');
-
-//     // Log exact value of 'action' and its length
-//     $action = isset($_POST['action']) ? trim($_POST['action']) : null;
-
-//     // Debugging: Output the action variable and log it
-//     var_dump($action); // Outputs the exact string and its details
-//     error_log('Var dump of action: ' . var_export($action, true));
-
-//     error_log('Exact value of action parameter: "' . $action . '" with length: ' . strlen($action));
-
-//     // Log full POST data to verify it is being sent correctly
-//     error_log('Full POST data: ' . print_r($_POST, true));
-
-//     if (strcasecmp($action, 'declare_winner') === 0) {
-//         error_log('Action parameter is correct.');
-
-//         // SQL to update the top 9 candidates by votes to "winner"
-//         $sql = "UPDATE user_votes
-//                 SET status = 'Winner'
-//                 WHERE unique_id IN (
-//                     SELECT unique_id 
-//                     FROM (
-//                         SELECT unique_id 
-//                         FROM user_votes 
-//                         ORDER BY votes DESC 
-//                         LIMIT 9
-//                     ) AS TopCandidates
-//                 )";
-
-//         if ($conn->query($sql) === TRUE) {
-//             $response = ['success' => true];
-//             error_log('Query successful.');
-//         } else {
-//             error_log("SQL Error: " . $conn->error);
-//             $response = ['success' => false, 'error' => "Database error occurred"];
-//         }
-
-//         closeConnectionAndRespond($conn, $response);
-//     } else {
-//         error_log('Invalid action parameter: "' . $action . '" with length: ' . strlen($action));
-//         $response = ['success' => false, 'error' => 'Invalid request'];
-//         closeConnectionAndRespond($conn, $response);
-//     }
-// } else {
-//     error_log('Invalid request method: ' . $_SERVER['REQUEST_METHOD']);
-//     $response = ['success' => false, 'error' => 'Invalid request method'];
-//     closeConnectionAndRespond($conn, $response);
-// }
-// echo "PHP script is working.";
-// echo 'Error log path: ' . ini_get('error_log');
 
 
 

@@ -556,6 +556,11 @@ html{
     font-size: 30px;
 }
 
+.colon{
+    font-size: 30px;
+    margin-bottom: 4px;
+}
+
 /*DESIGN FOR TABLE RANKING */
 table{
     width: 100%;
@@ -613,7 +618,7 @@ td{
     position: absolute;
     background-color: #f9f9f9;
     width: 300px;
-    height: 410px;
+    height: 300px;
     right: 25px;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 1;
@@ -651,6 +656,7 @@ td{
 
 #start{
     background: green;
+    margin-top: 10px;
 }
 
 #start:hover{
@@ -671,6 +677,51 @@ td{
 
 #reset:hover{
     background: rgb(0, 0, 197);
+}
+
+/* DESIGN SA DATE TO TIME SA COUNTDOWN TIMER */
+.dateTime{
+    width: 100%;
+    max-width: 300px; /* Adjust as needed */
+    padding: 10px;
+    font-size: 13px;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    color: #333;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.dateTime:focus {
+    border-color: #4A90E2;
+    box-shadow: 0 0 8px rgba(74, 144, 226, 0.3);
+    outline: none;
+}
+
+.dateTime:not(:focus) { 
+    border-color: #1c34cd63; /* Reset the border when not focused */
+}
+
+.dateTime::placeholder {
+    color: #aaa;
+    font-style: italic;
+}
+
+.dateTime:hover {
+    border-color: var(--color-primary);
+}
+
+/* Kasama rin to sa timer eto yung input ng date */
+input[type="datetime-local"] {
+    padding-right: 20px; /* Create space for the date picker icon */
+    font-size: 22px;
+    color: #333;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 
@@ -1151,13 +1202,15 @@ td{
 /* Error at sakses ng add candidate */
 .iror{
     color: #721c24; 
-    padding: 8px 10px;
+    padding: 10px 10px;
     text-align: center;
     border-radius: 5px;
     background: #f8d7da;
     border: 1px solid #f5c6cb;
-    margin-bottom: 10px;
+    margin-right: 25%;
     display: none;
+    font-size: 18px;
+    max-width: 350px;
   }
 
 .sakses {
@@ -1205,14 +1258,15 @@ display: none;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: rgb(229, 229, 229);
+    background: var(--color-primary);
     /* border-bottom: 1px solid gray; */
     padding: 15px;
     border-radius: 5px;
+    color: white;
 }
 
 .CloseAdding{
-    color: #000000;
+    color: white;
     font-size: 22px;
     font-weight: bold;
     cursor: pointer;
@@ -1236,6 +1290,8 @@ display: none;
     padding: 10px 40px;
     font-size: large;
     cursor: pointer;
+    background: var(--color-primary);
+    color: white;
 }
 
 .NameNewCandi{
@@ -1243,7 +1299,6 @@ display: none;
     font-size: 17px;
     padding: 5px;
     border: 1px solid rgb(164, 164, 164);
-    margin-bottom: 10px;
 }
 
 .FileUploadPicNewCandi {
@@ -1264,6 +1319,7 @@ display: none;
     border-radius: 5px;
     padding: 10px;
     margin-bottom: 10px;
+    margin-top: 10px;
 }
 
 .file-upload-label {
@@ -1290,4 +1346,31 @@ display: none;
     top: 0;
     opacity: 0;
     cursor: pointer;
+}
+
+/* Desayn para sa smart search */
+#suggestions {
+    border: 1px solid #ccc;
+    border-top: none; /* Remove border at the top to make it look connected to the input */
+    max-height: 150px;
+    overflow-y: auto;
+    position: absolute;
+    width: 95.5%; /* Make it the same width as the input field */
+    background-color: white;
+    z-index: 1000;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Add a shadow for a floating effect */
+}
+
+.suggestion-item {
+    padding: 10px;
+    cursor: pointer;
+    border-bottom: 1px solid #eee;
+}
+
+.suggestion-item:last-child {
+    border-bottom: none; /* Remove the border from the last item */
+}
+
+.suggestion-item:hover {
+    background-color: #f0f0f0; /* Change background color on hover */
 }

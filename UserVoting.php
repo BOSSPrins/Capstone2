@@ -341,221 +341,257 @@ $user_UID = $_SESSION['unique_id'];
                             </div> -->
                         </div>
                         <footer class="footerCandidatesSubmit">
-                            <button class="buttonSubmitBoto" type="submit"> Submit </button>
+                            <button class="buttonSubmitBoto" type="submit" disabled> Submit </button>
                         </footer>
                     </div>
 
                     <div class="MainContainerAll">
                         <div class="containerDivssPangalawa">
                         <div class="CandidatesConPangalawa">
-                                <div class="CandiImageContainerPangalawa" id="CandiImageContainerPangalawa">
+                                <div class="CandiImageContainerPangalawa" id="CandiImage1" name="CandiImage1">
                                     <!-- Image will be displayed here -->
                                 </div>
-                                <input class="text" type="text">
+                                <input class="text" type="text" id="CandiName1" name="CandiName1">
+                                <input class="text" type="text" id="CandiPos1" name="CandiPos1" hidden>
+                                <input class="text" type="text" id="UID1" name="UID1" hidden>                                
                                 <div class="inputAndDropdownContainer">
-                                    <input type="text" placeholder="Select an option" class="dropdown-input">
+                                    <input type="text" placeholder="Select an option" class="dropdown-input" id="DisplayPos1" name="DisplayPos1" readonly>
                                     <button class="btnPosDrop" onclick="toggleDropOpsPos()">
                                         <div class="Emeposs emeDropPos"> </div>
                                     </button>
                                     <div class="Optioo OptionDropDown">
                                         <!-- Dropdown options using labels -->
-                                        <label><input type="radio" name="option1" value="option1"> President </label>
-                                        <label><input type="radio" name="option1" value="option2"> Vice President </label>
-                                        <label><input type="radio" name="option1" value="option3"> Secretary </label>
-                                        <label><input type="radio" name="option1" value="option4"> Treasurer </label>
-                                        <label><input type="radio" name="option1" value="option5"> Auditor </label>
-                                        <label><input type="radio" name="option1" value="option6"> Peace In Order </label>
-                                        <label><input type="radio" name="option1" value="option7"> Director </label>
+                                        <label><input type="radio" name="div1" value="President" data-display="President"> President </label>
+                                        <label><input type="radio" name="div1" value="VicePresident" data-display="Vice President"> Vice President </label>
+                                        <label><input type="radio" name="div1" value="Secretary" data-display="Secretary"> Secretary </label>
+                                        <label><input type="radio" name="div1" value="Treasurer" data-display="Treasurer"> Treasurer </label>
+                                        <label><input type="radio" name="div1" value="Auditor" data-display="Auditor"> Auditor </label>
+                                        <label><input type="radio" name="div1" value="PeaceInOrder" data-display="Peace In Order"> Peace In Order </label>
+                                        <label><input type="radio" name="div1" value="Director1" data-display="Director"> Director </label>
+                                        <label><input type="radio" name="div1" value="Director2" data-display="Director"> Director </label>
+                                        <label><input type="radio" name="div1" value="Director3" data-display="Director"> Director </label>
                                     </div>
                                 </div>
                             </div>
                             
                             <div class="CandidatesConPangalawa">
-                                <div class="CandiImageContainerPangalawa" id="CandiImageContainerPangalawa2">
+                                <div class="CandiImageContainerPangalawa" id="CandiImage2" name="CandiImage2">
                                     <!-- Image will be displayed here -->
                                 </div>
-                                <input class="text" type="text">
+                                <input class="text" type="text" id="CandiName2" name="CandiName2">
+                                <input class="text" type="text" id="CandiPos2" name="CandiPos2" hidden>
+                                <input class="text" type="text" id="UID2" name="UID2" hidden>
                                 <div class="inputAndDropdownContainer">
-                                    <input type="text" placeholder="Select an option" class="dropdown-input">
+                                    <input type="text" placeholder="Select an option" class="dropdown-input" id="DisplayPos2" name="DisplayPos2" readonly>
                                     <button class="btnPosDrop" onclick="toggleDropOpsPos2()">
                                         <div class="Emeposs emeDropPos2"> </div>
                                     </button>
                                     <div class="Optioo OptionDropDown2">
                                         <!-- Dropdown options using labels -->
-                                        <label><input type="radio" name="option2" value="option1"> President </label>
-                                        <label><input type="radio" name="option2" value="option2"> Vice President </label>
-                                        <label><input type="radio" name="option2" value="option3"> Secretary </label>
-                                        <label><input type="radio" name="option2" value="option4"> Treasurer </label>
-                                        <label><input type="radio" name="option2" value="option5"> Auditor </label>
-                                        <label><input type="radio" name="option2" value="option6"> Peace In Order </label>
-                                        <label><input type="radio" name="option2" value="option7"> Director </label>
+                                        <label><input type="radio" name="div2" value="President" data-display="President"> President </label>
+                                        <label><input type="radio" name="div2" value="VicePresident" data-display="Vice President"> Vice President </label>
+                                        <label><input type="radio" name="div2" value="Secretary" data-display="Secretary"> Secretary </label>
+                                        <label><input type="radio" name="div2" value="Treasurer" data-display="Treasurer"> Treasurer </label>
+                                        <label><input type="radio" name="div2" value="Auditor" data-display="Auditor"> Auditor </label>
+                                        <label><input type="radio" name="div2" value="PeaceInOrder" data-display="Peace In Order"> Peace In Order </label>
+                                        <label><input type="radio" name="div2" value="Director1" data-display="Director"> Director </label>
+                                        <label><input type="radio" name="div2" value="Director2" data-display="Director"> Director </label>
+                                        <label><input type="radio" name="div2" value="Director3" data-display="Director"> Director </label>
                                     </div>
                                 </div>
                             </div>
                             
                             <div class="CandidatesConPangalawa">
-                                <div class="CandiImageContainerPangalawa" id="CandiImageContainerPangalawa3">
+                                <div class="CandiImageContainerPangalawa" id="CandiImage3" name="CandiImage3">
                                     <!-- Image will be displayed here -->
                                 </div>
-                                <input class="text" type="text">
+                                <input class="text" type="text" id="CandiName3" name="CandiName3">
+                                <input class="text" type="text" id="CandiPos3" name="CandiPos3" hidden>
+                                <input class="text" type="text" id="UID3" name="UID3" hidden>
                                 <div class="inputAndDropdownContainer">
-                                    <input type="text" placeholder="Select an option" class="dropdown-input">
+                                    <input type="text" placeholder="Select an option" class="dropdown-input" id="DisplayPos3" name="DisplayPos3" readonly>
                                     <button class="btnPosDrop" onclick="toggleDropOpsPos3()">
                                         <div class="Emeposs emeDropPos3"> </div>
                                     </button>
                                     <div class="Optioo OptionDropDown3">
                                         <!-- Dropdown options using labels -->
-                                        <label><input type="radio" name="option2" value="option1"> President </label>
-                                        <label><input type="radio" name="option2" value="option2"> Vice President </label>
-                                        <label><input type="radio" name="option2" value="option3"> Secretary </label>
-                                        <label><input type="radio" name="option2" value="option4"> Treasurer </label>
-                                        <label><input type="radio" name="option2" value="option5"> Auditor </label>
-                                        <label><input type="radio" name="option2" value="option6"> Peace In Order </label>
-                                        <label><input type="radio" name="option2" value="option7"> Director </label>
+                                        <label><input type="radio" name="div3" value="President" data-display="President"> President </label>
+                                        <label><input type="radio" name="div3" value="VicePresident" data-display="Vice President"> Vice President </label>
+                                        <label><input type="radio" name="div3" value="Secretary" data-display="Secretary"> Secretary </label>
+                                        <label><input type="radio" name="div3" value="Treasurer" data-display="Treasurer"> Treasurer </label>
+                                        <label><input type="radio" name="div3" value="Auditor" data-display="Auditor"> Auditor </label>
+                                        <label><input type="radio" name="div3" value="PeaceInOrder" data-display="Peace In Order"> Peace In Order </label>
+                                        <label><input type="radio" name="div3" value="Director1" data-display="Director"> Director </label>
+                                        <label><input type="radio" name="div3" value="Director2" data-display="Director"> Director </label>
+                                        <label><input type="radio" name="div3" value="Director3" data-display="Director"> Director </label>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="CandidatesConPangalawa">
-                                <div class="CandiImageContainerPangalawa" id="CandiImageContainerPangalawa4">
+                                <div class="CandiImageContainerPangalawa" id="CandiImage4" name="CandiImage4">
                                     <!-- Image will be displayed here -->
                                 </div>
-                                <input class="text" type="text">
+                                <input class="text" type="text" id="CandiName4" name="CandiName4">
+                                <input class="text" type="text" id="CandiPos4" name="CandiPos4" hidden>
+                                <input class="text" type="text" id="UID4" name="UID4" hidden> 
                                 <div class="inputAndDropdownContainer">
-                                    <input type="text" placeholder="Select an option" class="dropdown-input">
+                                    <input type="text" placeholder="Select an option" class="dropdown-input" id="DisplayPos4" name="DisplayPos4" readonly>
                                     <button class="btnPosDrop" onclick="toggleDropOpsPos4()">
                                         <div class="Emeposs emeDropPos4"> </div>
                                     </button>
                                     <div class="Optioo OptionDropDown4">
                                         <!-- Dropdown options using labels -->
-                                        <label><input type="radio" name="option2" value="option1"> President </label>
-                                        <label><input type="radio" name="option2" value="option2"> Vice President </label>
-                                        <label><input type="radio" name="option2" value="option3"> Secretary </label>
-                                        <label><input type="radio" name="option2" value="option4"> Treasurer </label>
-                                        <label><input type="radio" name="option2" value="option5"> Auditor </label>
-                                        <label><input type="radio" name="option2" value="option6"> Peace In Order </label>
-                                        <label><input type="radio" name="option2" value="option7"> Director </label>
+                                        <label><input type="radio" name="div4" value="President" data-display="President"> President </label>
+                                        <label><input type="radio" name="div4" value="VicePresident" data-display="Vice President"> Vice President </label>
+                                        <label><input type="radio" name="div4" value="Secretary" data-display="Secretary"> Secretary </label>
+                                        <label><input type="radio" name="div4" value="Treasurer" data-display="Treasurer"> Treasurer </label>
+                                        <label><input type="radio" name="div4" value="Auditor" data-display="Auditor"> Auditor </label>
+                                        <label><input type="radio" name="div4" value="PeaceInOrder" data-display="Peace In Order"> Peace In Order </label>
+                                        <label><input type="radio" name="div4" value="Director1" data-display="Director"> Director </label>
+                                        <label><input type="radio" name="div4" value="Director2" data-display="Director"> Director </label>
+                                        <label><input type="radio" name="div4" value="Director3" data-display="Director"> Director </label>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="CandidatesConPangalawa">
-                                <div class="CandiImageContainerPangalawa" id="CandiImageContainerPangalawa5">
+                                <div class="CandiImageContainerPangalawa" id="CandiImage5" name="CandiImage5">
                                     <!-- Image will be displayed here -->
                                 </div>
-                                <input class="text" type="text">
+                                <input class="text" type="text" id="CandiName5" name="CandiName5">
+                                <input class="text" type="text" id="CandiPos5" name="CandiPos5" hidden>
+                                <input class="text" type="text" id="UID5" name="UID5" hidden> 
                                 <div class="inputAndDropdownContainer">
-                                    <input type="text" placeholder="Select an option" class="dropdown-input">
+                                    <input type="text" placeholder="Select an option" class="dropdown-input" id="DisplayPos5" name="DisplayPos5" readonly>
                                     <button class="btnPosDrop" onclick="toggleDropOpsPos5()">
                                         <div class="Emeposs emeDropPos5"> </div>
                                     </button>
                                     <div class="Optioo OptionDropDown5">
                                         <!-- Dropdown options using labels -->
-                                        <label><input type="radio" name="option2" value="option1"> President </label>
-                                        <label><input type="radio" name="option2" value="option2"> Vice President </label>
-                                        <label><input type="radio" name="option2" value="option3"> Secretary </label>
-                                        <label><input type="radio" name="option2" value="option4"> Treasurer </label>
-                                        <label><input type="radio" name="option2" value="option5"> Auditor </label>
-                                        <label><input type="radio" name="option2" value="option6"> Peace In Order </label>
-                                        <label><input type="radio" name="option2" value="option7"> Director </label>
+                                        <label><input type="radio" name="div5" value="President" data-display="President"> President </label>
+                                        <label><input type="radio" name="div5" value="VicePresident" data-display="Vice President"> Vice President </label>
+                                        <label><input type="radio" name="div5" value="Secretary" data-display="Secretary"> Secretary </label>
+                                        <label><input type="radio" name="div5" value="Treasurer" data-display="Treasurer"> Treasurer </label>
+                                        <label><input type="radio" name="div5" value="Auditor" data-display="Auditor"> Auditor </label>
+                                        <label><input type="radio" name="div5" value="PeaceInOrder" data-display="Peace In Order"> Peace In Order </label>
+                                        <label><input type="radio" name="div5" value="Director1" data-display="Director"> Director </label>
+                                        <label><input type="radio" name="div5" value="Director2" data-display="Director"> Director </label>
+                                        <label><input type="radio" name="div5" value="Director3" data-display="Director"> Director </label>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="CandidatesConPangalawa">
-                                <div class="CandiImageContainerPangalawa" id="CandiImageContainerPangalawa6">
+                                <div class="CandiImageContainerPangalawa" id="CandiImage6" name="CandiImage6">
                                     <!-- Image will be displayed here -->
                                 </div>
-                                <input class="text" type="text">
+                                <input class="text" type="text" id="CandiName6" name="CandiName6">
+                                <input class="text" type="text" id="CandiPos6" name="CandiPos6" hidden>
+                                <input class="text" type="text" id="UID6" name="UID6" hidden> 
                                 <div class="inputAndDropdownContainer">
-                                    <input type="text" placeholder="Select an option" class="dropdown-input">
+                                    <input type="text" placeholder="Select an option" class="dropdown-input" id="DisplayPos6" name="DisplayPos6" readonly>
                                     <button class="btnPosDrop" onclick="toggleDropOpsPos6()">
                                         <div class="Emeposs emeDropPos6"> </div>
                                     </button>
                                     <div class="Optioo OptionDropDown6">
                                         <!-- Dropdown options using labels -->
-                                        <label><input type="radio" name="option2" value="option1"> President </label>
-                                        <label><input type="radio" name="option2" value="option2"> Vice President </label>
-                                        <label><input type="radio" name="option2" value="option3"> Secretary </label>
-                                        <label><input type="radio" name="option2" value="option4"> Treasurer </label>
-                                        <label><input type="radio" name="option2" value="option5"> Auditor </label>
-                                        <label><input type="radio" name="option2" value="option6"> Peace In Order </label>
-                                        <label><input type="radio" name="option2" value="option7"> Director </label>
+                                        <label><input type="radio" name="div6" value="President" data-display="President"> President </label>
+                                        <label><input type="radio" name="div6" value="VicePresident" data-display="Vice President"> Vice President </label>
+                                        <label><input type="radio" name="div6" value="Secretary" data-display="Secretary"> Secretary </label>
+                                        <label><input type="radio" name="div6" value="Treasurer" data-display="Treasurer"> Treasurer </label>
+                                        <label><input type="radio" name="div6" value="Auditor" data-display="Auditor"> Auditor </label>
+                                        <label><input type="radio" name="div6" value="PeaceInOrder" data-display="Peace In Order"> Peace In Order </label>
+                                        <label><input type="radio" name="div6" value="Director1" data-display="Director"> Director </label>
+                                        <label><input type="radio" name="div6" value="Director2" data-display="Director"> Director </label>
+                                        <label><input type="radio" name="div6" value="Director3" data-display="Director"> Director </label>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="CandidatesConPangalawa">
-                                <div class="CandiImageContainerPangalawa" id="CandiImageContainerPangalawa7">
+                                <div class="CandiImageContainerPangalawa" id="CandiImage7" name="CandiImage7">
                                     <!-- Image will be displayed here -->
                                 </div>
-                                <input class="text" type="text">
+                                <input class="text" type="text" id="CandiName7" name="CandiName7">
+                                <input class="text" type="text" id="CandiPos7" name="CandiPos7" hidden>
+                                <input class="text" type="text" id="UID7" name="UID7" hidden> 
                                 <div class="inputAndDropdownContainer">
-                                    <input type="text" placeholder="Select an option" class="dropdown-input">
+                                    <input type="text" placeholder="Select an option" class="dropdown-input" id="DisplayPos7" name="DisplayPos7" readonly>
                                     <button class="btnPosDrop" onclick="toggleDropOpsPos7()">
                                         <div class="Emeposs emeDropPos7"> </div>
                                     </button>
                                     <div class="Optioo OptionDropDown7">
                                         <!-- Dropdown options using labels -->
-                                        <label><input type="radio" name="option2" value="option1"> President </label>
-                                        <label><input type="radio" name="option2" value="option2"> Vice President </label>
-                                        <label><input type="radio" name="option2" value="option3"> Secretary </label>
-                                        <label><input type="radio" name="option2" value="option4"> Treasurer </label>
-                                        <label><input type="radio" name="option2" value="option5"> Auditor </label>
-                                        <label><input type="radio" name="option2" value="option6"> Peace In Order </label>
-                                        <label><input type="radio" name="option2" value="option7"> Director </label>
+                                        <label><input type="radio" name="div7" value="President" data-display="President"> President </label>
+                                        <label><input type="radio" name="div7" value="VicePresident" data-display="Vice President"> Vice President </label>
+                                        <label><input type="radio" name="div7" value="Secretary" data-display="Secretary"> Secretary </label>
+                                        <label><input type="radio" name="div7" value="Treasurer" data-display="Treasurer"> Treasurer </label>
+                                        <label><input type="radio" name="div7" value="Auditor" data-display="Auditor"> Auditor </label>
+                                        <label><input type="radio" name="div7" value="PeaceInOrder" data-display="Peace In Order"> Peace In Order </label>
+                                        <label><input type="radio" name="div7" value="Director1" data-display="Director"> Director </label>
+                                        <label><input type="radio" name="div7" value="Director2" data-display="Director"> Director </label>
+                                        <label><input type="radio" name="div7" value="Director3" data-display="Director"> Director </label>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="CandidatesConPangalawa">
-                                <div class="CandiImageContainerPangalawa" id="CandiImageContainerPangalawa8">
+                                <div class="CandiImageContainerPangalawa" id="CandiImage8" name="CandiImage8">
                                     <!-- Image will be displayed here -->
                                 </div>
-                                <input class="text" type="text">
+                                <input class="text" type="text" id="CandiName8" name="CandiName8">
+                                <input class="text" type="text" id="CandiPos8" name="CandiPos8" hidden>
+                                <input class="text" type="text" id="UID8" name="UID8" hidden> 
                                 <div class="inputAndDropdownContainer">
-                                    <input type="text" placeholder="Select an option" class="dropdown-input">
+                                    <input type="text" placeholder="Select an option" class="dropdown-input" id="DisplayPos8" name="DisplayPos8" readonly>
                                     <button class="btnPosDrop" onclick="toggleDropOpsPos8()">
                                         <div class="Emeposs emeDropPos8"> </div>
                                     </button>
                                     <div class="Optioo OptionDropDown8">
                                         <!-- Dropdown options using labels -->
-                                        <label><input type="radio" name="option2" value="option1"> President </label>
-                                        <label><input type="radio" name="option2" value="option2"> Vice President </label>
-                                        <label><input type="radio" name="option2" value="option3"> Secretary </label>
-                                        <label><input type="radio" name="option2" value="option4"> Treasurer </label>
-                                        <label><input type="radio" name="option2" value="option5"> Auditor </label>
-                                        <label><input type="radio" name="option2" value="option6"> Peace In Order </label>
-                                        <label><input type="radio" name="option2" value="option7"> Director </label>
+                                        <label><input type="radio" name="div8" value="President" data-display="President"> President </label>
+                                        <label><input type="radio" name="div8" value="VicePresident" data-display="Vice President"> Vice President </label>
+                                        <label><input type="radio" name="div8" value="Secretary" data-display="Secretary"> Secretary </label>
+                                        <label><input type="radio" name="div8" value="Treasurer" data-display="Treasurer"> Treasurer </label>
+                                        <label><input type="radio" name="div8" value="Auditor" data-display="Auditor"> Auditor </label>
+                                        <label><input type="radio" name="div8" value="PeaceInOrder" data-display="Peace In Order"> Peace In Order </label>
+                                        <label><input type="radio" name="div8" value="Director1" data-display="Director"> Director </label>
+                                        <label><input type="radio" name="div8" value="Director2" data-display="Director"> Director </label>
+                                        <label><input type="radio" name="div8" value="Director3" data-display="Director"> Director </label>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="CandidatesConPangalawa">
-                                <div class="CandiImageContainerPangalawa" id="CandiImageContainerPangalawa9">
+                                <div class="CandiImageContainerPangalawa" id="CandiImage9" name="CandiImage9">
                                     <!-- Image will be displayed here -->
                                 </div>
-                                <input class="text" type="text">
+                                <input class="text" type="text" id="CandiName9" name="CandiName9">
+                                <input class="text" type="text" id="CandiPos9" name="CandiPos9" hidden>
+                                <input class="text" type="text" id="UID9" name="UID9" hidden>                           
                                 <div class="inputAndDropdownContainer">
-                                    <input type="text" placeholder="Select an option" class="dropdown-input">
+                                    <input type="text" placeholder="Select an option" class="dropdown-input" id="DisplayPos9" name="DisplayPos9" readonly>
                                     <button class="btnPosDrop" onclick="toggleDropOpsPos9()">
                                         <div class="Emeposs emeDropPos9"> </div>
                                     </button>
                                     <div class="Optioo OptionDropDown9">
                                         <!-- Dropdown options using labels -->
-                                        <label><input type="radio" name="option2" value="option1"> President </label>
-                                        <label><input type="radio" name="option2" value="option2"> Vice President </label>
-                                        <label><input type="radio" name="option2" value="option3"> Secretary </label>
-                                        <label><input type="radio" name="option2" value="option4"> Treasurer </label>
-                                        <label><input type="radio" name="option2" value="option5"> Auditor </label>
-                                        <label><input type="radio" name="option2" value="option6"> Peace In Order </label>
-                                        <label><input type="radio" name="option2" value="option7"> Director </label>
+                                        <label><input type="radio" name="div9" value="President" data-display="President"> President </label>
+                                        <label><input type="radio" name="div9" value="VicePresident" data-display="Vice President"> Vice President </label>
+                                        <label><input type="radio" name="div9" value="Secretary" data-display="Secretary"> Secretary </label>
+                                        <label><input type="radio" name="div9" value="Treasurer" data-display="Treasurer"> Treasurer </label>
+                                        <label><input type="radio" name="div9" value="Auditor" data-display="Auditor"> Auditor </label>
+                                        <label><input type="radio" name="div9" value="PeaceInOrder" data-display="Peace In Order"> Peace In Order </label>
+                                        <label><input type="radio" name="div9" value="Director1" data-display="Director"> Director </label>
+                                        <label><input type="radio" name="div9" value="Director2" data-display="Director"> Director </label>
+                                        <label><input type="radio" name="div9" value="Director3" data-display="Director"> Director </label>
                                     </div>
                                 </div>
                             </div>
                         </div> 
                         <footer class="footerCandidatesSubmit2">
-                            <button class="buttonSubmitBoto2" type="submit"> Submit </button>
+                            <button class="buttonSubmitBoto2" type="submit" disabled> Submit </button>
                         </footer>
                     </div>
                 </div>
@@ -660,6 +696,7 @@ $user_UID = $_SESSION['unique_id'];
                                 </div>                                                     
                                 <footer class="UsersFooterSummary">
                                     <input type="hidden" name="user_ID" id="user_ID" value="<?php echo $user_UID ?>">
+                                    <input type="hidden" name="underVote" id="underVote">
                                     <button type="submit" class="btnSubmitNaSaAdmin" id="submitVoteButton" name="submitVoteButton"> Submit </button>
                                 </footer>
                             </div>
@@ -674,75 +711,85 @@ $user_UID = $_SESSION['unique_id'];
                                 <h2> SUMMARY </h2>
                                 <span class="closeSummaryTwo">&times;</span>
                             </header>
+                            <form method="post">
                             <div class="LamanLoobSummaryTwo">
                                 <div class="candidatesTwo">
-                                    <div class="PictureCan1Two"> </div>
+                                    <div class="PictureCan1Two" id="PresImg"> </div>
                                     <div class="NameAndPositionTwo">
-                                        <input class="inputCanTwo" type="text">
-                                        <label> PPRESIDENT </label>
+                                        <input class="inputCanTwo" type="text" id="PresName">
+                                        <input class="inputCanTwo" type="text" id="PresUID">
+                                        <label> PRESIDENT </label>
                                     </div>
                                 </div>
 
                                 <div class="candidatesTwo">
-                                    <div class="PictureCan1Two"> </div>
+                                    <div class="PictureCan1Two" id="VpresImg"> </div>
                                     <div class="NameAndPositionTwo">
-                                        <input class="inputCanTwo" type="text">
+                                        <input class="inputCanTwo" type="text" id="VpresName">
+                                        <input class="inputCanTwo" type="text" id="VpresUID">
                                         <label> VICE PRESIDENT </label>
                                     </div>
                                 </div>
 
                                 <div class="candidatesTwo">
-                                    <div class="PictureCan1Two"> </div>
+                                    <div class="PictureCan1Two" id="SecImg"> </div>
                                     <div class="NameAndPositionTwo">
-                                        <input class="inputCanTwo" type="text">
+                                        <input class="inputCanTwo" type="text" id="SecName">
+                                        <input class="inputCanTwo" type="text" id="SecUID">
                                         <label> SECRETARY </label>
                                     </div>
                                 </div>
 
                                 <div class="candidatesTwo">
-                                    <div class="PictureCan1Two"> </div>
+                                    <div class="PictureCan1Two" id="TreaImg"> </div>
                                     <div class="NameAndPositionTwo">
-                                        <input class="inputCanTwo" type="text">
+                                        <input class="inputCanTwo" type="text" id="TreaName">
+                                        <input class="inputCanTwo" type="text" id="TreaUID">
                                         <label> TREASURER </label>
                                     </div>
                                 </div>
 
                                 <div class="candidatesTwo">
-                                    <div class="PictureCan1Two"> </div>
+                                    <div class="PictureCan1Two" id="AudImg"> </div>
                                     <div class="NameAndPositionTwo">
-                                        <input class="inputCanTwo" type="text">
+                                        <input class="inputCanTwo" type="text" id="AudName">
+                                        <input class="inputCanTwo" type="text" id="AudUID">
                                         <label> AUDITOR </label>
                                     </div>
                                 </div>
 
                                 <div class="candidatesTwo">
-                                    <div class="PictureCan1Two"> </div>
+                                    <div class="PictureCan1Two" id="PioImg"> </div>
                                     <div class="NameAndPositionTwo">
-                                        <input class="inputCanTwo" type="text">
+                                        <input class="inputCanTwo" type="text" id="PioName">
+                                        <input class="inputCanTwo" type="text" id="PioUID">
                                         <label> PEACE IN ORDER </label>
                                     </div>
                                 </div>
 
                                 <div class="candidatesTwo">
-                                    <div class="PictureCan1Two"> </div>
+                                    <div class="PictureCan1Two" id="Dir1Img"> </div>
                                     <div class="NameAndPositionTwo">
-                                        <input class="inputCanTwo" type="text">
+                                        <input class="inputCanTwo" type="text" id="Dir1Name">
+                                        <input class="inputCanTwo" type="text" id="Dir1UID">
                                         <label> DIRECTOR </label>
                                     </div>
                                 </div>
 
                                 <div class="candidatesTwo">
-                                    <div class="PictureCan1Two"> </div>
+                                    <div class="PictureCan1Two" id="Dir2Img"> </div>
                                     <div class="NameAndPositionTwo">
-                                        <input class="inputCanTwo" type="text">
+                                        <input class="inputCanTwo" type="text" id="Dir2Name">
+                                        <input class="inputCanTwo" type="text" id="Dir2UID">
                                         <label> DIRECTOR </label>
                                     </div>
                                 </div>
 
                                 <div class="candidatesTwo">
-                                    <div class="PictureCan1Two"> </div>
+                                    <div class="PictureCan1Two" id="Dir3Img"> </div>
                                     <div class="NameAndPositionTwo">
-                                        <input class="inputCanTwo" type="text">
+                                        <input class="inputCanTwo" type="text" id="Dir3Name">
+                                        <input class="inputCanTwo" type="text" id="Dir3UID">
                                         <label> DIRECTOR </label>
                                     </div>
                                 </div>
@@ -751,6 +798,7 @@ $user_UID = $_SESSION['unique_id'];
                                 <button class="AcceptBtn"> Accept </button>
                             </footer>
                         </div>
+                        </form>
                     </div>
                 </div>
 
@@ -761,8 +809,20 @@ $user_UID = $_SESSION['unique_id'];
                             <h1> Vote </h1>
                             <img class="FingerPrint" src="Pictures/Picsart_24-07-24_15-10-12-879.png">
                             <h2> Reference No. </h2>
-                            <input class="refNumber" type="text">
-                            <button class="OkInSuccess"> Ok </button>
+                            <input class="refNumber" type="text" value="<?php echo $user_UID ?>">
+                            <button class="OkInSuccess OkieNa"> Ok </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="SuccessfulUnderVote">
+                    <div class="SubSucessLaman">
+                        <div class="SuccessContainer">
+                            <h1> Voted Successfully </h1>
+                            <h1> and mark as Under Vote </h1>                           
+                            <img class="FingerPrint" src="Pictures/Picsart_24-07-24_15-10-12-879.png">
+                            <h2> Reference No. </h2>
+                            <input class="refNumber" type="text" value="<?php echo $user_UID ?>">
+                            <button class="OkInSuccess OkieNaPo"> Ok </button>
                         </div>
                     </div>
                 </div>

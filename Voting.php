@@ -155,8 +155,8 @@ if (isset($_SESSION['unique_id'])) {
                 <div class="MainContainerForTables">
                     <div class="NavBarSaLoob">
                         <div class="VotingNavv">
-                            <a href="#" onclick="toggleContent('Payments')"> One </a>
-                            <a href="#" onclick="toggleContent('History')"> Two </a>
+                            <a href="#" onclick="toggleContent('Payments')"> Candidates Table </a>
+                            <a href="#" onclick="toggleContent('History')"> Add Candidates </a>
                             <a href="#" onclick="toggleContent('Hindi ko pa alam')"> History </a> <!-- Babaguhin pa to hindi ko pa alam kung anong tawag sa mga editan ng kung ano-ano -->
                         </div>
                         <div class="ContainerOfEachhh">
@@ -166,9 +166,12 @@ if (isset($_SESSION['unique_id'])) {
                                     <div class="btnAndTimer">
                                         <div class="timerVote">
                                             <h2> Timer: </h2>
-                                            <span class="spanNumberTime" id="hours">00:</span>
-                                            <span class="spanNumberTime" id="minutes">00:</span> 
+                                            <span class="spanNumberTime" id="hours">00</span>
+                                            <span class="colon">:</span>
+                                            <span class="spanNumberTime" id="minutes">00</span>
+                                            <span class="colon">:</span>
                                             <span class="spanNumberTime" id="seconds">00</span>
+                                                                                 
                                             <div class="dropDownforSetTimer">
                                                 <button onclick="toggleSetTimer()" class="dropSetTimer"> 
                                                     <div class="emeSet"></div>
@@ -176,16 +179,20 @@ if (isset($_SESSION['unique_id'])) {
                                                 <div id="SetTimerDropDownn" class="timerContent">
                                                     <div class="timer"> 
                                                         <div class="timer-controls">
-                                                            <h2 for="input-hours">Hours:</h2>
+                                                            <!-- <h2 for="input-hours">Hours:</h2>
                                                             <input type="number" id="input-hours" min="0" step="1">
                         
                                                             <h2 for="input-minutes">Minutes:</h2>
                                                             <input type="number" id="input-minutes" min="0" step="1">
                         
                                                             <h2 for="input-seconds">Seconds:</h2>
-                                                            <input type="number" id="input-seconds" min="0" step="1">
+                                                            <input type="number" id="input-seconds" min="0" step="1"> -->
+
+                                                            <h2>Select date:</h2>
+                                                            <input class="dateTime" type="datetime-local" id="input-datetime" placeholder="Select a date and time">
                         
                                                             <div class="btnsForTimer">
+                                                                <!-- <button id="setEndTime">Set End Time</button> pang testing ng declare winner -->
                                                                 <button id="start">Start</button>
                                                                 <button id="stop">Stop</button>
                                                                 <button id="reset">Reset</button>
@@ -470,17 +477,18 @@ if (isset($_SESSION['unique_id'])) {
                                     <button type="button" class="addingDivsBtn"> Add </button>
                                 </header>
                                     <form class="bowting" id="candidateForm"  method="POST" enctype="multipart/form-data">
-                                        <div class="addingcanditatesDivCon" id="addingCandidatesContainer">
+                                        <div class="addingcanditatesDivCon" id="addingCandidatesContainer" name="addingCandidatesContainer">
                                             <div class="SubAddingCandiCon">
                                                 <div class="addingCandidatesLoob">
                                                     <header class="headerNgAdding">
-                                                        <h2> Add Candidate </h2>
+                                                        <h2> Add New Candidate </h2>
                                                         <span class="CloseAdding">&times;</span>
                                                     </header>
                                                     <div class="AddingNewCandidateLoob">
                                                         <div class="NameOfCandidateNew">
                                                             <h2> Name: </h2>
                                                             <input class="NameNewCandi" type="text" placeholder="Enter full name" id="candi_Name" name="candi_Name" oninput="fetchResidentID()">
+                                                            <div id="suggestions"></div>
                                                         </div>
                                                         <div class="FileUploadPicNewCandi">
                                                             <div class="file-upload">
@@ -492,23 +500,24 @@ if (isset($_SESSION['unique_id'])) {
                                                             </div>
                                                             <img id="previewImage" src="#" alt="Image Preview" style="display: none; max-width: 100%; max-height: 200px;">
                                                         </div>
-                                                        <div class="iror" id="iror"></div>
-                                                        <div class="sakses" id="sakses"></div> 
+                                                        
                                                         <div class="NameOfCandidateNew">
                                                             <input class="NameNewCandi" type="hidden" id="candi_ID" name="candi_ID"> 
                                                         </div>
                                                     </div>
                                                     <footer class="AddingNewCandi">
-                                                        <button type="button addCandi" onclick="submitForm(event)"> Add </button>
+                                                        <div class="iror" id="iror"></div>
+                                                        <div class="sakses" id="sakses"></div>
+                                                        <button type="button addCandi" onclick="submitForm(event)"> Add </button>                                                        
                                                     </footer>
                                                 </div>
                                             </div>
                                         </div> 
                                     </form>
                                 <div class="containerDivss">
-                                    <div class="CandidatesCon">
+                                    <!-- <div class="CandidatesCon">
                                         <div class="CandiImageContainer" id="CandiImageContainer">
-                                            <!-- Image will be displayed here -->
+                                            
                                         </div>
                                         <input class="NameCandiInput" type="text" placeholder="Enter Candidate Name">
                                         <div class="buttonsNgCandidates">
@@ -520,11 +529,11 @@ if (isset($_SESSION['unique_id'])) {
                                                 <button class="buttonSivv SaveBtn">Save</button>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> -->
 
-                                    <div class="CandidatesCon">
+                                    <!-- <div class="CandidatesCon">
                                         <div class="CandiImageContainer" id="CandiImageContainer2">
-                                            <!-- Image will be displayed here -->
+                                            
                                         </div>
                                         <input class="NameCandiInput" type="text" placeholder="Enter Candidate Name">
                                         <div class="buttonsNgCandidates">
@@ -536,11 +545,11 @@ if (isset($_SESSION['unique_id'])) {
                                                 <button class="buttonSivv SaveBtn">Save</button>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> -->
 
-                                    <div class="CandidatesCon">
+                                    <!-- <div class="CandidatesCon">
                                         <div class="CandiImageContainer" id="CandiImageContainer3">
-                                            <!-- Image will be displayed here -->
+                                            
                                         </div>
                                         <input class="NameCandiInput" type="text" placeholder="Enter Candidate Name">
                                         <div class="buttonsNgOffi">
@@ -556,9 +565,9 @@ if (isset($_SESSION['unique_id'])) {
 
                                     <div class="CandidatesCon">
                                         <div class="CandiImageContainer" id="CandiImageContainer4">
-                                            <!-- Image will be displayed here -->
+                                            
                                         </div>
-                                        <input class="NameCandiInput" type="text" placeholder="Enter Candidate Name">
+                                        <input class="NameCandiInput" type="text" placeholder="Enter Candidate Name"  >
                                         <div class="buttonsNgOffi">
                                             <div class="btnOne">
                                                 <button class="butonSiv UploadPics4">Upload Picture</button>
@@ -568,11 +577,11 @@ if (isset($_SESSION['unique_id'])) {
                                                 <button class="butonSiv SaveBtn">Save</button>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> 
 
                                     <div class="CandidatesCon">
                                         <div class="CandiImageContainer" id="CandiImageContainer5">
-                                            <!-- Image will be displayed here -->
+                                            
                                         </div>
                                         <input class="NameCandiInput" type="text" placeholder="Enter Candidate Name">
                                         <div class="buttonsNgOffi">
@@ -588,7 +597,7 @@ if (isset($_SESSION['unique_id'])) {
 
                                     <div class="CandidatesCon">
                                         <div class="CandiImageContainer" id="CandiImageContainer6">
-                                            <!-- Image will be displayed here -->
+                                            
                                         </div>
                                         <input class="NameCandiInput" type="text" placeholder="Enter Candidate Name">
                                         <div class="buttonsNgOffi">
@@ -604,7 +613,7 @@ if (isset($_SESSION['unique_id'])) {
 
                                     <div class="CandidatesCon">
                                         <div class="CandiImageContainer" id="CandiImageContainer7">
-                                            <!-- Image will be displayed here -->
+                                            
                                         </div>
                                         <input class="NameCandiInput" type="text" placeholder="Enter Candidate Name">
                                         <div class="buttonsNgOffi">
@@ -620,9 +629,9 @@ if (isset($_SESSION['unique_id'])) {
 
                                     <div class="CandidatesCon">
                                         <div class="CandiImageContainer" id="CandiImageContainer8">
-                                            <!-- Image will be displayed here -->
+                                            
                                         </div>
-                                        <input class="NameCandiInput" type="text" placeholder="Enter Candidate Name">
+                                        <input class="NameCandiInput" type="text" placeholder="Enter Candidate Name"value="tangaka">
                                         <div class="buttonsNgOffi">
                                             <div class="btnOne">
                                                 <button class="butonSiv UploadPics8">Upload Picture</button>
@@ -636,7 +645,7 @@ if (isset($_SESSION['unique_id'])) {
 
                                     <div class="CandidatesCon">
                                         <div class="CandiImageContainer" id="CandiImageContainer9">
-                                            <!-- Image will be displayed here -->
+                                            
                                         </div>
                                         <input class="NameCandiInput" type="text" placeholder="Enter Candidate Name">
                                         <div class="buttonsNgOffi">
@@ -648,7 +657,7 @@ if (isset($_SESSION['unique_id'])) {
                                                 <button class="butonSiv SaveBtn">Save</button>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> -->
                                 </div> 
                             </div>
 
