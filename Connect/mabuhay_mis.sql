@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 10, 2024 at 09:40 AM
+-- Generation Time: Sep 10, 2024 at 02:09 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -318,7 +318,7 @@ CREATE TABLE `tblaccounts` (
 --
 
 INSERT INTO `tblaccounts` (`user_id`, `unique_id`, `email`, `password`, `img`, `status`, `role`, `access`) VALUES
-(2, 1589571584, 'admin@gmail.com', '21232f297a57a5a743894a0e4a801fc3', '1715091144pusi.jpg', 'Offline now', 'admin', 'Approved'),
+(2, 1589571584, 'admin@gmail.com', '21232f297a57a5a743894a0e4a801fc3', '1715091144pusi.jpg', 'Active now', 'admin', 'Approved'),
 (4, 1357825271, 'senpai@gmail.com', '1e5db03ce967cfef4e21ada16da09b06', '1715105349271713718_1999144396919159_608519389647854942_n.jpg', 'Offline now', 'user', 'Rejected'),
 (19, 112466338, 'Prins@gmail.com', '0a9e0db6e95c394ee792ecbc6e510791', '1717745936pitikvermo.jpg', 'Pending', 'user', 'Approved'),
 (21, 1017731196, 'tnjrdlcrz@gmail.com', '202cb962ac59075b964b07152d234b70', '1717937589pitikvermo.jpg', 'Pending', 'user', 'Approved'),
@@ -482,7 +482,8 @@ INSERT INTO `voting_countdown` (`countdown_id`, `start_id`, `start_time`, `end_i
 (12, 2773, '2024-09-09T11:35:32.', 2773, '2024-09-08 11:35:00', 'VotingEnded'),
 (13, 8246, '2024-09-09T11:39:57.', 8246, '2024-09-08 11:39:00', 'VotingEnded'),
 (14, 8331, '2024-09-09T11:42:44.', 8331, '2024-09-08 11:42:00', 'VotingEnded'),
-(17, 4525, '2024-09-09T13:45:57.', 4525, '2024-09-09 13:46:00', 'VotingEnded');
+(17, 4525, '2024-09-09T13:45:57.', 4525, '2024-09-09 13:46:00', 'VotingEnded'),
+(32, 7702, '2024-09-10 18:42:18', 7702, '2024-09-10 20:42:00', 'VotingStarted');
 
 -- --------------------------------------------------------
 
@@ -676,7 +677,7 @@ ALTER TABLE `voting`
 -- AUTO_INCREMENT for table `voting_countdown`
 --
 ALTER TABLE `voting_countdown`
-  MODIFY `countdown_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `countdown_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `voting_history`
