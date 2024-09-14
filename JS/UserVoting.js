@@ -727,12 +727,6 @@ function loadWinners() {
     xhr.send();
 }
 
-// Call the function when the page loads
-window.onload = function () {
-    loadWinners();
-};
-
-
 function getInputValues() {
     const mainContainer = document.querySelector('.MainContainerAll');
     console.log('Main Container:', mainContainer);
@@ -1101,4 +1095,133 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
+// Function para pang check kung naka boto na tapos may overlay
+function checkVotingHistory() {
+    // Retrieve the unique ID from the hidden input field
+    var sessionUniqueId = document.getElementById('sessionUniqueId').value;
+
+    $.ajax({
+        type: 'POST',
+        url: 'PHPBackend/DeclareWinner.php', // Update this with the correct path
+        data: { action: 'check_voting_history', unique_id: sessionUniqueId }, // Ensure sessionUniqueId is defined
+        dataType: 'json',
+        success: function(response) {
+            console.log('Parsed response:', response);
+            if (response.success) {
+                // Handle successful response
+                if (response.voted) {
+                    console.log('User has already voted.');
+                    var voteContainer = document.getElementById('FirstVotingContainer');
+
+                    var overlay = document.createElement('div');
+                    overlay.style.position = 'absolute';
+                    overlay.style.width = '100%';
+                    overlay.style.height = '100%';
+                    overlay.style.top = '0';
+                    overlay.style.left = '0';
+                    overlay.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
+                    overlay.innerHTML = `
+                                        <div style="text-align: center; margin-top: 40%;">
+                                            
+                                            <p style="color: white; font-size: 25px;">You have already voted</p>
+                                        </div>
+                                    `;
+                    //<img src="Pictures/Mabuhay_Logo.png" alt="Logo" style="max-width: 35%; margin-bottom: 30px;">
+
+                    voteContainer.appendChild(overlay);
+                } else {
+                    console.log('User has not voted yet.');
+                }
+            } else {
+                console.error('Error:', response.error);
+            }
+        },
+        error: function(xhr, status, error) {
+            console.error('AJAX error:', status, error);
+        }
+    });
+    
+};
+
+// Function kung tapos na yung botohan e buong voting may overlay na
+function fetchOverlayMessage(callback) {
+    $.ajax({
+        type: 'POST',
+        url: 'PHPBackend/DeclareWinner.php',
+        data: { action: 'fetch_overlay_message' },
+        dataType: 'json',
+        success: function(response) {
+            console.log("Full response:", response);
+
+            if (response.success) {
+                console.log("Eto ang sagot:", response.success);
+                
+                // Check the status and determine success or failure
+                if (response.status === 'VotingEnded') {
+                    console.log("Eto ang status naman:", response.status);
+                    // Success case
+                } else {
+                    console.log("Unknown status:", response.status);
+                }
+            } else {
+                console.error('Error:', response.error);
+            }
+
+            // Execute callback if provided
+            if (typeof callback === 'function') {
+                callback(response.status !== 'VotingEnded'); // Pass true if the status is 'VotingStarted'
+            }
+        },
+        error: function(xhr, status, error) {
+            console.error('AJAX error:', status, error);
+            console.error('Response Text:', xhr.responseText);
+
+            // Execute callback if provided
+            if (typeof callback === 'function') {
+                callback(true); // Pass true if fetchOverlayMessage failed
+            }
+        }
+    });
+}
+
+// Function para lumabas yung pangalawang botohan para sa positions ng winner
+function checkWinnerStatus() {
+
+    var uniqueId = document.getElementById('WinnerUniqueId').value;
+
+    $.ajax({
+        type: 'POST',
+        url: 'PHPBackend/DeclareWinner.php', // Path to your PHP file
+        data: {
+            action: 'check_winner', // Add an action parameter
+            unique_id: uniqueId
+        },
+        dataType: 'json',
+        success: function(response) {
+            if (response.success && response.display) {
+                // If the user is a winner, show the div
+                document.getElementById('SecondVotingContainer').style.display = 'none';
+            } else {
+                console.log('Not a winner or error in status.');
+            }
+        },
+        error: function(xhr, status, error) {
+            console.error('AJAX error:', status, error);
+        }
+    });
+}
+
+// Call the function when the page loads
+window.onload = function () {
+    loadWinners();
+
+    // Call fetchOverlayMessage with a callback to conditionally call checkVotingHistory
+    fetchOverlayMessage(function(failed) {
+        if (failed) {
+            checkVotingHistory();
+        }
+    });
+
+    checkWinnerStatus();
+};
 

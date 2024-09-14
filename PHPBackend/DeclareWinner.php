@@ -33,6 +33,7 @@ function generateRandomId() {
 // Handle the request
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $action = isset($_POST['action']) ? trim($_POST['action']) : null;
+    error_log('Action received: ' . $action);
 
     if ($action === 'store_end_time') {
         $end_time = isset($_POST['end_time']) ? $_POST['end_time'] : null;
@@ -163,6 +164,86 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         closeConnectionAndRespond($conn, $response);
+
+        // Etong part na to pababa sa user side na to 
+    } elseif ($action === 'check_voting_history') {
+        // Get the unique_id from the AJAX request data
+        $user_unique_id = isset($_POST['unique_id']) ? $_POST['unique_id'] : '';
+        error_log('User unique_id: ' . $user_unique_id);
+
+        if (!empty($user_unique_id)) {
+            // Query to check if the user has already voted in the voting history table
+            $sql = "SELECT COUNT(*) AS vote_count FROM voting_history WHERE unique_id = ?";
+            if ($stmt = $conn->prepare($sql)) {
+                $stmt->bind_param("s", $user_unique_id);
+                $stmt->execute();
+                $result = $stmt->get_result();
+                $row = $result->fetch_assoc();
+
+                // Check if the user has already voted
+                if ($row['vote_count'] > 0) {
+                    // If vote count is greater than 0, the user has voted
+                    $response = ['success' => true, 'voted' => true, 'message' => 'User has already voted.'];
+                } else {
+                    // No vote found for this user
+                    $response = ['success' => true, 'voted' => false, 'message' => 'User has not voted yet.'];
+                }
+                $stmt->close();
+            } else {
+                error_log("SQL Error: " . $conn->error);
+                $response = ['success' => false, 'error' => "Database error occurred"];
+            }
+        } else {
+            $response = ['success' => false, 'error' => 'Missing unique ID.'];
+        }
+
+        closeConnectionAndRespond($conn, $response);
+
+    } elseif ($action === 'fetch_overlay_message') {
+        // Logic for fetching the most recent message from the database
+        $sql = "SELECT voting_status FROM voting_countdown ORDER BY countdown_id DESC LIMIT 1;";
+        $result = $conn->query($sql);
+
+        if ($result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+            $response = ['success' => true, 'status' => $row['voting_status']];
+        } else {
+            $response = ['success' => false, 'error' => 'No message found'];
+        }
+        
+        closeConnectionAndRespond($conn, $response);
+    
+    } elseif ($action === 'check_winner') {
+            $unique_id = $_POST['unique_id'] ?? '';
+            $response = ['success' => false, 'display' => false]; // Default response
+    
+            if (!empty($unique_id)) {
+                // Query to check if the unique_id is a winner
+                $sql = "
+                    SELECT a.unique_id 
+                    FROM user_votes uv
+                    JOIN tblaccounts a ON uv.unique_id = a.unique_id
+                    WHERE uv.unique_id = ? AND uv.status = 'Winner'
+                ";
+    
+                if ($stmt = $conn->prepare($sql)) {
+                    $stmt->bind_param('s', $unique_id); // Bind the unique_id
+                    $stmt->execute();
+                    $stmt->store_result();
+    
+                    if ($stmt->num_rows > 0) {
+                        $response['success'] = true;
+                        $response['display'] = true; // If the status is 'Winner', allow display
+                    }
+    
+                    $stmt->close();
+                } else {
+                    error_log("SQL Error: " . $conn->error);
+                    $response = ['success' => false, 'error' => "Database error occurred"];
+                }
+            }
+    
+            closeConnectionAndRespond($conn, $response);
 
     } else {
         $response = ['success' => false, 'error' => 'Invalid request'];

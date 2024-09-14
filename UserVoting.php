@@ -149,7 +149,7 @@ $user_UID = $_SESSION['unique_id'];
                     </div>
                 </div>
                 <div class="MainContainerForTables">
-                    <div class="MainContainerAllOne">
+                    <div class="MainContainerAllOne" id="FirstVotingContainer">
                         <header class="CountsVote">
                             <div class="headerCan">
                                 <h1> Candidates </h1>
@@ -341,11 +341,13 @@ $user_UID = $_SESSION['unique_id'];
                             </div> -->
                         </div>
                         <footer class="footerCandidatesSubmit">
+                            <input type="hidden" id="sessionUniqueId" value="<?php echo $_SESSION['unique_id']; ?>">
+                            <input type="hidden" id="WinnerUniqueId" value="<?php echo $_SESSION['unique_id']; ?>">
                             <button class="buttonSubmitBoto" type="submit" disabled> Submit </button>
                         </footer>
                     </div>
 
-                    <div class="MainContainerAll">
+                    <div class="MainContainerAll" id="SecondVotingContainer">
                         <div class="containerDivssPangalawa">
                         <div class="CandidatesConPangalawa">
                                 <div class="CandiImageContainerPangalawa" id="CandiImage1" name="CandiImage1">

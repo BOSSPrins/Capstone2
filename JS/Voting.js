@@ -743,6 +743,22 @@ function submitForm(event) {
     var form = document.getElementById("candidateForm");
     var formData = new FormData(form);
 
+    var irorDiv = document.getElementById("iror");
+
+    // Check if the "iror" div contains "No results found"
+    if (irorDiv && irorDiv.innerText === "No results found") {
+        irorDiv.innerText = "This resident is not registered";  // Set the error message
+        irorDiv.style.display = "block";
+
+        setTimeout(function() {
+            irorDiv.style.display = "none";
+            document.getElementById("candi_Name").value = ''; // Clear the name input
+            document.getElementById("previewImage").style.display = 'none'; // Hide the image preview
+            document.getElementById("candi_ID").style.display = 'none';
+        }, 5000);
+        return; // Stop the submission if the div shows "No results found"
+    }
+
     var xhr = new XMLHttpRequest();
     xhr.open("POST", "PHPBackend/VotingProcess.php", true);
 
@@ -1035,7 +1051,7 @@ setInterval(fetchTableData, 5000);
 
 
 
-
+// Function sa pagset ng oras ng botohan 
 document.addEventListener("DOMContentLoaded", function() {
     let countdownInterval;
     const startButton = document.getElementById('start');
