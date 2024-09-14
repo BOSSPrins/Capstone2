@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 10, 2024 at 02:09 PM
+-- Generation Time: Sep 14, 2024 at 04:27 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -318,7 +318,7 @@ CREATE TABLE `tblaccounts` (
 --
 
 INSERT INTO `tblaccounts` (`user_id`, `unique_id`, `email`, `password`, `img`, `status`, `role`, `access`) VALUES
-(2, 1589571584, 'admin@gmail.com', '21232f297a57a5a743894a0e4a801fc3', '1715091144pusi.jpg', 'Active now', 'admin', 'Approved'),
+(2, 1589571584, 'admin@gmail.com', '21232f297a57a5a743894a0e4a801fc3', '1715091144pusi.jpg', 'Offline now', 'admin', 'Approved'),
 (4, 1357825271, 'senpai@gmail.com', '1e5db03ce967cfef4e21ada16da09b06', '1715105349271713718_1999144396919159_608519389647854942_n.jpg', 'Offline now', 'user', 'Rejected'),
 (19, 112466338, 'Prins@gmail.com', '0a9e0db6e95c394ee792ecbc6e510791', '1717745936pitikvermo.jpg', 'Pending', 'user', 'Approved'),
 (21, 1017731196, 'tnjrdlcrz@gmail.com', '202cb962ac59075b964b07152d234b70', '1717937589pitikvermo.jpg', 'Pending', 'user', 'Approved'),
@@ -328,7 +328,7 @@ INSERT INTO `tblaccounts` (`user_id`, `unique_id`, `email`, `password`, `img`, `
 (25, 1095492376, 'daadaaw@gmail.com', 'f2a85c6878e7978563609d089ee1173a', 'Mabuhay_Logo.png', 'Pending', 'user', 'Pending'),
 (26, 911851766, 'aSbkghjgsghj@gmail.com', '4e3b9566b4b9abfd8f6671f7b4e423a7', 'Mabuhay_Logo.png', 'Pending', 'user', 'Pending'),
 (27, 509858760, 'Tiklop@gmail.com', '9f4a66a0bac35d6f7f25b5fd931c7abe', 'Mabuhay_Logo.png', 'Pending', 'user', 'Pending'),
-(28, 1581632830, 'wela@gmail.com', 'f9395f741e6f4da0f873c08008ed5760', 'Mabuhay_Logo.png', 'Active now', 'user', 'Approved'),
+(28, 1581632830, 'wela@gmail.com', 'f9395f741e6f4da0f873c08008ed5760', 'Mabuhay_Logo.png', 'Offline now', 'user', 'Approved'),
 (29, 821155870, 'Renz@gmail.com', 'b55dc472db84256de67972b96657e7b9', 'Mabuhay_Logo.png', 'Offline now', 'user', 'Approved'),
 (30, 776313154, 'Pat@gmail.com', '532762fa5a5b7169aa4dd24717ba9df9', 'Mabuhay_Logo.png', 'Offline now', 'user', 'Approved'),
 (31, 1590469844, 'Pao@gmail.com', '1b6203e2e1b7e63e7b3677cdd932001f', 'Mabuhay_Logo.png', 'Offline now', 'user', 'Approved'),
@@ -421,7 +421,7 @@ INSERT INTO `user_votes` (`vote_id`, `unique_id`, `candidate`, `votes`, `status`
 (6, 1308040957, 'John Doe', 9, 'Winner'),
 (7, 931588206, 'Jane Doe', 9, 'Winner'),
 (8, 662462528, 'Hev Alvin', 9, 'Winner'),
-(10, 1434008263, 'Rose Winters', 10, 'Winner'),
+(10, 1434008263, 'Rose Winters', 11, 'Winner'),
 (11, 1195874011, 'Mia Winters', 9, 'Winner');
 
 -- --------------------------------------------------------
@@ -482,8 +482,7 @@ INSERT INTO `voting_countdown` (`countdown_id`, `start_id`, `start_time`, `end_i
 (12, 2773, '2024-09-09T11:35:32.', 2773, '2024-09-08 11:35:00', 'VotingEnded'),
 (13, 8246, '2024-09-09T11:39:57.', 8246, '2024-09-08 11:39:00', 'VotingEnded'),
 (14, 8331, '2024-09-09T11:42:44.', 8331, '2024-09-08 11:42:00', 'VotingEnded'),
-(17, 4525, '2024-09-09T13:45:57.', 4525, '2024-09-09 13:46:00', 'VotingEnded'),
-(32, 7702, '2024-09-10 18:42:18', 7702, '2024-09-10 20:42:00', 'VotingStarted');
+(17, 4525, '2024-09-09T13:45:57.', 4525, '2024-09-09 13:46:00', 'VotingEnded');
 
 -- --------------------------------------------------------
 
@@ -503,35 +502,37 @@ CREATE TABLE `voting_history` (
   `candidate7` int(11) NOT NULL,
   `candidate8` int(11) NOT NULL,
   `candidate9` int(11) NOT NULL,
-  `vote_status` varchar(20) NOT NULL
+  `vote_status` varchar(20) NOT NULL,
+  `access` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `voting_history`
 --
 
-INSERT INTO `voting_history` (`vote_id`, `unique_id`, `candidate1`, `candidate2`, `candidate3`, `candidate4`, `candidate5`, `candidate6`, `candidate7`, `candidate8`, `candidate9`, `vote_status`) VALUES
-(15, 1357825271, 1195874011, 1434008263, 662462528, 499733408, 1308040957, 931588206, 1590469844, 776313154, 1581632830, ''),
-(16, 1357825271, 1195874011, 1434008263, 662462528, 499733408, 1308040957, 931588206, 1590469844, 776313154, 1581632830, ''),
-(17, 1357825271, 1195874011, 1434008263, 662462528, 499733408, 1308040957, 931588206, 1590469844, 776313154, 1581632830, ''),
-(18, 1581632830, 1434008263, 662462528, 499733408, 931588206, 1308040957, 776313154, 1590469844, 1581632830, 821155870, ''),
-(19, 1581632830, 1195874011, 1434008263, 499733408, 931588206, 662462528, 1590469844, 1308040957, 821155870, 776313154, ''),
-(20, 1581632830, 1195874011, 1434008263, 499733408, 931588206, 662462528, 1590469844, 1308040957, 821155870, 776313154, ''),
-(21, 1581632830, 499733408, 1195874011, 0, 0, 0, 0, 0, 0, 0, ''),
-(22, 1581632830, 0, 0, 0, 0, 0, 0, 0, 0, 0, ''),
-(23, 1581632830, 0, 0, 0, 0, 0, 0, 0, 0, 0, ''),
-(24, 1581632830, 499733408, 0, 0, 0, 0, 0, 0, 0, 0, 'UnderVote'),
-(25, 1581632830, 499733408, 1195874011, 662462528, 1434008263, 1308040957, 931588206, 776313154, 1590469844, 1581632830, 'Voted'),
-(26, 1581632830, 499733408, 0, 0, 0, 0, 0, 0, 0, 0, 'UnderVote'),
-(27, 1581632830, 499733408, 1195874011, 662462528, 1434008263, 931588206, 1308040957, 776313154, 1590469844, 821155870, 'Voted'),
-(28, 1581632830, 499733408, 0, 0, 0, 0, 0, 0, 0, 0, 'UnderVote'),
-(29, 1581632830, 499733408, 0, 0, 0, 0, 0, 0, 0, 0, 'UnderVote'),
-(30, 1581632830, 499733408, 0, 0, 0, 0, 0, 0, 0, 0, 'UnderVote'),
-(31, 1581632830, 499733408, 0, 0, 0, 0, 0, 0, 0, 0, 'UnderVote'),
-(32, 1581632830, 499733408, 0, 0, 0, 0, 0, 0, 0, 0, 'UnderVote'),
-(33, 1581632830, 499733408, 0, 0, 0, 0, 0, 0, 0, 0, 'UnderVote'),
-(34, 1581632830, 499733408, 1195874011, 662462528, 1434008263, 931588206, 1308040957, 1590469844, 776313154, 821155870, 'Voted'),
-(35, 1581632830, 1434008263, 0, 0, 0, 0, 0, 0, 0, 0, 'UnderVote');
+INSERT INTO `voting_history` (`vote_id`, `unique_id`, `candidate1`, `candidate2`, `candidate3`, `candidate4`, `candidate5`, `candidate6`, `candidate7`, `candidate8`, `candidate9`, `vote_status`, `access`) VALUES
+(15, 1357825271, 1195874011, 1434008263, 662462528, 499733408, 1308040957, 931588206, 1590469844, 776313154, 1581632830, '', ''),
+(16, 1357825271, 1195874011, 1434008263, 662462528, 499733408, 1308040957, 931588206, 1590469844, 776313154, 1581632830, '', ''),
+(17, 1357825271, 1195874011, 1434008263, 662462528, 499733408, 1308040957, 931588206, 1590469844, 776313154, 1581632830, '', ''),
+(18, 1581632830, 1434008263, 662462528, 499733408, 931588206, 1308040957, 776313154, 1590469844, 1581632830, 821155870, '', ''),
+(19, 1581632830, 1195874011, 1434008263, 499733408, 931588206, 662462528, 1590469844, 1308040957, 821155870, 776313154, '', ''),
+(20, 1581632830, 1195874011, 1434008263, 499733408, 931588206, 662462528, 1590469844, 1308040957, 821155870, 776313154, '', ''),
+(21, 1581632830, 499733408, 1195874011, 0, 0, 0, 0, 0, 0, 0, '', ''),
+(22, 1581632830, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', ''),
+(23, 1581632830, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', ''),
+(24, 1581632830, 499733408, 0, 0, 0, 0, 0, 0, 0, 0, 'UnderVote', ''),
+(25, 1581632830, 499733408, 1195874011, 662462528, 1434008263, 1308040957, 931588206, 776313154, 1590469844, 1581632830, 'Voted', ''),
+(26, 1581632830, 499733408, 0, 0, 0, 0, 0, 0, 0, 0, 'UnderVote', ''),
+(27, 1581632830, 499733408, 1195874011, 662462528, 1434008263, 931588206, 1308040957, 776313154, 1590469844, 821155870, 'Voted', ''),
+(28, 1581632830, 499733408, 0, 0, 0, 0, 0, 0, 0, 0, 'UnderVote', ''),
+(29, 1581632830, 499733408, 0, 0, 0, 0, 0, 0, 0, 0, 'UnderVote', ''),
+(30, 1581632830, 499733408, 0, 0, 0, 0, 0, 0, 0, 0, 'UnderVote', ''),
+(31, 1581632830, 499733408, 0, 0, 0, 0, 0, 0, 0, 0, 'UnderVote', ''),
+(32, 1581632830, 499733408, 0, 0, 0, 0, 0, 0, 0, 0, 'UnderVote', ''),
+(33, 1581632830, 499733408, 0, 0, 0, 0, 0, 0, 0, 0, 'UnderVote', ''),
+(34, 1581632830, 499733408, 1195874011, 662462528, 1434008263, 931588206, 1308040957, 1590469844, 776313154, 821155870, 'Voted', ''),
+(35, 1581632830, 1434008263, 0, 0, 0, 0, 0, 0, 0, 0, 'UnderVote', ''),
+(36, 1581632830, 1434008263, 0, 0, 0, 0, 0, 0, 0, 0, 'UnderVote', '');
 
 --
 -- Indexes for dumped tables
@@ -665,25 +666,25 @@ ALTER TABLE `tblresident`
 -- AUTO_INCREMENT for table `user_votes`
 --
 ALTER TABLE `user_votes`
-  MODIFY `vote_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `vote_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `voting`
 --
 ALTER TABLE `voting`
-  MODIFY `vote_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `vote_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `voting_countdown`
 --
 ALTER TABLE `voting_countdown`
-  MODIFY `countdown_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `countdown_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `voting_history`
 --
 ALTER TABLE `voting_history`
-  MODIFY `vote_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `vote_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
