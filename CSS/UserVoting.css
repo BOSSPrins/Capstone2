@@ -221,7 +221,7 @@ html{
 }
   
 .MainContainerAllOne {
-    /* display: none; */
+    display: none;
     width: 100%;
     padding: 10px;
     background-color: #ffffff;
@@ -230,6 +230,7 @@ html{
     /* padding: 30px 40px; */
     border: 1px solid rgb(179, 172, 172);
     margin: 10px;
+    position: relative;  /* Added this line for the overlay if already voted*/
 }
 
 .MainContainerAll{
