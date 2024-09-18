@@ -1200,7 +1200,7 @@ function checkWinnerStatus() {
         success: function(response) {
             if (response.success && response.display) {
                 // If the user is a winner, show the div
-                document.getElementById('SecondVotingContainer').style.display = 'none';
+                document.getElementById('SecondVotingContainer').style.display = 'block';
             } else {
                 console.log('Not a winner or error in status.');
             }
@@ -1214,7 +1214,6 @@ function checkWinnerStatus() {
 // Call the function when the page loads
 window.onload = function () {
     loadWinners();
-
     // Call fetchOverlayMessage with a callback to conditionally call checkVotingHistory
     fetchOverlayMessage(function(failed) {
         if (failed) {

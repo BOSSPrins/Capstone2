@@ -43,11 +43,11 @@ $user_UID = $_SESSION['unique_id'];
                     <img class="img-logo" src="Pictures/Mabuhay_Logo.png">
                     <h2 class="MabuhayName"> Mabuhay Homes 2000 Phase 5 </h2>
                 </div>
-                <a href="DashBoard.php" class="sideside baractive">
+                <a href="#" class="sideside baractive">
                     <img class="img-sideboard" src="Pictures/Dashboard2.png">
                     <span> Dasboard </span>
                 </a>
-                <a href="Announcement.php" class="sideside">
+                <a href="#" class="sideside">
                     <img class="img-sideboard" src="Pictures/Announcement.png">
                     <span> Announcement </span>
                 </a>
@@ -61,14 +61,14 @@ $user_UID = $_SESSION['unique_id'];
                     </a>  
                     <ul class="subMenuComp" id="complaintsSubMenu">
                         <li> 
-                            <a href="UserChat.php">
+                            <a href="#">
                                 <img class="img-subMenu" src="Pictures/Chat.png">
                                 <label class="sub-spa"> Chat </label>
                             </a> 
                         </li>
                     </ul>
                 </div>
-                <a href="UserPayments.php" class="sideside">
+                <a href="#" class="sideside">
                     <img class="img-sideboard" src="Pictures/MonthlyDue.png">
                     <span> Monthly Due </span>
                 </a>
