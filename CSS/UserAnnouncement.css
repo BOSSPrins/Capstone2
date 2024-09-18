@@ -209,17 +209,17 @@ html{
 /* ========== MAIN DASHBOARD DESIGN ========== */
 .MainBodyContainerr {
   padding-left: 250px;
-  display: flex; 
-  flex-direction: column; 
-  height: 100vh; 
+  display: flex; /* Ensure it uses flexbox to manage layout */
+  flex-direction: column; /* Stack children vertically */
+  height: 100vh; /* Make sure it takes full viewport height */
 }
 
 .MainContainerForTables {
   display: flex;
   justify-content: center;
   width: 100%;
-  flex: 1;
-  overflow: hidden; 
+  flex: 1; /* Allow it to grow and take available space */
+  overflow: hidden; /* Prevent scrollbars here */
 }
 
 .MainContainerAll {
@@ -228,10 +228,12 @@ html{
   background-color: #ffffff;
   border: 1px solid rgb(179, 172, 172);
   margin: 10px;
-  flex: 1; 
-  overflow-y: auto;
+  /* Allow it to expand within the flex container */
+  /* Remove the fixed height to allow dynamic adjustment */
+  flex: 1; /* Allow it to grow and shrink with available space */
+  overflow-y: auto; /* Optional: Add scrollbar if content overflows */
 }
-  
+
   /* DESIGN PARA TO SA HEADER NG SIDEBAR AT SA MAIN */
   .headerTop{
     align-items: center;

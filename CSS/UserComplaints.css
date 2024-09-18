@@ -208,231 +208,28 @@ html{
 
 /* ========== MAIN DASHBOARD DESIGN ========== */
 .MainBodyContainerr{
-  padding-left: 250px;
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
+padding-left: 250px;
+display: flex;
+flex-direction: column;
+height: 100vh;
 }
 
 .MainContainerForTables{
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  flex: 1;
-  overflow: hidden;
+display: flex;
+justify-content: center;
+width: 100%;
+flex: 1;
+overflow: hidden;
 }
 
-.TablessContainer{
-  display: flex;
-  flex-direction: column; /* Stack children vertically */
+.MainContainerAll{
   width: 100%;
-  padding: 10px;
+  padding: 30px 120px;
   background-color: #ffffff;
   border: 1px solid rgb(179, 172, 172);
   margin: 10px;
-  flex: 1; /* Allow it to grow and take available space */
-}
-
-/* DESIGN FOR DROPDOWN */
-.TableHeaderr{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 6px;
-}
-
-.itemsController,
-.searchTablee{
-  display: flex;
-  align-items: center;
-}
-
-.dropdown {
-  position: relative;
-  display: inline-block;
-  cursor: pointer;
-  margin: 0 7px;
-}
-
-.ArrowandPlace{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.selected {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 5px;
-  border: 1px solid #ccc;
-  background-color: #fff;
-  width: 70px;
-  user-select: none;
-  z-index: 1;
-}
-
-.options {
-  display: none;
-  position: absolute;
-  background-color: #fff;
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.1);
-  top: 100%;
-  left: 0;
-  width: 70px;
-  z-index: 1;
-}
-
-.option {
-  text-align: center;
-  padding: 8px;
-  cursor: pointer;
-  border-top: 1px solid #ccc;
-  width: 100%;
-  box-sizing: border-box;
-  z-index: 1;
-}
-
-.open .options {
-  display: block;
-}
-
-.inputSearchhh{
-  padding: 5px;
-  font-size: 16px;
-  width: 300px;
-  margin-left: 5px;
-}
-
-/* DESIGN FOR TABLE */
-.TablesContainer{
-  flex: 1; /* Grow to fill available space */
-  width: 100%;
-  overflow-y: auto; /* Scroll if content overflows */
-}
-
-table{
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 20px;
-}
-
-thead{
-  background: var(--color-primary);
-  color: white;
-}
-
-th{
-  padding: 20px;
-  cursor: pointer;
-  position: relative;
-  font-size: 12px;
-  white-space: nowrap;
-  user-select: none;
-  transition: all linear 0.16s;
-  border: 1px solid rgb(179, 172, 172); /* Outline partition */
-}
-
-table th.asc,
-table th.desc {
-  border-bottom-color: rgb(255, 255, 255);
-}
-
-table th[data-sort]::before,
-table th[data-sort]::after {
-  content: '';
-  position: absolute;
-  height: 0;
-  width: 0;
-  right: 10%;
-  opacity: 0.3;
-  margin-top: 12px;
-  border: 4px solid transparent;
-}
-
-table th[data-sort]::before {
-  top: 6px;
-  border-bottom-color: rgb(255, 255, 255);
-}
-
-table th[data-sort]::after {
-  top: 16px;
-  border-top-color: rgb(255, 255, 255);
-}
-
-table th.asc::before,
-table th.desc::after {
-  opacity: 1;
-}
-
-table td {
-  font-size: 14px;
-  border-bottom: 1px solid #576574;
-  padding: 10px 12px;
-}
-
-td{
-  padding: 5px;
-  border: 1px solid rgb(179, 172, 172); /* Outline partition */
-}
-
-tbody{
-  background: var(--color-white);
-  text-align: center;
-}
-
-td{
-  color: #000000;
-}
-
-tr:nth-child(even){
-  background: var(--color-light);
-}
-
-.ResidentsViewBtn{
-    border-radius: 5px;
-    padding: 0.4rem 2rem;
-    cursor: pointer;
-}
-
-
-/* DESIGN PARA SA PAGINATION */
-.bottom-field{
-  width: 100%;
-  margin-top: 10px;
-}
-.pagination{
-  display: flex;
-  justify-content: end;
-  align-items: center;
-}
-
-.pagination li{
-list-style: none;
-flex-shrink: 0;
-text-align: center;
-border: 1px solid #999;
-color: #000000;
-}
-
-.pagination a.Pageactive{
-  background: #04007a;
-  color: white;
-  border-color: #32d6aa;
-}
-
-.pagination li a{
-text-decoration: none;
-padding: 3px 8px;
-color: inherit;
-display: block;
-font-family: sans-serif;
-font-size: 13px;
-}
-
-.prevv:hover,
-.nextt:hover{
-  background: rgb(182, 182, 182);
+  flex: 1;
+  overflow-y: auto;
 }
 
 /* DESIGN PARA TO SA HEADER NG SIDEBAR AT SA MAIN */
@@ -494,6 +291,7 @@ font-size: 13px;
 .profileBtn{
   padding: 5px 20px;
   margin-right: 5px;
+  cursor: pointer;
 }
 
 .profileBtn label{
@@ -641,177 +439,101 @@ font-size: 13px;
   cursor: pointer;
 }
 
-
-/* DESIGN PARA SA VIEW MODAL */
-.containerNgViewModal{
-  display: none;
-  position: fixed;
-  z-index: 1;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
-}
-
-.subContainerViewModal{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-}
-
-.viewItongmodal{
-  position: relative;
-  max-width: 600px;
-  width: 100%;
-  margin-top: 10px;
-  height: 590px;
-  background: #fff;
-  border-radius: 8px;
-}
-
-.titleHeaderView{
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  /* background: rgb(30, 0, 224);
-  color: white; */
-  /* border-bottom: 1px solid gray; */
-  padding: 20px;
+/* DESIGN PARA SA COMPLAINT */
+.inputUserComps {
+  width: 90%;
+  font-size: 16px;
   border-radius: 5px;
-}
-
-.closeViewModal{
-  color: #000000;
-  font-size: 22px;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.emeeeee{
-  height: 510px;
+  border: 1px solid rgba(62, 65, 71, 0.4);
   padding: 10px;
-  overflow-y: auto;
 }
 
-/* .footerNgViewModal{
-  background: gray;
-  display: flex;
-  justify-content: end;
-  margin: 10px;
+.ComplainUser{
+margin-bottom: 20px;
 }
 
-.AcceptBtn{
-  margin-right: 20px;
-  background: green;
-}
-
-.DecBtn{
-  background: rgb(195, 0, 0);
-}
-
-.ResPindot{
-  font-size: 20px;
-  padding: 10px 30px;
-  color: white;
-  border-radius: 5px;
-} */
-
-.headerModalRow{
-  text-align: center;
-}
-
-.ViewForm .inputboxView{
-  width: 100%;
-}
-
-.ViewForm .inputboxView .inputngViewModalTo{
-  width: 100%;
-  border: 1px solid rgb(203, 214, 220);
-  font-size: 15px;
-  padding: 7px;
-  margin-top: 3px;
-  border-radius: 2px;
-}
-
-.ViewForm .inputboxView label{
-  font-weight: 550;
-  font-size: 14px;
-}
-
-.ViewForm .row{
-  display: flex;
-  column-gap: 15px;
-  margin-top: 10px;
-  margin-bottom: 13px;
-}
-
-select{
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  width: 100%;
-  border: 1px solid rgb(203, 214, 220);
-  font-size: 15px;
-  padding: 8px;
-  margin-top: 3px;
-  border-radius: 2px;
-}
-
-select::-ms-expand{
-  display: none;
-}
-
-hr{
-  border: none;
-  height: 1px;
-  background-color: #8e8e8e;
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
-
-.dropdownFilter {
+.dropdownInput {
+width: 91%;
   position: relative;
   display: inline-block;
 }
 
-.dropdownFiltercontent {
+.dropdownInputField {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid rgba(62, 65, 71, 0.4);
+  cursor: pointer;
+}
+
+.dropdownContentInput {
   display: none;
   position: absolute;
   background-color: #f9f9f9;
-  min-width: 160px;
+  width: 99%;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
-  max-height: 200px; /* Set your desired max-height */
-  overflow-y: auto; /* Enable vertical scroll if content exceeds max-height */
+  border-radius: 5px;
+  top: 100%;
+  left: 0;
 }
 
-.dropdownFilter:hover .dropdownFiltercontent {
-  display: block;
-}
-
-.dropdownFilter label {
-  display: block;
-  padding: 10px 20px;
+.dropdownContentInput div {
+  padding: 12px 16px;
   cursor: pointer;
 }
 
-.dropdownFilter label:hover {
-  background-color: #ddd; /* Change background color on hover */
+.dropdownContentInput div:hover {
+  background-color: #f1f1f1;
 }
 
-.DropFilterInput[type="radio"] {
-  display: none;
-}
-
-.DropFilterInput[type="radio"] + label {
-  display: block;
-  padding: 10px 20px;
+.dropbtnInput {
+  background-color: transparent;
+  border: none;
   cursor: pointer;
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  background: none;
 }
 
-.DropFilterInput[type="radio"]:checked + label {
-  background-color: #f0f0f0; /* Change background color for checked state */
+.arrowDown {
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+.dropdownInput.open .arrowDown {
+  transform: rotate(180deg);
+}
+
+.ComplainUser2, .DescriUser, .ComplainUser3{
+margin-bottom: 20px;
+}
+
+.DescriptUsers{
+resize: none;
+height: 300px;
+width: 100%;
+border-radius: 5px;
+border: 1px solid rgba(62, 65, 71, 0.4);
+margin-top: 10px;
+font-size: medium;
+font-family: Arial;
+padding: 5px;
+}
+
+.footerUserSubmitt{
+display: flex;
+justify-content: end;
+}
+
+.submittUserComp{
+background: rgb(0, 0, 164);
+font-size: 17px;
+padding: 10px 30px;
+color: white;
+border-radius: 5px;
+cursor: pointer;
 }

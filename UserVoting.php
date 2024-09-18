@@ -43,16 +43,16 @@ $user_UID = $_SESSION['unique_id'];
                     <img class="img-logo" src="Pictures/Mabuhay_Logo.png">
                     <h2 class="MabuhayName"> Mabuhay Homes 2000 Phase 5 </h2>
                 </div>
-                <a href="#" class="sideside baractive">
+                <a href="UserDashBoard.php" class="sideside baractive">
                     <img class="img-sideboard" src="Pictures/Dashboard2.png">
                     <span> Dasboard </span>
                 </a>
-                <a href="#" class="sideside">
-                    <img class="img-sideboard" src="Pictures/Announcement.png">
-                    <span> Announcement </span>
+                <a href="UserDocuments.php" class="sideside">
+                    <img class="img-sideboard" src="Pictures/Documents2.png">
+                    <span> Documents </span>
                 </a>
                 <div class="complaintsContainer">
-                    <a href="#" class="sideside" id="complaintsDropdown">
+                    <a href="UserComplaints.php" class="sideside" id="complaintsDropdown">
                         <img class="img-sideboard" src="Pictures/ComplaintsCap.png">
                         <span> Complaints </span>
                         <button class="buttonEme2">
@@ -68,9 +68,9 @@ $user_UID = $_SESSION['unique_id'];
                         </li>
                     </ul>
                 </div>
-                <a href="#" class="sideside">
-                    <img class="img-sideboard" src="Pictures/MonthlyDue.png">
-                    <span> Monthly Due </span>
+                <a href="UserAnnouncement.php" class="sideside">
+                    <img class="img-sideboard" src="Pictures/Announcement.png">
+                    <span> Announcement </span>
                 </a>
                 <a href="UserVoting.php" class="sideside">
                     <img class="img-sideboard" src="Pictures/voting.png">

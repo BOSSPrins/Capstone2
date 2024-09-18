@@ -209,27 +209,31 @@ html{
 /* ========== MAIN DASHBOARD DESIGN ========== */
 .MainBodyContainerr{
     padding-left: 250px;
-    /* margin-top: 57px; */
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
 }
 
 .MainContainerForTables{
     display: flex;
-    /* justify-content: center; */
-    width: 100%;
-    height: 100%;
-    /* background: gray; */
-}
-
-/* .TablessContainer{
-    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    /* width: 100%; */
+    height: 100%; /* Ensure it takes full height */
+    overflow: hidden;
     padding: 10px;
     background-color: #ffffff;
-    height: 620px;
-    overflow:hidden;
-    padding: 30px 40px;
     border: 1px solid rgb(179, 172, 172);
-    margin: 15px;
-} */
+    margin: 0px 10px 5px 10px;
+}
+
+.page-content {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 94.5%; /* Ensure it takes full height */
+    padding: 10px 0px 10px 0px;
+}  
 
 /* DESIGN PARA SA PAGINATION */
 
@@ -478,15 +482,17 @@ html{
 }
 
 /* DESIGN PARA SA VOTING NAVIGATION */
-.NavBarSaLoob{
-    /* background: gray; */
+/* .NavBarSaLoob{
+    background: gray;
     width: 100%;
     margin: 15px;
     height: 90px;
-}
+} */
 
 .VotingNavv{
-    font-size: 0; /* Fixes inline-block gap issue by setting font-size to 0 */
+    margin: 10px 10px 0px 10px;
+    /* background: gray; */
+    font-size: 0;
 }
 
 .VotingNavv a {
@@ -521,28 +527,35 @@ html{
 }
 
 .EachContentsMonth {
-    display: none;
-    height: 100%;
-    background: rgb(255, 255, 255);
-    border: 1px solid gray;
-    padding: 10px;
-    overflow-y: auto;
+    display: flex;
+    flex-direction: column; /* Stack children vertically */
+    width: 100%;
+    height: 99.4%; /* Ensure it takes full height */
+    padding-bottom: 30px;
 }
 
-.ContainerOfEachhh{
+/* .ContainerOfEachhh{
     height: 585px;
-}
+} */
 
-.btnAndTimer{
+/* .btnAndTimer{
     height: 525px;
 }
 
 .btnAndTimerTwo{
     height: 525px;
-}
+} */
 
 /* DESIGN PARA SA LAHAT LAHAT NA NASA LOOB */
-.timerVote{
+.TableHeaderr{
+    display: flex;
+    flex-direction: column;
+    /* justify-content: space-between; */
+    /* align-items: center; */
+    /* margin-bottom: 6px; */
+}
+
+.TimerSaLabas{
     display: flex;
     justify-content: end;
     align-items: center;
@@ -562,10 +575,16 @@ html{
 }
 
 /*DESIGN FOR TABLE RANKING */
+.TableContainerRank{
+    /* padding: 10px; */
+    overflow-y: auto; /* Enable vertical scrolling */
+    flex: 1; /* Allow it to grow and take remaining space */
+}
+
 table{
     width: 100%;
     border-collapse: collapse;
-    margin-top: 15px;
+    /* margin-top: 15px; */
 }
 
 thead{
@@ -619,7 +638,8 @@ td{
     background-color: #f9f9f9;
     width: 300px;
     height: 300px;
-    right: 25px;
+    right: 19px;
+    top: 149px;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 1;
 }
@@ -1120,14 +1140,11 @@ td{
 /* DESIGN PARA SA OFFICIALS DIVS */
 .containerDivss{
     display: grid;
-    padding-left: 10px;
-    padding-right: 10px;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    padding: 10px;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     gap: 1.6rem;
-    padding-bottom: 20px;
-    padding-top: 20px;
-    overflow-y: auto; /* Add this */
-    height: 520px;
+    overflow-y: auto;
+    height: 100%; /* Takes up full height of parent */
 }
 
 .CandidatesCon {
@@ -1138,7 +1155,7 @@ td{
     padding: 10px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
     transition: all 300ms ease;
-    height: 360px;
+    height: 330px;
 }
 
 .CandiImageContainer{
@@ -1147,7 +1164,7 @@ td{
     height: 260px; /* Set a fixed height */
     width: 100%;
     border: 2px rgb(3, 1, 139) solid;
-    overflow: hidden; /* Ensure overflow is hidden to contain images */
+    overflow: auto; /* Ensure overflow is hidden to contain images */
 }
 
 .buttonsNgCandidates{
