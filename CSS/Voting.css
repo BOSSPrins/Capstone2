@@ -531,6 +531,7 @@ html{
     flex-direction: column; /* Stack children vertically */
     width: 100%;
     height: 99.4%; /* Ensure it takes full height */
+    padding-bottom: 30px;
 }
 
 /* .ContainerOfEachhh{
@@ -1139,14 +1140,11 @@ td{
 /* DESIGN PARA SA OFFICIALS DIVS */
 .containerDivss{
     display: grid;
-    padding-left: 10px;
-    padding-right: 10px;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    padding: 10px;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     gap: 1.6rem;
-    padding-bottom: 20px;
-    padding-top: 20px;
-    overflow-y: auto; /* Add this */
-    height: 520px;
+    overflow-y: auto;
+    height: 100%; /* Takes up full height of parent */
 }
 
 .CandidatesCon {
@@ -1157,7 +1155,7 @@ td{
     padding: 10px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
     transition: all 300ms ease;
-    height: 360px;
+    height: 330px;
 }
 
 .CandiImageContainer{
@@ -1166,7 +1164,7 @@ td{
     height: 260px; /* Set a fixed height */
     width: 100%;
     border: 2px rgb(3, 1, 139) solid;
-    overflow: hidden; /* Ensure overflow is hidden to contain images */
+    overflow: auto; /* Ensure overflow is hidden to contain images */
 }
 
 .buttonsNgCandidates{

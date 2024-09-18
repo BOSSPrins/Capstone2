@@ -207,32 +207,33 @@ html{
 }
   
 /* ========== MAIN DASHBOARD DESIGN ========== */
-.MainBodyContainerr{
+.MainBodyContainerr {
   padding-left: 250px;
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
+  display: flex; /* Ensure it uses flexbox to manage layout */
+  flex-direction: column; /* Stack children vertically */
+  height: 100vh; /* Make sure it takes full viewport height */
 }
-  
-.MainContainerForTables{
+
+.MainContainerForTables {
   display: flex;
   justify-content: center;
   width: 100%;
-  flex: 1;
-  overflow: hidden;
+  flex: 1; /* Allow it to grow and take available space */
+  overflow: hidden; /* Prevent scrollbars here */
 }
-  
-.MainContainerAll{
-  display: flex;
-  flex-direction: column; /* Stack children vertically */
+
+.MainContainerAll {
   width: 100%;
   padding: 10px;
   background-color: #ffffff;
   border: 1px solid rgb(179, 172, 172);
   margin: 10px;
-  flex: 1; /* Allow it to grow and take available space */
+  /* Allow it to expand within the flex container */
+  /* Remove the fixed height to allow dynamic adjustment */
+  flex: 1; /* Allow it to grow and shrink with available space */
+  overflow-y: auto; /* Optional: Add scrollbar if content overflows */
 }
-  
+
   /* DESIGN PARA TO SA HEADER NG SIDEBAR AT SA MAIN */
   .headerTop{
     align-items: center;
@@ -439,70 +440,3 @@ html{
     font-size: 17.5px;
     cursor: pointer;
   }
-
-
-  /* DESIGN PARA SA OFFICIALS DIVS */
-.subofficialCards{
-  display: grid;
-  padding: 10px;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-  gap: 1.6rem;
-  overflow-y: auto; 
-  flex: 1; 
-}
-
-.everyConOfficial {
-    display: flex;
-    flex-direction: column;
-    background: var(--color-white);
-    padding: 10px;
-    /* border-radius: var(--color-border-radius); */
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-    transition: all 300ms ease;
-    height: 400px;
-}
-
-.officialLaman{
-    display: flex;
-    justify-content: center;
-    height: 300px; /* Set a fixed height */
-    width: 100%;
-    border: 2px rgb(3, 1, 139) solid;
-    overflow: hidden; /* Ensure overflow is hidden to contain images */
-    margin-bottom: 15px;
-}
-
-.officialLaman img {
-    width: 65%;
-    height: 100%;
-    /* object-fit: cover; Ensure the image fits without stretching */
-}
-
-.LabelUpo{
-    text-align: center;
-  }
-
-.buttonsNgOffi{
-    display: flex;
-    justify-content: space-between;
-}
-
-.inputNgUUpo{
-    border: 2px rgb(3, 1, 139) solid;
-    padding: 5px;
-    font-size: 17px;
-    margin-top: 10px;
-}
-
-.buttonSiv{
-    margin-top: 10px;
-    padding: 5px 30px;
-    font-size: medium;
-    border-radius: 5px;
-    cursor: pointer;
-}
-  
-.inputts{
-    position: absolute;
-    visibility: hidden;
-}

@@ -31,7 +31,7 @@
                     <span> Documents </span>
                 </a>
                 <div class="complaintsContainer">
-                    <a href="Complaints.php" class="sideside" id="complaintsDropdown">
+                    <a href="#" class="sideside" id="complaintsDropdown">
                         <img class="img-sideboard" src="Pictures/ComplaintsCap.png">
                         <span> Complaints </span>
                         <button class="buttonEme2">
@@ -59,7 +59,7 @@
                     <img class="img-sideboard" src="Pictures/MonthlyDue.png">
                     <span> Monthly Due </span>
                 </a>
-                <a href="Voting.php" class="sideside">
+                <a href="MonthlyDue.php" class="sideside">
                     <img class="img-sideboard" src="Pictures/voting.png">
                     <span> Voting </span>
                 </a>

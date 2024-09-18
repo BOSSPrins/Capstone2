@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title> Complaints </title>
-  <link rel="stylesheet" href="CSS/UserComplaints.css">
+  <title> Dashboard </title>
+  <link rel="stylesheet" href="CSS/UserAnnouncement.css">
 </head>
 <body>
 <div class="mainDashboardContainer">
@@ -23,7 +23,7 @@
                     <span> Documents </span>
                 </a>
                 <div class="complaintsContainer">
-                    <a href="UserComplaints.php" class="sideside" id="complaintsDropdown">
+                    <a href="UserComplaints" class="sideside" id="complaintsDropdown">
                         <img class="img-sideboard" src="Pictures/ComplaintsCap.png">
                         <span> Complaints </span>
                         <button class="buttonEme2">
@@ -109,7 +109,7 @@
                             <img id="menuBtn" class="menu" src="Pictures/menu-hamburger.png">
                         </div>
                         <div class="NamesModuleCon">
-                            <h2 class="namePerModule"> Complaints </h2>
+                            <h2 class="namePerModule"> Documents </h2>
                         </div>
                     </div>
                     <div class="ProfileViewww">
@@ -121,40 +121,12 @@
                 </div>
                 <div class="MainContainerForTables">
                     <div class="MainContainerAll">
-                        <div class="ComplainUser">
-                            <label style="font-size: medium; font-weight: bold;">Complainee:</label>
-                            <input class="inputUserComps" type="text">
-                        </div>
-                        <div class="ComplainUser2">
-                            <label style="font-size: medium; font-weight: bold;">Complaint:</label>
-                            <div class="dropdownInput">
-                                <input type="text" id="selectedComplaint" class="dropdownInputField" placeholder="Select Complaint" readonly>
-                                <button class="dropbtnInput">
-                                    <span class="arrowDown">&#9660;</span> <!-- Downward arrow -->
-                                </button>
-                                <div class="dropdownContentInput">
-                                    <div onclick="selectComplaint('Complaint 1')">Complaint 1</div>
-                                    <div onclick="selectComplaint('Complaint 2')">Complaint 2</div>
-                                    <div onclick="selectComplaint('Complaint 3')">Complaint 3</div>
-                                </div>
-                            </div>
-                        </div> 
-                        <div class="DescriUser">
-                            <label style="font-size: medium; font-weight: bold;"> Description: </label>
-                            <textarea class="DescriptUsers"></textarea>
-                        </div>
-                        <div class="ComplainUser3">
-                            <label style="font-size: medium; font-weight: bold;"> Proof:</label>
-                            <input class="inputFile" type="file">
-                        </div>
-                        <footer class="footerUserSubmitt">
-                            <button class="submittUserComp"> Submit </button>
-                        </footer>                      
+                        
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <script src="JS/UserComplaints.js"></script>
+    <script src="JS/UserDocuments.js"></script>
 </body>
 </html>
