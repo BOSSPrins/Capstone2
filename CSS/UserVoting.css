@@ -219,9 +219,10 @@ html{
     height: 100%;
     /* background: gray; */
 }
-  
+
+/*Container ng botohan ng candidates*/
 .MainContainerAllOne {
-    /* display: none; */
+    display: block;
     width: 100%;
     padding: 10px;
     background-color: #ffffff;
@@ -233,6 +234,7 @@ html{
     position: relative;  /* Added this line for the overlay if already voted*/
 }
 
+/*botohan ng mga nanalo na para sa positions*/
 .MainContainerAll{
     display: none;
     width: 100%;
@@ -243,6 +245,7 @@ html{
     /* padding: 30px 40px; */
     border: 1px solid rgb(179, 172, 172);
     margin: 10px;
+    position: relative;
 }
   
 /* DESIGN PARA TO SA HEADER NG SIDEBAR AT SA MAIN */
@@ -321,7 +324,7 @@ html{
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 2;
+    z-index: 4;
     left: 0;
     top: 0;
     width: 100%;
@@ -1053,4 +1056,33 @@ html{
 .AcceptBtn{
     padding: 10px 20px;
     cursor: pointer;
+}
+
+/* Overlay kapag tapos na botohan */
+.Overlay{
+    position: fixed;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    left: 30;
+    top: 50px;
+    width: 90%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.overlay-content {
+    text-align: center;
+    color: white;
+}
+
+.overlay-content img {
+    max-width: 50%; /* Adjust size as needed */
+    margin-bottom: 20px;
+}
+
+.overlay-content p {
+    font-size: 25px;
+    color: white;
 }

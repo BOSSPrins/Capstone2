@@ -48,7 +48,7 @@ if (isset($_SESSION['unique_id'])) {
                     <span> Documents </span>
                 </a>
                 <div class="complaintsContainer">
-                    <a href="#" class="sideside" id="complaintsDropdown">
+                    <a href="Complaints.php" class="sideside" id="complaintsDropdown">
                         <img class="img-sideboard" src="Pictures/ComplaintsCap.png">
                         <span> Complaints </span>
                         <button class="buttonEme2">
@@ -72,10 +72,10 @@ if (isset($_SESSION['unique_id'])) {
                     <img class="img-sideboard" src="Pictures/Accounts2.png">
                     <span> Accounts </span>
                 </a>
-                <a href="Payments.php" class="sideside">
+                <!-- <a href="Payments.php" class="sideside">
                     <img class="img-sideboard" src="Pictures/MonthlyDue.png">
                     <span> Monthly Due </span>
-                </a>
+                </a> -->
                 <a href="Voting.php" class="sideside">
                     <img class="img-sideboard" src="Pictures/voting.png">
                     <span> Voting </span>
@@ -164,9 +164,14 @@ if (isset($_SESSION['unique_id'])) {
                             <header class="TableHeaderr">
                                 <div class="timerVote">
                                     <div class="TimerSaLabas">
+
+                                    <input type="hidden" id="timestamp" name="timestamp">
+
                                         <h2> Timer: </h2>
-                                        <span class="spanNumberTime" id="hours">00:</span>
-                                        <span class="spanNumberTime" id="minutes">00:</span> 
+                                        <span class="spanNumberTime" id="hours">00</span>
+                                        <span class="colon">:</span>
+                                        <span class="spanNumberTime" id="minutes">00</span> 
+                                        <span class="colon">:</span>
                                         <span class="spanNumberTime" id="seconds">00</span>
                                         <div class="dropDownforSetTimer">
                                             <button onclick="toggleSetTimer()" class="dropSetTimer"> 
@@ -502,6 +507,7 @@ if (isset($_SESSION['unique_id'])) {
                                         </div>
 
                                         <footer class="AddingNewCandi">
+                                            <input type="hidden" id="timestamp2" name="timestamp2">
                                             <div class="iror" id="iror"></div>
                                             <div class="sakses" id="sakses"></div>
                                             <button type="button addCandi" onclick="submitForm(event)"> Add </button>

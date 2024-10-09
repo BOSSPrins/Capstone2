@@ -1,10 +1,27 @@
+<?php
+include_once "Connect/Connection.php";
+session_start();
+
+if (isset($_SESSION['unique_id'])) {
+    if ($_SESSION['role'] == 'user') {
+        header("Location: LoginPage.php");
+        exit();
+    }
+    } else {
+    header("Location: LoginPage.php");
+    exit();
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title> Complaints </title>
-  <link rel="stylesheet" href="CSS/Complaints.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Mabuhay Website </title>
+    <link rel="icon" type="image/x-icon" href="Pictures/Mabuhay_Logo.ico">
+    <link rel="stylesheet" href="CSS/Complaints.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
 <div class="mainDashboardContainer">
@@ -31,7 +48,7 @@
                     <span> Documents </span>
                 </a>
                 <div class="complaintsContainer">
-                    <a href="#" class="sideside" id="complaintsDropdown">
+                    <a href="Complaints.php" class="sideside" id="complaintsDropdown">
                         <img class="img-sideboard" src="Pictures/ComplaintsCap.png">
                         <span> Complaints </span>
                         <button class="buttonEme2">
@@ -40,7 +57,7 @@
                     </a>  
                     <ul class="subMenuComp" id="complaintsSubMenu">
                         <li> 
-                            <a href="Chat.php">
+                            <a href="MainChat.php">
                                 <img class="img-subMenu" src="Pictures/Chat.png">
                                 <label class="sub-spa"> Chat </label>
                             </a> 
@@ -55,15 +72,15 @@
                     <img class="img-sideboard" src="Pictures/Accounts2.png">
                     <span> Accounts </span>
                 </a>
-                <a href="MonthlyDue.php" class="sideside">
+                <!-- <a href="MonthlyDue.php" class="sideside">
                     <img class="img-sideboard" src="Pictures/MonthlyDue.png">
                     <span> Monthly Due </span>
-                </a>
-                <a href="MonthlyDue.php" class="sideside">
+                </a> -->
+                <a href="Voting.php" class="sideside">
                     <img class="img-sideboard" src="Pictures/voting.png">
                     <span> Voting </span>
                 </a>
-                <a href="#" class="sideside">
+                <a href="Logout.php" class="sideside">
                     <img class="img-sideboard" src="Pictures/logout.png">
                     <span> Logout </span>
                 </a>
@@ -169,10 +186,10 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td> Ruella </td>
+                                        <!-- <td> Ruella </td>
                                         <td> Blk 22 Lot 48 </td>
                                         <td> Neighbor </td>
-                                        <td>
+                                        <td> -->
                                             <!-- <button> 
                                                 <span> &#x2714; </span>
                                             </button>

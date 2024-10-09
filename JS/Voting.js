@@ -665,7 +665,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 function fetchCandidates() {
     var xhr = new XMLHttpRequest();
-    xhr.open("GET", "PHPBackend/VotingProcess.php", true);
+    xhr.open("GET", "PHPBackend/VotingProcess.php?action=fetchVotes", true);
     xhr.onload = function() {
         if (xhr.status >= 200 && xhr.status < 300) {
             try {
@@ -737,9 +737,12 @@ function addCandidateToGeneratedDiv(candidate) {
 
 document.getElementById("candidateForm").onsubmit = submitForm;
 
+// Function sa pag insert na ng bagong candidate sa database
 function submitForm(event) {
     event.preventDefault();
     
+    document.getElementById("timestamp2").value = formatDate(new Date());
+
     var form = document.getElementById("candidateForm");
     var formData = new FormData(form);
 
@@ -995,7 +998,7 @@ document.addEventListener('DOMContentLoaded', function() {
 function fetchTableData() {
     console.log('Fetching table data...');
     var xhr = new XMLHttpRequest();
-    xhr.open('GET', 'PHPBackend/VotingProcess.php?votes=true', true); // Include the 'votes' parameter to fetch by votes
+    xhr.open('GET', 'PHPBackend/VotingProcess.php?action=fetchTable', true); // Fetch by votes
     xhr.onreadystatechange = function() {
         if (xhr.readyState === XMLHttpRequest.DONE) {
             console.log('XHR ReadyState:', xhr.readyState);
@@ -1003,23 +1006,28 @@ function fetchTableData() {
             if (xhr.status === 200) {
                 console.log('Response received:', xhr.responseText);
                 var response = JSON.parse(xhr.responseText);
+                
                 if (response.success) {
                     console.log('Response candidates:', response.candidates);
                     var tableBody = document.querySelector('.TableContainerRank tbody');
                     tableBody.innerHTML = ''; // Clear existing rows
 
-                    // Check if the candidates data is available
                     if (response.candidates && response.candidates.length > 0) {
                         response.candidates.forEach(function(candidate, index) {
-                            console.log('Candidate:', candidate); // Debugging candidate data
-                            var votesCount = parseInt(candidate.votes_count, 10); // Convert votes_count to integer
-                            // Check if votesCount is a valid number
+                            // Ensure we're accessing the correct properties from the response
+                            var candidateName = candidate.candidate;  // Use the 'candidate' field from the table
+                            var votesCount = parseInt(candidate.votes_count, 10); // Use 'votes_count' field
+
                             if (isNaN(votesCount)) {
-                                votesCount = 0; // Set to 0 if NaN
+                                votesCount = 0;
                                 console.error('Invalid votes_count:', candidate.votes_count);
                             }
+
                             var tr = document.createElement('tr');
-                            tr.innerHTML = '<td>' + (index + 1) + '</td><td>' + candidate.candidate + '</td><td>' + votesCount + '</td>';
+                            tr.innerHTML = `
+                                <td>${index + 1}</td>
+                                <td>${candidateName}</td>
+                                <td>${votesCount}</td>`;
                             tableBody.appendChild(tr);
                         });
                     } else {
@@ -1028,7 +1036,7 @@ function fetchTableData() {
                         tableBody.appendChild(tr);
                     }
                 } else {
-                    console.log('Error:', response.error);
+                    console.error('Error in response:', response.error);
                 }
             } else {
                 console.error('Request failed with status:', xhr.status);
@@ -1037,6 +1045,7 @@ function fetchTableData() {
     };
     xhr.send();
 }
+
 
 // Fetch data initially
 fetchTableData();
@@ -1141,6 +1150,10 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Declare winners
     function declareWinners() {
+
+        document.getElementById("timestamp").textContent = formatDate(new Date());
+        var timestamp = document.getElementById("timestamp").textContent;
+
         var xhrDeclareWinners = new XMLHttpRequest();
         xhrDeclareWinners.open("POST", "PHPBackend/DeclareWinner.php", true);
         xhrDeclareWinners.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
@@ -1154,6 +1167,7 @@ document.addEventListener("DOMContentLoaded", function() {
                         if (response.success) {
                             alert("Winners declared successfully.");
                             console.log("Winners declared successfully.");
+                            location.reload();
                         } else {
                             console.error("Failed to declare winners: ", response.error);
                         }
@@ -1166,7 +1180,7 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         };
 
-        xhrDeclareWinners.send("action=declare_winner");
+        xhrDeclareWinners.send("action=declare_winner&timestamp=" + encodeURIComponent(timestamp));
     }
 
     // Update countdown display
@@ -1261,10 +1275,10 @@ document.addEventListener("DOMContentLoaded", function() {
     }
     
 
-    // Fetch start and end times on page load
-    window.onload = function() {
-        fetchTimes(); // This will run fetchTimes when the window has fully loaded.
-    };
+    window.addEventListener("load", function() {
+        fetchTimes();
+    });
+
 
     // Variable to track if the countdown is paused
     let isPaused = false;
@@ -1354,14 +1368,39 @@ document.addEventListener("DOMContentLoaded", function() {
 
         // Trigger the deletion of voting status
         resetVotingStatus();
+        location.reload();
     });
 });
 
 
+// Timestamp ng add candidate
+
+function formatDate(now) {
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, '0'); // Add leading zero
+    const day = String(now.getDate()).padStart(2, '0');
+    const hours = String(now.getHours()).padStart(2, '0'); // 24-hour format
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+    const seconds = String(now.getSeconds()).padStart(2, '0');
+
+    return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+}
+
+function updateTimestamp() {
+    const now = new Date();
+    const formattedDate = formatDate(now);
+
+    document.getElementById('timestamp').value = formattedDate;
+    document.getElementById('timestamp2').value = formattedDate;
+}
+
+// Optionally update the timestamp every second
+setInterval(updateTimestamp, 1000);
 
 
-
-
+window.addEventListener("load", function() {
+    updateTimestamp();
+});
 
 
 

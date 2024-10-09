@@ -73,3 +73,46 @@ function selectComplaint(value) {
     dropdown.querySelector('.dropdownContentInput').style.display = 'none';
 }
 
+// Function ng submit ng complaint
+document.getElementById('Submit').addEventListener('click', function(event) {
+    event.preventDefault(); // Prevent form submission or page reload
+
+    // Get values from inputs
+    const complainee = document.getElementById('Complainee').value;
+    const complaint = document.getElementById('selectedComplaint').value;
+    const description = document.getElementById('Description').value;
+    const proof = document.getElementById('Proof').files[0]; // Get file input
+
+    // Extract just the file name (if a file is selected)
+    let proofFileName = proof ? proof.name : null;
+
+    // Prepare the data to be sent via AJAX
+    let formData = new FormData();
+    formData.append('complainee', complainee);
+    formData.append('complaint', complaint);
+    formData.append('description', description);
+    formData.append('proof', proofFileName); // Send the file name
+
+    // Create an XMLHttpRequest object
+    let xhr = new XMLHttpRequest();
+    
+    // Open the request
+    xhr.open('POST', 'PHPBackend/Complaint.php', true);
+
+    // Set up a function to handle the response
+    xhr.onload = function() {
+        if (xhr.status === 200) {
+            // Success response from PHP
+            console.log(xhr.responseText);
+            alert('Complaint submitted successfully!');
+        } else {
+            // Error response
+            console.error('Error: ' + xhr.status);
+            alert('There was an issue submitting the complaint.');
+        }
+    };
+
+    // Send the request with the form data
+    xhr.send(formData);
+});
+

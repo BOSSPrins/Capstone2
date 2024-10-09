@@ -3,7 +3,6 @@ include "Connect/Connection.php";
 session_start();
 
 if(isset($_SESSION['unique_id'])){
-    // Perform logout actions
     // Redirect to login page only if the user is not already on the login page
     if(basename($_SERVER['PHP_SELF']) !== 'LoginPage.php') {
         header("Location: LoginPage.php");

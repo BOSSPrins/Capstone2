@@ -11,6 +11,15 @@ if (isset($_SESSION['unique_id'])) {
     header("Location: LoginPage.php");
     exit();
     }
+
+$admin_unique_id = ''; // Default value if no admin found
+$admin_sql = mysqli_query($conn, "SELECT unique_id FROM tblaccounts WHERE role = 'admin' LIMIT 1");
+if ($admin_sql && mysqli_num_rows($admin_sql) > 0) {
+    $admin_row = mysqli_fetch_assoc($admin_sql);
+    $admin_unique_id = $admin_row['unique_id'];
+}
+$encoded_id = urlencode($admin_unique_id);
+
 $user_UID = $_SESSION['unique_id'];
 
 
@@ -61,7 +70,7 @@ $user_UID = $_SESSION['unique_id'];
                     </a>  
                     <ul class="subMenuComp" id="complaintsSubMenu">
                         <li> 
-                            <a href="#">
+                            <a href="UserChat.php?user_id=<?php echo $encoded_id?>">
                                 <img class="img-subMenu" src="Pictures/Chat.png">
                                 <label class="sub-spa"> Chat </label>
                             </a> 
@@ -342,7 +351,7 @@ $user_UID = $_SESSION['unique_id'];
                         </div>
                         <footer class="footerCandidatesSubmit">
                             <input type="hidden" id="sessionUniqueId" value="<?php echo $_SESSION['unique_id']; ?>">
-                            <input type="hidden" id="WinnerUniqueId" value="<?php echo $_SESSION['unique_id']; ?>">
+                            <input type="hidden" id="WinnerUniqueId" value="<?php echo $_SESSION['unique_id']; ?>">                           
                             <button class="buttonSubmitBoto" type="submit" disabled> Submit </button>
                         </footer>
                     </div>
@@ -594,6 +603,7 @@ $user_UID = $_SESSION['unique_id'];
                         </div> 
                         <footer class="footerCandidatesSubmit2">
                             <button class="buttonSubmitBoto2" type="submit" disabled> Submit </button>
+                            <input type="text" id="newCandiPositions" value="<?php echo $user_UID ?>" hidden>
                         </footer>
                     </div>
                 </div>
@@ -699,6 +709,7 @@ $user_UID = $_SESSION['unique_id'];
                                 <footer class="UsersFooterSummary">
                                     <input type="hidden" name="user_ID" id="user_ID" value="<?php echo $user_UID ?>">
                                     <input type="hidden" name="underVote" id="underVote">
+                                    <div class="timestamp" id="timestamp1" hidden></div>
                                     <button type="submit" class="btnSubmitNaSaAdmin" id="submitVoteButton" name="submitVoteButton"> Submit </button>
                                 </footer>
                             </div>
@@ -719,7 +730,8 @@ $user_UID = $_SESSION['unique_id'];
                                     <div class="PictureCan1Two" id="PresImg"> </div>
                                     <div class="NameAndPositionTwo">
                                         <input class="inputCanTwo" type="text" id="PresName">
-                                        <input class="inputCanTwo" type="text" id="PresUID">
+                                        <input class="inputCanTwo" type="text" id="PresUID" hidden>
+                                        <input class="inputCanTwo" type="text" id="PresValue" value="President" hidden>
                                         <label> PRESIDENT </label>
                                     </div>
                                 </div>
@@ -728,7 +740,8 @@ $user_UID = $_SESSION['unique_id'];
                                     <div class="PictureCan1Two" id="VpresImg"> </div>
                                     <div class="NameAndPositionTwo">
                                         <input class="inputCanTwo" type="text" id="VpresName">
-                                        <input class="inputCanTwo" type="text" id="VpresUID">
+                                        <input class="inputCanTwo" type="text" id="VpresUID" hidden>
+                                        <input class="inputCanTwo" type="text" id="VpresValue" value="VicePresident" hidden>
                                         <label> VICE PRESIDENT </label>
                                     </div>
                                 </div>
@@ -737,7 +750,8 @@ $user_UID = $_SESSION['unique_id'];
                                     <div class="PictureCan1Two" id="SecImg"> </div>
                                     <div class="NameAndPositionTwo">
                                         <input class="inputCanTwo" type="text" id="SecName">
-                                        <input class="inputCanTwo" type="text" id="SecUID">
+                                        <input class="inputCanTwo" type="text" id="SecUID" hidden>
+                                        <input class="inputCanTwo" type="text" id="SecValue" value="Secretary" hidden>
                                         <label> SECRETARY </label>
                                     </div>
                                 </div>
@@ -746,7 +760,8 @@ $user_UID = $_SESSION['unique_id'];
                                     <div class="PictureCan1Two" id="TreaImg"> </div>
                                     <div class="NameAndPositionTwo">
                                         <input class="inputCanTwo" type="text" id="TreaName">
-                                        <input class="inputCanTwo" type="text" id="TreaUID">
+                                        <input class="inputCanTwo" type="text" id="TreaUID" hidden>
+                                        <input class="inputCanTwo" type="text" id="TreaValue" value="Treasurer" hidden>
                                         <label> TREASURER </label>
                                     </div>
                                 </div>
@@ -755,7 +770,8 @@ $user_UID = $_SESSION['unique_id'];
                                     <div class="PictureCan1Two" id="AudImg"> </div>
                                     <div class="NameAndPositionTwo">
                                         <input class="inputCanTwo" type="text" id="AudName">
-                                        <input class="inputCanTwo" type="text" id="AudUID">
+                                        <input class="inputCanTwo" type="text" id="AudUID" hidden>
+                                        <input class="inputCanTwo" type="text" id="AudValue" value="Auditor" hidden>
                                         <label> AUDITOR </label>
                                     </div>
                                 </div>
@@ -764,7 +780,8 @@ $user_UID = $_SESSION['unique_id'];
                                     <div class="PictureCan1Two" id="PioImg"> </div>
                                     <div class="NameAndPositionTwo">
                                         <input class="inputCanTwo" type="text" id="PioName">
-                                        <input class="inputCanTwo" type="text" id="PioUID">
+                                        <input class="inputCanTwo" type="text" id="PioUID" hidden>
+                                        <input class="inputCanTwo" type="text" id="PioValue" value="PeaceInOrder" hidden>
                                         <label> PEACE IN ORDER </label>
                                     </div>
                                 </div>
@@ -773,7 +790,8 @@ $user_UID = $_SESSION['unique_id'];
                                     <div class="PictureCan1Two" id="Dir1Img"> </div>
                                     <div class="NameAndPositionTwo">
                                         <input class="inputCanTwo" type="text" id="Dir1Name">
-                                        <input class="inputCanTwo" type="text" id="Dir1UID">
+                                        <input class="inputCanTwo" type="text" id="Dir1UID" hidden>
+                                        <input class="inputCanTwo" type="text" id="Dir1Value" value="Director1" hidden>
                                         <label> DIRECTOR </label>
                                     </div>
                                 </div>
@@ -782,7 +800,8 @@ $user_UID = $_SESSION['unique_id'];
                                     <div class="PictureCan1Two" id="Dir2Img"> </div>
                                     <div class="NameAndPositionTwo">
                                         <input class="inputCanTwo" type="text" id="Dir2Name">
-                                        <input class="inputCanTwo" type="text" id="Dir2UID">
+                                        <input class="inputCanTwo" type="text" id="Dir2UID" hidden>
+                                        <input class="inputCanTwo" type="text" id="Dir2Value" value="Director2" hidden>
                                         <label> DIRECTOR </label>
                                     </div>
                                 </div>
@@ -791,13 +810,16 @@ $user_UID = $_SESSION['unique_id'];
                                     <div class="PictureCan1Two" id="Dir3Img"> </div>
                                     <div class="NameAndPositionTwo">
                                         <input class="inputCanTwo" type="text" id="Dir3Name">
-                                        <input class="inputCanTwo" type="text" id="Dir3UID">
+                                        <input class="inputCanTwo" type="text" id="Dir3UID" hidden>
+                                        <input class="inputCanTwo" type="text" id="Dir3Value" value="Director3" hidden>
                                         <label> DIRECTOR </label>
                                     </div>
                                 </div>
                             </div>
                             <footer class="footerSummaryTwo">
-                                <button class="AcceptBtn"> Accept </button>
+                                <input type="hidden" id="timestamp2" name="timestamp2">
+                                <input type="text" id="WinnerUID" value="<?php echo $user_UID ?>" hidden>
+                                <button class="AcceptBtn" id="submitPositionBTN"> Accept </button>                              
                             </footer>
                         </div>
                         </form>
@@ -826,6 +848,12 @@ $user_UID = $_SESSION['unique_id'];
                             <input class="refNumber" type="text" value="<?php echo $user_UID ?>">
                             <button class="OkInSuccess OkieNaPo"> Ok </button>
                         </div>
+                    </div>
+                </div>
+                <div class="Overlay" id="Overlay">
+                    <div class="overlay-content">
+                        <img src="Pictures/Mabuhay_Logo.png" alt="Logo">
+                        <p>Voting Ended!</p>
                     </div>
                 </div>
             </div>

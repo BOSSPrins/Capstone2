@@ -49,7 +49,7 @@ if (isset($_SESSION['unique_id'])) {
                     <span> Documents </span>
                 </a>
                 <div class="complaintsContainer">
-                    <a href="#" class="sideside" id="complaintsDropdown">
+                    <a href="Complaints.php" class="sideside" id="complaintsDropdown">
                         <img class="img-sideboard" src="Pictures/ComplaintsCap.png">
                         <span> Complaints </span>
                         <button class="buttonEme2">
@@ -58,7 +58,7 @@ if (isset($_SESSION['unique_id'])) {
                     </a>  
                     <ul class="subMenuComp" id="complaintsSubMenu">
                         <li> 
-                            <a href="Chat.php">
+                            <a href="MainChat.php">
                                 <img class="img-subMenu" src="Pictures/Chat.png">
                                 <label class="sub-spa"> Chat </label>
                             </a> 
@@ -73,10 +73,10 @@ if (isset($_SESSION['unique_id'])) {
                     <img class="img-sideboard" src="Pictures/Accounts2.png">
                     <span> Accounts </span>
                 </a>
-                <a href="MonthlyDue.php" class="sideside">
+                <!-- <a href="MonthlyDue.php" class="sideside">
                     <img class="img-sideboard" src="Pictures/MonthlyDue.png">
                     <span> Monthly Due </span>
-                </a>
+                </a> -->
                 <a href="Voting.php" class="sideside">
                     <img class="img-sideboard" src="Pictures/voting.png">
                     <span> Voting </span>

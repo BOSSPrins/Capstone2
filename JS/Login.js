@@ -74,7 +74,7 @@ document.addEventListener("DOMContentLoaded", () => {
         xhr.send(formData);
       };
     }
-  });
+});
 
 
 //   function fetchAccountsData() {

@@ -227,3 +227,65 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+
+// Function sa paglagay ng data sa table
+function fetchComplaints() {
+    // Create an AJAX request
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', 'PHPBackend/Complaint.php?action=fetch_complaints', true); // Add action parameter
+
+    xhr.onload = function () {
+        if (this.status == 200) {
+            var response = JSON.parse(this.responseText);
+            
+            // Check if data fetch was successful
+            if (response.success) {
+                // Get the tbody element
+                var tbody = document.querySelector("table tbody");
+                tbody.innerHTML = ''; // Clear the current contents
+                
+                // Loop through the response data and insert rows into the table
+                response.data.forEach(function (item) {
+                    var tr = document.createElement("tr");
+
+                    // Complainee Name
+                    var complaineeTd = document.createElement("td");
+                    complaineeTd.textContent = item.complainee;
+                    tr.appendChild(complaineeTd);
+
+                    // Address (if available, modify accordingly)
+                    var addressTd = document.createElement("td");
+                    addressTd.textContent = "N/A";  // Placeholder for the address
+                    tr.appendChild(addressTd);
+
+                    // Complaint
+                    var complaintTd = document.createElement("td");
+                    complaintTd.textContent = item.complaint;
+                    tr.appendChild(complaintTd);
+
+                    // Action buttons
+                    var actionTd = document.createElement("td");
+                    var viewButton = document.createElement("button");
+                    viewButton.textContent = "View";
+                    viewButton.className = "ViewBtnCom";
+                    actionTd.appendChild(viewButton);
+                    tr.appendChild(actionTd);
+
+                    // Append the row to the table body
+                    tbody.appendChild(tr);
+                });
+            } else {
+                alert(response.error);
+            }
+        }
+    };
+
+    xhr.onerror = function () {
+        console.error('Error making the request.');
+    };
+
+    xhr.send();
+}
+
+// Call fetchComplaints when the page loads
+document.addEventListener("DOMContentLoaded", fetchComplaints);

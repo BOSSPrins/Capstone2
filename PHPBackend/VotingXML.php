@@ -13,7 +13,7 @@ $conn = connection();
 $sql = "SELECT v.candidate_name, v.img, v.unique_id
         FROM voting v
         INNER JOIN user_votes uv ON v.unique_id = uv.unique_id
-        WHERE uv.status = 'Winner'
+        WHERE uv.status = 'Winner' AND uv.won_date IS NOT NULL AND uv.won_date != ''
         ORDER BY uv.votes DESC
         LIMIT 9";
 

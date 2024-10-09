@@ -1,17 +1,42 @@
+<?php 
+include_once "Connect/Connection.php";
+session_start();
+
+if (isset($_SESSION['unique_id'])) {
+    if ($_SESSION['role'] == 'admin') {
+        header("Location: LoginPage.php");
+        exit();
+    }
+    } else {
+    header("Location: LoginPage.php");
+    exit();
+    }
+
+$admin_unique_id = ''; // Default value if no admin found
+$admin_sql = mysqli_query($conn, "SELECT unique_id FROM tblaccounts WHERE role = 'admin' LIMIT 1");
+if ($admin_sql && mysqli_num_rows($admin_sql) > 0) {
+    $admin_row = mysqli_fetch_assoc($admin_sql);
+    $admin_unique_id = $admin_row['unique_id'];
+}
+$encoded_id = urlencode($admin_unique_id);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title> Complaints </title>
-  <link rel="stylesheet" href="CSS/UserComplaints.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Mabuhay Website </title>
+    <link rel="icon" type="image/x-icon" href="Pictures/Mabuhay_Logo.ico">
+    <link rel="stylesheet" href="CSS/UserComplaints.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
 <div class="mainDashboardContainer">
         <div class="secMainDash">
             <div class="sidebarContainer sideActive" id="sidebar">
                 <div class="headerTop">
-                    <img class="img-logo" src="Pictures/Dasma_City_Logo.png">
+                    <img class="img-logo" src="Pictures/Mabuhay_Logo.png">
                     <h2 class="MabuhayName"> Mabuhay Homes 2000 Phase 5 </h2>
                 </div>
                 <a href="UserDashBoard.php" class="sideside baractive">
@@ -32,7 +57,7 @@
                     </a>  
                     <ul class="subMenuComp" id="complaintsSubMenu">
                         <li> 
-                            <a href="UserChat.php">
+                            <a href="UserChat.php?user_id=<?php echo $encoded_id?>">
                                 <img class="img-subMenu" src="Pictures/Chat.png">
                                 <label class="sub-spa"> Chat </label>
                             </a> 
@@ -47,7 +72,7 @@
                     <img class="img-sideboard" src="Pictures/voting.png">
                     <span> Voting </span>
                 </a>
-                <a href="#" class="sideside">
+                <a href="Logout.php" class="sideside">
                     <img class="img-sideboard" src="Pictures/logout.png">
                     <span> Logout </span>
                 </a>
@@ -123,7 +148,7 @@
                     <div class="MainContainerAll">
                         <div class="ComplainUser">
                             <label style="font-size: medium; font-weight: bold;">Complainee:</label>
-                            <input class="inputUserComps" type="text">
+                            <input class="inputUserComps" type="text" id="Complainee">
                         </div>
                         <div class="ComplainUser2">
                             <label style="font-size: medium; font-weight: bold;">Complaint:</label>
@@ -133,22 +158,22 @@
                                     <span class="arrowDown">&#9660;</span> <!-- Downward arrow -->
                                 </button>
                                 <div class="dropdownContentInput">
-                                    <div onclick="selectComplaint('Complaint 1')">Complaint 1</div>
-                                    <div onclick="selectComplaint('Complaint 2')">Complaint 2</div>
-                                    <div onclick="selectComplaint('Complaint 3')">Complaint 3</div>
+                                    <div onclick="selectComplaint('Broken Streetlight')">Broken Streetlight</div>
+                                    <div onclick="selectComplaint('Blocking the Driveway')">Blocking the Driveway</div>
+                                    <div onclick="selectComplaint('Noise Complaint')">Noise Complaint</div>
                                 </div>
                             </div>
                         </div> 
                         <div class="DescriUser">
                             <label style="font-size: medium; font-weight: bold;"> Description: </label>
-                            <textarea class="DescriptUsers"></textarea>
+                            <textarea class="DescriptUsers" id="Description"></textarea>
                         </div>
                         <div class="ComplainUser3">
                             <label style="font-size: medium; font-weight: bold;"> Proof:</label>
-                            <input class="inputFile" type="file">
+                            <input class="inputFile" type="file" id="Proof">
                         </div>
                         <footer class="footerUserSubmitt">
-                            <button class="submittUserComp"> Submit </button>
+                            <button class="submittUserComp" id="Submit"> Submit </button>
                         </footer>                      
                     </div>
                 </div>

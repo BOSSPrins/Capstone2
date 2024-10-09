@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 14, 2024 at 04:27 PM
+-- Generation Time: Oct 09, 2024 at 10:02 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -59,6 +59,29 @@ INSERT INTO `announcements` (`news_id`, `title`, `context`, `start_date`, `start
 (37, 'EETO NA', 'ufvuyfkuvghb', '2024-05-23', '08:38', '2024-05-23', '07:38', 'Calcu.png,arle.png,arle.png,Calcu.png'),
 (39, 'testingi', 'tye', '2024-05-23', '16:16', '2024-05-24', '16:16', ''),
 (40, 'BAGO TO ', 'kiss mo ko ', '2024-06-02', '02:05', '2024-06-03', '04:05', 'vermo1.jpg,vermo2.jpg,pusi.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `complaints`
+--
+
+CREATE TABLE `complaints` (
+  `complaint_id` int(11) NOT NULL,
+  `complainee` varchar(50) NOT NULL,
+  `complaint` varchar(50) NOT NULL,
+  `description` text NOT NULL,
+  `proof` varchar(255) NOT NULL,
+  `filed_date` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `complaints`
+--
+
+INSERT INTO `complaints` (`complaint_id`, `complainee`, `complaint`, `description`, `proof`, `filed_date`) VALUES
+(1, 'Raul', 'Blocking the Driveway', 'Laging nakaharang yung kotse nya sa gate ko', 'bossing.jpg', '2024-09-19 12:07:15'),
+(2, 'Raul', 'Blocking the Driveway', 'Laging nakaharang yung kotse nya sa gate ko', 'bossing.jpg', '2024-09-19 12:07:35');
 
 -- --------------------------------------------------------
 
@@ -231,15 +254,15 @@ CREATE TABLE `officials` (
 --
 
 INSERT INTO `officials` (`bod_id`, `roles`, `name`, `img`) VALUES
-(1, 'President', 'Presi', 'gin.png'),
-(2, 'VicePresident', 'vice', 'flrmeouv.png'),
-(3, 'Secretary', 'Sec', 'received_737091231046329.jpg'),
-(4, 'Treasurer', 'Trea', '271713718_1999144396919159_608519389647854942_n.jpg'),
-(5, 'Auditor', 'Aud', 'pusi.jpg'),
-(6, 'PeaceInOrder', 'pis', 'ble.png'),
-(7, 'Director1', 'Dir', 'ble.png'),
-(8, 'Director2 ', 'Dir', 'ble.png'),
-(9, 'Director3', 'Director ', 'ble.png');
+(1, 'President', 'John Doe', 'ble.png'),
+(2, 'VicePresident', 'Rose Winters', '183726533_469980844255676_8094931697298234118_n.jpg'),
+(3, 'Secretary', 'Jane Doe', 'wolXdead.jpg'),
+(4, 'Treasurer', 'Jane  Doe', 'wolXdead.jpg'),
+(5, 'Auditor', 'Jane  Doe', 'wolXdead.jpg'),
+(6, 'PeaceInOrder', 'John  Doe', 'ble.png'),
+(7, 'Director1', 'Rose  Winters', '183726533_469980844255676_8094931697298234118_n.jpg'),
+(8, 'Director2 ', 'Paolo M Murillo', 'malupiton.png'),
+(9, 'Director3', 'Mia  Winters', 'Screenshot 2023-10-03 215143.png');
 
 -- --------------------------------------------------------
 
@@ -406,23 +429,37 @@ CREATE TABLE `user_votes` (
   `unique_id` int(11) NOT NULL,
   `candidate` varchar(255) NOT NULL,
   `votes` int(11) NOT NULL,
-  `status` varchar(50) NOT NULL
+  `status` varchar(50) NOT NULL,
+  `won_date` varchar(20) NOT NULL,
+  `new_status` varchar(20) NOT NULL,
+  `fail_date` varchar(20) NOT NULL,
+  `access` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `user_votes`
 --
 
-INSERT INTO `user_votes` (`vote_id`, `unique_id`, `candidate`, `votes`, `status`) VALUES
-(2, 1581632830, 'Wela A Magsino', 5, 'Winner'),
-(3, 821155870, 'Jhonrenz Berbano', 5, 'Winner'),
-(4, 776313154, 'Patrick B Bayona', 9, 'Winner'),
-(5, 1590469844, 'Paolo M Murillo', 9, 'Winner'),
-(6, 1308040957, 'John Doe', 9, 'Winner'),
-(7, 931588206, 'Jane Doe', 9, 'Winner'),
-(8, 662462528, 'Hev Alvin', 9, 'Winner'),
-(10, 1434008263, 'Rose Winters', 11, 'Winner'),
-(11, 1195874011, 'Mia Winters', 9, 'Winner');
+INSERT INTO `user_votes` (`vote_id`, `unique_id`, `candidate`, `votes`, `status`, `won_date`, `new_status`, `fail_date`, `access`) VALUES
+(2, 1581632830, 'Wela A Magsino', 7, '', '2024-10-04 17:40:11', '', '', 'Declared'),
+(3, 821155870, 'Jhonrenz Berbano', 9, '', '2024-10-04 17:40:11', '', '', 'Declared'),
+(4, 776313154, 'Patrick B Bayona', 12, '', '2024-10-04 17:40:11', '', '', 'Declared'),
+(5, 1590469844, 'Paolo M Murillo', 14, '', '2024-10-04 17:40:11', '', '', 'Declared'),
+(6, 1308040957, 'John Doe', 13, '', '2024-10-04 17:40:11', '', '', 'Declared'),
+(7, 931588206, 'Jane Doe', 13, '', '2024-10-04 17:40:11', '', '', 'Declared'),
+(8, 662462528, 'Hev Alvin', 12, '', '2024-10-04 17:40:11', '', '', 'Declared'),
+(10, 1434008263, 'Rose Winters', 19, '', '2024-10-04 17:40:11', '', '', 'Declared'),
+(11, 1195874011, 'Mia Winters', 14, '', '2024-10-04 17:40:11', '', '', 'Declared'),
+(31, 931588206, 'Jane  Doe', 9, '', '2024-10-08 21:47:57', '', '', 'Declared'),
+(32, 776313154, 'Patrick B Bayona', 7, 'Failure', '', '', '2024-10-08 21:47:57', 'Declared'),
+(33, 1581632830, 'Wela A Magsino', 7, '', '2024-10-08 21:47:57', '', '', 'Declared'),
+(34, 821155870, 'Jhonrenz  Berbano', 7, '', '2024-10-08 21:47:57', '', '', 'Declared'),
+(35, 1590469844, 'Paolo M Murillo', 9, '', '2024-10-08 21:47:57', '', '', 'Declared'),
+(36, 1308040957, 'John  Doe', 9, '', '2024-10-08 21:47:57', '', '', 'Declared'),
+(37, 662462528, 'Hev  Alvin', 7, '', '2024-10-08 21:47:57', '', '', 'Declared'),
+(38, 1434008263, 'Rose  Winters', 9, '', '2024-10-08 21:47:57', '', '', 'Declared'),
+(39, 1357825271, 'Wela Aguilar Magsino', 8, '', '2024-10-08 21:47:57', '', '', 'Declared'),
+(40, 1195874011, 'Mia  Winters', 9, '', '2024-10-08 21:47:57', '', '', 'Declared');
 
 -- --------------------------------------------------------
 
@@ -434,23 +471,38 @@ CREATE TABLE `voting` (
   `vote_id` int(11) NOT NULL,
   `unique_id` int(11) NOT NULL,
   `candidate_name` varchar(255) NOT NULL,
-  `img` varchar(255) NOT NULL
+  `img` varchar(255) NOT NULL,
+  `add_date` varchar(20) NOT NULL,
+  `status` varchar(20) NOT NULL,
+  `won_date` varchar(20) NOT NULL,
+  `fail_date` varchar(20) NOT NULL,
+  `access` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `voting`
 --
 
-INSERT INTO `voting` (`vote_id`, `unique_id`, `candidate_name`, `img`) VALUES
-(10, 1581632830, 'Wela A Magsino', 'kasal.jpeg'),
-(11, 821155870, 'Jhonrenz Berbano', 'bossing.jpg'),
-(12, 776313154, 'Patrick B Bayona', 'malupiton2.png'),
-(13, 1590469844, 'Paolo M Murillo', 'malupiton.png'),
-(14, 1308040957, 'John Doe', 'ble.png'),
-(15, 931588206, 'Jane Doe', 'wolXdead.jpg'),
-(16, 662462528, 'Hev Alvin', 'maxresdefault.jpg'),
-(18, 1434008263, 'Rose Winters', '183726533_469980844255676_8094931697298234118_n.jpg'),
-(19, 1195874011, 'Mia Winters', 'Screenshot 2023-10-03 215143.png');
+INSERT INTO `voting` (`vote_id`, `unique_id`, `candidate_name`, `img`, `add_date`, `status`, `won_date`, `fail_date`, `access`) VALUES
+(10, 1581632830, 'Wela A Magsino', 'kasal.jpeg', '', 'Winner', '2024-10-08 21:24:01', '', 'Declared'),
+(11, 821155870, 'Jhonrenz Berbano', 'bossing.jpg', '', 'Winner', '2024-10-08 21:24:01', '', 'Declared'),
+(12, 776313154, 'Patrick B Bayona', 'malupiton2.png', '', 'Winner', '2024-10-04 17:40:11', '', 'Declared'),
+(13, 1590469844, 'Paolo M Murillo', 'malupiton.png', '', 'Winner', '2024-10-08 21:24:01', '', 'Declared'),
+(14, 1308040957, 'John Doe', 'ble.png', '', 'Winner', '2024-10-08 21:24:01', '', 'Declared'),
+(15, 931588206, 'Jane Doe', 'wolXdead.jpg', '', 'Winner', '2024-10-08 21:24:01', '', 'Declared'),
+(16, 662462528, 'Hev Alvin', 'maxresdefault.jpg', '', 'Winner', '2024-10-08 21:24:01', '', 'Declared'),
+(18, 1434008263, 'Rose Winters', '183726533_469980844255676_8094931697298234118_n.jpg', '', 'Winner', '2024-10-08 21:24:01', '', 'Declared'),
+(19, 1195874011, 'Mia Winters', 'Screenshot 2023-10-03 215143.png', '', 'Winner', '2024-10-08 21:24:01', '', 'Declared'),
+(39, 931588206, 'Jane  Doe', 'bossing.jpg', '2024-10-02 22:21:24', 'Winner', '2024-10-08 21:47:57', '', 'Declared'),
+(40, 776313154, 'Patrick B Bayona', 'malupiton3.jpg', '2024-10-02 22:22:19', 'Failure', '', '2024-10-08 21:47:57', 'Declared'),
+(41, 1581632830, 'Wela A Magsino', 'IMG_20240628_161330.jpg', '2024-10-02 22:23:27', 'Winner', '2024-10-08 21:47:57', '', 'Declared'),
+(42, 821155870, 'Jhonrenz  Berbano', 'malupiton.png', '2024-10-02 22:23:44', 'Winner', '2024-10-08 21:47:57', '', 'Declared'),
+(43, 1590469844, 'Paolo M Murillo', 'malupiton2.png', '2024-10-02 22:24:15', 'Winner', '2024-10-08 21:47:57', '', 'Declared'),
+(44, 1308040957, 'John  Doe', 'dora-miming.jpg', '2024-10-02 22:25:16', 'Winner', '2024-10-08 21:47:57', '', 'Declared'),
+(45, 662462528, 'Hev  Alvin', 'received_831848847916169.jpg', '2024-10-02 22:25:51', 'Winner', '2024-10-08 21:47:57', '', 'Declared'),
+(46, 1434008263, 'Rose  Winters', 'tracing.png', '2024-10-02 22:26:27', 'Winner', '2024-10-08 21:47:57', '', 'Declared'),
+(47, 1357825271, 'Wela Aguilar Magsino', 'dora-miming.jpg', '2024-10-02 22:36:42', 'Winner', '2024-10-08 21:47:57', '', 'Declared'),
+(48, 1195874011, 'Mia  Winters', 'dora-miming.jpg', '2024-10-05 12:23:02', 'Winner', '2024-10-08 21:47:57', '', 'Declared');
 
 -- --------------------------------------------------------
 
@@ -473,16 +525,36 @@ CREATE TABLE `voting_countdown` (
 
 INSERT INTO `voting_countdown` (`countdown_id`, `start_id`, `start_time`, `end_id`, `end_time`, `voting_status`) VALUES
 (2, 0, '2024-09-08 10:00:00', 0, '2024-09-08 18:00:00', 'VotingEnded'),
-(5, 5694, '2024-09-09T09:10:58.', 5694, '2024-09-09 09:12:00', 'VotingActive'),
-(6, 7804, '2024-09-09T10:10:49.', 7804, '2024-09-09 10:12:00', 'VotingEnded'),
-(7, 6564, '2024-09-09T10:12:17.', 6564, '2024-09-09 10:13:00', 'VotingEnded'),
-(9, 3655, '2024-09-09T11:28:16.', 3655, '2024-09-09 11:29:00', 'VotingEnded'),
-(10, 2166, '2024-09-09T11:31:43.', 2166, '2024-09-08 11:31:00', 'VotingEnded'),
-(11, 2055, '2024-09-09T11:34:30.', 2055, '2024-09-08 11:34:00', 'VotingEnded'),
-(12, 2773, '2024-09-09T11:35:32.', 2773, '2024-09-08 11:35:00', 'VotingEnded'),
-(13, 8246, '2024-09-09T11:39:57.', 8246, '2024-09-08 11:39:00', 'VotingEnded'),
-(14, 8331, '2024-09-09T11:42:44.', 8331, '2024-09-08 11:42:00', 'VotingEnded'),
-(17, 4525, '2024-09-09T13:45:57.', 4525, '2024-09-09 13:46:00', 'VotingEnded');
+(45, 1330, '2024-09-27 20:19:24', 1330, '2024-09-27 20:20:00', 'VotingEnded'),
+(46, 2541, '2024-09-27 20:22:14', 2541, '2024-09-28 20:22:00', 'VotingEnded'),
+(47, 6043, '2024-09-29 19:32:03', 6043, '2024-09-29 19:33:00', 'VotingEnded'),
+(48, 8983, '2024-09-29 19:48:09', 8983, '2024-09-29 19:49:00', 'VotingEnded'),
+(58, 5572, '2024-10-01 02:40:40', 5572, '2024-10-01 02:41:00', 'VotingEnded'),
+(60, 2440, '2024-10-02 15:10:27', 2440, '2024-10-02 15:11:00', 'VotingEnded'),
+(65, 3479, '2024-10-04 17:39:24', 3479, '2024-10-04 17:40:00', 'VotingEnded'),
+(66, 4628, '2024-10-04 19:16:59', 4628, '2024-10-04 19:17:00', 'VotingEnded'),
+(67, 2478, '2024-10-04 19:35:40', 2478, '2024-10-04 19:36:00', 'VotingEnded'),
+(68, 2218, '2024-10-04 19:39:52', 2218, '2024-10-04 19:40:00', 'VotingEnded'),
+(69, 4511, '2024-10-04 19:50:29', 4511, '2024-10-04 19:51:00', 'VotingEnded'),
+(70, 7837, '2024-10-04 20:08:09', 7837, '2024-10-04 20:09:00', 'VotingEnded'),
+(71, 2014, '2024-10-04 20:09:40', 2014, '2024-10-04 20:10:00', 'VotingEnded'),
+(72, 5854, '2024-10-04 20:31:40', 5854, '2024-10-04 20:32:00', 'VotingEnded'),
+(73, 3380, '2024-10-04 20:32:55', 3380, '2024-10-04 20:33:00', 'VotingEnded'),
+(74, 2547, '2024-10-04 20:35:32', 2547, '2024-10-04 20:36:00', 'VotingEnded'),
+(75, 7564, '2024-10-04 21:01:24', 7564, '2024-10-04 21:02:00', 'VotingEnded'),
+(76, 8100, '2024-10-04 21:20:10', 8100, '2024-10-04 21:21:00', 'VotingEnded'),
+(81, 7804, '2024-10-07 00:31:43', 7804, '2024-10-07 00:32:00', 'VotingEnded'),
+(83, 9282, '2024-10-07 01:15:30', 9282, '2024-10-07 01:16:00', 'VotingEnded'),
+(85, 5000, '2024-10-07 01:39:07', 5000, '2024-10-07 01:40:00', 'VotingEnded'),
+(86, 4837, '2024-10-07 12:15:53', 4837, '2024-10-07 12:16:00', 'VotingEnded'),
+(87, 3070, '2024-10-07 12:31:05', 3070, '2024-10-07 12:32:00', 'VotingEnded'),
+(88, 9344, '2024-10-07 20:38:41', 9344, '2024-10-07 20:39:00', 'VotingEnded'),
+(89, 6739, '2024-10-08 21:01:21', 6739, '2024-10-08 21:02:00', 'VotingEnded'),
+(90, 8688, '2024-10-08 21:15:19', 8688, '2024-10-08 21:16:00', 'VotingEnded'),
+(91, 2306, '2024-10-08 21:16:28', 2306, '2024-10-08 21:17:00', 'VotingEnded'),
+(92, 1341, '2024-10-08 21:23:09', 1341, '2024-10-08 21:24:00', 'VotingEnded'),
+(93, 3691, '2024-10-08 21:41:05', 3691, '2024-10-08 21:42:00', 'VotingEnded'),
+(94, 7412, '2024-10-08 21:46:44', 7412, '2024-10-08 21:47:00', 'VotingEnded');
 
 -- --------------------------------------------------------
 
@@ -503,36 +575,149 @@ CREATE TABLE `voting_history` (
   `candidate8` int(11) NOT NULL,
   `candidate9` int(11) NOT NULL,
   `vote_status` varchar(20) NOT NULL,
-  `access` varchar(20) NOT NULL
+  `vote_date` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `voting_history`
 --
 
-INSERT INTO `voting_history` (`vote_id`, `unique_id`, `candidate1`, `candidate2`, `candidate3`, `candidate4`, `candidate5`, `candidate6`, `candidate7`, `candidate8`, `candidate9`, `vote_status`, `access`) VALUES
-(15, 1357825271, 1195874011, 1434008263, 662462528, 499733408, 1308040957, 931588206, 1590469844, 776313154, 1581632830, '', ''),
-(16, 1357825271, 1195874011, 1434008263, 662462528, 499733408, 1308040957, 931588206, 1590469844, 776313154, 1581632830, '', ''),
-(17, 1357825271, 1195874011, 1434008263, 662462528, 499733408, 1308040957, 931588206, 1590469844, 776313154, 1581632830, '', ''),
-(18, 1581632830, 1434008263, 662462528, 499733408, 931588206, 1308040957, 776313154, 1590469844, 1581632830, 821155870, '', ''),
-(19, 1581632830, 1195874011, 1434008263, 499733408, 931588206, 662462528, 1590469844, 1308040957, 821155870, 776313154, '', ''),
-(20, 1581632830, 1195874011, 1434008263, 499733408, 931588206, 662462528, 1590469844, 1308040957, 821155870, 776313154, '', ''),
-(21, 1581632830, 499733408, 1195874011, 0, 0, 0, 0, 0, 0, 0, '', ''),
-(22, 1581632830, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', ''),
-(23, 1581632830, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', ''),
-(24, 1581632830, 499733408, 0, 0, 0, 0, 0, 0, 0, 0, 'UnderVote', ''),
-(25, 1581632830, 499733408, 1195874011, 662462528, 1434008263, 1308040957, 931588206, 776313154, 1590469844, 1581632830, 'Voted', ''),
-(26, 1581632830, 499733408, 0, 0, 0, 0, 0, 0, 0, 0, 'UnderVote', ''),
-(27, 1581632830, 499733408, 1195874011, 662462528, 1434008263, 931588206, 1308040957, 776313154, 1590469844, 821155870, 'Voted', ''),
-(28, 1581632830, 499733408, 0, 0, 0, 0, 0, 0, 0, 0, 'UnderVote', ''),
-(29, 1581632830, 499733408, 0, 0, 0, 0, 0, 0, 0, 0, 'UnderVote', ''),
-(30, 1581632830, 499733408, 0, 0, 0, 0, 0, 0, 0, 0, 'UnderVote', ''),
-(31, 1581632830, 499733408, 0, 0, 0, 0, 0, 0, 0, 0, 'UnderVote', ''),
-(32, 1581632830, 499733408, 0, 0, 0, 0, 0, 0, 0, 0, 'UnderVote', ''),
-(33, 1581632830, 499733408, 0, 0, 0, 0, 0, 0, 0, 0, 'UnderVote', ''),
-(34, 1581632830, 499733408, 1195874011, 662462528, 1434008263, 931588206, 1308040957, 1590469844, 776313154, 821155870, 'Voted', ''),
-(35, 1581632830, 1434008263, 0, 0, 0, 0, 0, 0, 0, 0, 'UnderVote', ''),
-(36, 1581632830, 1434008263, 0, 0, 0, 0, 0, 0, 0, 0, 'UnderVote', '');
+INSERT INTO `voting_history` (`vote_id`, `unique_id`, `candidate1`, `candidate2`, `candidate3`, `candidate4`, `candidate5`, `candidate6`, `candidate7`, `candidate8`, `candidate9`, `vote_status`, `vote_date`) VALUES
+(47, 821155870, 1195874011, 1357825271, 1434008263, 662462528, 776313154, 1581632830, 1590469844, 1308040957, 931588206, 'Voted', '2024-10-07 01:36:35'),
+(48, 1581632830, 1195874011, 1357825271, 1434008263, 662462528, 776313154, 821155870, 1590469844, 1308040957, 931588206, 'Voted', '2024-10-07 01:37:20'),
+(49, 776313154, 1195874011, 1357825271, 1434008263, 662462528, 1581632830, 1590469844, 821155870, 1308040957, 931588206, 'Voted', '2024-10-07 01:37:50'),
+(50, 662462528, 1195874011, 1357825271, 1434008263, 1308040957, 776313154, 1581632830, 821155870, 1590469844, 931588206, 'Voted', '2024-10-07 01:38:27'),
+(51, 1357825271, 1434008263, 1195874011, 821155870, 1590469844, 1581632830, 662462528, 1308040957, 776313154, 931588206, 'Voted', '2024-10-07 01:38:44');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `voting_position`
+--
+
+CREATE TABLE `voting_position` (
+  `position_id` int(11) NOT NULL,
+  `unique_id` int(20) NOT NULL,
+  `positions` varchar(20) NOT NULL,
+  `candidate_name` varchar(20) NOT NULL,
+  `candidate_uid` varchar(20) NOT NULL,
+  `setposition_date` varchar(20) NOT NULL,
+  `setposition_status` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `voting_position`
+--
+
+INSERT INTO `voting_position` (`position_id`, `unique_id`, `positions`, `candidate_name`, `candidate_uid`, `setposition_date`, `setposition_status`) VALUES
+(83, 1581632830, 'President', 'Rose Winters', '1434008263', '2024-10-01 02:23:18', ''),
+(84, 1581632830, 'VicePresident', 'Patrick B Bayona', '776313154', '2024-10-01 02:23:18', ''),
+(85, 1581632830, 'Secretary', 'Paolo M Murillo', '1590469844', '2024-10-01 02:23:18', ''),
+(86, 1581632830, 'Treasurer', 'John Doe', '1308040957', '2024-10-01 02:23:18', ''),
+(87, 1581632830, 'Auditor', 'Jane Doe', '931588206', '2024-10-01 02:23:18', ''),
+(88, 1581632830, 'PeaceInOrder', 'Hev Alvin', '662462528', '2024-10-01 02:23:18', ''),
+(89, 1581632830, 'Director1', 'Mia Winters', '1195874011', '2024-10-01 02:23:18', ''),
+(90, 1581632830, 'Director2', 'Wela A Magsino', '1581632830', '2024-10-01 02:23:18', ''),
+(91, 1581632830, 'Director3', 'Jhonrenz Berbano', '821155870', '2024-10-01 02:23:18', ''),
+(92, 1581632830, 'President', 'Rose Winters', '1434008263', '2024-10-01 02:30:09', ''),
+(93, 1581632830, 'VicePresident', 'Patrick B Bayona', '776313154', '2024-10-01 02:30:09', ''),
+(94, 1581632830, 'Secretary', 'Paolo M Murillo', '1590469844', '2024-10-01 02:30:09', ''),
+(95, 1581632830, 'Treasurer', 'John Doe', '1308040957', '2024-10-01 02:30:09', ''),
+(96, 1581632830, 'Auditor', 'Jane Doe', '931588206', '2024-10-01 02:30:09', ''),
+(97, 1581632830, 'PeaceInOrder', 'Hev Alvin', '662462528', '2024-10-01 02:30:09', ''),
+(98, 1581632830, 'Director1', 'Mia Winters', '1195874011', '2024-10-01 02:30:09', ''),
+(99, 1581632830, 'Director2', 'Wela A Magsino', '1581632830', '2024-10-01 02:30:09', ''),
+(100, 1581632830, 'Director3', 'Jhonrenz Berbano', '821155870', '2024-10-01 02:30:09', ''),
+(101, 1581632830, 'President', 'Rose Winters', '1434008263', '2024-10-01 02:43:04', ''),
+(102, 1581632830, 'VicePresident', 'Patrick B Bayona', '776313154', '2024-10-01 02:43:04', ''),
+(103, 1581632830, 'Secretary', 'Paolo M Murillo', '1590469844', '2024-10-01 02:43:04', ''),
+(104, 1581632830, 'Treasurer', 'John Doe', '1308040957', '2024-10-01 02:43:04', ''),
+(105, 1581632830, 'Auditor', 'Jane Doe', '931588206', '2024-10-01 02:43:04', ''),
+(106, 1581632830, 'PeaceInOrder', 'Hev Alvin', '662462528', '2024-10-01 02:43:04', ''),
+(107, 1581632830, 'Director1', 'Mia Winters', '1195874011', '2024-10-01 02:43:04', ''),
+(108, 1581632830, 'Director2', 'Wela A Magsino', '1581632830', '2024-10-01 02:43:04', ''),
+(109, 1581632830, 'Director3', 'Jhonrenz Berbano', '821155870', '2024-10-01 02:43:04', ''),
+(110, 931588206, 'President', 'Mia Winters', '1195874011', '2024-10-09 21:54:01', 'Voted'),
+(111, 931588206, 'VicePresident', 'John Doe', '1308040957', '2024-10-09 21:54:01', 'Voted'),
+(112, 931588206, 'Secretary', 'Jane Doe', '931588206', '2024-10-09 21:54:01', 'Voted'),
+(113, 931588206, 'Treasurer', 'Rose Winters', '1434008263', '2024-10-09 21:54:01', 'Voted'),
+(114, 931588206, 'Auditor', 'Jane  Doe', '931588206', '2024-10-09 21:54:01', 'Voted'),
+(115, 931588206, 'PeaceInOrder', 'Paolo M Murillo', '1590469844', '2024-10-09 21:54:01', 'Voted'),
+(116, 931588206, 'Director1', 'Rose  Winters', '1434008263', '2024-10-09 21:54:01', 'Voted'),
+(117, 931588206, 'Director2', 'John  Doe', '1308040957', '2024-10-09 21:54:01', 'Voted'),
+(118, 931588206, 'Director3', 'Mia  Winters', '1195874011', '2024-10-09 21:54:01', 'Voted'),
+(119, 1581632830, 'President', 'John Doe', '1308040957', '2024-10-09 21:55:39', 'Voted'),
+(120, 1581632830, 'VicePresident', 'Rose Winters', '1434008263', '2024-10-09 21:55:39', 'Voted'),
+(121, 1581632830, 'Secretary', 'Jane Doe', '931588206', '2024-10-09 21:55:39', 'Voted'),
+(122, 1581632830, 'Treasurer', 'Jane  Doe', '931588206', '2024-10-09 21:55:39', 'Voted'),
+(123, 1581632830, 'Auditor', 'Paolo M Murillo', '1590469844', '2024-10-09 21:55:39', 'Voted'),
+(124, 1581632830, 'PeaceInOrder', 'John  Doe', '1308040957', '2024-10-09 21:55:39', 'Voted'),
+(125, 1581632830, 'Director1', 'Rose  Winters', '1434008263', '2024-10-09 21:55:39', 'Voted'),
+(126, 1581632830, 'Director2', 'Mia Winters', '1195874011', '2024-10-09 21:55:39', 'Voted'),
+(127, 1581632830, 'Director3', 'Mia  Winters', '1195874011', '2024-10-09 21:55:39', 'Voted'),
+(128, 821155870, 'President', 'John Doe', '1308040957', '2024-10-09 21:56:13', 'Voted'),
+(129, 821155870, 'VicePresident', 'Rose Winters', '1434008263', '2024-10-09 21:56:13', 'Voted'),
+(130, 821155870, 'Secretary', 'Mia Winters', '1195874011', '2024-10-09 21:56:13', 'Voted'),
+(131, 821155870, 'Treasurer', 'Paolo M Murillo', '1590469844', '2024-10-09 21:56:13', 'Voted'),
+(132, 821155870, 'Auditor', 'Jane  Doe', '931588206', '2024-10-09 21:56:13', 'Voted'),
+(133, 821155870, 'PeaceInOrder', 'Mia  Winters', '1195874011', '2024-10-09 21:56:13', 'Voted'),
+(134, 821155870, 'Director1', 'Rose  Winters', '1434008263', '2024-10-09 21:56:13', 'Voted'),
+(135, 821155870, 'Director2', 'Jane Doe', '931588206', '2024-10-09 21:56:13', 'Voted'),
+(136, 821155870, 'Director3', 'John  Doe', '1308040957', '2024-10-09 21:56:13', 'Voted'),
+(137, 1590469844, 'President', 'Paolo M Murillo', '1590469844', '2024-10-09 21:56:49', 'Voted'),
+(138, 1590469844, 'VicePresident', 'Jane Doe', '931588206', '2024-10-09 21:56:49', 'Voted'),
+(139, 1590469844, 'Secretary', 'John Doe', '1308040957', '2024-10-09 21:56:49', 'Voted'),
+(140, 1590469844, 'Treasurer', 'Mia Winters', '1195874011', '2024-10-09 21:56:49', 'Voted'),
+(141, 1590469844, 'Auditor', 'Rose Winters', '1434008263', '2024-10-09 21:56:49', 'Voted'),
+(142, 1590469844, 'PeaceInOrder', 'Jane  Doe', '931588206', '2024-10-09 21:56:49', 'Voted'),
+(143, 1590469844, 'Director1', 'John  Doe', '1308040957', '2024-10-09 21:56:49', 'Voted'),
+(144, 1590469844, 'Director2', 'Paolo M Murillo', '1590469844', '2024-10-09 21:56:49', 'Voted'),
+(145, 1590469844, 'Director3', 'Rose  Winters', '1434008263', '2024-10-09 21:56:49', 'Voted'),
+(146, 1308040957, 'President', 'John Doe', '1308040957', '2024-10-09 21:57:22', 'Voted'),
+(147, 1308040957, 'VicePresident', 'Rose Winters', '1434008263', '2024-10-09 21:57:22', 'Voted'),
+(148, 1308040957, 'Secretary', 'Jane Doe', '931588206', '2024-10-09 21:57:22', 'Voted'),
+(149, 1308040957, 'Treasurer', 'Paolo M Murillo', '1590469844', '2024-10-09 21:57:22', 'Voted'),
+(150, 1308040957, 'Auditor', 'Mia Winters', '1195874011', '2024-10-09 21:57:22', 'Voted'),
+(151, 1308040957, 'PeaceInOrder', 'Jane  Doe', '931588206', '2024-10-09 21:57:22', 'Voted'),
+(152, 1308040957, 'Director1', 'John  Doe', '1308040957', '2024-10-09 21:57:22', 'Voted'),
+(153, 1308040957, 'Director2', 'Rose  Winters', '1434008263', '2024-10-09 21:57:22', 'Voted'),
+(154, 1308040957, 'Director3', 'Paolo M Murillo', '1590469844', '2024-10-09 21:57:22', 'Voted'),
+(155, 662462528, 'President', 'John Doe', '1308040957', '2024-10-09 21:57:57', 'Voted'),
+(156, 662462528, 'VicePresident', 'Paolo M Murillo', '1590469844', '2024-10-09 21:57:57', 'Voted'),
+(157, 662462528, 'Secretary', 'Rose Winters', '1434008263', '2024-10-09 21:57:57', 'Voted'),
+(158, 662462528, 'Treasurer', 'Jane  Doe', '931588206', '2024-10-09 21:57:57', 'Voted'),
+(159, 662462528, 'Auditor', 'Jane Doe', '931588206', '2024-10-09 21:57:57', 'Voted'),
+(160, 662462528, 'PeaceInOrder', 'John  Doe', '1308040957', '2024-10-09 21:57:57', 'Voted'),
+(161, 662462528, 'Director1', 'Mia Winters', '1195874011', '2024-10-09 21:57:57', 'Voted'),
+(162, 662462528, 'Director2', 'Paolo M Murillo', '1590469844', '2024-10-09 21:57:57', 'Voted'),
+(163, 662462528, 'Director3', 'Rose  Winters', '1434008263', '2024-10-09 21:57:57', 'Voted'),
+(164, 1434008263, 'President', 'Paolo M Murillo', '1590469844', '2024-10-09 21:58:40', 'Voted'),
+(165, 1434008263, 'VicePresident', 'Jane Doe', '931588206', '2024-10-09 21:58:40', 'Voted'),
+(166, 1434008263, 'Secretary', 'John Doe', '1308040957', '2024-10-09 21:58:40', 'Voted'),
+(167, 1434008263, 'Treasurer', 'Jane  Doe', '931588206', '2024-10-09 21:58:40', 'Voted'),
+(168, 1434008263, 'Auditor', 'Rose Winters', '1434008263', '2024-10-09 21:58:40', 'Voted'),
+(169, 1434008263, 'PeaceInOrder', 'Rose  Winters', '1434008263', '2024-10-09 21:58:40', 'Voted'),
+(170, 1434008263, 'Director1', 'Mia Winters', '1195874011', '2024-10-09 21:58:40', 'Voted'),
+(171, 1434008263, 'Director2', 'Paolo M Murillo', '1590469844', '2024-10-09 21:58:40', 'Voted'),
+(172, 1434008263, 'Director3', 'John  Doe', '1308040957', '2024-10-09 21:58:40', 'Voted'),
+(173, 1357825271, 'President', 'John  Doe', '1308040957', '2024-10-09 21:59:12', 'Voted'),
+(174, 1357825271, 'VicePresident', 'Mia  Winters', '1195874011', '2024-10-09 21:59:12', 'Voted'),
+(175, 1357825271, 'Secretary', 'Paolo M Murillo', '1590469844', '2024-10-09 21:59:12', 'Voted'),
+(176, 1357825271, 'Treasurer', 'Rose  Winters', '1434008263', '2024-10-09 21:59:12', 'Voted'),
+(177, 1357825271, 'Auditor', 'Paolo M Murillo', '1590469844', '2024-10-09 21:59:12', 'Voted'),
+(178, 1357825271, 'PeaceInOrder', 'Rose Winters', '1434008263', '2024-10-09 21:59:12', 'Voted'),
+(179, 1357825271, 'Director1', 'John Doe', '1308040957', '2024-10-09 21:59:12', 'Voted'),
+(180, 1357825271, 'Director2', 'Jane Doe', '931588206', '2024-10-09 21:59:12', 'Voted'),
+(181, 1357825271, 'Director3', 'Mia Winters', '1195874011', '2024-10-09 21:59:12', 'Voted'),
+(182, 1195874011, 'President', 'Rose  Winters', '1434008263', '2024-10-09 22:00:03', 'Voted'),
+(183, 1195874011, 'VicePresident', 'Paolo M Murillo', '1590469844', '2024-10-09 22:00:03', 'Voted'),
+(184, 1195874011, 'Secretary', 'John  Doe', '1308040957', '2024-10-09 22:00:03', 'Voted'),
+(185, 1195874011, 'Treasurer', 'John Doe', '1308040957', '2024-10-09 22:00:03', 'Voted'),
+(186, 1195874011, 'Auditor', 'Mia  Winters', '1195874011', '2024-10-09 22:00:03', 'Voted'),
+(187, 1195874011, 'PeaceInOrder', 'Mia Winters', '1195874011', '2024-10-09 22:00:03', 'Voted'),
+(188, 1195874011, 'Director1', 'Jane  Doe', '931588206', '2024-10-09 22:00:03', 'Voted'),
+(189, 1195874011, 'Director2', 'Rose Winters', '1434008263', '2024-10-09 22:00:03', 'Voted'),
+(190, 1195874011, 'Director3', 'Paolo M Murillo', '1590469844', '2024-10-09 22:00:03', 'Voted');
 
 --
 -- Indexes for dumped tables
@@ -543,6 +728,12 @@ INSERT INTO `voting_history` (`vote_id`, `unique_id`, `candidate1`, `candidate2`
 --
 ALTER TABLE `announcements`
   ADD PRIMARY KEY (`news_id`);
+
+--
+-- Indexes for table `complaints`
+--
+ALTER TABLE `complaints`
+  ADD PRIMARY KEY (`complaint_id`);
 
 --
 -- Indexes for table `forms`
@@ -611,6 +802,12 @@ ALTER TABLE `voting_history`
   ADD PRIMARY KEY (`vote_id`);
 
 --
+-- Indexes for table `voting_position`
+--
+ALTER TABLE `voting_position`
+  ADD PRIMARY KEY (`position_id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -619,6 +816,12 @@ ALTER TABLE `voting_history`
 --
 ALTER TABLE `announcements`
   MODIFY `news_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+
+--
+-- AUTO_INCREMENT for table `complaints`
+--
+ALTER TABLE `complaints`
+  MODIFY `complaint_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `forms`
@@ -666,25 +869,31 @@ ALTER TABLE `tblresident`
 -- AUTO_INCREMENT for table `user_votes`
 --
 ALTER TABLE `user_votes`
-  MODIFY `vote_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `vote_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT for table `voting`
 --
 ALTER TABLE `voting`
-  MODIFY `vote_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `vote_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- AUTO_INCREMENT for table `voting_countdown`
 --
 ALTER TABLE `voting_countdown`
-  MODIFY `countdown_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `countdown_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=96;
 
 --
 -- AUTO_INCREMENT for table `voting_history`
 --
 ALTER TABLE `voting_history`
-  MODIFY `vote_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `vote_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+
+--
+-- AUTO_INCREMENT for table `voting_position`
+--
+ALTER TABLE `voting_position`
+  MODIFY `position_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=191;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

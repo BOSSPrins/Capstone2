@@ -93,6 +93,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     if (checkboxStates[candidateId]) {
                         currentCount--;
                         checkboxStates[candidateId] = false; // Track as unchecked
+                        removeCandidate(candidateId);
                     }
                 }
 
@@ -124,8 +125,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Function to fetch candidates from the database
     function fetchCandidates() {
+
+        var sessionUniqueId = document.getElementById('sessionUniqueId').value;
+        
         var xhr = new XMLHttpRequest();
-        xhr.open("GET", "PHPBackend/VotingProcess.php", true); // Adjust URL as needed
+        xhr.open("GET", "PHPBackend/VotingProcess.php?action=fetchCandidates&sessionUniqueId=" + sessionUniqueId, true);
         xhr.onload = function() {
             if (xhr.status >= 200 && xhr.status < 300) {
                 try {
@@ -145,6 +149,7 @@ document.addEventListener('DOMContentLoaded', function() {
         };
         xhr.send();
     }
+    
 
     // Function to generate candidate divs
     function generateCandidateDivs(candidates) {
@@ -183,48 +188,65 @@ document.addEventListener('DOMContentLoaded', function() {
     function fetchCandidateData(candidateId) {
         return new Promise((resolve, reject) => {
             var xhr = new XMLHttpRequest();
-            xhr.open('GET', `PHPBackend/VotingProcess.php?id=${candidateId}`, true);
+            xhr.open('GET', `PHPBackend/VotingProcess2.php?id=${candidateId}`, true);
             xhr.onload = function() {
                 if (xhr.status >= 200 && xhr.status < 300) {
+                    console.log("Raw response:", xhr.responseText);
                     try {
                         var response = JSON.parse(xhr.responseText);
-                        if (response.success && response.candidates.length > 0) {
-                            // Find the candidate by ID
-                            var candidate = response.candidates.find(c => c.unique_id === candidateId);
-                            if (candidate) {
+    
+                        // Adjust to handle single candidate object instead of an array
+                        if (response.success && response.candidate) {
+                            var candidate = response.candidate;
+    
+                            // Ensure both IDs are compared as strings
+                            if (String(candidate.unique_id) === String(candidateId)) {
                                 resolve(candidate);
                             } else {
-                                reject('Candidate not found in the response');
+                                console.error('Candidate ID mismatch in the response');
+                                reject('Candidate ID mismatch in the response');
                             }
                         } else {
+                            console.error('Candidate data is missing or request failed');
                             reject('Candidate data is missing or request failed');
                         }
                     } catch (e) {
+                        console.error('Error parsing response:', e);
                         reject('Error parsing response');
                     }
                 } else {
+                    console.error('Failed to fetch candidate with status:', xhr.status);
                     reject('Failed to fetch candidate');
                 }
             };
             xhr.onerror = function() {
+                console.error('Request failed');
                 reject('Request failed');
             };
             xhr.send();
         });
     }
+    
+    
 
     function handleCheckboxChange(checkbox) {
-        console.log(`Checkbox changed: ${checkbox.value}, Checked: ${checkbox.checked}`);
-        if (checkbox.checked) {
-            if (selectedCandidates.length < maxCandidates) {
-                addCandidate(checkbox.value);   
-            } else {
-                checkbox.checked = false;
-            }
+        const candidateId = parseInt(checkbox.value); // Assuming checkbox value is the unique_id
+        const isChecked = checkbox.checked;
+    
+        if (isChecked) {
+            // Code that adds the candidate when the checkbox is checked (this part seems to work fine)
+            fetchCandidateData(candidateId).then(candidate => {
+                selectedCandidates.push(candidate);
+                updateSummary();
+            });
         } else {
-            removeCandidate(checkbox.value);
+            // This part needs to call removeCandidate correctly when the checkbox is unchecked
+            removeCandidate(candidateId);  // Fix: Ensure it's being called on uncheck
         }
+    
+        console.log(`Checkbox changed: ${candidateId}, Checked: ${isChecked}`);
     }
+    
 
     function addCandidate(candidateId) {
         fetchCandidateData(candidateId).then(candidate => {
@@ -251,27 +273,35 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function renderSummary() {
         console.log(`Rendering summary for ${selectedCandidates.length} candidates...`);
+    
+        // Always clear all fields first
         for (let i = 1; i <= maxCandidates; i++) {
             const imgDiv = document.getElementById(`candi${i}_img`);
             const nameInput = document.getElementById(`candi${i}_name`);
             const idInput = document.getElementById(`candi${i}_ID`);
-
+    
             if (imgDiv && nameInput && idInput) {
-                if (i <= selectedCandidates.length) {
-                    const candidate = selectedCandidates[i - 1];
-                    console.log(`Rendering candidate ${i}: ${JSON.stringify(candidate)}`);
-                    imgDiv.innerHTML = `<img src="Pictures/${candidate.img}" alt="${candidate.candidate_name}">`;
-                    nameInput.value = candidate.candidate_name;
-                    idInput.value = candidate.unique_id;
-                } else {
-                    console.log(`Clearing candidate ${i}`);
-                    imgDiv.innerHTML = '';
-                    nameInput.value = '';
-                    idInput.value = '';
-                }
+                imgDiv.innerHTML = '';  // Clear the image div
+                nameInput.value = '';   // Clear the name input
+                idInput.value = '';     // Clear the ID input
             }
         }
-    }
+    
+        // Now populate the selected candidates
+        for (let i = 0; i < selectedCandidates.length; i++) {
+            const imgDiv = document.getElementById(`candi${i+1}_img`);
+            const nameInput = document.getElementById(`candi${i+1}_name`);
+            const idInput = document.getElementById(`candi${i+1}_ID`);
+    
+            if (imgDiv && nameInput && idInput) {
+                const candidate = selectedCandidates[i];
+                console.log(`Rendering candidate ${i+1}: ${JSON.stringify(candidate)}`);
+                imgDiv.innerHTML = `<img src="Pictures/${candidate.img}" alt="${candidate.candidate_name}">`;
+                nameInput.value = candidate.candidate_name;
+                idInput.value = candidate.unique_id;
+            }
+        }
+    }    
     
     fetchCandidates();
 });
@@ -281,7 +311,7 @@ document.getElementById('submitVoteButton').addEventListener('click', function(e
     // Prevent the default form submission
     event.preventDefault();
 
-
+    var VoteDate = document.getElementById('timestamp1').textContent;
     var underVote = document.getElementById('underVote').value;
     var user_ID = document.getElementById('user_ID').value;
     var candidate_IDs = [];
@@ -293,7 +323,7 @@ document.getElementById('submitVoteButton').addEventListener('click', function(e
     }
 
     var xhr = new XMLHttpRequest();
-    xhr.open('POST', 'PHPBackend/VotingProcess.php', true);
+    xhr.open('POST', 'PHPBackend/VotingProcess2.php', true);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.onreadystatechange = function () {
         if (xhr.readyState == 4) {
@@ -316,8 +346,10 @@ document.getElementById('submitVoteButton').addEventListener('click', function(e
     var data = {
         voter_id: user_ID,
         candidate_ids: candidate_IDs,
-        voteStatus: underVote
+        voteStatus: underVote,
+        vote_date: VoteDate
     };
+    console.log(data);
     xhr.send(JSON.stringify(data));
 });
 
@@ -403,11 +435,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-// Store selected values in an array
 let selectedValues = [];
+let previousSelections = {}; // Object to store previous selections for each dropdown
 
 // Function to hide selected options in all dropdowns
 function hideSelectedOptions() {
+    console.log("Hiding selected options. Current selected values:", selectedValues);
     const allDropdowns = document.querySelectorAll('.OptionDropDown, .OptionDropDown2, .OptionDropDown3, .OptionDropDown4, .OptionDropDown5, .OptionDropDown6, .OptionDropDown7, .OptionDropDown8, .OptionDropDown9');
     
     allDropdowns.forEach(dropdown => {
@@ -417,8 +450,10 @@ function hideSelectedOptions() {
             const value = inputElement.value;
 
             if (selectedValues.includes(value)) {
+                console.log(`Hiding option: ${value}`);
                 option.style.display = 'none';
             } else {
+                console.log(`Showing option: ${value}`);
                 option.style.display = 'block';
             }
         });
@@ -439,14 +474,38 @@ function selectOption(dropdownClass, inputId, emeDropPosClass) {
     options.forEach(option => {
         option.addEventListener('change', function() {
             const selectedValue = this.value;
+            console.log(`Selected value: ${selectedValue} in dropdown ${dropdownClass}`);
+
+            // Check if there's a previous selection
+            const previousValue = previousSelections[dropdownClass] || null;
+            console.log(`Previous selection for ${dropdownClass}:`, previousValue);
+
+            if (previousValue) {
+                // Remove the previous value from selectedValues before making it visible
+                selectedValues = selectedValues.filter(value => value !== previousValue);
+                console.log(`Removed ${previousValue} from selectedValues:`, selectedValues);
+
+                // Make the previously selected option visible again
+                const previousOption = Array.from(options).find(opt => opt.value === previousValue);
+                if (previousOption) {
+                    console.log(`Making previous option visible again: ${previousValue}`);
+                    previousOption.closest('label').style.display = 'block'; // Show previous option
+                }
+            }
 
             // Set the selected value to the input field
             inputField.value = selectedValue;
+            console.log(`Set input field ${inputId} value to: ${selectedValue}`);
 
             // Add selected value to array if not already selected
             if (!selectedValues.includes(selectedValue)) {
                 selectedValues.push(selectedValue);
             }
+            console.log("Updated selected values:", selectedValues);
+
+            // Store the current selection as the previous one
+            previousSelections[dropdownClass] = selectedValue;
+            console.log(`Stored ${selectedValue} as previous selection for ${dropdownClass}`);
 
             // Hide selected options in other dropdowns
             hideSelectedOptions();
@@ -583,7 +642,7 @@ function checkInputsAndToggleButton() {
         return input && input.value.trim() !== '';
     });
     
-    const btn = document.querySelector('.buttonSubmitBoto2');
+    const btn = document.querySelector('.buttonSubmitBoto2');                                  
 
     if (btn) {
         if (allFilled) {
@@ -1143,6 +1202,49 @@ function checkVotingHistory() {
     
 };
 
+
+let isWinner = false;
+
+// Function to check if the user is a winner
+function checkWinnerStatus(callback) {
+    // var uniqueId = document.getElementById('WinnerUniqueId').value;
+
+    $.ajax({
+        type: 'POST',
+        url: 'PHPBackend/DeclareWinner.php', // Path to your PHP file
+        data: {
+            action: 'check_winner' // Add an action parameter
+            // unique_id: uniqueId
+        },
+        dataType: 'json',
+        cache: false,
+        success: function(response) {
+            console.log("checkWinnerStatus response:", response); // Log response to see the server's reply
+            if (response.success && response.display) {
+                // If the user is a winner, show the SecondVotingContainer
+                document.getElementById('SecondVotingContainer').style.display = 'block';
+                document.getElementById('FirstVotingContainer').style.display = 'none';
+                isWinner = true;
+                callback(true); // Proceed as a winner
+            } else {
+                console.log('Not a winner or error in status.');
+                callback(false); // Not a winner, continue normal flow
+                // Hide the SecondVotingContainer if not a winner
+                document.getElementById('SecondVotingContainer').style.display = 'none';
+            }
+
+            // Debugging: Log the display state of both containers
+            console.log("FirstVotingContainer display after checkWinnerStatus:", document.getElementById('FirstVotingContainer').style.display);
+            console.log("SecondVotingContainer display after checkWinnerStatus:", document.getElementById('SecondVotingContainer').style.display);
+        },
+        error: function(xhr, status, error) {
+            console.error('AJAX error:', status, error);
+            callback(false); // Treat error as not a winner
+        }
+    });
+}
+
+
 // Function kung tapos na yung botohan e buong voting may overlay na
 function fetchOverlayMessage(callback) {
     $.ajax({
@@ -1151,76 +1253,340 @@ function fetchOverlayMessage(callback) {
         data: { action: 'fetch_overlay_message' },
         dataType: 'json',
         success: function(response) {
-            console.log("Full response:", response);
-
+            console.log("fetchOverlayMessage response:", response); // Log overlay message response
             if (response.success) {
-                console.log("Eto ang sagot:", response.success);
-                
-                // Check the status and determine success or failure
-                if (response.status === 'VotingEnded') {
-                    console.log("Eto ang status naman:", response.status);
-                    // Success case
+                if (response.status === 'VotingEnded' && !isWinner) {
+                    document.getElementById('Overlay').style.display = 'flex';
+                    document.getElementById('FirstVotingContainer').style.display = 'none';
+                    document.getElementById('SecondVotingContainer').style.display = 'none';
                 } else {
-                    console.log("Unknown status:", response.status);
+                    callback(); // Proceed with normal voting flow
+                }
+            } else {
+                console.error('Error:', response.error);
+                callback(); // Proceed if error occurred
+            }
+
+            // Debugging: Log the display state of both containers
+            console.log("FirstVotingContainer display after fetchOverlayMessage:", document.getElementById('FirstVotingContainer').style.display);
+            console.log("SecondVotingContainer display after fetchOverlayMessage:", document.getElementById('SecondVotingContainer').style.display);
+        },
+        error: function(xhr, status, error) {
+            console.error('AJAX error:', status, error);
+            callback(); // Proceed in case of an AJAX error
+        }
+    });
+}
+
+function formatDate(now) {
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, '0'); // Add leading zero
+    const day = String(now.getDate()).padStart(2, '0');
+    const hours = String(now.getHours()).padStart(2, '0'); // 24-hour format
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+    const seconds = String(now.getSeconds()).padStart(2, '0');
+
+    return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+}
+
+function updateTimestamp() {
+    const now = new Date();
+    const formattedDate = formatDate(now);
+
+    document.getElementById('timestamp1').textContent = formattedDate;
+    document.getElementById('timestamp2').textContent = formattedDate;
+}
+
+// Optionally update the timestamp every second
+setInterval(updateTimestamp, 1000);
+
+
+// Pangcheck kung nakaboto na for new candidates positions
+function checkVotingPositions() {
+    // Retrieve the unique ID from the hidden input field
+    var newCandiPositions = document.getElementById('newCandiPositions').value;
+
+    $.ajax({
+        type: 'POST',
+        url: 'PHPBackend/DeclareWinner.php', // Update this with the correct path
+        data: { action: 'check_voting_positions', unique_id: newCandiPositions }, // Ensure sessionUniqueId is defined
+        dataType: 'json',
+        success: function(response) {
+            console.log('Parsed response:', response);
+            if (response.success) {
+                // Handle successful response
+                if (response.voted) {
+                    console.log('User has already voted for new positions.');
+                    var voteContainer = document.getElementById('SecondVotingContainer');
+
+                    var overlay = document.createElement('div');
+                    overlay.style.position = 'absolute';
+                    overlay.style.width = '100%';
+                    overlay.style.height = '100%';
+                    overlay.style.top = '0';
+                    overlay.style.left = '0';
+                    overlay.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
+                    overlay.innerHTML = `
+                                        <div style="text-align: center; margin-top: 20%;">
+                                            
+                                            <p style="color: white; font-size: 25px;">Wait for the other directors to vote</p>
+                                        </div>
+                                    `;
+                    //<img src="Pictures/Mabuhay_Logo.png" alt="Logo" style="max-width: 35%; margin-bottom: 30px;">
+
+                    voteContainer.appendChild(overlay);
+                } else {
+                    console.log('User has not voted yet for new positions.');
                 }
             } else {
                 console.error('Error:', response.error);
             }
-
-            // Execute callback if provided
-            if (typeof callback === 'function') {
-                callback(response.status !== 'VotingEnded'); // Pass true if the status is 'VotingStarted'
-            }
         },
         error: function(xhr, status, error) {
             console.error('AJAX error:', status, error);
-            console.error('Response Text:', xhr.responseText);
-
-            // Execute callback if provided
-            if (typeof callback === 'function') {
-                callback(true); // Pass true if fetchOverlayMessage failed
-            }
         }
     });
-}
+    
+};
 
-// Function para lumabas yung pangalawang botohan para sa positions ng winner
-function checkWinnerStatus() {
-
-    var uniqueId = document.getElementById('WinnerUniqueId').value;
-
-    $.ajax({
-        type: 'POST',
-        url: 'PHPBackend/DeclareWinner.php', // Path to your PHP file
-        data: {
-            action: 'check_winner', // Add an action parameter
-            unique_id: uniqueId
-        },
-        dataType: 'json',
-        success: function(response) {
-            if (response.success && response.display) {
-                // If the user is a winner, show the div
-                document.getElementById('SecondVotingContainer').style.display = 'block';
+// function para kahit tapos na yung botohan e makakaboto parin ng pagset ng position   
+function handleVotingStatus() {
+    fetchOverlayMessage(function(isOngoing) {
+        if (isOngoing) {
+            // Only check for the winner if voting is ongoing and no winner has been set
+            if (!isWinner) {
+                checkWinnerStatus();
             } else {
-                console.log('Not a winner or error in status.');
+                console.log('Winner already confirmed not checking for winners again.');
             }
-        },
-        error: function(xhr, status, error) {
-            console.error('AJAX error:', status, error);
+        } else {
+            console.log('Voting has ended; not checking for winners.');
         }
+
+        // Debugging: Log the display state of both containers
+        console.log("FirstVotingContainer display after handleVotingStatus:", document.getElementById('FirstVotingContainer').style.display);
+        console.log("SecondVotingContainer display after handleVotingStatus:", document.getElementById('SecondVotingContainer').style.display);
     });
 }
+
+
 
 // Call the function when the page loads
 window.onload = function () {
     loadWinners();
-    // Call fetchOverlayMessage with a callback to conditionally call checkVotingHistory
-    fetchOverlayMessage(function(failed) {
-        if (failed) {
-            checkVotingHistory();
+    checkVotingPositions();
+    updateTimestamp();
+    
+    // First, check if the user is already a winner
+    checkWinnerStatus(function(isWinnerStatusChecked) {
+        if (isWinnerStatusChecked) {
+            console.log('Winner status confirmed; skipping further voting checks.');
+        } else {
+            // If not a winner, proceed with the voting status check
+            fetchOverlayMessage(function() {
+                // If no overlay, check the user's voting history
+                checkVotingHistory();
+            });
         }
+
+        // Debugging: Log the display state of both containers
+        console.log("FirstVotingContainer display after checkWinnerStatus in onload:", document.getElementById('FirstVotingContainer').style.display);
+        console.log("SecondVotingContainer display after checkWinnerStatus in onload:", document.getElementById('SecondVotingContainer').style.display);
     });
 
-    checkWinnerStatus();
+    handleVotingStatus();
 };
+
+
+// Function sa pagboto ng positions ng mga nanalo
+document.getElementById('submitPositionBTN').addEventListener('click', function(e) {
+    e.preventDefault(); // Prevent form from submitting the traditional way
+
+    // Gather the position values
+    let winnerUID = document.getElementById('WinnerUID').value;
+
+    let presidentPosition = document.getElementById('PresValue').value;
+    let presidentName = document.getElementById('PresName').value;
+    let presidentUID = document.getElementById('PresUID').value;
+
+    let vicePresidentPosition = document.getElementById('VpresValue').value;
+    let vicePresidentName = document.getElementById('VpresName').value;
+    let vicePresidentUID = document.getElementById('VpresUID').value;
+
+    let secretaryPosition = document.getElementById('SecValue').value;
+    let secretaryName = document.getElementById('SecName').value;
+    let secretaryUID = document.getElementById('SecUID').value;
+
+    let treasurerPosition = document.getElementById('TreaValue').value;
+    let treasurerName = document.getElementById('TreaName').value;
+    let treasurerUID = document.getElementById('TreaUID').value;
+
+    let auditorPosition = document.getElementById('AudValue').value;
+    let auditorName = document.getElementById('AudName').value;
+    let auditorUID = document.getElementById('AudUID').value;
+
+    let peaceInOrderPosition = document.getElementById('PioValue').value;
+    let peaceInOrderName = document.getElementById('PioName').value;
+    let peaceInOrderUID = document.getElementById('PioUID').value;
+
+    let director1Position = document.getElementById('Dir1Value').value;
+    let director1Name = document.getElementById('Dir1Name').value;
+    let director1UID = document.getElementById('Dir1UID').value;
+
+    let director2Position = document.getElementById('Dir2Value').value;
+    let director2Name = document.getElementById('Dir2Name').value;
+    let director2UID = document.getElementById('Dir2UID').value;
+
+    let director3Position = document.getElementById('Dir3Value').value;
+    let director3Name = document.getElementById('Dir3Name').value;
+    let director3UID = document.getElementById('Dir3UID').value;
+
+    let setPositionDate = document.getElementById('timestamp2').textContent;
+
+    // Create an XMLHttpRequest object
+    let xhr = new XMLHttpRequest();
+    xhr.open('POST', 'PHPBackend/DeclareWinner.php', true); // Change 'path_to_your_php_file.php' to your actual PHP file path
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+    // Define what happens on successful data submission
+    xhr.onload = function() {
+        if (this.status === 200) {
+            const response = JSON.parse(this.responseText);
+            if (response.success) {
+                alert("Positions successfully inserted.");
+                location.reload();
+            } else {
+                alert("Error: " + response.error);
+            }
+        }
+    };
+
+    // Prepare the data for sending
+    let params = 
+        'action=insert_positions' +
+        '&winnerUID=' + encodeURIComponent(winnerUID) + 
+
+        '&presidentPosition=' + encodeURIComponent(presidentPosition) + 
+        '&presidentName=' + encodeURIComponent(presidentName) + 
+        '&presidentUID=' + encodeURIComponent(presidentUID) + 
+
+        '&vicePresidentPosition=' + encodeURIComponent(vicePresidentPosition) + 
+        '&vicePresidentName=' + encodeURIComponent(vicePresidentName) + 
+        '&vicePresidentUID=' + encodeURIComponent(vicePresidentUID) + 
+
+        '&secretaryPosition=' + encodeURIComponent(secretaryPosition) + 
+        '&secretaryName=' + encodeURIComponent(secretaryName) + 
+        '&secretaryUID=' + encodeURIComponent(secretaryUID) + 
+
+        '&treasurerPosition=' + encodeURIComponent(treasurerPosition) + 
+        '&treasurerName=' + encodeURIComponent(treasurerName) + 
+        '&treasurerUID=' + encodeURIComponent(treasurerUID) + 
+
+        '&auditorPosition=' + encodeURIComponent(auditorPosition) + 
+        '&auditorName=' + encodeURIComponent(auditorName) + 
+        '&auditorUID=' + encodeURIComponent(auditorUID) + 
+
+        '&peaceInOrderPosition=' + encodeURIComponent(peaceInOrderPosition) +
+        '&peaceInOrderName=' + encodeURIComponent(peaceInOrderName) +
+        '&peaceInOrderUID=' + encodeURIComponent(peaceInOrderUID) +
+
+        '&director1Position=' + encodeURIComponent(director1Position) + 
+        '&director1Name=' + encodeURIComponent(director1Name) +
+        '&director1UID=' + encodeURIComponent(director1UID) +
+
+        '&director2Position=' + encodeURIComponent(director2Position) + 
+        '&director2Name=' + encodeURIComponent(director2Name) + 
+        '&director2UID=' + encodeURIComponent(director2UID) + 
+
+        '&director3Position=' + encodeURIComponent(director3Position) +
+        '&director3Name=' + encodeURIComponent(director3Name) +
+        '&director3UID=' + encodeURIComponent(director3UID) +
+
+        '&setPositionDate=' + encodeURIComponent(setPositionDate);
+
+    // Send the request with the parameters
+    xhr.send(params);
+});
+
+
+// Function ng paglagay ng position sa table ng add candidate
+function tallyVotes() {
+    // Create an XMLHttpRequest object
+    let xhr = new XMLHttpRequest();
+    xhr.open('POST', 'PHPBackend/DeclareWinner.php', true); // Adjust the path to your PHP file
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+    // Define what happens on successful data submission
+    xhr.onload = function() {
+        try {
+            const response = JSON.parse(this.responseText);
+            if (response.success) {
+                displayVoteTallyInConsole(response.votes);
+            } else {
+                console.error("Error: " + response.error);
+            }
+        } catch (error) {
+            console.error("Invalid JSON response:", this.responseText);
+        }
+    };
+
+    // Send the request to tally votes
+    xhr.send('action=tally_votes');
+}
+
+function displayVoteTallyInConsole(voteData) {
+    console.log('Vote Tally by Position:');
+    for (let position in voteData) {
+        if (voteData.hasOwnProperty(position)) {
+            console.log(`Position: ${position}`);
+            console.log(`Winner: ${voteData[position].candidate_name}`);
+            console.log(`UID: ${voteData[position].candidate_uid}`);
+            console.log(`Votes: ${voteData[position].votes}`);
+            console.log('--------------------------------');
+        }
+    }
+}
+
+// Set the interval when the page loads
+var checkNewWinnersInterval = setInterval(checkForNewWinners, 1000);
+
+function checkForNewWinners() {
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', 'PHPBackend/DeclareWinner.php', true);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+            try {
+                var response = JSON.parse(xhr.responseText);
+                
+                console.log("Response received:", response);  // Debug log
+
+                if (response.success) {
+                    // Convert response.count to a number and check if it equals 0
+                    var count = Number(response.count);  // Ensure count is a number
+                    if (count === 0) {
+                        console.log(response.message);
+                        clearInterval(checkNewWinnersInterval);  // Clear the interval
+                        console.log("Interval cleared");  // Log to confirm
+                        tallyVotes();
+                    } else {
+                        console.log(response.message + ": " + count);  // Log the count
+                    }
+                } else {
+                    console.error("Error: " + response.error);
+                }
+            } catch (e) {
+                console.error("Failed to parse response: " + e);
+            }
+        }
+    };
+
+    // Send the request with action 'check_new_winners'
+    xhr.send('action=check_new_winners');
+}
+
+
+
+
 
