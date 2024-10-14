@@ -25,6 +25,23 @@ if (isset($_SESSION['unique_id'])) {
 </head>
 </head>
 <body>
+
+<div class="SuccessModalIto" id="successModal">
+        <div class="subSuccessModalContent">
+            <div class="successModalContent">
+                <div class="successText">
+                    <img class="successImg" src="Pictures/success.png">
+                    <h2 class="paragSuccess">Updated Successfully!</h2>
+                </div>
+                <hr class="hrSuccess"> 
+                <div class="successButtons">
+                    <button class="buttonSuccess okButn OkSaModal">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- MODAL NG SUCCESS -->
+
 <div class="mainDashboardContainer">
         <div class="secMainDash">
             <div class="sidebarContainer sideActive" id="sidebar">
