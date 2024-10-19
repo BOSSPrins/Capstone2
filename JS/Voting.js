@@ -1397,9 +1397,40 @@ function updateTimestamp() {
 // Optionally update the timestamp every second
 setInterval(updateTimestamp, 1000);
 
+function fetchWinners() {
+    fetch('PHPBackend/DeclareWinner.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: new URLSearchParams({
+            'action': 'fetch_winners'  // Sending the 'fetch_winners' action
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            for (let i = 0; i < data.data.length; i++) {
+                const candidate = data.data[i];
+
+                // Populate modal with fetched data
+                const candidateImg = document.getElementById(`CandidateIMG${i+1}`);
+                const candidateName = document.getElementById(`CandidateName${i+1}`);
+                
+                // Update content in modal
+                candidateName.value = candidate.candidate_name;
+                candidateImg.style.backgroundImage = `url(${candidate.img})`;
+            }
+        } else {
+            console.error('Error fetching winners:', data.error);
+        }
+    })
+    .catch(error => console.error('Error:', error));
+}
 
 window.addEventListener("load", function() {
     updateTimestamp();
+    fetchWinners();
 });
 
 

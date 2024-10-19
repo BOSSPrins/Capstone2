@@ -172,10 +172,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action'])) {
     }
 
     if ($action === 'fetchCandidates') {
-        // Action 1: Fetch candidates excluding the current user, with empty won_date
+        // Action 1: Fetch candidates excluding the current user / di maboto yung sarili
         $sql = "SELECT unique_id, candidate_name, img 
                 FROM voting 
-                WHERE won_date = '' 
+                WHERE won_date = '' AND fail_date = ''
                 AND unique_id != '$sessionUniqueId' 
                 ORDER BY vote_id DESC";
         $result = $conn->query($sql);
@@ -191,10 +191,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action'])) {
         }
 
     } else if ($action === 'fetchVotes') {
-        // Action 2: Fetch candidates (without including votes column), without excluding the current user
+        // Action 2: Fetch candidates para sa add candidate na listahan
         $sql = "SELECT unique_id, candidate_name, img 
                 FROM voting 
                 WHERE won_date = '' 
+                AND fail_date = ''
                 ORDER BY vote_id DESC";
         $result = $conn->query($sql);
 

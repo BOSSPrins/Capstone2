@@ -356,6 +356,7 @@ $user_UID = $_SESSION['unique_id'];
                         </footer>
                     </div>
 
+                    <!-- Aalisin na tong pangalawang botohan -->
                     <div class="MainContainerAll" id="SecondVotingContainer">
                         <div class="containerDivssPangalawa">
                         <div class="CandidatesConPangalawa">
@@ -607,6 +608,8 @@ $user_UID = $_SESSION['unique_id'];
                         </footer>
                     </div>
                 </div>
+
+
                 <div class="UsersSummaryModal" id="UsersSummaryModal">
                     <div class="UsersSummaryModalBaba">
                         <form method="POST">
@@ -717,6 +720,7 @@ $user_UID = $_SESSION['unique_id'];
                     </div>
                 </div>
 
+                <!-- Eto ding modal -->
                 <div class="SummaryViewModalTwo" id="summaryModalTwo">
                     <div class="summary-ModalTwo">
                         <div class="SubSummaryTwo">

@@ -216,57 +216,57 @@ if (isset($_SESSION['unique_id'])) {
                                         </header>
                                         <div class="LamanLoobSummary">
                                             <div class="candidates">
-                                                <div class="PictureCan1"> </div>
+                                                <div class="PictureCan1" id="CandidateIMG1"> </div>
                                                 <div class="NameAndPosition">
-                                                    <input class="inputCan" type="text">
+                                                    <input class="inputCan" type="text" id="CandidateName1">
                                                 </div>
                                             </div>
                                             <div class="candidates">
-                                                <div class="PictureCan1"> </div>
+                                                <div class="PictureCan1" id="CandidateIMG2"> </div>
                                                 <div class="NameAndPosition">
-                                                    <input class="inputCan" type="text">
+                                                    <input class="inputCan" type="text" id="CandidateName2">
                                                 </div>
                                             </div>
                                             <div class="candidates">
-                                                <div class="PictureCan1"> </div>
+                                                <div class="PictureCan1" id="CandidateIMG3"> </div>
                                                 <div class="NameAndPosition">
-                                                    <input class="inputCan" type="text">
+                                                    <input class="inputCan" type="text" id="CandidateName3">
                                                 </div>
                                             </div>
                                             <div class="candidates">
-                                                <div class="PictureCan1"> </div>
+                                                <div class="PictureCan1" id="CandidateIMG4"> </div>
                                                 <div class="NameAndPosition">
-                                                    <input class="inputCan" type="text">
+                                                    <input class="inputCan" type="text" id="CandidateName4">
                                                 </div>
                                             </div>
                                             <div class="candidates">
-                                                <div class="PictureCan1"> </div>
+                                                <div class="PictureCan1" id="CandidateIMG5"> </div>
                                                 <div class="NameAndPosition">
-                                                    <input class="inputCan" type="text">
+                                                    <input class="inputCan" type="text" id="CandidateName5">
                                                 </div>
                                             </div>
                                             <div class="candidates">
-                                                <div class="PictureCan1"> </div>
+                                                <div class="PictureCan1" id="CandidateIMG6"> </div>
                                                 <div class="NameAndPosition">
-                                                    <input class="inputCan" type="text">
+                                                    <input class="inputCan" type="text" id="CandidateName6">
                                                 </div>
                                             </div>
                                             <div class="candidates">
-                                                <div class="PictureCan1"> </div>
+                                                <div class="PictureCan1" id="CandidateIMG7"> </div>
                                                 <div class="NameAndPosition">
-                                                    <input class="inputCan" type="text">
+                                                    <input class="inputCan" type="text" id="CandidateName7">
                                                 </div>
                                             </div>
                                             <div class="candidates">
-                                                <div class="PictureCan1"> </div>
+                                                <div class="PictureCan1" id="CandidateIMG8"> </div>
                                                 <div class="NameAndPosition">
-                                                    <input class="inputCan" type="text">
+                                                    <input class="inputCan" type="text" id="CandidateName8">
                                                 </div>
                                             </div>
                                             <div class="candidates">
-                                                <div class="PictureCan1"> </div>
+                                                <div class="PictureCan1" id="CandidateIMG9"> </div>
                                                 <div class="NameAndPosition">
-                                                    <input class="inputCan" type="text">
+                                                    <input class="inputCan" type="text" id="CandidateName9">
                                                 </div>
                                             </div>
                                         </div>

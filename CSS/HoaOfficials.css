@@ -506,3 +506,72 @@ html{
     position: absolute;
     visibility: hidden;
 }
+
+/* ===== MODAL SA SUCCESS */
+.SuccessModalIto {
+  display: none;
+}
+
+.subSuccessModalContent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  z-index: 2;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.successModalContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  background: white;
+  border-radius: 10px;
+  width: 400px;
+  height: 150px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.paragSuccess {
+  margin-top: 5px;
+}
+
+.successText {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.successButtons {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  
+}
+
+.successImg {
+  width: 50px;
+  display: block;
+  margin: 0 auto;
+}
+
+.buttonSuccess {
+  padding: 10px 45px;
+  cursor: pointer;
+  border-radius: 4px;
+  margin: 10px;
+  margin-top: 10px;
+}
+
+.okButn {
+  background: rgb(76, 175, 80);
+  color: white;
+}
+
+.okButn:hover {
+  background: rgb(56, 142, 60);
+}
