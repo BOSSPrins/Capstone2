@@ -1435,6 +1435,86 @@ window.addEventListener("load", function() {
 
 
 
+// Function para sa bagong add candidates eto na yung may search / suggestion
+document.addEventListener('DOMContentLoaded', function() {
+    const input = document.getElementById('suggestionInput');
+    const suggestionContainer = document.getElementById('suggestionContainer');
+    const suggestionTableBody = document.getElementById('suggestionTableBody');
+
+    input.addEventListener('input', function() {
+        const query = input.value.trim();
+        suggestionTableBody.innerHTML = ''; // Clear previous suggestions
+        suggestionContainer.style.display = 'none'; // Hide the container by default
+
+        if (query.length > 0) {
+            // Send AJAX request to PHP to fetch the search results
+            fetch('PHPBackend/DeclareWinner.php', {  // Make sure this is the correct path to your PHP file
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: new URLSearchParams({
+                    'action': 'search_residents',
+                    'query': query
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.length > 0) {
+                    data.forEach(item => {
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                            <td>${item.first_name} ${item.middle_name} ${item.last_name}</td>
+                            <td>Blk ${item.block} Lot ${item.lot}</td>
+                            <td><button class="action-button" data-id="${item.resident_id}">Action</button></td>
+                        `;
+                        suggestionTableBody.appendChild(row);
+                    });
+                    suggestionContainer.style.display = 'block'; // Show the suggestion container
+                } else {
+                    suggestionContainer.style.display = 'none'; // Hide if no results
+                }
+            })
+            .catch(error => console.error('Error fetching data:', error));
+        } else {
+            suggestionContainer.style.display = 'none'; // Hide if input is empty
+        }
+    });
+
+    // Handle action button click event
+    suggestionTableBody.addEventListener('click', function(event) {
+        if (event.target.classList.contains('action-button')) {
+            const residentId = event.target.getAttribute('data-id');
+            
+            // Send the selected resident ID to PHP for further action
+            fetch('PHPBackend/DeclareWinner.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: new URLSearchParams({
+                    'resident_id': residentId
+                })
+            })
+            .then(response => response.text())
+            .then(data => {
+                alert('Action completed: ' + data); // Display the result of the action
+            })
+            .catch(error => console.error('Error in action:', error));
+        }
+    });
+
+    // Hide the suggestion container when clicking outside
+    document.addEventListener('click', function(event) {
+        if (!input.contains(event.target) && !suggestionContainer.contains(event.target)) {
+            suggestionContainer.style.display = 'none';
+        }
+    });
+});
+
+
+
+
 
 
 

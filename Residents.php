@@ -172,18 +172,14 @@ if (isset($_SESSION['unique_id'])) {
                             </div>
                             <div class="searchTablee">
                                 <div class="dropdownFilter">
-                                  <label for="filter_option">Select Option</label>
+                                  <label for="filter_option">Filter</label>
                                   <input class="DropFilterInput" type="radio" value="" id="filter_option" name="filter_option" checked>
                                   <div class="dropdownFiltercontent">
+                                    <label><input class="DropFilterInput" type="radio" value="All" name="filter_option">All</label>
                                     <label><input class="DropFilterInput" type="radio" value="1" name="filter_option">Block 1</label>
                                     <label><input class="DropFilterInput" type="radio" value="2" name="filter_option">Block 2</label>
                                     <label><input class="DropFilterInput" type="radio" value="3" name="filter_option">Block 3</label>
-                                    <label><input class="DropFilterInput" type="radio" value="3" name="filter_option">Block 3</label>
-                                    <label><input class="DropFilterInput" type="radio" value="3" name="filter_option">Block 3</label>
-                                    <label><input class="DropFilterInput" type="radio" value="3" name="filter_option">Block 3</label>
-                                    <label><input class="DropFilterInput" type="radio" value="3" name="filter_option">Block 3</label>
-                                    <label><input class="DropFilterInput" type="radio" value="3" name="filter_option">Block 3</label>
-                                    <label><input class="DropFilterInput" type="radio" value="3" name="filter_option">Block 3</label>
+                                    <label><input class="DropFilterInput" type="radio" value="4" name="filter_option">Block 4</label>
                                   </div>
                                 </div>
                                 <h3>Search:</h3>
@@ -199,56 +195,8 @@ if (isset($_SESSION['unique_id'])) {
                                         <th style="width:200px"> Contact Number </th>
                                         <th style="width:200px"> Action </th>
                                     </tr>
-
-                                    <tbody>
-                                        <?php
-                                            $filterOption = isset($_GET['filter_option']) ? $_GET['filter_option'] : '';
-                                            $searchQuery = isset($_GET['search_query']) ? $_GET['search_query'] : '';
-
-                                            $query = "SELECT * FROM tblresident WHERE access != 'Pending' OR access = 'Approved'";
-
-                                            if (!empty($filterOption)) {
-                                                $query .= " WHERE block = '" . mysqli_real_escape_string($conn, $filterOption) . "'";
-                                            }
-
-                                            if (!empty($searchQuery)) {
-                                                if (!empty($filterOption)) {
-                                                    $query .= " AND ";
-                                                } else {
-                                                    $query .= " WHERE ";
-                                                }
-                                                $query .= "CONCAT(first_name,middle_name,last_name,block,lot,phone_number) LIKE '%" . mysqli_real_escape_string($conn, $searchQuery) . "%'";
-                                            }
-
-                                            $result = mysqli_query($conn, $query);
-
-                                            if ($result) {
-                                                if (mysqli_num_rows($result) > 0) {
-                                                    while ($row = mysqli_fetch_assoc($result)) {
-                                                        ?>
-                                                            <tr>
-                                                                <td class="user_id" hidden><?php echo $row['user_id'] ?></td>
-                                                                <td><?php echo $row['first_name'] . " " . $row['middle_name'] . " " . $row['last_name']; ?></td>
-                                                                <td><?php echo "Block " . $row['block'] . " Lot " . $row['lot'] ?></td>
-                                                                <td><?php echo $row['phone_number'] ?></td>
-                                                                <td>
-                                                                    <button class="ResidentsViewBtn BiyuModal"> View </button>
-                                                                </td>
-                                                            </tr>
-                                                        <?php
-                                                    }
-                                                    } else {
-                                                    ?>
-                                                        <tr>
-                                                            <td colspan="4">No data found.</td>
-                                                        </tr>
-                                                    <?php
-                                                    }
-                                            } else {
-                                                echo "Query failed: " . mysqli_error($conn);
-                                            }
-                                        mysqli_close($conn);
-                                        ?>
+                                    <tbody id="residentTableBody">
+                                        
                                     </tbody>
                                 </thead>
                             </table>
@@ -264,7 +212,7 @@ if (isset($_SESSION['unique_id'])) {
                                 </li>
                             </ul>
                         </footer>
-                        <div class="containerNgViewModal" id="ViewModalResidents">
+                        <div class="containerNgViewModal" id="ViewModalResidents" name="ViewModalResidents">
                             <div class="subContainerViewModal">
                                 <div class="viewItongmodal">
                                     <header class="titleHeaderView">
@@ -300,7 +248,7 @@ if (isset($_SESSION['unique_id'])) {
                                             <div class="row">
                                                 <div class="inputboxView">
                                                     <label> Date of Birth: </label>
-                                                    <input class="inputngViewModalTo" type="text" id="" name="">
+                                                    <input class="inputngViewModalTo" type="text" id="Bday" name="birthday">
                                                 </div>
                                                 <div class="inputboxView">
                                                     <label> Age: </label>
@@ -310,7 +258,7 @@ if (isset($_SESSION['unique_id'])) {
                                             <div class="row">
                                                 <div class="inputboxView">
                                                     <label> Gender: </label>
-                                                    <input class="inputngViewModalTo"  type="text" id="Gender" name="gender">
+                                                    <input class="inputngViewModalTo"  type="text" id="Sex" name="sex">
                                                 </div>
                                                 <div class="inputboxView">
                                                     <label> Contact Number: </label>

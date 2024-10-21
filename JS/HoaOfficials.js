@@ -358,20 +358,24 @@ inputFile9.addEventListener("change", function() {
     reader9.readAsDataURL(file9);
 });
 
-const modal = document.getElementById("successModal");
-const okButton = document.querySelector(".okButn.OkSaModal");
+$(document).ready(function() {
+    const modal = $("#successModal"); // Using jQuery to select the modal
+    const okButton = $(".okButn.OkSaModal"); // Using jQuery to select the OK button
 
- // Function to open the success modal
- function openSuccessModal() {
-    console.log("Opening success modal");
-    modal.style.display = "block";
-}
+    // Function to open the success modal with fadeIn effect
+    window.openSuccessModal = function() {
+        console.log("Opening success modal");
+        modal.fadeIn(); // Fade in the modal
+    };
 
-// Event listener for the "OK" button to refresh the page
-okButton.addEventListener("click", () => {
-    modal.style.display = "none";
-    location.reload(); // Refresh the page
+    // Event listener for the "OK" button to refresh the page
+    okButton.on("click", function() {
+        modal.fadeOut(function() {
+            location.reload(); // Refresh the page after the modal has faded out
+        });
+    });
 });
+
 
 
 

@@ -474,7 +474,27 @@ if (isset($_SESSION['unique_id'])) {
                     <!-- Modal ng add candidate -->
                     <div id="History" class="EachContentsMonth">
                         <header class="AddingDivsForCandidates">
-                            <button type="button" class="addingDivsBtn"> Add </button>
+                            <div class="autocomplete-wrapper">
+                            <div class="autocomplete-container">
+                                <input type="text" id="suggestionInput" placeholder="Type something...">
+                                <div id="suggestionContainer" class="suggestion-container">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Address</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="suggestionTableBody">
+                                            <!-- Suggestions will be dynamically inserted here -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="button" class="addingDivsBtn"> Add </button>
                         </header>
                         <form class="bowting" id="candidateForm"  method="POST" enctype="multipart/form-data">
                             <div class="addingcanditatesDivCon" id="addingCandidatesContainer" name="addingCandidatesContainer">

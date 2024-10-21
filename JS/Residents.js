@@ -186,81 +186,126 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
-document.addEventListener('DOMContentLoaded', function() {
-    // Select the button that opens the modal
-    const openModalButtons = document.querySelectorAll('.ResidentsViewBtn');
-    
-    // Select the close button inside the modal
-    const closeModalButton = document.querySelector('.closeViewModal');
-    
-    // Select the modal itself
-    const modal = document.querySelector('.containerNgViewModal');
+// ETO YUNG LUMANG FUNCTION NG VIEW BUTTON SA TABLE
+// document.addEventListener('DOMContentLoaded', function() {
+//     const modal = document.getElementById('ViewModalResidents');
+//     const viewButtons = document.querySelectorAll('.ResidentsViewBtn');
+//     const closeModalButton = document.querySelector('.closeViewModal');
 
-    // Function to open the modal
-    function openModal() {
-        modal.style.display = 'block';
-    }
+//     viewButtons.forEach(function(button) {
+//         button.addEventListener('click', function() {
+//             console.log('Button clicked, opening modal'); // Debugging log
+//             modal.style.display = 'block'; // Show the modal
+//         });
+//     });
 
-    // Function to close the modal
-    function closeModal() {
-        modal.style.display = 'none';
-    }
+//     // Close the modal when the 'X' is clicked
+//     if (closeModalButton) {
+//         closeModalButton.addEventListener('click', function() {
+//             modal.style.display = 'none';
+//         });
+//     }
 
-    // Loop through each open modal button and attach click event listener
-    openModalButtons.forEach(function(button) {
-        button.addEventListener('click', openModal);
-    });
+//     // Close modal when clicking outside the modal content
+//     window.addEventListener('click', function(event) {
+//         if (event.target === modal) {
+//             modal.style.display = 'none';
+//         }
+//     });
+// });
 
-    // Event listener to close the modal when the close button is clicked
-    closeModalButton.addEventListener('click', closeModal);
-});
+
 
 
 $(document).ready(function () {
-            
-    $('.BiyuModal').click(function (e) { 
-        e.preventDefault();
-        
-     var  user_id = $(this).closest('tr').find('.user_id').text();
-       
+    
+    // Load table data on page load
+    function loadTableData() {
         $.ajax({
             method: "POST",
             url: "PHPBackend/DashProcess.php",
             data: {
-                'click_BiyuModal': true,
-                'user_id':user_id,
+                'action': 'search_residents', // Action for PHP to handle
+                'search_query': '',  // Empty search query for initial load
+                'filter_option': ''  // No filter for initial load
             },
+            success: function (response) {
+                // Update the table body with the initial data
+                $('#residentTableBody').html(response);
+            }
+        });
+    }
 
-             success: function (response) {
+    loadTableData();  // Trigger the load when the page first loads
 
-                $.each(response, function (Key, value) { 
+    // Filter and search as you type
+    $('#search, input[name="filter_option"]').on('keyup change', function() {
+        var searchQuery = $('#search').val().trim();
+        var filterOption = $('input[name="filter_option"]:checked').val();
+        
+        $.ajax({
+            method: "POST",
+            url: "PHPBackend/DashProcess.php",
+            data: {
+                'action': 'search_residents',
+                'search_query': searchQuery,
+                'filter_option': filterOption
+            },
+            success: function (response) {
+                // Update the table body with the search/filter results
+                $('#residentTableBody').html(response);
+            }
+        });
+    });
 
+    // BiyuModal click event handling
+    $(document).on('click', '.BiyuModal', function (e) { 
+        e.preventDefault();
+        var user_id = $(this).closest('tr').find('.user_id').text();
+        console.log("Button clicked!");
+        
+        $.ajax({
+            method: "POST",
+            url: "PHPBackend/DashProcess.php",
+            data: {
+                'action': 'fetch_user_data', // Distinguish request
+                'user_id': user_id
+            },
+            success: function (response) {
+                $.each(response, function (key, value) {
                     $('#userID').val(value['user_id']);
                     $('#Lname').val(value['last_name']);
                     $('#Fname').val(value['first_name']);
                     $('#Mname').val(value['middle_name']);
-                    console.log("Before setting value to #Age:", value['sex']);
+                    $('#Suffix').val(value['suffix']);
                     $('#Age').val(value['age']);
-                    console.log("After setting value to #Age:", $('#Age').val());
-                    console.log("Value of value['age']:", value['age']);
-                    console.log("End of code execution");
-                    // $('#Bplace').val(value['birthplace']);
+                    $('#Bday').val(value['birthday']);
                     $('#Sex').val(value['sex']);
                     $('#PhoneNum').val(value['phone_number']);
-                    // $('#CitizShip').val(value['citizenship']);
                     $('#Blk').val(value['block']);
                     $('#Lot').val(value['lot']);
+                    $('#STName').val(value['street_name']);
                     $('#ecName').val(value['ec_name']);
                     $('#ecRel').val(value['ec_relship']);
                     $('#ecNum').val(value['ec_phone_num']);
-                    //$('#STName').val(value['street_name']);
                     $('#ecAddress').val("Blk " + value['block'] + " Lot " + value['lot']);
-                    // + "  " + value['street_name'] + " St."
                 });
 
-
-             }
-        });
-    })
-
+               // Show the modal with a fade-in effect
+            $('.containerNgViewModal').fadeIn(300); // 300ms for a fade-in effect
+        }
+    });
 });
+
+// Hide the modal when clicking the close button or outside the modal
+$('.closeViewModal').on('click', function() {
+    $('.containerNgViewModal').fadeOut(300); // Fade out effect
+});
+
+$(window).on('click', function(event) {
+    if (event.target.className === 'containerNgViewModal') {
+        $('.containerNgViewModal').fadeOut(300); // Fade out when clicking outside the modal
+    }
+});
+});
+

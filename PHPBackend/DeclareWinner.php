@@ -314,6 +314,98 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         closeConnectionAndRespond($conn, $response);
+
+    } elseif ($action === 'resident_action') {
+        $resident_id = isset($_POST['resident_id']) ? $_POST['resident_id'] : null;
+        
+        if ($resident_id) {
+            // Perform the desired action with the resident ID (for example, fetching more details or updating a field)
+            $sql = "SELECT first_name, middle_name, last_name, block, lot, phone_number FROM tblresident WHERE user_id = ?";
+            
+            if ($stmt = $conn->prepare($sql)) {
+                $stmt->bind_param("i", $resident_id);
+                if ($stmt->execute()) {
+                    $result = $stmt->get_result();
+                    if ($result->num_rows > 0) {
+                        $resident = $result->fetch_assoc();
+                        $response = [
+                            'success' => true,
+                            'message' => 'Resident action successfully processed.',
+                            'resident' => $resident
+                        ];
+                    } else {
+                        $response = ['success' => false, 'error' => 'Resident not found'];
+                    }
+                } else {
+                    error_log("SQL Error: " . $stmt->error);
+                    $response = ['success' => false, 'error' => "Database error occurred"];
+                }
+                $stmt->close();
+            } else {
+                error_log("SQL Error: " . $conn->error);
+                $response = ['success' => false, 'error' => "Database error occurred"];
+            }
+        } else {
+            $response = ['success' => false, 'error' => 'Missing resident ID'];
+        }
+
+        closeConnectionAndRespond($conn, $response);
+
+    } elseif ($action === 'search_residents') {
+            $query = isset($_POST['query']) ? trim($_POST['query']) : '';
+         
+            // Debugging: Log the received query
+            error_log("Search Query: " . $query);
+
+            if ($query !== '') {
+                $sql = "SELECT user_id, first_name, middle_name, last_name, block, lot
+                        FROM tblresident
+                        WHERE CONCAT(first_name, ' ', middle_name, ' ', last_name) LIKE ? 
+                        OR block LIKE ? 
+                        OR lot LIKE ?";
+                
+                // Debugging: Log the SQL statement
+                error_log("SQL Statement: " . $sql);
+                
+                $stmt = $conn->prepare($sql);
+                
+                if ($stmt === false) {
+                    // Log preparation error
+                    error_log("Prepare Statement Error: " . $conn->error);
+                    closeConnectionAndRespond($conn, ['success' => false, 'error' => 'Database error occurred']);
+                    return;
+                }
+
+                $likeQuery = "%" . $query . "%";
+                $stmt->bind_param("sss", $likeQuery, $likeQuery, $likeQuery);
+                
+                // Debugging: Log the binding of parameters
+                error_log("Binding Parameters: " . $likeQuery);
+
+                if (!$stmt->execute()) {
+                    // Log execution error
+                    error_log("Execute Statement Error: " . $stmt->error);
+                    closeConnectionAndRespond($conn, ['success' => false, 'error' => 'Database error occurred']);
+                    return;
+                }
+
+                $result = $stmt->get_result();
+                
+                // Debugging: Log the number of rows fetched
+                error_log("Number of Rows Fetched: " . $result->num_rows);
+
+                $residents = [];
+                while ($row = $result->fetch_assoc()) {
+                    $residents[] = $row;
+                }
+
+                // Return the results as JSON and close connection
+                closeConnectionAndRespond($conn, $residents);
+            } else {
+                // Return an empty array if no query is provided
+                closeConnectionAndRespond($conn, []);
+            }
+
     } else {
         $response = ['success' => false, 'error' => 'Invalid request'];
         closeConnectionAndRespond($conn, $response);
