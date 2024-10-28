@@ -231,7 +231,7 @@ html{
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: 94.5%; /* Ensure it takes full height */
+    height: 100%; /* Ensure it takes full height */
     padding: 10px 0px 10px 0px;
 }  
 
@@ -530,8 +530,7 @@ html{
     display: flex;
     flex-direction: column; /* Stack children vertically */
     width: 100%;
-    height: 99.4%; /* Ensure it takes full height */
-    padding-bottom: 30px;
+    height: 100%; /* Ensure it takes full height */
 }
 
 /* .ContainerOfEachhh{
@@ -546,31 +545,39 @@ html{
     height: 525px;
 } */
 
-/* DESIGN PARA SA LAHAT LAHAT NA NASA LOOB */
+/* DESIGN PARA SA TIMER LOOB */
 .TableHeaderr{
     display: flex;
     flex-direction: column;
-    /* justify-content: space-between; */
-    /* align-items: center; */
-    /* margin-bottom: 6px; */
 }
 
-.TimerSaLabas{
+.TimerVoteAndButton{
     display: flex;
-    justify-content: end;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.InputTimee{
+    display: flex;
     align-items: center;
 }
 
-.timerVote h2{
+.LagayanNgOras{
+    display: flex   ;
+    align-items: center;
+}
+
+.h2Timer {
     margin-right: 10px;
 }
 
 .spanNumberTime{
-    font-size: 30px;
+    font-size: 25px;
 }
 
 .colon{
-    font-size: 30px;
+    font-size: 25px;
     margin-bottom: 4px;
 }
 
@@ -581,38 +588,35 @@ html{
     flex: 1; /* Allow it to grow and take remaining space */
 }
 
-table{
+.TableContainerRank table{
     width: 100%;
     border-collapse: collapse;
-    /* margin-top: 15px; */
+    margin-top: 15px;
 }
 
-thead{
+.TableContainerRank thead{
     background: var(--color-primary);
     color: white;
 }
 
-tr:nth-child(even){
+.TableContainerRank tr:nth-child(even){
     background: var(--color-light);
 }
 
-th{
-    padding: 20px;
-    border: 1px solid rgb(179, 172, 172); /* Outline partition */
-}
-
-td{
+.TableContainerRank th{
     padding: 10px;
     border: 1px solid rgb(179, 172, 172); /* Outline partition */
 }
 
-tbody{
-    background: var(--color-white);
-    text-align: center;
+.TableContainerRank td{
+    color: #000000;
+    padding: 10px;
+    border: 1px solid rgb(179, 172, 172); /* Outline partition */
 }
 
-td{
-    color: #000000;
+.TableContainerRank tbody{
+    background: var(--color-white);
+    text-align: center;
 }
 
 /* DESIGN PARA SA DROPDOWN PANG SET NG TIMER */
@@ -639,7 +643,7 @@ td{
     width: 300px;
     height: 300px;
     right: 19px;
-    top: 149px;
+    top: 159px;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 1;
 }
@@ -747,8 +751,8 @@ input[type="datetime-local"] {
 
 /* DESIGN PARA SA GENERATE BUTTON */
 .BtnGeneratee{
-    font-size: 15px;
-    padding: 10px 30px;
+    font-size: 12px;
+    padding: 10px 20px;
     cursor: pointer;
     background: rgb(198, 230, 240);
 }
@@ -850,140 +854,6 @@ input[type="datetime-local"] {
     padding: 5px;
     font-size: 20px;
     margin-top: 13px;
-}
-
-
-
-/* PANGALAWANG DESIGN PARA SA LAHAT LAHAT NA NASA LOOB */
-.timerVoteTwo{
-    display: flex;
-    justify-content: end;
-    align-items: center;
-}
-
-.timerVoteTwo h2{
-    margin-right: 10px;
-}
-
-.spanNumberTimeTwo{
-    font-size: 30px;
-}
-
-/*DESIGN FOR TABLE RANKING */
-table{
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 15px;
-}
-
-thead{
-    background: var(--color-primary);
-    color: white;
-}
-
-tr:nth-child(even){
-    background: var(--color-light);
-}
-
-th{
-    padding: 20px;
-    border: 1px solid rgb(179, 172, 172); /* Outline partition */
-}
-
-td{
-    padding: 10px;
-    border: 1px solid rgb(179, 172, 172); /* Outline partition */
-}
-
-tbody{
-    background: var(--color-white);
-    text-align: center;
-}
-
-td{
-    color: #000000;
-}
-
-/* DESIGN PARA SA DROPDOWN PANG SET NG TIMER */
-.dropSetTimerTwo{
-    padding: 10px 15px;
-    margin-left: 15px;
-    cursor: pointer;
-}
-
-.emeSetTwo{
-    width: 0;
-    height: 0;
-    border-left: 5px solid transparent;
-    border-right: 5px solid transparent;
-    border-top: 6px solid #aeaeae;
-    margin-top: 1.5px;
-    transition: 0.3s;
-}
-
-.timerContentTwo{
-    display: none;
-    position: absolute;
-    background-color: #f9f9f9;
-    width: 300px;
-    height: 410px;
-    right: 25px;
-    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-    z-index: 1;
-}
-
-.showTwo{
-    display:block;
-}
-
-.rotateSetTwo{
-    transform: rotate(180deg); 
-}
-
-/* DESIGN SA LOOB NG DROPDOWN */
-.timer-controlsTwo input{
-    width: 100%;
-    padding: 5px;
-    margin-bottom: 10px;
-    font-size: 25px;
-}
-
-.timerTwo{
-    margin: 20px;
-}
-
-.btnsForTimerTwo button{
-    width: 100%;
-    /* margin-top: 15px; */
-    margin-bottom: 15px;
-    padding: 10px 0;
-    font-size: 20px;
-    cursor: pointer;
-    color: white;
-}
-
-#startTwo{
-    background: green;
-}
-
-#startTwo:hover{
-    background: rgb(1, 178, 1);
-}
-
-#stopTwo{
-    background: rgb(165, 0, 0);
-}
-
-#stopTwo:hover{
-    background: rgb(219, 0, 0);
-}
-
-#resetTwo{
-    background: rgb(0, 0, 128);
-}
-
-#resetTwo:hover{
-    background: rgb(0, 0, 197);
 }
 
 
@@ -1118,103 +988,6 @@ td{
     background-color: #007bff;
     color: white;
 }
-
-/* .page-btn2.Paginationnactive2 {
-    background-color: #007bff;
-    color: white;
-} */
-
-/* DESIGN PARA SA ADDING DIVS */
-.AddingDivsForCandidates{
-    display: flex;
-    justify-content: end;
-}
-
-.addingDivsBtn{
-    padding: 10px 30px;
-    font-size: 15px;
-    cursor: pointer;
-}
-
-
-/* DESIGN PARA SA OFFICIALS DIVS */
-.containerDivss{
-    display: grid;
-    padding: 10px;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: 1.6rem;
-    overflow-y: auto;
-    height: 100%; /* Takes up full height of parent */
-}
-
-.CandidatesCon {
-    position: relative; /* Needed for absolute positioning of CloseButton */
-    display: flex;
-    flex-direction: column;
-    background: var(--color-white);
-    padding: 10px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-    transition: all 300ms ease;
-    height: 330px;
-}
-
-.CandiImageContainer{
-    display: flex;
-    justify-content: center;
-    height: 260px; /* Set a fixed height */
-    width: 100%;
-    border: 2px rgb(3, 1, 139) solid;
-    overflow: auto; /* Ensure overflow is hidden to contain images */
-}
-
-.buttonsNgCandidates{
-    display: flex;
-    justify-content: space-between;
-}
-
-.NameCandiInput{
-    border: 2px rgb(3, 1, 139) solid;
-    padding: 5px;
-    font-size: 17px;
-    margin-top: 10px;
-}
-
-.buttonSivv{
-    margin-top: 10px;
-    padding: 5px 30px;
-    font-size: medium;
-    border-radius: 5px;
-    cursor: pointer;
-}
-  
-.inputts{
-    position: absolute;
-    visibility: hidden;
-}
-
-
-.CloseButton {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    cursor: pointer;
-    font-size: 18px;
-    color: red;
-    background: white;
-    border: none;
-    border-radius: 50%;
-    width: 24px;
-    height: 24px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-}
-
-.CloseButton:hover {
-    background: #f5f5f5;
-}
-
 
 /* Error at sakses ng add candidate */
 .iror{
@@ -1396,6 +1169,7 @@ display: none;
 
 /* Para sa add candidates na may search at table na */
 .autocomplete-wrapper {
+    display: flex;
     width: 100%; /* Ensure the wrapper has full width */
     margin: 0; /* Remove margin */
     padding: 0; /* Remove padding */
@@ -1403,17 +1177,19 @@ display: none;
 
 .autocomplete-wrapper .autocomplete-container {
     position: relative;
-    width: 400px;
+    width: 100%;
     margin: 0; /* Ensure there's no margin here */
 }
 
 .autocomplete-wrapper #suggestionInput {
     width: 100%;
-    padding: 10px;
+    padding: 5px;
     border: 1px solid #ccc;
     border-radius: 4px;
-    margin: 0;
-    margin-right: 50%;
+}
+
+.inputGroup{
+    display: flex;
 }
 
 .autocomplete-wrapper .suggestion-container {
@@ -1421,18 +1197,20 @@ display: none;
     position: absolute;
     background-color: white;
     border: 1px solid #ccc;
-    width: 150%;
-    z-index: 1000;
+    width: 100%;
+    z-index: 1;
     margin: 0;
     padding: 0;
     top: 100%; /* Position directly below the input */
+    max-height: 250px; /* Optional: Set a max-height for suggestions */
+    overflow: auto; /* Enable scrolling if suggestions exceed max-height */
 }
 
 /* Scoped table styling inside the autocomplete-wrapper */
 .autocomplete-wrapper table {
     width: 100%;
-    max-width: 600px;
     border-collapse: collapse;
+    margin-top: 5px;
 }
 
 .autocomplete-wrapper th {
@@ -1442,14 +1220,23 @@ display: none;
 }
 
 .autocomplete-wrapper td {
-    padding: 8px;
+    padding: 3px 10px;
     border: 1px solid #ccc;
     text-align: left;
 }
 
-.autocomplete-wrapper th {
-    background-color: var(--color-primary);
+.autocomplete-wrapper tr:nth-child(even){
+    background: var(--color-light);
 }
+
+.autocomplete-wrapper tr{
+    cursor: pointer;
+}
+
+.autocomplete-wrapper tr:hover{
+    color: #007bff;
+}
+
 
 .autocomplete-wrapper .action-button {
     padding: 5px 10px;
@@ -1462,5 +1249,36 @@ display: none;
 
 .autocomplete-wrapper .action-button:hover {
     background-color: #0056b3;
+}
+
+/*MODAL PARA SA VIEWING MODAL SA SEACH NG ADDING CANDIDATES*/
+.ViewingResidentsModal {
+    width: 29%;
+    max-height: 400px;
+    overflow: auto;
+    padding: 10px;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    position: absolute; /* Make sure it’s positioned correctly */
+    z-index: 2; /* Ensure it's on top of other elements */
+    display: none; /* Hidden by default */
+}
+
+.closeModalInfoo{
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+
+.closeViewingIn{
+    cursor: pointer;
+    font-size: 1.5em;
+    color: #aaa;
+}
+
+.closeViewingIn:hover{
+    color: black;
 }
 

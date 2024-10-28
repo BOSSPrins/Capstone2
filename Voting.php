@@ -153,26 +153,34 @@ if (isset($_SESSION['unique_id'])) {
                     </div>
                 </div>
                 <div class="VotingNavv">
-                    <a href="#" onclick="toggleContent('Payments')"> Candidates Table </a>
-                    <a href="#" onclick="toggleContent('History')"> Add Candidates </a>
-                    <a href="#" onclick="toggleContent('Hindi ko pa alam')"> History </a> <!-- Babaguhin pa to hindi ko pa alam kung anong tawag sa mga editan ng kung ano-ano -->
+                    <a href="#" onclick="toggleContent('CandidateTable')"> Candidates Table </a>
+                    <a href="#" onclick="toggleContent('History')"> History </a>
                 </div>
                 <div class="MainContainerForTables">
-                    <div id="Payments" class="EachContentsMonth">
-                        <!-- Page 1 content -->
-                        <div id="page1" class="page-content contentPage">
+                    <div id="CandidateTable" class="EachContentsMonth">
+                        <div class="page-content contentPage">
                             <header class="TableHeaderr">
-                                <div class="timerVote">
-                                    <div class="TimerSaLabas">
+                                <div class="TimerVoteAndButton">
+                                    <div class="ButtonGen">
+                                        <button class="BtnGeneratee">Generate</button>
+                                    </div>
 
-                                    <input type="hidden" id="timestamp" name="timestamp">
+                                    <div class="LagayanNgOras">
+                                        <div class="InputTimee">
+                                            <div class="DikonaAlamOne">
+                                                <input type="hidden" id="timestamp" name="timestamp">
+                                                <h2 class="h2Timer"> Timer: </h2>
+                                            </div>
 
-                                        <h2> Timer: </h2>
-                                        <span class="spanNumberTime" id="hours">00</span>
-                                        <span class="colon">:</span>
-                                        <span class="spanNumberTime" id="minutes">00</span> 
-                                        <span class="colon">:</span>
-                                        <span class="spanNumberTime" id="seconds">00</span>
+                                            <div class="DikonaAlamTwo">
+                                                <span class="spanNumberTime" id="hours">00</span>
+                                                <span class="colon">:</span>
+                                                <span class="spanNumberTime" id="minutes">00</span> 
+                                                <span class="colon">:</span>
+                                                <span class="spanNumberTime" id="seconds">00</span>
+                                            </div>
+                                        </div>
+
                                         <div class="dropDownforSetTimer">
                                             <button onclick="toggleSetTimer()" class="dropSetTimer"> 
                                                 <div class="emeSet"></div>
@@ -201,11 +209,34 @@ if (isset($_SESSION['unique_id'])) {
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="ButtonGen">
-                                    <button class="BtnGeneratee">Generate</button>
-                                </div>
+                                </div> 
                             </header>
+
+                            <div class="autocomplete-wrapper">
+                                <div class="autocomplete-container">
+                                    <div class="inputGroup">
+                                        <input type="text" id="suggestionInput" placeholder="Search...">
+                                        <input type="text" id="addressFilter" placeholder="Filter by Address...">
+                                    </div>
+                                    <div id="suggestionContainer" class="suggestion-container">
+                                        <table>
+                                            <tbody id="suggestionTableBody">
+                                                <!-- Suggestions will be dynamically inserted here -->
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="ViewingResidentsModal">
+                                <div class="ViewingResContent">
+                                    <!--- Content nasa JS  tsaka nalang ayusin yung design pag nakukuha na ng js yung apat --->
+                                    <!-- Picture -->
+                                     <!-- Address -->
+                                      <!-- Gender -->
+                                       <!-- Age -->
+                                </div>
+                            </div>
 
                             <div class="SummaryViewModal" id="summaryModal">
                                 <div class="summary-Modal">
@@ -279,8 +310,9 @@ if (isset($_SESSION['unique_id'])) {
                                     <thead>
                                         <tr>
                                             <th style="width: 5%;"> Rank </th>
+                                            <th style="width: 10%;"> Picture </th>
                                             <th> Name </th>
-                                            <th style="width: 15%;"> Total Votes </th>
+                                            <th style="width: 10%;"> Total Votes </th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -303,245 +335,9 @@ if (isset($_SESSION['unique_id'])) {
                                 </table> 
                             </div>
                         </div>
-
-                        <!-- Page 2 content -->
-                        <div id="page2" class="page-content" style="display: none;">
-                            <header class="TableHeaderr">
-                                <div class="timerVote">
-                                    <div class="TimerSaLabas">
-                                        <h2> Timer: </h2>
-                                        <span class="spanNumberTimeTwo" id="hours">00:</span>
-                                        <span class="spanNumberTimeTwo" id="minutes">00:</span> 
-                                        <span class="spanNumberTimeTwo" id="seconds">00</span>
-                                        <div class="dropDownforSetTimer">
-                                            <button onclick="toggleSetTimerTwo()" class="dropSetTimerTwo"> 
-                                                <div class="emeSetTwo"></div>
-                                            </button>
-                                            <div id="SetTimerDropDownnTwo" class="timerContentTwo">
-                                                <div class="timerTwo">
-                                                    <div class="timer-controlsTwo">
-                                                        <h2 for="input-hoursTwo">Hours:</h2>
-                                                        <input type="number" id="input-hoursTwo" min="0" step="1">
-
-                                                        <h2 for="input-minutesTwo">Minutes:</h2>
-                                                        <input type="number" id="input-minutesTwo" min="0" step="1">
-
-                                                        <h2 for="input-secondsTwo">Seconds:</h2>
-                                                        <input type="number" id="input-secondsTwo" min="0" step="1">
-
-                                                        <div class="btnsForTimerTwo">
-                                                            <button id="startTwo">Start</button>
-                                                            <button id="stopTwo">Stop</button>
-                                                            <button id="resetTwo">Reset</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="ButtonGenTwo">
-                                        <button class="BtnGenerateeTwo">Generate</button>
-                                    </div>
-                                </div>
-                            </header>
-
-                            <div class="SummaryViewModalTwo" id="summaryModalTwo">
-                                <div class="summary-ModalTwo">
-                                    <div class="SubSummaryTwo">
-                                        <header class="headerForSummaryTwo">
-                                            <h2> SUMMARY </h2>
-                                            <span class="closeSummaryTwo">&times;</span>
-                                        </header>
-                                        <div class="LamanLoobSummaryTwo">
-                                            <div class="candidatesTwo">
-                                                <div class="PictureCan1Two"> </div>
-                                                <div class="NameAndPositionTwo">
-                                                    <input class="inputCanTwo" type="text">
-                                                    <label> PPRESIDENT </label>
-                                                </div>
-                                            </div>
-
-                                            <div class="candidatesTwo">
-                                                <div class="PictureCan1Two"> </div>
-                                                <div class="NameAndPositionTwo">
-                                                    <input class="inputCanTwo" type="text">
-                                                    <label> VICE PRESIDENT </label>
-                                                </div>
-                                            </div>
-
-                                            <div class="candidatesTwo">
-                                                <div class="PictureCan1Two"> </div>
-                                                <div class="NameAndPositionTwo">
-                                                    <input class="inputCanTwo" type="text">
-                                                    <label> SECRETARY </label>
-                                                </div>
-                                            </div>
-
-                                            <div class="candidatesTwo">
-                                                <div class="PictureCan1Two"> </div>
-                                                <div class="NameAndPositionTwo">
-                                                    <input class="inputCanTwo" type="text">
-                                                    <label> TREASURER </label>
-                                                </div>
-                                            </div>
-
-                                            <div class="candidatesTwo">
-                                                <div class="PictureCan1Two"> </div>
-                                                <div class="NameAndPositionTwo">
-                                                    <input class="inputCanTwo" type="text">
-                                                    <label> AUDITOR </label>
-                                                </div>
-                                            </div>
-
-                                            <div class="candidatesTwo">
-                                                <div class="PictureCan1Two"> </div>
-                                                <div class="NameAndPositionTwo">
-                                                    <input class="inputCanTwo" type="text">
-                                                    <label> PEACE IN ORDER </label>
-                                                </div>
-                                            </div>
-
-                                            <div class="candidatesTwo">
-                                                <div class="PictureCan1Two"> </div>
-                                                <div class="NameAndPositionTwo">
-                                                    <input class="inputCanTwo" type="text">
-                                                    <label> DIRECTOR </label>
-                                                </div>
-                                            </div>
-
-                                            <div class="candidatesTwo">
-                                                <div class="PictureCan1Two"> </div>
-                                                <div class="NameAndPositionTwo">
-                                                    <input class="inputCanTwo" type="text">
-                                                    <label> DIRECTOR </label>
-                                                </div>
-                                            </div>
-
-                                            <div class="candidatesTwo">
-                                                <div class="PictureCan1Two"> </div>
-                                                <div class="NameAndPositionTwo">
-                                                    <input class="inputCanTwo" type="text">
-                                                    <label> DIRECTOR </label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <footer class="footerSummaryTwo">
-                                            ,jhfbljdfbjlfd
-                                        </footer>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="TableContainerRankTwo">
-                                <table class="tableFinalOfficialVoted">
-                                    <thead>
-                                        <tr>
-                                            <th style="width: 5%;"> Rank </th>
-                                            <th> Name </th>
-                                            <th style="width: 15%;"> Total Votes </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td> 1 </td>
-                                            <td> Prince </td>
-                                            <td> 1000 </td>
-                                        </tr>
-                                        <tr>
-                                            <td> 2 </td>
-                                            <td> Ruella </td>
-                                            <td> 900 </td>
-                                        </tr>
-                                        <tr>
-                                            <td> 3 </td>
-                                            <td> Jefferson </td>
-                                            <td> 899 </td>
-                                        </tr>
-                                </tbody>
-                                </table>
-                            </div>
-                        </div>
-
-                        <!-- Pagination controls -->
-                        <footer>
-                            <div class="pagination">
-                                <button id="page1Btn" onclick="togglePage('page1')" class="page-btn Paginationnactive">Page 1</button>
-                                <button id="page2Btn" onclick="togglePage('page2')" class="page-btn">Page 2</button>
-                            </div>
-                        </footer>
                     </div>
 
-                    <!-- Modal ng add candidate -->
                     <div id="History" class="EachContentsMonth">
-                        <header class="AddingDivsForCandidates">
-                            <div class="autocomplete-wrapper">
-                            <div class="autocomplete-container">
-                                <input type="text" id="suggestionInput" placeholder="Type something...">
-                                <div id="suggestionContainer" class="suggestion-container">
-                                    <table>
-                                        <thead>
-                                            <tr>
-                                                <th>Name</th>
-                                                <th>Address</th>
-                                                <th>Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="suggestionTableBody">
-                                            <!-- Suggestions will be dynamically inserted here -->
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-
-                        <button type="button" class="addingDivsBtn"> Add </button>
-                        </header>
-                        <form class="bowting" id="candidateForm"  method="POST" enctype="multipart/form-data">
-                            <div class="addingcanditatesDivCon" id="addingCandidatesContainer" name="addingCandidatesContainer">
-                                <div class="SubAddingCandiCon">
-                                    <div class="addingCandidatesLoob">
-                                        <header class="headerNgAdding">
-                                            <h2> Add New Candidate </h2>
-                                            <span class="CloseAdding">&times;</span>
-                                        </header>
-                                        <div class="AddingNewCandidateLoob">
-                                            <div class="NameOfCandidateNew">
-                                                <h2> Name: </h2>
-                                                <input class="NameNewCandi" type="text" placeholder="Enter full name" id="candi_Name" name="candi_Name" oninput="fetchResidentID()">
-                                                <div id="suggestions"></div>
-                                            </div>
-                                            <div class="FileUploadPicNewCandi">
-                                                <div class="file-upload">
-                                                    <label for="fileInput" class="file-upload-label">
-                                                        <div class="file-upload-icon">+</div>
-                                                        <div class="file-upload-text">Upload Image</div>
-                                                    </label>
-                                                    <input type="file" id="fileInput" class="file-upload-input" id="candi_IMG" name="candi_IMG">
-                                                </div>
-                                                <img id="previewImage" src="#" alt="Image Preview" style="display: none; max-width: 100%; max-height: 200px;">
-                                            </div>
-
-                                            <div class="NameOfCandidateNew">
-                                                <input class="NameNewCandi" type="hidden" id="candi_ID" name="candi_ID"> 
-                                            </div>
-                                        </div>
-
-                                        <footer class="AddingNewCandi">
-                                            <input type="hidden" id="timestamp2" name="timestamp2">
-                                            <div class="iror" id="iror"></div>
-                                            <div class="sakses" id="sakses"></div>
-                                            <button type="button addCandi" onclick="submitForm(event)"> Add </button>
-                                        </footer>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                        <div class="containerDivss">
-                            
-                        </div>
-                    </div>
-
-                    <div id="Hindi ko pa alam" class="EachContentsMonth">
                         <h2> HAHAHAHAHA </h2>
                     </div>
                 </div>

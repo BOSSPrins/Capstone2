@@ -47,7 +47,7 @@ function openPage(pageName) {
 
 
 
-//FUNCTION SA NAVBAR PAYMENTS AND HISTORY 
+//FUNCTION SA NAVBAR CANDIDATE TABLE AND HISTORY 
 function togglePage(pageId) {
     // Hide all pages
     const pages = document.querySelectorAll('.page-content');
@@ -103,7 +103,7 @@ const onPageLoad = () => {
     if (storedContentId) {
         toggleContent(storedContentId); // Display the last selected content
     } else {
-        toggleContent('Payments'); // Display 'Payments' content by default if no stored ID
+        toggleContent('CandidateTable'); // Display 'Payments' content by default if no stored ID
     }
 }
 
@@ -688,54 +688,54 @@ function fetchCandidates() {
     xhr.send();
 }
 
-function addCandidateToGeneratedDiv(candidate) {
-    console.log("Adding candidate to generated div:", candidate);
+// function addCandidateToGeneratedDiv(candidate) {
+//     console.log("Adding candidate to generated div:", candidate);
     
-    const container = document.querySelector('.containerDivss');
-    if (!container) {
-        console.error("Container not found");
-        return;
-    }
+//     const container = document.querySelector('.containerDivss');
+//     if (!container) {
+//         console.error("Container not found");
+//         return;
+//     }
     
-    // Gawaan ng buong div 
-    const newCandidateCon = document.createElement('div');
-    newCandidateCon.classList.add('CandidatesCon');
+//     // Gawaan ng buong div 
+//     const newCandidateCon = document.createElement('div');
+//     newCandidateCon.classList.add('CandidatesCon');
 
-    // At yung div ng pic
-    const imageContainer = document.createElement('div');
-    imageContainer.classList.add('CandiImageContainer');
+//     // At yung div ng pic
+//     const imageContainer = document.createElement('div');
+//     imageContainer.classList.add('CandiImageContainer');
 
-    // Lagayan ng pic
-    const img = document.createElement('img');
-    img.src = `Pictures/${candidate.img}`; 
-    img.alt = candidate.candidate_name;
-    img.style.maxWidth = "100%";
-    img.style.maxHeight = "100%"; 
-    imageContainer.appendChild(img);
+//     // Lagayan ng pic
+//     const img = document.createElement('img');
+//     img.src = `Pictures/${candidate.img}`; 
+//     img.alt = candidate.candidate_name;
+//     img.style.maxWidth = "100%";
+//     img.style.maxHeight = "100%"; 
+//     imageContainer.appendChild(img);
 
-    // Eto naman sa pangalan ng candi
-    const nameElement = document.createElement('p');
-    nameElement.textContent = candidate.candidate_name;
-    nameElement.classList.add('NameCandiInput');
+//     // Eto naman sa pangalan ng candi
+//     const nameElement = document.createElement('p');
+//     nameElement.textContent = candidate.candidate_name;
+//     nameElement.classList.add('NameCandiInput');
 
-    // Yung X sa gilid
-    const closeButton = document.createElement('button');
-    closeButton.classList.add('CloseButton');
-    closeButton.textContent = 'X';
+//     // Yung X sa gilid
+//     const closeButton = document.createElement('button');
+//     closeButton.classList.add('CloseButton');
+//     closeButton.textContent = 'X';
 
-    closeButton.addEventListener('click', function() {
-        container.removeChild(newCandidateCon);
-    });
+//     closeButton.addEventListener('click', function() {
+//         container.removeChild(newCandidateCon);
+//     });
 
-    newCandidateCon.appendChild(imageContainer);
-    newCandidateCon.appendChild(nameElement);
-    newCandidateCon.appendChild(closeButton);
+//     newCandidateCon.appendChild(imageContainer);
+//     newCandidateCon.appendChild(nameElement);
+//     newCandidateCon.appendChild(closeButton);
 
-    container.appendChild(newCandidateCon);
-    console.log("New candidate div added to container.");
-}
+//     container.appendChild(newCandidateCon);
+//     console.log("New candidate div added to container.");
+// }
 
-document.getElementById("candidateForm").onsubmit = submitForm;
+// document.getElementById("candidateForm").onsubmit = submitForm;
 
 // Function sa pag insert na ng bagong candidate sa database
 function submitForm(event) {
@@ -1440,6 +1440,12 @@ document.addEventListener('DOMContentLoaded', function() {
     const input = document.getElementById('suggestionInput');
     const suggestionContainer = document.getElementById('suggestionContainer');
     const suggestionTableBody = document.getElementById('suggestionTableBody');
+    const modal = document.querySelector('.ViewingResidentsModal');
+    const closeModal = document.querySelector('.closeViewingIn');
+    const modalContent = document.querySelector('.ViewingResContent');
+
+    let isDragging = false;
+    let offsetX, offsetY;
 
     input.addEventListener('input', function() {
         const query = input.value.trim();
@@ -1447,8 +1453,7 @@ document.addEventListener('DOMContentLoaded', function() {
         suggestionContainer.style.display = 'none'; // Hide the container by default
 
         if (query.length > 0) {
-            // Send AJAX request to PHP to fetch the search results
-            fetch('PHPBackend/DeclareWinner.php', {  // Make sure this is the correct path to your PHP file
+            fetch('PHPBackend/DeclareWinner.php', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'
@@ -1481,48 +1486,62 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Handle action button click event
-    suggestionTableBody.addEventListener('click', function(event) {
-        if (event.target.classList.contains('action-button')) {
-            const residentId = event.target.getAttribute('data-id');
+    // Show modal on row hover
+    suggestionTableBody.addEventListener('mouseenter', function(event) {
+        if (event.target.closest('tr')) {
+            const row = event.target.closest('tr');
+            const residentName = row.children[0].textContent; // Get the resident's name
             
-            // Send the selected resident ID to PHP for further action
-            fetch('PHPBackend/DeclareWinner.php', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                },
-                body: new URLSearchParams({
-                    'resident_id': residentId
-                })
-            })
-            .then(response => response.text())
-            .then(data => {
-                alert('Action completed: ' + data); // Display the result of the action
-            })
-            .catch(error => console.error('Error in action:', error));
+            // Set modal content
+            modalContent.textContent = `${residentName}`;
+            
+            // Position the modal at the same level as the row
+            const rect = row.getBoundingClientRect();
+            modal.style.top = `${rect.top + window.scrollY}px`; // Align with the row
+            modal.style.right = '40px'; // Position 35px from the right
+            modal.style.display = 'block'; // Show the modal
         }
+    }, true);
+
+    // Hide modal when not hovering
+    suggestionTableBody.addEventListener('mouseleave', function() {
+        modal.style.display = 'none'; // Hide the modal when not hovering
+    });
+
+    // Close modal when close button is clicked
+    closeModal.addEventListener('click', function() {
+        modal.style.display = 'none';
     });
 
     // Hide the suggestion container when clicking outside
     document.addEventListener('click', function(event) {
         if (!input.contains(event.target) && !suggestionContainer.contains(event.target)) {
             suggestionContainer.style.display = 'none';
+            modal.style.display = 'none'; // Hide the modal if clicking outside
         }
     });
+
+    // Make the modal draggable
+    modal.addEventListener('mousedown', function(e) {
+        isDragging = true;
+        offsetX = e.clientX - modal.getBoundingClientRect().left;
+        offsetY = e.clientY - modal.getBoundingClientRect().top;
+        document.addEventListener('mousemove', mouseMove);
+    });
+
+    document.addEventListener('mouseup', function() {
+        isDragging = false;
+        document.removeEventListener('mousemove', mouseMove);
+    });
+
+    function mouseMove(e) {
+        if (isDragging) {
+            modal.style.position = 'absolute'; // Ensure the modal can be moved
+            modal.style.left = `${e.clientX - offsetX}px`;
+            modal.style.top = `${e.clientY - offsetY}px`;
+        }
+    }
 });
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
