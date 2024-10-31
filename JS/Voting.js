@@ -1015,6 +1015,7 @@ function fetchTableData() {
                     if (response.candidates && response.candidates.length > 0) {
                         response.candidates.forEach(function(candidate, index) {
                             // Ensure we're accessing the correct properties from the response
+                            var candidateImg = candidate.img;
                             var candidateName = candidate.candidate;  // Use the 'candidate' field from the table
                             var votesCount = parseInt(candidate.votes_count, 10); // Use 'votes_count' field
 
@@ -1026,13 +1027,14 @@ function fetchTableData() {
                             var tr = document.createElement('tr');
                             tr.innerHTML = `
                                 <td>${index + 1}</td>
+                                <td><img src='Pictures/${candidateImg}'></td>
                                 <td>${candidateName}</td>
                                 <td>${votesCount}</td>`;
                             tableBody.appendChild(tr);
                         });
                     } else {
                         var tr = document.createElement('tr');
-                        tr.innerHTML = '<td colspan="3">No candidates found</td>';
+                        tr.innerHTML = '<td colspan="4">No candidates found</td>';
                         tableBody.appendChild(tr);
                     }
                 } else {
@@ -1391,7 +1393,6 @@ function updateTimestamp() {
     const formattedDate = formatDate(now);
 
     document.getElementById('timestamp').value = formattedDate;
-    document.getElementById('timestamp2').value = formattedDate;
 }
 
 // Optionally update the timestamp every second
@@ -1451,7 +1452,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const query = input.value.trim();
         suggestionTableBody.innerHTML = ''; // Clear previous suggestions
         suggestionContainer.style.display = 'none'; // Hide the container by default
-
+    
         if (query.length > 0) {
             fetch('PHPBackend/DeclareWinner.php', {
                 method: 'POST',
@@ -1468,12 +1469,31 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (data.length > 0) {
                     data.forEach(item => {
                         const row = document.createElement('tr');
+                        row.setAttribute('data-UID', item.unique_id);
+                        row.setAttribute('data-sex', item.sex); // Store sex in data attribute
+                        row.setAttribute('data-age', item.age); // Store age in data attribute
+                        row.setAttribute('data-img', item.img); // Store image path in data attribute
+                        
                         row.innerHTML = `
-                            <td>${item.first_name} ${item.middle_name} ${item.last_name}</td>
-                            <td>Blk ${item.block} Lot ${item.lot}</td>
-                            <td><button class="action-button" data-id="${item.resident_id}">Action</button></td>
+                        <td>${item.first_name} ${item.middle_name} ${item.last_name}</td>
+                        <td>Blk ${item.block} Lot ${item.lot}</td>
+                        <td><button class="action-button">Add</button></td>
                         `;
                         suggestionTableBody.appendChild(row);
+                        
+                        // Add event listener for the button
+                        row.querySelector('.action-button').addEventListener('click', function() {
+                            addCandidateToVoting(item.unique_id, `${item.first_name} ${item.middle_name} ${item.last_name}`, item.img)
+                                .then(response => {
+                                    if (response.success) {
+                                        row.style.display = 'none'; // Hide the row upon successful addition
+                                        alert('Candidate added successfully.');
+                                    } else {
+                                        alert('Failed to add candidate: ' + response.error);
+                                    }
+                                })
+                                .catch(error => console.error('Error adding candidate:', error));
+                        });
                     });
                     suggestionContainer.style.display = 'block'; // Show the suggestion container
                 } else {
@@ -1491,9 +1511,19 @@ document.addEventListener('DOMContentLoaded', function() {
         if (event.target.closest('tr')) {
             const row = event.target.closest('tr');
             const residentName = row.children[0].textContent; // Get the resident's name
-            
+            const residentAddress = row.children[1].textContent; 
+            const residentSex = row.getAttribute('data-sex'); // Get the sex from data attribute
+            const residentAge = row.getAttribute('data-age'); // Get the age from data attribute
+            const residentImg = row.getAttribute('data-img'); // Get the image source from data attribute
+
             // Set modal content
-            modalContent.textContent = `${residentName}`;
+            modalContent.innerHTML = `
+                <p>Name: ${residentName}</p>
+                <p>Address: ${residentAddress}</p>
+                <p>Sex: ${residentSex}</p>
+                <p>Age: ${residentAge}</p>
+                <img src="Pictures/${residentImg}" alt="Resident Image" width="100" height="100">
+            `;
             
             // Position the modal at the same level as the row
             const rect = row.getBoundingClientRect();
@@ -1542,6 +1572,31 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 });
+
+// Function to add candidate to voting
+function addCandidateToVoting(uniqueId, candidateName, candidateImg) {
+    return new Promise((resolve, reject) => {
+        $.ajax({
+            url: 'PHPBackend/DeclareWinner.php', // Change to the path of your PHP file
+            type: 'POST',
+            data: {
+                action: 'add_candidate',
+                unique_id: uniqueId,
+                candidate_name: candidateName,
+                img: candidateImg,
+                add_date: new Date().toISOString().split('T')[0] // Current date in YYYY-MM-DD format
+            },
+            dataType: 'json',
+            success: function(response) {
+                resolve(response);
+            },
+            error: function(xhr, status, error) {
+                console.error('AJAX Error:', error);
+                reject(error);
+            }
+        });
+    });
+}
 
 
 

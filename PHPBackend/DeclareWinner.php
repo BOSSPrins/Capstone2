@@ -358,12 +358,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             error_log("Search Query: " . $query);
 
             if ($query !== '') {
-                $sql = "SELECT user_id, first_name, middle_name, last_name, block, lot
-                        FROM tblresident
-                        WHERE CONCAT(first_name, ' ', middle_name, ' ', last_name) LIKE ? 
-                        OR block LIKE ? 
-                        OR lot LIKE ?";
-                
+                $sql = "SELECT tblresident.user_id, 
+                        tblresident.first_name, 
+                        tblresident.middle_name, 
+                        tblresident.last_name, 
+                        tblresident.sex, 
+                        tblresident.age, 
+                        tblresident.block, 
+                        tblresident.lot, 
+                        tblresident.unique_id, 
+                        tblaccounts.img
+                    FROM tblresident
+                    INNER JOIN tblaccounts ON tblresident.unique_id = tblaccounts.unique_id
+                    WHERE (CONCAT(tblresident.first_name, ' ', tblresident.middle_name, ' ', tblresident.last_name) LIKE ? 
+                        OR tblresident.block LIKE ? 
+                        OR tblresident.lot LIKE ?)
+                    AND tblresident.unique_id NOT IN (
+                        SELECT unique_id
+                        FROM voting
+                        WHERE status = ''
+                    )";
+                    
+                        
                 // Debugging: Log the SQL statement
                 error_log("SQL Statement: " . $sql);
                 
@@ -405,7 +421,47 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 // Return an empty array if no query is provided
                 closeConnectionAndRespond($conn, []);
             }
-
+    } elseif ($action === 'add_candidate') {
+        $unique_id = isset($_POST['unique_id']) ? $_POST['unique_id'] : null;
+        $candidate_name = isset($_POST['candidate_name']) ? $_POST['candidate_name'] : null;
+        $img = isset($_POST['img']) ? $_POST['img'] : null;
+        $add_date = isset($_POST['add_date']) ? $_POST['add_date'] : null;
+    
+        if ($unique_id && $candidate_name && $img && $add_date) {
+            // First insertion query for the voting table
+            $sql1 = "INSERT INTO voting (unique_id, candidate_name, img, add_date) VALUES (?, ?, ?, ?)";
+            if ($stmt1 = $conn->prepare($sql1)) {
+                $stmt1->bind_param("ssss", $unique_id, $candidate_name, $img, $add_date);
+                if ($stmt1->execute()) {
+                    // If the first query was successful, proceed to insert into user_votes
+                    $sql2 = "INSERT INTO user_votes (unique_id, candidate) VALUES (?, ?)";
+                    if ($stmt2 = $conn->prepare($sql2)) {
+                        $stmt2->bind_param("ss", $unique_id, $candidate_name);
+                        if ($stmt2->execute()) {
+                            $response = ['success' => true, 'message' => 'Candidate added to both tables successfully.'];
+                        } else {
+                            error_log("SQL Error on second query: " . $stmt2->error);
+                            $response = ['success' => false, 'error' => "Error occurred while adding candidate to user_votes"];
+                        }
+                        $stmt2->close();
+                    } else {
+                        error_log("SQL Error: " . $conn->error);
+                        $response = ['success' => false, 'error' => "Database error occurred on preparing user_votes statement"];
+                    }
+                } else {
+                    error_log("SQL Error on first query: " . $stmt1->error);
+                    $response = ['success' => false, 'error' => "Database error occurred while adding candidate to voting"];
+                }
+                $stmt1->close();
+            } else {
+                error_log("SQL Error: " . $conn->error);
+                $response = ['success' => false, 'error' => "Database error occurred on preparing voting statement"];
+            }
+        } else {
+            $response = ['success' => false, 'error' => 'Missing candidate data'];
+        }
+    
+        closeConnectionAndRespond($conn, $response);
     } else {
         $response = ['success' => false, 'error' => 'Invalid request'];
         closeConnectionAndRespond($conn, $response);

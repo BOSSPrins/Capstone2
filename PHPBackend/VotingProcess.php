@@ -139,10 +139,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['candi_IMG'])) {
 // Pang kuha ng mga boto papuntang table
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action']) && $_GET['action'] === 'fetchTable') {
     // SQL query to fetch the candidate and votes information
-    $sql = "SELECT unique_id, candidate, votes AS votes_count 
-            FROM user_votes 
-            WHERE won_date = '' AND fail_date = '' 
-            ORDER BY votes DESC";
+    $sql = "SELECT u.unique_id, u.candidate, u.votes AS votes_count, a.img
+            FROM user_votes u
+            INNER JOIN tblaccounts a ON u.unique_id = a.unique_id
+            WHERE u.won_date = '' AND u.fail_date = ''
+            ORDER BY u.votes DESC;
+            ";
 
     $result = $conn->query($sql);
 
