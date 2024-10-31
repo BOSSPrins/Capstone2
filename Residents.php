@@ -159,7 +159,7 @@ if (isset($_SESSION['unique_id'])) {
                             <div class="itemsController">
                                 <h3>Show</h3>
                                 <div class="dropdown" id="itemPerpage">
-                                    <div class="selected" style="z-index: 1;" id="dropdownSelected"> 23 </div>
+                                    <div class="selected" style="z-index: 1;" id="dropdownSelected"> All </div>
                                     <div class="options" style="z-index: 1;">
                                         <div class="option" style="z-index: 1;" data-value="4">04</div>
                                         <div class="option" style="z-index: 1;" data-value="5">05</div>

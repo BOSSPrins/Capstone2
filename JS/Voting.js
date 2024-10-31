@@ -1546,7 +1546,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-
 // function fetchTableData() {
 //     console.log('Fetching table data...');
 //     var xhr = new XMLHttpRequest();

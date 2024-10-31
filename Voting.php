@@ -215,8 +215,25 @@ if (isset($_SESSION['unique_id'])) {
                             <div class="autocomplete-wrapper">
                                 <div class="autocomplete-container">
                                     <div class="inputGroup">
-                                        <input type="text" id="suggestionInput" placeholder="Search...">
-                                        <input type="text" id="addressFilter" placeholder="Filter by Address...">
+                                        <div class="SearchDiv">
+                                            <input type="text" id="suggestionInput" placeholder="Search...">
+                                        </div>
+                                        <div class="FilterDiv2">
+                                            <span for="filterOption2"> Filter </span>
+                                            <input type="radio" id="addressFilter" >
+                                            <input class="InputLagayangPili" type="text">
+
+                                            <div class="dropFilterDiv2">
+                                            <label><input class="DropFilter2Input" type="radio" value="All" name="filterOption2">All</label>
+                                                <label><input class="DropFilter2Input" type="radio" value="1" name="filterOption2">Block 1</label>
+                                                <label><input class="DropFilter2Input" type="radio" value="2" name="filterOption2">Block 2</label>
+                                                <label><input class="DropFilter2Input" type="radio" value="3" name="filterOption2">Block 3</label>
+                                                <label><input class="DropFilter2Input" type="radio" value="4" name="filterOption2">Block 4</label>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <button> Filter </button>
+                                        </div>
                                     </div>
                                     <div id="suggestionContainer" class="suggestion-container">
                                         <table>

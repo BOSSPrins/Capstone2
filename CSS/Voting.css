@@ -1181,6 +1181,11 @@ display: none;
     margin: 0; /* Ensure there's no margin here */
 }
 
+.inputGroup{
+    display: flex;
+    align-items: center;
+}
+
 .autocomplete-wrapper #suggestionInput {
     width: 100%;
     padding: 5px;
@@ -1188,8 +1193,9 @@ display: none;
     border-radius: 4px;
 }
 
-.inputGroup{
-    display: flex;
+.SearchDiv{
+    width: 80%;
+    margin-right: 10px;
 }
 
 .autocomplete-wrapper .suggestion-container {
@@ -1250,6 +1256,48 @@ display: none;
 .autocomplete-wrapper .action-button:hover {
     background-color: #0056b3;
 }
+
+/* DESIGN PARA SA FILTER */
+.FilterDiv2{
+    position: relative;
+    display: inline-block;
+}
+
+.dropFilterDiv2{
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    max-height: 200px; /* Set your desired max-height */
+    overflow-y: auto; /* Enable vertical scroll if content exceeds max-height */
+}
+
+.InputLagayangPili:hover {
+    /* Ensure the cursor changes when hovering over the input */
+    cursor: pointer; 
+}
+
+.FilterDiv2:hover .dropFilterDiv2 {
+    display: block; /* Show dropdown when hovering over the entire FilterDiv2 */
+}
+
+.InputLagayangPili:hover + .dropFilterDiv2,
+.FilterDiv2:hover .dropFilterDiv2 {
+    display: block; /* Show dropdown when hovering over the input */
+}
+
+.FilterDiv2 label{
+    display: block;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.dropFilterDiv2 label:hover{
+    background-color: #ddd; /* Change background color on hover */
+}
+
 
 /*MODAL PARA SA VIEWING MODAL SA SEACH NG ADDING CANDIDATES*/
 .ViewingResidentsModal {
