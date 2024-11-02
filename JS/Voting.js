@@ -1026,8 +1026,12 @@ function fetchTableData() {
 
                             var tr = document.createElement('tr');
                             tr.innerHTML = `
-                                <td>${index + 1}</td>
-                                <td><img src='Pictures/${candidateImg}'></td>
+                                 <td>
+                                    ${index + 1} 
+                                    <br>
+                                    <span class="delete-icon" onclick="deleteCandidate(${candidate.id})">🗑️</span>
+                                </td>
+                                <td><img src='Pictures/${candidateImg}' width="100" height="100"></td>
                                 <td>${candidateName}</td>
                                 <td>${votesCount}</td>`;
                             tableBody.appendChild(tr);
