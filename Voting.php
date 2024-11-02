@@ -214,27 +214,7 @@ if (isset($_SESSION['unique_id'])) {
 
                             <div class="autocomplete-wrapper">
                                 <div class="autocomplete-container">
-                                    <div class="inputGroup">
-                                        <div class="SearchDiv">
-                                            <input type="text" id="suggestionInput" placeholder="Search...">
-                                        </div>
-                                        <div class="FilterDiv2">
-                                            <span for="filterOption2"> Filter </span>
-                                            <input type="radio" id="addressFilter" >
-                                            <input class="InputLagayangPili" type="text">
-
-                                            <div class="dropFilterDiv2">
-                                            <label><input class="DropFilter2Input" type="radio" value="All" name="filterOption2">All</label>
-                                                <label><input class="DropFilter2Input" type="radio" value="1" name="filterOption2">Block 1</label>
-                                                <label><input class="DropFilter2Input" type="radio" value="2" name="filterOption2">Block 2</label>
-                                                <label><input class="DropFilter2Input" type="radio" value="3" name="filterOption2">Block 3</label>
-                                                <label><input class="DropFilter2Input" type="radio" value="4" name="filterOption2">Block 4</label>
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <button> Filter </button>
-                                        </div>
-                                    </div>
+                                    <input type="text" id="suggestionInput" placeholder="Search...">
                                     <div id="suggestionContainer" class="suggestion-container">
                                         <table>
                                             <tbody id="suggestionTableBody">
@@ -247,11 +227,10 @@ if (isset($_SESSION['unique_id'])) {
 
                             <div class="ViewingResidentsModal">
                                 <div class="ViewingResContent">
-                                    <!--- Content nasa JS  tsaka nalang ayusin yung design pag nakukuha na ng js yung apat --->
-                                    <!-- Picture -->
-                                     <!-- Address -->
-                                      <!-- Gender -->
-                                       <!-- Age -->
+                                        <!-- Name -->
+                                        <!-- Age -->
+                                        <!-- Gender -->
+                                        <!-- Picture -->
                                 </div>
                             </div>
 
@@ -330,6 +309,7 @@ if (isset($_SESSION['unique_id'])) {
                                             <th style="width: 10%;"> Picture </th>
                                             <th> Name </th>
                                             <th style="width: 10%;"> Total Votes </th>
+                                            <th style="width:5%;"> Action </th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -355,7 +335,20 @@ if (isset($_SESSION['unique_id'])) {
                     </div>
 
                     <div id="History" class="EachContentsMonth">
-                        <h2> HAHAHAHAHA </h2>
+                        <div class="TableForHistory">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th style="width: 15%"> Date Of Win </th>
+                                        <th> Description </th>
+                                        <th style="width: 15%"> Action </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Mga Laman  -->
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
