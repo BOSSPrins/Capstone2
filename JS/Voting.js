@@ -157,49 +157,49 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-// PANGALAWANG FUNCTION PARA SA DROPDOWN SET TIMER 
-function toggleSetTimerTwo() {
-    const dropdownContent = document.getElementById("SetTimerDropDownnTwo");
-    dropdownContent.classList.toggle("showTwo");
+// // PANGALAWANG FUNCTION PARA SA DROPDOWN SET TIMER 
+// function toggleSetTimerTwo() {
+//     const dropdownContent = document.getElementById("SetTimerDropDownnTwo");
+//     dropdownContent.classList.toggle("showTwo");
 
-    // Rotate the emeSet element
-    const emeSetTwo = document.querySelector('.emeSetTwo');
-    emeSetTwo.classList.toggle('rotateSetTwo');
-}
+//     // Rotate the emeSet element
+//     const emeSetTwo = document.querySelector('.emeSetTwo');
+//     emeSetTwo.classList.toggle('rotateSetTwo');
+// }
 
-// Event listener to handle clicks
-document.addEventListener('click', function(eventTwo) {
-    const dropdownButtonTwo = document.querySelector('.dropSetTimerTwo');
-    const dropdownContentTwo = document.getElementById("SetTimerDropDownnTwo");
+// // Event listener to handle clicks
+// document.addEventListener('click', function(eventTwo) {
+//     const dropdownButtonTwo = document.querySelector('.dropSetTimerTwo');
+//     const dropdownContentTwo = document.getElementById("SetTimerDropDownnTwo");
 
-    // Check if the click is outside of the dropSetTimer button and the dropdown itself
-    if (!dropdownButtonTwo.contains(eventTwo.target) && !dropdownContentTwo.contains(eventTwo.target)) {
-        dropdownContentTwo.classList.remove('showTwo');
-        const emeSetTwo = document.querySelector('.emeSetTwo');
-        emeSetTwo.classList.remove('rotateSetTwo');
-    }
-});
+//     // Check if the click is outside of the dropSetTimer button and the dropdown itself
+//     if (!dropdownButtonTwo.contains(eventTwo.target) && !dropdownContentTwo.contains(eventTwo.target)) {
+//         dropdownContentTwo.classList.remove('showTwo');
+//         const emeSetTwo = document.querySelector('.emeSetTwo');
+//         emeSetTwo.classList.remove('rotateSetTwo');
+//     }
+// });
 
-document.addEventListener("DOMContentLoaded", function () {
-    const generateButtonTwo = document.querySelector(".BtnGenerateeTwo");
-    const modalTwo = document.getElementById("summaryModalTwo");
-    const closeBtnTwo = modalTwo.querySelector(".closeSummaryTwo");
+// document.addEventListener("DOMContentLoaded", function () {
+//     const generateButtonTwo = document.querySelector(".BtnGenerateeTwo");
+//     const modalTwo = document.getElementById("summaryModalTwo");
+//     const closeBtnTwo = modalTwo.querySelector(".closeSummaryTwo");
 
-    generateButtonTwo.addEventListener("click", function () {
-        modalTwo.style.display = "block"; // Show the modal
-    });
+//     generateButtonTwo.addEventListener("click", function () {
+//         modalTwo.style.display = "block"; // Show the modal
+//     });
 
-    closeBtnTwo.addEventListener("click", function () {
-        modalTwo.style.display = "none"; // Hide the modal
-    });
+//     closeBtnTwo.addEventListener("click", function () {
+//         modalTwo.style.display = "none"; // Hide the modal
+//     });
 
-    // Close the modal if the user clicks outside of it
-    window.addEventListener("click", function (event) {
-        if (event.target === modalTwo) {
-            modalTwo.style.display = "none";
-        }
-    });
-});
+//     // Close the modal if the user clicks outside of it
+//     window.addEventListener("click", function (event) {
+//         if (event.target === modalTwo) {
+//             modalTwo.style.display = "none";
+//         }
+//     });
+// });
 
 
 
@@ -1026,15 +1026,16 @@ function fetchTableData() {
 
                             var tr = document.createElement('tr');
                             tr.innerHTML = `
-                                 <td>
-                                    ${index + 1} 
-                                    <br>
-                                    <span class="delete-icon" onclick="deleteCandidate(${candidate.id})">🗑️</span>
-                                </td>
-                                <td><img src='Pictures/${candidateImg}' width="100" height="100"></td>
+                                <td>${index + 1} </td>
+                                <td><img src='Pictures/${candidateImg}' style="width: 60%; height: auto;"></td>
                                 <td>${candidateName}</td>
-                                <td>${votesCount}</td>`;
-                            tableBody.appendChild(tr);
+                                <td>${votesCount}</td>
+                                <td>
+                                    <span class="delteRowAdded" onclick="deleteCandidateRow(${candidate.id})">
+                                        <img class="deleteIconImg" src="Pictures/deleteRow.png">
+                                    </span>
+                                </td>`;
+                            tableBody.appendChild(tr);                            
                         });
                     } else {
                         var tr = document.createElement('tr');
@@ -1058,10 +1059,6 @@ fetchTableData();
 
 // Set interval to refresh table every 5 seconds
 setInterval(fetchTableData, 5000);
-
-
-
-
 
 
 
@@ -1425,6 +1422,14 @@ function fetchWinners() {
                 // Update content in modal
                 candidateName.value = candidate.candidate_name;
                 candidateImg.style.backgroundImage = `url(${candidate.img})`;
+
+                // Fit the candidate's image into the first "PictureCan1" div found
+                const pictureCan = document.querySelector('.PictureCan1'); // Select the first instance of .PictureCan1
+                if (pictureCan) {
+                    pictureCan.style.backgroundImage = `url(${candidate.img})`;
+                    pictureCan.style.backgroundSize = 'cover'; // Ensure the image covers the div
+                    pictureCan.style.backgroundPosition = 'center'; // Center the image
+                }
             }
         } else {
             console.error('Error fetching winners:', data.error);
@@ -1437,6 +1442,7 @@ window.addEventListener("load", function() {
     updateTimestamp();
     fetchWinners();
 });
+
 
 
 
@@ -1456,7 +1462,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const query = input.value.trim();
         suggestionTableBody.innerHTML = ''; // Clear previous suggestions
         suggestionContainer.style.display = 'none'; // Hide the container by default
-    
+
         if (query.length > 0) {
             fetch('PHPBackend/DeclareWinner.php', {
                 method: 'POST',
@@ -1477,14 +1483,16 @@ document.addEventListener('DOMContentLoaded', function() {
                         row.setAttribute('data-sex', item.sex); // Store sex in data attribute
                         row.setAttribute('data-age', item.age); // Store age in data attribute
                         row.setAttribute('data-img', item.img); // Store image path in data attribute
-                        
+
                         row.innerHTML = `
                         <td>${item.first_name} ${item.middle_name} ${item.last_name}</td>
                         <td>Blk ${item.block} Lot ${item.lot}</td>
-                        <td><button class="action-button">Add</button></td>
+                        <td style="display: flex; justify-content: center; align-items: center;">
+                            <button class="action-button">Add</button>
+                        </td>
                         `;
                         suggestionTableBody.appendChild(row);
-                        
+
                         // Add event listener for the button
                         row.querySelector('.action-button').addEventListener('click', function() {
                             addCandidateToVoting(item.unique_id, `${item.first_name} ${item.middle_name} ${item.last_name}`, item.img)
@@ -1522,23 +1530,39 @@ document.addEventListener('DOMContentLoaded', function() {
 
             // Set modal content
             modalContent.innerHTML = `
-                <p>Name: ${residentName}</p>
-                <p>Address: ${residentAddress}</p>
-                <p>Sex: ${residentSex}</p>
-                <p>Age: ${residentAge}</p>
-                <img src="Pictures/${residentImg}" alt="Resident Image" width="100" height="100">
+                <div class="DivBieww">
+                    <img src="Pictures/${residentImg}" alt="Resident Image" width="100" height="auto">
+                </div>
+                <div class="ParagDiv">
+                    <p> <span class="SColors"> Name: </span> ${residentName}</p>
+                    <p> <span class="SColors"> Address: </span> ${residentAddress}</p>
+                    <p> <span class="SColors"> Sex: </span> ${residentSex}</p>
+                    <p> <span class="SColors"> Age: </span> ${residentAge}</p>
+                </div>
             `;
-            
+
             // Position the modal at the same level as the row
             const rect = row.getBoundingClientRect();
             modal.style.top = `${rect.top + window.scrollY}px`; // Align with the row
-            modal.style.right = '40px'; // Position 35px from the right
+            modal.style.right = '500px'; // Position 35px from the right
             modal.style.display = 'block'; // Show the modal
         }
     }, true);
 
+    // Keep the modal visible when hovering over it
+    modal.addEventListener('mouseenter', function() {
+        modal.style.display = 'block'; // Ensure modal stays visible
+    });
+
     // Hide modal when not hovering
     suggestionTableBody.addEventListener('mouseleave', function() {
+        if (!modal.matches(':hover')) { // Check if modal is not hovered
+            modal.style.display = 'none'; // Hide the modal when not hovering
+        }
+    });
+
+    // Hide modal when mouse leaves the modal
+    modal.addEventListener('mouseleave', function() {
         modal.style.display = 'none'; // Hide the modal when not hovering
     });
 
@@ -1601,7 +1625,6 @@ function addCandidateToVoting(uniqueId, candidateName, candidateImg) {
         });
     });
 }
-
 
 
 

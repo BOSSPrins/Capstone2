@@ -610,9 +610,12 @@ html{
 
 .TableContainerRank td{
     color: #000000;
-    padding: 10px;
+    font-weight: bold;
+    font-size: medium;
+    padding: 5px;
     border: 1px solid rgb(179, 172, 172); /* Outline partition */
 }
+
 
 .TableContainerRank tbody{
     background: var(--color-white);
@@ -828,11 +831,14 @@ input[type="datetime-local"] {
     margin-bottom: 10px;
 }
 
-.PictureCan1{
+.PictureCan1 {
     width: 80px;
     height: 80px;
     border: 3px solid var(--color-primary);
     margin-right: 10px;
+    background-color: #f0f0f0; /* Optional: background color before the image loads */
+    background-size: cover; /* Make sure to cover the area */
+    background-position: center; /* Center the image */
 }
 
 .NameAndPosition{
@@ -1181,6 +1187,11 @@ display: none;
     margin: 0; /* Ensure there's no margin here */
 }
 
+.inputGroup{
+    display: flex;
+    align-items: center;
+}
+
 .autocomplete-wrapper #suggestionInput {
     width: 100%;
     padding: 5px;
@@ -1188,8 +1199,9 @@ display: none;
     border-radius: 4px;
 }
 
-.inputGroup{
-    display: flex;
+.SearchDiv{
+    width: 80%;
+    margin-right: 10px;
 }
 
 .autocomplete-wrapper .suggestion-container {
@@ -1239,7 +1251,7 @@ display: none;
 
 
 .autocomplete-wrapper .action-button {
-    padding: 5px 10px;
+    padding: 5px 20px;
     background-color: #007BFF;
     color: white;
     border: none;
@@ -1251,9 +1263,10 @@ display: none;
     background-color: #0056b3;
 }
 
+
 /*MODAL PARA SA VIEWING MODAL SA SEACH NG ADDING CANDIDATES*/
 .ViewingResidentsModal {
-    width: 29%;
+    width: 26%;
     max-height: 400px;
     overflow: auto;
     padding: 10px;
@@ -1264,21 +1277,59 @@ display: none;
     position: absolute; /* Make sure it’s positioned correctly */
     z-index: 2; /* Ensure it's on top of other elements */
     display: none; /* Hidden by default */
-}
-
-.closeModalInfoo{
-    display: flex;
-    justify-content: end;
-    align-items: center;
-}
-
-.closeViewingIn{
     cursor: pointer;
-    font-size: 1.5em;
-    color: #aaa;
 }
 
-.closeViewingIn:hover{
-    color: black;
+.ViewingResContent{
+    display: flex;
+}
+
+.DivBieww{
+    margin-right: 10px;
+}
+
+.ParagDiv p{
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.SColors{
+    color: rgb(197, 0, 0);
+}
+
+/* DESIGN FOR DELETE ROW IMG */
+.deleteIconImg{
+    width: 35px;
+    cursor: pointer;
+}
+
+/* DESIGN PARA SA HISTORY TABLE */
+.TableForHistory{
+    overflow-y: auto; /* Enable vertical scrolling */
+    flex: 1; /* Allow it to grow and take remaining space */
+}
+
+.TableForHistory table{
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+.TableForHistory thead{
+    background: var(--color-primary);
+    color: white;
+}
+
+.TableForHistory th{
+    padding: 10px;
+    border: 1px solid rgb(179, 172, 172); /* Outline partition */
+}
+
+.TableForHistory td{
+    color: #000000;
+    font-weight: bold;
+    font-size: medium;
+    padding: 5px;
+    border: 1px solid rgb(179, 172, 172); /* Outline partition */
 }
 

@@ -54,7 +54,7 @@ document.addEventListener("DOMContentLoaded", function() {
     let tr = Array.from(tbody.querySelectorAll("tr"));
     let emptyBox = [...tr];
     let index = 1;
-    let itemPerPage = 23;
+    let itemPerPage = 15;
     
     // Handle dropdown
     dropdownSelected.addEventListener("click", function() {
