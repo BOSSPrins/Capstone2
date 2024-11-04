@@ -1333,3 +1333,60 @@ display: none;
     border: 1px solid rgb(179, 172, 172); /* Outline partition */
 }
 
+
+/* Pansamantalang design ng modal sa history */
+.winnersModals {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8); /* Darker background for a more elegant look */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Ensure the modal is above other content */
+}
+
+.modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 400px; /* Increased width for better readability */
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* Add shadow for depth */
+}
+
+.modal-content h2 {
+    margin-bottom: 20px; /* Spacing below the heading */
+    color: #333; /* Darker text color for better contrast */
+}
+
+ul {
+    list-style-type: none; /* Remove bullet points */
+    padding: 0; /* Remove default padding */
+}
+
+ul li {
+    padding: 10px; /* Spacing within each list item */
+    border-bottom: 1px solid #eee; /* Add separator lines between winners */
+    color: #555; /* Slightly lighter text for the list items */
+}
+
+ul li:last-child {
+    border-bottom: none; /* Remove border from the last item */
+}
+
+.close {
+    color: #aaa; /* Close button color */
+    float: right; /* Position close button to the right */
+    font-size: 28px; /* Increase close button size */
+    font-weight: bold; /* Make it bold */
+}
+
+.close:hover,
+.close:focus {
+    color: black; /* Change color on hover/focus */
+    text-decoration: none; /* Remove underline */
+    cursor: pointer; /* Change cursor to pointer */
+}

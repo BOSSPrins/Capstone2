@@ -161,9 +161,9 @@ if (isset($_SESSION['unique_id'])) {
                         <div class="page-content contentPage">
                             <header class="TableHeaderr">
                                 <div class="TimerVoteAndButton">
-                                    <div class="ButtonGen">
+                                    <!-- <div class="ButtonGen">
                                         <button class="BtnGeneratee">Generate</button>
-                                    </div>
+                                    </div> -->
 
                                     <div class="LagayanNgOras">
                                         <div class="InputTimee">
@@ -214,7 +214,7 @@ if (isset($_SESSION['unique_id'])) {
 
                             <div class="autocomplete-wrapper">
                                 <div class="autocomplete-container">
-                                    <input type="text" id="suggestionInput" placeholder="Search...">
+                                    <input type="text" id="suggestionInput" name="suggestionInput" placeholder="Search...">
                                     <div id="suggestionContainer" class="suggestion-container">
                                         <table>
                                             <tbody id="suggestionTableBody">
@@ -339,17 +339,31 @@ if (isset($_SESSION['unique_id'])) {
                             <table>
                                 <thead>
                                     <tr>
-                                        <th style="width: 15%"> Date Of Win </th>
-                                        <th> Description </th>
-                                        <th style="width: 15%"> Action </th>
+                                        <th style="width: 15%">Won Date</th>
+                                        <th>Description</th>
+                                        <th style="width: 15%">Action</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <!-- Mga Laman  -->
+                                <tbody id="winnersTableBody">
+                                    <tr>
+                                        <td id="recentWonDate">Loading...</td>
+                                        <td>Recent Winners</td>
+                                        <td><button onclick="showHistoryModal()">View</button></td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
                     </div>
+
+                    <!-- Modal for displaying recent winners -->
+                    <div class="winnersModals" id="winnersModal" class="modal" style="display: none;">
+                        <div class="modal-content">
+                            <span class="close" onclick="closeWinnersModal()">&times;</span>
+                            <h2>Recent Winners</h2>
+                            <ul id="winnersList"></ul>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
