@@ -165,11 +165,12 @@ html{
   border-right: 5px solid transparent;
   border-top: 6px solid #aeaeae;
   transition: 0.3s;
-  margin-left: 6%;
+  margin-left: 25%;
 }
 
 .buttonEme2{
   padding: 10px 15px;
+  margin-left: 45px;
   cursor: pointer;
 }
 
@@ -210,204 +211,197 @@ html{
 }
 
 /* ========== MAIN DASHBOARD DESIGN ========== */
-.MainBodyContainerr{
-  padding-left: 260px;
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
+.MainBodyContainerr {
+padding-left: 260px;
+display: flex;
+flex-direction: column;
+height: 100vh;
 }
 
-.MainContainerForTables{
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  flex: 1;
-  overflow: hidden;
+.MainContainerForTables {
+display: flex;
+justify-content: center;
+width: 100%;
+flex: 1;
+overflow: hidden;
 }
 
-.TablessContainer{
-  display: flex;
-  flex-direction: column; /* Stack children vertically */
-  width: 100%;
-  padding: 10px;
-  background-color: #ffffff;
-  border: 1px solid rgb(179, 172, 172);
-  margin: 10px;
-  flex: 1; /* Allow it to grow and take available space */
+.TablessContainer {
+display: flex;
+flex-direction: column; /* Stack children vertically */
+width: 100%;
+padding: 10px;
+background-color: #ffffff;
+border: 1px solid rgb(179, 172, 172);
+margin: 10px;
+flex: 1; /* Allow it to grow and take available space */
 }
 
 /* DESIGN FOR DROPDOWN */
-.TableHeaderr{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 6px;
+.TableHeaderr {
+display: flex;
+justify-content: space-between;
+align-items: center;
+margin-bottom: 6px;
 }
 
 .itemsController,
 .searchTablee{
-  display: flex;
-  align-items: center;
+display: flex;
+align-items: center;
 }
 
 .dropdown {
-  position: relative;
-  display: inline-block;
-  cursor: pointer;
-  margin: 0 7px;
+position: relative;
+display: inline-block;
+cursor: pointer;
+margin: 0 7px;
 }
 
 .ArrowandPlace{
-  display: flex;
-  justify-content: center;
-  align-items: center;
+display: flex;
+justify-content: center;
+align-items: center;
 }
 
 .selected {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 5px;
-  border: 1px solid #ccc;
-  background-color: #fff;
-  width: 70px;
-  user-select: none;
-  z-index: 1;
+display: flex;
+align-items: center;
+justify-content: center;
+padding: 5px;
+border: 1px solid #ccc;
+background-color: #fff;
+width: 70px;
+user-select: none;
+z-index: 1;
 }
 
 .options {
-  display: none;
-  position: absolute;
-  background-color: #fff;
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.1);
-  top: 100%;
-  left: 0;
-  width: 70px;
-  z-index: 1;
+display: none;
+position: absolute;
+background-color: #fff;
+box-shadow: 0 4px 8px 0 rgba(0,0,0,0.1);
+top: 100%;
+left: 0;
+width: 70px;
+z-index: 1;
 }
 
 .option {
-  text-align: center;
-  padding: 8px;
-  cursor: pointer;
-  border-top: 1px solid #ccc;
-  width: 100%;
-  box-sizing: border-box;
-  z-index: 1;
+text-align: center;
+padding: 8px;
+cursor: pointer;
+border-top: 1px solid #ccc;
+width: 100%;
+box-sizing: border-box;
+z-index: 1;
 }
 
 .open .options {
-  display: block;
+display: block;
 }
 
 .inputSearchhh{
-  padding: 5px;
-  font-size: 16px;
-  width: 300px;
-  margin-left: 5px;
+padding: 5px;
+font-size: 16px;
+width: 300px;
+margin-left: 5px;
 }
 
 /* DESIGN FOR TABLE */
-.TablesContainer{
-  flex: 1; /* Grow to fill available space */
-  width: 100%;
-  overflow-y: auto; /* Scroll if content overflows */
+.TablesContainer {
+flex: 1; /* Grow to fill available space */
+width: 100%;
+overflow-y: auto; /* Scroll if content overflows */
 }
 
 table{
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 20px;
+width: 100%;
+border-collapse: collapse;
+margin-top: 20px;
 }
 
 thead{
-  background: var(--color-primary);
-  color: white;
+background: var(--color-primary);
+color: white;
 }
 
 th{
-  padding: 20px;
-  cursor: pointer;
-  position: relative;
-  font-size: 12px;
-  white-space: nowrap;
-  user-select: none;
-  transition: all linear 0.16s;
-  border: 1px solid rgb(179, 172, 172); /* Outline partition */
+padding: 20px;
+cursor: pointer;
+position: relative;
+font-size: 12px;
+white-space: nowrap;
+user-select: none;
+transition: all linear 0.16s;
+border: 1px solid rgb(179, 172, 172); /* Outline partition */
 }
 
 table th.asc,
 table th.desc {
-  border-bottom-color: rgb(255, 255, 255);
+border-bottom-color: rgb(255, 255, 255);
 }
 
 table th[data-sort]::before,
 table th[data-sort]::after {
-  content: '';
-  position: absolute;
-  height: 0;
-  width: 0;
-  right: 10%;
-  opacity: 0.3;
-  margin-top: 12px;
-  border: 4px solid transparent;
+content: '';
+position: absolute;
+height: 0;
+width: 0;
+right: 10%;
+opacity: 0.3;
+margin-top: 12px;
+border: 4px solid transparent;
 }
 
 table th[data-sort]::before {
-  top: 6px;
-  border-bottom-color: rgb(255, 255, 255);
+top: 6px;
+border-bottom-color: rgb(255, 255, 255);
 }
 
 table th[data-sort]::after {
-  top: 16px;
-  border-top-color: rgb(255, 255, 255);
+top: 16px;
+border-top-color: rgb(255, 255, 255);
 }
 
 table th.asc::before,
 table th.desc::after {
-  opacity: 1;
+opacity: 1;
 }
 
 table td {
-  font-size: 14px;
-  border-bottom: 1px solid #576574;
-  padding: 10px 12px;
+font-size: 14px;
+border-bottom: 1px solid #576574;
+padding: 10px 12px;
 }
 
 td{
-  padding: 5px;
-  border: 1px solid rgb(179, 172, 172); /* Outline partition */
+padding: 5px;
+border: 1px solid rgb(179, 172, 172); /* Outline partition */
 }
 
 tbody{
-  background: var(--color-white);
-  text-align: center;
+background: var(--color-white);
+text-align: center;
 }
 
 td{
-  color: #000000;
+color: #000000;
 }
 
 tr:nth-child(even){
-  background: var(--color-light);
+background: var(--color-light);
 }
-
-.ResidentsViewBtn{
-    border-radius: 5px;
-    padding: 0.4rem 2rem;
-    cursor: pointer;
-}
-
 
 /* DESIGN PARA SA PAGINATION */
 .bottom-field{
-  width: 100%;
-  margin-top: 10px;
+width: 100%;
+margin-top: 10px;
 }
 .pagination{
-  display: flex;
-  justify-content: end;
-  align-items: center;
+display: flex;
+justify-content: end;
+align-items: center;
 }
 
 .pagination li{
@@ -419,9 +413,9 @@ color: #000000;
 }
 
 .pagination a.Pageactive{
-  background: #04007a;
-  color: white;
-  border-color: #32d6aa;
+background: #04007a;
+color: white;
+border-color: #32d6aa;
 }
 
 .pagination li a{
@@ -435,7 +429,7 @@ font-size: 13px;
 
 .prevv:hover,
 .nextt:hover{
-  background: rgb(182, 182, 182);
+background: rgb(182, 182, 182);
 }
 
 /* DESIGN PARA TO SA HEADER NG SIDEBAR AT SA MAIN */
@@ -497,6 +491,7 @@ font-size: 13px;
 .profileBtn{
   padding: 5px 20px;
   margin-right: 5px;
+  cursor: pointer;
 }
 
 .profileBtn label{
@@ -644,177 +639,249 @@ font-size: 13px;
   cursor: pointer;
 }
 
+/* DESIGN PARA SA PAGINATION */
 
-/* DESIGN PARA SA VIEW MODAL */
-.containerNgViewModal{
-  display: none;
-  position: fixed;
-  z-index: 1;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+.bottom-field{
+width: 100%;
+margin-top: 10px;
+}
+.pagination{
+display: flex;
+justify-content: end;
+align-items: center;
 }
 
-.subContainerViewModal{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
+.pagination li{
+list-style: none;
+flex-shrink: 0;
+text-align: center;
+border: 1px solid #999;
+color: #000000;
 }
 
-.viewItongmodal{
-  position: relative;
-  max-width: 600px;
-  width: 100%;
-  margin-top: 10px;
-  height: 590px;
-  background: #fff;
-  border-radius: 8px;
+.pagination a.Pageactive{
+background: #04007a;
+color: white;
+border-color: #32d6aa;
+}
+
+.pagination li a{
+text-decoration: none;
+padding: 3px 8px;
+color: inherit;
+display: block;
+font-family: sans-serif;
+font-size: 13px;
+}
+
+.prevv:hover,
+.nextt:hover{
+background: rgb(182, 182, 182);
+}
+
+/* DESIGN PARA SA MODAL VIEW */
+.ViewBtnCom{
+border-radius: 5px;
+padding: 0.4rem 2rem;
+cursor: pointer;
+}
+
+.ModalNgComplain{
+display: none;
+position: fixed;
+z-index: 1;
+left: 0;
+top: 0;
+width: 100%;
+height: 100%;
+overflow: auto;
+background-color: rgba(0, 0, 0, 0.4);
+}
+
+.SubModalComplain{
+display: flex;
+align-items: center;
+justify-content: center;
+height: 100%;
+}
+
+.LamanNgViewCom{
+position: relative;
+max-width: 600px;
+width: 100%;
+margin-top: 10px;
+height: 500px;
+background: #f7f7f7;
+border-radius: 8px;
 }
 
 .titleHeaderView{
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  /* background: rgb(30, 0, 224);
-  color: white; */
-  /* border-bottom: 1px solid gray; */
-  padding: 20px;
-  border-radius: 5px;
+display: flex;
+align-items: center;
+justify-content: end;
+padding: 10px;
+border-radius: 5px;
 }
 
 .closeViewModal{
-  color: #000000;
-  font-size: 22px;
-  font-weight: bold;
-  cursor: pointer;
+color: #000000;
+font-size: 22px;
+font-weight: bold;
+cursor: pointer;
 }
 
-.emeeeee{
-  height: 510px;
-  padding: 10px;
-  overflow-y: auto;
+.boxsaLoob{
+/* display: none; */
+height: 450px;
+padding: 10px;
+overflow-y: auto;
 }
 
-/* .footerNgViewModal{
-  background: gray;
-  display: flex;
-  justify-content: end;
-  margin: 10px;
+.inputComplaintss{
+width: 82%;
+font-size: medium;
+border-radius: 5px;
+border: 1px solid rgba(62, 65, 71, 0.4);
+padding: 5px 10px;
 }
 
-.AcceptBtn{
-  margin-right: 20px;
-  background: green;
+.divssComp{
+margin-bottom: 10px;
 }
 
-.DecBtn{
-  background: rgb(195, 0, 0);
+.DescriTextArea{
+resize: none;
+height: 300px;
+width: 100%;
+border-radius: 5px;
+border: 1px solid rgba(62, 65, 71, 0.4);
+margin-top: 10px;
+font-size: medium;
+font-family: Arial;
+padding: 5px;
 }
 
-.ResPindot{
-  font-size: 20px;
-  padding: 10px 30px;
-  color: white;
-  border-radius: 5px;
-} */
-
-.headerModalRow{
-  text-align: center;
+.LagayanPictureComp{
+display: flex;
+justify-content: center;
+height: 300px;
+width: 100%;
+border-radius: 5px;
+border: 1px solid rgba(62, 65, 71, 0.4);
+background: white;
 }
 
-.ViewForm .inputboxView{
-  width: 100%;
+.BotonDalawa{
+display: flex;
+justify-content: space-between;
+margin-bottom: 10px;
 }
 
-.ViewForm .inputboxView .inputngViewModalTo{
-  width: 100%;
-  border: 1px solid rgb(203, 214, 220);
-  font-size: 15px;
-  padding: 7px;
-  margin-top: 3px;
-  border-radius: 2px;
+.MessComp{
+background: rgb(0, 0, 149);
 }
 
-.ViewForm .inputboxView label{
-  font-weight: 550;
-  font-size: 14px;
+.MessComp:hover{
+background: blue; 
 }
 
-.ViewForm .row{
-  display: flex;
-  column-gap: 15px;
-  margin-top: 10px;
-  margin-bottom: 13px;
+.repsComp{
+background: rgb(172, 0, 0);
 }
 
-select{
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  width: 100%;
-  border: 1px solid rgb(203, 214, 220);
-  font-size: 15px;
-  padding: 8px;
-  margin-top: 3px;
-  border-radius: 2px;
+.repsComp:hover{
+background: rgb(255, 0, 0);
 }
 
-select::-ms-expand{
-  display: none;
+.Compsss{
+font-size: 15px;
+padding: 10px 30px;
+color: white;
+border-radius: 5px;
+cursor: pointer;
 }
 
-hr{
-  border: none;
-  height: 1px;
-  background-color: #8e8e8e;
-  margin-top: 10px;
-  margin-bottom: 10px;
+.BackBtn{
+color: #000000;
+background: rgb(207, 207, 207);
 }
 
-.dropdownFilter {
-  position: relative;
-  display: inline-block;
+/* DESIGN PARA SA RESPONDS */
+.boxLoobReply{
+display: none;
+padding: 10px;
+overflow-y: auto;
 }
 
-.dropdownFiltercontent {
-  display: none;
-  position: absolute;
-  background-color: #f9f9f9;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-  max-height: 200px; /* Set your desired max-height */
-  overflow-y: auto; /* Enable vertical scroll if content exceeds max-height */
+
+.ComplaintName{
+width: 81%;
+font-size: medium;
+border-radius: 5px;
+border: 1px solid rgba(62, 65, 71, 0.4);
+padding: 5px 10px;
 }
 
-.dropdownFilter:hover .dropdownFiltercontent {
-  display: block;
+.textAreaComp{
+resize: none;
+height: 340px;
+width: 100%;
+border-radius: 5px;
+border: 1px solid rgba(62, 65, 71, 0.4);
+margin-top: 10px;
+font-size: medium;
+font-family: Arial;
+margin-bottom: 10px;
+padding: 5px;
 }
 
-.dropdownFilter label {
-  display: block;
-  padding: 10px 20px;
-  cursor: pointer;
+.footerRespo, .footerRespo2{
+display: flex;
+justify-content: space-between;
 }
 
-.dropdownFilter label:hover {
-  background-color: #ddd; /* Change background color on hover */
+.SubmitRespo{
+background: rgb(0, 0, 164);
+font-size: 17px;
+padding: 10px 30px;
+color: white;
+border-radius: 5px;
 }
 
-.DropFilterInput[type="radio"] {
-  display: none;
+/* DESIGN PARA SA RESPONDS MESSAGING */
+.boxLoobReply2{
+display: none;
+padding: 10px;
+overflow-y: auto;
 }
 
-.DropFilterInput[type="radio"] + label {
-  display: block;
-  padding: 10px 20px;
-  cursor: pointer;
+
+.ComplaintName2{
+width: 81%;
+font-size: medium;
+border-radius: 5px;
+border: 1px solid rgba(62, 65, 71, 0.4);
+padding: 5px 10px;
 }
 
-.DropFilterInput[type="radio"]:checked + label {
-  background-color: #f0f0f0; /* Change background color for checked state */
+.textAreaComp2{
+resize: none;
+height: 300px;
+width: 100%;
+border-radius: 5px;
+border: 1px solid rgba(62, 65, 71, 0.4);
+margin-top: 10px;
+font-size: medium;
+font-family: Arial;
+margin-bottom: 10px;
+padding: 5px;
+}
+
+
+.SubmitRespo2{
+background: rgb(0, 0, 164);
+font-size: 17px;
+padding: 10px 30px;
+color: white;
+border-radius: 5px;
 }

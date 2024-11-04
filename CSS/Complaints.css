@@ -1,883 +1,446 @@
 :root{
-  --color-primary: #1828b8;
-  --color-danger: #ff7782;
-  --color-success: #41f1b6;
-  --color-warning: #ffbb55;
-  --color-white: #fff;
-  --color-info-dark: #1e1e1f;
-  --color-info-light: #939fb6;
-  --color-dark: #363949;
-  --color-light: rgba(61, 109, 176, 0.18);
-  --color-light-2: rgba(52, 58, 116, 0.20);
-  --color-primary-variant: #111e88;
-  --color-dark-variant: #677483;
-  --color-background: #f0f0f0;
-
-  --light: #f9f9f9;
-  --blue: #3c91e6;
-  --light-blue: #a9d5ff;
-  --light-red: #f38c8c;
-  --light-green: #a7f9d0;
-  --grey: #eee;
-  --dark-grey: #aaaaaa;
-  --drak: #342e37;
-  --red:  #e88383;
-  --green: rgb(94, 232, 129);
-  --color-info-dark: #919497;
-
-  --color-border-radius: 2rem;
-  --color-border-radius-1: 0.4rem;
-  --color-border-radius-2: 0.8rem;
-  --color-border-radius-3: 1.2rem;
-
-
-  --card-padding: 1.8rem;
-  --padding-1: 1.2rem;
-
-  --box-shadow: 0 2rem 3rem var(--color-light);
+    --color-primary: #1828b8;
+    --color-danger: #ff7782;
+    --color-success: #41f1b6;
+    --color-warning: #ffbb55;
+    --color-white: #fff;
+    --color-info-dark: #1e1e1f;
+    --color-info-light: #939fb6;
+    --color-dark: #363949;
+    --color-light: rgba(61, 109, 176, 0.18);
+    --color-light-2: rgba(52, 58, 116, 0.20);
+    --color-primary-variant: #111e88;
+    --color-dark-variant: #677483;
+    --color-background: #f0f0f0;
+  
+    --light: #f9f9f9;
+    --blue: #3c91e6;
+    --light-blue: #a9d5ff;
+    --light-red: #f38c8c;
+    --light-green: #a7f9d0;
+    --grey: #eee;
+    --dark-grey: #aaaaaa;
+    --drak: #342e37;
+    --red:  #e88383;
+    --green: rgb(94, 232, 129);
+    --color-info-dark: #919497;
+  
+    --color-border-radius: 2rem;
+    --color-border-radius-1: 0.4rem;
+    --color-border-radius-2: 0.8rem;
+    --color-border-radius-3: 1.2rem;
+  
+  
+    --card-padding: 1.8rem;
+    --padding-1: 1.2rem;
+  
+    --box-shadow: 0 2rem 3rem var(--color-light);
 }
-
+  
 *{
-  margin: 0;
-  padding: 0;
-  outline: none;
-  appearance: none;
-  border: 0;
-  text-decoration: none;
-  list-style: none;
-  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    outline: none;
+    appearance: none;
+    border: 0;
+    text-decoration: none;
+    list-style: none;
+    box-sizing: border-box;
 }
-
+  
 html{
-  font-size: 14px;
+    font-size: 14px;
 }
-
+  
 .mainDashboardContainer{
-  width: 100vw;
-  height: 100vh;
-  font-family: Arial, sans-serif;
-  font-size: 0.88rem;
-  background: var(--color-background);
-  user-select: none;
-  overflow-x: hidden;
-  color: var(--color-dark);
+    width: 100vw;
+    height: 100vh;
+    font-family: Arial, sans-serif;
+    font-size: 0.88rem;
+    background: var(--color-background);
+    user-select: none;
+    overflow-x: hidden;
+    color: var(--color-dark);
 }
-
+  
 /* ===== SIDEBAR DESIGN ===== */
 .sidebarContainer {
   position: fixed;
   display: flex;
   flex-direction: column;
-  /* left: 5px; */
   bottom: 0;
   top: 0;
-  background-color:  rgb(255, 255, 255);
-  width: 250px;
-  /* margin-top: 7px; */
+  background-color: rgb(255, 255, 255);
+  width: 260px;
   transition: all 0.3s;
 }
 
-.sidebarContainer span{
-  font-size: 14.5px;
-  font-weight: 500;
+.DagdagNanaman {
+  flex: 1; /* Allow the div to grow and fill available space */
+  overflow-y: auto; /* Enable vertical scrolling */
+  /* background-color: gray; */
+  scrollbar-width: thin; /* For Firefox */
 }
 
-.sidebarContainer .sideside{
-  display: flex;
-  color: var(--color-info-dark);
-  padding-left: 25px;
-  gap: 1rem;
-  align-items: center;
-  position: relative;
-  height: 3.6rem;
-  transition: all 300ms ease;
+.DagdagNanaman span{
+    font-size: 14.5px;
+    font-weight: 500;
 }
-
-.sidebarContainer .sideside .img-sideboard{
-  font-size: 1.6rem;
-  transition: all 300ms ease;
+  
+.DagdagNanaman .sideside{
+    display: flex;
+    color: var(--color-info-dark);
+    padding-left: 25px;
+    gap: 1rem;
+    align-items: center;
+    position: relative;
+    height: 3.6rem;
+    transition: all 300ms ease;
 }
-
-.sidebarContainer .sideside:last-child{
-  position: absolute;
-  bottom: 1px;
-  width: 100%;
+  
+.DagdagNanaman .sideside .img-sideboard{
+    font-size: 1.6rem;
+    transition: all 300ms ease;
 }
-
-.sidebarContainer .sideside.baractive{
-  background: var(--color-light);
-  color: var(--color-primary);
+  
+.DagdagNanaman .sideside:last-child{
+    bottom: 1px;
 }
-
-.sidebarContainer .sideside.baractive .img-sideboard{
-  margin-left: calc(1rem -3rem);
+  
+.DagdagNanaman .sideside.baractive{
+    background: var(--color-light);
+    color: var(--color-primary);
 }
-
-.sidebarContainer .sideside:hover{
-  color: var(--color-primary);
+  
+.DagdagNanaman .sideside.baractive .img-sideboard{
+    margin-left: calc(1rem -3rem);
 }
-
-.sidebarContainer .sideside:hover .img-sideboard{
-  margin-left: 1rem;
+  
+.DagdagNanaman .sideside:hover{
+    color: var(--color-primary);
+}
+  
+.DagdagNanaman .sideside:hover .img-sideboard{
+    margin-left: 1rem;
 }
 
 /* SIDEBAR ACTIVE */
 .sidebarActive {
-  transform: translateX(250px); /* Move sidebar into view */
+    transform: translateX(250px); 
 }
-
+  
 /* .MonthlyDuessContainerr.MonthlyDuessConActivee {
-  margin-left: 5px;
+    margin-left: 5px;
 } */
-
+  
 /* ===== SIDEBAR IMAGE SIZE ===== */
-.img-sideboard{
-  width: 20px;
+  .img-sideboard{
+    width: 20px;
 }
-
+  
 /* ========== SUB MENU SIDEBAR ========== */
-.subMenuComp{
-  display: none;
-  margin-left: 35px;
-  transition: all 0.3s;
+  .subMenuComp{
+    display: none;
+    margin-left: 35px;
+    transition: all 0.3s;
 }
-
+  
 .submenu-visible {
-  display: block; 
+    display: block; 
 }
-
+  
 .subMenuComp li a{
-  position: relative;
-  display: flex;
-  color: var(--color-info-dark);
-  padding: 10px;
-  position: relative;
-  transition: all 300ms ease;
+    position: relative;
+    display: flex;
+    color: var(--color-info-dark);
+    padding: 10px;
+    position: relative;
+    transition: all 300ms ease;
 }
-
+  
 .eme2{
-  width: 0;
-  height: 0;
-  border-left: 5px solid transparent;
-  border-right: 5px solid transparent;
-  border-top: 6px solid #aeaeae;
-  transition: 0.3s;
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 6px solid #aeaeae;
+    transition: 0.3s;
+    margin-left: 25%;
 }
-
+  
 .buttonEme2{
-  padding: 10px 15px;
-  margin-left: 45px;
-  cursor: pointer;
+    padding: 10px 15px;
+    cursor: pointer;
 }
-
+  
 .eme2-rotate{
-  transform: rotate(180deg);
+    transform: rotate(180deg);
 }
-
+  
 .subMenuComp li a.active{
-  background: var(--color-light);
-  color: var(--color-primary);
-  height: 100%;
-  margin-left: 5px;
+    background: var(--color-light);
+    color: var(--color-primary);
+    height: 100%;
+    margin-left: 5px;
 }
-
+  
 .sidebarContainer li a:hover{
-  color: var(--color-primary);
-  margin-left: 1rem;
+    color: var(--color-primary);
+    margin-left: 1rem;
 }
-
+  
 .subMenuComp li a.active::before {
-  content: '';
-  width: 4px;
-  height: 100%;
-  background: var(--color-primary);
-  position: absolute;
-  left: 0;
-  top: 0;
+    content: '';
+    width: 4px;
+    height: 100%;
+    background: var(--color-primary);
+    position: absolute;
+    left: 0;
+    top: 0;
 }
-
+  
 /* ===== SUB MENU CHAT IMAGE ==== */
-.img-subMenu{
-  width: 20px;
-  margin-right: 5px;
+  .img-subMenu{
+    width: 20px;
+    margin-right: 5px;
 }
-
+  
 .sub-spa{
-  margin-top: 5px;
+    margin-top: 5px;
 }
-
+  
 /* ========== MAIN DASHBOARD DESIGN ========== */
 .MainBodyContainerr {
-padding-left: 250px;
-display: flex;
-flex-direction: column;
-height: 100vh;
+  padding-left: 260px;
+  display: flex; /* Ensure it uses flexbox to manage layout */
+  flex-direction: column; /* Stack children vertically */
+  height: 100vh; /* Make sure it takes full viewport height */
 }
 
 .MainContainerForTables {
-display: flex;
-justify-content: center;
-width: 100%;
-flex: 1;
-overflow: hidden;
-}
-
-.TablessContainer {
-display: flex;
-flex-direction: column; /* Stack children vertically */
-width: 100%;
-padding: 10px;
-background-color: #ffffff;
-border: 1px solid rgb(179, 172, 172);
-margin: 10px;
-flex: 1; /* Allow it to grow and take available space */
-}
-
-/* DESIGN FOR DROPDOWN */
-.TableHeaderr {
-display: flex;
-justify-content: space-between;
-align-items: center;
-margin-bottom: 6px;
-}
-
-.itemsController,
-.searchTablee{
-display: flex;
-align-items: center;
-}
-
-.dropdown {
-position: relative;
-display: inline-block;
-cursor: pointer;
-margin: 0 7px;
-}
-
-.ArrowandPlace{
-display: flex;
-justify-content: center;
-align-items: center;
-}
-
-.selected {
-display: flex;
-align-items: center;
-justify-content: center;
-padding: 5px;
-border: 1px solid #ccc;
-background-color: #fff;
-width: 70px;
-user-select: none;
-z-index: 1;
-}
-
-.options {
-display: none;
-position: absolute;
-background-color: #fff;
-box-shadow: 0 4px 8px 0 rgba(0,0,0,0.1);
-top: 100%;
-left: 0;
-width: 70px;
-z-index: 1;
-}
-
-.option {
-text-align: center;
-padding: 8px;
-cursor: pointer;
-border-top: 1px solid #ccc;
-width: 100%;
-box-sizing: border-box;
-z-index: 1;
-}
-
-.open .options {
-display: block;
-}
-
-.inputSearchhh{
-padding: 5px;
-font-size: 16px;
-width: 300px;
-margin-left: 5px;
-}
-
-/* DESIGN FOR TABLE */
-.TablesContainer {
-flex: 1; /* Grow to fill available space */
-width: 100%;
-overflow-y: auto; /* Scroll if content overflows */
-}
-
-table{
-width: 100%;
-border-collapse: collapse;
-margin-top: 20px;
-}
-
-thead{
-background: var(--color-primary);
-color: white;
-}
-
-th{
-padding: 20px;
-cursor: pointer;
-position: relative;
-font-size: 12px;
-white-space: nowrap;
-user-select: none;
-transition: all linear 0.16s;
-border: 1px solid rgb(179, 172, 172); /* Outline partition */
-}
-
-table th.asc,
-table th.desc {
-border-bottom-color: rgb(255, 255, 255);
-}
-
-table th[data-sort]::before,
-table th[data-sort]::after {
-content: '';
-position: absolute;
-height: 0;
-width: 0;
-right: 10%;
-opacity: 0.3;
-margin-top: 12px;
-border: 4px solid transparent;
-}
-
-table th[data-sort]::before {
-top: 6px;
-border-bottom-color: rgb(255, 255, 255);
-}
-
-table th[data-sort]::after {
-top: 16px;
-border-top-color: rgb(255, 255, 255);
-}
-
-table th.asc::before,
-table th.desc::after {
-opacity: 1;
-}
-
-table td {
-font-size: 14px;
-border-bottom: 1px solid #576574;
-padding: 10px 12px;
-}
-
-td{
-padding: 5px;
-border: 1px solid rgb(179, 172, 172); /* Outline partition */
-}
-
-tbody{
-background: var(--color-white);
-text-align: center;
-}
-
-td{
-color: #000000;
-}
-
-tr:nth-child(even){
-background: var(--color-light);
-}
-
-/* DESIGN PARA SA PAGINATION */
-.bottom-field{
-width: 100%;
-margin-top: 10px;
-}
-.pagination{
-display: flex;
-justify-content: end;
-align-items: center;
-}
-
-.pagination li{
-list-style: none;
-flex-shrink: 0;
-text-align: center;
-border: 1px solid #999;
-color: #000000;
-}
-
-.pagination a.Pageactive{
-background: #04007a;
-color: white;
-border-color: #32d6aa;
-}
-
-.pagination li a{
-text-decoration: none;
-padding: 3px 8px;
-color: inherit;
-display: block;
-font-family: sans-serif;
-font-size: 13px;
-}
-
-.prevv:hover,
-.nextt:hover{
-background: rgb(182, 182, 182);
-}
-
-/* DESIGN PARA TO SA HEADER NG SIDEBAR AT SA MAIN */
-.headerTop{
-  align-items: center;
-  text-align: center;
-  background: rgb(229, 229, 229);
-  height: 160px;
-  width: 100%;
-  padding-top: 10px;
-  box-shadow: 0 8px 8px -10px #888888;
-}
-
-.img-logo{
-  width: 100px;
-}
-
-.headerTopMain{
-  position: sticky;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 50px;
-  width: 100%;
-  background: rgb(255, 255, 255);
-  padding: 20px;
-  top: 0;
-  box-shadow: 5px 10px 18px #888888;
-  box-shadow: 0 8px 8px -10px black;
-  z-index: 1;
-}
-
-.HamburgerandOthers{
-  display: flex;
-  align-items: center;
-}
-
-.namePerModule{
-  padding-left: 20px;
-}
-
-.menu{
-  width: 25px;
-  cursor: pointer;
-}
-
-.ProfileViewww{
-  display: flex;
-  align-items: center;
-}
-
-.user-img{
-  width: 30px;
-  height: 30px;
-  background: rgb(0, 0, 0);
-  border-radius: 20px;
-}
-
-.profileBtn{
-  padding: 5px 20px;
-  margin-right: 5px;
-  cursor: pointer;
-}
-
-.profileBtn label{
-  cursor: pointer;
-}
-
-/* ===== PROFILE MODAL DESIGN ===== */
-.modal{
-  display: none;
-}
-
-.subModal{
-  position: fixed;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 2;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.4);
-}
-
-.modal-content {
-  display: flex;
-  background: var(--color-background);
-  width: 800px;
-  height: 500px; /* Set the desired height */
-  overflow: hidden; /* Hide overflow */
-  border-radius: 10px;
-}
-
-.profileSidebar{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background: white;
-  width: 150px;
-  height: 100%;
-  border-radius: 10px;
-}
-
-.profileSidebar a{
-  display: flex;
-  align-items: center;
   justify-content: center;
   width: 100%;
-  height: 4rem;
-  margin-bottom: 5px;
-  /* background: rgb(192, 184, 184); */
-  color: var(--color-info-dark);
+  flex: 1; /* Allow it to grow and take available space */
+  overflow: hidden; /* Prevent scrollbars here */
 }
 
-.profileSidebar a:hover{
-  color: var(--color-primary);
-}
-
-.profilePages{
+.MainContainerAll {
   width: 100%;
-  margin-left: 10px;
+  padding: 10px;
+  background-color: #ffffff;
+  border: 1px solid rgb(179, 172, 172);
+  margin: 10px;
+  /* Allow it to expand within the flex container */
+  /* Remove the fixed height to allow dynamic adjustment */
+  flex: 1; /* Allow it to grow and shrink with available space */
+  overflow-y: auto; /* Optional: Add scrollbar if content overflows */
 }
 
-.closeProf{
-  display: flex;
-  justify-content: end;
-  margin-right: 5px;
-  color: #000000;
-  font-size: 28px;
-  font-weight: bold;
-  cursor: pointer;
-}
+  /* DESIGN PARA TO SA HEADER NG SIDEBAR AT SA MAIN */
+  .headerTop{
+    align-items: center;
+    text-align: center;
+    background: rgb(229, 229, 229);
+    height: 160px;
+    width: 100%;
+    padding-top: 10px;
+    box-shadow: 0 8px 8px -10px #888888;
+  }
+  
+  .img-logo{
+    width: 100px;
+  }
+  
+  .headerTopMain{
+    position: sticky;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 50px;
+    width: 100%;
+    background: rgb(255, 255, 255);
+    padding: 20px;
+    top: 0;
+    box-shadow: 5px 10px 18px #888888;
+    box-shadow: 0 8px 8px -10px black;
+    z-index: 1;
+  }
+  
+  .HamburgerandOthers{
+    display: flex;
+    align-items: center;
+  }
+  
+  .namePerModule{
+    padding-left: 20px;
+  }
+  
+  .menu{
+    width: 25px;
+    cursor: pointer;
+  }
+  
+  .ProfileViewww{
+    display: flex;
+    align-items: center;
+  }
+  
+  .user-img{
+    width: 30px;
+    height: 30px;
+    background: rgb(0, 0, 0);
+    border-radius: 20px;
+  }
+  
+  .profileBtn{
+    padding: 5px 20px;
+    margin-right: 5px;
+    cursor: pointer;
+  }
+  
+  .profileBtn label{
+    cursor: pointer;
+  }
+  
+  /* ===== PROFILE MODAL DESIGN ===== */
+  .modal{
+    display: none;
+  }
+  
+  .subModal{
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+  }
+  
+  .modal-content {
+    display: flex;
+    background: var(--color-background);
+    width: 800px;
+    height: 500px; /* Set the desired height */
+    overflow: hidden; /* Hide overflow */
+    border-radius: 10px;
+  }
+  
+  .profileSidebar{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    width: 150px;
+    height: 100%;
+    border-radius: 10px;
+  }
+  
+  .profileSidebar a{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 4rem;
+    margin-bottom: 5px;
+    /* background: rgb(192, 184, 184); */
+    color: var(--color-info-dark);
+  }
+  
+  .profileSidebar a:hover{
+    color: var(--color-primary);
+  }
+  
+  .profilePages{
+    width: 100%;
+    margin-left: 10px;
+  }
+  
+  .closeProf{
+    display: flex;
+    justify-content: end;
+    margin-right: 5px;
+    color: #000000;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  /* Hide all pages initially */
+  .page {
+    display: none;
+  }
+  
+  /* Show active page */
+  .activeProfModal{
+    display: block;
+  }
+  
+  /* ===== CHANGING PASSWORD ===== */
+  .changingPassword {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 20px;
+    margin-left: 50px;
+    margin-right: 50px;
+  }
+  
+  .changingInputBox{
+    width: 100%;
+    margin-bottom: 50px;
+  }
+  
+  .changingInputBoxLast{
+    width: 100%;
+  }
+  
+  .changingInputBox .inputngChanging,
+  .changingInputBoxLast .inputngChanging{
+    width: 100%;
+    padding: 15px;
+    font-size: 20px;
+    border-radius: 10px;
+    border: 1px solid rgba(62, 65, 71, 0.4);
+  }
+  
+  .changingInputBox .inputngChanging:focus,
+  .changingInputBoxLast .inputngChanging:focus{
+    border-color: var(--color-primary);
+  }
+  
+  .changingForgotPass {
+    display: flex;
+    justify-content: end;
+    margin-top: 15px;
+    font-size: 17.5px;
+    width: 100%;
+  }
+  
+  .forgotpassAs{
+    color: var(--color-primary);
+  }
+  
+  .forgotpassAs:hover{
+    text-decoration: underline;
+  }
+  
+  .paragChange{
+    margin-top: 10px;
+  }
+  
+  .buttonSapagPalit{
+    margin-top: 10px;
+    width: 100%;
+    padding: 15px;
+    background: var(--color-primary);
+    color: white;
+    font-size: 17.5px;
+    cursor: pointer;
+  }
 
-/* Hide all pages initially */
-.page {
-  display: none;
-}
-
-/* Show active page */
-.activeProfModal{
-  display: block;
-}
-
-/* ===== CHANGING PASSWORD ===== */
-.changingPassword {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin-top: 20px;
-  margin-left: 50px;
-  margin-right: 50px;
-}
-
-.changingInputBox{
-  width: 100%;
-  margin-bottom: 50px;
-}
-
-.changingInputBoxLast{
-  width: 100%;
-}
-
-.changingInputBox .inputngChanging,
-.changingInputBoxLast .inputngChanging{
-  width: 100%;
-  padding: 15px;
-  font-size: 20px;
-  border-radius: 10px;
-  border: 1px solid rgba(62, 65, 71, 0.4);
-}
-
-.changingInputBox .inputngChanging:focus,
-.changingInputBoxLast .inputngChanging:focus{
-  border-color: var(--color-primary);
-}
-
-.changingForgotPass {
-  display: flex;
-  justify-content: end;
-  margin-top: 15px;
-  font-size: 17.5px;
-  width: 100%;
-}
-
-.forgotpassAs{
-  color: var(--color-primary);
-}
-
-.forgotpassAs:hover{
-  text-decoration: underline;
-}
-
-.paragChange{
-  margin-top: 10px;
-}
-
-.buttonSapagPalit{
-  margin-top: 10px;
-  width: 100%;
-  padding: 15px;
-  background: var(--color-primary);
-  color: white;
-  font-size: 17.5px;
-  cursor: pointer;
-}
-
-/* DESIGN PARA SA PAGINATION */
-
-.bottom-field{
-width: 100%;
-margin-top: 10px;
-}
-.pagination{
-display: flex;
-justify-content: end;
-align-items: center;
-}
-
-.pagination li{
-list-style: none;
-flex-shrink: 0;
-text-align: center;
-border: 1px solid #999;
-color: #000000;
-}
-
-.pagination a.Pageactive{
-background: #04007a;
-color: white;
-border-color: #32d6aa;
-}
-
-.pagination li a{
-text-decoration: none;
-padding: 3px 8px;
-color: inherit;
-display: block;
-font-family: sans-serif;
-font-size: 13px;
-}
-
-.prevv:hover,
-.nextt:hover{
-background: rgb(182, 182, 182);
-}
-
-/* DESIGN PARA SA MODAL VIEW */
-.ViewBtnCom{
-border-radius: 5px;
-padding: 0.4rem 2rem;
-cursor: pointer;
-}
-
-.ModalNgComplain{
-display: none;
-position: fixed;
-z-index: 1;
-left: 0;
-top: 0;
-width: 100%;
-height: 100%;
-overflow: auto;
-background-color: rgba(0, 0, 0, 0.4);
-}
-
-.SubModalComplain{
-display: flex;
-align-items: center;
-justify-content: center;
-height: 100%;
-}
-
-.LamanNgViewCom{
-position: relative;
-max-width: 600px;
-width: 100%;
-margin-top: 10px;
-height: 500px;
-background: #f7f7f7;
-border-radius: 8px;
-}
-
-.titleHeaderView{
-display: flex;
-align-items: center;
-justify-content: end;
-padding: 10px;
-border-radius: 5px;
-}
-
-.closeViewModal{
-color: #000000;
-font-size: 22px;
-font-weight: bold;
-cursor: pointer;
-}
-
-.boxsaLoob{
-/* display: none; */
-height: 450px;
-padding: 10px;
-overflow-y: auto;
-}
-
-.inputComplaintss{
-width: 82%;
-font-size: medium;
-border-radius: 5px;
-border: 1px solid rgba(62, 65, 71, 0.4);
-padding: 5px 10px;
-}
-
-.divssComp{
-margin-bottom: 10px;
-}
-
-.DescriTextArea{
-resize: none;
-height: 300px;
-width: 100%;
-border-radius: 5px;
-border: 1px solid rgba(62, 65, 71, 0.4);
-margin-top: 10px;
-font-size: medium;
-font-family: Arial;
-padding: 5px;
-}
-
-.LagayanPictureComp{
-display: flex;
-justify-content: center;
-height: 300px;
-width: 100%;
-border-radius: 5px;
-border: 1px solid rgba(62, 65, 71, 0.4);
-background: white;
-}
-
-.BotonDalawa{
-display: flex;
-justify-content: space-between;
-margin-bottom: 10px;
-}
-
-.MessComp{
-background: rgb(0, 0, 149);
-}
-
-.MessComp:hover{
-background: blue; 
-}
-
-.repsComp{
-background: rgb(172, 0, 0);
-}
-
-.repsComp:hover{
-background: rgb(255, 0, 0);
-}
-
-.Compsss{
-font-size: 15px;
-padding: 10px 30px;
-color: white;
-border-radius: 5px;
-cursor: pointer;
-}
-
-.BackBtn{
-color: #000000;
-background: rgb(207, 207, 207);
-}
-
-/* DESIGN PARA SA RESPONDS */
-.boxLoobReply{
-display: none;
-padding: 10px;
-overflow-y: auto;
-}
-
-
-.ComplaintName{
-width: 81%;
-font-size: medium;
-border-radius: 5px;
-border: 1px solid rgba(62, 65, 71, 0.4);
-padding: 5px 10px;
-}
-
-.textAreaComp{
-resize: none;
-height: 340px;
-width: 100%;
-border-radius: 5px;
-border: 1px solid rgba(62, 65, 71, 0.4);
-margin-top: 10px;
-font-size: medium;
-font-family: Arial;
-margin-bottom: 10px;
-padding: 5px;
-}
-
-.footerRespo, .footerRespo2{
-display: flex;
-justify-content: space-between;
-}
-
-.SubmitRespo{
-background: rgb(0, 0, 164);
-font-size: 17px;
-padding: 10px 30px;
-color: white;
-border-radius: 5px;
-}
-
-/* DESIGN PARA SA RESPONDS MESSAGING */
-.boxLoobReply2{
-display: none;
-padding: 10px;
-overflow-y: auto;
-}
-
-
-.ComplaintName2{
-width: 81%;
-font-size: medium;
-border-radius: 5px;
-border: 1px solid rgba(62, 65, 71, 0.4);
-padding: 5px 10px;
-}
-
-.textAreaComp2{
-resize: none;
-height: 300px;
-width: 100%;
-border-radius: 5px;
-border: 1px solid rgba(62, 65, 71, 0.4);
-margin-top: 10px;
-font-size: medium;
-font-family: Arial;
-margin-bottom: 10px;
-padding: 5px;
-}
-
-
-.SubmitRespo2{
-background: rgb(0, 0, 164);
-font-size: 17px;
-padding: 10px 30px;
-color: white;
-border-radius: 5px;
-}
