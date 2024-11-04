@@ -134,26 +134,27 @@ document.addEventListener('click', function(event) {
     }
 });
 
-document.addEventListener("DOMContentLoaded", function () {
-    const generateButton = document.querySelector(".BtnGeneratee");
-    const modal = document.getElementById("summaryModal");
-    const closeBtn = modal.querySelector(".closeSummary");
+// Function ng pagbukas ng generate button dati ng mga winners
+// document.addEventListener("DOMContentLoaded", function () {
+//     const generateButton = document.querySelector(".BtnGeneratee");
+//     const modal = document.getElementById("summaryModal");
+//     const closeBtn = modal.querySelector(".closeSummary");
 
-    generateButton.addEventListener("click", function () {
-        modal.style.display = "block"; // Show the modal
-    });
+//     generateButton.addEventListener("click", function () {
+//         modal.style.display = "block"; // Show the modal
+//     });
 
-    closeBtn.addEventListener("click", function () {
-        modal.style.display = "none"; // Hide the modal
-    });
+//     closeBtn.addEventListener("click", function () {
+//         modal.style.display = "none"; // Hide the modal
+//     });
 
-    // Close the modal if the user clicks outside of it
-    window.addEventListener("click", function (event) {
-        if (event.target === modal) {
-            modal.style.display = "none";
-        }
-    });
-});
+//     // Close the modal if the user clicks outside of it
+//     window.addEventListener("click", function (event) {
+//         if (event.target === modal) {
+//             modal.style.display = "none";
+//         }
+//     });
+// });
 
 
 
@@ -1039,7 +1040,7 @@ function fetchTableData() {
                         });
                     } else {
                         var tr = document.createElement('tr');
-                        tr.innerHTML = '<td colspan="4">No candidates found</td>';
+                        tr.innerHTML = '<td colspan="5">No candidates found</td>';
                         tableBody.appendChild(tr);
                     }
                 } else {
@@ -1139,6 +1140,9 @@ document.addEventListener("DOMContentLoaded", function() {
         clearInterval(countdownInterval); // Clear any existing interval
         updateDisplay(); // Update the display initially
 
+        var element = document.querySelector("[name='suggestionInput']");
+            element.hidden = true;
+
         countdownInterval = setInterval(function() {
             if (remainingTime <= 0) {
                 clearInterval(countdownInterval);
@@ -1149,6 +1153,28 @@ document.addEventListener("DOMContentLoaded", function() {
                 updateDisplay();
             }
         }, 1000); // Update every second
+    }
+
+    // Function ng pagbukas ng modal nang mga nanalo
+    function showWinnerModal() {
+        // Modal setup logic
+        const modal = document.getElementById("summaryModal");
+        const closeBtn = modal.querySelector(".closeSummary");
+        
+        // Show the modal
+        modal.style.display = "block";
+    
+        // Hide the modal when the close button is clicked
+        closeBtn.addEventListener("click", function () {
+            modal.style.display = "none"; // Hide the modal
+        });
+    
+        // Hide the modal if the user clicks outside of it
+        window.addEventListener("click", function (event) {
+            if (event.target === modal) {
+                modal.style.display = "none";
+            }
+        });
     }
 
     // Declare winners
@@ -1169,7 +1195,10 @@ document.addEventListener("DOMContentLoaded", function() {
                         console.log("Winners declaration response:", response);
                         if (response.success) {
                             alert("Winners declared successfully.");
+                            showWinnerModal();
                             console.log("Winners declared successfully.");
+                            var element = document.querySelector("[name='suggestionInput']");
+                                element.hidden = false;
                             location.reload();
                         } else {
                             console.error("Failed to declare winners: ", response.error);
@@ -1260,6 +1289,8 @@ document.addEventListener("DOMContentLoaded", function() {
                     try {
                         let response = JSON.parse(xhrResetVoting.responseText);
                         if (response.success) {
+                            var element = document.querySelector("[name='suggestionInput']");
+                                element.hidden = false;
                             console.log("Voting status reset successfully.");
                         } else {
                             console.error("Failed to reset voting status: ", response.error);
@@ -1438,9 +1469,58 @@ function fetchWinners() {
     .catch(error => console.error('Error:', error));
 }
 
+
+
+// Function sa history
+function fetchHistory() {
+    fetch('PHPBackend/DeclareWinner.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: new URLSearchParams({ action: 'fetch_history' })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            const tbody = document.querySelector('.TableForHistory tbody');
+            tbody.innerHTML = ''; // Clear the current content
+
+            data.winners.forEach(winner => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${winner.won_date}</td>
+                    <td>Recent Winners</td>
+                    <td><button onclick="showHistoryModal('${winner.candidate_names}')">View</button></td>
+                `;
+                tbody.appendChild(row);
+            });
+        } else {
+            console.error('Error fetching winners:', data.error);
+        }
+    })
+    .catch(error => console.error('Fetch error:', error));
+}
+
+function showHistoryModal(candidateNames) {
+    const winnersList = document.getElementById('winnersList');
+    winnersList.innerHTML = ''; // Clear previous data
+    candidateNames.split(', ').forEach(name => {
+        const listItem = document.createElement('li');
+        listItem.textContent = name;
+        winnersList.appendChild(listItem);
+    });
+    document.getElementById('winnersModal').style.display = 'block';
+}
+
+function closeWinnersModal() {
+    document.getElementById('winnersModal').style.display = 'none';
+}
+
 window.addEventListener("load", function() {
     updateTimestamp();
     fetchWinners();
+    fetchHistory();
 });
 
 
@@ -1603,6 +1683,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Function to add candidate to voting
 function addCandidateToVoting(uniqueId, candidateName, candidateImg) {
+
+    const timestamp = formatDate(new Date());
+
+
     return new Promise((resolve, reject) => {
         $.ajax({
             url: 'PHPBackend/DeclareWinner.php', // Change to the path of your PHP file
@@ -1612,7 +1696,7 @@ function addCandidateToVoting(uniqueId, candidateName, candidateImg) {
                 unique_id: uniqueId,
                 candidate_name: candidateName,
                 img: candidateImg,
-                add_date: new Date().toISOString().split('T')[0] // Current date in YYYY-MM-DD format
+                add_date: timestamp
             },
             dataType: 'json',
             success: function(response) {
@@ -1625,6 +1709,15 @@ function addCandidateToVoting(uniqueId, candidateName, candidateImg) {
         });
     });
 }
+
+
+
+
+
+
+
+
+
 
 
 

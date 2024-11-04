@@ -462,6 +462,36 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     
         closeConnectionAndRespond($conn, $response);
+
+    }elseif ($action === 'fetch_history') {
+        // Fetch winners grouped by won_date
+        $sql = "SELECT GROUP_CONCAT(candidate_name SEPARATOR ', ') AS candidate_names, won_date
+                FROM voting
+                WHERE status = 'Winner'
+                GROUP BY won_date";
+        
+        if ($result = $conn->query($sql)) {
+            $winners = [];
+            while ($row = $result->fetch_assoc()) {
+                $winners[] = [
+                    'candidate_names' => $row['candidate_names'],
+                    'won_date' => $row['won_date']
+                ];
+            }
+
+            if (!empty($winners)) {
+                $response = [
+                    'success' => true,
+                    'winners' => $winners
+                ];
+            } else {
+                $response = ['success' => false, 'message' => 'No winners found.'];
+            }
+        } else {
+            $response = ['success' => false, 'error' => 'Database error occurred.'];
+        }
+        closeConnectionAndRespond($conn, $response);
+
     } else {
         $response = ['success' => false, 'error' => 'Invalid request'];
         closeConnectionAndRespond($conn, $response);
