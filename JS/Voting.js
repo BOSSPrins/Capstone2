@@ -1472,6 +1472,47 @@ function fetchWinners() {
 
 
 // Function sa history
+// function fetchHistory() {
+//     fetch('PHPBackend/DeclareWinner.php', {
+//         method: 'POST',
+//         headers: {
+//             'Content-Type': 'application/x-www-form-urlencoded'
+//         },
+//         body: new URLSearchParams({ action: 'fetch_history' })
+//     })
+//     .then(response => response.json())
+//     .then(data => {
+//         if (data.success) {
+//             const tbody = document.querySelector('.TableForHistory tbody');
+//             tbody.innerHTML = ''; // Clear the current content
+
+//             data.winners.forEach(winner => {
+//                 const row = document.createElement('tr');
+//                 row.innerHTML = `
+//                     <td>${winner.won_date}</td>
+//                     <td>Recent Winners</td>
+//                     <td><button onclick="showHistoryModal('${winner.candidate_names}')">View</button></td>
+//                 `;
+//                 tbody.appendChild(row);
+//             });
+//         } else {
+//             console.error('Error fetching winners:', data.error);
+//         }
+//     })
+//     .catch(error => console.error('Fetch error:', error));
+// }
+
+// function showHistoryModal(candidateNames) {
+//     const winnersList = document.getElementById('winnersList');
+//     winnersList.innerHTML = ''; // Clear previous data
+
+//     candidateNames.split(', ').forEach(name => {
+//         const listItem = document.createElement('li');
+//         listItem.textContent = name;
+//         winnersList.appendChild(listItem);
+//     });
+//     document.getElementById('winnersModal').style.display = 'block';
+// }
 function fetchHistory() {
     fetch('PHPBackend/DeclareWinner.php', {
         method: 'POST',
@@ -1482,36 +1523,42 @@ function fetchHistory() {
     })
     .then(response => response.json())
     .then(data => {
+        console.log('Fetched data:', JSON.stringify(data, null, 2)); // Debug: print data structure
         if (data.success) {
             const tbody = document.querySelector('.TableForHistory tbody');
             tbody.innerHTML = ''; // Clear the current content
 
-            data.winners.forEach(winner => {
+            Object.keys(data.winners).forEach(won_date => {
                 const row = document.createElement('tr');
+                // Passing winners data as a JSON string
                 row.innerHTML = `
-                    <td>${winner.won_date}</td>
+                    <td>${won_date}</td>
                     <td>Recent Winners</td>
-                    <td><button onclick="showHistoryModal('${winner.candidate_names}')">View</button></td>
+                    <td><button onclick='showHistoryModal(${JSON.stringify(data.winners[won_date])})'>View</button></td>
                 `;
                 tbody.appendChild(row);
             });
         } else {
-            console.error('Error fetching winners:', data.error);
+            console.error('Error fetching winners:', data.message || data.error);
         }
     })
     .catch(error => console.error('Fetch error:', error));
 }
 
-function showHistoryModal(candidateNames) {
+function showHistoryModal(winners) {
+    console.log('Modal data:', winners); // Debug: check winners data
     const winnersList = document.getElementById('winnersList');
     winnersList.innerHTML = ''; // Clear previous data
-    candidateNames.split(', ').forEach(name => {
+
+    winners.forEach(winner => {
         const listItem = document.createElement('li');
-        listItem.textContent = name;
+        listItem.textContent = `ID: ${winner.vote_id} - Name: ${winner.candidate_name}`;
         winnersList.appendChild(listItem);
     });
+
     document.getElementById('winnersModal').style.display = 'block';
 }
+
 
 function closeWinnersModal() {
     document.getElementById('winnersModal').style.display = 'none';

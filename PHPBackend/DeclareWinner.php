@@ -463,36 +463,69 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
         closeConnectionAndRespond($conn, $response);
 
-    }elseif ($action === 'fetch_history') {
-        // Fetch winners grouped by won_date
-        $sql = "SELECT GROUP_CONCAT(candidate_name SEPARATOR ', ') AS candidate_names, won_date
-                FROM voting
-                WHERE status = 'Winner'
-                GROUP BY won_date";
+    // }elseif ($action === 'fetch_history') {
+    //     // Fetch winners grouped by won_date
+    //     $sql = "SELECT GROUP_CONCAT(candidate_name SEPARATOR ', ') AS candidate_names, won_date, vote_id
+    //             FROM voting
+    //             WHERE status = 'Winner'
+    //             GROUP BY won_date";
         
-        if ($result = $conn->query($sql)) {
-            $winners = [];
-            while ($row = $result->fetch_assoc()) {
-                $winners[] = [
-                    'candidate_names' => $row['candidate_names'],
-                    'won_date' => $row['won_date']
-                ];
-            }
+    //     if ($result = $conn->query($sql)) {
+    //         $winners = [];
+    //         while ($row = $result->fetch_assoc()) {
+    //             $winners[] = [
+    //                 'vote_id' => $row['vote_id'],
+    //                 'candidate_names' => $row['candidate_names'],
+    //                 'won_date' => $row['won_date']
+    //             ];
+    //         }
 
-            if (!empty($winners)) {
-                $response = [
-                    'success' => true,
-                    'winners' => $winners
-                ];
-            } else {
-                $response = ['success' => false, 'message' => 'No winners found.'];
-            }
-        } else {
-            $response = ['success' => false, 'error' => 'Database error occurred.'];
+    //         if (!empty($winners)) {
+    //             $response = [
+    //                 'success' => true,
+    //                 'winners' => $winners
+    //             ];
+    //         } else {
+    //             $response = ['success' => false, 'message' => 'No winners found.'];
+    //         }
+    //     } else {
+    //         $response = ['success' => false, 'error' => 'Database error occurred.'];
+    //     }
+    //     closeConnectionAndRespond($conn, $response);
+
+    // } 
+}elseif ($action === 'fetch_history') {
+    // Fetch winners grouped by won_date, including vote_id and candidate_name
+    $sql = "SELECT vote_id, candidate_name, won_date
+            FROM voting
+            WHERE status = 'Winner'
+            ORDER BY won_date DESC";
+
+    if ($result = $conn->query($sql)) {
+        $winnersByDate = [];
+        while ($row = $result->fetch_assoc()) {
+            $won_date = $row['won_date'];
+            $winnersByDate[$won_date][] = [
+                'vote_id' => $row['vote_id'],
+                'candidate_name' => $row['candidate_name']
+            ];
         }
-        closeConnectionAndRespond($conn, $response);
 
+        if (!empty($winnersByDate)) {
+            $response = [
+                'success' => true,
+                'winners' => $winnersByDate
+            ];
+        } else {
+            $response = ['success' => false, 'message' => 'No winners found.'];
+        }
     } else {
+        $response = ['success' => false, 'error' => 'Database error occurred.'];
+    }
+    closeConnectionAndRespond($conn, $response);
+}
+
+    else {
         $response = ['success' => false, 'error' => 'Invalid request'];
         closeConnectionAndRespond($conn, $response);
     }
