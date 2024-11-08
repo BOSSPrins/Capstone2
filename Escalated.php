@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> Mabuhay Website </title>
     <link rel="icon" type="image/x-icon" href="Pictures/Mabuhay_Logo.ico">
-    <link rel="stylesheet" href="CSS/Complaints.css">
+    <link rel="stylesheet" href="CSS/Escalated.css">
 </head>
 <body>
 <div class="mainDashboardContainer">
@@ -33,7 +33,7 @@
                         <span> Documents </span>
                     </a>
                     <div class="complaintsContainer">
-                        <a href="Complaints.php" class="sideside" id="complaintsDropdown">
+                        <a href="" class="sideside" id="complaintsDropdown">
                             <img class="img-sideboard" src="Pictures/ComplaintsCap.png">
                             <span> Manage Complaints</span>
                             <button class="buttonEme2">
@@ -43,15 +43,15 @@
                         <ul class="subMenuComp" id="complaintsSubMenu">
                             <li> 
                                 <a href="#">
-                                    <img class="img-subMenu" src="Pictures/In-Process.png">
+                                    <img class="img-subMenu" src="#">
                                     <label class="sub-spa"> In-Process </label>
                                 </a> 
                                 <a href="#">
-                                    <img class="img-subMenu" src="Pictures/resolved.png">
+                                    <img class="img-subMenu" src="#">
                                     <label class="sub-spa"> Resolved </label>
                                 </a> 
                                 <a href="#">
-                                    <img class="img-subMenu" src="Pictures/warning.png">
+                                    <img class="img-subMenu" src="#">
                                     <label class="sub-spa"> Escalated </label>
                                 </a> 
                                 <a href="MainChat.php">
@@ -140,7 +140,7 @@
                             <img id="menuBtn" class="menu" src="Pictures/menu-hamburger.png">
                         </div>
                         <div class="NamesModuleCon">
-                            <h2 class="namePerModule"> Manage Complaints </h2>
+                            <h2 class="namePerModule"> Escalated Complaints </h2>
                         </div>
                     </div>
                     <div class="ProfileViewww">
@@ -188,7 +188,7 @@
                                         <td> Ruella </td>
                                         <td> Blk 22 Lot 48 </td>
                                         <td> 2023-02-02 02:23 </td>
-                                        <td style="color: red;"> Pending </td>
+                                        <td style="color: red;"> Escalated </td>
                                         <td>
                                             <button class="BiewPendBtn" onclick="togglePage('PangalawangCon')">View Details</button>
                                         </td>
@@ -215,25 +215,21 @@
                             <h2 style="margin-left: 10px;"> Complaint Details </h2>
                         </div>
                         <div class="DetaLaman">
-                        <div class="EwanKoNaBa">
-                                <div class="grid-container">
-                                    <div class="grid-item">
-                                        <label class="LabelCompDeta">Complaint Name:</label>
-                                        <input class="inputCompDeta" type="text">
-                                    </div>
-                                    <div class="grid-item">
-                                        <label class="LabelCompDeta">Address:</label>
-                                        <input class="inputCompDeta" type="text">
-                                    </div>
-                                    <div class="grid-item">
-                                        <label class="LabelCompDeta">Date Submitted:</label>
-                                        <input class="inputCompDeta" type="text">
-                                    </div>
-                                    <div class="grid-item">
-                                        <label class="LabelCompDeta">Nature of Complaint:</label>
-                                        <input class="inputCompDeta" type="text">
-                                    </div>
-                                </div>
+                            <div style="display: flex; margin-bottom: 15px; align-items:center;">
+                                <label class="LabelCompDeta"> Complaint Name: </label>
+                                <input class="inputCompDeta" type="text">
+                            </div>
+                            <div style="display: flex; margin-bottom: 15px; align-items:center;">
+                                <label class="LabelCompDeta"> Address: </label>
+                                <input class="inputCompDeta" type="text">
+                            </div>
+                            <div style="display: flex; margin-bottom: 15px; align-items:center;">
+                                <label class="LabelCompDeta"> Date Submitted: </label>
+                                <input class="inputCompDeta" type="text">
+                            </div>
+                            <div style="display: flex; margin-bottom: 15px; align-items:center;">
+                                <label class="LabelCompDeta"> Nature Of Complaint: </label>
+                                <input class="inputCompDeta" type="text">
                             </div>
                             <h2> Details </h2>
                             <div style="display: flex; margin-bottom: 15px;">
@@ -248,11 +244,54 @@
                                 <label class="LabelCompDeta"> Current Status: </label>
                                 <input class="inputCompDeta" type="text">
                             </div>
+
+                            <!-- Galing Pending Lagayan -->
+                            <div style="background: rgb(138, 187, 231); padding: 10px;">
+                                <div style="display: flex; margin-bottom: 15px;">
+                                    <label class="LabelCompDeta"> Remark: </label>
+                                    <textarea class="textAreaCompDeta"> </textarea>
+                                </div>
+                                <div style="display: flex; margin-bottom: 15px; align-items:center;">
+                                    <label class="LabelCompDeta"> Remark by: </label>
+                                    <input class="inputCompDeta" type="text">
+                                </div>
+                                <div style="display: flex; margin-bottom: 15px; align-items:center;">
+                                    <label class="LabelCompDeta"> Status: </label>
+                                    <input class="inputCompDeta" type="text">
+                                </div>
+                                <div style="display: flex; align-items:center;">
+                                    <label class="LabelCompDeta"> Remark Date: </label>
+                                    <input class="inputCompDeta" type="text">
+                                </div>
+                            </div>
+
+
+                            <!-- Galing In-Process Lagayan -->
+                            <div style="background: rgb(110, 160, 204); padding: 10px;">
+                                <div style="display: flex; margin-bottom: 15px;">
+                                    <label class="LabelCompDeta"> Remark: </label>
+                                    <textarea class="textAreaCompDeta"> </textarea>
+                                </div>
+                                <div style="display: flex; margin-bottom: 15px; align-items:center;">
+                                    <label class="LabelCompDeta"> Remark by: </label>
+                                    <input class="inputCompDeta" type="text">
+                                </div>
+                                <div style="display: flex; margin-bottom: 15px; align-items:center;">
+                                    <label class="LabelCompDeta"> Status: </label>
+                                    <input class="inputCompDeta" type="text">
+                                </div>
+                                <div style="display: flex; align-items:center;">
+                                    <label class="LabelCompDeta"> Remark Date: </label>
+                                    <input class="inputCompDeta" type="text">
+                                </div>
+                            </div>
                             <div style="display: flex; margin-bottom: 15px; margin-top: 10px; align-items:center;">
                                 <label class="LabelCompDeta"> Action: </label>
                                 <button class="TabkeActionBtn" onclick="toggleStatusFields()"> Take Action </button>
                             </div>
                         </div>
+
+                        <!-- Laman Ng Take Action -->
                         <div class="Take-Action DetaLaman" id="status-container" style="display:none;">
                             <div style="display: flex; margin-bottom: 15px; width: 50%; align-items:center;">
                                 <label class="LabelCompDeta">Status: </label>
@@ -278,6 +317,6 @@
             </div>
         </div>
     </div>
-    <script src="JS/Complaints.js"></script>
+    <script src="JS/Escalated.js"></script>
 </body>
 </html>

@@ -29,7 +29,6 @@ $encoded_id = urlencode($admin_unique_id);
     <title> Mabuhay Website </title>
     <link rel="icon" type="image/x-icon" href="Pictures/Mabuhay_Logo.ico">
     <link rel="stylesheet" href="CSS/UserComplaints.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
 <div class="mainDashboardContainer">
@@ -147,20 +146,22 @@ $encoded_id = urlencode($admin_unique_id);
                 <div class="MainContainerForTables">
                     <div class="MainContainerAll">
                         <div class="ComplainUser">
-                            <label style="font-size: medium; font-weight: bold;">Complainee:</label>
+                            <label style="font-size: medium; font-weight: bold;">Complaint Name:</label>
                             <input class="inputUserComps" type="text" id="Complainee">
                         </div>
                         <div class="ComplainUser2">
-                            <label style="font-size: medium; font-weight: bold;">Complaint:</label>
+                            <label style="font-size: medium; font-weight: bold;">Nature Of Complaint:</label>
                             <div class="dropdownInput">
                                 <input type="text" id="selectedComplaint" class="dropdownInputField" placeholder="Select Complaint" readonly>
                                 <button class="dropbtnInput">
                                     <span class="arrowDown">&#9660;</span> <!-- Downward arrow -->
                                 </button>
                                 <div class="dropdownContentInput">
-                                    <div onclick="selectComplaint('Broken Streetlight')">Broken Streetlight</div>
-                                    <div onclick="selectComplaint('Blocking the Driveway')">Blocking the Driveway</div>
-                                    <div onclick="selectComplaint('Noise Complaint')">Noise Complaint</div>
+                                    <div onclick="selectComplaint('Noise Complaint')"> Noise Complaint </div>
+                                    <div onclick="selectComplaint('Parking Problems ')"> Parking Problems </div>
+                                    <div onclick="selectComplaint('Pet Issues')"> Pet Issues </div>
+                                    <div onclick="selectComplaint('Property Maintenance')"> Property Maintenance </div>
+                                    <div onclick="selectComplaint('Rule Violation')"> Rule Violation </div>
                                 </div>
                             </div>
                         </div> 
@@ -180,6 +181,6 @@ $encoded_id = urlencode($admin_unique_id);
             </div>
         </div>
     </div>
-    <script src="JS/UserComplaints.js"></script>
+    <script src="JS/UserComplaints"></script>
 </body>
 </html>

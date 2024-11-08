@@ -224,7 +224,7 @@ overflow: hidden;
 
 .MainContainerAll{
   width: 100%;
-  padding: 30px 120px;
+  padding: 30px;
   background-color: #ffffff;
   border: 1px solid rgb(179, 172, 172);
   margin: 10px;
@@ -441,7 +441,7 @@ overflow: hidden;
 
 /* DESIGN PARA SA COMPLAINT */
 .inputUserComps {
-  width: 90%;
+  width: 87.5%;
   font-size: 16px;
   border-radius: 5px;
   border: 1px solid rgba(62, 65, 71, 0.4);
@@ -453,7 +453,7 @@ margin-bottom: 20px;
 }
 
 .dropdownInput {
-width: 91%;
+  width: 85%;
   position: relative;
   display: inline-block;
 }

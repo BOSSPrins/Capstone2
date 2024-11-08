@@ -35,22 +35,22 @@ if (isset($_SESSION['unique_id'])) {
                 <div class="DagdagNanaman">
                     <a href="DashBoard.php" class="sideside baractive">
                         <img class="img-sideboard" src="Pictures/Dashboard2.png">
-                        <span>Dashboard</span>
+                        <span> Dasboard </span>
                     </a>
                     <a href="HoaOfficials.php" class="sideside">
                         <img class="img-sideboard" src="Pictures/Officials.png">
-                        <span>Hoa Officials</span>
+                        <span> Hoa Officials </span>
                     </a>
                     <a href="Residents.php" class="sideside">
                         <img class="img-sideboard" src="Pictures/Residents2.png">
-                        <span>Residents</span>
+                        <span> Residents </span>
                     </a>
                     <a href="Documents.php" class="sideside">
                         <img class="img-sideboard" src="Pictures/Documents2.png">
-                        <span>Documents</span>
+                        <span> Documents </span>
                     </a>
                     <div class="complaintsContainer">
-                        <a href="#" class="sideside" id="complaintsDropdown">
+                        <a href="Complaints.php" class="sideside" id="complaintsDropdown">
                             <img class="img-sideboard" src="Pictures/ComplaintsCap.png">
                             <span> Manage Complaints</span>
                             <button class="buttonEme2">
@@ -59,32 +59,44 @@ if (isset($_SESSION['unique_id'])) {
                         </a>  
                         <ul class="subMenuComp" id="complaintsSubMenu">
                             <li> 
+                                <a href="#">
+                                    <img class="img-subMenu" src="Pictures/In-Process.png">
+                                    <label class="sub-spa"> In-Process </label>
+                                </a> 
+                                <a href="#">
+                                    <img class="img-subMenu" src="Pictures/resolved.png">
+                                    <label class="sub-spa"> Resolved </label>
+                                </a> 
+                                <a href="#">
+                                    <img class="img-subMenu" src="Pictures/warning.png">
+                                    <label class="sub-spa"> Escalated </label>
+                                </a> 
                                 <a href="MainChat.php">
                                     <img class="img-subMenu" src="Pictures/Chat.png">
-                                    <label class="sub-spa">Chat</label>
+                                    <label class="sub-spa"> Chat </label>
                                 </a> 
                             </li>
                         </ul>
                     </div>
                     <a href="Announcement.php" class="sideside">
                         <img class="img-sideboard" src="Pictures/Announcement.png">
-                        <span>Announcement</span>
+                        <span> Announcement </span>
                     </a>
                     <a href="Accounts.php" class="sideside">
                         <img class="img-sideboard" src="Pictures/Accounts2.png">
-                        <span>Accounts</span>
+                        <span> Accounts </span>
                     </a>
                     <!-- <a href="MonthlyDue.php" class="sideside">
                         <img class="img-sideboard" src="Pictures/MonthlyDue.png">
-                        <span>Monthly Due</span>
+                        <span> Monthly Due </span>
                     </a> -->
                     <a href="Voting.php" class="sideside">
                         <img class="img-sideboard" src="Pictures/voting.png">
-                        <span>Voting</span>
+                        <span> Voting </span>
                     </a>
-                    <a href="#" class="sideside">
+                    <a href="Logout.php" class="sideside">
                         <img class="img-sideboard" src="Pictures/logout.png">
-                        <span>Logout</span>
+                        <span> Logout </span>
                     </a>
                 </div>
             </div>

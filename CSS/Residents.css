@@ -71,7 +71,7 @@ html{
   bottom: 0;
   top: 0;
   background-color: rgb(255, 255, 255);
-  width: 260px;
+  width: 275px;
   transition: all 0.3s;
 }
 
@@ -165,11 +165,11 @@ html{
   border-right: 5px solid transparent;
   border-top: 6px solid #aeaeae;
   transition: 0.3s;
-  margin-left: 6%;
 }
 
 .buttonEme2{
   padding: 10px 15px;
+  margin-left: 5px;
   cursor: pointer;
 }
 
@@ -211,7 +211,7 @@ html{
 
 /* ========== MAIN DASHBOARD DESIGN ========== */
 .MainBodyContainerr{
-  padding-left: 260px;
+  padding-left: 275px;
   display: flex;
   flex-direction: column;
   height: 100vh;
