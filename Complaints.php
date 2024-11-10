@@ -49,7 +49,7 @@ if (isset($_SESSION['unique_id'])) {
                         <span> Documents </span>
                     </a>
                     <div class="complaintsContainer">
-                        <a href="" class="sideside" id="complaintsDropdown">
+                        <a href="Complaints.php" class="sideside" id="complaintsDropdown">
                             <img class="img-sideboard" src="Pictures/ComplaintsCap.png">
                             <span> Manage Complaints</span>
                             <button class="buttonEme2">
