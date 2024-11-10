@@ -288,3 +288,140 @@ function adjustTextareaHeight(textarea) {
     // Set the height based on the scrollHeight, which adjusts to the content size
     textarea.style.height = textarea.scrollHeight + "px";
 }
+
+
+//Backend na 
+function formatDateTimeToWords(dateString) {
+    const date = new Date(dateString);
+    const options = { 
+        year: 'numeric', 
+        month: 'long', 
+        day: 'numeric', 
+        hour: 'numeric', 
+        minute: 'numeric', 
+        second: 'numeric',
+        hour12: true  // To show time in AM/PM format
+    };
+    return date.toLocaleString(undefined, options);
+}
+
+
+function fetchComplaints() {
+    fetch('PHPBackend/Complaint.php', {
+        method: 'POST',
+        body: new URLSearchParams({
+            action: 'get_complaints'
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            generateTable(data.data); // Pass complaints data to generateTable function
+        } else {
+            console.error('No complaints found or error in fetching data.');
+        }
+    })
+    .catch(error => {
+        console.error('Error fetching complaints:', error);
+    });
+}
+
+function generateTable(complaints) {
+    const tableBody = document.querySelector('.TableComPend tbody');
+    tableBody.innerHTML = ''; // Clear any existing rows
+
+    complaints.forEach(complaint => {
+        const row = document.createElement('tr');
+
+        const formattedDateTime = formatDateTimeToWords(complaint.filed_date);
+        
+        row.innerHTML = `
+            <td>${formattedDateTime}</td>
+            <td style="color: #FFB300; font-weight: bold;">${complaint.status}</td>
+            <td>${complaint.complaint}</td>
+            <td>${complaint.complaineeAddress}</td>
+            <td><button class="BiewPendBtn" data-id="${complaint.complaint_id}" onclick="viewDetails(this)">View Details</button></td>
+        `;
+        
+        tableBody.appendChild(row);
+    });
+}
+
+
+function viewDetails(button) {
+    const complaintId = button.getAttribute('data-id');
+    document.getElementById('ComplaintID').value = complaintId;
+    fetchComplaintDetails(complaintId);
+}
+
+function fetchComplaintDetails(complaintId) {
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", "PHPBackend/Complaint.php", true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            const response = JSON.parse(xhr.responseText);
+
+            if (response.success) {
+                // Populate the fields with the fetched data
+                document.getElementById('ComplaineeName').value = response.data.complainee;
+                document.getElementById('ComplaineeAddress').value = response.data.complaineeAddress;
+                document.getElementById('ComplainantName').value = response.data.complainantName;
+                document.getElementById('ComplainantAddress').value = response.data.complainantAddress;
+                document.getElementById('DateSubmit').value = formatDateTimeToWords(response.data.filed_date);
+                document.getElementById('ComplaintType').value = response.data.complaint;
+                document.getElementById('Description').value = response.data.description;
+                document.getElementById('Status').value = response.data.status;
+
+                document.getElementById('ProofFileName').src = "Pictures/" + response.data.proof;
+
+                // Display the details section only after data is loaded
+                togglePage('PangalawangCon');
+            } else {
+                console.error('Error fetching complaint details:', response.error);
+            }
+        }
+    };
+
+    xhr.send("action=fetchDetails&complaint_id=" + complaintId);
+}
+
+
+function submitComplaintUpdate() {
+    const complaintId = document.getElementById('ComplaintID').value;
+    const status = document.getElementById('RemarkStatus').innerText;
+    const remark = document.getElementById('NewRemark').value;
+    const role = document.getElementById('RemarkRole').value;
+
+    fetch('PHPBackend/Complaint.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: new URLSearchParams({
+            action: 'update_complaint',
+            complaint_id: complaintId,
+            status: status,
+            remark: remark,
+            role: role
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert('Complaint updated successfully!');
+            // Optionally refresh or update the page content here
+        } else {
+            console.error('Error updating complaint:', data.error);
+        }
+    })
+    .catch(error => {
+        console.error('Request failed:', error);
+    });
+}
+
+
+window.onload = function () {
+    fetchComplaints();
+};

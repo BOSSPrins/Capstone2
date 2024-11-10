@@ -76,15 +76,15 @@ if (isset($_SESSION['unique_id'])) {
                         </a>  
                         <ul class="subMenuComp" id="complaintsSubMenu">
                             <li> 
-                                <a href="#">
+                                <a href="In-Process.php">
                                     <img class="img-subMenu" src="Pictures/In-Process.png">
                                     <label class="sub-spa"> In-Process </label>
                                 </a> 
-                                <a href="#">
+                                <a href="Resolved.php">
                                     <img class="img-subMenu" src="Pictures/resolved.png">
                                     <label class="sub-spa"> Resolved </label>
                                 </a> 
-                                <a href="#">
+                                <a href="Escalated.php">
                                     <img class="img-subMenu" src="Pictures/warning.png">
                                     <label class="sub-spa"> Escalated </label>
                                 </a> 

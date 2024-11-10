@@ -448,6 +448,21 @@ overflow: hidden;
   padding: 10px;
 }
 
+.inputUserComps2 {
+  width: 87.5%;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid rgba(62, 65, 71, 0.4);
+  padding: 10px;
+   margin-top: 20px;
+}
+
+.Label2{
+  font-size: medium; 
+  font-weight: bold;
+  margin-left: 4.6%;
+}
+
 .ComplainUser{
 margin-bottom: 20px;
 }

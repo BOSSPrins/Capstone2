@@ -1,3 +1,18 @@
+<?php
+include_once "Connect/Connection.php";
+session_start();
+
+if (isset($_SESSION['unique_id'])) {
+    if ($_SESSION['role'] == 'user') {
+        header("Location: LoginPage.php");
+        exit();
+    }
+    } else {
+    header("Location: LoginPage.php");
+    exit();
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,6 +21,7 @@
     <title> Mabuhay Website </title>
     <link rel="icon" type="image/x-icon" href="Pictures/Mabuhay_Logo.ico">
     <link rel="stylesheet" href="CSS/Complaints.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
 <div class="mainDashboardContainer">
@@ -33,7 +49,7 @@
                         <span> Documents </span>
                     </a>
                     <div class="complaintsContainer">
-                        <a href="Complaints.php" class="sideside" id="complaintsDropdown">
+                        <a href="" class="sideside" id="complaintsDropdown">
                             <img class="img-sideboard" src="Pictures/ComplaintsCap.png">
                             <span> Manage Complaints</span>
                             <button class="buttonEme2">
@@ -42,15 +58,15 @@
                         </a>  
                         <ul class="subMenuComp" id="complaintsSubMenu">
                             <li> 
-                                <a href="#">
+                                <a href="In-Process.php">
                                     <img class="img-subMenu" src="Pictures/In-Process.png">
                                     <label class="sub-spa"> In-Process </label>
                                 </a> 
-                                <a href="#">
+                                <a href="Resolved.php">
                                     <img class="img-subMenu" src="Pictures/resolved.png">
                                     <label class="sub-spa"> Resolved </label>
                                 </a> 
-                                <a href="#">
+                                <a href="Escalated.php">
                                     <img class="img-subMenu" src="Pictures/warning.png">
                                     <label class="sub-spa"> Escalated </label>
                                 </a> 
@@ -140,7 +156,7 @@
                             <img id="menuBtn" class="menu" src="Pictures/menu-hamburger.png">
                         </div>
                         <div class="NamesModuleCon">
-                            <h2 class="namePerModule"> Manage Complaints </h2>
+                            <h2 class="namePerModule"> Pending Complaints </h2>
                         </div>
                     </div>
                     <div class="ProfileViewww">
@@ -176,22 +192,15 @@
                             <table class="TableComPend">
                                 <thead>
                                     <!-- <th style="width:10%"> Complain No.</th> -->
-                                    <th style="width:25%" data-sort onclick="sortTable(0, event)"> Complaint Name </th>
-                                    <th style="width:25%"> Address </th>
                                     <th style="width:15%"> Date Submitted </th>
                                     <th style="width:12%" > Status </th>
+                                    <th style="width:25%" data-sort onclick="sortTable(0, event)"> Complaint </th>
+                                    <th style="width:25%"> Address </th>                                                                       
                                     <th style="width:15%" > Action </th>
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <!-- <td> 02022023 </td> -->
-                                        <td> Ruella </td>
-                                        <td> Blk 22 Lot 48 </td>
-                                        <td> 2023-02-02 02:23 </td>
-                                        <td style="color: red;"> Pending </td>
-                                        <td>
-                                            <button class="BiewPendBtn" onclick="togglePage('PangalawangCon')">View Details</button>
-                                        </td>
+                                        
                                     </tr>
                                 </tbody>
                             </table>
@@ -215,64 +224,82 @@
                             <h2 style="margin-left: 10px;"> Complaint Details </h2>
                         </div>
                         <div class="DetaLaman">
-                        <div class="EwanKoNaBa">
-                                <div class="grid-container">
-                                    <div class="grid-item">
-                                        <label class="LabelCompDeta">Complaint Name:</label>
-                                        <input class="inputCompDeta" type="text">
-                                    </div>
-                                    <div class="grid-item">
-                                        <label class="LabelCompDeta">Address:</label>
-                                        <input class="inputCompDeta" type="text">
-                                    </div>
-                                    <div class="grid-item">
-                                        <label class="LabelCompDeta">Date Submitted:</label>
-                                        <input class="inputCompDeta" type="text">
-                                    </div>
-                                    <div class="grid-item">
-                                        <label class="LabelCompDeta">Nature of Complaint:</label>
-                                        <input class="inputCompDeta" type="text">
-                                    </div>
-                                </div>
+                            <h2> Complainee </h2>
+                            <div style="display: flex; margin-bottom: 15px; align-items:center;">
+                                <label class="LabelCompDeta"> Name: </label>
+                                <input class="inputCompDeta" type="text" id="ComplaineeName">
+                            </div>
+                            <div style="display: flex; margin-bottom: 15px; align-items:center;">
+                                <label class="LabelCompDeta"> Address: </label>
+                                <input class="inputCompDeta" type="text" id="ComplaineeAddress">
+                            </div>
+
+                            <h2> Complainant </h2>
+                            <div style="display: flex; margin-bottom: 15px; align-items:center;">
+                                <label class="LabelCompDeta"> Name: </label>
+                                <input class="inputCompDeta" type="text" id="ComplainantName">
+                            </div>
+                            <div style="display: flex; margin-bottom: 15px; align-items:center;">
+                                <label class="LabelCompDeta"> Address: </label>
+                                <input class="inputCompDeta" type="text" id="ComplainantAddress">
+                            </div>
+                            <div style="display: flex; margin-bottom: 15px; align-items:center;">
+                                <label class="LabelCompDeta"> Date Submitted: </label>
+                                <input class="inputCompDeta" type="text" id="DateSubmit">
+                            </div>
+                            <div style="display: flex; margin-bottom: 15px; align-items:center;">
+                                <label class="LabelCompDeta"> Nature Of Complaint: </label>
+                                <input class="inputCompDeta" type="text" id="ComplaintType">
                             </div>
                             <h2> Details </h2>
                             <div style="display: flex; margin-bottom: 15px;">
                                 <label class="LabelCompDeta"> Description: </label>
-                                <textarea class="textAreaCompDeta"> </textarea>
+                                <textarea class="textAreaCompDeta" id="Description"> </textarea>
                             </div>
                             <div style="display: flex; margin-bottom: 15px; align-items:center;">
                                 <label class="LabelCompDeta"> File: </label>
-                                <input class="inputCompDeta" type="file">
+                                <!-- <input type="file" id="Proof" disabled> -->
+            
+                                <img id="ProofFileName" alt="Proof Image" style="max-width: 300px; max-height: 200px;"></img>
+
                             </div>
                             <div style="display: flex; margin-bottom: 15px; align-items:center;">
                                 <label class="LabelCompDeta"> Current Status: </label>
-                                <input class="inputCompDeta" type="text">
+                                <input class="inputCompDeta" type="text" id="Status">
                             </div>
                             <div style="display: flex; margin-bottom: 15px; margin-top: 10px; align-items:center;">
                                 <label class="LabelCompDeta"> Action: </label>
                                 <button class="TabkeActionBtn" onclick="toggleStatusFields()"> Take Action </button>
                             </div>
                         </div>
-                        <div class="Take-Action DetaLaman" id="status-container" style="display:none;">
-                            <div style="display: flex; margin-bottom: 15px; width: 50%; align-items:center;">
-                                <label class="LabelCompDeta">Status: </label>
-                                <div class="custom-dropdown">
-                                    <div class="dropdown-display" onclick="toggleDropdown()"> --- </div>
-                                    <div class="dropdown-options" style="display: none;">
-                                        <div class="dropdown-option" onclick="setStatus('In-Progress')"> In-Process </div>
-                                        <div class="dropdown-option" onclick="setStatus('Resolved')"> Resolved </div>
-                                        <div class="dropdown-option" onclick="setStatus('Escalated')"> Escalated </div>
+
+                        <!-- Laman Ng Take Action -->
+                        <form method="POST" enctype="multipart/form-data">
+                            <div class="Take-Action DetaLaman" id="status-container" style="display:none;">
+                                <div style="display: flex; margin-bottom: 15px; width: 50%; align-items:center;">
+                                    <label class="LabelCompDeta">Status: </label>
+                                    <div class="custom-dropdown">
+                                        <div class="dropdown-display" onclick="toggleDropdown()" id="RemarkStatus"> --- </div>
+                                        <div class="dropdown-options" style="display: none;">
+                                            <div class="dropdown-option" onclick="setStatus('In-Process')"> In-Process </div>
+                                            <div class="dropdown-option" onclick="setStatus('Resolved')"> Resolved </div>
+                                            <div class="dropdown-option" onclick="setStatus('Escalated')"> Escalated </div>
+                                        </div>
                                     </div>
                                 </div>
+                                <div style="display: flex;">
+                                    <label class="LabelCompDeta">Remark: </label>
+                                    <textarea class="textAreaCompDeta" id="NewRemark"></textarea>
+                                </div>
+
+                                <input type="hidden" id="RemarkRole" value="<?php echo $_SESSION['role']?>">
+                                <input type="hidden" id="ComplaintID">
+
+                                <div style="display: flex; justify-content: end; width: 100%; margin-top: 10px;">
+                                    <button type="button" style="padding: 10px 30px;" onclick="submitComplaintUpdate()"> Submit </button>
+                                </div>
                             </div>
-                            <div style="display: flex;">
-                                <label class="LabelCompDeta">Remark: </label>
-                                <textarea class="textAreaCompDeta"></textarea>
-                            </div>
-                            <div style="display: flex; justify-content: end; width: 100%; margin-top: 10px;">
-                                <button style="padding: 10px 30px;"> Submit </button>
-                            </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>
