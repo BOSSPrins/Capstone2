@@ -29,6 +29,7 @@ $encoded_id = urlencode($admin_unique_id);
     <title> Mabuhay Website </title>
     <link rel="icon" type="image/x-icon" href="Pictures/Mabuhay_Logo.ico">
     <link rel="stylesheet" href="CSS/UserComplaints.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
 <div class="mainDashboardContainer">
@@ -143,44 +144,51 @@ $encoded_id = urlencode($admin_unique_id);
                         <div class="user-img"></div>
                     </div>
                 </div>
-                <div class="MainContainerForTables">
-                    <div class="MainContainerAll">
-                        <div class="ComplainUser">
-                            <label style="font-size: medium; font-weight: bold;">Complaint Name:</label>
-                            <input class="inputUserComps" type="text" id="Complainee">
-                        </div>
-                        <div class="ComplainUser2">
-                            <label style="font-size: medium; font-weight: bold;">Nature Of Complaint:</label>
-                            <div class="dropdownInput">
-                                <input type="text" id="selectedComplaint" class="dropdownInputField" placeholder="Select Complaint" readonly>
-                                <button class="dropbtnInput">
-                                    <span class="arrowDown">&#9660;</span> <!-- Downward arrow -->
-                                </button>
-                                <div class="dropdownContentInput">
-                                    <div onclick="selectComplaint('Noise Complaint')"> Noise Complaint </div>
-                                    <div onclick="selectComplaint('Parking Problems ')"> Parking Problems </div>
-                                    <div onclick="selectComplaint('Pet Issues')"> Pet Issues </div>
-                                    <div onclick="selectComplaint('Property Maintenance')"> Property Maintenance </div>
-                                    <div onclick="selectComplaint('Rule Violation')"> Rule Violation </div>
-                                </div>
+                <form method="POST" enctype="multipart/form-data"></form>
+                    <div class="MainContainerForTables">
+                        <div class="MainContainerAll">
+                            <div class="ComplainUser">
+                                <label style="font-size: medium; font-weight: bold;">Complainee Name:</label>
+                                <input class="inputUserComps" type="text" id="Complainee">
+                                <label class="Label2">Address:</label>
+                                <input class="inputUserComps2" type="text" id="ComplaineeAddress">
+                                <input class="inputUserComps2" type="hidden" id="ComplainantUID" value="<?php echo $_SESSION['unique_id']?>">
+                                <input class="inputUserComps2" type="hidden" id="ComplainantName"   value="<?php echo $_SESSION['first_name'] . ' ' . (!empty($_SESSION['middle_name']) ? $_SESSION['middle_name'] . ' ' : '') . $_SESSION['last_name']; ?>">
+                                <input class="inputUserComps2" type="hidden" id="ComplainantAddress"   value="<?php echo 'Blk' . ' ' . $_SESSION['block'] . ' ' . 'Lot' . ' ' . $_SESSION['lot']; ?>">
                             </div>
-                        </div> 
-                        <div class="DescriUser">
-                            <label style="font-size: medium; font-weight: bold;"> Description: </label>
-                            <textarea class="DescriptUsers" id="Description"></textarea>
+                            <div class="ComplainUser2">
+                                <label style="font-size: medium; font-weight: bold;">Nature Of Complaint:</label>
+                                <div class="dropdownInput">
+                                    <input type="text" id="selectedComplaint" class="dropdownInputField" placeholder="Select Complaint" readonly>
+                                    <button class="dropbtnInput">
+                                        <span class="arrowDown">&#9660;</span> <!-- Downward arrow -->
+                                    </button>
+                                    <div class="dropdownContentInput">
+                                        <div onclick="selectComplaint('Noise Complaint')"> Noise Complaint </div>
+                                        <div onclick="selectComplaint('Parking Problems ')"> Parking Problems </div>
+                                        <div onclick="selectComplaint('Pet Issues')"> Pet Issues </div>
+                                        <div onclick="selectComplaint('Property Maintenance')"> Property Maintenance </div>
+                                        <div onclick="selectComplaint('Rule Violation')"> Rule Violation </div>
+                                    </div>
+                                </div>
+                            </div> 
+                            <div class="DescriUser">
+                                <label style="font-size: medium; font-weight: bold;"> Description: </label>
+                                <textarea class="DescriptUsers" id="Description"></textarea>
+                            </div>
+                            <div class="ComplainUser3">
+                                <label style="font-size: medium; font-weight: bold;"> Proof:</label>
+                                <input class="inputFile" type="file" id="Proof" accept=".jpg, .jpeg, .png, .pdf">
+                            </div>
+                            <footer class="footerUserSubmitt">
+                                <button class="submittUserComp" id="Submit"> Submit </button>
+                            </footer>                      
                         </div>
-                        <div class="ComplainUser3">
-                            <label style="font-size: medium; font-weight: bold;"> Proof:</label>
-                            <input class="inputFile" type="file" id="Proof">
-                        </div>
-                        <footer class="footerUserSubmitt">
-                            <button class="submittUserComp" id="Submit"> Submit </button>
-                        </footer>                      
                     </div>
-                </div>
+                </form>
             </div>
         </div>
     </div>
-    <script src="JS/UserComplaints"></script>
+    <script src="JS/UserComplaints.js"></script>
 </body>
 </html>

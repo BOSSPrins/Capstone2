@@ -219,7 +219,7 @@ document.addEventListener("DOMContentLoaded", function() {
 //     }
 // };
 
-// FUNCTION PARA SA COMPLAINT DETAILS 
+// // FUNCTION PARA SA COMPLAINT DETAILS 
 function togglePage(pageId) {
     // Hide all pages
     const pages = document.querySelectorAll('.TablessContainer');
@@ -243,7 +243,7 @@ window.onload = function() {
     togglePage(activeContainer || 'tableCon'); // Default to 'tableCon'
 }
 
-// FUNCTION PARA SA TAKE ACTION BUTTON 
+// // FUNCTION PARA SA TAKE ACTION BUTTON 
 function toggleStatusFields() {
     // Get the elements for Status and Remark fields
     var statusContainer = document.getElementById('status-container');
@@ -259,7 +259,7 @@ function toggleStatusFields() {
     }
 }
 
-// FUNCTION PARA SA STATUS cHANGE DROPDOWN
+// // FUNCTION PARA SA STATUS cHANGE DROPDOWN
 function toggleDropdown() {
     const options = document.querySelector('.dropdown-options');
     options.style.display = options.style.display === 'none' ? 'block' : 'none';
@@ -288,3 +288,133 @@ function adjustTextareaHeight(textarea) {
     // Set the height based on the scrollHeight, which adjusts to the content size
     textarea.style.height = textarea.scrollHeight + "px";
 }
+
+
+
+function formatDateTimeToWords(dateString) {
+    const date = new Date(dateString);
+
+    if (isNaN(date)) {
+        return ''; // Return empty string if date is invalid
+    }
+
+    const options = { 
+        year: 'numeric', 
+        month: 'long', 
+        day: 'numeric', 
+        hour: 'numeric', 
+        minute: 'numeric', 
+        second: 'numeric',
+        hour12: true  // To show time in AM/PM format
+    };
+    return date.toLocaleString(undefined, options);
+}
+
+function fetchComplaints() {
+    fetch('PHPBackend/Complaint.php', {
+        method: 'POST',
+        body: new URLSearchParams({
+            action: 'Resolved_complaints'
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            generateTable(data.data); // Pass complaints data to generateTable function
+        } else {
+            console.error('No complaints found or error in fetching data.');
+        }
+    })
+    .catch(error => {
+        console.error('Error fetching complaints:', error);
+    });
+}
+
+function generateTable(complaints) {
+    const tableBody = document.querySelector('.TableComPend tbody');
+    tableBody.innerHTML = ''; // Clear any existing rows
+
+    complaints.forEach(complaint => {
+        const row = document.createElement('tr');
+
+        const formattedDateTime = formatDateTimeToWords(complaint.filed_date);
+        
+        row.innerHTML = `
+            <td>${formattedDateTime}</td>
+            <td style="color: #FFB300; font-weight: bold;">${complaint.status}</td>
+            <td>${complaint.complaint}</td>
+            <td>${complaint.complaineeAddress}</td>
+            <td><button class="BiewPendBtn" data-id="${complaint.complaint_id}" onclick="viewDetails(this)">View Details</button></td>
+        `;
+        
+        tableBody.appendChild(row);
+    });
+}
+
+
+function viewDetails(button) {
+    const complaintId = button.getAttribute('data-id');
+    fetchComplaintDetails(complaintId);
+}
+
+function fetchComplaintDetails(complaintId) {
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", "PHPBackend/Complaint.php", true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            const response = JSON.parse(xhr.responseText);
+
+            if (response.success) {
+                // Populate the fields with the fetched data
+                document.getElementById('ComplaineeName').value = response.data.complainee;
+                document.getElementById('ComplaineeAddress').value = response.data.complaineeAddress;
+                
+                document.getElementById('ComplainantName').value = response.data.complainantName;
+                document.getElementById('ComplainantAddress').value = response.data.complainantAddress;
+                document.getElementById('DateSubmit').value = formatDateTimeToWords(response.data.filed_date)
+                document.getElementById('ComplaintType').value = response.data.complaint;
+                document.getElementById('Description').value = response.data.description;
+                document.getElementById('Status').value = response.data.status;
+
+                document.getElementById('FirstRemark').value = response.data.Remark1;
+                document.getElementById('FirstRemarkBy').value = response.data.RemarkBy1;
+                document.getElementById('FirstStatus').value = response.data.status1;
+                document.getElementById('FirstRemarkDate').value = formatDateTimeToWords(response.data.RemarkDate1);
+
+                document.getElementById('SecondRemark').value = response.data.Remark2;
+                document.getElementById('SecondRemarkBy').value = response.data.RemarkBy2;
+                document.getElementById('SecondStatus').value = response.data.status2;
+                document.getElementById('SecondRemarkDate').value = formatDateTimeToWords(response.data.RemarkDate2);
+
+                document.getElementById('ThirdRemark').value = response.data.Remark3;
+                document.getElementById('ThirdRemarkBy').value = response.data.RemarkBy3;
+                document.getElementById('ThirdStatus').value = response.data.status3;
+                document.getElementById('ThirdRemarkDate').value = formatDateTimeToWords(response.data.RemarkDate3);
+                
+                document.getElementById('ProofFileName').src = "Pictures/" + response.data.proof;
+
+                 // Check if Third Remark section should be hidden
+                 const thirdRemarkSection = document.getElementById('ThirdRemarkSectionContainer');
+                 if (!response.data.Remark3 && !response.data.RemarkBy3 && !response.data.status3 && !response.data.RemarkDate3) {
+                     thirdRemarkSection.style.display = 'none';
+                 } else {
+                     thirdRemarkSection.style.display = 'block';
+                 }
+ 
+
+
+                togglePage('PangalawangCon');
+            } else {
+                console.error('Error fetching complaint details:', response.error);
+            }
+        }
+    };
+
+    xhr.send("action=fetch_Resolved&complaint_id=" + complaintId);
+}
+
+window.onload = function () {
+    fetchComplaints();
+};

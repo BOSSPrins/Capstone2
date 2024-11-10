@@ -75,44 +75,53 @@ function selectComplaint(value) {
 
 // Function ng submit ng complaint
 document.getElementById('Submit').addEventListener('click', function(event) {
-    event.preventDefault(); // Prevent form submission or page reload
+    event.preventDefault();
 
-    // Get values from inputs
     const complainee = document.getElementById('Complainee').value;
+    const ComplaineeAddress = document.getElementById('ComplaineeAddress').value;
+
+    const ComplainantUID = document.getElementById('ComplainantUID').value;
+    const ComplainantName = document.getElementById('ComplainantName').value;
+    const ComplainantAddress = document.getElementById('ComplainantAddress').value;
+
     const complaint = document.getElementById('selectedComplaint').value;
     const description = document.getElementById('Description').value;
-    const proof = document.getElementById('Proof').files[0]; // Get file input
 
-    // Extract just the file name (if a file is selected)
-    let proofFileName = proof ? proof.name : null;
+    const proofInput = document.getElementById('Proof');
+    let proofFileName = '';
 
-    // Prepare the data to be sent via AJAX
+    // Check if the file input exists and has files
+    if (proofInput && proofInput.files && proofInput.files.length > 0) {
+        proofFileName = proofInput.files[0].name; // Retrieve file name
+    }
+
     let formData = new FormData();
+    formData.append('action', 'submit_complaint');
     formData.append('complainee', complainee);
+    formData.append('ComplaineeAddress', ComplaineeAddress);
+    formData.append('ComplainantUID', ComplainantUID);
+    formData.append('ComplainantName', ComplainantName);
+    formData.append('ComplainantAddress', ComplainantAddress);
     formData.append('complaint', complaint);
     formData.append('description', description);
-    formData.append('proof', proofFileName); // Send the file name
-
-    // Create an XMLHttpRequest object
-    let xhr = new XMLHttpRequest();
     
-    // Open the request
+    if (proofFileName) {
+        formData.append('proofFileName', proofInput.files[0]); // Append the actual file
+    }
+
+    let xhr = new XMLHttpRequest();
     xhr.open('POST', 'PHPBackend/Complaint.php', true);
 
-    // Set up a function to handle the response
     xhr.onload = function() {
         if (xhr.status === 200) {
-            // Success response from PHP
-            console.log(xhr.responseText);
-            alert('Complaint submitted successfully!');
+            const response = JSON.parse(xhr.responseText);
+            alert(response.success ? response.message : response.error);
         } else {
-            // Error response
-            console.error('Error: ' + xhr.status);
             alert('There was an issue submitting the complaint.');
         }
     };
 
-    // Send the request with the form data
     xhr.send(formData);
 });
+
 
