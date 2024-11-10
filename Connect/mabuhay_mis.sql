@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 21, 2024 at 09:20 PM
+-- Generation Time: Nov 11, 2024 at 12:24 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -72,16 +72,35 @@ CREATE TABLE `complaints` (
   `complaint` varchar(50) NOT NULL,
   `description` text NOT NULL,
   `proof` varchar(255) NOT NULL,
-  `filed_date` timestamp NOT NULL DEFAULT current_timestamp()
+  `filed_date` timestamp NOT NULL DEFAULT current_timestamp(),
+  `complaineeAddress` varchar(20) NOT NULL,
+  `complainantUID` int(11) NOT NULL,
+  `complainantName` varchar(255) NOT NULL,
+  `complainantAddress` varchar(20) NOT NULL,
+  `status` varchar(20) NOT NULL,
+  `Remark1` varchar(255) NOT NULL,
+  `RemarkBy1` varchar(20) NOT NULL,
+  `status1` varchar(20) NOT NULL,
+  `RemarkDate1` varchar(50) NOT NULL,
+  `Remark2` varchar(255) NOT NULL,
+  `RemarkBy2` varchar(20) NOT NULL,
+  `status2` varchar(20) NOT NULL,
+  `RemarkDate2` varchar(50) NOT NULL,
+  `Remark3` varchar(255) NOT NULL,
+  `RemarkBy3` varchar(20) NOT NULL,
+  `status3` varchar(20) NOT NULL,
+  `RemarkDate3` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `complaints`
 --
 
-INSERT INTO `complaints` (`complaint_id`, `complainee`, `complaint`, `description`, `proof`, `filed_date`) VALUES
-(1, 'Raul', 'Blocking the Driveway', 'Laging nakaharang yung kotse nya sa gate ko', 'bossing.jpg', '2024-09-19 12:07:15'),
-(2, 'Raul', 'Blocking the Driveway', 'Laging nakaharang yung kotse nya sa gate ko', 'bossing.jpg', '2024-09-19 12:07:35');
+INSERT INTO `complaints` (`complaint_id`, `complainee`, `complaint`, `description`, `proof`, `filed_date`, `complaineeAddress`, `complainantUID`, `complainantName`, `complainantAddress`, `status`, `Remark1`, `RemarkBy1`, `status1`, `RemarkDate1`, `Remark2`, `RemarkBy2`, `status2`, `RemarkDate2`, `Remark3`, `RemarkBy3`, `status3`, `RemarkDate3`) VALUES
+(1, 'Mooda', 'Blocking the Driveway', 'Laging nakaharang yung kotse nya sa gate ko', 'bossing.jpg', '2024-09-19 12:07:15', 'Blk 54 Lot 1', 0, 'Mark', 'Blk 78 Lot 10', 'Escalated', '', 'admin', 'In-Process', '2024-11-10 23:00:38', 'Turn over to barangay', 'admin', 'Escalated', '2024-11-10 23:12:40', '', '', '', ''),
+(2, 'Raul', 'Blocking the Driveway', 'Yung tricycle nya dinikit sa kotse ko', 'bossing.jpg', '2024-09-19 12:07:35', 'Blk 3 Lot 6', 0, 'Sgup', 'Blk 100 Lot 6', 'Escalated', 'Processing na po', 'admin', 'In-Process', '2024-11-10 22:52:21', 'This Complaint will be turn over to the barangay', 'admin', 'Escalated', '2024-11-10 22:54:21', '', '', '', ''),
+(3, 'Nigs', 'Pet Issues', 'Aso nya laging galit', 'awtlas.png', '2024-11-08 19:34:38', 'Blk 54 Lot 1', 1581632830, 'Wela A Magsino', 'Blk 9 Lot 18', 'Resolved', 'Change to in process', 'admin', 'In-Process', '2024-11-10 02:39:52', 'Resolved na', 'admin', 'Resolved', '2024-11-10 21:42:27', '', '', '', ''),
+(4, 'Pat Anoyab', 'Noise Complaint', 'Ingay nila mag asawa', 'boss.jpg', '2024-11-10 14:57:37', 'Blk 123 Lot 56', 821155870, 'Jhonrenz Berbano', 'Blk 1 Lot 1', 'Pending', '', '', '', '', '', '', '', '', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -341,18 +360,18 @@ CREATE TABLE `tblaccounts` (
 --
 
 INSERT INTO `tblaccounts` (`user_id`, `unique_id`, `email`, `password`, `img`, `status`, `role`, `access`) VALUES
-(2, 1589571584, 'admin@gmail.com', '21232f297a57a5a743894a0e4a801fc3', '1715091144pusi.jpg', 'Offline now', 'admin', 'Approved'),
+(2, 1589571584, 'admin@gmail.com', '21232f297a57a5a743894a0e4a801fc3', '1715091144pusi.jpg', 'Active now', 'admin', 'Approved'),
 (4, 1357825271, 'senpai@gmail.com', '1e5db03ce967cfef4e21ada16da09b06', '1715105349271713718_1999144396919159_608519389647854942_n.jpg', 'Offline now', 'user', 'Rejected'),
 (19, 112466338, 'Prins@gmail.com', '0a9e0db6e95c394ee792ecbc6e510791', '1717745936pitikvermo.jpg', 'Pending', 'user', 'Approved'),
 (21, 1017731196, 'tnjrdlcrz@gmail.com', '202cb962ac59075b964b07152d234b70', '1717937589pitikvermo.jpg', 'Pending', 'user', 'Approved'),
-(22, 1593518745, 'aawafawf@gmail.com', '2310553235ab181ae0c551c242988734', 'Pictures/Mabuhay_Logo.png', 'Pending', 'user', 'Pending'),
+(22, 1593518745, 'aawafawf@gmail.com', '2310553235ab181ae0c551c242988734', 'Mabuhay_Logo.png', 'Pending', 'user', 'Pending'),
 (23, 1469021725, 'adadawda@gmail.com', '32db117b68ab7598389c18b68f721116', 'Mabuhay_Logo.png', 'Pending', 'user', 'Pending'),
 (24, 1433443368, 'waeaewea@gmail.com', '458e5a124f7ed72d143d837a9a3bd76e', 'Mabuhay_Logo.png', 'Pending', 'user', 'Pending'),
 (25, 1095492376, 'daadaaw@gmail.com', 'f2a85c6878e7978563609d089ee1173a', 'Mabuhay_Logo.png', 'Pending', 'user', 'Pending'),
 (26, 911851766, 'aSbkghjgsghj@gmail.com', '4e3b9566b4b9abfd8f6671f7b4e423a7', 'Mabuhay_Logo.png', 'Pending', 'user', 'Pending'),
 (27, 509858760, 'Tiklop@gmail.com', '9f4a66a0bac35d6f7f25b5fd931c7abe', 'Mabuhay_Logo.png', 'Pending', 'user', 'Pending'),
 (28, 1581632830, 'wela@gmail.com', 'f9395f741e6f4da0f873c08008ed5760', 'Mabuhay_Logo.png', 'Offline now', 'user', 'Approved'),
-(29, 821155870, 'Renz@gmail.com', 'b55dc472db84256de67972b96657e7b9', 'Mabuhay_Logo.png', 'Offline now', 'user', 'Approved'),
+(29, 821155870, 'Renz@gmail.com', 'b55dc472db84256de67972b96657e7b9', 'Mabuhay_Logo.png', 'Active now', 'user', 'Approved'),
 (30, 776313154, 'Pat@gmail.com', '532762fa5a5b7169aa4dd24717ba9df9', 'Mabuhay_Logo.png', 'Offline now', 'user', 'Approved'),
 (31, 1590469844, 'Pao@gmail.com', '1b6203e2e1b7e63e7b3677cdd932001f', 'Mabuhay_Logo.png', 'Offline now', 'user', 'Approved'),
 (32, 1308040957, 'John@gmail.com', '61409aa1fd47d4a5332de23cbf59a36f', 'Mabuhay_Logo.png', 'Offline now', 'user', 'Approved'),
@@ -463,7 +482,18 @@ INSERT INTO `user_votes` (`vote_id`, `unique_id`, `candidate`, `votes`, `status`
 (42, 499733408, 'Ethan  Winters', 0, 'Winner', '2024-10-18 13:33:01', '', 'Declared'),
 (43, 1195874011, 'Mia  Winters', 0, 'Winner', '2024-10-18 13:33:01', '', 'Declared'),
 (44, 1434008263, 'Rose  Winters', 0, 'Winner', '2024-10-18 13:33:01', '', 'Declared'),
-(45, 662462528, 'Hev  Alvin', 0, 'Winner', '2024-10-18 13:33:01', '', 'Declared');
+(45, 662462528, 'Hev  Alvin', 0, 'Winner', '2024-10-18 13:33:01', '', 'Declared'),
+(49, 662462528, 'Hev  Alvin', 0, 'Winner', '2024-11-04 21:37:01', '', 'Declared'),
+(50, 1434008263, 'Rose  Winters', 0, 'Winner', '2024-11-04 21:37:01', '', 'Declared'),
+(51, 1357825271, 'Wela Aguilar Magsino', 0, 'Winner', '2024-11-04 21:37:01', '', 'Declared'),
+(52, 1195874011, 'Mia  Winters', 0, 'Winner', '2024-11-04 21:37:01', '', 'Declared'),
+(53, 776313154, 'Patrick B Bayona', 0, 'Winner', '2024-11-04 21:37:01', '', 'Declared'),
+(54, 499733408, 'Ethan  Winters', 0, 'Winner', '2024-11-04 21:37:01', '', 'Declared'),
+(55, 1308040957, 'John  Doe', 0, 'Winner', '2024-11-04 21:37:01', '', 'Declared'),
+(56, 931588206, 'Jane  Doe', 0, 'Winner', '2024-11-04 21:37:01', '', 'Declared'),
+(57, 821155870, 'Jhonrenz  Berbano', 0, 'Winner', '2024-11-04 21:37:01', '', 'Declared'),
+(58, 1590469844, 'Paolo M Murillo', 0, 'Failure', '', '2024-11-04 21:37:01', 'Declared'),
+(59, 821155870, 'Jhonrenz  Berbano', 0, '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -490,7 +520,7 @@ CREATE TABLE `voting` (
 INSERT INTO `voting` (`vote_id`, `unique_id`, `candidate_name`, `img`, `add_date`, `status`, `won_date`, `fail_date`, `access`) VALUES
 (10, 1581632830, 'Wela A Magsino', 'kasal.jpeg', '', 'Winner', '2024-10-08 21:24:01', '', 'Declared'),
 (11, 821155870, 'Jhonrenz Berbano', 'bossing.jpg', '', 'Winner', '2024-10-08 21:24:01', '', 'Declared'),
-(12, 776313154, 'Patrick B Bayona', 'malupiton2.png', '', 'Winner', '2024-10-04 17:40:11', '', 'Declared'),
+(12, 776313154, 'Patrick B Bayona', 'malupiton2.png', '', 'Winner', '2024-10-08 21:24:01', '', 'Declared'),
 (13, 1590469844, 'Paolo M Murillo', 'malupiton.png', '', 'Winner', '2024-10-08 21:24:01', '', 'Declared'),
 (14, 1308040957, 'John Doe', 'ble.png', '', 'Winner', '2024-10-08 21:24:01', '', 'Declared'),
 (15, 931588206, 'Jane Doe', 'wolXdead.jpg', '', 'Winner', '2024-10-08 21:24:01', '', 'Declared'),
@@ -511,7 +541,18 @@ INSERT INTO `voting` (`vote_id`, `unique_id`, `candidate_name`, `img`, `add_date
 (50, 499733408, 'Ethan  Winters', 'bossing.jpg', '2024-10-18 13:30:02', 'Winner', '2024-10-18 13:33:01', '', 'Declared'),
 (51, 1195874011, 'Mia  Winters', 'pakyu.png', '2024-10-18 13:30:18', 'Winner', '2024-10-18 13:33:01', '', 'Declared'),
 (52, 1434008263, 'Rose  Winters', 'malupiton.png', '2024-10-18 13:31:43', 'Winner', '2024-10-18 13:33:01', '', 'Declared'),
-(53, 662462528, 'Hev  Alvin', 'meow.jpg', '2024-10-18 13:32:18', 'Winner', '2024-10-18 13:33:01', '', 'Declared');
+(53, 662462528, 'Hev  Alvin', 'meow.jpg', '2024-10-18 13:32:18', 'Winner', '2024-10-18 13:33:01', '', 'Declared'),
+(70, 662462528, 'Hev  Alvin', 'Mabuhay_Logo.png', '2024-11-04', 'Winner', '2024-10-18 13:33:01', '', 'Declared'),
+(71, 1434008263, 'Rose  Winters', 'Mabuhay_Logo.png', '2024-11-04', 'Winner', '2024-10-18 13:33:01', '', 'Declared'),
+(72, 1357825271, 'Wela Aguilar Magsino', '1715105349271713718_1999144396919159_608519389647854942_n.jpg', '2024-11-04', 'Winner', '2024-11-04 21:37:01', '', 'Declared'),
+(73, 1195874011, 'Mia  Winters', 'Mabuhay_Logo.png', '2024-11-04', 'Winner', '2024-10-18 13:33:01', '', 'Declared'),
+(74, 776313154, 'Patrick B Bayona', 'Mabuhay_Logo.png', '2024-11-04', 'Winner', '2024-10-18 13:33:01', '', 'Declared'),
+(75, 499733408, 'Ethan  Winters', 'Mabuhay_Logo.png', '2024-11-04', 'Winner', '2024-10-18 13:33:01', '', 'Declared'),
+(76, 1308040957, 'John  Doe', 'Mabuhay_Logo.png', '2024-11-04', 'Winner', '2024-11-04 21:37:01', '', 'Declared'),
+(77, 931588206, 'Jane  Doe', 'Mabuhay_Logo.png', '2024-11-04', 'Winner', '2024-11-04 21:37:01', '', 'Declared'),
+(78, 821155870, 'Jhonrenz  Berbano', 'Mabuhay_Logo.png', '2024-11-04', 'Winner', '2024-11-04 21:37:01', '', 'Declared'),
+(79, 1590469844, 'Paolo M Murillo', 'Mabuhay_Logo.png', '2024-11-04', 'Failure', '', '2024-11-04 21:37:01', 'Declared'),
+(80, 821155870, 'Jhonrenz  Berbano', 'Mabuhay_Logo.png', '2024-11-04 22:01:23', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -564,7 +605,8 @@ INSERT INTO `voting_countdown` (`countdown_id`, `start_id`, `start_time`, `end_i
 (92, 1341, '2024-10-08 21:23:09', 1341, '2024-10-08 21:24:00', 'VotingEnded'),
 (93, 3691, '2024-10-08 21:41:05', 3691, '2024-10-08 21:42:00', 'VotingEnded'),
 (94, 7412, '2024-10-08 21:46:44', 7412, '2024-10-08 21:47:00', 'VotingEnded'),
-(100, 2167, '2024-10-18 13:32:56', 2167, '2024-10-18 13:33:00', 'VotingEnded');
+(100, 2167, '2024-10-18 13:32:56', 2167, '2024-10-18 13:33:00', 'VotingEnded'),
+(105, 7867, '2024-11-04 21:36:07', 7867, '2024-11-04 21:37:00', 'VotingEnded');
 
 -- --------------------------------------------------------
 
@@ -697,7 +739,7 @@ ALTER TABLE `announcements`
 -- AUTO_INCREMENT for table `complaints`
 --
 ALTER TABLE `complaints`
-  MODIFY `complaint_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `complaint_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `forms`
@@ -745,19 +787,19 @@ ALTER TABLE `tblresident`
 -- AUTO_INCREMENT for table `user_votes`
 --
 ALTER TABLE `user_votes`
-  MODIFY `vote_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `vote_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
 
 --
 -- AUTO_INCREMENT for table `voting`
 --
 ALTER TABLE `voting`
-  MODIFY `vote_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+  MODIFY `vote_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
 
 --
 -- AUTO_INCREMENT for table `voting_countdown`
 --
 ALTER TABLE `voting_countdown`
-  MODIFY `countdown_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=101;
+  MODIFY `countdown_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=106;
 
 --
 -- AUTO_INCREMENT for table `voting_history`
