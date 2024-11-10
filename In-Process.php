@@ -22,6 +22,7 @@ if (isset($_SESSION['unique_id'])) {
     <link rel="icon" type="image/x-icon" href="Pictures/Mabuhay_Logo.ico">
     <link rel="stylesheet" href="CSS/In-Process.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="JS/sidebar.js"></script>
 </head>
 <body>
 <div class="mainDashboardContainer">
@@ -32,7 +33,7 @@ if (isset($_SESSION['unique_id'])) {
                     <h2 class="MabuhayName"> Mabuhay Homes 2000 <br> Phase 5 </h2>
                 </div>
                 <div class="DagdagNanaman">
-                    <a href="DashBoard.php" class="sideside baractive">
+                    <a href="DashBoard.php" class="sideside">
                         <img class="img-sideboard" src="Pictures/Dashboard2.png">
                         <span> Dasboard </span>
                     </a>
