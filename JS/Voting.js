@@ -1007,7 +1007,7 @@ function fetchTableData() {
             if (xhr.status === 200) {
                 console.log('Response received:', xhr.responseText);
                 var response = JSON.parse(xhr.responseText);
-                
+
                 if (response.success) {
                     console.log('Response candidates:', response.candidates);
                     var tableBody = document.querySelector('.TableContainerRank tbody');
@@ -1015,10 +1015,9 @@ function fetchTableData() {
 
                     if (response.candidates && response.candidates.length > 0) {
                         response.candidates.forEach(function(candidate, index) {
-                            // Ensure we're accessing the correct properties from the response
                             var candidateImg = candidate.img;
-                            var candidateName = candidate.candidate;  // Use the 'candidate' field from the table
-                            var votesCount = parseInt(candidate.votes_count, 10); // Use 'votes_count' field
+                            var candidateName = candidate.candidate;
+                            var votesCount = parseInt(candidate.votes_count, 10);
 
                             if (isNaN(votesCount)) {
                                 votesCount = 0;
@@ -1027,12 +1026,12 @@ function fetchTableData() {
 
                             var tr = document.createElement('tr');
                             tr.innerHTML = `
-                                <td>${index + 1} </td>
+                                <td>${index + 1}</td>
                                 <td><img src='Pictures/${candidateImg}' style="width: 60%; height: auto;"></td>
                                 <td>${candidateName}</td>
                                 <td>${votesCount}</td>
                                 <td>
-                                    <span class="delteRowAdded" onclick="deleteCandidateRow(${candidate.id})">
+                                    <span class="delteRowAdded" onclick="deleteCandidateRow(${candidate.unique_id})">
                                         <img class="deleteIconImg" src="Pictures/deleteRow.png">
                                     </span>
                                 </td>`;
@@ -1053,6 +1052,27 @@ function fetchTableData() {
     };
     xhr.send();
 }
+
+// Function to handle deletion of a candidate row
+function deleteCandidateRow(candidateId) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', 'PHPBackend/VotingProcess.php?action=deleteCandidate&candidateId=' + candidateId, true);
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+                var response = JSON.parse(xhr.responseText);
+                if (response.success) {
+                    console.log('Candidate deleted successfully');
+                    fetchTableData(); // Refresh the table after deletion
+                } else {
+                    console.error('Error deleting candidate:', response.error);
+                }
+            }
+        }
+    };
+    xhr.send();
+}
+
 
 
 // Fetch data initially
@@ -1525,7 +1545,7 @@ function fetchHistory() {
     .then(data => {
         console.log('Fetched data:', JSON.stringify(data, null, 2)); // Debug: print data structure
         if (data.success) {
-            const tbody = document.querySelector('.TableForHistory tbody');
+            const tbody = document.querySelector('.TableForHistory tbody'); 
             tbody.innerHTML = ''; // Clear the current content
 
             Object.keys(data.winners).forEach(won_date => {

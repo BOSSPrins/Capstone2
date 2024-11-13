@@ -273,19 +273,37 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         closeConnectionAndRespond($conn, $response);
 
     } elseif ($action === 'fetch_overlay_message') {
-        // Logic for fetching the most recent message from the database
+        // Fetch the most recent voting status
         $sql = "SELECT voting_status FROM voting_countdown ORDER BY countdown_id DESC LIMIT 1;";
         $result = $conn->query($sql);
-
+    
         if ($result->num_rows > 0) {
             $row = $result->fetch_assoc();
-            $response = ['success' => true, 'status' => $row['voting_status']];
+            
+            if ($row['voting_status'] === 'VotingEnded') {
+                // Query to fetch exactly 9 candidates marked as winners
+                $winners_sql = "SELECT candidate_name, img FROM voting WHERE status = 'winner' LIMIT 9";
+                $winners_result = $conn->query($winners_sql);
+                $winners = [];
+    
+                while ($winner = $winners_result->fetch_assoc()) {
+                    $winners[] = $winner;
+                }
+    
+                $response = [
+                    'success' => true,
+                    'status' => 'VotingEnded',
+                    'winners' => $winners
+                ];
+            } else {
+                $response = ['success' => true, 'status' => $row['voting_status']];
+            }
         } else {
             $response = ['success' => false, 'error' => 'No message found'];
         }
-        
-        closeConnectionAndRespond($conn, $response);
     
+        closeConnectionAndRespond($conn, $response);
+        
     } elseif ($action === 'fetch_winners') {
 
         $pictures_dir = 'Pictures/';
