@@ -59,9 +59,10 @@ if (isset($_SESSION['unique_id'])) {
                         </a>  
                         <ul class="subMenuComp" id="complaintsSubMenu">
                             <li> 
-                                <a href="In-Process.php">
+                            <a href="In-Process.php">
                                     <img class="img-subMenu" src="Pictures/In-Process.png">
                                     <label class="sub-spa"> In-Process </label>
+                                    <span class="badge badge-yellow" id="inProcessBadge">0</span>
                                 </a> 
                                 <a href="Resolved.php">
                                     <img class="img-subMenu" src="Pictures/resolved.png">
@@ -70,6 +71,7 @@ if (isset($_SESSION['unique_id'])) {
                                 <a href="Escalated.php">
                                     <img class="img-subMenu" src="Pictures/warning.png">
                                     <label class="sub-spa"> Escalated </label>
+                                    <span class="badge badge-red" id="escalatedBadge">0</span>
                                 </a> 
                                 <a href="MainChat.php">
                                     <img class="img-subMenu" src="Pictures/Chat.png">
@@ -193,10 +195,10 @@ if (isset($_SESSION['unique_id'])) {
                             <table class="TableComPend">
                                 <thead>
                                     <!-- <th style="width:10%"> Complain No.</th> -->
-                                    <th style="width:15%"> Date Submitted </th>
-                                    <th style="width:12%" > Status </th>
+                                    <th style="width:12%"> Complaint No. </th>
                                     <th style="width:25%" data-sort onclick="sortTable(0, event)"> Complaint </th>
-                                    <th style="width:25%"> Address </th>                                                                       
+                                    <th style="width:15%"> Date Submitted </th>
+                                    <th style="width:12%" > Status </th>                                   
                                     <th style="width:15%" > Action </th>
                                 </thead>
                                 <tbody>
@@ -258,16 +260,16 @@ if (isset($_SESSION['unique_id'])) {
                                 <textarea class="textAreaCompDeta" id="Description"> </textarea>
                             </div>
                             <div style="display: flex; margin-bottom: 15px; align-items:center;">
+                                <label class="LabelCompDeta"> Current Status: </label>
+                                <input class="inputCompDeta" type="text" id="Status">
+                            </div>
+                            <div style="display: flex; margin-bottom: 15px; align-items:center;">
                                 <label class="LabelCompDeta"> File: </label>
                                 <!-- <input type="file" id="Proof" disabled> -->
             
                                 <img id="ProofFileName" alt="Proof Image" style="max-width: 300px; max-height: 200px;"></img>
 
-                            </div>
-                            <div style="display: flex; margin-bottom: 15px; align-items:center;">
-                                <label class="LabelCompDeta"> Current Status: </label>
-                                <input class="inputCompDeta" type="text" id="Status">
-                            </div>
+                            </div>                           
 
                             <!-- Galing Pending Lagayan -->
                             <h2>First Remark:</h2>
@@ -291,7 +293,7 @@ if (isset($_SESSION['unique_id'])) {
                             </div>
 
 
-                            <!-- Galing In-Process Lagayan -->
+                            <div id="SecondRemarkSectionContainer">
                             <h2>Second Remark:</h2>
                             <div style="background: rgb(110, 160, 204); padding: 10px;">
                                 <div style="display: flex; margin-bottom: 15px;">
@@ -312,7 +314,7 @@ if (isset($_SESSION['unique_id'])) {
                                 </div>
                             </div>
 
-                            <div id="ThirdRemarkSectionContainer">
+                            <!-- <div id="ThirdRemarkSectionContainer">
                                 <h2>Third Remark:</h2>
                                 <div style="background: rgb(138, 187, 231); padding: 10px;">
                                     <div style="display: flex; margin-bottom: 15px;">
@@ -332,7 +334,7 @@ if (isset($_SESSION['unique_id'])) {
                                         <input class="inputCompDeta" type="text" id="ThirdRemarkDate">
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                             <!-- <div style="display: flex; margin-bottom: 15px; margin-top: 10px; align-items:center;">
                                 <label class="LabelCompDeta"> Action: </label>
                                 <button class="TabkeActionBtn" onclick="toggleStatusFields()"> Take Action </button>

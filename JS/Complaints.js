@@ -372,7 +372,8 @@ function fetchComplaints() {
         if (data.success) {
             generateTable(data.data); // Pass complaints data to generateTable function
         } else {
-            console.error('No complaints found or error in fetching data.');
+            generateTable([]); 
+            console.log(data.error);
         }
     })
     .catch(error => {
@@ -384,22 +385,29 @@ function generateTable(complaints) {
     const tableBody = document.querySelector('.TableComPend tbody');
     tableBody.innerHTML = ''; // Clear any existing rows
 
-    complaints.forEach(complaint => {
+    if (complaints.length === 0) {
+        // Create a row for the "No pending complaints" message
         const row = document.createElement('tr');
-
-        const formattedDateTime = formatDateTimeToWords(complaint.filed_date);
-        
-        row.innerHTML = `
-            <td>${formattedDateTime}</td>
-            <td style="color: #FFB300; font-weight: bold;">${complaint.status}</td>
-            <td>${complaint.complaint}</td>
-            <td>${complaint.complaineeAddress}</td>
-            <td><button class="BiewPendBtn" data-id="${complaint.complaint_id}" onclick="viewDetails(this)">View Details</button></td>
-        `;
-        
+        row.innerHTML = `<td colspan="5" style="text-align: center; color: black;">No Pending Complaints</td>`;
         tableBody.appendChild(row);
-    });
+    } else {
+        complaints.forEach(complaint => {
+            const row = document.createElement('tr');
+            const formattedDateTime = formatDateTimeToWords(complaint.filed_date);
+            
+            row.innerHTML = `
+                <td>${complaint.complaint_number}</td>
+                <td>${complaint.complaint}</td>
+                <td>${formattedDateTime}</td>
+                <td style="color: #FFB300; font-weight: bold;">${complaint.status}</td>              
+                <td><button class="BiewPendBtn" data-id="${complaint.complaint_number}" onclick="viewDetails(this)">View Details</button></td>
+            `;
+            
+            tableBody.appendChild(row);
+        });
+    }
 }
+
 
 
 function viewDetails(button) {
@@ -444,9 +452,7 @@ function fetchComplaintDetails(complaintId) {
 
 function submitComplaintUpdate() {
     const complaintId = document.getElementById('ComplaintID').value;
-    const status = document.getElementById('RemarkStatus').innerText;
-    const remark = document.getElementById('NewRemark').value;
-    const role = document.getElementById('RemarkRole').value;
+    const status = document.getElementById('NewStatus').value;
 
     fetch('PHPBackend/Complaint.php', {
         method: 'POST',
@@ -456,9 +462,8 @@ function submitComplaintUpdate() {
         body: new URLSearchParams({
             action: 'update_complaint',
             complaint_id: complaintId,
-            status: status,
-            remark: remark,
-            role: role
+            status: status
+            
         })
     })
     .then(response => response.json())
@@ -476,6 +481,37 @@ function submitComplaintUpdate() {
 }
 
 
+function updateComplaintCounts() {
+    fetch('PHPBackend/Complaint.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: 'action=get_complaint_counts'
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            // Update badges and hide if the count is zero
+            const inProcessBadge = document.getElementById('inProcessBadge');           
+            const escalatedBadge = document.getElementById('escalatedBadge');
+
+            const updateBadge = (badge, count) => {
+                badge.textContent = count || 0;
+                badge.style.display = count > 0 ? 'inline-block' : 'none';
+            };
+
+            updateBadge(inProcessBadge, data.in_process);           
+            updateBadge(escalatedBadge, data.escalated);
+        } else {
+            console.error('Failed to fetch complaint counts:', data.error);
+        }
+    })
+    .catch(error => console.error('Error:', error));
+}
+
+setInterval(updateComplaintCounts, 60000); // Refresh every 60 seconds
+
+
 window.onload = function () {
     fetchComplaints();
+    updateComplaintCounts();
 };

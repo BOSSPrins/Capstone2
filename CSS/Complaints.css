@@ -758,3 +758,18 @@ html{
 .dropdown-option:hover {
   background-color: #e0e0e0;
 }
+
+/* DESIGN NUNG BADGE */
+.badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 0.8em;
+  font-weight: bold;
+  color: white;
+  margin-left: 85px;
+}
+
+.badge-yellow { background-color: #FFB300; }
+.badge-red { background-color: #F44336; }
+

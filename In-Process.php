@@ -62,14 +62,16 @@ if (isset($_SESSION['unique_id'])) {
                                 <a href="In-Process.php">
                                     <img class="img-subMenu" src="Pictures/In-Process.png">
                                     <label class="sub-spa"> In-Process </label>
+                                    <span class="badge badge-yellow" id="inProcessBadge">0</span>
                                 </a> 
                                 <a href="Resolved.php">
                                     <img class="img-subMenu" src="Pictures/resolved.png">
-                                    <label class="sub-spa"> Resolved </label>
+                                    <label class="sub-spa"> Resolved </label>                                   
                                 </a> 
                                 <a href="Escalated.php">
                                     <img class="img-subMenu" src="Pictures/warning.png">
                                     <label class="sub-spa"> Escalated </label>
+                                    <span class="badge badge-red" id="escalatedBadge">0</span>
                                 </a> 
                                 <a href="MainChat.php">
                                     <img class="img-subMenu" src="Pictures/Chat.png">
@@ -193,10 +195,10 @@ if (isset($_SESSION['unique_id'])) {
                             <table class="TableComPend">
                                 <thead>
                                     <!-- <th style="width:10%"> Complain No.</th> -->
-                                    <th style="width:15%"> Date Submitted </th>
-                                    <th style="width:12%" > Status </th>
+                                    <th style="width:12%"> Complaint No. </th>
                                     <th style="width:25%" data-sort onclick="sortTable(0, event)"> Complaint </th>
-                                    <th style="width:25%"> Address </th>                                                                       
+                                    <th style="width:15%"> Date Submitted </th>
+                                    <th style="width:12%" > Status </th>                                   
                                     <th style="width:15%" > Action </th>
                                 </thead>
                                 <tbody>
@@ -270,7 +272,7 @@ if (isset($_SESSION['unique_id'])) {
                             </div>
 
                             <!-- Galing Pending Lagayan -->
-                            <h2>First Remark:</h2>
+                            <!-- <h2>First Remark:</h2>
                             <div style="background: rgb(138, 187, 231); padding: 10px;">
                                 <div style="display: flex; margin-bottom: 15px;">
                                     <label class="LabelCompDeta"> Remark: </label>
@@ -288,7 +290,7 @@ if (isset($_SESSION['unique_id'])) {
                                     <label class="LabelCompDeta"> Remark Date: </label>
                                     <input class="inputCompDeta" type="text" id="FirstRemarkDate">
                                 </div>
-                            </div>
+                            </div> -->
                             <div style="display: flex; margin-bottom: 15px; margin-top: 10px; align-items:center;">
                                 <label class="LabelCompDeta"> Action: </label>
                                 <button class="TabkeActionBtn" onclick="toggleStatusFields()"> Take Action </button>
