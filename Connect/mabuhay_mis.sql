@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 11, 2024 at 12:24 AM
+-- Generation Time: Nov 13, 2024 at 04:17 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -68,6 +68,7 @@ INSERT INTO `announcements` (`news_id`, `title`, `context`, `start_date`, `start
 
 CREATE TABLE `complaints` (
   `complaint_id` int(11) NOT NULL,
+  `complaint_number` int(11) NOT NULL,
   `complainee` varchar(50) NOT NULL,
   `complaint` varchar(50) NOT NULL,
   `description` text NOT NULL,
@@ -78,6 +79,7 @@ CREATE TABLE `complaints` (
   `complainantName` varchar(255) NOT NULL,
   `complainantAddress` varchar(20) NOT NULL,
   `status` varchar(20) NOT NULL,
+  `processed_date` varchar(50) NOT NULL,
   `Remark1` varchar(255) NOT NULL,
   `RemarkBy1` varchar(20) NOT NULL,
   `status1` varchar(20) NOT NULL,
@@ -85,22 +87,21 @@ CREATE TABLE `complaints` (
   `Remark2` varchar(255) NOT NULL,
   `RemarkBy2` varchar(20) NOT NULL,
   `status2` varchar(20) NOT NULL,
-  `RemarkDate2` varchar(50) NOT NULL,
-  `Remark3` varchar(255) NOT NULL,
-  `RemarkBy3` varchar(20) NOT NULL,
-  `status3` varchar(20) NOT NULL,
-  `RemarkDate3` varchar(50) NOT NULL
+  `RemarkDate2` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `complaints`
 --
 
-INSERT INTO `complaints` (`complaint_id`, `complainee`, `complaint`, `description`, `proof`, `filed_date`, `complaineeAddress`, `complainantUID`, `complainantName`, `complainantAddress`, `status`, `Remark1`, `RemarkBy1`, `status1`, `RemarkDate1`, `Remark2`, `RemarkBy2`, `status2`, `RemarkDate2`, `Remark3`, `RemarkBy3`, `status3`, `RemarkDate3`) VALUES
-(1, 'Mooda', 'Blocking the Driveway', 'Laging nakaharang yung kotse nya sa gate ko', 'bossing.jpg', '2024-09-19 12:07:15', 'Blk 54 Lot 1', 0, 'Mark', 'Blk 78 Lot 10', 'Escalated', '', 'admin', 'In-Process', '2024-11-10 23:00:38', 'Turn over to barangay', 'admin', 'Escalated', '2024-11-10 23:12:40', '', '', '', ''),
-(2, 'Raul', 'Blocking the Driveway', 'Yung tricycle nya dinikit sa kotse ko', 'bossing.jpg', '2024-09-19 12:07:35', 'Blk 3 Lot 6', 0, 'Sgup', 'Blk 100 Lot 6', 'Escalated', 'Processing na po', 'admin', 'In-Process', '2024-11-10 22:52:21', 'This Complaint will be turn over to the barangay', 'admin', 'Escalated', '2024-11-10 22:54:21', '', '', '', ''),
-(3, 'Nigs', 'Pet Issues', 'Aso nya laging galit', 'awtlas.png', '2024-11-08 19:34:38', 'Blk 54 Lot 1', 1581632830, 'Wela A Magsino', 'Blk 9 Lot 18', 'Resolved', 'Change to in process', 'admin', 'In-Process', '2024-11-10 02:39:52', 'Resolved na', 'admin', 'Resolved', '2024-11-10 21:42:27', '', '', '', ''),
-(4, 'Pat Anoyab', 'Noise Complaint', 'Ingay nila mag asawa', 'boss.jpg', '2024-11-10 14:57:37', 'Blk 123 Lot 56', 821155870, 'Jhonrenz Berbano', 'Blk 1 Lot 1', 'Pending', '', '', '', '', '', '', '', '', '', '', '', '');
+INSERT INTO `complaints` (`complaint_id`, `complaint_number`, `complainee`, `complaint`, `description`, `proof`, `filed_date`, `complaineeAddress`, `complainantUID`, `complainantName`, `complainantAddress`, `status`, `processed_date`, `Remark1`, `RemarkBy1`, `status1`, `RemarkDate1`, `Remark2`, `RemarkBy2`, `status2`, `RemarkDate2`) VALUES
+(1, 0, 'Mooda', 'Blocking the Driveway', 'Laging nakaharang yung kotse nya sa gate ko', 'bossing.jpg', '2024-09-19 12:07:15', 'Blk 54 Lot 1', 0, 'Mark', 'Blk 78 Lot 10', 'Escalated', '', '', 'admin', 'In-Process', '2024-11-10 23:00:38', 'Turn over to barangay', 'admin', 'Escalated', '2024-11-10 23:12:40'),
+(2, 0, 'Raul', 'Blocking the Driveway', 'Yung tricycle nya dinikit sa kotse ko', 'bossing.jpg', '2024-09-19 12:07:35', 'Blk 3 Lot 6', 0, 'Sgup', 'Blk 100 Lot 6', 'Escalated', '', 'Processing na po', 'admin', 'In-Process', '2024-11-10 22:52:21', 'This Complaint will be turn over to the barangay', 'admin', 'Escalated', '2024-11-10 22:54:21'),
+(3, 0, 'Nigs', 'Pet Issues', 'Aso nya laging galit', 'awtlas.png', '2024-11-08 19:34:38', 'Blk 54 Lot 1', 1581632830, 'Wela A Magsino', 'Blk 9 Lot 18', 'Resolved', '', 'Change to in process', 'admin', 'In-Process', '2024-11-10 02:39:52', 'Resolved na', 'admin', 'Resolved', '2024-11-10 21:42:27'),
+(4, 0, 'Pat Anoyab', 'Noise Complaint', 'Ingay nila mag asawa', 'boss.jpg', '2024-11-10 14:57:37', 'Blk 123 Lot 56', 821155870, 'Jhonrenz Berbano', 'Blk 1 Lot 1', 'Resolved', '2024-11-11 21:59:35', 'Done na po', 'admin', 'Resolved', '2024-11-11 22:21:17', '', '', '', ''),
+(5, 0, '', 'Property Maintenance', 'Yung bintana nya sa third floor tumusok sa bubong ko', 'malupiton.png', '2024-11-11 14:30:11', 'Blk 9 Lot 6', 1581632830, 'Wela A Magsino', 'Blk 9 Lot 18', 'Escalated', '2024-11-11 22:31:57', 'Turn over na po sa barangay di na namin kaya', 'admin', 'Escalated', '2024-11-11 22:32:16', '', '', '', ''),
+(6, 1142799674, '', 'Noise Complaint', 'Ingay ng aso nila kahit madaling araw nagwawala', 'meow.jpg', '2024-11-12 15:34:45', 'Blk 60 Lot 60', 1581632830, 'Wela A Magsino', 'Blk 9 Lot 18', 'Resolved', '2024-11-13 00:00:52', 'Okay na po tinapon na namin yung aso', 'admin', 'Resolved', '2024-11-13 00:27:55', '', '', '', ''),
+(7, 1546759430, '', 'Property Maintenance', 'Yung puno nya tumumba sa gate ko', 'malupiton.png', '2024-11-12 18:35:21', 'Blk 61 Lot 61', 1581632830, 'Wela A Magsino', 'Blk 9 Lot 18', 'In-Process', '2024-11-13 02:38:23', '', '', '', '', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -739,7 +740,7 @@ ALTER TABLE `announcements`
 -- AUTO_INCREMENT for table `complaints`
 --
 ALTER TABLE `complaints`
-  MODIFY `complaint_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `complaint_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `forms`
