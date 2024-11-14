@@ -261,7 +261,14 @@ if (isset($_SESSION['unique_id'])) {
                             </div>
                             <div style="display: flex; margin-bottom: 15px; align-items:center;">
                                 <label class="LabelCompDeta"> File: </label>
-                                <!-- <input type="file" id="Proof" disabled> -->
+                                <button class="BiewwPicture"> View </button>
+                                 <!-- Modal for Image Preview -->
+                                <div class="imageModal" style="display: none;">
+                                    <span class="closeModal">&times;</span>
+                                    <button class="prevImage" onclick="changeImage(-1)">&#10094;</button>
+                                    <img class="modalImage" src="" alt="Image Preview" />
+                                    <button class="nextImage" onclick="changeImage(1)">&#10095;</button>
+                                </div>
             
                                 <img id="ProofFileName" alt="Proof Image" style="max-width: 300px; max-height: 200px;"></img>
 

@@ -450,3 +450,48 @@ window.onload = function () {
     fetchComplaints();
     updateComplaintCounts();
 };
+
+
+// FUNCTION PARA SA PICTURE MODAL PREVIEW 
+// Example list of images that you want to display in the modal (use your actual image list here)
+const images = [
+    "image1.jpg", // Replace with actual image URLs
+    "image2.jpg",
+    "image3.jpg"
+];
+
+// Modal and Image elements
+const modal = document.querySelector('.imageModal');
+const modalImage = document.querySelector('.modalImage');
+let currentIndex = 0;  // Track the current image index
+
+// Show the modal and display the first image
+document.querySelector('.BiewwPicture').addEventListener('click', function() {
+    currentIndex = 0;  // Reset to first image
+    showModal();
+});
+
+// Function to display the modal and set the image
+function showModal() {
+    modal.style.display = 'flex';  // Show the modal
+    modalImage.src = images[currentIndex];  // Set the image source
+}
+
+// Close the modal when clicking the close button
+document.querySelector('.closeModal').addEventListener('click', function() {
+    modal.style.display = 'none';  // Hide the modal
+});
+
+// Function to change the image when clicking next or previous
+function changeImage(direction) {
+    currentIndex += direction;
+
+    // Loop the images: if we're at the start or end, loop around
+    if (currentIndex < 0) {
+        currentIndex = images.length - 1;  // Go to last image
+    } else if (currentIndex >= images.length) {
+        currentIndex = 0;  // Go to first image
+    }
+
+    modalImage.src = images[currentIndex];  // Update the image source
+}

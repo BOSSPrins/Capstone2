@@ -215,21 +215,30 @@ height: 100vh;
 }
 
 .MainContainerForTables{
-display: flex;
-justify-content: center;
-width: 100%;
-flex: 1;
-overflow: hidden;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  flex: 1;
+  overflow: hidden;
+}
+  
+.ContainerForComplaints{
+    display: flex;
+    flex-direction: column; /* Stack children vertically */
+    width: 100%;
+    padding: 10px;
+    background-color: #ffffff;
+    border: 1px solid rgb(179, 172, 172);
+    margin: 10px;
+    flex: 1; /* Allow it to grow and take available space */
+    overflow: auto;
 }
 
-.MainContainerAll{
-  width: 100%;
-  padding: 30px;
-  background-color: #ffffff;
-  border: 1px solid rgb(179, 172, 172);
-  margin: 10px;
-  flex: 1;
-  overflow-y: auto;
+.TblListComplaint{
+    flex: 1; /* Allow this div to grow and take all available space */
+    /* padding: 10px; */
+    background-color: #f9f9f9;
+    overflow-y: auto; /* Scroll within this section if necessary */
 }
 
 /* DESIGN PARA TO SA HEADER NG SIDEBAR AT SA MAIN */
@@ -439,9 +448,130 @@ overflow: hidden;
   cursor: pointer;
 }
 
-/* DESIGN PARA SA COMPLAINT */
-.inputUserComps {
-  width: 87.5%;
+/* DESIGN PARA SA TABLE LIST NG COMPLAINTS */
+.NewCompl{
+  padding: 10px 25px;
+  margin-top: 5px;
+  background: #0e1b7b;
+  color: white;
+  border-radius: 15px;
+  cursor: pointer;
+}
+
+.NewCompl:hover{
+  background: #045c9a;
+}
+
+.ListTablee {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.ListTablee thead {
+  background: var(--color-primary);
+  color: white;
+}
+
+.ListTablee th {
+  padding: 15px;
+  cursor: pointer;
+  position: relative;
+  font-size: 12px;
+  white-space: nowrap;
+  user-select: none;
+  transition: all linear 0.16s;
+  border: 1px solid rgb(179, 172, 172); /* Outline partition */
+}
+
+.ListTablee td {
+  font-size: 14px;
+  color: #000000;
+  border-bottom: 1px solid #576574;
+  padding: 10px 12px;
+  border: 1px solid rgb(179, 172, 172); /* Outline partition */
+}
+
+.ListTablee tbody {
+  background: var(--color-white);
+  text-align: center;
+}
+
+.ListTablee:nth-child(even) {
+  background: var(--color-light);
+}
+
+/* DESIGN PARA SA DROPDOWN TYPE */
+.TypeDrop{
+    position: relative;
+    width: 100%;
+}
+
+.TypeDisplay{
+  margin-left: 20px;
+  background-color: #ffffff;
+  padding: 10px;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.TypedropOptions{
+    position: absolute;
+    top: 100%;
+    left: 20px;
+    right: 0;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    max-height: 150px;
+    overflow-y: auto;
+    display: none;
+    z-index: 1;
+    margin-top: 5px;
+}
+
+.TypeDropOption{
+    padding: 10px;
+    cursor: pointer;
+}
+
+.TypeDropOption:hover{
+    background-color: #e0e0e0;
+}
+
+/* DESIGN FOR ARROW BACK */
+.TableComplaintsCon{
+    margin-bottom: 5px;
+}
+
+/* DESIGN PARA SA CONTENT NG DIRECT COMPLAINT*/
+.contentBoth {
+  flex: 1;
+  overflow-y: auto;
+  /* background: rgb(162, 138, 138); */
+  padding: 10px;
+}
+
+.ComplainUser,
+.ComplainUser2,
+.DescriUser,
+.ComplainUser3 {
+  margin-bottom: 20px;
+}
+
+.ComplainUser div, .ComplainUser2, .DescriUser, .ComplainUser3 {
+  display: flex;
+  align-items: center;
+}
+
+.ComplainUser label, .ComplainUser2 label, .DescriUser label, .ComplainUser3 label {
+  width: 150px;  /* Set a fixed width for all labels */
+  font-weight: bold;
+  margin-right: 15px;  /* Space between label and input */
+}
+
+.inputUserComps2, .dropdownInputField, .DescriptUsers, .inputFile {
+  flex-grow: 1;  /* Make the input fields take up the remaining space */
   font-size: 16px;
   border-radius: 5px;
   border: 1px solid rgba(62, 65, 71, 0.4);
@@ -449,32 +579,17 @@ overflow: hidden;
 }
 
 .inputUserComps2 {
-  width: 87.5%;
-  font-size: 16px;
-  border-radius: 5px;
-  border: 1px solid rgba(62, 65, 71, 0.4);
-  padding: 10px;
-   margin-top: 20px;
-}
-
-.Label2{
-  font-size: medium; 
-  font-weight: bold;
-  margin-left: 4.6%;
-}
-
-.ComplainUser{
-margin-bottom: 20px;
+  margin-top: 20px;
 }
 
 .dropdownInput {
-  width: 85%;
+  display: flex;
+  flex-grow: 1;
   position: relative;
-  display: inline-block;
 }
 
 .dropdownInputField {
-  width: 100%;
+  flex-grow: 1;
   padding: 10px;
   font-size: 16px;
   border-radius: 5px;
@@ -487,7 +602,7 @@ margin-bottom: 20px;
   position: absolute;
   background-color: #f9f9f9;
   width: 99%;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
   border-radius: 5px;
   top: 100%;
@@ -523,32 +638,552 @@ margin-bottom: 20px;
   transform: rotate(180deg);
 }
 
-.ComplainUser2, .DescriUser, .ComplainUser3{
-margin-bottom: 20px;
+.DescriptUsers {
+  resize: none;
+  height: 300px;
+  width: 100%;
+  border-radius: 5px;
+  border: 1px solid rgba(62, 65, 71, 0.4);
+  margin-top: 10px;
+  font-size: medium;
+  font-family: Arial;
+  padding: 5px;
 }
 
-.DescriptUsers{
-resize: none;
-height: 300px;
-width: 100%;
-border-radius: 5px;
-border: 1px solid rgba(62, 65, 71, 0.4);
-margin-top: 10px;
-font-size: medium;
-font-family: Arial;
-padding: 5px;
+.footerUserSubmitt {
+  display: flex;
+  justify-content: end;
 }
 
-.footerUserSubmitt{
-display: flex;
-justify-content: end;
+.submittUserComp {
+  background: rgb(0, 0, 164);
+  font-size: 17px;
+  padding: 10px 30px;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
-.submittUserComp{
-background: rgb(0, 0, 164);
-font-size: 17px;
-padding: 10px 30px;
-color: white;
-border-radius: 5px;
-cursor: pointer;
+/* DESIGN PARA SA PAG UPLOAD NG PICTURES */
+.file-upload-container {
+  position: relative;
+  display: inline-block;
+  width: 50%;  /* Adjust width of upload area */
+  height: 50px;
+  border-radius: 5px;
+  border: dotted rgba(62, 65, 71, 0.4);
+  cursor: pointer;
+  text-align: center;
+  padding-top: 10px;  /* Center the '+' icon vertically */
+}
+
+/* Wrapper to contain both file upload and preview container */
+.file-upload-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centers content horizontally */
+  width: 100%;
+  margin-bottom: 20px;
+} 
+
+/* Hide default file input */
+.inputFile {
+  display: none;
+}
+
+.plus-icon {
+  font-weight: bold;
+  font-size: medium;
+  color: rgb(88, 88, 88);
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.plus-icon:hover {
+  color: rgb(0, 0, 164); /* Hover effect */
+}
+
+
+/* Styling for the '+' icon */
+.file-upload-btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #333;
+  cursor: pointer;
+}
+
+/* Styling for image previews */
+.image-preview-container {
+  margin-top: 15px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.image-preview {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.image-preview-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.remove-image {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: rgba(255, 0, 0, 0.6);
+  color: white;
+  font-size: 16px;
+  padding: 2px 6px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+/* Display file names if not an image */
+.file-name {
+  font-size: 12px;
+  color: #666;
+  text-align: center;
+  margin-top: 5px;
+}
+
+/* Lightbox styles (overlay background) */
+.lightbox {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  cursor: pointer;
+}
+
+.lightbox img {
+  max-width: 80%;
+  max-height: 80%;
+  object-fit: contain;
+}
+
+.close-lightbox {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: rgba(255, 255, 255, 0.5);
+  color: white;
+  font-size: 20px;
+  padding: 5px;
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  cursor: pointer;
+  
+  /* Center the "X" horizontally and vertically */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.footerUserSubmitt {
+  display: flex;
+  justify-content: end;
+}
+
+.submittUserComp {
+  background: rgb(0, 0, 164);
+  font-size: 17px;
+  padding: 10px 30px;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+
+/* DESIGN PARA SA GENERAL cOMPLAINT */
+.DropContentInputGen {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  width: 99%;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  border-radius: 5px;
+  top: 100%;
+  left: 0;
+}
+
+.DropContentInputGen div {
+  padding: 12px 16px;
+  cursor: pointer;
+}
+
+.DropContentInputGen div:hover{
+  background-color: #f1f1f1;
+}
+
+.dropdownInputGen{
+  display: flex;
+  flex-grow: 1;
+  position: relative;
+}
+
+.InputFiledGen {
+  flex-grow: 1;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid rgba(62, 65, 71, 0.4);
+  cursor: pointer;
+}
+
+.BtnInputGendrop {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  background: none;
+}
+
+.ArrowDownGen {
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+.dropdownInputGen.Buksan .ArrowDownGen {
+  transform: rotate(180deg);
+}
+
+.GenComplainUser, .DescripUserGen, .GenComplainUser2 {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.GenComplainUser label, .DescripUserGen label, .GenComplainUser2 label {
+  width: 150px;  /* Set a fixed width for all labels */
+  font-weight: bold;
+  margin-right: 15px;  /* Space between label and input */
+}
+
+.InputFiledGen, .DescripUserGenn {
+  flex-grow: 1;  /* Make the input fields take up the remaining space */
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid rgba(62, 65, 71, 0.4);
+  padding: 10px;
+}
+
+.DescripUserGenn {
+  resize: none;
+  height: 263px;
+  width: 100%;
+  border-radius: 5px;
+  border: 1px solid rgba(62, 65, 71, 0.4);
+  margin-top: 10px;
+  font-size: medium;
+  font-family: Arial;
+  padding: 5px;
+}
+
+
+/* DESIGN PARA SA PROOF GENERAL */
+.FileUploadWrapp {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centers content horizontally */
+  width: 100%;
+  margin-bottom: 20px;
+} 
+
+.FileUploadCont {
+  position: relative;
+  display: inline-block;
+  width: 50%;  /* Adjust width of upload area */
+  height: 50px;
+  border-radius: 5px;
+  border: dotted rgba(62, 65, 71, 0.4);
+  cursor: pointer;
+  text-align: center;
+  padding-top: 10px;  /* Center the '+' icon vertically */
+}
+
+.InputFileGen{
+  display: none;
+}
+
+.FileUploadGen{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #333;
+  cursor: pointer;
+}
+
+.plusIconGen {
+  font-weight: bold;
+  font-size: medium;
+  color: rgb(88, 88, 88);
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.plusIconGen:hover {
+  color: rgb(0, 0, 164); /* Hover effect */
+}
+
+.ImagePreviewCon{
+  margin-top: 15px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.imagePreviewGenn {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.imagePreview-WrapperGen {
+  position: relative;
+  display: inline-block;
+}
+
+.removeImageProofGen {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: rgba(255, 0, 0, 0.6);
+  color: white;
+  font-size: 16px;
+  padding: 2px 6px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+/* Display file names if not an image */
+.fileNameGen {
+  font-size: 12px;
+  color: #666;
+  text-align: center;
+  margin-top: 5px;
+}
+
+/* Lightbox styles (overlay background) */
+.lightboxGen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  cursor: pointer;
+}
+
+.lightboxGen img {
+  max-width: 80%;
+  max-height: 80%;
+  object-fit: contain;
+}
+
+.LightBoxClose {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: rgba(255, 255, 255, 0.5);
+  color: white;
+  font-size: 20px;
+  padding: 5px;
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  cursor: pointer;
+  
+  /* Center the "X" horizontally and vertically */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.footerUserSubGen {
+  display: flex;
+  justify-content: end;
+}
+
+.submitUserGen {
+  background: rgb(0, 0, 164);
+  font-size: 17px;
+  padding: 10px 30px;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* DESIGN PARA SA MODAL NG TRACKING */
+.viewDetailsBtn{
+  background: none;
+  text-decoration: underline;
+  cursor: pointer;
+  color: blue;
+}
+
+.ModalNato {
+  display: none; /* Initially hidden */
+  position: fixed;
+  align-items: center;
+  justify-content: center;
+  height: 100%; /* Full viewport height */
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%; /* Full viewport width */
+  background-color: rgba(0, 0, 0, 0.4); /* Semi-transparent background */
+  flex-direction: column; /* Stack modal content vertically */
+}
+
+.SubModalNato {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: auto; /* Adjust based on content */
+  width: 100%; /* Full width of the screen */
+}
+
+.contentModalNato {
+  position: relative;
+  width: 100%; /* Full width of the available space */
+  max-width: 800px; /* Maximum width for the modal */
+  margin-top: 10px;
+  flex: 1; /* Allow it to expand based on content */
+  background: #fff;
+  border-radius: 8px;
+  padding: 20px; /* Padding for spacing inside the modal */
+  display: flex;
+  flex-direction: column; /* Stack content vertically */
+  max-height: 80vh; /* Max height to ensure it doesn't take too much of the screen */
+  overflow: hidden; /* Hide overflow content outside the modal */
+}
+
+.EkisTo {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+}
+
+.PagEkis {
+  cursor: pointer;
+  font-size: 22px;
+}
+
+.LoobNaPoIto {
+  padding: 10px;
+  flex-grow: 1; /* Allow it to expand with content */
+  overflow-y: auto; /* Enable vertical scrolling if content exceeds the modal height */
+  height: 100%; /* Take up remaining space inside the modal */
+}
+
+.linyaTo {
+  width: 3px; /* Set a width as needed */
+  flex: 1;
+  background-color: rgb(196, 196, 196); /* For demonstration */
+}
+
+.CheckLogo {
+  display: flex;
+  position: absolute;
+  top: 10px;  /* Adjust this value to position the logo above the line */
+  left: 50%;
+  transform: translateX(-50%);
+  justify-content: center;
+  align-items: center;
+  width: 20px;
+  height: 20px;
+  background: green;
+  border-radius: 50%;
+}
+
+.EclaLogo{
+  display: flex;
+  position: absolute;
+  top: 10px;  /* Adjust this value to position the logo above the line */
+  left: 50%;
+  transform: translateX(-50%);
+  justify-content: center;
+  align-items: center;
+  width: 20px;
+  height: 20px;
+  background: rgb(155, 30, 16);
+  border-radius: 50%;
+}
+
+.LogoAndLine{
+  display: flex;
+  margin-left: 5%; 
+  position: relative;
+}
+
+.DateAndRemark{
+  margin-left: 5%;
+  padding: 10px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  background: rgb(197, 197, 197);
+  width: 100%;
+  border-radius: 5px;
+}
+
+/* Flex layout for labels and inputs */
+.DateAndTime, .RemarkGalingAd {
+  display: flex;
+  align-items: center; /* Vertically center the label and input */
+}
+
+.DateAndTime label, .RemarkGalingAd label {
+  width: 120px; /* Fixed width for labels */
+  margin-right: 10px; /* Space between label and input */
+  font-weight: bold; /* Make the label text bold */
+}
+
+.RemarkTextareaa {
+  resize: none;
+  max-height: 200px;
+  width: 100%;
+  border-radius: 5px;
+  border: 1px solid rgba(62, 65, 71, 0.4);
+  font-size: medium;
+  font-family: Arial;
+  padding: 5px;
+  box-sizing: border-box; /* Include padding in width calculation */
+  /* background: transparent;  */
+}
+
+/* Adjust the input fields */
+.DateAndTime input, .RemarkGalingAd textarea {
+  width: 100%; /* Make input take remaining space */
+  padding: 5px;
+  font-size: medium;
+  border-radius: 5px;
+  border: 1px solid rgba(62, 65, 71, 0.4);
+  /* background: transparent;  */
 }

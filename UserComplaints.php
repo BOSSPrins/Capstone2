@@ -24,7 +24,7 @@ $encoded_id = urlencode($admin_unique_id);
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> Mabuhay Website </title>
     <link rel="icon" type="image/x-icon" href="Pictures/Mabuhay_Logo.ico">
@@ -144,20 +144,239 @@ $encoded_id = urlencode($admin_unique_id);
                         <div class="user-img"></div>
                     </div>
                 </div>
-                <form method="POST" enctype="multipart/form-data"></form>
-                    <div class="MainContainerForTables">
-                        <div class="MainContainerAll">
+                <div class="MainContainerForTables">
+                    <!-- TABLE LIST PAGE -->
+                    <div class="ContainerForComplaints" id="tblConforComplaints">
+                        <header style="margin-bottom: 20px;">
+                            <h2> List Of Complaints </h2>
+                            <button class="NewCompl" onclick="togglePageNewAndTbl('AddNewComplaints')"> File New Complaint </button>
+                        </header>
+                        <div class="TblListComplaint">
+                            <table class="ListTablee">
+                                <thead>
+                                    <tr>
+                                        <th> Complain No. </th>
+                                        <th> Complaint Type </th>
+                                        <th> Date Submitted </th>
+                                        <th> Status </th>
+                                        <th> Action </th>
+                                    </tr>
+                                    <tbody>
+                                        <tr>
+                                            <td> 123456 </td>
+                                            <td> General Complaint </td>
+                                            <td> 02-02-23  02:23</td>
+                                            <td> In-Process </td>
+                                            <td>
+                                                <button class="viewDetailsBtn" id="viewDetailsBtn">View Details</button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </thead>
+                            </table>
+
+
+                            <!-- MODAL VIEW TRACKING  -->
+                            <div class="ModalNato">
+                                <div class="SubModalNato">
+                                    <div class="contentModalNato">
+                                        <header class="EkisTo">
+                                            <span class="PagEkis"> &times; </span>
+                                        </header>
+                                        <div class="LoobNaPoIto">
+                                            <div class="tangimaHirap">
+                                                <h2> Resolved</h2>
+                                                <div style="display: flex;" class="TanginaNito"> 
+                                                    <div class="LogoAndLine">
+                                                        <div class="linyaTo"></div>
+                                                        <div class="CheckLogo">
+                                                            <span style="color: white;">&#x2714;</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="DateAndRemark">
+                                                        <div style="margin-bottom: 10px;" class="DateAndTime">
+                                                            <label> Date & Time:</label>
+                                                            <input type="text">
+                                                        </div>
+                                                        <div class="RemarkGalingAd">
+                                                            <label> Remark:</label>
+                                                            <textarea class="RemarkTextareaa"> </textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="tangimaHirap">
+                                                <h2> Escalated </h2>
+                                                <div style="display: flex;" class="TanginaNito"> 
+                                                    <div class="LogoAndLine">
+                                                        <div class="linyaTo"></div>
+                                                        <div class="EclaLogo">
+                                                            <span style="color: white;"> &#33; </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="DateAndRemark">
+                                                        <div style="margin-bottom: 10px;" class="DateAndTime">
+                                                            <label> Date & Time:</label>
+                                                            <input type="text">
+                                                        </div>
+                                                        <div class="RemarkGalingAd">
+                                                            <label> Remark:</label>
+                                                            <textarea class="RemarkTextareaa"> </textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="tangimaHirap">
+                                                <h2> Resolved</h2>
+                                                <div style="display: flex;" class="TanginaNito"> 
+                                                    <div class="LogoAndLine">
+                                                        <div class="linyaTo"></div>
+                                                        <div class="CheckLogo">
+                                                            <span style="color: white;">&#x2714;</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="DateAndRemark">
+                                                        <div style="margin-bottom: 10px;" class="DateAndTime">
+                                                            <label> Date & Time:</label>
+                                                            <input type="text">
+                                                        </div>
+                                                        <div class="RemarkGalingAd">
+                                                            <label> Remark:</label>
+                                                            <textarea class="RemarkTextareaa"> </textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="tangimaHirap">
+                                                <h2> Escalated </h2>
+                                                <div style="display: flex;" class="TanginaNito"> 
+                                                    <div class="LogoAndLine">
+                                                        <div class="linyaTo"></div>
+                                                        <div class="EclaLogo">
+                                                            <span style="color: white;"> &#33; </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="DateAndRemark">
+                                                        <div style="margin-bottom: 10px;" class="DateAndTime">
+                                                            <label> Date & Time:</label>
+                                                            <input type="text">
+                                                        </div>
+                                                        <div class="RemarkGalingAd">
+                                                            <label> Remark:</label>
+                                                            <textarea class="RemarkTextareaa"> </textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- NEW COMPLAINT PAGE -->
+                    <div class="ContainerForComplaints" id="AddNewComplaints">
+                        <div class="TableComplaintsCon" onclick="togglePageNewAndTbl('tblConforComplaints')"> 
+                            <span style="font-size: 17px; color: blue; cursor: pointer;"> &larr; </span>
+                            <span style="color: blue; cursor: pointer;"> Back to List Of Complaint </span> 
+                        </div>
+                        <br>
+                        <!-- <hr style="border: 1px solid #d0d0d0; width: 100%; margin: 20px auto;"> -->
+                        <header style="display: flex; align-items: center; width: 40%; margin-bottom: 10px;">
+                            <label style="width: 50%; font-weight: bold;"> Select type of Complaint: </label>
+                            <div class="TypeDrop">
+                                <!-- Clicking this div will trigger the dropdown toggle -->
+                                <div class="TypeDisplay" onclick="toggleType()"> ---- </div>
+                                <!-- Hidden dropdown options -->
+                                <div class="TypedropOptions" style="display: none;">
+                                    <div class="TypeDropOption" onclick="setType('General Complaint')"> General Complaint </div>
+                                    <div class="TypeDropOption" onclick="setType('Direct Complaint')"> Direct Complaint </div>
+                                </div>
+                            </div>
+                        </header>
+                        
+                        <!-- Content sections that will change based on selection -->
+                        <div id="generalContent" class="contentBoth" style="display: none;">
+                            <div class="GenComplainUser">
+                                <label> Nature Of Complaint: </label>
+                                <div class="dropdownInputGen">
+                                    <input class="InputFiledGen" type="text" id="selectGenComplaintInput" readonly>
+                                    <button class="BtnInputGendrop">
+                                        <span class="ArrowDownGen"> &#9660; </span>
+                                    </button>
+                                    <div class="DropContentInputGen">
+                                        <div onclick="selectGenComplaint('Noise Complaint')"> Noise Complaint </div>
+                                        <div onclick="selectGenComplaint('Parking Problems')"> Parking Problems </div>
+                                        <div onclick="selectGenComplaint('Pet Issues ')"> Pet Issues </div>
+                                        <div onclick="selectGenComplaint('Property Maintenance')"> Property Maintenance </div>
+                                        <div onclick="selectGenComplaint('Rule Violation')"> Rule Violation </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="DescripUserGen">
+                                <label> Description: </label>
+                                <textarea style="margin-left: 20px;" class="DescripUserGenn"></textarea>
+                            </div>
+                            <!-- Proof Section with Multiple Image Upload -->
+                            <div class="GenComplainUser2">
+                                <label> Proof: </label>
+                                <div class="FileUploadWrapp">
+                                    <div class="FileUploadCont">
+                                        <input class="InputFileGen" type="file" multiple> <!-- Allow multiple file selection -->
+                                        <div class="FileUploadGen">
+                                            <span class="plusIconGen">+ <br> Upload Pictures here... </br> </span>
+                                        </div>
+                                    </div>
+
+                                    <!-- Image previews will appear here -->
+                                    <div class="ImagePreviewCon"></div>
+                                </div>
+
+                                <!-- Display non-image file names here -->
+                                <div id="fileListGenn"></div>
+                            </div>
+
+                            <!-- Submit Button -->
+                            <footer class="footerUserSubGen">
+                                <button class="submitUserGen">Submit</button>
+                            </footer>
+
+                            <!-- Lightbox modal -->
+                            <div class="lightboxGen">
+                                <span class="LightBoxClose"> × </span>
+                                <img class="LarawanContainer" id="lightboxImage" />
+                            </div>
+                        </div>
+
+
+
+
+                        <!-- DIRECT COMPLAINT PAGE  -->
+                        <div id="directContent" class="contentBoth" style="display: none;">
+                            <!-- Direct Content goes here -->
                             <div class="ComplainUser">
-                                <label style="font-size: medium; font-weight: bold;">Complainee Name:</label>
-                                <input class="inputUserComps" type="text" id="Complainee">
-                                <label class="Label2">Address:</label>
-                                <input class="inputUserComps2" type="text" id="ComplaineeAddress">
-                                <input class="inputUserComps2" type="hidden" id="ComplainantUID" value="<?php echo $_SESSION['unique_id']?>">
-                                <input class="inputUserComps2" type="hidden" id="ComplainantName"   value="<?php echo $_SESSION['first_name'] . ' ' . (!empty($_SESSION['middle_name']) ? $_SESSION['middle_name'] . ' ' : '') . $_SESSION['last_name']; ?>">
-                                <input class="inputUserComps2" type="hidden" id="ComplainantAddress"   value="<?php echo 'Blk' . ' ' . $_SESSION['block'] . ' ' . 'Lot' . ' ' . $_SESSION['lot']; ?>">
+                                <div>
+                                    <label>Complainee Name:</label>
+                                    <input class="inputUserComps2" type="text" id="Complainee">
+                                </div>
+                                <div>
+                                    <label>Address:</label>
+                                    <input class="inputUserComps2" type="text" id="ComplaineeAddress">
+                                    <input class="inputUserComps2" type="hidden" id="ComplainantUID" value="<?php echo $_SESSION['unique_id']?>">
+                                    <input class="inputUserComps2" type="hidden" id="ComplainantName"   value="<?php echo $_SESSION['first_name'] . ' ' . (!empty($_SESSION['middle_name']) ? $_SESSION['middle_name'] . ' ' : '') . $_SESSION['last_name']; ?>">
+                                    <input class="inputUserComps2" type="hidden" id="ComplainantAddress"   value="<?php echo 'Blk' . ' ' . $_SESSION['block'] . ' ' . 'Lot' . ' ' . $_SESSION['lot']; ?>">
+                                </div>
                             </div>
                             <div class="ComplainUser2">
-                                <label style="font-size: medium; font-weight: bold;">Nature Of Complaint:</label>
+                                <label>Nature Of Complaint:</label>
                                 <div class="dropdownInput">
                                     <input type="text" id="selectedComplaint" class="dropdownInputField" placeholder="Select Complaint" readonly>
                                     <button class="dropbtnInput">
@@ -173,19 +392,40 @@ $encoded_id = urlencode($admin_unique_id);
                                 </div>
                             </div> 
                             <div class="DescriUser">
-                                <label style="font-size: medium; font-weight: bold;"> Description: </label>
+                                <label> Description: </label>
                                 <textarea class="DescriptUsers" id="Description"></textarea>
                             </div>
                             <div class="ComplainUser3">
-                                <label style="font-size: medium; font-weight: bold;"> Proof:</label>
-                                <input class="inputFile" type="file" id="Proof" accept=".jpg, .jpeg, .png, .pdf">
+                                <label>Proof:</label>
+                                <div class="file-upload-wrapper">
+                                    <div class="file-upload-container">
+                                        <input class="inputFile" type="file" id="Proof" accept=".jpg, .jpeg, .png" multiple>
+                                        <div class="file-upload-btn">
+                                            <span class="plus-icon">+ <br> Upload Pictures here... </br> </span>
+                                        </div>
+                                    </div>
+
+                                    <!-- Image previews will appear here -->
+                                    <div class="image-preview-container" id="imagePreviewContainer"></div>
+                                </div>
+                    
+                                <!-- Display non-image file names here -->
+                                <div id="fileList"></div>
                             </div>
+                    
+                            <!-- Submit Button -->
                             <footer class="footerUserSubmitt">
-                                <button class="submittUserComp" id="Submit"> Submit </button>
-                            </footer>                      
+                                <button class="submittUserComp" id="Submit">Submit</button>
+                            </footer>
                         </div>
+                    
+                        <!-- Lightbox modal -->
+                        <div id="lightbox" class="lightbox">
+                            <span id="closeLightbox" class="close-lightbox">×</span>
+                            <img id="lightboxImage" class="lightbox-image" />
+                        </div>                       
                     </div>
-                </form>
+                </div>
             </div>
         </div>
     </div>
