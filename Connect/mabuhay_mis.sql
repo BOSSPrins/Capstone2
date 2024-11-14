@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 13, 2024 at 04:17 PM
+-- Generation Time: Nov 15, 2024 at 12:00 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -361,7 +361,7 @@ CREATE TABLE `tblaccounts` (
 --
 
 INSERT INTO `tblaccounts` (`user_id`, `unique_id`, `email`, `password`, `img`, `status`, `role`, `access`) VALUES
-(2, 1589571584, 'admin@gmail.com', '21232f297a57a5a743894a0e4a801fc3', '1715091144pusi.jpg', 'Active now', 'admin', 'Approved'),
+(2, 1589571584, 'admin@gmail.com', '21232f297a57a5a743894a0e4a801fc3', '1715091144pusi.jpg', 'Offline now', 'admin', 'Approved'),
 (4, 1357825271, 'senpai@gmail.com', '1e5db03ce967cfef4e21ada16da09b06', '1715105349271713718_1999144396919159_608519389647854942_n.jpg', 'Offline now', 'user', 'Rejected'),
 (19, 112466338, 'Prins@gmail.com', '0a9e0db6e95c394ee792ecbc6e510791', '1717745936pitikvermo.jpg', 'Pending', 'user', 'Approved'),
 (21, 1017731196, 'tnjrdlcrz@gmail.com', '202cb962ac59075b964b07152d234b70', '1717937589pitikvermo.jpg', 'Pending', 'user', 'Approved'),
@@ -460,7 +460,6 @@ CREATE TABLE `user_votes` (
 --
 
 INSERT INTO `user_votes` (`vote_id`, `unique_id`, `candidate`, `votes`, `status`, `won_date`, `fail_date`, `access`) VALUES
-(2, 1581632830, 'Wela A Magsino', 7, '', '2024-10-04 17:40:11', '', 'Declared'),
 (3, 821155870, 'Jhonrenz Berbano', 9, '', '2024-10-04 17:40:11', '', 'Declared'),
 (4, 776313154, 'Patrick B Bayona', 12, '', '2024-10-04 17:40:11', '', 'Declared'),
 (5, 1590469844, 'Paolo M Murillo', 14, '', '2024-10-04 17:40:11', '', 'Declared'),
@@ -471,7 +470,6 @@ INSERT INTO `user_votes` (`vote_id`, `unique_id`, `candidate`, `votes`, `status`
 (11, 1195874011, 'Mia Winters', 14, '', '2024-10-04 17:40:11', '', 'Declared'),
 (31, 931588206, 'Jane  Doe', 9, '', '2024-10-08 21:47:57', '', 'Declared'),
 (32, 776313154, 'Patrick B Bayona', 7, 'Winner', '2024-10-18 13:33:01', '2024-10-08 21:47:57', 'Declared'),
-(33, 1581632830, 'Wela A Magsino', 7, '', '2024-10-08 21:47:57', '', 'Declared'),
 (34, 821155870, 'Jhonrenz  Berbano', 7, '', '2024-10-08 21:47:57', '', 'Declared'),
 (35, 1590469844, 'Paolo M Murillo', 9, '', '2024-10-08 21:47:57', '', 'Declared'),
 (36, 1308040957, 'John  Doe', 9, '', '2024-10-08 21:47:57', '', 'Declared'),
@@ -494,7 +492,16 @@ INSERT INTO `user_votes` (`vote_id`, `unique_id`, `candidate`, `votes`, `status`
 (56, 931588206, 'Jane  Doe', 0, 'Winner', '2024-11-04 21:37:01', '', 'Declared'),
 (57, 821155870, 'Jhonrenz  Berbano', 0, 'Winner', '2024-11-04 21:37:01', '', 'Declared'),
 (58, 1590469844, 'Paolo M Murillo', 0, 'Failure', '', '2024-11-04 21:37:01', 'Declared'),
-(59, 821155870, 'Jhonrenz  Berbano', 0, '', '', '', '');
+(59, 821155870, 'Jhonrenz  Berbano', 1, '', '', '', ''),
+(60, 776313154, 'Patrick B Bayona', 1, '', '', '', ''),
+(61, 1590469844, 'Paolo M Murillo', 1, '', '', '', ''),
+(62, 499733408, 'Ethan  Winters', 1, '', '', '', ''),
+(63, 1434008263, 'Rose  Winters', 1, '', '', '', ''),
+(64, 1195874011, 'Mia  Winters', 1, '', '', '', ''),
+(65, 662462528, 'Hev  Alvin', 1, '', '', '', ''),
+(67, 1308040957, 'John  Doe', 1, '', '', '', ''),
+(68, 931588206, 'Jane  Doe', 1, '', '', '', ''),
+(71, 1581632830, 'Wela A Magsino', 0, '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -519,7 +526,6 @@ CREATE TABLE `voting` (
 --
 
 INSERT INTO `voting` (`vote_id`, `unique_id`, `candidate_name`, `img`, `add_date`, `status`, `won_date`, `fail_date`, `access`) VALUES
-(10, 1581632830, 'Wela A Magsino', 'kasal.jpeg', '', 'Winner', '2024-10-08 21:24:01', '', 'Declared'),
 (11, 821155870, 'Jhonrenz Berbano', 'bossing.jpg', '', 'Winner', '2024-10-08 21:24:01', '', 'Declared'),
 (12, 776313154, 'Patrick B Bayona', 'malupiton2.png', '', 'Winner', '2024-10-08 21:24:01', '', 'Declared'),
 (13, 1590469844, 'Paolo M Murillo', 'malupiton.png', '', 'Winner', '2024-10-08 21:24:01', '', 'Declared'),
@@ -530,7 +536,6 @@ INSERT INTO `voting` (`vote_id`, `unique_id`, `candidate_name`, `img`, `add_date
 (19, 1195874011, 'Mia Winters', 'Screenshot 2023-10-03 215143.png', '', 'Winner', '2024-10-08 21:24:01', '', 'Declared'),
 (39, 931588206, 'Jane  Doe', 'bossing.jpg', '2024-10-02 22:21:24', 'Winner', '2024-10-08 21:47:57', '', 'Declared'),
 (40, 776313154, 'Patrick B Bayona', 'malupiton3.jpg', '2024-10-02 22:22:19', 'Failure', '', '2024-10-08 21:47:57', 'Declared'),
-(41, 1581632830, 'Wela A Magsino', 'IMG_20240628_161330.jpg', '2024-10-02 22:23:27', 'Winner', '2024-10-08 21:47:57', '', 'Declared'),
 (42, 821155870, 'Jhonrenz  Berbano', 'malupiton.png', '2024-10-02 22:23:44', 'Winner', '2024-10-08 21:47:57', '', 'Declared'),
 (43, 1590469844, 'Paolo M Murillo', 'malupiton2.png', '2024-10-02 22:24:15', 'Winner', '2024-10-08 21:47:57', '', 'Declared'),
 (44, 1308040957, 'John  Doe', 'dora-miming.jpg', '2024-10-02 22:25:16', 'Winner', '2024-10-08 21:47:57', '', 'Declared'),
@@ -553,7 +558,16 @@ INSERT INTO `voting` (`vote_id`, `unique_id`, `candidate_name`, `img`, `add_date
 (77, 931588206, 'Jane  Doe', 'Mabuhay_Logo.png', '2024-11-04', 'Winner', '2024-11-04 21:37:01', '', 'Declared'),
 (78, 821155870, 'Jhonrenz  Berbano', 'Mabuhay_Logo.png', '2024-11-04', 'Winner', '2024-11-04 21:37:01', '', 'Declared'),
 (79, 1590469844, 'Paolo M Murillo', 'Mabuhay_Logo.png', '2024-11-04', 'Failure', '', '2024-11-04 21:37:01', 'Declared'),
-(80, 821155870, 'Jhonrenz  Berbano', 'Mabuhay_Logo.png', '2024-11-04 22:01:23', '', '', '', '');
+(80, 821155870, 'Jhonrenz  Berbano', 'Mabuhay_Logo.png', '2024-11-04 22:01:23', '', '', '', ''),
+(81, 776313154, 'Patrick B Bayona', 'Mabuhay_Logo.png', '2024-11-13 21:17:46', '', '', '', ''),
+(82, 1590469844, 'Paolo M Murillo', 'Mabuhay_Logo.png', '2024-11-13 21:17:50', '', '', '', ''),
+(83, 499733408, 'Ethan  Winters', 'Mabuhay_Logo.png', '2024-11-13 21:18:17', '', '', '', ''),
+(84, 1434008263, 'Rose  Winters', 'Mabuhay_Logo.png', '2024-11-13 21:18:19', '', '', '', ''),
+(85, 1195874011, 'Mia  Winters', 'Mabuhay_Logo.png', '2024-11-13 21:18:26', '', '', '', ''),
+(86, 662462528, 'Hev  Alvin', 'Mabuhay_Logo.png', '2024-11-13 21:18:40', '', '', '', ''),
+(88, 1308040957, 'John  Doe', 'Mabuhay_Logo.png', '2024-11-13 21:27:42', '', '', '', ''),
+(89, 931588206, 'Jane  Doe', 'Mabuhay_Logo.png', '2024-11-13 21:27:44', '', '', '', ''),
+(92, 1581632830, 'Wela A Magsino', 'Mabuhay_Logo.png', '2024-11-13 21:57:20', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -642,7 +656,8 @@ INSERT INTO `voting_history` (`vote_id`, `unique_id`, `candidate1`, `candidate2`
 (50, 662462528, 1195874011, 1357825271, 1434008263, 1308040957, 776313154, 1581632830, 821155870, 1590469844, 931588206, 'Voted', '2024-10-07 01:38:27'),
 (51, 1357825271, 1434008263, 1195874011, 821155870, 1590469844, 1581632830, 662462528, 1308040957, 776313154, 931588206, 'Voted', '2024-10-07 01:38:44'),
 (52, 1581632830, 776313154, 0, 0, 0, 0, 0, 0, 0, 0, 'UnderVote', '2024-10-18 13:25:08'),
-(53, 1581632830, 776313154, 0, 0, 0, 0, 0, 0, 0, 0, 'UnderVote', '2024-10-18 13:26:17');
+(53, 1581632830, 776313154, 0, 0, 0, 0, 0, 0, 0, 0, 'UnderVote', '2024-10-18 13:26:17'),
+(54, 1581632830, 931588206, 1308040957, 499733408, 1434008263, 662462528, 1590469844, 1195874011, 776313154, 821155870, 'Voted', '2024-11-13 21:28:57');
 
 --
 -- Indexes for dumped tables
@@ -788,25 +803,25 @@ ALTER TABLE `tblresident`
 -- AUTO_INCREMENT for table `user_votes`
 --
 ALTER TABLE `user_votes`
-  MODIFY `vote_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
+  MODIFY `vote_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
 
 --
 -- AUTO_INCREMENT for table `voting`
 --
 ALTER TABLE `voting`
-  MODIFY `vote_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
+  MODIFY `vote_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=93;
 
 --
 -- AUTO_INCREMENT for table `voting_countdown`
 --
 ALTER TABLE `voting_countdown`
-  MODIFY `countdown_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=106;
+  MODIFY `countdown_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=109;
 
 --
 -- AUTO_INCREMENT for table `voting_history`
 --
 ALTER TABLE `voting_history`
-  MODIFY `vote_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+  MODIFY `vote_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
