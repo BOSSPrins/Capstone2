@@ -856,8 +856,7 @@ $user_UID = $_SESSION['unique_id'];
                 </div>
                 <div class="Overlay" id="Overlay">
                     <div class="overlay-content">
-                        <img src="Pictures/Mabuhay_Logo.png" alt="Logo">
-                        <p>Voting Ended!</p>
+                         <!-- Eto yung lagayan ng mga nanalo -->
                     </div>
                 </div>
             </div>

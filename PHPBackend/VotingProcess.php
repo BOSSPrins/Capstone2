@@ -137,27 +137,61 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['candi_IMG'])) {
 }
 
 // Pang kuha ng mga boto papuntang table
-if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action']) && $_GET['action'] === 'fetchTable') {
-    // SQL query to fetch the candidate and votes information
-    $sql = "SELECT u.unique_id, u.candidate, u.votes AS votes_count, a.img
-            FROM user_votes u
-            INNER JOIN tblaccounts a ON u.unique_id = a.unique_id
-            WHERE u.won_date = '' AND u.fail_date = ''
-            ORDER BY u.votes DESC;
-            ";
+if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+    if (isset($_GET['action'])) {
+        $action = $_GET['action'];
 
-    $result = $conn->query($sql);
+        // Fetch table data
+        if ($action === 'fetchTable') {
+            $sql = "SELECT u.unique_id, u.candidate, u.votes AS votes_count, a.img
+                    FROM user_votes u
+                    INNER JOIN tblaccounts a ON u.unique_id = a.unique_id
+                    WHERE u.won_date = '' AND u.fail_date = ''
+                    ORDER BY u.votes DESC;";
+            
+            $result = $conn->query($sql);
 
-    if ($result) {
-        $candidates = [];
-        while ($row = $result->fetch_assoc()) {
-            $candidates[] = $row;  // Fetches the 'candidate' and 'votes' fields from the table
+            if ($result) {
+                $candidates = [];
+                while ($row = $result->fetch_assoc()) {
+                    $candidates[] = $row;
+                }
+                closeConnectionAndRespond($conn, ['success' => true, 'candidates' => $candidates]);
+            } else {
+                closeConnectionAndRespond($conn, ['success' => false, 'error' => 'Query failed: ' . $conn->error]);
+            }
         }
-        // Respond with the candidates data
-        closeConnectionAndRespond($conn, ['success' => true, 'candidates' => $candidates]);
-    } else {
-        // Handle SQL query error
-        closeConnectionAndRespond($conn, ['success' => false, 'error' => 'Query failed: ' . $conn->error]);
+
+        // Delete a candidate
+        if ($action === 'deleteCandidate' && isset($_GET['candidateId'])) {
+            $candidateId = $_GET['candidateId'];
+
+            // Begin transaction to delete from both tables
+            $conn->begin_transaction();
+            
+            try {
+                // SQL query to delete the candidate from the user_votes table
+                $sqlUserVotes = "DELETE FROM user_votes WHERE unique_id = ?";
+                $stmtUserVotes = $conn->prepare($sqlUserVotes);
+                $stmtUserVotes->bind_param("i", $candidateId);
+                $stmtUserVotes->execute();
+
+                // SQL query to delete the candidate from the voting table
+                $sqlVoting = "DELETE FROM voting WHERE unique_id = ?";
+                $stmtVoting = $conn->prepare($sqlVoting);
+                $stmtVoting->bind_param("i", $candidateId);
+                $stmtVoting->execute();
+
+                // Commit the transaction
+                $conn->commit();
+
+                closeConnectionAndRespond($conn, ['success' => true]);
+            } catch (Exception $e) {
+                // Rollback the transaction if something goes wrong
+                $conn->rollback();
+                closeConnectionAndRespond($conn, ['success' => false, 'error' => 'Delete failed: ' . $e->getMessage()]);
+            }
+        }
     }
 }
 

@@ -1059,30 +1059,108 @@ html{
 }
 
 /* Overlay kapag tapos na botohan */
-.Overlay{
+/* Overlay container to cover the entire screen */
+.Overlay {
     position: fixed;
     display: none;
     align-items: center;
     justify-content: center;
-    z-index: 2;
-    left: 30;
-    top: 50px;
-    width: 90%;
+    z-index: 0;
+    top: 0;
+    left: 0;
+    width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.8);
+    /* background-color: rgba(0, 0, 0, 0.5); Darker overlay for focus */
+    transition: opacity 0.3s ease-in-out;
 }
 
+/* Content inside the overlay (rectangular and centered) */
 .overlay-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start; /* Adjusted for a more compact rectangular shape */
+    background: #fff;
+    padding: 30px 40px; /* Padding for balance */
+    border-radius: 15px; /* Rounded corners for a polished look */
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+    max-width: 900px; /* Increased width for rectangular shape */
+    width: 85%; /* Ensures it doesn't take up full width */
+    max-height: 75%; /* Keeps the height proportionate */
     text-align: center;
-    color: white;
+    opacity: 0.95;
+    transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
-.overlay-content img {
-    max-width: 50%; /* Adjust size as needed */
+/* Header style for the winners section */
+.winners-header {
     margin-bottom: 20px;
+    font-size: 1.8em;
+    font-weight: 700;
+    color: #0033ff;
+    text-transform: uppercase;
 }
 
-.overlay-content p {
-    font-size: 25px;
+/* Change winner list to use grid layout with 3 items per row */
+.winner-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Three columns */
+    gap: 20px; /* Space between items */
+    justify-items: center; /* Center items horizontally */
+    margin-top: 20px; /* Adjust margin between header and list */
+}
+
+/* Individual winner item (horizontal rectangle shape) */
+.winner-item {
+    display: flex;
+    flex-direction: row; /* Align image and text horizontally */
+    align-items: center;
+    background: #f8f8f8;
+    padding: 20px 25px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    width: 100%; /* Full width within grid cell */
+    max-width: 450px; /* Wider container */
+    min-height: 120px; /* Taller container for a more rectangular look */
+    text-align: left; /* Align text to the left */
+}
+
+.winner-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Styling for the winner's image */
+.winner-item img {
+    width: 100px; /* Increased image size */
+    height: 100px;
+    border-radius: 50%;
+    margin-right: 20px; /* Space between image and name */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Text styling for the winner's name */
+.winner-item p {
+    color: #333;
+    font-size: 1.1em;
+    font-weight: 600;
+    margin: 0;
+}
+
+/* Button for closing or interacting with the overlay */
+.overlay-content button {
+    padding: 12px 25px;
+    font-size: 1.2em;
+    background-color: #007bff;
     color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 20px; /* Reduced margin */
+    transition: background-color 0.3s ease;
+}
+
+.overlay-content button:hover {
+    background-color: #0056b3;
 }

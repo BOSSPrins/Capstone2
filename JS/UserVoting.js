@@ -433,14 +433,13 @@ function checkVotingHistory() {
                     overlay.style.height = '100%';
                     overlay.style.top = '0';
                     overlay.style.left = '0';
-                    overlay.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
+                    overlay.style.backgroundColor = '#ffffff';
                     overlay.innerHTML = `
-                                        <div style="text-align: center; margin-top: 40%;">
-                                            
-                                            <p style="color: white; font-size: 25px;">You have already voted</p>
+                                        <div style="text-align: center; margin-top: 8%;">
+                                        <img src="Pictures/vote.png" alt="Logo" style="max-width: 20%; margin-bottom: 30px; margin-right: 6%;">
+                                            <p style="color: black; font-size: 25px; margin-right: 1.5%;">Vote Submitted</p>
                                         </div>
                                     `;
-                    //<img src="Pictures/Mabuhay_Logo.png" alt="Logo" style="max-width: 35%; margin-bottom: 30px;">
 
                     voteContainer.appendChild(overlay);
                 } else {
@@ -466,22 +465,51 @@ function fetchOverlayMessage() {
         data: { action: 'fetch_overlay_message' },
         dataType: 'json',
         success: function(response) {
-            console.log("fetchOverlayMessage response:", response); // Log overlay message response
+            console.log("fetchOverlayMessage response:", response);
+            
+
             if (response.success && response.status === 'VotingEnded') {
-                document.getElementById('Overlay').style.display = 'flex';
                 document.getElementById('FirstVotingContainer').style.display = 'none';
+                document.getElementById('Overlay').style.display = 'flex';
+
+                // Get the overlay content div to append winners
+                var overlayContent = document.querySelector('#Overlay .overlay-content');
+                
+                // Add winners section
+                let winnersHtml = `
+                    <div class="winners-header">
+                        <p>Congratulations to the Winners:</p>
+                    </div>
+                    <div class="winner-list">`;
+
+                response.winners.forEach(function(winner) {
+                    winnersHtml += `
+                        <div class="winner-item">
+                            <img src="Pictures/${winner.img}" alt="${winner.candidate_name}">
+                            <p>${winner.candidate_name}</p>
+                        </div>
+                    `;
+                });
+
+                winnersHtml += `</div>`;
+
+                // Append winners' HTML to the overlay content
+                overlayContent.innerHTML = winnersHtml;
+
             } else {
-                // If no overlay needed, proceed to check voting history
                 checkVotingHistory();
             }
         },
         error: function(xhr, status, error) {
             console.error('AJAX error:', status, error);
-            // Proceed to check voting history in case of an error
             checkVotingHistory();
         }
     });
 }
+
+
+
+
 
 function formatDate(now) {
     const year = now.getFullYear();
