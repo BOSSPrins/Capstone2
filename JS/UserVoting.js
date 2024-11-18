@@ -466,19 +466,18 @@ function fetchOverlayMessage() {
         dataType: 'json',
         success: function(response) {
             console.log("fetchOverlayMessage response:", response);
-            
 
             if (response.success && response.status === 'VotingEnded') {
                 document.getElementById('FirstVotingContainer').style.display = 'none';
-                document.getElementById('Overlay').style.display = 'flex';
+                document.getElementById('Overlay').style.display = 'flex';  // Show overlay with flex
 
                 // Get the overlay content div to append winners
-                var overlayContent = document.querySelector('#Overlay .overlay-content');
+                var overlayContent = document.querySelector('#Overlay .TanginangOverlay');
                 
                 // Add winners section
                 let winnersHtml = `
-                    <div class="winners-header">
-                        <p>Congratulations to the Winners:</p>
+                    <div class="CongratsHeader">
+                        <p> CONGRATULATIONS TO THE WINNERS: </p>
                     </div>
                     <div class="winner-list">`;
 
@@ -491,7 +490,7 @@ function fetchOverlayMessage() {
                     `;
                 });
 
-                winnersHtml += `</div>`;
+                winnersHtml += `</div>`; // Close the winner list div
 
                 // Append winners' HTML to the overlay content
                 overlayContent.innerHTML = winnersHtml;
@@ -506,9 +505,6 @@ function fetchOverlayMessage() {
         }
     });
 }
-
-
-
 
 
 function formatDate(now) {

@@ -1,66 +1,80 @@
 document.addEventListener("DOMContentLoaded", function () {
-  const sidebarLinks = document.querySelectorAll('.sideside');
-  const submenuLinks = document.querySelectorAll('#complaintsSubMenu a');
-  const complaintsDropdown = document.getElementById('complaintsDropdown');
-  const complaintsSubMenu = document.getElementById('complaintsSubMenu');
-  const buttonEme2 = document.querySelector('.buttonEme2');
-  const eme2 = buttonEme2.querySelector('.eme2');
+    const sidebarLinks = document.querySelectorAll('.sideside');
+    const submenuLinks = document.querySelectorAll('#complaintsSubMenu a');
+    const complaintsDropdown = document.getElementById('complaintsDropdown');
+    const complaintsSubMenu = document.getElementById('complaintsSubMenu');
+    const buttonEme2 = document.querySelector('.buttonEme2');
+    const eme2 = buttonEme2.querySelector('.eme2');
 
-  // Get the current page URL
-  const activePage = window.location.pathname.split("/").pop();
+    // Variable to track submenu visibility
+    let submenuVisible = false;
 
-  // Highlight the active sidebar link based on the current page
-  sidebarLinks.forEach(link => {
-      const linkHref = link.getAttribute('href');
-      if (linkHref === activePage) {
-          link.classList.add('baractive');
-      } else {
-          link.classList.remove('baractive');
-      }
-  });
+    // Get the current page URL
+    const activePage = window.location.pathname.split("/").pop();
 
-  // Highlight submenu items but remove highlight from parent item (complaintsDropdown)
-  submenuLinks.forEach(link => {
-      const linkHref = link.getAttribute('href');
-      if (linkHref === activePage) {
-          link.classList.add('baractive'); // Highlight the active submenu item
+    // Highlight the active sidebar link based on the current page
+    sidebarLinks.forEach(link => {
+        const linkHref = link.getAttribute('href');
+        if (linkHref === activePage) {
+            link.classList.add('baractive');
+        } else {
+            link.classList.remove('baractive');
+        }
+    });
 
-          // Keep submenu open but remove highlight from the parent
-          complaintsDropdown.classList.remove('baractive');
-          complaintsSubMenu.classList.add('submenu-visible'); // Ensure submenu remains open
-          eme2.classList.add('eme2-rotate'); // Rotate the arrow to indicate submenu is open
-      } else {
-          link.classList.remove('baractive');
-      }
-  });
+    // Highlight submenu items and open submenu if needed
+    submenuLinks.forEach(link => {
+        const linkHref = link.getAttribute('href');
+        if (linkHref === activePage) {
+            link.classList.add('baractive');
+            complaintsDropdown.classList.remove('baractive');
+            complaintsSubMenu.classList.add('submenu-visible');
+            eme2.classList.add('eme2-rotate');
+            submenuVisible = true;  // Set the submenu as visible
+        } else {
+            link.classList.remove('baractive');
+        }
+    });
 
-  // Toggle submenu visibility only when clicking the main dropdown button
-  buttonEme2.addEventListener('click', function (event) {
-      event.preventDefault();
-      complaintsSubMenu.classList.toggle('submenu-visible');
-      eme2.classList.toggle('eme2-rotate');
-  });
+    // Toggle submenu visibility when clicking the main dropdown button (buttonEme2)
+    buttonEme2.addEventListener('click', function (event) {
+        event.preventDefault();
 
-  // Ensure submenu doesn't close when a submenu link is clicked
-  submenuLinks.forEach(link => {
-      link.addEventListener('click', function (event) {
-          event.stopPropagation(); // Prevent click from bubbling up to toggle
+        // Toggle submenu visibility
+        submenuVisible = !submenuVisible;
 
-          // Set active states based on the clicked submenu item
-          submenuLinks.forEach(item => item.classList.remove('baractive'));
-          link.classList.add('baractive');
-          complaintsSubMenu.classList.add('submenu-visible'); // Ensure submenu remains open
+        if (submenuVisible) {
+            complaintsSubMenu.classList.add('submenu-visible');
+            eme2.classList.add('eme2-rotate');
+        } else {
+            complaintsSubMenu.classList.remove('submenu-visible');
+            eme2.classList.remove('eme2-rotate');
+        }
+    });
 
-          // Remove highlight from the parent item (complaintsDropdown)
-          complaintsDropdown.classList.remove('baractive');
-      });
-  });
+    // Ensure submenu doesn't close when a submenu link is clicked
+    submenuLinks.forEach(link => {
+        link.addEventListener('click', function (event) {
+            event.stopPropagation(); // Prevent click from bubbling up to toggle
 
-  // Close submenu when clicking outside the dropdown button
-  document.addEventListener('click', function (event) {
-      if (!complaintsDropdown.contains(event.target) && !buttonEme2.contains(event.target)) {
-          complaintsSubMenu.classList.remove('submenu-visible');
-          eme2.classList.remove('eme2-rotate');
-      }
-  });
+            // Highlight the clicked link
+            submenuLinks.forEach(item => item.classList.remove('baractive'));
+            link.classList.add('baractive');
+
+            // Ensure submenu remains open
+            complaintsSubMenu.classList.add('submenu-visible');
+            complaintsDropdown.classList.remove('baractive'); // Remove highlight from parent dropdown
+        });
+    });
+
+    // Close submenu when clicking outside the dropdown button or submenu
+    document.addEventListener('click', function (event) {
+        if (!complaintsDropdown.contains(event.target) && !buttonEme2.contains(event.target)) {
+            if (submenuVisible) {
+                complaintsSubMenu.classList.remove('submenu-visible');
+                eme2.classList.remove('eme2-rotate');
+                submenuVisible = false;
+            }
+        }
+    });
 });

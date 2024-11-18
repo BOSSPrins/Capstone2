@@ -22,6 +22,7 @@ if (isset($_SESSION['unique_id'])) {
     <link rel="icon" type="image/x-icon" href="Pictures/Mabuhay_Logo.ico">
     <link rel="stylesheet" href="CSS/Voting.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="JS/sidebar.js"></script>
 </head>
 <body>
     <div class="mainDashboardContainer">
@@ -32,7 +33,7 @@ if (isset($_SESSION['unique_id'])) {
                     <h2 class="MabuhayName"> Mabuhay Homes 2000 <br> Phase 5 </h2>
                 </div>
                 <div class="DagdagNanaman">
-                    <a href="DashBoard.php" class="sideside baractive">
+                    <a href="DashBoard.php" class="sideside">
                         <img class="img-sideboard" src="Pictures/Dashboard2.png">
                         <span> Dasboard </span>
                     </a>
@@ -200,24 +201,16 @@ if (isset($_SESSION['unique_id'])) {
                                                 <div class="emeSet"></div>
                                             </button>
                                             <div id="SetTimerDropDownn" class="timerContent">
-                                            <div class="timer">
-                                                <div class="timer-controls">
-                                                    <!-- <h2 for="input-hours">Hours:</h2>
-                                                    <input type="number" id="input-hours" min="0" step="1">
-                
-                                                    <h2 for="input-minutes">Minutes:</h2>
-                                                    <input type="number" id="input-minutes" min="0" step="1">
-                
-                                                    <h2 for="input-seconds">Seconds:</h2>
-                                                    <input type="number" id="input-seconds" min="0" step="1"> -->
+                                                <div class="timer">
+                                                    <div class="timer-controls">
+                                                        <h2>Select date:</h2>
+                                                        <input class="dateTime" type="datetime-local" id="input-datetime" placeholder="Select a date and time">
 
-                                                    <h2>Select date:</h2>
-                                                    <input class="dateTime" type="datetime-local" id="input-datetime" placeholder="Select a date and time">
-
-                                                    <div class="btnsForTimer">
-                                                        <button id="start">Start</button>
-                                                        <button id="stop">Stop</button>
-                                                        <button id="reset">Reset</button>
+                                                        <div class="btnsForTimer">
+                                                            <button id="start">Start</button>
+                                                            <button id="stop">Stop</button>
+                                                            <button id="reset">Reset</button>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>

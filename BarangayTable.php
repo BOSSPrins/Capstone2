@@ -1,108 +1,15 @@
-<?php
-include_once "Connect/Connection.php";
-session_start();
-
-if (isset($_SESSION['unique_id'])) {
-    if ($_SESSION['role'] == 'user') {
-        header("Location: LoginPage.php");
-        exit();
-    }
-    } else {
-    header("Location: LoginPage.php");
-    exit();
-    }
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> Mabuhay Website </title>
-    <link rel="icon" type="image/x-icon" href="Pictures/Mabuhay_Logo.ico">
-    <link rel="stylesheet" href="CSS/In-Process.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="JS/sidebar.js"></script>
+    <link rel="stylesheet" href="CSS/BarangayTable.css">
+</head>
 </head>
 <body>
 <div class="mainDashboardContainer">
         <div class="secMainDash">
-            <div class="sidebarContainer sideActive" id="sidebar">
-                <div class="headerTop">
-                    <img class="img-logo" src="Pictures/Mabuhay_Logo.png">
-                    <h2 class="MabuhayName"> Mabuhay Homes 2000 <br> Phase 5 </h2>
-                </div>
-                <div class="DagdagNanaman">
-                    <a href="DashBoard.php" class="sideside">
-                        <img class="img-sideboard" src="Pictures/Dashboard2.png">
-                        <span> Dasboard </span>
-                    </a>
-                    <a href="HoaOfficials.php" class="sideside">
-                        <img class="img-sideboard" src="Pictures/Officials.png">
-                        <span> Hoa Officials </span>
-                    </a>
-                    <a href="Residents.php" class="sideside">
-                        <img class="img-sideboard" src="Pictures/Residents2.png">
-                        <span> Residents </span>
-                    </a>
-                    <a href="Documents.php" class="sideside">
-                        <img class="img-sideboard" src="Pictures/Documents2.png">
-                        <span> Documents </span>
-                    </a>
-                    <div class="complaintsContainer">
-                        <a href="Complaints.php" class="sideside" id="complaintsDropdown">
-                            <img class="img-sideboard" src="Pictures/ComplaintsCap.png">
-                            <span> Manage Complaints</span>
-                            <button class="buttonEme2">
-                                <div class="eme2"></div>
-                            </button>
-                        </a>  
-                        <ul class="subMenuComp" id="complaintsSubMenu">
-                            <li> 
-                                <a href="In-Process.php">
-                                    <img class="img-subMenu" src="Pictures/In-Process.png">
-                                    <label class="sub-spa"> In-Process </label>
-                                    <span class="badge badge-yellow" id="inProcessBadge">0</span>
-                                </a> 
-                                <a href="Resolved.php">
-                                    <img class="img-subMenu" src="Pictures/resolved.png">
-                                    <label class="sub-spa"> Resolved </label>                                   
-                                </a> 
-                                <a href="Escalated.php">
-                                    <img class="img-subMenu" src="Pictures/warning.png">
-                                    <label class="sub-spa"> Escalated </label>
-                                    <span class="badge badge-red" id="escalatedBadge">0</span>
-                                </a> 
-                                <a href="MainChat.php">
-                                    <img class="img-subMenu" src="Pictures/Chat.png">
-                                    <label class="sub-spa"> Chat </label>
-                                </a> 
-                            </li>
-                        </ul>
-                    </div>
-                    <a href="Announcement.php" class="sideside">
-                        <img class="img-sideboard" src="Pictures/Announcement.png">
-                        <span> Announcement </span>
-                    </a>
-                    <a href="Accounts.php" class="sideside">
-                        <img class="img-sideboard" src="Pictures/Accounts2.png">
-                        <span> Accounts </span>
-                    </a>
-                    <!-- <a href="MonthlyDue.php" class="sideside">
-                        <img class="img-sideboard" src="Pictures/MonthlyDue.png">
-                        <span> Monthly Due </span>
-                    </a> -->
-                    <a href="Voting.php" class="sideside">
-                        <img class="img-sideboard" src="Pictures/voting.png">
-                        <span> Voting </span>
-                    </a>
-                    <a href="Logout.php" class="sideside">
-                        <img class="img-sideboard" src="Pictures/logout.png">
-                        <span> Logout </span>
-                    </a>
-                </div>
-            </div>
-
             <div id="profileModal" class="modal">
                 <div class="subModal">
                     <div class="modal-content">
@@ -159,7 +66,7 @@ if (isset($_SESSION['unique_id'])) {
                             <img id="menuBtn" class="menu" src="Pictures/menu-hamburger.png">
                         </div>
                         <div class="NamesModuleCon">
-                            <h2 class="namePerModule"> In-Process Complaints </h2>
+                            <h2 class="namePerModule"> Barangay </h2>
                         </div>
                     </div>
                     <div class="ProfileViewww">
@@ -169,10 +76,16 @@ if (isset($_SESSION['unique_id'])) {
                         <div class="user-img"></div>
                     </div>
                 </div>
+                <div class="BarangayNavv">
+                    <a href="BarangayTable.html" class="NavTop NavActive">List Of Escalated Complaints</a>
+                    <a href="BarangayHisto.html" class="NavTop">History</a>
+                </div>
+                
                 <div class="MainContainerForTables">
-                    <div class="TablessContainer" id="tableCon">
-                        <header class="TableHeaderr">
-                            <div class="itemsController">
+                    <!-- Section for the List of Escalated Complaints -->
+                    <div class="EachContainerBarang" id="TableListEsca">
+                        <header class="BarangHeader">
+                            <div class="BarangItemCon">
                                 <h3>Show</h3>
                                 <div class="dropdown" id="itemPerpage">
                                     <div class="selected" style="z-index: 1;" id="dropdownSelected"> All </div>
@@ -191,19 +104,26 @@ if (isset($_SESSION['unique_id'])) {
                                 <input class="inputSearchhh" type="search" name="search_query" id="search" placeholder="search">
                             </div>
                         </header>
-                        <div class="TableComplaintsPen">
-                            <table class="TableComPend">
+                        <hr style="width: 100%; height: 0.5px; background: rgb(196, 196, 196);">
+                        <div class="TableBarangCont">
+                            <table class="TableBarangDet">
                                 <thead>
-                                    <!-- <th style="width:10%"> Complain No.</th> -->
-                                    <th style="width:12%"> Complaint No. </th>
-                                    <th style="width:25%" data-sort onclick="sortTable(0, event)"> Complaint </th>
-                                    <th style="width:15%"> Date Submitted </th>
-                                    <th style="width:12%" > Status </th>                                   
-                                    <th style="width:15%" > Action </th>
+                                    <th> Complaint No. </th>
+                                    <th> Name </th>
+                                    <th> Date Submitted </th>
+                                    <th> Status </th>
+                                    <th> Action </th>
                                 </thead>
                                 <tbody>
                                     <tr>
-                                    
+                                        <td> 123456 </td>
+                                        <td> Ruella Cervantes </td>
+                                        <td> 02-02-23 02:23 </td>
+                                        <td> Escalated </td>
+                                        <td> 
+                                            <!-- View button to show the complaint details -->
+                                            <button class="BiewEscaBarang" onclick="toggleBarangayCon('ViewExcaltedDet')"> View </button>
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -213,51 +133,41 @@ if (isset($_SESSION['unique_id'])) {
                                 <li class="prev">
                                     <a href="#" class="prevv" id="prev"> &#139; Previous </a>
                                 </li>
-                                    <!-- page number here -->
                                 <li class="next">
                                     <a href="#" class="nextt" id="next"> Next &#155; </a>
                                 </li>
                             </ul>
                         </footer>
                     </div>
-                    
-                    <div class="TablessContainer DetailsTo" id="PangalawangCon" style="display: none;">
+                
+                    <!-- Section for the Complaint Details (when View is clicked) -->
+                    <div class="EachContainerBarang" id="ViewExcaltedDet">
                         <div style="display: flex; align-items: center;" class="NameAndBtn">
-                            <button class="BtnNgNameBack" onclick="togglePage('tableCon')"> &#60; </button>
+                            <!-- Back button to return to the TableListEsca section -->
+                            <button class="ButtonBack" onclick="toggleBarangayCon('TableListEsca')"> &#60; </button>
                             <h2 style="margin-left: 10px;"> Complaint Details </h2>
                         </div>
                         <div class="DetaLaman">
-                            <h2> Complainee </h2>
                             <div style="display: flex; margin-bottom: 15px; align-items:center;">
-                                <label class="LabelCompDeta"> Name: </label>
-                                <input class="inputCompDeta" type="text" id="ComplaineeName">
+                                <label class="LabelCompDeta"> Complaint Name: </label>
+                                <input class="inputCompDeta" type="text">
                             </div>
                             <div style="display: flex; margin-bottom: 15px; align-items:center;">
                                 <label class="LabelCompDeta"> Address: </label>
-                                <input class="inputCompDeta" type="text" id="ComplaineeAddress">
-                            </div>
-
-                            <h2> Complainant </h2>
-                            <div style="display: flex; margin-bottom: 15px; align-items:center;">
-                                <label class="LabelCompDeta"> Name: </label>
-                                <input class="inputCompDeta" type="text" id="ComplainantName">
-                            </div>
-                            <div style="display: flex; margin-bottom: 15px; align-items:center;">
-                                <label class="LabelCompDeta"> Address: </label>
-                                <input class="inputCompDeta" type="text" id="ComplainantAddress">
+                                <input class="inputCompDeta" type="text">
                             </div>
                             <div style="display: flex; margin-bottom: 15px; align-items:center;">
                                 <label class="LabelCompDeta"> Date Submitted: </label>
-                                <input class="inputCompDeta" type="text" id="DateSubmit">
+                                <input class="inputCompDeta" type="text">
                             </div>
                             <div style="display: flex; margin-bottom: 15px; align-items:center;">
                                 <label class="LabelCompDeta"> Nature Of Complaint: </label>
-                                <input class="inputCompDeta" type="text" id="ComplaintType">
+                                <input class="inputCompDeta" type="text">
                             </div>
                             <h2> Details </h2>
                             <div style="display: flex; margin-bottom: 15px;">
                                 <label class="LabelCompDeta"> Description: </label>
-                                <textarea class="textAreaCompDeta" id="Description"> </textarea>
+                                <textarea class="textAreaBarangDeta"> </textarea>
                             </div>
                             <div style="display: flex; margin-bottom: 15px; align-items:center;">
                                 <label class="LabelCompDeta"> File: </label>
@@ -269,73 +179,65 @@ if (isset($_SESSION['unique_id'])) {
                                     <img class="modalImage" src="" alt="Image Preview" />
                                     <button class="nextImage" onclick="changeImage(1)">&#10095;</button>
                                 </div>
-            
-                                <img id="ProofFileName" alt="Proof Image" style="max-width: 300px; max-height: 200px;"></img>
-
                             </div>
                             <div style="display: flex; margin-bottom: 15px; align-items:center;">
                                 <label class="LabelCompDeta"> Current Status: </label>
-                                <input class="inputCompDeta" type="text" id="Status">
+                                <input class="inputCompDeta" type="text">
                             </div>
 
                             <!-- Galing Pending Lagayan -->
-                            <!-- <h2>First Remark:</h2>
                             <div style="background: rgb(138, 187, 231); padding: 10px;">
                                 <div style="display: flex; margin-bottom: 15px;">
                                     <label class="LabelCompDeta"> Remark: </label>
-                                    <textarea class="textAreaCompDeta" id="FirstRemark"> </textarea>
+                                    <textarea class="textAreaBarangDeta"> </textarea>
                                 </div>
                                 <div style="display: flex; margin-bottom: 15px; align-items:center;">
                                     <label class="LabelCompDeta"> Remark by: </label>
-                                    <input class="inputCompDeta" type="text" id="FirstRemarkBy">
+                                    <input class="inputCompDeta" type="text">
                                 </div>
                                 <div style="display: flex; margin-bottom: 15px; align-items:center;">
                                     <label class="LabelCompDeta"> Status: </label>
-                                    <input class="inputCompDeta" type="text" id="FirstStatus">
+                                    <input class="inputCompDeta" type="text">
                                 </div>
                                 <div style="display: flex; align-items:center;">
                                     <label class="LabelCompDeta"> Remark Date: </label>
-                                    <input class="inputCompDeta" type="text" id="FirstRemarkDate">
+                                    <input class="inputCompDeta" type="text">
                                 </div>
-                            </div> -->
+                            </div>
                             <div style="display: flex; margin-bottom: 15px; margin-top: 10px; align-items:center;">
                                 <label class="LabelCompDeta"> Action: </label>
                                 <button class="TabkeActionBtn" onclick="toggleStatusFields()"> Take Action </button>
+                                <button class="DownloadBtn"> Download </button>
                             </div>
 
-
-                             <!-- Laman Ng Take Action -->
-                            <form method="POST" enctype="multipart/form-data">
-                                <div class="Take-Action" id="status-container" style="display:none;">
-                                    <div style="display: flex; margin-bottom: 15px; width: 50%; align-items:center;">
-                                        <label class="LabelCompDeta">Status: </label>
-                                        <div class="custom-dropdown">
-                                            <div class="dropdown-display" onclick="toggleDropdown()" id="RemarkStatus"> --- </div>
-                                            <div class="dropdown-options" style="display: none;">
-                                                <div class="dropdown-option" onclick="setStatus('Resolved')"> Resolved </div>
-                                                <div class="dropdown-option" onclick="setStatus('Escalated')"> Escalated </div>
-                                            </div>
+                            <!-- Laman Ng Take Action -->
+                            <div class="Take-Action" id="status-container" style="display:none;">
+                                <div style="display: flex; margin-bottom: 15px; width: 50%; align-items:center;">
+                                    <label class="LabelCompDeta">Status: </label>
+                                    <div class="custom-dropdown">
+                                        <div class="dropdown-display" onclick="toggleDropdown()"> --- </div>
+                                        <div class="dropdown-options" style="display: none;">
+                                            <div class="dropdown-option" onclick="setStatus('In-Progress')"> In-Process </div>
+                                            <div class="dropdown-option" onclick="setStatus('Resolved')"> Resolved </div>
+                                            <div class="dropdown-option" onclick="setStatus('Escalated')"> Escalated </div>
                                         </div>
                                     </div>
-                                    <div style="display: flex;">
-                                        <label class="LabelCompDeta">Remark: </label>
-                                        <textarea class="textAreaCompDeta" id="NewRemark"></textarea>
-                                    </div>
-
-                                    <input type="hidden" id="RemarkRole" value="<?php echo $_SESSION['role']?>">
-                                    <input type="hidden" id="ComplaintID">
-
-                                    <div style="display: flex; justify-content: end; width: 100%; margin-top: 10px;">
-                                        <button type="button" style="padding: 10px 30px;" onclick="submitComplaintUpdate()"> Submit </button>
-                                    </div>
                                 </div>
-                            </form>
+                                <div style="display: flex;">
+                                    <label class="LabelCompDeta">Remark: </label>
+                                    <textarea class="textAreaBarangDeta"></textarea>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; width: 100%; margin-top: 10px;">
+                                    <button style="padding: 10px 30px;"> Submit </button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <script src="JS/In-Process.js"></script>
+
+    <script src="JS/BarangayTable.js"></script>
 </body>
 </html>

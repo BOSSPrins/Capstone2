@@ -11,7 +11,7 @@
         <div class="secMainDash">
             <div class="sidebarContainer sideActive" id="sidebar">
                 <div class="headerTop">
-                    <img class="img-logo" src="Pictures/Dasma_City_Logo.png">
+                    <img class="img-logo" src="Pictures/Mabuhay_Logo.png">
                     <h2 class="MabuhayName"> Mabuhay Homes 2000 Phase 5 </h2>
                 </div>
                 <a href="UserDashBoard.php" class="sideside baractive">
@@ -23,7 +23,7 @@
                     <span> Documents </span>
                 </a>
                 <div class="complaintsContainer">
-                    <a href="UserComplaints" class="sideside" id="complaintsDropdown">
+                    <a href="UserComplaints.php" class="sideside" id="complaintsDropdown">
                         <img class="img-sideboard" src="Pictures/ComplaintsCap.png">
                         <span> Complaints </span>
                         <button class="buttonEme2">

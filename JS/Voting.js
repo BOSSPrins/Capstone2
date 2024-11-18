@@ -119,6 +119,24 @@ function toggleSetTimer() {
     // Rotate the emeSet element
     const emeSet = document.querySelector('.emeSet');
     emeSet.classList.toggle('rotateSet');
+    
+    // Adjust the dropdown position when it's shown
+    if (dropdownContent.classList.contains("show")) {
+        adjustDropdownPosition();
+    }
+}
+
+// Function to adjust the position of the dropdown relative to InputTimee
+function adjustDropdownPosition() {
+    const inputTimeElement = document.querySelector('.InputTimee');
+    const dropDownContent = document.getElementById("SetTimerDropDownn");
+
+    // Get the position of InputTimee relative to the viewport
+    const rect = inputTimeElement.getBoundingClientRect();
+    
+    // Adjust the position of the dropdown
+    dropDownContent.style.top = rect.bottom + window.scrollY + 10 + 'px';  // 10px for padding
+    dropDownContent.style.left = rect.left + window.scrollX + 'px';  // Align left with InputTimee
 }
 
 // Event listener to handle clicks
@@ -133,6 +151,11 @@ document.addEventListener('click', function(event) {
         emeSet.classList.remove('rotateSet');
     }
 });
+
+// Call the function to adjust the position initially, in case it's already open
+window.addEventListener('load', adjustDropdownPosition);
+window.addEventListener('resize', adjustDropdownPosition);  // Recalculate position on window resize
+
 
 // Function ng pagbukas ng generate button dati ng mga winners
 // document.addEventListener("DOMContentLoaded", function () {

@@ -23,7 +23,7 @@
                     <span> Documents </span>
                 </a>
                 <div class="complaintsContainer">
-                    <a href="UserComplaints" class="sideside" id="complaintsDropdown">
+                    <a href="UserComplaints.php" class="sideside" id="complaintsDropdown">
                         <img class="img-sideboard" src="Pictures/ComplaintsCap.png">
                         <span> Complaints </span>
                         <button class="buttonEme2">
