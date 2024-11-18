@@ -46,7 +46,7 @@ function togglePageNewAndTbl(pageId) {
     localStorage.setItem('activeComplaintContainer', pageId);
 }
 
-// Check local storage on page load to determine which container to show
+// Check local storage on page load to determine which container to show // 
 window.onload = function() {
     const activeContainer = localStorage.getItem('activeComplaintContainer');
     togglePageNewAndTbl(activeContainer || 'tblConforComplaints'); // Default to 'tblConforComplaints'
@@ -105,7 +105,7 @@ document.querySelector('.inputFile').addEventListener('change', function(event) 
                 
                 // Add an event listener to the image for opening the lightbox
                 imgElement.addEventListener('click', function() {
-                    openLightbox(e.target.result);
+                    openDirectComplaintLightbox(e.target.result);
                 });
 
                 // Create a wrapper for the image with a remove option
@@ -141,9 +141,9 @@ document.querySelector('.inputFile').addEventListener('change', function(event) 
 });
 
 // Open the lightbox with the image
-function openLightbox(src) {
+function openDirectComplaintLightbox(src) {
     const lightbox = document.getElementById('lightbox');
-    const lightboxImage = document.getElementById('lightboxImage');
+    const lightboxImage = document.querySelector('.lightbox-image');
     lightbox.style.display = 'flex';
     lightboxImage.src = src;
 }
@@ -190,56 +190,6 @@ function selectComplaint(value) {
 }
 
 
-// Function ng submit ng complaint
-document.getElementById('Submit').addEventListener('click', function(event) {
-    event.preventDefault();
-
-    const complainee = document.getElementById('Complainee').value;
-    const ComplaineeAddress = document.getElementById('ComplaineeAddress').value;
-
-    const ComplainantUID = document.getElementById('ComplainantUID').value;
-    const ComplainantName = document.getElementById('ComplainantName').value;
-    const ComplainantAddress = document.getElementById('ComplainantAddress').value;
-
-    const complaint = document.getElementById('selectedComplaint').value;
-    const description = document.getElementById('Description').value;
-
-    const proofInput = document.getElementById('Proof');
-    let proofFileName = '';
-
-    // Check if the file input exists and has files
-    if (proofInput && proofInput.files && proofInput.files.length > 0) {
-        proofFileName = proofInput.files[0].name; // Retrieve file name
-    }
-
-    let formData = new FormData();
-    formData.append('action', 'submit_complaint');
-    formData.append('complainee', complainee);
-    formData.append('ComplaineeAddress', ComplaineeAddress);
-    formData.append('ComplainantUID', ComplainantUID);
-    formData.append('ComplainantName', ComplainantName);
-    formData.append('ComplainantAddress', ComplainantAddress);
-    formData.append('complaint', complaint);
-    formData.append('description', description);
-    
-    if (proofFileName) {
-        formData.append('proofFileName', proofInput.files[0]); // Append the actual file
-    }
-
-    let xhr = new XMLHttpRequest();
-    xhr.open('POST', 'PHPBackend/Complaint.php', true);
-
-    xhr.onload = function() {
-        if (xhr.status === 200) {
-            const response = JSON.parse(xhr.responseText);
-            alert(response.success ? response.message : response.error);
-        } else {
-            alert('There was an issue submitting the complaint.');
-        }
-    };
-
-    xhr.send(formData);
-});
 
 
 // FUNCTION PARA SA DROPDOWN COMPLAINT 
@@ -389,27 +339,28 @@ document.querySelector('.BtnInputGendrop').addEventListener('click', toggleDropd
 
 
 // DUNCTION PARA SA PAG SHOW NG MODAL TRACKING
-// Get the modal, button, and close button elements
-const modalViewDetails = document.querySelector('.ModalNato');
-const btn = document.getElementById('viewDetailsBtn');
-const closeModalButton = document.querySelector('.PagEkis');
 
-// Show the modal when the "View Details" button is clicked
-btn.addEventListener('click', function() {
-    modalViewDetails.style.display = 'flex';  // Show modal
-});
+// Nasa USERviewDetails function na to
+// const btn = document.getElementById('viewDetailsBtn');
+
+// btn.addEventListener('click', function() {
+//     modalViewDetails.style.display = 'flex';  // Show modal
+// });
+
+// const modalViewDetails = document.querySelector('.ModalNato');
+// const closeModalButton = document.querySelector('.PagEkis');
 
 // Close the modal when the "X" button is clicked
-closeModalButton.addEventListener('click', function() {
-    modalViewDetails.style.display = 'none';  // Hide modal
-});
+// closeModalButton.addEventListener('click', function() {
+//     modalViewDetails.style.display = 'none';  // Hide modal
+// });
 
 // Close the modal when clicking outside of the modal content
-window.addEventListener('click', function(event) {
-    if (event.target === modalViewDetails) {
-        modalViewDetails.style.display = 'none';  // Hide modal if clicked outside
-    }
-});
+// window.addEventListener('click', function(event) {
+//     if (event.target === modalViewDetails) {
+//         modalViewDetails.style.display = 'none';  // Hide modal if clicked outside
+//     }
+// });
 
 
 // Select all textareas with the class "RemarkTextareaa" inside the "ModalNato" div
@@ -430,3 +381,257 @@ function adjustTextareaHeight(textarea) {
     // Set the height based on the scrollHeight, which adjusts to the content size
     textarea.style.height = textarea.scrollHeight + "px";
 }
+
+
+
+
+// Function ng submit ng direct complaint
+document.getElementById('Submit').addEventListener('click', function(event) {
+    event.preventDefault();
+
+    const complainee = document.getElementById('Complainee').value;
+    const ComplaineeAddress = document.getElementById('ComplaineeAddress').value;
+    const ComplainantUID = document.getElementById('ComplainantUID').value;
+    const ComplainantName = document.getElementById('ComplainantName').value;
+    const ComplainantAddress = document.getElementById('ComplainantAddress').value;
+    const complaint = document.getElementById('selectedComplaint').value;
+    const description = document.getElementById('Description').value;
+
+    const proofInput = document.getElementById('Proof');
+    let formData = new FormData();
+
+    formData.append('action', 'submit_complaint');
+    formData.append('complainee', complainee);
+    formData.append('ComplaineeAddress', ComplaineeAddress);
+    formData.append('ComplainantUID', ComplainantUID);
+    formData.append('ComplainantName', ComplainantName);
+    formData.append('ComplainantAddress', ComplainantAddress);
+    formData.append('complaint', complaint);
+    formData.append('description', description);
+
+    // Loop through each file and append it to the FormData
+    if (proofInput.files.length > 0) {
+        for (let i = 0; i < proofInput.files.length; i++) {
+            formData.append('proofFiles[]', proofInput.files[i]); // Append each file
+        }
+    }
+
+    let xhr = new XMLHttpRequest();
+    xhr.open('POST', 'PHPBackend/Complaint.php', true);
+
+    xhr.onload = function() {
+        if (xhr.status === 200) {
+            console.log('Raw Response:', xhr.responseText); // Log raw response for debugging
+            try {
+                const response = JSON.parse(xhr.responseText); // Parse the JSON response
+                alert(response.success ? response.message : response.error);
+            } catch (error) {
+                console.error('Error parsing JSON:', error);
+                alert('There was an issue with the response format.');
+            }
+        } else {
+            alert('There was an issue submitting the complaint.');
+        }
+    };
+
+    xhr.send(formData);
+});
+
+
+// Function ng submit ng general complaint
+document.getElementById('submitGen').addEventListener('click', function(event) {
+    event.preventDefault();
+
+    const GENComplainantUID = document.getElementById('GENComplainantUID').value;
+    const GENComplainantName = document.getElementById('GENComplainantName').value;
+    const GENComplainantAddress = document.getElementById('GENComplainantAddress').value;
+    const selectGenComplaintInput = document.getElementById('selectGenComplaintInput').value;
+    const DescriptionGen = document.getElementById('DescriptionGen').value;
+
+    const GENproofInput = document.getElementById('ProofGen');
+    let formData = new FormData();
+
+    if (!GENComplainantUID || !GENComplainantName || !selectGenComplaintInput || !DescriptionGen || !GENComplainantAddress) {
+        alert('Please fill in all required fieldss.');
+        return; // Stop further processing
+    }
+
+    formData.append('action', 'submit_GEN_complaint');
+    formData.append('GENComplainantUID', GENComplainantUID);
+    formData.append('GENComplainantName', GENComplainantName);
+    formData.append('selectGenComplaintInput', selectGenComplaintInput);
+    formData.append('GENComplainantAddress', GENComplainantAddress);
+    formData.append('DescriptionGen', DescriptionGen);
+
+    // Loop through each file and append it to the FormData 
+    if (GENproofInput.files.length > 0) {
+        for (let i = 0; i < GENproofInput.files.length; i++) {
+            formData.append('GENproofFiles[]', GENproofInput.files[i]); // Append each file
+        }
+    }
+
+    let xhr = new XMLHttpRequest();
+    xhr.open('POST', 'PHPBackend/Complaint.php', true);
+
+    xhr.onload = function() {
+        if (xhr.status === 200) {
+            console.log('Raw Response:', xhr.responseText); // Log raw response for debugging
+            try {
+                const response = JSON.parse(xhr.responseText); // Parse the JSON response
+                alert(response.success ? response.message : response.error);
+            } catch (error) {
+                console.error('Error parsing JSON:', error);
+                alert('There was an issue with the response format.');
+            }
+        } else {
+            alert('There was an issue submitting the complaint.');
+        }
+    };
+
+    xhr.send(formData);
+});
+
+
+
+window.addEventListener('load', function() {
+    const UserUID = document.getElementById('UserUID').value;
+    USERfetchComplaints(UserUID);
+});
+
+function formatDateTimeToWords(dateString) {
+    const date = new Date(dateString);
+    const options = { 
+        year: 'numeric', 
+        month: 'long', 
+        day: 'numeric', 
+        hour: 'numeric', 
+        minute: 'numeric', 
+        second: 'numeric',
+        hour12: true  // To show time in AM/PM format
+    };
+    return date.toLocaleString(undefined, options);
+}
+
+function USERfetchComplaints(userUID) {
+    fetch('PHPBackend/Complaint.php', {
+        method: 'POST',
+        body: new URLSearchParams({
+            action: 'user_get_complaints',
+            userUID: userUID
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            USERgenerateTable(data.data); // Pass complaints data to USERgenerateTable function
+        } else {
+            USERgenerateTable([]); 
+            console.log(data.error);
+        }
+    })
+    .catch(error => {
+        console.error('Error fetching complaints:', error);
+    });
+}
+
+function USERgenerateTable(complaints) {
+    const tableBody = document.querySelector('.ListTablee tbody');
+    tableBody.innerHTML = ''; // Clear any existing rows
+
+    if (complaints.length === 0) {
+        const row = document.createElement('tr');
+        row.innerHTML = `<td colspan="5" style="text-align: center; color: black;">No Complaints</td>`;
+        tableBody.appendChild(row);
+    } else {
+        complaints.forEach(complaint => {
+            const row = document.createElement('tr');
+            const formattedDateTime = formatDateTimeToWords(complaint.filed_date);
+
+            row.innerHTML = `
+                <td>${complaint.complaint_number}</td>
+                <td>${complaint.complaint}</td>
+                <td>${formattedDateTime}</td>
+                <td style="color: ${complaint.status === 'Resolved' ? 'green' : (complaint.status === 'Escalated' ? 'red' : '#FFB300')}; font-weight: bold;"">${complaint.status}</td>
+                <td><button class="viewDetailsBtn" data-id="${complaint.complaint_number}">View Details</button></td>
+            `;
+            
+            row.querySelector('.viewDetailsBtn').addEventListener('click', function () {
+                USERviewDetails(this);
+            });
+
+            tableBody.appendChild(row);
+        });
+    }
+}
+
+
+function USERviewDetails(button) {
+    const complaintId = button.getAttribute('data-id');
+    
+    // Open the modal
+    const modal = document.querySelector('.ModalNato');
+    modal.style.display = 'flex';  // Display the modal
+
+    // Fetch complaint details and populate modal
+    USERfetchComplaintDetails(complaintId);
+
+    // Close the modal when clicking the "X" close button
+    document.querySelector('.PagEkis').addEventListener('click', () => {
+        modal.style.display = 'none';  // Hide modal
+    });
+
+    // Close the modal if the user clicks outside the modal content
+    window.addEventListener('click', function(event) {
+        if (event.target === modal) {
+            modal.style.display = 'none';  // Hide modal if clicked outside
+        }
+    });
+
+    // Enable the Generate PDF button after fetching details
+    document.getElementById('generatePdfBtn').disabled = false;
+}
+
+// const images = [];
+
+// function USERfetchComplaintDetails(complaintId) {
+//     const xhr = new XMLHttpRequest();
+//     xhr.open("POST", "PHPBackend/Complaint.php", true);
+//     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+//     xhr.onreadystatechange = function () {
+//         if (xhr.readyState === 4 && xhr.status === 200) {
+//             const response = JSON.parse(xhr.responseText);
+
+//             if (response.success) {
+
+//                 document.getElementById('UserComplaineeName').value = response.data.complainee;
+//                 document.getElementById('UserComplaineeAddress').value = response.data.complaineeAddress;
+//                 document.getElementById('UserComplainantName').value = response.data.complainantName;
+//                 document.getElementById('UserComplainantAddress').value = response.data.complainantAddress;
+//                 document.getElementById('UserDateSubmit').value = formatDateTimeToWords(response.data.filed_date);
+//                 document.getElementById('UserComplaintType').value = response.data.complaint;
+//                 document.getElementById('UserDescription').value = response.data.description;
+//                 document.getElementById('UserStatus').value = response.data.status;
+
+//                 //  // Parse the proof field as JSON
+//                 // const proofFiles = JSON.parse(response.data.proof);
+
+//                 // // Clear the images array and add the new images
+//                 // images.length = 0; // Clear any existing images
+//                 // proofFiles.forEach(file => images.push("Pictures/" + file));
+
+//                 // // Update the main displayed image
+//                 // // document.getElementById('ProofFileName').src = images[0]; // Display the first image by default
+
+//                 // // Store the images for modal use
+//                 // document.querySelector('.BiewwPicture').dataset.proofImages = JSON.stringify(images);
+
+//                 // Display the details section only after data is loaded
+//             } else {
+//                 console.error('Error fetching complaint details:', response.error);
+//             }
+//         }
+//     };
+
+//     xhr.send("action=UserfetchDetails&complaint_id=" + complaintId);
+// }

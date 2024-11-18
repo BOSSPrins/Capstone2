@@ -349,7 +349,7 @@ function generateTable(complaints) {
                <td>${complaint.complaint_number}</td>
                 <td>${complaint.complaint}</td>
                 <td>${formattedDateTime}</td>
-                <td style="color: #FFB300; font-weight: bold;">${complaint.status}</td>              
+                <td style="color: #28a745; font-weight: bold;">${complaint.status}</td>              
                 <td><button class="BiewPendBtn" data-id="${complaint.complaint_number}" onclick="viewDetails(this)">View Details</button></td>
             `;
             

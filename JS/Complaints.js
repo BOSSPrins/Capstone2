@@ -414,7 +414,12 @@ function viewDetails(button) {
     const complaintId = button.getAttribute('data-id');
     document.getElementById('ComplaintID').value = complaintId;
     fetchComplaintDetails(complaintId);
+
+     // Enable the Generate PDF button after fetching details
+     document.getElementById('generatePdfBtn').disabled = false;
 }
+
+const images = []; // Initialize an empty array to store images
 
 function fetchComplaintDetails(complaintId) {
     const xhr = new XMLHttpRequest();
@@ -426,7 +431,23 @@ function fetchComplaintDetails(complaintId) {
             const response = JSON.parse(xhr.responseText);
 
             if (response.success) {
-                // Populate the fields with the fetched data
+                
+                const complaineeName = response.data.complainee;
+                const complaineeAddress = response.data.complaineeAddress;
+
+                // Set the input values
+                document.getElementById('ComplaineeName').value = complaineeName || '';
+                document.getElementById('ComplaineeAddress').value = complaineeAddress || '';
+
+                // Hide the Complainee section if both fields are empty
+                const complaineeSection = document.getElementById('ComplaineeSection');
+                if (!complaineeName && !complaineeAddress) {
+                    complaineeSection.style.display = 'none';
+                } else {
+                    complaineeSection.style.display = 'block';
+                }
+
+
                 document.getElementById('ComplaineeName').value = response.data.complainee;
                 document.getElementById('ComplaineeAddress').value = response.data.complaineeAddress;
                 document.getElementById('ComplainantName').value = response.data.complainantName;
@@ -436,7 +457,18 @@ function fetchComplaintDetails(complaintId) {
                 document.getElementById('Description').value = response.data.description;
                 document.getElementById('Status').value = response.data.status;
 
-                document.getElementById('ProofFileName').src = "Pictures/" + response.data.proof;
+                 // Parse the proof field as JSON
+                const proofFiles = JSON.parse(response.data.proof);
+
+                // Clear the images array and add the new images
+                images.length = 0; // Clear any existing images
+                proofFiles.forEach(file => images.push("Pictures/" + file));
+
+                // Update the main displayed image
+                // document.getElementById('ProofFileName').src = images[0]; // Display the first image by default
+
+                // Store the images for modal use
+                document.querySelector('.BiewwPicture').dataset.proofImages = JSON.stringify(images);
 
                 // Display the details section only after data is loaded
                 togglePage('PangalawangCon');
@@ -519,27 +551,42 @@ window.onload = function () {
 
 // FUNCTION PARA SA PICTURE MODAL PREVIEW 
 // Example list of images that you want to display in the modal (use your actual image list here)
-const images = [
-    "image1.jpg", // Replace with actual image URLs
-    "image2.jpg",
-    "image3.jpg"
-];
+// const images = [
+//     "image1.jpg", // Replace with actual image URLs
+//     "image2.jpg",
+//     "image3.jpg"
+// ];
 
 // Modal and Image elements
 const modal = document.querySelector('.imageModal');
 const modalImage = document.querySelector('.modalImage');
+const prevButton = document.querySelector('.prevImage');
+const nextButton = document.querySelector('.nextImage');
 let currentIndex = 0;  // Track the current image index
 
 // Show the modal and display the first image
-document.querySelector('.BiewwPicture').addEventListener('click', function() {
-    currentIndex = 0;  // Reset to first image
-    showModal();
+document.querySelector('.BiewwPicture').addEventListener('click', function () {
+    const proofImages = JSON.parse(this.dataset.proofImages); // Get all images for the modal
+    currentIndex = 0; // Reset to the first image
+    images.length = 0; // Ensure images array matches the current proof
+    proofImages.forEach(image => images.push(image));
+
+    showModal(); // Open the modal
 });
 
 // Function to display the modal and set the image
 function showModal() {
-    modal.style.display = 'flex';  // Show the modal
-    modalImage.src = images[currentIndex];  // Set the image source
+    modal.style.display = 'flex'; // Show the modal
+    modalImage.src = images[currentIndex]; // Set the first image
+
+    // Hide or show the navigation buttons depending on the number of images
+    if (images.length === 1) {
+        prevButton.style.display = 'none'; // Hide previous button if there's only one image
+        nextButton.style.display = 'none'; // Hide next button if there's only one image
+    } else {
+        prevButton.style.display = 'block'; // Show previous button if there are multiple images
+        nextButton.style.display = 'block'; // Show next button if there are multiple images
+    }
 }
 
 // Close the modal when clicking the close button
@@ -553,10 +600,65 @@ function changeImage(direction) {
 
     // Loop the images: if we're at the start or end, loop around
     if (currentIndex < 0) {
-        currentIndex = images.length - 1;  // Go to last image
+        currentIndex = images.length - 1; // Go to last image
     } else if (currentIndex >= images.length) {
-        currentIndex = 0;  // Go to first image
+        currentIndex = 0; // Go to first image
     }
 
-    modalImage.src = images[currentIndex];  // Update the image source
+    modalImage.src = images[currentIndex]; // Update the image source
 }
+
+
+// Function para sa pag generate ng pdf
+const { jsPDF } = window.jspdf;
+
+function generateCustomPdf() {
+    // Initialize jsPDF
+    const pdf = new jsPDF();
+
+    // Set up content for the letter
+    const complaineeName = document.getElementById('ComplaineeName').value || 'N/A';
+    const complaineeAddress = document.getElementById('ComplaineeAddress').value || 'N/A';
+    const complainantName = document.getElementById('ComplainantName').value || 'N/A';
+    const complainantAddress = document.getElementById('ComplainantAddress').value || 'N/A';
+    const filedDate = document.getElementById('DateSubmit').value || 'N/A';
+    const complaintType = document.getElementById('ComplaintType').value || 'N/A';
+    const description = document.getElementById('Description').value || 'N/A';
+    const status = document.getElementById('Status').value || 'N/A';
+
+    // Example letter format
+    pdf.setFontSize(12);
+    pdf.text("Republic of the Philippines", 105, 20, { align: "center" });
+    pdf.text("City/Municipality of [Insert Name Here]", 105, 28, { align: "center" });
+    pdf.text("Office of the Barangay Captain", 105, 36, { align: "center" });
+
+    pdf.setFontSize(16);
+    pdf.text("Complaint Letter", 105, 50, { align: "center" });
+
+    pdf.setFontSize(12);
+    pdf.text(`Filed Date: ${filedDate}`, 20, 70);
+
+    pdf.text(`Complainant:`, 20, 80);
+    pdf.text(`Name: ${complainantName}`, 30, 88);
+    pdf.text(`Address: ${complainantAddress}`, 30, 96);
+
+    pdf.text(`Complainee:`, 20, 110);
+    pdf.text(`Name: ${complaineeName}`, 30, 118);
+    pdf.text(`Address: ${complaineeAddress}`, 30, 126);
+
+    pdf.text(`Complaint Type: ${complaintType}`, 20, 140);
+    pdf.text(`Description:`, 20, 150);
+    pdf.text(`${description}`, 30, 158, { maxWidth: 160 });
+
+    pdf.text(`Status: ${status}`, 20, 180);
+
+    // Optional: Add signature placeholders
+    pdf.text("_________________________", 105, 220, { align: "center" });
+    pdf.text("Barangay Captain", 105, 230, { align: "center" });
+
+    // Save the PDF
+    pdf.save('Complaint_Letter.pdf');
+}
+
+// Attach to a button
+document.getElementById('generatePdfBtn').addEventListener('click', generateCustomPdf);

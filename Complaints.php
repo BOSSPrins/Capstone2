@@ -23,6 +23,7 @@ if (isset($_SESSION['unique_id'])) {
     <link rel="stylesheet" href="CSS/Complaints.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="JS/sidebar.js"></script>
+    <script src="jsPDF/dist/jspdf.umd.min.js"></script>
 </head>
 <body>
 <div class="mainDashboardContainer">
@@ -227,15 +228,18 @@ if (isset($_SESSION['unique_id'])) {
                             <h2 style="margin-left: 10px;"> Complaint Details </h2>
                         </div>
                         <div class="DetaLaman">
-                            <h2> Complainee </h2>
-                            <div style="display: flex; margin-bottom: 15px; align-items:center;">
-                                <label class="LabelCompDeta"> Name: </label>
-                                <input class="inputCompDeta" type="text" id="ComplaineeName">
+                            <div id="ComplaineeSection">
+                                <h2> Complainee </h2>
+                                <div style="display: flex; margin-bottom: 15px; align-items:center;">
+                                    <label class="LabelCompDeta"> Name: </label>
+                                    <input class="inputCompDeta" type="text" id="ComplaineeName">
+                                </div>
+                                <div style="display: flex; margin-bottom: 15px; align-items:center;">
+                                    <label class="LabelCompDeta"> Address: </label>
+                                    <input class="inputCompDeta" type="text" id="ComplaineeAddress">
+                                </div>
                             </div>
-                            <div style="display: flex; margin-bottom: 15px; align-items:center;">
-                                <label class="LabelCompDeta"> Address: </label>
-                                <input class="inputCompDeta" type="text" id="ComplaineeAddress">
-                            </div>
+
 
                             <h2> Complainant </h2>
                             <div style="display: flex; margin-bottom: 15px; align-items:center;">
@@ -263,6 +267,7 @@ if (isset($_SESSION['unique_id'])) {
                                 <label class="LabelCompDeta"> Current Status: </label>
                                 <input class="inputCompDeta" type="text" id="Status">
                             </div>
+
                             <div style="display: flex; margin-bottom: 15px; align-items:center;">
                                 <label class="LabelCompDeta"> File: </label>
                                 <button class="BiewwPicture"> View </button>
@@ -274,7 +279,7 @@ if (isset($_SESSION['unique_id'])) {
                                     <button class="nextImage" onclick="changeImage(1)">&#10095;</button>
                                 </div>
             
-                                <img id="ProofFileName" alt="Proof Image" style="max-width: 300px; max-height: 200px;"></img>
+                                <!-- <img id="ProofFileName" alt="Proof Image" style="max-width: 300px; max-height: 200px;"></img> -->
 
                             </div>                   
                             <form method="POST" enctype="multipart/form-data">
@@ -283,6 +288,7 @@ if (isset($_SESSION['unique_id'])) {
                                     <input type="hidden" id="ComplaintID">
                                     <label class="LabelCompDeta"> Action: </label>
                                     <button class="TabkeActionBtn" onclick="submitComplaintUpdate()"> Take Action </button>
+                                    <button id="generatePdfBtn" disabled>Generate Complaint Letter</button>
                                 </div>
                             </form>
                         </div>
