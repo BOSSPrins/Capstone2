@@ -1103,69 +1103,23 @@ height: 100vh;
   height: 100%; /* Take up remaining space inside the modal */
 }
 
-.linyaTo {
-  width: 3px; /* Set a width as needed */
-  flex: 1;
-  background-color: rgb(196, 196, 196); /* For demonstration */
-}
-
-.CheckLogo {
-  display: flex;
-  position: absolute;
-  top: 10px;  /* Adjust this value to position the logo above the line */
-  left: 50%;
-  transform: translateX(-50%);
-  justify-content: center;
-  align-items: center;
-  width: 20px;
-  height: 20px;
-  background: green;
-  border-radius: 50%;
-}
-
-.EclaLogo{
-  display: flex;
-  position: absolute;
-  top: 10px;  /* Adjust this value to position the logo above the line */
-  left: 50%;
-  transform: translateX(-50%);
-  justify-content: center;
-  align-items: center;
-  width: 20px;
-  height: 20px;
-  background: rgb(155, 30, 16);
-  border-radius: 50%;
-}
-
-.LogoAndLine{
-  display: flex;
-  margin-left: 5%; 
-  position: relative;
-}
-
-.DateAndRemark{
-  margin-left: 5%;
-  padding: 10px;
-  margin-top: 15px;
-  margin-bottom: 15px;
-  background: rgb(197, 197, 197);
-  width: 100%;
-  border-radius: 5px;
-}
-
-/* Flex layout for labels and inputs */
-.DateAndTime, .RemarkGalingAd {
-  display: flex;
-  align-items: center; /* Vertically center the label and input */
-}
-
-.DateAndTime label, .RemarkGalingAd label {
-  width: 120px; /* Fixed width for labels */
+.LabelModalDet{
+  display: inline-block;
+  width: 180px; /* Set width for label */
   margin-right: 10px; /* Space between label and input */
-  font-weight: bold; /* Make the label text bold */
+  font-weight: bold;
 }
 
-.RemarkTextareaa {
+.InputModalDet{
+  width: 100%;
+   padding: 8px;
+  /* margin-bottom: 10px; */
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  flex-grow: 1; /* Allow input to take up remaining space */
+}
+
+.textAreaModalDet{
   resize: none;
   max-height: 200px;
   width: 100%;
@@ -1174,16 +1128,11 @@ height: 100vh;
   font-size: medium;
   font-family: Arial;
   padding: 5px;
-  box-sizing: border-box; /* Include padding in width calculation */
-  /* background: transparent;  */
 }
 
-/* Adjust the input fields */
-.DateAndTime input, .RemarkGalingAd textarea {
-  width: 100%; /* Make input take remaining space */
-  padding: 5px;
-  font-size: medium;
-  border-radius: 5px;
-  border: 1px solid rgba(62, 65, 71, 0.4);
-  /* background: transparent;  */
+.BtnDownloadModal {
+  background: rgb(2, 118, 0);
+  padding: 10px 30px;
+  cursor: pointer;
+  color: white;
 }

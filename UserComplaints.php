@@ -151,7 +151,7 @@ $encoded_id = urlencode($admin_unique_id);
                         <header style="margin-bottom: 20px;">
                             <h2> List Of Complaints </h2>
                             <button class="NewCompl" onclick="togglePageNewAndTbl('AddNewComplaints')"> File New Complaint </button>
-                            <input type="text" id="UserUID" value="<?php echo $_SESSION['unique_id']?>">
+                            <input type="hidden" id="UserUID" value="<?php echo $_SESSION['unique_id']?>">
                         </header>
                         <div class="TblListComplaint">
                             <table class="ListTablee">
@@ -186,93 +186,84 @@ $encoded_id = urlencode($admin_unique_id);
                                             <span class="PagEkis"> &times; </span>
                                         </header>
                                         <div class="LoobNaPoIto">
-                                            <div class="tangimaHirap">
-                                                <h2> Resolved</h2>
-                                                <div style="display: flex;" class="TanginaNito"> 
-                                                    <div class="LogoAndLine">
-                                                        <div class="linyaTo"></div>
-                                                        <div class="CheckLogo">
-                                                            <span style="color: white;">&#x2714;</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="DateAndRemark">
-                                                        <div style="margin-bottom: 10px;" class="DateAndTime">
-                                                            <label> Date & Time:</label>
-                                                            <input type="text">
-                                                        </div>
-                                                        <div class="RemarkGalingAd">
-                                                            <label> Remark:</label>
-                                                            <textarea class="RemarkTextareaa"> </textarea>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                            <div style="display: flex; margin-bottom: 15px; align-items:center;">
+                                                <label class="LabelModalDet"> Complaint Name: </label>
+                                                <input class="InputModalDet" type="text">
                                             </div>
-
-                                            <div class="tangimaHirap">
-                                                <h2> Escalated </h2>
-                                                <div style="display: flex;" class="TanginaNito"> 
-                                                    <div class="LogoAndLine">
-                                                        <div class="linyaTo"></div>
-                                                        <div class="EclaLogo">
-                                                            <span style="color: white;"> &#33; </span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="DateAndRemark">
-                                                        <div style="margin-bottom: 10px;" class="DateAndTime">
-                                                            <label> Date & Time:</label>
-                                                            <input type="text">
-                                                        </div>
-                                                        <div class="RemarkGalingAd">
-                                                            <label> Remark:</label>
-                                                            <textarea class="RemarkTextareaa"> </textarea>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                            <div style="display: flex; margin-bottom: 15px; align-items:center;">
+                                                <label class="LabelModalDet"> Address: </label>
+                                                <input class="InputModalDet" type="text">
+                                            </div>
+                                            <div style="display: flex; margin-bottom: 15px; align-items:center;">
+                                                <label class="LabelModalDet"> Date Submitted: </label>
+                                                <input class="InputModalDet" type="text">
+                                            </div>
+                                            <div style="display: flex; margin-bottom: 15px; align-items:center;">
+                                                <label class="LabelModalDet"> Nature Of Complaint: </label>
+                                                <input class="InputModalDet" type="text">
+                                            </div>
+                                            <h2> Details </h2>
+                                            <div style="display: flex; margin-bottom: 15px; align-items:center;">
+                                                <label class="LabelModalDet"> Description: </label>
+                                                <textarea class="textAreaModalDet"></textarea>
+                                            </div>
+                                            <div style="display: flex; margin-bottom: 15px; align-items:center;">
+                                                <label class="LabelModalDet">  File: </label>
+                                                <!-- Input a container for images and a container for view but this function will be applicable when edit button click -->
+                                            </div>
+                                            <div style="display: flex; margin-bottom: 15px; align-items:center;">
+                                                <label class="LabelModalDet"> Complaint Name: </label>
+                                                <input class="InputModalDet" type="text">
+                                            </div>
+                                            <div style="display: flex; margin-bottom: 15px; align-items:center;">
+                                                <label class="LabelModalDet"> Current Status: </label>
+                                                <input class="InputModalDet" type="text">
                                             </div>
 
 
-                                            <div class="tangimaHirap">
-                                                <h2> Resolved</h2>
-                                                <div style="display: flex;" class="TanginaNito"> 
-                                                    <div class="LogoAndLine">
-                                                        <div class="linyaTo"></div>
-                                                        <div class="CheckLogo">
-                                                            <span style="color: white;">&#x2714;</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="DateAndRemark">
-                                                        <div style="margin-bottom: 10px;" class="DateAndTime">
-                                                            <label> Date & Time:</label>
-                                                            <input type="text">
-                                                        </div>
-                                                        <div class="RemarkGalingAd">
-                                                            <label> Remark:</label>
-                                                            <textarea class="RemarkTextareaa"> </textarea>
-                                                        </div>
-                                                    </div>
+                                            <!-- Lagayan galing admin 1 -->
+                                            <div style="background: rgb(138, 187, 231); padding: 10px; margin-bottom:10px;">
+                                                <div style="display: flex; margin-bottom: 15px;">
+                                                    <label class="LabelModalDet"> Remark: </label>
+                                                    <textarea class="textAreaModalDet"> </textarea>
+                                                </div>
+                                                <div style="display: flex; margin-bottom: 15px; align-items:center;">
+                                                    <label class="LabelModalDet"> Remark by: </label>
+                                                    <input class="InputModalDet" type="text">
+                                                </div>
+                                                <div style="display: flex; margin-bottom: 15px; align-items:center;">
+                                                    <label class="LabelModalDet"> Status: </label>
+                                                    <input class="InputModalDet" type="text">
+                                                </div>
+                                                <div style="display: flex; align-items:center;">
+                                                    <label class="LabelModalDet"> Remark Date: </label>
+                                                    <input class="InputModalDet" type="text">
                                                 </div>
                                             </div>
 
-                                            <div class="tangimaHirap">
-                                                <h2> Escalated </h2>
-                                                <div style="display: flex;" class="TanginaNito"> 
-                                                    <div class="LogoAndLine">
-                                                        <div class="linyaTo"></div>
-                                                        <div class="EclaLogo">
-                                                            <span style="color: white;"> &#33; </span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="DateAndRemark">
-                                                        <div style="margin-bottom: 10px;" class="DateAndTime">
-                                                            <label> Date & Time:</label>
-                                                            <input type="text">
-                                                        </div>
-                                                        <div class="RemarkGalingAd">
-                                                            <label> Remark:</label>
-                                                            <textarea class="RemarkTextareaa"> </textarea>
-                                                        </div>
-                                                    </div>
+
+                                             <!-- Lagayan galing admin 2 -->
+                                             <div style="background: rgb(138, 187, 231); padding: 10px;">
+                                                <div style="display: flex; margin-bottom: 15px;">
+                                                    <label class="LabelModalDet"> Remark: </label>
+                                                    <textarea class="textAreaModalDet"> </textarea>
                                                 </div>
+                                                <div style="display: flex; margin-bottom: 15px; align-items:center;">
+                                                    <label class="LabelModalDet"> Remark by: </label>
+                                                    <input class="InputModalDet" type="text">
+                                                </div>
+                                                <div style="display: flex; margin-bottom: 15px; align-items:center;">
+                                                    <label class="LabelModalDet"> Status: </label>
+                                                    <input class="InputModalDet" type="text">
+                                                </div>
+                                                <div style="display: flex; align-items:center;">
+                                                    <label class="LabelModalDet"> Remark Date: </label>
+                                                    <input class="InputModalDet" type="text">
+                                                </div>
+                                            </div>
+                                            <div style="display: flex; margin-bottom: 15px; margin-top: 10px; align-items:center;">
+                                                <label class="LabelModalDet"> Action: </label>
+                                                <button class="BtnDownloadModal"> Download </button>
                                             </div>
                                         <!-- <input type="text" id="UserComplaineeName">
                                         <input type="text" id="UserComplaineeAddress">
@@ -281,8 +272,7 @@ $encoded_id = urlencode($admin_unique_id);
                                         <input type="text" id="UserDateSubmit">
                                         <input type="text" id="UserComplaintType">
                                         <input type="text" id="UserDescription">
-                                        <input type="text" id="UserStatus"> -->
-                                                                                   
+                                        <input type="text" id="UserStatus"> -->                                     
                                         </div>
                                     </div>
                                 </div>
@@ -315,9 +305,9 @@ $encoded_id = urlencode($admin_unique_id);
                         
                         <!-- GENERAL COMPLAINT PAGE  -->
                         <div id="generalContent" class="contentBoth" style="display: none;">
-                            <input type="text" id="GENComplainantUID" value="<?php echo $_SESSION['unique_id']?>">
-                            <input type="text" id="GENComplainantName"   value="<?php echo $_SESSION['first_name'] . ' ' . (!empty($_SESSION['middle_name']) ? $_SESSION['middle_name'] . ' ' : '') . $_SESSION['last_name']; ?>">
-                            <input type="text" id="GENComplainantAddress"   value="<?php echo 'Blk' . ' ' . $_SESSION['block'] . ' ' . 'Lot' . ' ' . $_SESSION['lot']; ?>">
+                            <input type="hidden" id="GENComplainantUID" value="<?php echo $_SESSION['unique_id']?>">
+                            <input type="hidden" id="GENComplainantName"   value="<?php echo $_SESSION['first_name'] . ' ' . (!empty($_SESSION['middle_name']) ? $_SESSION['middle_name'] . ' ' : '') . $_SESSION['last_name']; ?>">
+                            <input type="hidden" id="GENComplainantAddress"   value="<?php echo 'Blk' . ' ' . $_SESSION['block'] . ' ' . 'Lot' . ' ' . $_SESSION['lot']; ?>">
 
                             <div class="GenComplainUser">
                                 <label> Nature Of Complaint: </label>
