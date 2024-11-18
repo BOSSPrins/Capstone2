@@ -440,7 +440,7 @@ function checkVotingHistory() {
                                             <p style="color: black; font-size: 25px; margin-right: 1.5%;">Vote Submitted</p>
                                         </div>
                                     `;
-
+                    
                     voteContainer.appendChild(overlay);
                 } else {
                     console.log('User has not voted yet.');

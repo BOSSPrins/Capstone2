@@ -30,6 +30,7 @@ $encoded_id = urlencode($admin_unique_id);
     <link rel="icon" type="image/x-icon" href="Pictures/Mabuhay_Logo.ico">
     <link rel="stylesheet" href="CSS/UserComplaints.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="jsPDF/dist/jspdf.umd.min.js"></script>
 </head>
 <body>
 <div class="mainDashboardContainer">
@@ -150,12 +151,13 @@ $encoded_id = urlencode($admin_unique_id);
                         <header style="margin-bottom: 20px;">
                             <h2> List Of Complaints </h2>
                             <button class="NewCompl" onclick="togglePageNewAndTbl('AddNewComplaints')"> File New Complaint </button>
+                            <input type="text" id="UserUID" value="<?php echo $_SESSION['unique_id']?>">
                         </header>
                         <div class="TblListComplaint">
                             <table class="ListTablee">
                                 <thead>
                                     <tr>
-                                        <th> Complain No. </th>
+                                        <th> Complaint No. </th>
                                         <th> Complaint Type </th>
                                         <th> Date Submitted </th>
                                         <th> Status </th>
@@ -163,18 +165,18 @@ $encoded_id = urlencode($admin_unique_id);
                                     </tr>
                                     <tbody>
                                         <tr>
-                                            <td> 123456 </td>
+                                            <!-- <td> 123456 </td>
                                             <td> General Complaint </td>
                                             <td> 02-02-23  02:23</td>
                                             <td> In-Process </td>
                                             <td>
                                                 <button class="viewDetailsBtn" id="viewDetailsBtn">View Details</button>
-                                            </td>
+                                            </td> -->
                                         </tr>
                                     </tbody>
                                 </thead>
                             </table>
-
+                            <button id="generatePdfBtn" disabled>Generate Complaint Letter</button>
 
                             <!-- MODAL VIEW TRACKING  -->
                             <div class="ModalNato">
@@ -272,8 +274,15 @@ $encoded_id = urlencode($admin_unique_id);
                                                     </div>
                                                 </div>
                                             </div>
-
-                                            
+                                        <!-- <input type="text" id="UserComplaineeName">
+                                        <input type="text" id="UserComplaineeAddress">
+                                        <input type="text" id="UserComplainantName">
+                                        <input type="text" id="UserComplainantAddress">
+                                        <input type="text" id="UserDateSubmit">
+                                        <input type="text" id="UserComplaintType">
+                                        <input type="text" id="UserDescription">
+                                        <input type="text" id="UserStatus"> -->
+                                                                                   
                                         </div>
                                     </div>
                                 </div>
@@ -302,9 +311,14 @@ $encoded_id = urlencode($admin_unique_id);
                                 </div>
                             </div>
                         </header>
+
                         
-                        <!-- Content sections that will change based on selection -->
+                        <!-- GENERAL COMPLAINT PAGE  -->
                         <div id="generalContent" class="contentBoth" style="display: none;">
+                            <input type="text" id="GENComplainantUID" value="<?php echo $_SESSION['unique_id']?>">
+                            <input type="text" id="GENComplainantName"   value="<?php echo $_SESSION['first_name'] . ' ' . (!empty($_SESSION['middle_name']) ? $_SESSION['middle_name'] . ' ' : '') . $_SESSION['last_name']; ?>">
+                            <input type="text" id="GENComplainantAddress"   value="<?php echo 'Blk' . ' ' . $_SESSION['block'] . ' ' . 'Lot' . ' ' . $_SESSION['lot']; ?>">
+
                             <div class="GenComplainUser">
                                 <label> Nature Of Complaint: </label>
                                 <div class="dropdownInputGen">
@@ -323,14 +337,14 @@ $encoded_id = urlencode($admin_unique_id);
                             </div>
                             <div class="DescripUserGen">
                                 <label> Description: </label>
-                                <textarea style="margin-left: 20px;" class="DescripUserGenn"></textarea>
+                                <textarea style="margin-left: 20px;" class="DescripUserGenn" id="DescriptionGen"></textarea>
                             </div>
                             <!-- Proof Section with Multiple Image Upload -->
                             <div class="GenComplainUser2">
                                 <label> Proof: </label>
                                 <div class="FileUploadWrapp">
                                     <div class="FileUploadCont">
-                                        <input class="InputFileGen" type="file" multiple> <!-- Allow multiple file selection -->
+                                        <input class="InputFileGen" type="file" id="ProofGen" accept=".jpg, .jpeg, .png" multiple> <!-- Allow multiple file selection -->
                                         <div class="FileUploadGen">
                                             <span class="plusIconGen">+ <br> Upload Pictures here... </br> </span>
                                         </div>
@@ -346,7 +360,7 @@ $encoded_id = urlencode($admin_unique_id);
 
                             <!-- Submit Button -->
                             <footer class="footerUserSubGen">
-                                <button class="submitUserGen">Submit</button>
+                                <button class="submitUserGen" id="submitGen">Submit</button>
                             </footer>
 
                             <!-- Lightbox modal -->
