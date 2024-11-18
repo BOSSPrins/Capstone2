@@ -1,0 +1,3 @@
+[submodule "jsPDF"]
+	path = jsPDF
+	url = https://github.com/parallax/jsPDF.git
