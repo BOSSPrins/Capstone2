@@ -364,9 +364,9 @@ document.querySelector('.BtnInputGendrop').addEventListener('click', toggleDropd
 
 
 // Select all textareas with the class "RemarkTextareaa" inside the "ModalNato" div
-const remarkTextareas = document.querySelectorAll(".ModalNato .RemarkTextareaa");
+const textAreaModalDet = document.querySelectorAll(".ModalNato .textAreaModalDet");
 
-remarkTextareas.forEach(textarea => {
+textAreaModalDet.forEach(textarea => {
     // Add an event listener to each textarea to adjust its height on input
     textarea.addEventListener("input", function() {
         adjustTextareaHeight(textarea);
