@@ -3,14 +3,14 @@ include_once "Connect/Connection.php";
 session_start();
 
 if (isset($_SESSION['unique_id'])) {
-    if ($_SESSION['role'] == 'user') {
+    if ($_SESSION['role'] == 'user' || $_SESSION['role'] == 'barangay') {
         header("Location: LoginPage.php");
         exit();
     }
-    } else {
+} else {
     header("Location: LoginPage.php");
     exit();
-    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -227,14 +227,16 @@ if (isset($_SESSION['unique_id'])) {
                             <h2 style="margin-left: 10px;"> Complaint Details </h2>
                         </div>
                         <div class="DetaLaman">
-                            <h2> Complainee </h2>
-                            <div style="display: flex; margin-bottom: 15px; align-items:center;">
-                                <label class="LabelCompDeta"> Name: </label>
-                                <input class="inputCompDeta" type="text" id="ComplaineeName">
-                            </div>
-                            <div style="display: flex; margin-bottom: 15px; align-items:center;">
-                                <label class="LabelCompDeta"> Address: </label>
-                                <input class="inputCompDeta" type="text" id="ComplaineeAddress">
+                            <div id="ComplaineeSection">
+                                <h2> Complainee </h2>
+                                <div style="display: flex; margin-bottom: 15px; align-items:center;">
+                                    <label class="LabelCompDeta"> Name: </label>
+                                    <input class="inputCompDeta" type="text" id="ComplaineeName">
+                                </div>
+                                <div style="display: flex; margin-bottom: 15px; align-items:center;">
+                                    <label class="LabelCompDeta"> Address: </label>
+                                    <input class="inputCompDeta" type="text" id="ComplaineeAddress">
+                                </div>
                             </div>
 
                             <h2> Complainant </h2>
@@ -270,7 +272,7 @@ if (isset($_SESSION['unique_id'])) {
                                     <button class="nextImage" onclick="changeImage(1)">&#10095;</button>
                                 </div>
             
-                                <img id="ProofFileName" alt="Proof Image" style="max-width: 300px; max-height: 200px;"></img>
+                                <!-- <img id="ProofFileName" alt="Proof Image" style="max-width: 300px; max-height: 200px;"></img> -->
 
                             </div>
                             <div style="display: flex; margin-bottom: 15px; align-items:center;">

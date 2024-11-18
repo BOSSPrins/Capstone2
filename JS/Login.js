@@ -61,6 +61,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 window.location.href = "DashBoard.php";
               } else if (data === "user") {
                 window.location.href = "UserVoting.php";
+              } else if (data === "barangay") {
+                window.location.href = "BarangayTable.php";
               } else {
                 errorText.textContent = data;
                 errorText.style.display = "block";

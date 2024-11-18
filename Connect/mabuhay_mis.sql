@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 15, 2024 at 12:00 AM
+-- Generation Time: Nov 19, 2024 at 02:51 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -69,6 +69,7 @@ INSERT INTO `announcements` (`news_id`, `title`, `context`, `start_date`, `start
 CREATE TABLE `complaints` (
   `complaint_id` int(11) NOT NULL,
   `complaint_number` int(11) NOT NULL,
+  `complaint_type` varchar(50) NOT NULL,
   `complainee` varchar(50) NOT NULL,
   `complaint` varchar(50) NOT NULL,
   `description` text NOT NULL,
@@ -94,14 +95,30 @@ CREATE TABLE `complaints` (
 -- Dumping data for table `complaints`
 --
 
-INSERT INTO `complaints` (`complaint_id`, `complaint_number`, `complainee`, `complaint`, `description`, `proof`, `filed_date`, `complaineeAddress`, `complainantUID`, `complainantName`, `complainantAddress`, `status`, `processed_date`, `Remark1`, `RemarkBy1`, `status1`, `RemarkDate1`, `Remark2`, `RemarkBy2`, `status2`, `RemarkDate2`) VALUES
-(1, 0, 'Mooda', 'Blocking the Driveway', 'Laging nakaharang yung kotse nya sa gate ko', 'bossing.jpg', '2024-09-19 12:07:15', 'Blk 54 Lot 1', 0, 'Mark', 'Blk 78 Lot 10', 'Escalated', '', '', 'admin', 'In-Process', '2024-11-10 23:00:38', 'Turn over to barangay', 'admin', 'Escalated', '2024-11-10 23:12:40'),
-(2, 0, 'Raul', 'Blocking the Driveway', 'Yung tricycle nya dinikit sa kotse ko', 'bossing.jpg', '2024-09-19 12:07:35', 'Blk 3 Lot 6', 0, 'Sgup', 'Blk 100 Lot 6', 'Escalated', '', 'Processing na po', 'admin', 'In-Process', '2024-11-10 22:52:21', 'This Complaint will be turn over to the barangay', 'admin', 'Escalated', '2024-11-10 22:54:21'),
-(3, 0, 'Nigs', 'Pet Issues', 'Aso nya laging galit', 'awtlas.png', '2024-11-08 19:34:38', 'Blk 54 Lot 1', 1581632830, 'Wela A Magsino', 'Blk 9 Lot 18', 'Resolved', '', 'Change to in process', 'admin', 'In-Process', '2024-11-10 02:39:52', 'Resolved na', 'admin', 'Resolved', '2024-11-10 21:42:27'),
-(4, 0, 'Pat Anoyab', 'Noise Complaint', 'Ingay nila mag asawa', 'boss.jpg', '2024-11-10 14:57:37', 'Blk 123 Lot 56', 821155870, 'Jhonrenz Berbano', 'Blk 1 Lot 1', 'Resolved', '2024-11-11 21:59:35', 'Done na po', 'admin', 'Resolved', '2024-11-11 22:21:17', '', '', '', ''),
-(5, 0, '', 'Property Maintenance', 'Yung bintana nya sa third floor tumusok sa bubong ko', 'malupiton.png', '2024-11-11 14:30:11', 'Blk 9 Lot 6', 1581632830, 'Wela A Magsino', 'Blk 9 Lot 18', 'Escalated', '2024-11-11 22:31:57', 'Turn over na po sa barangay di na namin kaya', 'admin', 'Escalated', '2024-11-11 22:32:16', '', '', '', ''),
-(6, 1142799674, '', 'Noise Complaint', 'Ingay ng aso nila kahit madaling araw nagwawala', 'meow.jpg', '2024-11-12 15:34:45', 'Blk 60 Lot 60', 1581632830, 'Wela A Magsino', 'Blk 9 Lot 18', 'Resolved', '2024-11-13 00:00:52', 'Okay na po tinapon na namin yung aso', 'admin', 'Resolved', '2024-11-13 00:27:55', '', '', '', ''),
-(7, 1546759430, '', 'Property Maintenance', 'Yung puno nya tumumba sa gate ko', 'malupiton.png', '2024-11-12 18:35:21', 'Blk 61 Lot 61', 1581632830, 'Wela A Magsino', 'Blk 9 Lot 18', 'In-Process', '2024-11-13 02:38:23', '', '', '', '', '', '', '', '');
+INSERT INTO `complaints` (`complaint_id`, `complaint_number`, `complaint_type`, `complainee`, `complaint`, `description`, `proof`, `filed_date`, `complaineeAddress`, `complainantUID`, `complainantName`, `complainantAddress`, `status`, `processed_date`, `Remark1`, `RemarkBy1`, `status1`, `RemarkDate1`, `Remark2`, `RemarkBy2`, `status2`, `RemarkDate2`) VALUES
+(1, 111111, '', 'Mooda', 'Blocking the Driveway', 'Laging nakaharang yung kotse nya sa gate ko', '[\"bossing.jpg\"]', '2024-09-19 12:07:15', 'Blk 54 Lot 1', 0, 'Mark', 'Blk 78 Lot 10', 'Escalated', '', '', 'admin', 'In-Process', '2024-11-10 23:00:38', 'Turn over to barangay', 'admin', 'Escalated', '2024-11-10 23:12:40'),
+(2, 222222, '', 'Raul', 'Blocking the Driveway', 'Yung tricycle nya dinikit sa kotse ko', '[\"bossing.jpg\"]', '2024-09-19 12:07:35', 'Blk 3 Lot 6', 0, 'Sgup', 'Blk 100 Lot 6', 'Escalated', '', 'Processing na po', 'admin', 'In-Process', '2024-11-10 22:52:21', 'This Complaint will be turn over to the barangay', 'admin', 'Escalated', '2024-11-10 22:54:21'),
+(3, 333333, '', 'Nigs', 'Pet Issues', 'Aso nya laging galit', '[\"awtlas.png\"]', '2024-11-08 19:34:38', 'Blk 54 Lot 1', 1581632830, 'Wela A Magsino', 'Blk 9 Lot 18', 'Resolved', '', 'Change to in process', 'admin', 'In-Process', '2024-11-10 02:39:52', 'Resolved na', 'admin', 'Resolved', '2024-11-10 21:42:27'),
+(4, 444444, '', 'Pat Anoyab', 'Noise Complaint', 'Ingay nila mag asawa', '[\"boss.jpg\"]', '2024-11-10 14:57:37', 'Blk 123 Lot 56', 821155870, 'Jhonrenz Berbano', 'Blk 1 Lot 1', 'Resolved', '2024-11-11 21:59:35', 'Done na po', 'admin', 'Resolved', '2024-11-11 22:21:17', '', '', '', ''),
+(5, 555555, '', '', 'Property Maintenance', 'Yung bintana nya sa third floor tumusok sa bubong ko', '[\"malupiton.png\"]', '2024-11-11 14:30:11', 'Blk 9 Lot 6', 1581632830, 'Wela A Magsino', 'Blk 9 Lot 18', 'Escalated', '2024-11-11 22:31:57', 'Turn over na po sa barangay di na namin kaya', 'admin', 'Escalated', '2024-11-11 22:32:16', '', '', '', ''),
+(6, 1142799674, '', '', 'Noise Complaint', 'Ingay ng aso nila kahit madaling araw nagwawala', '[\"meow.jpg\"]', '2024-11-12 15:34:45', 'Blk 60 Lot 60', 1581632830, 'Wela A Magsino', 'Blk 9 Lot 18', 'Resolved', '2024-11-13 00:00:52', 'Okay na po tinapon na namin yung aso', 'admin', 'Resolved', '2024-11-13 00:27:55', '', '', '', ''),
+(7, 1546759430, '', '', 'Property Maintenance', 'Yung puno nya tumumba sa gate ko', '[\"malupiton.png\"]', '2024-11-12 18:35:21', 'Blk 61 Lot 61', 1581632830, 'Wela A Magsino', 'Blk 9 Lot 18', 'In-Process', '2024-11-13 02:38:23', '', '', '', '', '', '', '', ''),
+(8, 1502036937, '', 'Di ko alam', 'Noise Complaint', 'ingay', '[\"bike.jpg\"]', '2024-11-14 17:14:04', 'Blk 6 lot 7', 1581632830, 'Wela A Magsino', 'Blk 9 Lot 18', 'Pending', '', '', '', '', '', '', '', '', ''),
+(9, 316398639, '', '', 'Noise Complaint', 'Ingay', '[\"673773a2b3bbf_malupiton.png\",\"673773a2b3dc0_malupiton2.png\"]', '2024-11-15 16:15:30', 'Blk 0 Lot 1', 1581632830, 'Wela A Magsino', 'Blk 9 Lot 18', 'Pending', '', '', '', '', '', '', '', '', ''),
+(10, 1310202046, '', '', 'Pet Issues', 'Aso nya di nakatali', '[\"673777811631c_boss.jpg\",\"67377781164ee_bossing.jpg\"]', '2024-11-15 16:32:01', 'Blk 9 Lot 9', 1581632830, 'Wela A Magsino', 'Blk 9 Lot 18', 'Pending', '', '', '', '', '', '', '', '', ''),
+(11, 287290528, '', '', 'Noise Complaint', 'test', '[\"67377976c6b1b_boss.jpg\",\"67377976c6d23_bossing.jpg\"]', '2024-11-15 16:40:22', 'test', 1581632830, 'Wela A Magsino', 'Blk 9 Lot 18', 'Pending', '', '', '', '', '', '', '', '', ''),
+(12, 802553249, '', '', 'Property Maintenance', 'Pagong', '[\"malupiton.png\",\"malupiton2.png\"]', '2024-11-15 17:02:21', 'Blk 6 lot 0', 1581632830, 'Wela A Magsino', 'Blk 9 Lot 18', 'Pending', '', '', '', '', '', '', '', '', ''),
+(13, 644834543, '', '', 'Rule Violation', 'aw', '[\"malupiton.png\",\"malupiton2.png\",\"malupiton3.jpg\",\"meow.jpg\"]', '2024-11-15 17:03:25', 'Blk 0 lot 0 ', 1581632830, 'Wela A Magsino', 'Blk 9 Lot 18', 'Resolved', '2024-11-19 01:59:22', 'Dili na kaya', 'admin', 'Escalated', '2024-11-19 01:59:46', 'Gg\'s na', 'barangay', 'Resolved', '2024-11-19 02:01:45'),
+(14, 709666182, '', '', 'Rule Violation', 'test', '[\"boss.jpg\",\"bossing.jpg\",\"malupiton.png\",\"malupiton2.png\",\"malupiton3.jpg\"]', '2024-11-15 17:04:42', 'Test', 1581632830, 'Wela A Magsino', 'Blk 9 Lot 18', 'Pending', '', '', '', '', '', '', '', '', ''),
+(15, 799350189, 'Direct Complaint', 'test', 'Parking Problems ', 'test', '[\"meow.jpg\"]', '2024-11-15 17:13:50', 'test', 1581632830, 'Wela A Magsino', 'Blk 9 Lot 18', 'Pending', '', '', '', '', '', '', '', '', ''),
+(16, 1341459227, 'Direct Complaint', 'test', 'Parking Problems ', 'test', '[\"re4.png\"]', '2024-11-15 17:25:42', 'test', 1581632830, 'Wela A Magsino', 'Blk 9 Lot 18', 'Pending', '', '', '', '', '', '', '', '', ''),
+(17, 401542834, 'Direct Complaint', 'test', 'Parking Problems ', 'test', '[\"re4.png\"]', '2024-11-15 17:33:37', 'test', 1581632830, 'Wela A Magsino', 'Blk 9 Lot 18', 'Pending', '', '', '', '', '', '', '', '', ''),
+(18, 751353843, 'Direct Complaint', 'qwer', 'Parking Problems ', 'qwer', '[\"boss.jpg\"]', '2024-11-15 17:36:03', 'qwer', 1581632830, 'Wela A Magsino', 'Blk 9 Lot 18', 'In-Process', '2024-11-16 21:48:34', '', '', '', '', '', '', '', ''),
+(19, 1264254659, 'Direct Complaint', 'waea', 'Parking Problems ', 'adawdad', '[\"vote.png\"]', '2024-11-15 17:53:05', 'adawda', 1581632830, 'Wela A Magsino', 'Blk 9 Lot 18', 'Pending', '', '', '', '', '', '', '', '', ''),
+(20, 446038163, 'Direct Complaint', 'test', 'Parking Problems', 'test', '[\"re4.png\"]', '2024-11-15 18:15:09', 'test', 1581632830, 'Wela A Magsino', 'Blk 9 Lot 18', 'Pending', '', '', '', '', '', '', '', '', ''),
+(21, 1080101548, 'General Complaint', '', 'Noise Complaint', 'test', '[\"Eternity.jpg\"]', '2024-11-16 12:46:19', '', 1581632830, 'Wela A Magsino', 'Blk 9 Lot 18', 'Pending', '', '', '', '', '', '', '', '', ''),
+(22, 999220120, 'Direct Complaint', 'nice', 'Noise Complaint', 'good job', '[\"malupiton.png\",\"malupiton3.jpg\",\"meow.jpg\"]', '2024-11-16 14:18:03', 'one', 1581632830, 'Wela A Magsino', 'Blk 9 Lot 18', 'Resolved', '2024-11-18 22:38:24', 'Okay na pi', 'barangay', 'Resolved', '2024-11-18 22:48:10', '', '', '', ''),
+(23, 866088832, 'General Complaint', '', 'Noise Complaint', 'nice', '[\"arkana.png\",\"arle.png\",\"awtlas.png\",\"bebetime.jpg\"]', '2024-11-16 14:18:42', '', 1581632830, 'Wela A Magsino', 'Blk 9 Lot 18', 'Resolved', '2024-11-18 22:37:21', 'Test', 'admin', 'Escalated', '2024-11-18 22:52:06', 'oki na pi', 'barangay', 'Resolved', '2024-11-18 22:55:42');
 
 -- --------------------------------------------------------
 
@@ -380,7 +397,8 @@ INSERT INTO `tblaccounts` (`user_id`, `unique_id`, `email`, `password`, `img`, `
 (34, 662462528, 'Hev@gmail.com', '84f60ea382314109784cb42b9b4b8e42', 'Mabuhay_Logo.png', 'Offline now', 'user', 'Approved'),
 (35, 499733408, 'Ethan@gmail.com', 'e05699b45eae134804f4419d3fbb3139', 'Mabuhay_Logo.png', 'Offline now', 'user', 'Approved'),
 (36, 1434008263, 'Rose@gmail.com', '0df4dccc4aac3f6f36e00ef2a6a4bfac', 'Mabuhay_Logo.png', 'Offline now', 'user', 'Approved'),
-(37, 1195874011, 'Mia@gmail.com', '46e6f8781dd60e2635430b61db511262', 'Mabuhay_Logo.png', 'Offline now', 'user', 'Approved');
+(37, 1195874011, 'Mia@gmail.com', '46e6f8781dd60e2635430b61db511262', 'Mabuhay_Logo.png', 'Offline now', 'user', 'Approved'),
+(38, 724357114, 'barangay@gmail.com', '1ee0fa80acf1af702cf55d07704548f6', 'Mabuhay_Logo.png', 'Offline now', 'barangay', 'Approved');
 
 -- --------------------------------------------------------
 
@@ -436,7 +454,8 @@ INSERT INTO `tblresident` (`user_id`, `unique_id`, `access`, `first_name`, `midd
 (36, '662462528', 'Approved', 'Hev', '', 'Alvin', '', 'Male', 4, 'No', '2020-02-24', '', '', 6, 6, '', 1231312313, '', 0, '', ''),
 (37, '499733408', 'Approved', 'Ethan', '', 'Winters', '', 'Male', 7, 'Yes', '2017-02-24', '', '', 1, 1, '', 131132123, '', 0, '', ''),
 (38, '1434008263', 'Approved', 'Rose', '', 'Winters', '', 'Female', 3, 'No', '2021-02-25', '', '', 2, 2, '', 123123123, '', 0, '', ''),
-(39, '1195874011', 'Approved', 'Mia', '', 'Winters', '', 'Female', 5, 'Yes', '2019-03-01', '', '', 6, 6, 'Mold', 312313132313, '', 0, '', '');
+(39, '1195874011', 'Approved', 'Mia', '', 'Winters', '', 'Female', 5, 'Yes', '2019-03-01', '', '', 6, 6, 'Mold', 312313132313, '', 0, '', ''),
+(40, '724357114', 'Approved', 'N/A', 'N/A', 'N/A', 'N/A', 'Preferred not to say', 1, 'No', '2023-11-18', '', '', 0, 0, 'N/A', 0, '', 0, '', '');
 
 -- --------------------------------------------------------
 
@@ -501,7 +520,7 @@ INSERT INTO `user_votes` (`vote_id`, `unique_id`, `candidate`, `votes`, `status`
 (65, 662462528, 'Hev  Alvin', 1, '', '', '', ''),
 (67, 1308040957, 'John  Doe', 1, '', '', '', ''),
 (68, 931588206, 'Jane  Doe', 1, '', '', '', ''),
-(71, 1581632830, 'Wela A Magsino', 0, '', '', '', '');
+(73, 1581632830, 'Wela A Magsino', 0, '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -567,7 +586,7 @@ INSERT INTO `voting` (`vote_id`, `unique_id`, `candidate_name`, `img`, `add_date
 (86, 662462528, 'Hev  Alvin', 'Mabuhay_Logo.png', '2024-11-13 21:18:40', '', '', '', ''),
 (88, 1308040957, 'John  Doe', 'Mabuhay_Logo.png', '2024-11-13 21:27:42', '', '', '', ''),
 (89, 931588206, 'Jane  Doe', 'Mabuhay_Logo.png', '2024-11-13 21:27:44', '', '', '', ''),
-(92, 1581632830, 'Wela A Magsino', 'Mabuhay_Logo.png', '2024-11-13 21:57:20', '', '', '', '');
+(94, 1581632830, 'Wela A Magsino', 'Mabuhay_Logo.png', '2024-11-15 00:18:19', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -621,7 +640,8 @@ INSERT INTO `voting_countdown` (`countdown_id`, `start_id`, `start_time`, `end_i
 (93, 3691, '2024-10-08 21:41:05', 3691, '2024-10-08 21:42:00', 'VotingEnded'),
 (94, 7412, '2024-10-08 21:46:44', 7412, '2024-10-08 21:47:00', 'VotingEnded'),
 (100, 2167, '2024-10-18 13:32:56', 2167, '2024-10-18 13:33:00', 'VotingEnded'),
-(105, 7867, '2024-11-04 21:36:07', 7867, '2024-11-04 21:37:00', 'VotingEnded');
+(105, 7867, '2024-11-04 21:36:07', 7867, '2024-11-04 21:37:00', 'VotingEnded'),
+(109, 3522, '2024-11-15 00:18:36', 3522, '2024-11-16 00:18:00', 'VotingStarted');
 
 -- --------------------------------------------------------
 
@@ -755,7 +775,7 @@ ALTER TABLE `announcements`
 -- AUTO_INCREMENT for table `complaints`
 --
 ALTER TABLE `complaints`
-  MODIFY `complaint_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `complaint_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `forms`
@@ -791,31 +811,31 @@ ALTER TABLE `payment_history`
 -- AUTO_INCREMENT for table `tblaccounts`
 --
 ALTER TABLE `tblaccounts`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT for table `tblresident`
 --
 ALTER TABLE `tblresident`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT for table `user_votes`
 --
 ALTER TABLE `user_votes`
-  MODIFY `vote_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
+  MODIFY `vote_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
 
 --
 -- AUTO_INCREMENT for table `voting`
 --
 ALTER TABLE `voting`
-  MODIFY `vote_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=93;
+  MODIFY `vote_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=95;
 
 --
 -- AUTO_INCREMENT for table `voting_countdown`
 --
 ALTER TABLE `voting_countdown`
-  MODIFY `countdown_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=109;
+  MODIFY `countdown_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=110;
 
 --
 -- AUTO_INCREMENT for table `voting_history`

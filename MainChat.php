@@ -3,15 +3,14 @@ include_once "Connect/Connection.php";
 session_start();
 
 if (isset($_SESSION['unique_id'])) {
-    if ($_SESSION['role'] == 'user') {
+    if ($_SESSION['role'] == 'user' || $_SESSION['role'] == 'barangay') {
         header("Location: LoginPage.php");
         exit();
     }
-  } else {
+} else {
     header("Location: LoginPage.php");
     exit();
-  }
-
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">

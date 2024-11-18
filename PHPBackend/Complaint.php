@@ -240,7 +240,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Server-side ng In-process
     } elseif ($action === 'In-process_complaints') {
         // Fetch complaints from the database
-        $sql = "SELECT complaint_number, complainee, complaint, description, proof, filed_date, complaineeAddress, complainantUID, complainantName, complainantAddress, status 
+        $sql = "SELECT complaint_number, complaint, filed_date, status  
         FROM complaints 
         WHERE status = 'In-Process' 
         ORDER BY filed_date DESC";
@@ -306,7 +306,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
      // Server-side ng Resolved
     } elseif ($action === 'Resolved_complaints') {
         // Fetch complaints from the database
-        $sql = "SELECT complaint_number, complainee, complaint, description, proof, filed_date, complaineeAddress, complainantUID, complainantName, complainantAddress, status 
+        $sql = "SELECT complaint_number, complaint, filed_date, status 
         FROM complaints 
         WHERE status = 'Resolved' 
         ORDER BY filed_date DESC";
@@ -351,7 +351,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
      // Server-side ng Escalated
     } elseif ($action === 'Escalated_complaints') {
         // Fetch complaints from the database
-        $sql = "SELECT complaint_number, complainee, complaint, description, proof, filed_date, complaineeAddress, complainantUID, complainantName, complainantAddress, status 
+        $sql = "SELECT complaint_number, complaint, filed_date, status 
         FROM complaints 
         WHERE status = 'Escalated' 
         ORDER BY filed_date DESC";
@@ -486,6 +486,163 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             echo json_encode(['success' => false, 'error' => 'Complaint not found']); // Return an error if no details are found
         }
     
+        $stmt->close();
+        $conn->close();
+        exit;
+
+    } elseif ($action === 'brngy_get_complaints') {
+        // Fetch complaints from the database
+        $sql = "SELECT complaint_number, complaint, filed_date, status 
+        FROM complaints 
+        WHERE status = 'Escalated' 
+        ORDER BY filed_date DESC";
+        $result = $conn->query($sql);
+    
+        if ($result && $result->num_rows > 0) {
+            $complaints = [];
+            while ($row = $result->fetch_assoc()) {
+                $complaints[] = $row;
+            }
+            echo json_encode(['success' => true, 'data' => $complaints]);
+        } else {
+            echo json_encode(['success' => false, 'error' => 'No complaints found']); 
+        }
+    
+        $conn->close();
+        exit;
+    
+    } elseif ($action === 'BRNGYfetchDetails') {
+        $complaint_id = $_POST['complaint_id'];
+    
+        $sql = "SELECT complainee, complaineeAddress, complainantName, complainantAddress, filed_date, complaint, description, proof, status,
+                Remark1, RemarkBy1, status1, RemarkDate1
+                FROM complaints
+                WHERE complaint_number = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("i", $complaint_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+    
+        if ($result && $result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+            $row['proof'] = trim($row['proof'], '"');
+            echo json_encode(['success' => true, 'data' => $row]);
+        } else {
+            echo json_encode(['success' => false, 'error' => 'Complaint not found']); // Return an error if no details are found
+        }
+    
+        $stmt->close();
+        $conn->close();
+        exit;
+
+    } elseif ($action === 'brngy_get_badge') {
+        // SQL query to count complaints by status
+        $sql = "
+            SELECT 
+                SUM(status = 'Escalated') AS escalated_count
+            FROM complaints
+        ";
+
+        $result = $conn->query($sql);
+
+        if ($result) {
+            $counts = $result->fetch_assoc();
+            echo json_encode([
+                'success' => true,
+                'escalated' => $counts['escalated_count']
+            ]);
+        } else {
+            echo json_encode(['success' => false, 'error' => 'Failed to fetch complaint counts.']);
+        }
+        $conn->close();
+        exit;
+
+    } elseif ($action === 'update_barangay') {
+        $complaint_id = $_POST['complaint_id'];
+        $status = $_POST['status'];
+        $remark = $_POST['remark'];
+        $role = $_POST['role'];
+    
+        // Update the complaint record in the database
+        $sql = "UPDATE complaints SET status = ?, status2 = ?, Remark2 = ?, RemarkBy2 = ?, RemarkDate2 = NOW() WHERE complaint_number = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("ssssi", $status, $status, $remark, $role, $complaint_id);
+    
+        if ($stmt->execute()) {
+            echo json_encode(['success' => true]);
+        } else {
+            echo json_encode(['success' => false, 'error' => 'Failed to update complaint.']);
+        }
+    
+        $stmt->close();
+        $conn->close();
+        exit;
+
+
+     // Server-side ng Resolved
+    } elseif ($action === 'brngyHistory_get_badge') {
+        // SQL query to count complaints by status
+        $sql = "
+            SELECT 
+                SUM(status = 'Escalated') AS escalated_count
+            FROM complaints
+        ";
+
+        $result = $conn->query($sql);
+
+        if ($result) {
+            $counts = $result->fetch_assoc();
+            echo json_encode([
+                'success' => true,
+                'escalated' => $counts['escalated_count']
+            ]);
+        } else {
+            echo json_encode(['success' => false, 'error' => 'Failed to fetch complaint counts.']);
+        }
+        $conn->close();
+        exit;
+
+    } elseif ($action === 'brngyHistory_get_complaints') {
+        // Fetch complaints from the database
+        $sql = "SELECT complaint_number, complaint, filed_date, status, status1
+        FROM complaints 
+        WHERE status = 'Resolved' AND status1 = 'Escalated'
+        ORDER BY filed_date DESC";
+        $result = $conn->query($sql);
+
+        if ($result && $result->num_rows > 0) {
+            $complaints = [];
+            while ($row = $result->fetch_assoc()) {
+                $complaints[] = $row;
+            }
+            echo json_encode(['success' => true, 'data' => $complaints]);
+        } else {
+            echo json_encode(['success' => false, 'error' => 'No complaints found']); 
+        }
+
+        $conn->close();
+        exit;
+
+    } elseif ($action === 'HISTORYfetchDetails') {
+        $complaint_id = $_POST['complaint_id'];
+
+        $sql = "SELECT complainee, complaineeAddress, complainantName, complainantAddress, filed_date, complaint, description, proof, status,
+                Remark1, RemarkBy1, status1, RemarkDate1, Remark2, RemarkBy2, status2, RemarkDate2
+                FROM complaints
+                WHERE complaint_number = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("i", $complaint_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        if ($result && $result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+            $row['proof'] = trim($row['proof'], '"');
+            echo json_encode(['success' => true, 'data' => $row]);
+        } else {
+            echo json_encode(['success' => false, 'error' => 'Complaint not found']); // Return an error if no details are found
+        }
+
         $stmt->close();
         $conn->close();
         exit;

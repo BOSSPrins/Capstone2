@@ -3,14 +3,14 @@ include_once "Connect/Connection.php";
 session_start();
 
 if (isset($_SESSION['unique_id'])) {
-    if ($_SESSION['role'] == 'admin') {
+    if ($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'barangay') {
         header("Location: LoginPage.php");
         exit();
     }
-    } else {
+} else {
     header("Location: LoginPage.php");
     exit();
-    }
+}
 
 $admin_unique_id = ''; // Default value if no admin found
 $admin_sql = mysqli_query($conn, "SELECT unique_id FROM tblaccounts WHERE role = 'admin' LIMIT 1");
@@ -290,7 +290,7 @@ $encoded_id = urlencode($admin_unique_id);
                         </div>
                     </div>
 
-
+    
                     <!-- NEW COMPLAINT PAGE -->
                     <div class="ContainerForComplaints" id="AddNewComplaints">
                         <div class="TableComplaintsCon" onclick="togglePageNewAndTbl('tblConforComplaints')"> 

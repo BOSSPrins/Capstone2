@@ -365,6 +365,8 @@ function viewDetails(button) {
     fetchComplaintDetails(complaintId);
 }
 
+const images = []; // Initialize an empty array to store images
+
 function fetchComplaintDetails(complaintId) {
     const xhr = new XMLHttpRequest();
     xhr.open("POST", "PHPBackend/Complaint.php", true);
@@ -375,7 +377,45 @@ function fetchComplaintDetails(complaintId) {
             const response = JSON.parse(xhr.responseText);
 
             if (response.success) {
-                // Populate the fields with the fetched data
+                
+                const complaineeName = response.data.complainee;
+                const complaineeAddress = response.data.complaineeAddress;
+
+                // Get the input and label elements
+                const complaineeNameInput = document.getElementById('ComplaineeName');
+                const complaineeAddressInput = document.getElementById('ComplaineeAddress');
+                const complaineeNameLabel = complaineeNameInput.previousElementSibling; // Get the label for name
+                const complaineeAddressLabel = complaineeAddressInput.previousElementSibling; // Get the label for address
+
+                // Set the input values
+                complaineeNameInput.value = complaineeName || '';
+                complaineeAddressInput.value = complaineeAddress || '';
+
+                // Hide the respective fields and their labels if their values are empty
+                if (!complaineeName) {
+                    complaineeNameInput.style.display = 'none'; // Hide name field
+                    complaineeNameLabel.style.display = 'none'; // Hide name label
+                } else {
+                    complaineeNameInput.style.display = 'block'; // Show name field
+                    complaineeNameLabel.style.display = 'block'; // Show name label
+                }
+
+                if (!complaineeAddress) {
+                    complaineeAddressInput.style.display = 'none'; // Hide address field
+                    complaineeAddressLabel.style.display = 'none'; // Hide address label
+                } else {
+                    complaineeAddressInput.style.display = 'block'; // Show address field
+                    complaineeAddressLabel.style.display = 'block'; // Show address label
+                }
+
+                // Optionally hide the entire Complainee section if both are hidden
+                const complaineeSection = document.getElementById('ComplaineeSection');
+                if (!complaineeName && !complaineeAddress) {
+                    complaineeSection.style.display = 'none';
+                } else {
+                    complaineeSection.style.display = 'block';
+                }
+
                 document.getElementById('ComplaineeName').value = response.data.complainee;
                 document.getElementById('ComplaineeAddress').value = response.data.complaineeAddress;
                 
@@ -396,7 +436,19 @@ function fetchComplaintDetails(complaintId) {
                 document.getElementById('SecondStatus').value = response.data.status2;
                 document.getElementById('SecondRemarkDate').value = formatDateTimeToWords(response.data.RemarkDate2);
                 
-                document.getElementById('ProofFileName').src = "Pictures/" + response.data.proof;
+
+                const proofFiles = JSON.parse(response.data.proof);
+
+                // Clear the images array and add the new images
+                images.length = 0; // Clear any existing images
+                proofFiles.forEach(file => images.push("Pictures/" + file));
+
+                // Update the main displayed image
+                // document.getElementById('ProofFileName').src = images[0]; // Display the first image by default
+
+                // Store the images for modal use
+                document.querySelector('.BiewwPicture').dataset.proofImages = JSON.stringify(images);
+
 
                  // Check if Third Remark section should be hidden
                  const secondRemarkSection = document.getElementById('SecondRemarkSectionContainer');
@@ -451,30 +503,37 @@ window.onload = function () {
     updateComplaintCounts();
 };
 
-
+ 
 // FUNCTION PARA SA PICTURE MODAL PREVIEW 
-// Example list of images that you want to display in the modal (use your actual image list here)
-const images = [
-    "image1.jpg", // Replace with actual image URLs
-    "image2.jpg",
-    "image3.jpg"
-];
-
-// Modal and Image elements
 const modal = document.querySelector('.imageModal');
 const modalImage = document.querySelector('.modalImage');
+const prevButton = document.querySelector('.prevImage');
+const nextButton = document.querySelector('.nextImage');
 let currentIndex = 0;  // Track the current image index
 
 // Show the modal and display the first image
-document.querySelector('.BiewwPicture').addEventListener('click', function() {
-    currentIndex = 0;  // Reset to first image
-    showModal();
+document.querySelector('.BiewwPicture').addEventListener('click', function () {
+    const proofImages = JSON.parse(this.dataset.proofImages); // Get all images for the modal
+    currentIndex = 0; // Reset to the first image
+    images.length = 0; // Ensure images array matches the current proof
+    proofImages.forEach(image => images.push(image));
+
+    showModal(); // Open the modal
 });
 
 // Function to display the modal and set the image
 function showModal() {
-    modal.style.display = 'flex';  // Show the modal
-    modalImage.src = images[currentIndex];  // Set the image source
+    modal.style.display = 'flex'; // Show the modal
+    modalImage.src = images[currentIndex]; // Set the first image
+
+    // Hide or show the navigation buttons depending on the number of images
+    if (images.length === 1) {
+        prevButton.style.display = 'none'; // Hide previous button if there's only one image
+        nextButton.style.display = 'none'; // Hide next button if there's only one image
+    } else {
+        prevButton.style.display = 'block'; // Show previous button if there are multiple images
+        nextButton.style.display = 'block'; // Show next button if there are multiple images
+    }
 }
 
 // Close the modal when clicking the close button
@@ -488,10 +547,10 @@ function changeImage(direction) {
 
     // Loop the images: if we're at the start or end, loop around
     if (currentIndex < 0) {
-        currentIndex = images.length - 1;  // Go to last image
+        currentIndex = images.length - 1; // Go to last image
     } else if (currentIndex >= images.length) {
-        currentIndex = 0;  // Go to first image
+        currentIndex = 0; // Go to first image
     }
 
-    modalImage.src = images[currentIndex];  // Update the image source
+    modalImage.src = images[currentIndex]; // Update the image source
 }
