@@ -1,10 +1,29 @@
+<?php
+include_once "Connect/Connection.php";
+session_start();
+
+if (isset($_SESSION['unique_id'])) {
+    if ($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'user') {
+        header("Location: LoginPage.php");
+        exit();
+    }
+} else {
+    header("Location: LoginPage.php");
+    exit();
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> Mabuhay Website </title>
+    <link rel="icon" type="image/x-icon" href="Pictures/Mabuhay_Logo.ico">
     <link rel="stylesheet" href="CSS/BarangayHisto.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="jsPDF/dist/jspdf.umd.min.js"></script>
 </head>
 </head>
 <body>
@@ -17,6 +36,7 @@
                             <a href="#" onclick="openPage('Edit Profile')"> Edit Profile </a>
                             <a href="#" onclick="openPage('Edit Email')"> Edit Email </a>
                             <a href="#" onclick="openPage('Change Password')"> Change Password </a>
+                            <a href="Logout.php">Logout</a>
                         </div>
         
                         <div class="profilePages">
@@ -77,8 +97,10 @@
                     </div>
                 </div>
                 <div class="BarangayNavv">
-                    <a href="BarangayTable.html" class="NavTop">List Of Escalated Complaints</a>
-                    <a href="BarangayHisto.html" class="NavTop">History</a>
+                    <a href="BarangayTable.php" class="NavTop NavActive">List Of Escalated Complaints
+                        <span class="badge badge-red" id="escalatedBadge">0</span>
+                    </a>
+                    <a href="BarangayHisto.php" class="NavTop">History</a>
                 </div>
                 
                 <div class="MainContainerForTables">
@@ -116,14 +138,14 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td> 123456 </td>
+                                        <!-- <td> 123456 </td>
                                         <td> Ruella Cervantes </td>
                                         <td> 02-02-23 02:23 </td>
                                         <td> Escalated </td>
                                         <td> 
-                                            <!-- View button to show the complaint details -->
+                                           
                                             <button class="BiewHisto" onclick="toggleHistoBiew('ViewExcaltedDet2')"> View </button>
-                                        </td>
+                                        </td> -->
                                     </tr>
                                 </tbody>
                             </table>
@@ -141,33 +163,50 @@
                     </div>
                 
                     <!-- Section for the Complaint Details (when View is clicked) -->
-                    <div class="EachContainerBarang2" id="ViewExcaltedDet2">
+                    <div class="EachContainerBarang2" id="ViewExcaltedDet2" style="display: none;">
                         <div style="display: flex; align-items: center;" class="NameAndBtn">
                             <!-- Back button to return to the TableListEsca section -->
                             <button class="ButtonBack" onclick="toggleHistoBiew('TableHistory')"> &#60; </button>
                             <h2 style="margin-left: 10px;"> Complaint Details </h2>
                         </div>
                         <div class="DetaLaman">
+                        <div id="ComplaineeSection">
+                                <h2> Complainee </h2>
+                                <div style="display: flex; margin-bottom: 15px; align-items:center;">
+                                    <label class="LabelCompDeta"> Name: </label>
+                                    <input class="inputCompDeta" type="text" id="ComplaineeName">
+                                </div>
+                                <div style="display: flex; margin-bottom: 15px; align-items:center;">
+                                    <label class="LabelCompDeta"> Address: </label>
+                                    <input class="inputCompDeta" type="text" id="ComplaineeAddress">
+                                </div>
+                            </div>
+                        
+                            <h2> Complainant </h2>
                             <div style="display: flex; margin-bottom: 15px; align-items:center;">
-                                <label class="LabelCompDeta"> Complaint Name: </label>
-                                <input class="inputCompDeta" type="text">
+                                <label class="LabelCompDeta"> Name: </label>
+                                <input class="inputCompDeta" type="text" id="ComplainantName">
                             </div>
                             <div style="display: flex; margin-bottom: 15px; align-items:center;">
                                 <label class="LabelCompDeta"> Address: </label>
-                                <input class="inputCompDeta" type="text">
+                                <input class="inputCompDeta" type="text" id="ComplainantAddress">
                             </div>
                             <div style="display: flex; margin-bottom: 15px; align-items:center;">
                                 <label class="LabelCompDeta"> Date Submitted: </label>
-                                <input class="inputCompDeta" type="text">
+                                <input class="inputCompDeta" type="text" id="DateSubmit">
                             </div>
                             <div style="display: flex; margin-bottom: 15px; align-items:center;">
                                 <label class="LabelCompDeta"> Nature Of Complaint: </label>
-                                <input class="inputCompDeta" type="text">
+                                <input class="inputCompDeta" type="text" id="ComplaintType">
                             </div>
                             <h2> Details </h2>
                             <div style="display: flex; margin-bottom: 15px;">
                                 <label class="LabelCompDeta"> Description: </label>
-                                <textarea class="textAreaBarangDeta2"> </textarea>
+                                <textarea class="textAreaBarangDeta2" id="Description"> </textarea>
+                            </div>
+                            <div style="display: flex; margin-bottom: 15px; align-items:center;">
+                                <label class="LabelCompDeta"> Current Status: </label>
+                                <input class="inputCompDeta" type="text" id="Status">
                             </div>
                             <div style="display: flex; margin-bottom: 15px; align-items:center;">
                                 <label class="LabelCompDeta"> File: </label>
@@ -180,33 +219,50 @@
                                     <button class="nextImage" onclick="changeHistoImg(1)">&#10095;</button>
                                 </div>
                             </div>
-                            <div style="display: flex; margin-bottom: 15px; align-items:center;">
-                                <label class="LabelCompDeta"> Current Status: </label>
-                                <input class="inputCompDeta" type="text">
-                            </div>
 
                             <!-- Galing Pending Lagayan -->
+                            <h2>First Remark:</h2>
                             <div style="background: rgb(138, 187, 231); padding: 10px;">
                                 <div style="display: flex; margin-bottom: 15px;">
                                     <label class="LabelCompDeta"> Remark: </label>
-                                    <textarea class="textAreaBarangDeta2"> </textarea>
+                                    <textarea class="textAreaBarangDeta2" id="FirstRemark"> </textarea>
                                 </div>
                                 <div style="display: flex; margin-bottom: 15px; align-items:center;">
                                     <label class="LabelCompDeta"> Remark by: </label>
-                                    <input class="inputCompDeta" type="text">
+                                    <input class="inputCompDeta" type="text" id="FirstRemarkBy">
                                 </div>
                                 <div style="display: flex; margin-bottom: 15px; align-items:center;">
                                     <label class="LabelCompDeta"> Status: </label>
-                                    <input class="inputCompDeta" type="text">
+                                    <input class="inputCompDeta" type="text" id="FirstStatus">
                                 </div>
                                 <div style="display: flex; align-items:center;">
                                     <label class="LabelCompDeta"> Remark Date: </label>
-                                    <input class="inputCompDeta" type="text">
+                                    <input class="inputCompDeta" type="text" id="FirstRemarkDate">
+                                </div>
+                            </div>
+
+                            <h2>Second Remark:</h2>
+                            <div style="background: rgb(138, 187, 231); padding: 10px;">
+                                <div style="display: flex; margin-bottom: 15px;">
+                                    <label class="LabelCompDeta"> Remark: </label>
+                                    <textarea class="textAreaBarangDeta2" id="SecondRemark"> </textarea>
+                                </div>
+                                <div style="display: flex; margin-bottom: 15px; align-items:center;">
+                                    <label class="LabelCompDeta"> Remark by: </label>
+                                    <input class="inputCompDeta" type="text" id="SecondRemarkBy">
+                                </div>
+                                <div style="display: flex; margin-bottom: 15px; align-items:center;">
+                                    <label class="LabelCompDeta"> Status: </label>
+                                    <input class="inputCompDeta" type="text" id="SecondStatus">
+                                </div>
+                                <div style="display: flex; align-items:center;">
+                                    <label class="LabelCompDeta"> Remark Date: </label>
+                                    <input class="inputCompDeta" type="text" id="SecondRemarkDate">
                                 </div>
                             </div>
                             <div style="display: flex; margin-bottom: 15px; margin-top: 10px; align-items:center;">
                                 <label class="LabelCompDeta"> Action: </label>
-                                <button class="DownloadBtn"> Download </button>
+                                <button class="DownloadBtn" id="generatePdfBtn" disabled> Generate Complaint Letter </button>
                             </div>
                         </div>
                     </div>
