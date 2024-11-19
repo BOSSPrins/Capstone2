@@ -168,6 +168,7 @@
       padding: 10px;
       position: relative;
       transition: all 300ms ease;
+      align-items: center; /* Ensure items (image + label + badge) are aligned */
     }
     
     /* Active state for submenu items */
@@ -219,6 +220,7 @@
   .img-subMenu{
     width: 20px;
     margin-right: 5px;
+    margin-right: 10px;
   }
   
   .sub-spa{
@@ -760,18 +762,30 @@
   
 /* DESIGN NUNG BADGE */
 .badge {
-  display: inline-block;
-  padding: 2px 8px;
-  border-radius: 12px;
-  font-size: 0.8em;
+  display: inline-flex;
+  justify-content: center;  /* Centers content horizontally */
+  text-align: center;       /* Ensures text is centered */
+  padding-top: 5px;               /* Remove extra padding */
+  width: 24px;              /* Fixed width */
+  height: 24px;             /* Fixed height */
+  border-radius: 12px;      /* Rounded corners */
+  font-size: 0.9em;         /* Font size for the text inside the badge */
   font-weight: bold;
   color: white;
-  margin-left: 85px;
+  position: absolute;
+  top: 50%;                 /* Position the badge vertically */
+  right: 10px;              /* Align badge towards the right */
+  transform: translateY(-50%); /* Fine-tune vertical centering */
 }
 
-.badge-yellow { background-color: #FFB300; }
-.badge-red { background-color: #F44336; }
-  
+/* Badge color variations */
+.badge-yellow {
+  background-color: #FFB300;
+}
+
+.badge-red {
+  background-color: #F44336;
+} 
   
 /* DESIGN PARA SA BUTTON VIEW PICTURES */
 .BiewwPicture{

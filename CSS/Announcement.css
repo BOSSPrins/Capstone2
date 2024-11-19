@@ -65,150 +65,169 @@ html{
   
 /* ===== SIDEBAR DESIGN ===== */
 .sidebarContainer {
-    position: fixed;
-    display: flex;
-    flex-direction: column;
-    /* left: 5px; */
-    bottom: 0;
-    top: 0;
-    background-color:  rgb(255, 255, 255);
-    width: 250px;
-    /* margin-top: 7px; */
-    transition: all 0.3s;
+position: fixed;
+display: flex;
+flex-direction: column;
+bottom: 0;
+top: 0;
+background-color: rgb(255, 255, 255);
+width: 275px;
+transition: all 0.3s;
 }
-  
-.sidebarContainer span{
-    font-size: 14.5px;
-    font-weight: 500;
+
+.DagdagNanaman {
+flex: 1; /* Allow the div to grow and fill available space */
+overflow-y: auto; /* Enable vertical scrolling */
+/* background-color: gray; */
+scrollbar-width: thin; /* For Firefox */
 }
-  
-.sidebarContainer .sideside{
-    display: flex;
-    color: var(--color-info-dark);
-    padding-left: 25px;
-    gap: 1rem;
-    align-items: center;
-    position: relative;
-    height: 3.6rem;
-    transition: all 300ms ease;
+
+.DagdagNanaman span{
+  font-size: 14.5px;
+  font-weight: 500;
 }
-  
-.sidebarContainer .sideside .img-sideboard{
-    font-size: 1.6rem;
-    transition: all 300ms ease;
+
+.DagdagNanaman .sideside{
+  display: flex;
+  color: var(--color-info-dark);
+  padding-left: 25px;
+  gap: 1rem;
+  align-items: center;
+  position: relative;
+  height: 3.6rem;
+  transition: all 300ms ease;
 }
-  
-.sidebarContainer .sideside:last-child{
-    position: absolute;
-    bottom: 1px;
-    width: 100%;
+
+.DagdagNanaman .sideside .img-sideboard{
+  font-size: 1.6rem;
+  transition: all 300ms ease;
 }
-  
-.sidebarContainer .sideside.baractive{
-    background: var(--color-light);
-    color: var(--color-primary);
+
+.DagdagNanaman .sideside:last-child{
+  bottom: 1px;
 }
-  
-.sidebarContainer .sideside.baractive .img-sideboard{
-    margin-left: calc(1rem -3rem);
+
+/* Active state for sidebar items */
+.sideside.baractive {
+  background: var(--color-light);
+  color: var(--color-primary);
 }
-  
-.sidebarContainer .sideside:hover{
-    color: var(--color-primary);
+
+.sideside.baractive::before{
+  content: '';
+  width: 4px;
+  height: 100%;
+  background: var(--color-primary);
+  position: absolute;
+  left: 0;
+  top: 0;
+  margin-left: 2px;
 }
-  
-.sidebarContainer .sideside:hover .img-sideboard{
-    margin-left: 1rem;
+
+.DagdagNanaman .sideside.baractive .img-sideboard{
+  margin-left: calc(1rem -3rem);
 }
-  
+
+.DagdagNanaman .sideside:hover{
+  color: var(--color-primary);
+}
+
+.DagdagNanaman .sideside:hover .img-sideboard{
+  margin-left: 1rem;
+}
+
 /* SIDEBAR ACTIVE */
 .sidebarActive {
-    transform: translateX(250px); /* Move sidebar into view */
+  transform: translateX(250px); 
 }
-  
+
 /* .MonthlyDuessContainerr.MonthlyDuessConActivee {
-    margin-left: 5px;
+  margin-left: 5px;
 } */
-  
+
 /* ===== SIDEBAR IMAGE SIZE ===== */
-  .img-sideboard{
-    width: 20px;
+.img-sideboard{
+  width: 20px;
 }
-  
+
 /* ========== SUB MENU SIDEBAR ========== */
-  .subMenuComp{
-    display: none;
-    margin-left: 35px;
-    transition: all 0.3s;
+.subMenuComp{
+  display: none;
+  margin-left: 35px;
+  transition: all 0.3s;
 }
-  
+
 .submenu-visible {
-    display: block; 
+  display: block; 
 }
-  
+
 .subMenuComp li a{
-    position: relative;
-    display: flex;
-    color: var(--color-info-dark);
-    padding: 10px;
-    position: relative;
-    transition: all 300ms ease;
+  position: relative;
+  display: flex;
+  color: var(--color-info-dark);
+  padding: 10px;
+  position: relative;
+  transition: all 300ms ease;
 }
-  
+
+/* Active state for submenu items */
+.subMenuComp li a.baractive {
+  background: var(--color-light);
+  color: var(--color-primary);
+}
+
+.subMenuComp li a.baractive::before {
+  content: '';
+  width: 4px;
+  height: 100%;
+  background: var(--color-primary);
+  position: absolute;
+  left: 0;
+  top: 0;
+  margin-left: 2px;
+}
+
 .eme2{
-    width: 0;
-    height: 0;
-    border-left: 5px solid transparent;
-    border-right: 5px solid transparent;
-    border-top: 6px solid #aeaeae;
-    transition: 0.3s;
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 6px solid #aeaeae;
+  transition: 0.3s;
+  z-index: 2;
 }
-  
+
 .buttonEme2{
-    padding: 10px 15px;
-    margin-left: 45px;
-    cursor: pointer;
+  padding: 10px 15px;
+  margin-left: 5px;
+  cursor: pointer;
+  z-index: 2;
 }
-  
+
 .eme2-rotate{
-    transform: rotate(180deg);
+  transform: rotate(180deg);
 }
-  
+
 .subMenuComp li a.active{
-    background: var(--color-light);
-    color: var(--color-primary);
-    height: 100%;
-    margin-left: 5px;
+  background: var(--color-light);
+  color: var(--color-primary);
+  height: 100%;
+  margin-left: 5px;
 }
-  
-.sidebarContainer li a:hover{
-    color: var(--color-primary);
-    margin-left: 1rem;
-}
-  
-.subMenuComp li a.active::before {
-    content: '';
-    width: 4px;
-    height: 100%;
-    background: var(--color-primary);
-    position: absolute;
-    left: 0;
-    top: 0;
-}
-  
+
 /* ===== SUB MENU CHAT IMAGE ==== */
-  .img-subMenu{
-    width: 20px;
-    margin-right: 5px;
+.img-subMenu{
+  width: 20px;
+  margin-right: 5px;
 }
-  
+
 .sub-spa{
-    margin-top: 5px;
+  margin-top: 5px;
 }
   
 /* ========== MAIN DASHBOARD DESIGN ========== */
 .MainBodyContainerr {
-  padding-left: 250px;
+  padding-left: 275px;
   display: flex; 
   flex-direction: column; 
   height: 100vh; 
@@ -222,14 +241,17 @@ html{
   overflow: hidden; 
 }
 
-.MainContainerAll {
+.EachContainerAnnounce{
+  display: flex;
+  flex-direction: column; /* Stack children vertically */
   width: 100%;
   padding: 10px;
   background-color: #ffffff;
   border: 1px solid rgb(179, 172, 172);
-  margin: 10px;
-  flex: 1; 
-  overflow-y: auto;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  flex: 1; /* Allow it to grow and take available space */
 }
   
   /* DESIGN PARA TO SA HEADER NG SIDEBAR AT SA MAIN */
@@ -438,3 +460,36 @@ html{
     font-size: 17.5px;
     cursor: pointer;
   }
+
+/* DESIGN PARA SA ANNOUNCEMENT NAVIGATION */
+.AnnounceNav {
+  margin: 10px 10px 0px 10px;
+  font-size: 0; /* Removes any unwanted spacing around inline-block elements */
+  display: flex; /* Use flexbox to distribute space evenly */
+  gap: 10px; /* Adds a gap between the anchor tags */
+  margin-top: 15px;
+}
+
+.AnnounceNav a {
+  flex: 1; /* Each anchor tag takes up equal space */
+  padding: 5px 20px;
+  background-color: #dfdfdf;
+  color: black;
+  text-decoration: none;
+  font-size: 16px; /* Reset font-size for anchor tags */
+  text-align: center; /* Centers the text inside the anchor tags */
+}
+
+.AnnounceNav a.NavActive {
+  background: #c7b216; /* Change the background color when active */
+  color: white; /* Optional: Change text color when active */
+}
+
+.AnnounceNav a:hover {
+  background: #c7b216;
+  color: white;
+}
+
+.ConNavHidden {
+  display: none;
+}
