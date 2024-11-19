@@ -186,38 +186,48 @@ $encoded_id = urlencode($admin_unique_id);
                                             <span class="PagEkis"> &times; </span>
                                         </header>
                                         <div class="LoobNaPoIto">
+
+                                            <div id="ComplaineeSection">
+                                                <h2> Complainee </h2>
+                                                <div style="display: flex; margin-bottom: 15px; align-items:center;">
+                                                    <label class="LabelModalDet"> Name: </label>
+                                                    <input class="InputModalDet" type="text" id="UserComplaineeName">
+                                                </div>
+                                                <div style="display: flex; margin-bottom: 15px; align-items:center;">
+                                                    <label class="LabelModalDet"> Address: </label>
+                                                    <input class="InputModalDet" type="text" id="UserComplaineeAddress">
+                                                </div>
+                                            </div>
+                                            
+                                            <h2> Complainant </h2>
                                             <div style="display: flex; margin-bottom: 15px; align-items:center;">
-                                                <label class="LabelModalDet"> Complaint Name: </label>
-                                                <input class="InputModalDet" type="text">
+                                                <label class="LabelModalDet"> Name: </label>
+                                                <input class="InputModalDet" type="text" id="UserComplainantName">
                                             </div>
                                             <div style="display: flex; margin-bottom: 15px; align-items:center;">
                                                 <label class="LabelModalDet"> Address: </label>
-                                                <input class="InputModalDet" type="text">
+                                                <input class="InputModalDet" type="text" id="UserComplainantAddress">
                                             </div>
                                             <div style="display: flex; margin-bottom: 15px; align-items:center;">
                                                 <label class="LabelModalDet"> Date Submitted: </label>
-                                                <input class="InputModalDet" type="text">
+                                                <input class="InputModalDet" type="text" id="UserDateSubmit">
                                             </div>
                                             <div style="display: flex; margin-bottom: 15px; align-items:center;">
                                                 <label class="LabelModalDet"> Nature Of Complaint: </label>
-                                                <input class="InputModalDet" type="text">
+                                                <input class="InputModalDet" type="text" id="UserComplaintType">
                                             </div>
                                             <h2> Details </h2>
                                             <div style="display: flex; margin-bottom: 15px; align-items:center;">
                                                 <label class="LabelModalDet"> Description: </label>
-                                                <textarea class="textAreaModalDet"></textarea>
-                                            </div>
-                                            <div style="display: flex; margin-bottom: 15px; align-items:center;">
-                                                <label class="LabelModalDet">  File: </label>
-                                                <!-- Input a container for images and a container for view but this function will be applicable when edit button click -->
-                                            </div>
-                                            <div style="display: flex; margin-bottom: 15px; align-items:center;">
-                                                <label class="LabelModalDet"> Complaint Name: </label>
-                                                <input class="InputModalDet" type="text">
+                                                <textarea class="textAreaModalDet" id="UserDescription"></textarea>
                                             </div>
                                             <div style="display: flex; margin-bottom: 15px; align-items:center;">
                                                 <label class="LabelModalDet"> Current Status: </label>
-                                                <input class="InputModalDet" type="text">
+                                                <input class="InputModalDet" type="text" id="UserStatus">
+                                            </div>
+                                            <div style="display: flex; margin-bottom: 15px; align-items:center;">
+                                                <label class="LabelModalDet">  File: </label>
+                                                <!-- input a images when click the edit button it will show a "x" above the images -->
                                             </div>
 
 
@@ -225,19 +235,19 @@ $encoded_id = urlencode($admin_unique_id);
                                             <div style="background: rgb(138, 187, 231); padding: 10px; margin-bottom:10px;">
                                                 <div style="display: flex; margin-bottom: 15px;">
                                                     <label class="LabelModalDet"> Remark: </label>
-                                                    <textarea class="textAreaModalDet"> </textarea>
+                                                    <textarea class="textAreaModalDet" id="UserFirstRemark"> </textarea>
                                                 </div>
                                                 <div style="display: flex; margin-bottom: 15px; align-items:center;">
                                                     <label class="LabelModalDet"> Remark by: </label>
-                                                    <input class="InputModalDet" type="text">
+                                                    <input class="InputModalDet" type="text" id="UserFirstRemarkBy">
                                                 </div>
                                                 <div style="display: flex; margin-bottom: 15px; align-items:center;">
                                                     <label class="LabelModalDet"> Status: </label>
-                                                    <input class="InputModalDet" type="text">
+                                                    <input class="InputModalDet" type="text" id="UserFirstStatus">
                                                 </div>
                                                 <div style="display: flex; align-items:center;">
                                                     <label class="LabelModalDet"> Remark Date: </label>
-                                                    <input class="InputModalDet" type="text">
+                                                    <input class="InputModalDet" type="text" id="UserFirstRemarkDate">
                                                 </div>
                                             </div>
 
@@ -246,19 +256,19 @@ $encoded_id = urlencode($admin_unique_id);
                                              <div style="background: rgb(138, 187, 231); padding: 10px;">
                                                 <div style="display: flex; margin-bottom: 15px;">
                                                     <label class="LabelModalDet"> Remark: </label>
-                                                    <textarea class="textAreaModalDet"> </textarea>
+                                                    <textarea class="textAreaModalDet" id="UserSecondRemark"> </textarea>
                                                 </div>
                                                 <div style="display: flex; margin-bottom: 15px; align-items:center;">
                                                     <label class="LabelModalDet"> Remark by: </label>
-                                                    <input class="InputModalDet" type="text">
+                                                    <input class="InputModalDet" type="text" id="UserSecondRemarkBy">
                                                 </div>
                                                 <div style="display: flex; margin-bottom: 15px; align-items:center;">
                                                     <label class="LabelModalDet"> Status: </label>
-                                                    <input class="InputModalDet" type="text">
+                                                    <input class="InputModalDet" type="text" id="UserSecondStatus">
                                                 </div>
                                                 <div style="display: flex; align-items:center;">
                                                     <label class="LabelModalDet"> Remark Date: </label>
-                                                    <input class="InputModalDet" type="text">
+                                                    <input class="InputModalDet" type="text" id="UserSecondRemarkDate">
                                                 </div>
                                             </div>
                                             <div style="display: flex; margin-bottom: 15px; margin-top: 10px; align-items:center;">

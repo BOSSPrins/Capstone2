@@ -591,47 +591,97 @@ function USERviewDetails(button) {
     document.getElementById('generatePdfBtn').disabled = false;
 }
 
-// const images = [];
+const images = [];
 
-// function USERfetchComplaintDetails(complaintId) {
-//     const xhr = new XMLHttpRequest();
-//     xhr.open("POST", "PHPBackend/Complaint.php", true);
-//     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+function USERfetchComplaintDetails(complaintId) {
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", "PHPBackend/Complaint.php", true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 
-//     xhr.onreadystatechange = function () {
-//         if (xhr.readyState === 4 && xhr.status === 200) {
-//             const response = JSON.parse(xhr.responseText);
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            const response = JSON.parse(xhr.responseText);
 
-//             if (response.success) {
+            if (response.success) {
+                
+                const complaineeName = response.data.complainee;
+                const complaineeAddress = response.data.complaineeAddress;
 
-//                 document.getElementById('UserComplaineeName').value = response.data.complainee;
-//                 document.getElementById('UserComplaineeAddress').value = response.data.complaineeAddress;
-//                 document.getElementById('UserComplainantName').value = response.data.complainantName;
-//                 document.getElementById('UserComplainantAddress').value = response.data.complainantAddress;
-//                 document.getElementById('UserDateSubmit').value = formatDateTimeToWords(response.data.filed_date);
-//                 document.getElementById('UserComplaintType').value = response.data.complaint;
-//                 document.getElementById('UserDescription').value = response.data.description;
-//                 document.getElementById('UserStatus').value = response.data.status;
+                // Get the input and label elements
+                const complaineeNameInput = document.getElementById('UserComplaineeName');
+                const complaineeAddressInput = document.getElementById('UserComplaineeAddress');
+                const complaineeNameLabel = complaineeNameInput.previousElementSibling; // Get the label for name
+                const complaineeAddressLabel = complaineeAddressInput.previousElementSibling; // Get the label for address
 
-//                 //  // Parse the proof field as JSON
-//                 // const proofFiles = JSON.parse(response.data.proof);
+                // Set the input values
+                complaineeNameInput.value = complaineeName || '';
+                complaineeAddressInput.value = complaineeAddress || '';
 
-//                 // // Clear the images array and add the new images
-//                 // images.length = 0; // Clear any existing images
-//                 // proofFiles.forEach(file => images.push("Pictures/" + file));
+                // Hide the respective fields and their labels if their values are empty
+                if (!complaineeName) {
+                    complaineeNameInput.style.display = 'none'; // Hide name field
+                    complaineeNameLabel.style.display = 'none'; // Hide name label
+                } else {
+                    complaineeNameInput.style.display = 'block'; // Show name field
+                    complaineeNameLabel.style.display = 'block'; // Show name label
+                }
 
-//                 // // Update the main displayed image
-//                 // // document.getElementById('ProofFileName').src = images[0]; // Display the first image by default
+                if (!complaineeAddress) {
+                    complaineeAddressInput.style.display = 'none'; // Hide address field
+                    complaineeAddressLabel.style.display = 'none'; // Hide address label
+                } else {
+                    complaineeAddressInput.style.display = 'block'; // Show address field
+                    complaineeAddressLabel.style.display = 'block'; // Show address label
+                }
 
-//                 // // Store the images for modal use
-//                 // document.querySelector('.BiewwPicture').dataset.proofImages = JSON.stringify(images);
+                // Optionally hide the entire Complainee section if both are hidden
+                const complaineeSection = document.getElementById('ComplaineeSection');
+                if (!complaineeName && !complaineeAddress) {
+                    complaineeSection.style.display = 'none';
+                } else {
+                    complaineeSection.style.display = 'block';
+                }
 
-//                 // Display the details section only after data is loaded
-//             } else {
-//                 console.error('Error fetching complaint details:', response.error);
-//             }
-//         }
-//     };
 
-//     xhr.send("action=UserfetchDetails&complaint_id=" + complaintId);
-// }
+                document.getElementById('UserComplaineeName').value = response.data.complainee;
+                document.getElementById('UserComplaineeAddress').value = response.data.complaineeAddress;
+                document.getElementById('UserComplainantName').value = response.data.complainantName;
+                document.getElementById('UserComplainantAddress').value = response.data.complainantAddress;
+                document.getElementById('UserDateSubmit').value = formatDateTimeToWords(response.data.filed_date);
+                document.getElementById('UserComplaintType').value = response.data.complaint;
+                document.getElementById('UserDescription').value = response.data.description;
+                document.getElementById('UserStatus').value = response.data.status;
+
+                document.getElementById('UserFirstRemark').value = response.data.Remark1;
+                document.getElementById('UserFirstRemarkBy').value = response.data.RemarkBy1;
+                document.getElementById('UserFirstStatus').value = response.data.status1;
+                document.getElementById('UserFirstRemarkDate').value = formatDateTimeToWords(response.data.RemarkDate1);
+
+                document.getElementById('UserSecondRemark').value = response.data.Remark2;
+                document.getElementById('UserSecondRemarkBy').value = response.data.RemarkBy2;
+                document.getElementById('UserSecondStatus').value = response.data.status2;
+                document.getElementById('UserSecondRemarkDate').value = formatDateTimeToWords(response.data.RemarkDate2);
+
+                 // Parse the proof field as JSON
+                const proofFiles = JSON.parse(response.data.proof);
+
+                // Clear the images array and add the new images
+                images.length = 0; // Clear any existing images
+                proofFiles.forEach(file => images.push("Pictures/" + file));
+
+                // Update the main displayed image
+                // document.getElementById('ProofFileName').src = images[0]; // Display the first image by default
+
+                // Store the images for modal use
+                document.querySelector('.BiewwPicture').dataset.proofImages = JSON.stringify(images);
+
+                // Display the details section only after data is loaded
+            } else {
+                console.error('Error fetching complaint details:', response.error);
+            }
+        }
+    };
+
+    xhr.send("action=UserfetchDetails&complaint_id=" + complaintId);
+}
+
