@@ -20,7 +20,7 @@ if (isset($_SESSION['unique_id'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> Mabuhay Website </title>
     <link rel="icon" type="image/x-icon" href="Pictures/Dasma_City_Icon.ico">
-    <link rel="stylesheet" href="CSS/Announcement.css">
+    <link rel="stylesheet" href="CSS/Announcementt.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
@@ -118,11 +118,7 @@ if (isset($_SESSION['unique_id'])) {
         </div>
     </div>
     
-
-
-
   <!-- Modal ng table ng announcement -->
-
 
     <div id="profileModal" class="modal">
         <div class="subModal">
@@ -395,7 +391,7 @@ if (isset($_SESSION['unique_id'])) {
         </div>
     </div>
     
-    <script src="JS/Announcement.js"></script>
+    <script src="JS/Announcementt.js"></script>
 
 </body>
 </html>

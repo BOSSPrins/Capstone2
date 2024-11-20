@@ -50,7 +50,7 @@ $user_UID = $_SESSION['unique_id'];
             <div class="sidebarContainer sideActive" id="sidebar">
                 <div class="headerTop">
                     <img class="img-logo" src="Pictures/Mabuhay_Logo.png">
-                    <h2 class="MabuhayName"> Mabuhay Homes 2000 Phase 5 </h2>
+                    <h2 class="MabuhayName"> Mabuhay Homes 2000 <br> Phase 5 </h2>
                 </div>
                 <a href="UserDashBoard.php" class="sideside baractive">
                     <img class="img-sideboard" src="Pictures/Dashboard2.png">

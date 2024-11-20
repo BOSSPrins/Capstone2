@@ -282,7 +282,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             
             if ($row['voting_status'] === 'VotingEnded') {
                 // Query to fetch exactly 9 candidates marked as winners
-                $winners_sql = "SELECT candidate_name, img FROM voting WHERE status = 'winner' LIMIT 9";
+                $winners_sql = "SELECT candidate_name, img FROM voting WHERE status = 'Winner' LIMIT 9";
                 $winners_result = $conn->query($winners_sql);
                 $winners = [];
     

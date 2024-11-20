@@ -12,61 +12,75 @@
             <div class="sidebarContainer sideActive" id="sidebar">
                 <div class="headerTop">
                     <img class="img-logo" src="Pictures/Mabuhay_Logo.png">
-                    <h2 class="MabuhayName"> Mabuhay Homes 2000 Phase 5 </h2>
+                    <h2 class="MabuhayName"> Mabuhay Homes 2000 <br> Phase 5 </h2>
                 </div>
-                <a href="DashBoard.php" class="sideside baractive">
-                    <img class="img-sideboard" src="Pictures/Dashboard2.png">
-                    <span> Dasboard </span>
-                </a>
-                <a href="HoaOfficials.php" class="sideside">
-                    <img class="img-sideboard" src="Pictures/Officials.png">
-                    <span> Hoa Officials </span>
-                </a>
-                <a href="Residents.php" class="sideside">
-                    <img class="img-sideboard" src="Pictures/Residents2.png">
-                    <span> Residents </span>
-                </a>
-                <a href="Documents.php" class="sideside">
-                    <img class="img-sideboard" src="Pictures/Documents2.png">
-                    <span> Documents </span>
-                </a>
-                <div class="complaintsContainer">
-                    <a href="#" class="sideside" id="complaintsDropdown">
-                        <img class="img-sideboard" src="Pictures/ComplaintsCap.png">
-                        <span> Complaints </span>
-                        <button class="buttonEme2">
-                            <div class="eme2"></div>
-                        </button> 
-                    </a>  
-                    <ul class="subMenuComp" id="complaintsSubMenu">
-                        <li> 
-                            <a href="Chat.php">
-                                <img class="img-subMenu" src="Pictures/Chat.png">
-                                <label class="sub-spa"> Chat </label>
-                            </a> 
-                        </li>
-                    </ul>
+                <div class="DagdagNanaman">
+                    <a href="DashBoard.php" class="sideside baractive">
+                        <img class="img-sideboard" src="Pictures/Dashboard2.png">
+                        <span> Dasboard </span>
+                    </a>
+                    <a href="HoaOfficials.php" class="sideside">
+                        <img class="img-sideboard" src="Pictures/Officials.png">
+                        <span> Hoa Officials </span>
+                    </a>
+                    <a href="Residents.php" class="sideside">
+                        <img class="img-sideboard" src="Pictures/Residents2.png">
+                        <span> Residents </span>
+                    </a>
+                    <a href="Documents.php" class="sideside">
+                        <img class="img-sideboard" src="Pictures/Documents2.png">
+                        <span> Documents </span>
+                    </a>
+                    <div class="complaintsContainer">
+                        <a href="Complaints.php" class="sideside" id="complaintsDropdown">
+                            <img class="img-sideboard" src="Pictures/ComplaintsCap.png">
+                            <span> Manage Complaints</span>
+                            <button class="buttonEme2">
+                                <div class="eme2"></div>
+                            </button>
+                        </a>  
+                        <ul class="subMenuComp" id="complaintsSubMenu">
+                            <li> 
+                                <a href="In-Process.php">
+                                    <img class="img-subMenu" src="Pictures/In-Process.png">
+                                    <label class="sub-spa"> In-Process </label>
+                                </a> 
+                                <a href="Resolved.php">
+                                    <img class="img-subMenu" src="Pictures/resolved.png">
+                                    <label class="sub-spa"> Resolved </label>
+                                </a> 
+                                <a href="Escalated.php">
+                                    <img class="img-subMenu" src="Pictures/warning.png">
+                                    <label class="sub-spa"> Escalated </label>
+                                </a> 
+                                <a href="MainChat.php">
+                                    <img class="img-subMenu" src="Pictures/Chat.png">
+                                    <label class="sub-spa"> Chat </label>
+                                </a> 
+                            </li>
+                        </ul>
+                    </div>
+                    <a href="Announcement.php" class="sideside">
+                        <img class="img-sideboard" src="Pictures/Announcement.png">
+                        <span> Announcement </span>
+                    </a>
+                    <a href="Accounts.php" class="sideside">
+                        <img class="img-sideboard" src="Pictures/Accounts2.png">
+                        <span> Accounts </span>
+                    </a>
+                    <!-- <a href="MonthlyDue.php" class="sideside">
+                        <img class="img-sideboard" src="Pictures/MonthlyDue.png">
+                        <span> Monthly Due </span>
+                    </a> -->
+                    <a href="Voting.php" class="sideside">
+                        <img class="img-sideboard" src="Pictures/voting.png">
+                        <span> Voting </span>
+                    </a>
+                    <a href="Logout.php" class="sideside">
+                        <img class="img-sideboard" src="Pictures/logout.png">
+                        <span> Logout </span>
+                    </a>
                 </div>
-                <a href="Announcement.php" class="sideside">
-                    <img class="img-sideboard" src="Pictures/Announcement.png">
-                    <span> Announcement </span>
-                </a>
-                <a href="Accounts.php" class="sideside">
-                    <img class="img-sideboard" src="Pictures/Accounts2.png">
-                    <span> Accounts </span>
-                </a>
-                <a href="MonthlyDue.php" class="sideside">
-                    <img class="img-sideboard" src="Pictures/MonthlyDue.png">
-                    <span> Monthly Due </span>
-                </a>
-                <a href="Voting.php" class="sideside">
-                    <img class="img-sideboard" src="Pictures/voting.png">
-                    <span> Voting </span>
-                </a>
-                <a href="#" class="sideside">
-                    <img class="img-sideboard" src="Pictures/logout.png">
-                    <span> Logout </span>
-                </a>
             </div>
 
             <div id="profileModal" class="modal">
@@ -135,8 +149,16 @@
                         <div class="user-img"></div>
                     </div>
                 </div>
+                <div class="AnnounceNav">
+                    <a href="Announcement" onclick="toggleNavAnn('TableAnnounce')"> Table </a>
+                    <a href="#" onclick="toggleNavAnn('TablePost')"> Posting </a>
+                    <a href="#" onclick="toggleNavAnn('TablePost')"> History </a>
+                </div>
                 <div class="MainContainerForTables">
-                    <div class="MainContainerAll">
+                    <div class="EachContainerAnnounce" id="AnnounceTab">
+                        
+                    </div>
+                    <div class="EachContainerAnnounce" id="AnnouncePost">
                         
                     </div>
                 </div>

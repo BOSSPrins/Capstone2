@@ -59,8 +59,10 @@ if (isset($_SESSION['role'])) {
                                         <img class="img-login" src="Pictures/usernameCap.png">
                                     </div>
                                     <div class="login-input-field">
-                                        <input type="password" required="required" class="password inputLogin" name="loginpassword">
+                                        <input type="password" required="required" class="password inputLogin" name="loginpassword" id="loginpassword">
                                         <span>Password</span>
+                                        <img src="Pictures/Open-eyed.png" alt="Show password" class="toggle-password" id="LogOpened" onclick="togglePasswordVisibilityLog('LogOpened', 'LogClosed')" style="display:none;"> 
+                                        <img src="Pictures/closed-eye.png" alt="Hide password" class="toggle-password" id="LogClosed" onclick="togglePasswordVisibilityLog('LogClosed', 'LogOpened')">
                                     </div>
 
                                     <div class="forgotpass-container">
@@ -205,9 +207,12 @@ if (isset($_SESSION['role'])) {
                                     </div>
 
                                     <div class="input-field">
-                                        <span> Password </span>
+                                        <span>Password</span>
                                         <span style="color:red"> &#42; </span>
-                                        <input class="SUF" type="text" id="password" name="password">
+                                        <input class="SUF" type="password" id="password" name="password">
+                                        <!-- Initially, the open eye is hidden and closed eye is shown -->
+                                        <img src="Pictures/Open-eyed.png" alt="Show password" class="toggle-password" id="SignOpened" onclick="togglePasswordVisibilitySign('SignOpened', 'SignClosed')" style="display:none;">
+                                        <img src="Pictures/closed-eye.png" alt="Hide password" class="toggle-password" id="SignClosed" onclick="togglePasswordVisibilitySign('SignClosed', 'SignOpened')">
                                     </div>
 
                                     <!-- <div class="rowFields">

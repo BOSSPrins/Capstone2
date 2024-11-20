@@ -409,7 +409,6 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
-// Function para pang check kung naka boto na tapos may overlay
 function checkVotingHistory() {
     // Retrieve the unique ID from the hidden input field
     var sessionUniqueId = document.getElementById('sessionUniqueId').value;
@@ -425,23 +424,34 @@ function checkVotingHistory() {
                 // Handle successful response
                 if (response.voted) {
                     console.log('User has already voted.');
+
+                    // Get the voting container
                     var voteContainer = document.getElementById('FirstVotingContainer');
 
+                    // Create the overlay div and apply the VoteSubmittedOverlay class
                     var overlay = document.createElement('div');
-                    overlay.style.position = 'absolute';
-                    overlay.style.width = '100%';
-                    overlay.style.height = '100%';
-                    overlay.style.top = '0';
-                    overlay.style.left = '0';
-                    overlay.style.backgroundColor = '#ffffff';
-                    overlay.innerHTML = `
-                                        <div style="text-align: center; margin-top: 8%;">
-                                        <img src="Pictures/vote.png" alt="Logo" style="max-width: 20%; margin-bottom: 30px; margin-right: 6%;">
-                                            <p style="color: black; font-size: 25px; margin-right: 1.5%;">Vote Submitted</p>
-                                        </div>
-                                    `;
-                    
+                    overlay.classList.add('VoteSubmittedOverlay'); // Add the class from CSS
+
+                    // Create the SubVote container and apply the SubVote class
+                    var subVoteContainer = document.createElement('div');
+                    subVoteContainer.classList.add('SubVote'); // Add the class from CSS
+
+                    // Add content inside the SubVote container
+                    subVoteContainer.innerHTML = `
+                        <div style="text-align: center; margin-top: 8%;">
+                            <img src="Pictures/vote.png" alt="Logo" style="width: 200px;">
+                            <p style="color: black; font-size: 25px; margin-left: 15%;">Vote Submitted</p>
+                        </div>
+                    `;
+
+                    // Append the SubVote container to the overlay
+                    overlay.appendChild(subVoteContainer);
+
+                    // Append the overlay to the voting container
                     voteContainer.appendChild(overlay);
+
+                    // Optionally, make the overlay visible (if needed)
+                    overlay.style.display = 'block';
                 } else {
                     console.log('User has not voted yet.');
                 }
@@ -453,8 +463,8 @@ function checkVotingHistory() {
             console.error('AJAX error:', status, error);
         }
     });
-    
 };
+
 
 
 // Function kung tapos na yung botohan e buong voting may overlay na

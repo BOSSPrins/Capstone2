@@ -470,7 +470,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } elseif ($action === 'UserfetchDetails') {
         $complaint_id = $_POST['complaint_id'];
     
-        $sql = "SELECT complainee, complaineeAddress, complainantName, complainantAddress, filed_date, complaint, description, proof, status
+        $sql = "SELECT complaint_number, complainee, complaineeAddress, complainantName, complainantAddress, filed_date, complaint, description, proof, status,
+                Remark1, RemarkBy1, status1, RemarkDate1, Remark2, RemarkBy2, status2, RemarkDate2
                 FROM complaints
                 WHERE complaint_number = ?";
         $stmt = $conn->prepare($sql);

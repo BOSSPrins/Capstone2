@@ -72,7 +72,7 @@
     bottom: 0;
     top: 0;
     background-color:  rgb(255, 255, 255);
-    width: 250px;
+    width: 275px;
     /* margin-top: 7px; */
     transition: all 0.3s;
 }
@@ -208,7 +208,7 @@
   
   /* ========== MAIN DASHBOARD DESIGN ========== */
   .MainBodyContainerr{
-    padding-left: 250px;
+    padding-left: 275px;
     display: flex;
     flex-direction: column;
     height: 100vh;
@@ -874,4 +874,42 @@
   font-size: 1.1em;
   font-weight: 600;
   margin: 0;
+}
+
+/* DESIGN PARA SA VOTE SUBMITTED */
+.VoteSubmittedOverlay {
+  position: fixed;
+  display: none;
+  z-index: 2;
+  left: 275px;  /* Adjust this as needed */
+  top: 50px;
+  width: 85%;
+  height: 100%;
+  background-color: white;
+}
+
+.SubVote {
+  display: flex;
+  justify-content: center;  /* Horizontally centers the content */
+  align-items: center; 
+  margin-top: 1%;
+  height: auto;             /* Fill the height of the Overlay */
+  width: 100%;              /* Take full width */
+  padding: 20px;
+  box-sizing: border-box;   /* Ensure padding doesn't affect width/height */
+}
+
+.TaenaOverlay {
+  position: relative;
+  width: 100%; /* Full width of the available space */
+  max-width: 800px; /* Maximum width for the modal */
+  margin-top: 10px;
+  flex: 1; /* Allow it to expand based on content */
+  background: #fff;
+  border-radius: 8px;
+  padding: 20px; /* Padding for spacing inside the modal */
+  display: flex;
+  flex-direction: column; /* Stack content vertically */
+  max-height: 80vh; /* Max height to ensure it doesn't take too much of the screen */
+  overflow: hidden; /* Hide overflow content outside the modal */
 }
