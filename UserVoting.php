@@ -42,7 +42,7 @@ $user_UID = $_SESSION['unique_id'];
     <title> Mabuhay Website </title>
     <link rel="icon" type="image/x-icon" href="Pictures/Mabuhay_Logo.ico">
     <link rel="stylesheet" href="CSS/UserVoting.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="jQuery/jquery.min.js"></script>
 </head>
 <body>
 <div class="mainDashboardContainer">

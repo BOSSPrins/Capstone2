@@ -29,7 +29,7 @@ if (isset($_SESSION['role'])) {
     <title> Mabuhay Website </title>
     <link rel="icon" type="image/x-icon" href="Pictures/Mabuhay_Logo.ico">
     <link rel="stylesheet" href="CSS/LoginPage.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="jQuery/jquery.min.js"></script>
 </head>
 <body>
     <div class="main">
@@ -122,7 +122,7 @@ if (isset($_SESSION['role'])) {
                                         </div>
             
                                         <div class="input-field dropdown">
-                                            <span>Gender</span>
+                                            <span>Sex</span>
                                             <span style="color:red"> &#42; </span>
                                             <div class="dropdown-button">Select Option</div>
                                             <div class="dropdown-content">

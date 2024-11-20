@@ -12,6 +12,16 @@ document.addEventListener("DOMContentLoaded", () => {
           // Prevent default form submission
           event.preventDefault();
 
+          const ageInput = document.getElementById("age");
+            const age = parseInt(ageInput.value, 10);
+
+            if (isNaN(age) || age < 18) {
+                errorText.textContent = "You must be at least 18 years old to sign up.";
+                errorText.style.display = "block";
+                console.log("Age validation failed");
+                return;
+            }
+
           let formData = new FormData(form);
 
           // Debugging: Log all form data entries
@@ -33,7 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
                       if (data === "success") {
                           console.log("Redirecting to LoginPage.php");
                           // location.reload();
-                          alert("Ayos na bossiing");
+                          alert("Account Created Successfully");
                           location.href = "LoginPage.php";
 
                       } else {

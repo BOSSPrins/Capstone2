@@ -12,7 +12,7 @@ include "Connect/Connection.php";
     <title> Mabuhay Website </title>
     <link rel="icon" type="image/x-icon" href="Pictures/Dasma_City_Icon.ico">
     <link rel="stylesheet" href="CSS/index.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="jQuery/jquery.min.js"></script>
 </head>
 <body>
     <div class="arawAtOras">
