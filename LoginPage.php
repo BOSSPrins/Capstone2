@@ -221,18 +221,20 @@ if (isset($_SESSION['role'])) {
                                         <img src="Pictures/closed-eye.png" alt="Hide password" class="toggle-password" 
                                             id="SignClosed1" 
                                             onclick="togglePasswordVisibilitySign('SignClosed1', 'SignOpened1', 'password')">
+                                    </div>
 
+                                    <div class="input-field">
                                         <span>Confirm Password</span>
-                                        <span style="color:red"> &#42; </span>
-                                        <input class="SUF" type="password" id="confirmPassword" name="confirmPassword">
-                                        <!-- Icons for toggling visibility of 'confirmPassword' -->
-                                        <img src="Pictures/Open-eyed.png" alt="Show password" class="toggle-password" 
-                                            id="SignOpened2" 
-                                            onclick="togglePasswordVisibilitySign('SignOpened2', 'SignClosed2', 'confirmPassword')" 
-                                            style="display:none;">
-                                        <img src="Pictures/closed-eye.png" alt="Hide password" class="toggle-password" 
-                                            id="SignClosed2" 
-                                            onclick="togglePasswordVisibilitySign('SignClosed2', 'SignOpened2', 'confirmPassword')">
+                                            <span style="color:red"> &#42; </span>
+                                            <input class="SUF" type="password" id="confirmPassword" name="confirmPassword">
+                                            <!-- Icons for toggling visibility of 'confirmPassword' -->
+                                            <img src="Pictures/Open-eyed.png" alt="Show password" class="toggle-password" 
+                                                id="SignOpened2" 
+                                                onclick="togglePasswordVisibilitySign2('SignOpened2', 'SignClosed2', 'confirmPassword')" 
+                                                style="display:none;">
+                                            <img src="Pictures/closed-eye.png" alt="Hide password" class="toggle-password" 
+                                                id="SignClosed2" 
+                                                onclick="togglePasswordVisibilitySign2('SignClosed2', 'SignOpened2', 'confirmPassword')">
                                     </div>
 
 

@@ -46,10 +46,23 @@ if (isset($_SESSION['unique_id'])) {
                         <img class="img-sideboard" src="Pictures/Residents2.png">
                         <span> Residents </span>
                     </a>
-                    <a href="Documents.php" class="sideside">
-                        <img class="img-sideboard" src="Pictures/Documents2.png">
-                        <span> Documents </span>
-                    </a>
+                    <div class="documentsContainer">
+                        <a href="Documents.php" class="sideside" id="documentsDropdown">
+                            <img class="img-sideboard" src="Pictures/Documents2.png">
+                            <span> Documents </span>
+                            <button class="buttonEme3">
+                                <div class="eme3"></div>
+                            </button>
+                        </a>
+                        <ul class="subMenuDocs" id="documentsSubMenu">
+                            <li>
+                                <a href="#">
+                                    <img class="img-subMenu" src="">
+                                    <label class="sub-spa"> ehe </label>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
                     <div class="complaintsContainer">
                         <a href="Complaints.php" class="sideside" id="complaintsDropdown">
                             <img class="img-sideboard" src="Pictures/ComplaintsCap.png">
@@ -79,6 +92,7 @@ if (isset($_SESSION['unique_id'])) {
                             </li>
                         </ul>
                     </div>
+
                     <a href="Announcement.php" class="sideside">
                         <img class="img-sideboard" src="Pictures/Announcement.png">
                         <span> Announcement </span>
