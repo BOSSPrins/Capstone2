@@ -587,8 +587,16 @@ function USERviewDetails(button) {
         }
     });
 
-    // Enable the Generate PDF button after fetching details
-    document.getElementById('generatePdfBtn').disabled = false;
+     // Enable the Generate PDF button after fetching details, but we will handle the PDF generation later
+     const generatePdfBtn = document.getElementById('generatePdfBtn');
+     generatePdfBtn.disabled = false;
+ 
+     // Attach the click event to the Generate PDF button
+     generatePdfBtn.addEventListener('click', function() {
+         // You should pass the complaint data to the generatePDF function here
+         const complaintData = getComplaintData();  // Get the complaint data dynamically
+         generatePDF(complaintData);  // Call the generatePDF function
+     });
 }
 
 const images = [];
@@ -603,6 +611,9 @@ function USERfetchComplaintDetails(complaintId) {
             const response = JSON.parse(xhr.responseText);
 
             if (response.success) {
+
+                const firstRemark = response.data.Remark1 || '';
+                const secondRemark = response.data.Remark2 || '';
                 
                 const complaineeName = response.data.complainee;
                 const complaineeAddress = response.data.complaineeAddress;
@@ -673,9 +684,53 @@ function USERfetchComplaintDetails(complaintId) {
                 // document.getElementById('ProofFileName').src = images[0]; // Display the first image by default
 
                 // Store the images for modal use
-                document.querySelector('.BiewwPicture').dataset.proofImages = JSON.stringify(images);
+                // document.querySelector('.BiewwPicture').dataset.proofImages = JSON.stringify(images);
 
                 // Display the details section only after data is loaded
+
+                 // Hide First Remark container if remark is empty
+                 const firstRemarkCont = document.getElementById('FirstRemarkCont');
+                 if (!firstRemark) {
+                     firstRemarkCont.style.display = 'none';
+                 } else {
+                     firstRemarkCont.style.display = 'block';
+                 }
+ 
+                 // Hide Second Remark container if remark is empty
+                 const secondRemarkCont = document.getElementById('SecondRemarkCont');
+                 if (!secondRemark) {
+                     secondRemarkCont.style.display = 'none';
+                 } else {
+                     secondRemarkCont.style.display = 'block';
+                 }
+ 
+                 // Hide the "Generate Complaint Letter" container if both remarks are empty
+                 const letterGeneratorCont = document.getElementById('LetterGeneratorCont');
+                 if (!firstRemark && !secondRemark) {
+                     letterGeneratorCont.style.display = 'none';
+                 } else {
+                     letterGeneratorCont.style.display = 'block';
+                 }
+
+
+                // Para sa papuntang pdf
+                const complaintData = {
+                    complaintNumber: response.data.complaint_number,  
+                    complaintType: response.data.complaint,
+                    complaineeName: response.data.complainee,
+                    complaineeAddress: response.data.complaineeAddress,
+                    complaintDescription: response.data.description,
+                    complainantName: response.data.complainantName,
+                    complainantAddress: response.data.complainantAddress,
+                    dateSubmit: formatDateTimeToWords(response.data.filed_date),
+                    complaintType: response.data.complaint
+
+
+                  };
+          
+                  // Call generatePDF with the fetched data
+                  generatePDF(complaintData);
+
             } else {
                 console.error('Error fetching complaint details:', response.error);
             }
@@ -684,4 +739,84 @@ function USERfetchComplaintDetails(complaintId) {
 
     xhr.send("action=UserfetchDetails&complaint_id=" + complaintId);
 }
+
+
+   // Load jsPDF library (if not already loaded)
+const { jsPDF } = window.jspdf;
+
+// Function to generate the PDF
+function generatePDF(complaintData) {
+  const doc = new jsPDF();
+
+  // Add logo image
+  doc.addImage('Pictures/Mabuhay_Logo.png', 'PNG', 20, 10, 40, 40); // Adjust the position and size as needed
+
+  // Set text styles for the NameOfMabuhay
+  doc.setFont("Helvetica", "bold");
+  doc.setFontSize(22);
+  doc.setTextColor(0, 0, 154); // Color for "MABUHAY HOMES 2000 PHASE V"
+  doc.text("MABUHAY HOMES 2000 PHASE V", 70, 20 ); // Adjust position
+
+  // Address line
+  doc.setFontSize(14);
+  doc.setTextColor(7, 7, 178); // Address color
+  doc.text("Brgy. Salawag, Dasmarinas, Cavite", 93, 30); // Adjust position
+
+  // HLURB REGISTRATION
+  doc.setTextColor(214, 0, 0); // Color for "HLURB REG. #"
+  doc.text("HLURB REG. # 04-3792", 107, 37); // Adjust position
+
+  // Tel. No.
+  doc.setTextColor(7, 7, 178); // Color for Tel. No.
+  doc.text("Tel. No. 973-9422", 114, 44); // Adjust position
+
+  // Add horizontal line (using rectangle as a line)
+  doc.setLineWidth(0.5);
+  doc.setDrawColor(0, 81, 168); // Line color
+  doc.line(15, 60, 200, 60); // Adjust the line's position
+
+  doc.setFont("Helvetica", "normal");
+  doc.setFontSize(12); // Change font size for the letter content
+  doc.setTextColor(0, 0, 0); // Black color for the body text
+  const letter = `
+${complaintData.complainantName}
+${complaintData.complainantAddress}
+Mabuhay Homes 2000 Phase V
+Brgy. Salawag, Dasmariñas, Cavite
+
+Date: ${complaintData.dateSubmit}
+
+To:
+Homeowners Association of
+Mabuhay Homes 2000 Phase V
+Brgy. Salawag, Dasmariñas, Cavite
+
+Dear Mabuhay Homes HOA,
+
+I am writing to formally bring to your attention an issue that has been affecting my experience as a resident of Mabuhay Homes 2000 Phase V. The matter pertains to the following:
+• Complaint Type: ${complaintData.complaintType}
+• Details of Concern: ${complaintData.complaintDescription}
+• Complainee: ${complaintData.complaineeName} ${complaintData.complaineeAddress}
+
+The problem started on ${complaintData.dateSubmit} and has continued despite efforts on my part to address the situation. The issue has caused major inconvenience, having an impact on my daily life. As a concerned resident, I kindly request the management’s immediate attention to this matter and appropriate action to resolve it.
+
+Please let me know if further details are required or if a meeting would be beneficial. 
+
+Thank you for your time and attention. I look forward to your response.
+
+
+
+Sincerely,
+${complaintData.complainantName}
+`;
+  
+    // Add the letter line by line for formatting control
+    const lines = doc.splitTextToSize(letter, 170); // Wrap text to fit within the page width
+    doc.text(lines, 20, 70); // Starting position for the text
+
+  // Save the PDF
+  const fileName = `Complaint-${complaintData.complaintNumber}.pdf`; // Dynamic file name based on the complaint number
+  doc.save(fileName);
+}
+
 

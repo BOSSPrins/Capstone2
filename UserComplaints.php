@@ -176,7 +176,6 @@ $encoded_id = urlencode($admin_unique_id);
                                     </tbody>
                                 </thead>
                             </table>
-                            <button id="generatePdfBtn" disabled>Generate Complaint Letter</button>
 
                             <!-- MODAL VIEW TRACKING  -->
                             <div class="ModalNato">
@@ -232,57 +231,57 @@ $encoded_id = urlencode($admin_unique_id);
 
 
                                             <!-- Lagayan galing admin 1 -->
-                                            <div style="background: rgb(138, 187, 231); padding: 10px; margin-bottom:10px;">
-                                                <div style="display: flex; margin-bottom: 15px;">
-                                                    <label class="LabelModalDet"> Remark: </label>
-                                                    <textarea class="textAreaModalDet" id="UserFirstRemark"> </textarea>
-                                                </div>
-                                                <div style="display: flex; margin-bottom: 15px; align-items:center;">
-                                                    <label class="LabelModalDet"> Remark by: </label>
-                                                    <input class="InputModalDet" type="text" id="UserFirstRemarkBy">
-                                                </div>
-                                                <div style="display: flex; margin-bottom: 15px; align-items:center;">
-                                                    <label class="LabelModalDet"> Status: </label>
-                                                    <input class="InputModalDet" type="text" id="UserFirstStatus">
-                                                </div>
-                                                <div style="display: flex; align-items:center;">
-                                                    <label class="LabelModalDet"> Remark Date: </label>
-                                                    <input class="InputModalDet" type="text" id="UserFirstRemarkDate">
+                                            <div id="FirstRemarkCont">
+                                                <h2>First Remark</h2>
+                                                <div style="background: rgb(138, 187, 231); padding: 10px; margin-bottom:10px;">
+                                                    <div style="display: flex; margin-bottom: 15px;">
+                                                        <label class="LabelModalDet"> Remark: </label>
+                                                        <textarea class="textAreaModalDet" id="UserFirstRemark"> </textarea>
+                                                    </div>
+                                                    <div style="display: flex; margin-bottom: 15px; align-items:center;">
+                                                        <label class="LabelModalDet"> Remark by: </label>
+                                                        <input class="InputModalDet" type="text" id="UserFirstRemarkBy">
+                                                    </div>
+                                                    <div style="display: flex; margin-bottom: 15px; align-items:center;">
+                                                        <label class="LabelModalDet"> Status: </label>
+                                                        <input class="InputModalDet" type="text" id="UserFirstStatus">
+                                                    </div>
+                                                    <div style="display: flex; align-items:center;">
+                                                        <label class="LabelModalDet"> Remark Date: </label>
+                                                        <input class="InputModalDet" type="text" id="UserFirstRemarkDate">
+                                                    </div>
                                                 </div>
                                             </div>
-
 
                                              <!-- Lagayan galing admin 2 -->
-                                             <div style="background: rgb(138, 187, 231); padding: 10px;">
-                                                <div style="display: flex; margin-bottom: 15px;">
-                                                    <label class="LabelModalDet"> Remark: </label>
-                                                    <textarea class="textAreaModalDet" id="UserSecondRemark"> </textarea>
-                                                </div>
-                                                <div style="display: flex; margin-bottom: 15px; align-items:center;">
-                                                    <label class="LabelModalDet"> Remark by: </label>
-                                                    <input class="InputModalDet" type="text" id="UserSecondRemarkBy">
-                                                </div>
-                                                <div style="display: flex; margin-bottom: 15px; align-items:center;">
-                                                    <label class="LabelModalDet"> Status: </label>
-                                                    <input class="InputModalDet" type="text" id="UserSecondStatus">
-                                                </div>
-                                                <div style="display: flex; align-items:center;">
-                                                    <label class="LabelModalDet"> Remark Date: </label>
-                                                    <input class="InputModalDet" type="text" id="UserSecondRemarkDate">
+                                            <div id="SecondRemarkCont">
+                                                <h2>Second Remark</h2>
+                                                <div style="background: rgb(138, 187, 231); padding: 10px;">
+                                                    <div style="display: flex; margin-bottom: 15px;">
+                                                        <label class="LabelModalDet"> Remark: </label>
+                                                        <textarea class="textAreaModalDet" id="UserSecondRemark"> </textarea>
+                                                    </div>
+                                                    <div style="display: flex; margin-bottom: 15px; align-items:center;">
+                                                        <label class="LabelModalDet"> Remark by: </label>
+                                                        <input class="InputModalDet" type="text" id="UserSecondRemarkBy">
+                                                    </div>
+                                                    <div style="display: flex; margin-bottom: 15px; align-items:center;">
+                                                        <label class="LabelModalDet"> Status: </label>
+                                                        <input class="InputModalDet" type="text" id="UserSecondStatus">
+                                                    </div>
+                                                    <div style="display: flex; align-items:center;">
+                                                        <label class="LabelModalDet"> Remark Date: </label>
+                                                        <input class="InputModalDet" type="text" id="UserSecondRemarkDate">
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <div style="display: flex; margin-bottom: 15px; margin-top: 10px; align-items:center;">
-                                                <label class="LabelModalDet"> Action: </label>
-                                                <button class="BtnDownloadModal"> Download </button>
-                                            </div>
-                                        <!-- <input type="text" id="UserComplaineeName">
-                                        <input type="text" id="UserComplaineeAddress">
-                                        <input type="text" id="UserComplainantName">
-                                        <input type="text" id="UserComplainantAddress">
-                                        <input type="text" id="UserDateSubmit">
-                                        <input type="text" id="UserComplaintType">
-                                        <input type="text" id="UserDescription">
-                                        <input type="text" id="UserStatus"> -->                                     
+                                            
+                                            <div id="LetterGeneratorCont">
+                                                <div style="display: flex; margin-bottom: 15px; margin-top: 10px; align-items:center;">
+                                                    <label class="LabelModalDet"> Action: </label>
+                                                    <button class="BtnDownloadModal" id="generatePdfBtn" onclick="generatePDF();" disabled> Generate Complaint Letter </button>
+                                                </div> 
+                                            </div>                                  
                                         </div>
                                     </div>
                                 </div>
@@ -443,6 +442,7 @@ $encoded_id = urlencode($admin_unique_id);
             </div>
         </div>
     </div>
+
     <script src="JS/UserComplaints.js"></script>
 </body>
 </html>

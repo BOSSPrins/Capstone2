@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Input Suggestion with Table</title>
-    <link rel="stylesheet" href="styles.css">
+    <!-- <link rel="stylesheet" href="styles.css"> -->
+    <script src="jsPDF/dist/jspdf.umd.min.js"></script>
+    <script src="jQuery/jquery.min.js"></script>
     <style>
       body {
     font-family: Arial, sans-serif;
@@ -112,7 +114,12 @@
     <button onclick="showGreenNotification()">Show Green Notification</button>
     <button onclick="showRedNotification()">Show Red Notification</button>
 
-    <script>document.addEventListener('DOMContentLoaded', function() {
+
+    <button onclick="generatePDF()">Generate Letter</button>
+
+<script>
+    
+    document.addEventListener('DOMContentLoaded', function() {
     const input = document.getElementById('suggestionInput');
     const suggestionContainer = document.getElementById('suggestionContainer');
     const suggestionTableBody = document.getElementById('suggestionTableBody');
@@ -187,6 +194,53 @@ function showNotification(notificationId) {
             notification.style.right = '-300px'; // Reset position
         }, 500); // Wait for the slide-out animation to finish
     }, 2000); // Show for 2 seconds
+}
+
+
+const { jsPDF } = window.jspdf;
+
+// Function to generate the PDF
+function generatePDF() {
+  const doc = new jsPDF();
+
+  // Set background color (light gray) for the entire page
+  doc.setFillColor(204, 204, 204); // RGB for the background color
+  doc.rect(0, 0, 210, 297, 'F'); // A4 size: 210mm x 297mm
+  
+  // Add Logo Image (Assuming the image is available in the same directory)
+  const logoUrl = 'Pictures/Mabuhay_Logo.png';  // Make sure the path to the image is correct
+  doc.addImage(logoUrl, 'PNG', 15, 15, 60, 30); // X, Y, width, height
+
+  // Set Font for the Text
+  doc.setFont('helvetica', 'normal');
+  
+  // Title: Name of Mabuhay
+  doc.setFontSize(20);
+  doc.setTextColor(0, 0, 154); // Blue color for text
+  doc.text('MABUHAY HOMES 2000 PHASE V', 85, 30); // Positioning for the title
+
+  // Address: Brgy. Salawag, Dasmarinas, Cavite
+  doc.setFontSize(12);
+  doc.setTextColor(7, 7, 178); // Blue color for the address
+  doc.text('Brgy. Salawag, Dasmarinas, Cavite', 85, 40); // Positioning for the address
+
+  // HLURB Registration Number: HLURB REG. # 04-3792
+  doc.setFontSize(12);
+  doc.setTextColor(214, 0, 0); // Red color for the Registration number
+  doc.text('HLURB REG. # 04-3792', 85, 50); // Positioning for the registration number
+
+  // Tel No: Tel. No. 973-9422
+  doc.setFontSize(12);
+  doc.setTextColor(7, 7, 178); // Blue color for the phone number
+  doc.text('Tel. No. 973-9422', 85, 60); // Positioning for the phone number
+
+  // Horizontal Rule (Line)
+  doc.setDrawColor(0, 81, 168); // Blue color for the line
+  doc.setLineWidth(0.5);
+  doc.line(10, 70, 200, 70); // Draw line from left (10) to right (200)
+
+  // Save the document as a PDF
+  doc.save('letter.pdf');
 }
 
 

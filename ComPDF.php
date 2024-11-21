@@ -81,7 +81,7 @@
     <div class="A4">
         <header>
             <div class="LogoManuhay">
-                <img style="width: 21%;" class="img-logo" src="Mabuhay_Logo.png">
+                <img style="width: 21%;" class="img-logo" src="Pictures/Mabuhay_Logo.png">
             </div>
             <div class="NameOfMabuhay">
                 <div>

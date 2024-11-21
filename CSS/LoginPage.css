@@ -323,7 +323,7 @@
     border: 1px solid rgba(62, 65, 71, 0.4);
     border-radius: 5px;
     background: transparent;
-    padding: 0 15px;
+    padding: 0 15px; /* Adjust padding for icons */
 }
 
 .signup-form .input-field input::placeholder{
@@ -365,6 +365,39 @@
 
 .SumbitSignUp-Btn:hover{
     background: #111d89;
+}
+
+/* DESIGN PARA SA IROR AT SA SAKSES */
+.iror{
+    color: #721c24;
+    padding: 8px 10px;
+    text-align: center;
+    border-radius: 5px;
+    background: #f8d7da;
+    border: 1px solid #f5c6cb;
+    margin-bottom: 10px;
+    display: none;
+}
+
+.irorSignup{
+    color: #721c24;
+    padding: 8px 10px;
+    text-align: center;
+    border-radius: 5px;
+    background: #f8d7da;
+    border: 1px solid #f5c6cb;
+    margin-bottom: 10px;
+    display: none;
+}
+.sakses {
+color: #1c7224; /* Changed text color to a shade of green */
+padding: 8px 10px;
+text-align: center;
+border-radius: 5px;
+background: #d7f8da; /* Changed background color to a light green */
+border: 1px solid #c6f5cb; /* Changed border color to a light green */
+margin-bottom: 10px;
+display: none;
 }
 
 /* DESIGN PARA SA DROPDOWN NG GENDER*/

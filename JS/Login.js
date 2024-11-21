@@ -40,6 +40,7 @@ if (!dropdownButton.contains(event.target) && !dropdownContent.contains(event.ta
 document.addEventListener("DOMContentLoaded", () => {
     const form = document.querySelector(".lagin");
     const errorText = form.querySelector(".iror");
+    const saksesText = form.querySelector(".sakses");
     const LoginBtn = form.querySelector(".laginbtn");
   
     form.onsubmit = (e) => {
@@ -63,10 +64,26 @@ document.addEventListener("DOMContentLoaded", () => {
                 window.location.href = "UserVoting.php";
               } else if (data === "barangay") {
                 window.location.href = "BarangayTable.php";
+              } else if (data === "Please wait for confirmation") {
+                // Display success message
+                saksesText.textContent = data;
+                saksesText.style.display = "block";
+                console.log(data);
+                
+                // Hide success text after 5 seconds
+                setTimeout(() => {
+                    saksesText.style.display = "none";
+                }, 5000);           
+
               } else {
                 errorText.textContent = data;
                 errorText.style.display = "block";
                 console.log(data);
+
+
+                setTimeout(() => {
+                  errorText.style.display = "none";
+              }, 3000);
               }
             }
           }
@@ -76,7 +93,7 @@ document.addEventListener("DOMContentLoaded", () => {
         xhr.send(formData);
       };
     }
-});
+}); 
 
 
 //   function fetchAccountsData() {
@@ -131,19 +148,21 @@ function togglePasswordVisibilityLog(showIconId, hideIconId) {
 
 
 // FUNCTION PARA SA TOGGLE PASSWORD SHOW AND HIDE IN SIGN UP 
-function togglePasswordVisibilitySign(showIconId, hideIconId) {
-  var passwordInput = document.getElementById('password');  // Reference to the password input
-  var showIcon = document.getElementById(showIconId);       // Icon to show (open eye)
-  var hideIcon = document.getElementById(hideIconId);       // Icon to hide (closed eye)
+function togglePasswordVisibilitySign(showIconId, hideIconId, inputFieldId) {
+  // Reference to the password input and the icons
+  var passwordInput = document.getElementById(inputFieldId);
+  var showIcon = document.getElementById(showIconId);
+  var hideIcon = document.getElementById(hideIconId);
 
-  // Toggle the password visibility (input type)
+  // Toggle the password visibility
   if (passwordInput.type === 'password') {
       passwordInput.type = 'text';  // Show the password
+      showIcon.style.display = 'inline'; // Show the "show" icon
+      hideIcon.style.display = 'none';   // Hide the "hide" icon
   } else {
       passwordInput.type = 'password';  // Hide the password
+      showIcon.style.display = 'none';  // Hide the "show" icon
+      hideIcon.style.display = 'inline'; // Show the "hide" icon
   }
-
-  // Toggle visibility of the icons
-  showIcon.style.display = 'none'; // Hide the "show" icon
-  hideIcon.style.display = 'inline'; // Show the "hide" icon
 }
+

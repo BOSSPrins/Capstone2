@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
+  const errorText = document.querySelector(".irorSignup");
   const form = document.querySelector(".saynap");
   const SaynapBtn = form.querySelector(".SaynapBtn");
-  const errorText = form.querySelector(".iror");
 
   if (SaynapBtn) {
       console.log("Signup button found");
@@ -12,6 +12,22 @@ document.addEventListener("DOMContentLoaded", () => {
           // Prevent default form submission
           event.preventDefault();
 
+          const password = document.getElementById("password").value;
+          const confirmPassword = document.getElementById("confirmPassword").value;
+      
+          // Password match validation
+          if (password !== confirmPassword) {
+              errorText.textContent = "Passwords do not match.";
+              errorText.style.display = "block";
+              console.log("Password mismatch error");
+      
+              setTimeout(() => {
+                  errorText.style.display = "none";
+              }, 3000);
+      
+              return;
+          }
+
           const ageInput = document.getElementById("age");
             const age = parseInt(ageInput.value, 10);
 
@@ -19,6 +35,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 errorText.textContent = "You must be at least 18 years old to sign up.";
                 errorText.style.display = "block";
                 console.log("Age validation failed");
+
+                setTimeout(() => {
+                    errorText.style.display = "none";
+                }, 3000);   
+
                 return;
             }
 
@@ -50,6 +71,10 @@ document.addEventListener("DOMContentLoaded", () => {
                           errorText.textContent = data;
                           errorText.style.display = "block";
                           console.log("Error text displayed: ", data);
+
+                          setTimeout(() => {
+                            errorText.style.display = "none";
+                        }, 3000);
                       }
                   } else {
                       console.log("Error: Request status not 200");
