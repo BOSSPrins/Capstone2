@@ -591,12 +591,8 @@ function USERviewDetails(button) {
      const generatePdfBtn = document.getElementById('generatePdfBtn');
      generatePdfBtn.disabled = false;
  
-     // Attach the click event to the Generate PDF button
-     generatePdfBtn.addEventListener('click', function() {
-         // You should pass the complaint data to the generatePDF function here
-         const complaintData = getComplaintData();  // Get the complaint data dynamically
-         generatePDF(complaintData);  // Call the generatePDF function
-     });
+    // Store the complaintId for later use
+    generatePdfBtn.setAttribute('data-complaint-id', complaintId);
 }
 
 const images = [];
@@ -720,16 +716,14 @@ function USERfetchComplaintDetails(complaintId) {
                     complaineeName: response.data.complainee,
                     complaineeAddress: response.data.complaineeAddress,
                     complaintDescription: response.data.description,
-                    complainantName: response.data.complainantName,
+                    complainantName1: response.data.complainantName,
                     complainantAddress: response.data.complainantAddress,
                     dateSubmit: formatDateTimeToWords(response.data.filed_date),
-                    complaintType: response.data.complaint
-
-
+                    complainantName2: response.data.complainantName
+                    
                   };
           
-                  // Call generatePDF with the fetched data
-                  generatePDF(complaintData);
+                  document.getElementById('generatePdfBtn').setAttribute('data-complaint-data', JSON.stringify(complaintData));
 
             } else {
                 console.error('Error fetching complaint details:', response.error);
@@ -746,40 +740,42 @@ const { jsPDF } = window.jspdf;
 
 // Function to generate the PDF
 function generatePDF(complaintData) {
-  const doc = new jsPDF();
+const doc = new jsPDF();
 
-  // Add logo image
-  doc.addImage('Pictures/Mabuhay_Logo.png', 'PNG', 20, 10, 40, 40); // Adjust the position and size as needed
+// Add logo image
+doc.addImage('Pictures/Mabuhay_Logo.png', 'PNG', 20, 10, 40, 40); // Adjust the position and size as needed
 
-  // Set text styles for the NameOfMabuhay
-  doc.setFont("Helvetica", "bold");
-  doc.setFontSize(22);
-  doc.setTextColor(0, 0, 154); // Color for "MABUHAY HOMES 2000 PHASE V"
-  doc.text("MABUHAY HOMES 2000 PHASE V", 70, 20 ); // Adjust position
+// Set text styles for the NameOfMabuhay
+doc.setFont("Helvetica", "bold");
+doc.setFontSize(22);
+doc.setTextColor(0, 0, 154); // Color for "MABUHAY HOMES 2000 PHASE V"
+doc.text("MABUHAY HOMES 2000 PHASE V", 70, 20 ); // Adjust position
 
-  // Address line
-  doc.setFontSize(14);
-  doc.setTextColor(7, 7, 178); // Address color
-  doc.text("Brgy. Salawag, Dasmarinas, Cavite", 93, 30); // Adjust position
+// Address line
+doc.setFontSize(14);
+doc.setTextColor(7, 7, 178); // Address color
+doc.text("Brgy. Salawag, Dasmarinas, Cavite", 93, 30); // Adjust position
 
-  // HLURB REGISTRATION
-  doc.setTextColor(214, 0, 0); // Color for "HLURB REG. #"
-  doc.text("HLURB REG. # 04-3792", 107, 37); // Adjust position
+// HLURB REGISTRATION
+doc.setTextColor(214, 0, 0); // Color for "HLURB REG. #"
+doc.text("HLURB REG. # 04-3792", 107, 37); // Adjust position
 
-  // Tel. No.
-  doc.setTextColor(7, 7, 178); // Color for Tel. No.
-  doc.text("Tel. No. 973-9422", 114, 44); // Adjust position
+// Tel. No.
+doc.setTextColor(7, 7, 178); // Color for Tel. No.
+doc.text("Tel. No. 973-9422", 114, 44); // Adjust position
 
-  // Add horizontal line (using rectangle as a line)
-  doc.setLineWidth(0.5);
-  doc.setDrawColor(0, 81, 168); // Line color
-  doc.line(15, 60, 200, 60); // Adjust the line's position
+// Add horizontal line (using rectangle as a line)
+doc.setLineWidth(0.5);
+doc.setDrawColor(0, 81, 168); // Line color
+doc.line(15, 60, 200, 60); // Adjust the line's position
 
-  doc.setFont("Helvetica", "normal");
-  doc.setFontSize(12); // Change font size for the letter content
-  doc.setTextColor(0, 0, 0); // Black color for the body text
-  const letter = `
-${complaintData.complainantName}
+doc.setFont("Helvetica", "normal");
+doc.setFontSize(12); // Change font size for the letter content
+doc.setTextColor(0, 0, 0); // Black color for the body text
+
+// Constructing the letter content
+let letter = `
+${complaintData.complainantName1}
 ${complaintData.complainantAddress}
 Mabuhay Homes 2000 Phase V
 Brgy. Salawag, Dasmariñas, Cavite
@@ -796,7 +792,22 @@ Dear Mabuhay Homes HOA,
 I am writing to formally bring to your attention an issue that has been affecting my experience as a resident of Mabuhay Homes 2000 Phase V. The matter pertains to the following:
 • Complaint Type: ${complaintData.complaintType}
 • Details of Concern: ${complaintData.complaintDescription}
-• Complainee: ${complaintData.complaineeName} ${complaintData.complaineeAddress}
+`;
+
+// Only add Complainee section if both name and address are not empty
+if (complaintData.complaineeName || complaintData.complaineeAddress) {
+    let complaineeText = '';
+    if (complaintData.complaineeName) {
+        complaineeText += complaintData.complaineeName;
+    }
+    if (complaintData.complaineeAddress) {
+        complaineeText += ` ${complaintData.complaineeAddress}`;
+    }
+    letter += `• Complainee: ${complaineeText}\n`;
+}
+
+
+letter += `
 
 The problem started on ${complaintData.dateSubmit} and has continued despite efforts on my part to address the situation. The issue has caused major inconvenience, having an impact on my daily life. As a concerned resident, I kindly request the management’s immediate attention to this matter and appropriate action to resolve it.
 
@@ -804,19 +815,22 @@ Please let me know if further details are required or if a meeting would be bene
 
 Thank you for your time and attention. I look forward to your response.
 
-
-
 Sincerely,
-${complaintData.complainantName}
+${complaintData.complainantName2}
 `;
-  
-    // Add the letter line by line for formatting control
-    const lines = doc.splitTextToSize(letter, 170); // Wrap text to fit within the page width
-    doc.text(lines, 20, 70); // Starting position for the text
 
-  // Save the PDF
-  const fileName = `Complaint-${complaintData.complaintNumber}.pdf`; // Dynamic file name based on the complaint number
-  doc.save(fileName);
+// Add the letter line by line for formatting control
+const lines = doc.splitTextToSize(letter, 170); // Wrap text to fit within the page width
+doc.text(lines, 20, 70); // Starting position for the text
+
+// Save the PDF
+const fileName = `Complaint-${complaintData.complaintNumber}.pdf`; // Dynamic file name based on the complaint number
+doc.save(fileName);
 }
+  
 
 
+document.getElementById('generatePdfBtn').addEventListener('click', function() {
+    const complaintData = JSON.parse(this.getAttribute('data-complaint-data'));
+    generatePDF(complaintData);
+});
