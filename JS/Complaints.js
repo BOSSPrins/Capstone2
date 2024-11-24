@@ -415,8 +415,6 @@ function viewDetails(button) {
     document.getElementById('ComplaintID').value = complaintId;
     fetchComplaintDetails(complaintId);
 
-     // Enable the Generate PDF button after fetching details
-     document.getElementById('generatePdfBtn').disabled = false;
 }
 
 const images = []; // Initialize an empty array to store images
@@ -457,6 +455,8 @@ function fetchComplaintDetails(complaintId) {
                 document.getElementById('Description').value = response.data.description;
                 document.getElementById('Status').value = response.data.status;
 
+
+
                  // Parse the proof field as JSON
                 const proofFiles = JSON.parse(response.data.proof);
 
@@ -469,6 +469,48 @@ function fetchComplaintDetails(complaintId) {
 
                 // Store the images for modal use
                 document.querySelector('.BiewwPicture').dataset.proofImages = JSON.stringify(images);
+
+                const pdfFiles = response.data.pdf_files || [];  // This will be the array of PDF filenames
+
+                const pdfSection = document.getElementById('pdfSection');
+
+                // Clear existing links if any
+                const pdfLinksContainer = document.getElementById('pdfLinksContainer');
+                pdfLinksContainer.innerHTML = '';
+
+                    // Check if there are any PDF files
+                    if (pdfFiles.length > 0) {
+                        // Show the section
+                        pdfSection.style.display = 'block';
+
+                        // Loop through each PDF file and create a styled download card
+                        pdfFiles.forEach(file => {
+                            const card = document.createElement('div');
+                            card.classList.add('pdf-card');
+
+                            // Create the PDF icon
+                            const pdfIcon = document.createElement('img');
+                            pdfIcon.src = 'Pictures/pdf.png';  // Use the actual path to your PDF icon
+                            card.appendChild(pdfIcon);
+
+                            // Create the file name display
+                            const fileName = document.createElement('div');
+                            fileName.classList.add('file-name');
+                            fileName.innerText = file;
+                            card.appendChild(fileName);
+
+                            // When the card is clicked, download the PDF and change favicon
+                            card.onclick = function () {
+                                window.open("view_pdf.php?file=PDF_Reports/" + file, "_blank");
+                            };
+
+                            // Append the card to the container
+                            pdfLinksContainer.appendChild(card);
+                        });
+                    } else {
+                        // Hide the section if no PDFs
+                        pdfSection.style.display = 'none';
+                    }
 
                 // Display the details section only after data is loaded
                 togglePage('PangalawangCon');
@@ -608,57 +650,3 @@ function changeImage(direction) {
     modalImage.src = images[currentIndex]; // Update the image source
 }
 
-
-// Function para sa pag generate ng pdf
-const { jsPDF } = window.jspdf;
-
-function generateCustomPdf() {
-    // Initialize jsPDF
-    const pdf = new jsPDF();
-
-    // Set up content for the letter
-    const complaineeName = document.getElementById('ComplaineeName').value || 'N/A';
-    const complaineeAddress = document.getElementById('ComplaineeAddress').value || 'N/A';
-    const complainantName = document.getElementById('ComplainantName').value || 'N/A';
-    const complainantAddress = document.getElementById('ComplainantAddress').value || 'N/A';
-    const filedDate = document.getElementById('DateSubmit').value || 'N/A';
-    const complaintType = document.getElementById('ComplaintType').value || 'N/A';
-    const description = document.getElementById('Description').value || 'N/A';
-    const status = document.getElementById('Status').value || 'N/A';
-
-    // Example letter format
-    pdf.setFontSize(12);
-    pdf.text("Republic of the Philippines", 105, 20, { align: "center" });
-    pdf.text("City/Municipality of [Insert Name Here]", 105, 28, { align: "center" });
-    pdf.text("Office of the Barangay Captain", 105, 36, { align: "center" });
-
-    pdf.setFontSize(16);
-    pdf.text("Complaint Letter", 105, 50, { align: "center" });
-
-    pdf.setFontSize(12);
-    pdf.text(`Filed Date: ${filedDate}`, 20, 70);
-
-    pdf.text(`Complainant:`, 20, 80);
-    pdf.text(`Name: ${complainantName}`, 30, 88);
-    pdf.text(`Address: ${complainantAddress}`, 30, 96);
-
-    pdf.text(`Complainee:`, 20, 110);
-    pdf.text(`Name: ${complaineeName}`, 30, 118);
-    pdf.text(`Address: ${complaineeAddress}`, 30, 126);
-
-    pdf.text(`Complaint Type: ${complaintType}`, 20, 140);
-    pdf.text(`Description:`, 20, 150);
-    pdf.text(`${description}`, 30, 158, { maxWidth: 160 });
-
-    pdf.text(`Status: ${status}`, 20, 180);
-
-    // Optional: Add signature placeholders
-    pdf.text("_________________________", 105, 220, { align: "center" });
-    pdf.text("Barangay Captain", 105, 230, { align: "center" });
-
-    // Save the PDF
-    pdf.save('Complaint_Letter.pdf');
-}
-
-// Attach to a button
-document.getElementById('generatePdfBtn').addEventListener('click', generateCustomPdf);

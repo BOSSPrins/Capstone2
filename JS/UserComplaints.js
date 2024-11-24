@@ -391,6 +391,48 @@ function adjustTextareaHeight(textarea) {
 
 
 
+//Funcion sa pagremove ng multiple pdf sa Direct complaints 
+document.getElementById('PDFDir').addEventListener('change', function () {
+    const DIRproof = this;
+    const DIRpreviewContainer = document.getElementById('DIRpdfPreviewContainer');
+    DIRpreviewContainer.innerHTML = ''; // Clear previous previews
+
+    // Display previews and add remove functionality
+    for (let i = 0; i < DIRproof.files.length; i++) {
+        const file = DIRproof.files[i];
+
+        // Create a preview item
+        const previewItem = document.createElement('div');
+        previewItem.className = 'dir-pdf-preview-item';
+        previewItem.innerHTML = `
+            <span>${file.name}</span>
+            <button class="dir-remove-pdf" dir-data-index="${i}">Remove</button>
+        `;
+
+        // Append to the preview container
+        DIRpreviewContainer.appendChild(previewItem);
+    }
+
+    // Add remove functionality
+    DIRpreviewContainer.querySelectorAll('.dir-remove-pdf').forEach((button) => {
+        button.addEventListener('click', function () {
+            const index = parseInt(this.getAttribute('dir-data-index'));
+
+            // Remove the file from the input
+            const dt = new DataTransfer();
+            Array.from(DIRproof.files)
+                .filter((_, i) => i !== index)
+                .forEach((file) => dt.items.add(file));
+                DIRproof.files = dt.files;
+
+            // Update the preview
+            DIRproof.dispatchEvent(new Event('change'));
+        });
+    });
+});
+
+
+
 // Function ng submit ng direct complaint
 document.getElementById('Submit').addEventListener('click', function(event) {
     event.preventDefault();
@@ -404,6 +446,7 @@ document.getElementById('Submit').addEventListener('click', function(event) {
     const description = document.getElementById('Description').value;
 
     const proofInput = document.getElementById('Proof');
+    const DIRproof = document.getElementById('PDFDir');
     let formData = new FormData();
 
     formData.append('action', 'submit_complaint');
@@ -419,6 +462,12 @@ document.getElementById('Submit').addEventListener('click', function(event) {
     if (proofInput.files.length > 0) {
         for (let i = 0; i < proofInput.files.length; i++) {
             formData.append('proofFiles[]', proofInput.files[i]); // Append each file
+        }
+    }
+
+    if (DIRproof.files.length > 0) {
+        for (let i = 0; i < DIRproof.files.length; i++) {
+            formData.append('DIRproof[]', DIRproof.files[i]); // Append each file
         }
     }
 
@@ -444,6 +493,49 @@ document.getElementById('Submit').addEventListener('click', function(event) {
 });
 
 
+
+
+// Function sa pdf ng general
+document.getElementById('PDFGen').addEventListener('change', function () {
+    const fileInput = this;
+    const previewContainer = document.getElementById('pdfPreviewContainer');
+    previewContainer.innerHTML = ''; // Clear previous previews
+
+    // Display previews and add remove functionality
+    for (let i = 0; i < fileInput.files.length; i++) {
+        const file = fileInput.files[i];
+
+        // Create a preview item
+        const previewItem = document.createElement('div');
+        previewItem.className = 'pdf-preview-item';
+        previewItem.innerHTML = `
+            <span>${file.name}</span>
+            <button class="remove-pdf" data-index="${i}">Remove</button>
+        `;
+
+        // Append to the preview container
+        previewContainer.appendChild(previewItem);
+    }
+
+    // Add remove functionality
+    previewContainer.querySelectorAll('.remove-pdf').forEach((button) => {
+        button.addEventListener('click', function () {
+            const index = parseInt(this.getAttribute('data-index'));
+
+            // Remove the file from the input
+            const dt = new DataTransfer();
+            Array.from(fileInput.files)
+                .filter((_, i) => i !== index)
+                .forEach((file) => dt.items.add(file));
+            fileInput.files = dt.files;
+
+            // Update the preview
+            fileInput.dispatchEvent(new Event('change'));
+        });
+    });
+});
+
+
 // Function ng submit ng general complaint
 document.getElementById('submitGen').addEventListener('click', function(event) {
     event.preventDefault();
@@ -455,6 +547,7 @@ document.getElementById('submitGen').addEventListener('click', function(event) {
     const DescriptionGen = document.getElementById('DescriptionGen').value;
 
     const GENproofInput = document.getElementById('ProofGen');
+    const PDFGenProof = document.getElementById('PDFGen');
     let formData = new FormData();
 
     if (!GENComplainantUID || !GENComplainantName || !selectGenComplaintInput || !DescriptionGen || !GENComplainantAddress) {
@@ -473,6 +566,12 @@ document.getElementById('submitGen').addEventListener('click', function(event) {
     if (GENproofInput.files.length > 0) {
         for (let i = 0; i < GENproofInput.files.length; i++) {
             formData.append('GENproofFiles[]', GENproofInput.files[i]); // Append each file
+        }
+    }
+
+    if (PDFGenProof.files.length > 0) {
+        for (let i = 0; i < PDFGenProof.files.length; i++) {
+            formData.append('PDFGENproof[]', PDFGenProof.files[i]); // Append each file
         }
     }
 
@@ -597,8 +696,8 @@ function USERviewDetails(button) {
      const generatePdfBtn = document.getElementById('generatePdfBtn');
      generatePdfBtn.disabled = false;
  
-    // Store the complaintId for later use
-    generatePdfBtn.setAttribute('data-complaint-id', complaintId);
+    // // Store the complaintId for later use
+    // generatePdfBtn.setAttribute('data-complaint-id', complaintId);
 }
 
 const images = [];
@@ -611,6 +710,7 @@ function USERfetchComplaintDetails(complaintId) {
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
             const response = JSON.parse(xhr.responseText);
+            console.log('Fetched complaint details:', response);
 
             if (response.success) {
 
@@ -619,6 +719,8 @@ function USERfetchComplaintDetails(complaintId) {
                 
                 const complaineeName = response.data.complainee;
                 const complaineeAddress = response.data.complaineeAddress;
+
+                console.log("Complainee Name:", complaineeName, "Complainee Address:", complaineeAddress); // Debug
 
                 // Get the input and label elements
                 const complaineeNameInput = document.getElementById('UserComplaineeName');
@@ -655,7 +757,6 @@ function USERfetchComplaintDetails(complaintId) {
                     complaineeSection.style.display = 'block';
                 }
 
-
                 document.getElementById('UserComplaineeName').value = response.data.complainee;
                 document.getElementById('UserComplaineeAddress').value = response.data.complaineeAddress;
                 document.getElementById('UserComplainantName').value = response.data.complainantName;
@@ -664,6 +765,7 @@ function USERfetchComplaintDetails(complaintId) {
                 document.getElementById('UserComplaintType').value = response.data.complaint;
                 document.getElementById('UserDescription').value = response.data.description;
                 document.getElementById('UserStatus').value = response.data.status;
+                document.getElementById('UserProcessDate').value = formatDateTimeToWords(response.data.processed_date);
 
                 document.getElementById('UserFirstRemark').value = response.data.Remark1;
                 document.getElementById('UserFirstRemarkBy').value = response.data.RemarkBy1;
@@ -686,9 +788,50 @@ function USERfetchComplaintDetails(complaintId) {
                 // document.getElementById('ProofFileName').src = images[0]; // Display the first image by default
 
                 // Store the images for modal use
-                // document.querySelector('.BiewwPicture').dataset.proofImages = JSON.stringify(images);
+                document.querySelector('.BiewwPicture').dataset.proofImages = JSON.stringify(images);
 
-                // Display the details section only after data is loaded
+                const pdfFiles = response.data.pdf_files || [];  // This will be the array of PDF filenames
+
+                const pdfSection = document.getElementById('pdfSection');
+
+                // Clear existing links if any
+                const pdfLinksContainer = document.getElementById('pdfLinksContainer');
+                pdfLinksContainer.innerHTML = '';
+
+                    // Check if there are any PDF files
+                    if (pdfFiles.length > 0) {
+                        // Show the section
+                        pdfSection.style.display = 'block';
+
+                        // Loop through each PDF file and create a styled download card
+                        pdfFiles.forEach(file => {
+                            const card = document.createElement('div');
+                            card.classList.add('pdf-card');
+
+                            // Create the PDF icon
+                            const pdfIcon = document.createElement('img');
+                            pdfIcon.src = 'Pictures/pdf.png';  // Use the actual path to your PDF icon
+                            card.appendChild(pdfIcon);
+
+                            // Create the file name display
+                            const fileName = document.createElement('div');
+                            fileName.classList.add('file-name');
+                            fileName.innerText = file;
+                            card.appendChild(fileName);
+
+                            // When the card is clicked, download the PDF and change favicon
+                            card.onclick = function () {
+
+                                window.open("view_pdf.php?file=PDF_Reports/" + file, "_blank");
+                            };
+
+                            // Append the card to the container
+                            pdfLinksContainer.appendChild(card);
+                        });
+                    } else {
+                        // Hide the section if no PDFs
+                        pdfSection.style.display = 'none';
+                    }
 
                  // Hide First Remark container if remark is empty
                  const firstRemarkCont = document.getElementById('FirstRemarkCont');
@@ -714,6 +857,20 @@ function USERfetchComplaintDetails(complaintId) {
                      letterGeneratorCont.style.display = 'block';
                  }
 
+                 // Hide UserProcessDate if status is "Pending"
+                 const userStatusInput = document.getElementById('UserStatus');
+                 const userProcessDateInput = document.getElementById('UserProcessDate');
+                 const userProcessDateLabel = userProcessDateInput.previousElementSibling;
+ 
+                 if (userStatusInput.value === "Pending") {
+                     userProcessDateInput.style.display = 'none';
+                     userProcessDateLabel.style.display = 'none';
+                     userProcessDateInput.value = "";
+                 } else {
+                     userProcessDateInput.style.display = 'block';
+                     userProcessDateLabel.style.display = 'block';
+                 }
+
 
                 // Para sa papuntang pdf
                 const complaintData = {
@@ -725,11 +882,16 @@ function USERfetchComplaintDetails(complaintId) {
                     complainantName1: response.data.complainantName,
                     complainantAddress: response.data.complainantAddress,
                     dateSubmit: formatDateTimeToWords(response.data.filed_date),
-                    complainantName2: response.data.complainantName
+                    complainantName2: response.data.complainantName,
+                    dateNow: formatDateTimeToWords(new Date())
                     
                   };
+
+                  console.log('Prepared complaintData for PDF:', complaintData); // Debug
+                console.log("Eto yung walang laman:",complaintData.complainantName1 );
           
                   document.getElementById('generatePdfBtn').setAttribute('data-complaint-data', JSON.stringify(complaintData));
+                  console.log('Assigned data-complaint-data to generatePdfBtn:', JSON.stringify(complaintData)); // Debug
 
             } else {
                 console.error('Error fetching complaint details:', response.error);
@@ -741,11 +903,70 @@ function USERfetchComplaintDetails(complaintId) {
 }
 
 
-   // Load jsPDF library (if not already loaded)
+// Modal and Image elements
+const modal = document.querySelector('.imageModal');
+const modalImage = document.querySelector('.modalImage');
+const prevButton = document.querySelector('.prevImage');
+const nextButton = document.querySelector('.nextImage');
+let currentIndex = 0;  // Track the current image index
+
+// Show the modal and display the first image
+document.querySelector('.BiewwPicture').addEventListener('click', function () {
+    const proofImages = JSON.parse(this.dataset.proofImages); // Get all images for the modal
+    currentIndex = 0; // Reset to the first image
+    images.length = 0; // Ensure images array matches the current proof
+    proofImages.forEach(image => images.push(image));
+
+    showModal(); // Open the modal
+});
+
+// Function to display the modal and set the image
+function showModal() {
+    modal.style.display = 'flex'; // Show the modal
+    modalImage.src = images[currentIndex]; // Set the first image
+
+    // Hide or show the navigation buttons depending on the number of images
+    if (images.length === 1) {
+        prevButton.style.display = 'none'; // Hide previous button if there's only one image
+        nextButton.style.display = 'none'; // Hide next button if there's only one image
+    } else {
+        prevButton.style.display = 'block'; // Show previous button if there are multiple images
+        nextButton.style.display = 'block'; // Show next button if there are multiple images
+    }
+}
+
+// Close the modal when clicking the close button
+document.querySelector('.closeModal').addEventListener('click', function() {
+    modal.style.display = 'none';  // Hide the modal
+});
+
+// Function to change the image when clicking next or previous
+function changeImage(direction) {
+    currentIndex += direction;
+
+    // Loop the images: if we're at the start or end, loop around
+    if (currentIndex < 0) {
+        currentIndex = images.length - 1; // Go to last image
+    } else if (currentIndex >= images.length) {
+        currentIndex = 0; // Go to first image
+    }
+
+    modalImage.src = images[currentIndex]; // Update the image source
+}
+
+
+// Load jsPDF library (if not already loaded)
 const { jsPDF } = window.jspdf;
 
 // Function to generate the PDF
 function generatePDF(complaintData) {
+    if (!complaintData || Object.keys(complaintData).length === 0) {
+        console.error("generatePDF called with undefined or null complaintData.");
+        return; // Stop execution
+    }
+    console.log("Starting generatePDF function."); // Debug
+    console.log("Received complaintData:", complaintData); // Debug
+    
 const doc = new jsPDF();
 
 // Add logo image
@@ -786,18 +1007,39 @@ ${complaintData.complainantAddress}
 Mabuhay Homes 2000 Phase V
 Brgy. Salawag, Dasmariñas, Cavite
 
-Date: ${complaintData.dateSubmit}
+`;
 
-To:
-Homeowners Association of
+doc.setFont("Helvetica", "bold");
+doc.text(`Date: ${complaintData.dateNow}`, 20, 100);
+doc.setFont("Helvetica", "normal");
+
+letter += `
+
+
+To: 
+`;
+
+doc.setFont("Helvetica", "bold");
+doc.text(`Homeowners Association (HOA)`, 20, 118);
+doc.setFont("Helvetica", "normal");
+
+letter += `
 Mabuhay Homes 2000 Phase V
 Brgy. Salawag, Dasmariñas, Cavite
 
-Dear Mabuhay Homes HOA,
 
-I am writing to formally bring to your attention an issue that has been affecting my experience as a resident of Mabuhay Homes 2000 Phase V. The matter pertains to the following:
+`;
+
+doc.setFont("Helvetica", "bold");
+doc.text(`Dear Mabuhay Homes HOA,`, 20, 141);
+doc.setFont("Helvetica", "normal");
+
+letter += `
+I am writing to formally bring to your attention an issue that has been affecting my experience as a resident of Mabuhay Homes 2000 Phase V. The matter pertains to the following:`;
+
+letter += `
+
 • Complaint Type: ${complaintData.complaintType}
-• Details of Concern: ${complaintData.complaintDescription}
 `;
 
 // Only add Complainee section if both name and address are not empty
@@ -812,8 +1054,14 @@ if (complaintData.complaineeName || complaintData.complaineeAddress) {
     letter += `• Complainee: ${complaineeText}\n`;
 }
 
+letter += `• Details of Concern: ${complaintData.complaintDescription} `;
+
 
 letter += `
+
+
+
+
 
 The problem started on ${complaintData.dateSubmit} and has continued despite efforts on my part to address the situation. The issue has caused major inconvenience, having an impact on my daily life. As a concerned resident, I kindly request the management’s immediate attention to this matter and appropriate action to resolve it.
 
@@ -821,9 +1069,14 @@ Please let me know if further details are required or if a meeting would be bene
 
 Thank you for your time and attention. I look forward to your response.
 
-Sincerely,
-${complaintData.complainantName2}
-`;
+Sincerely,`;
+
+doc.setFont("Helvetica", "bold");
+doc.text(`${complaintData.complainantName2}`, 20, 257);
+doc.setFont("Helvetica", "normal");
+
+
+
 
 // Add the letter line by line for formatting control
 const lines = doc.splitTextToSize(letter, 170); // Wrap text to fit within the page width
@@ -836,7 +1089,12 @@ doc.save(fileName);
   
 
 
-document.getElementById('generatePdfBtn').addEventListener('click', function() {
-    const complaintData = JSON.parse(this.getAttribute('data-complaint-data'));
+document.getElementById('generatePdfBtn').addEventListener('click', function (event) {
+    event.preventDefault();
+    const complaintData = JSON.parse(event.target.getAttribute("data-complaint-data") || "{}");
+    if (!complaintData || Object.keys(complaintData).length === 0) {
+        console.error("generatePDF called with undefined or null complaintData.");
+        return;
+    }
     generatePDF(complaintData);
 });

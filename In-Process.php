@@ -22,6 +22,7 @@ if (isset($_SESSION['unique_id'])) {
     <link rel="icon" type="image/x-icon" href="Pictures/Mabuhay_Logo.ico">
     <link rel="stylesheet" href="CSS/In-Process.css">
     <script src="jQuery/jquery.min.js"></script>
+    <script src="jsPDF/dist/jspdf.umd.min.js"></script>
     <script src="JS/sidebar.js"></script>
 </head>
 <body>
@@ -273,7 +274,15 @@ if (isset($_SESSION['unique_id'])) {
                                 <textarea class="textAreaCompDeta" id="Description"> </textarea>
                             </div>
                             <div style="display: flex; margin-bottom: 15px; align-items:center;">
-                                <label class="LabelCompDeta"> File: </label>
+                                <label class="LabelCompDeta"> Current Status: </label>
+                                <input class="inputCompDeta" type="text" id="Status">
+                            </div>
+                            <div style="display: flex; margin-bottom: 15px; align-items:center;">
+                                <label class="LabelCompDeta"> Processed Date: </label>
+                                <input class="inputCompDeta" type="text" id="ProcessDate">
+                            </div>
+                            <div style="display: flex; margin-bottom: 15px; align-items:center;">
+                                <label class="LabelCompDeta"> Proof Images: </label>
                                 <button class="BiewwPicture"> View </button>
                                  <!-- Modal for Image Preview -->
                                 <div class="imageModal" style="display: none;">
@@ -286,10 +295,15 @@ if (isset($_SESSION['unique_id'])) {
                                 <!-- <img id="ProofFileName" alt="Proof Image" style="max-width: 300px; max-height: 200px;"></img> -->
 
                             </div>
-                            <div style="display: flex; margin-bottom: 15px; align-items:center;">
-                                <label class="LabelCompDeta"> Current Status: </label>
-                                <input class="inputCompDeta" type="text" id="Status">
+                            <div id="pdfSection" style="display: none;">
+                                <div style="display: flex; margin-bottom: 15px; align-items:center;">
+                                    <label class="LabelCompDeta"> Previous Complaint Report: </label>
+                                    <div id="pdfLinksContainer" style="margin-left: 10px; display: flex; flex-wrap: wrap; gap: 10px;">
+                                        <!-- This will hold the links -->
+                                    </div>
+                                </div>
                             </div>
+                            
 
                             <!-- Galing Pending Lagayan -->
                             <!-- <h2>First Remark:</h2>
@@ -334,6 +348,10 @@ if (isset($_SESSION['unique_id'])) {
                                         <label class="LabelCompDeta">Remark: </label>
                                         <textarea class="textAreaCompDeta" id="NewRemark"></textarea>
                                     </div>
+
+                                    <button class="BtnDownloadModal" id="generatePdfBtn" disabled> Generate Turn-over Letter </button>
+
+                                    <input type="text" id="generatedFileName" readonly style="padding: 20px 40px 10px 10px; margin-left: 11%;"/>
 
                                     <input type="hidden" id="RemarkRole" value="<?php echo $_SESSION['role']?>">
                                     <input type="hidden" id="ComplaintID">

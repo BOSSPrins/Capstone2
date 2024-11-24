@@ -225,8 +225,30 @@ $encoded_id = urlencode($admin_unique_id);
                                                 <input class="InputModalDet" type="text" id="UserStatus">
                                             </div>
                                             <div style="display: flex; margin-bottom: 15px; align-items:center;">
-                                                <label class="LabelModalDet">  File: </label>
-                                                <!-- input a images when click the edit button it will show a "x" above the images -->
+                                                <label class="LabelModalDet"> Processed Date: </label>
+                                                <input class="InputModalDet" type="text" id="UserProcessDate">
+                                            </div>
+                                            <div style="display: flex; margin-bottom: 15px; align-items:center;">
+                                                <label class="LabelModalDet"> Proof Images: </label>
+                                                <button class="BiewwPicture"> View </button>
+                                                <!-- Modal for Image Preview -->
+                                                <div class="imageModal" style="display: none;">
+                                                    <span class="closeModal">&times;</span>
+                                                    <button class="prevImage" onclick="changeImage(-1)">&#10094;</button>
+                                                    <img class="modalImage" src="" alt="Image Preview" />
+                                                    <button class="nextImage" onclick="changeImage(1)">&#10095;</button>
+                                                </div>
+                            
+                                                <!-- <img id="ProofFileName" alt="Proof Image" style="max-width: 300px; max-height: 200px;"></img> -->
+
+                                            </div>   
+                                            <div id="pdfSection" style="display: none;">
+                                                <div style="display: flex; margin-bottom: 15px; align-items:center;">
+                                                    <label class="LabelCompDeta"> Previous Complaint Report: </label>
+                                                    <div id="pdfLinksContainer" style="margin-left: 10px; display: flex; flex-wrap: wrap; gap: 10px;">
+                                                        <!-- This will hold the links -->
+                                                    </div>
+                                                </div>
                                             </div>
 
 
@@ -279,7 +301,7 @@ $encoded_id = urlencode($admin_unique_id);
                                             <div id="LetterGeneratorCont">
                                                 <div style="display: flex; margin-bottom: 15px; margin-top: 10px; align-items:center;">
                                                     <label class="LabelModalDet"> Action: </label>
-                                                    <button class="BtnDownloadModal" id="generatePdfBtn" onclick="generatePDF();" disabled> Generate Complaint Letter </button>
+                                                    <button class="BtnDownloadModal" id="generatePdfBtn" disabled> Generate Complaint Letter </button>
                                                 </div> 
                                             </div>                                  
                                         </div>
@@ -356,6 +378,20 @@ $encoded_id = urlencode($admin_unique_id);
                                 </div>
                             </div>
 
+                            <div class="GenComplainUser3">
+                                <label> Attach a report letter if this has happened before: </label>
+                                <div class="PDFFileUploadWrapp">
+                                    <input class="PDFInputFileGen" type="file" id="PDFGen" accept=".pdf" multiple> <!-- Allow multiple file selection -->
+                                    <!-- <div class="PDFFileUploadGen">
+                                        <span class="PDFplusIconGen">+ <br> Upload PDFs here... </br> </span>
+                                    </div> -->
+                                </div>
+
+                                <!-- Preview uploaded PDF files with remove functionality -->
+                                <div id="pdfPreviewContainer"></div>
+                            </div>
+
+
                             <!-- Submit Button -->
                             <footer class="footerUserSubGen">
                                 <button class="submitUserGen" id="submitGen">Submit</button>
@@ -425,6 +461,19 @@ $encoded_id = urlencode($admin_unique_id);
                                 </div>
                             </div>
 
+                            <div class="ComplainUser3">
+                                <label> Attach a report letter if this has happened before: </label>
+                                <div class="PDFFileUploadWrappDir">
+                                    <input class="PDFInputFileDir" type="file" id="PDFDir" accept=".pdf" multiple> <!-- Allow multiple file selection -->
+                                    <!-- <div class="PDFFileUploadGen">
+                                        <span class="PDFplusIconGen">+ <br> Upload PDFs here... </br> </span>
+                                    </div> -->
+                                </div>
+
+                                <!-- Preview uploaded PDF files with remove functionality -->
+                                <div id="DIRpdfPreviewContainer"></div>
+                            </div>
+                    
                             <!-- Submit Button -->
                             <footer class="footerUserSubmitt">
                                 <button class="submittUserComp" id="Submit">Submit</button>

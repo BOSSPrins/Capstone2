@@ -105,16 +105,18 @@ function adjustTextareaHeight(textarea) {
 // FUNCTION PARA SA TAKE ACTION BUTTON 
 function toggleStatusFields() {
     // Get the elements for Status and Remark fields
+    const generatePdfBtn = document.getElementById('generatePdfBtn');
     var statusContainer = document.getElementById('status-container');
-    var remarkContainer = document.getElementById('remark-container');
+    // var remarkContainer = document.getElementById('remark-container');
 
     // Toggle visibility of the Status and Remark containers
     if (statusContainer.style.display === 'none') {
         statusContainer.style.display = 'block';
-        remarkContainer.style.display = 'block';
+        // remarkContainer.style.display = 'block';
+        generatePdfBtn.disabled = false;
     } else {
         statusContainer.style.display = 'none';
-        remarkContainer.style.display = 'none';
+        // remarkContainer.style.display = 'none';
     }
 }
 
@@ -309,6 +311,7 @@ function BRNGYfetchComplaintDetails(complaintId) {
                 document.getElementById('ComplaintType').value = response.data.complaint;
                 document.getElementById('Description').value = response.data.description;
                 document.getElementById('Status').value = response.data.status;
+                document.getElementById('ProcessDate').value = formatDateTimeToWords(response.data.processed_date);
 
                 document.getElementById('FirstRemark').value = response.data.Remark1;
                 document.getElementById('FirstRemarkBy').value = response.data.RemarkBy1;
@@ -329,6 +332,96 @@ function BRNGYfetchComplaintDetails(complaintId) {
                 // Store the images for modal use
                 document.querySelector('.BiewwPicture').dataset.proofImages = JSON.stringify(images);
 
+                const pdfFiles = response.data.pdf_files || [];  // This will be the array of PDF filenames
+                const hoaReportFiles = response.data.hoa_report_files || '';
+
+                const hoaReportSection = document.getElementById('HoaReport');
+                const pdfSection = document.getElementById('pdfSection');
+
+                // Clear existing links if any
+                const pdfLinksContainer = document.getElementById('pdfLinksContainer');
+                pdfLinksContainer.innerHTML = '';
+
+                    // Check if there are any PDF files
+                    if (pdfFiles.length > 0) {
+                        // Show the section
+                        pdfSection.style.display = 'block';
+
+                        // Loop through each PDF file and create a styled download card
+                        pdfFiles.forEach(file => {
+                            const card = document.createElement('div');
+                            card.classList.add('pdf-card');
+
+                            // Create the PDF icon
+                            const pdfIcon = document.createElement('img');
+                            pdfIcon.src = 'Pictures/pdf.png';  // Use the actual path to your PDF icon
+                            card.appendChild(pdfIcon);
+
+                            // Create the file name display
+                            const fileName = document.createElement('div');
+                            fileName.classList.add('file-name');
+                            fileName.innerText = file;
+                            card.appendChild(fileName);
+
+                            // When the card is clicked, download the PDF and change favicon
+                            card.onclick = function () {
+
+                                window.open("view_pdf.php?file=PDF_Reports/" + file, "_blank");
+                            };
+
+                            // Append the card to the container
+                            pdfLinksContainer.appendChild(card);
+                        });
+                    } else {
+                        // Hide the section if no PDFs
+                        pdfSection.style.display = 'none';
+                    }
+
+                    // Clear existing links for the HOA Report PDFs
+                    const hoaLinksContainer = document.getElementById('HoaReport');
+                    hoaLinksContainer.innerHTML = '';
+
+                    // Display the HOA Report PDFs if available
+                    if (hoaReportFiles) {
+                        hoaReportSection.style.display = 'block';
+                        
+                            const card = document.createElement('div');
+                            card.classList.add('hoa-pdf-card');
+
+                            const pdfIcon = document.createElement('img');
+                            pdfIcon.src = 'Pictures/pdf.png';  // Use the actual path to your PDF icon
+                            card.appendChild(pdfIcon);
+
+                            const fileName = document.createElement('div');
+                            fileName.classList.add('hoa-file-name');
+                            fileName.innerText = hoaReportFiles;
+                            card.appendChild(fileName);
+
+                            card.onclick = function () {
+                                window.open("view_pdf.php?file=PDF_Reports/" + hoaReportFiles, "_blank");
+                            };
+
+                            hoaLinksContainer.appendChild(card);
+                        
+                    } else {
+                        hoaReportSection.style.display = 'none';
+                    }
+
+                    const complaintData = {
+                        complaintNumber: response.data.complaint_number,  
+                        complaintType: response.data.complaint,
+                        complaineeName: response.data.complainee,
+                        complaineeAddress: response.data.complaineeAddress,
+                        complaintDescription: response.data.description,
+                        complainantName: response.data.complainantName,
+                        complainantAddress: response.data.complainantAddress,
+                        dateSubmit: formatDateTimeToWords(response.data.filed_date),
+                        dateNow: formatDateTimeToWords(new Date()) // Use your existing function
+                        
+                      };
+
+                    document.getElementById('generatePdfBtn').setAttribute('data-complaint-data', JSON.stringify(complaintData));
+
                 // Display the details section only after data is loaded
                 toggleBarangayCon('ViewExcaltedDet');
             } else {
@@ -342,10 +435,12 @@ function BRNGYfetchComplaintDetails(complaintId) {
 
 // Sa take action
 function BRNGYsubmitComplaintUpdate() {
+    
     const complaintId = document.getElementById('ComplaintID').value;
     const status = document.getElementById('RemarkStatus').value;
     const remark = document.getElementById('NewRemark').value;
     const role = document.getElementById('RemarkRole').value;
+    const generatedFileName = document.getElementById('generatedFileName').value;
 
     fetch('PHPBackend/Complaint.php', {
         method: 'POST',
@@ -357,15 +452,15 @@ function BRNGYsubmitComplaintUpdate() {
             complaint_id: complaintId,
             status: status,
             remark: remark,
-            role: role
+            role: role,
+            generatedFileName: generatedFileName
         })
     })
     .then(response => response.json())
     .then(data => {
         if (data.success) {
             alert('Complaint updated successfully!');
-            // Optionally refresh or update the page content here
-            toggleBarangayCon('TableListEsca');
+            
         } else {
             console.error('Error updating complaint:', data.error);
         }
@@ -403,6 +498,11 @@ function BRNGYHistoryBadge() {
 
 setInterval(BRNGYHistoryBadge, 60000);
 
+
+window.addEventListener('load', function() {
+    BRNGYfetchComplaints();
+    BRNGYHistoryBadge();
+});
 
 
 // FUNCTION PARA SA PICTURE MODAL PREVIEW 
@@ -457,64 +557,141 @@ function changeImage(direction) {
 }
 
 
-//Function ng pdf 
+
+// Pagclick ng generate letter
+document.getElementById('generatePdfBtn').addEventListener('click', function (event) {
+    event.preventDefault();
+    const complaintData = JSON.parse(event.target.getAttribute("data-complaint-data") || "{}");
+    if (!complaintData || Object.keys(complaintData).length === 0) {
+        console.error("generatePDF called with undefined or null complaintData.");
+        return;
+    }
+    generatePDF(complaintData);
+});
+
+
 // Function para sa pag generate ng pdf
 const { jsPDF } = window.jspdf;
 
-function generateCustomPdf() {
-    // Initialize jsPDF
-    const pdf = new jsPDF();
+// Function to generate the PDF
+function generatePDF(complaintData) {
+    if (!complaintData || Object.keys(complaintData).length === 0) {
+        console.error("generatePDF called with undefined or null complaintData.");
+        return; // Stop execution
+    }
+    console.log("Starting generatePDF function."); // Debug
+    console.log("Received complaintData:", complaintData); // Debug
+    
+const doc = new jsPDF();
 
-    // Set up content for the letter
-    const complaineeName = document.getElementById('ComplaineeName').value || 'N/A';
-    const complaineeAddress = document.getElementById('ComplaineeAddress').value || 'N/A';
-    const complainantName = document.getElementById('ComplainantName').value || 'N/A';
-    const complainantAddress = document.getElementById('ComplainantAddress').value || 'N/A';
-    const filedDate = document.getElementById('DateSubmit').value || 'N/A';
-    const complaintType = document.getElementById('ComplaintType').value || 'N/A';
-    const description = document.getElementById('Description').value || 'N/A';
-    const status = document.getElementById('Status').value || 'N/A';
+// Add logo image
+doc.addImage('Pictures/Mabuhay_Logo.png', 'PNG', 20, 10, 40, 40); // Adjust the position and size as needed
 
-    // Example letter format
-    pdf.setFontSize(12);
-    pdf.text("Republic of the Philippines", 105, 20, { align: "center" });
-    pdf.text("City/Municipality of [Insert Name Here]", 105, 28, { align: "center" });
-    pdf.text("Office of the Barangay Captain", 105, 36, { align: "center" });
+// Set text styles for the NameOfMabuhay
+doc.setFont("Helvetica", "bold");
+doc.setFontSize(22);
+doc.setTextColor(0, 0, 154); // Color for "MABUHAY HOMES 2000 PHASE V"
+doc.text("MABUHAY HOMES 2000 PHASE V", 70, 20 ); // Adjust position
 
-    pdf.setFontSize(16);
-    pdf.text("Complaint Letter", 105, 50, { align: "center" });
+// Address line
+doc.setFontSize(14);
+doc.setTextColor(7, 7, 178); // Address color
+doc.text("Brgy. Salawag, Dasmarinas, Cavite", 93, 30); // Adjust position
 
-    pdf.setFontSize(12);
-    pdf.text(`Filed Date: ${filedDate}`, 20, 70);
+// HLURB REGISTRATION
+doc.setTextColor(214, 0, 0); // Color for "HLURB REG. #"
+doc.text("HLURB REG. # 04-3792", 107, 37); // Adjust position
 
-    pdf.text(`Complainant:`, 20, 80);
-    pdf.text(`Name: ${complainantName}`, 30, 88);
-    pdf.text(`Address: ${complainantAddress}`, 30, 96);
+// Tel. No.
+doc.setTextColor(7, 7, 178); // Color for Tel. No.
+doc.text("Tel. No. 973-9422", 114, 44); // Adjust position
 
-    pdf.text(`Complainee:`, 20, 110);
-    pdf.text(`Name: ${complaineeName}`, 30, 118);
-    pdf.text(`Address: ${complaineeAddress}`, 30, 126);
+// Add horizontal line (using rectangle as a line)
+doc.setLineWidth(0.5);
+doc.setDrawColor(0, 81, 168); // Line color
+doc.line(15, 60, 200, 60); // Adjust the line's position
 
-    pdf.text(`Complaint Type: ${complaintType}`, 20, 140);
-    pdf.text(`Description:`, 20, 150);
-    pdf.text(`${description}`, 30, 158, { maxWidth: 160 });
+doc.setFont("Helvetica", "normal");
+doc.setFontSize(12); // Change font size for the letter content
+doc.setTextColor(0, 0, 0); // Black color for the body text
 
-    pdf.text(`Status: ${status}`, 20, 180);
+doc.setFontSize(12);
+doc.setFont("helvetica", "bold");
+doc.text("Barangay Office", 15, 75);
+doc.text("Brgy. Salawag, Dasmariñas, Cavite", 15, 80);
 
-    // Optional: Add signature placeholders
-    pdf.text("_________________________", 105, 220, { align: "center" });
-    pdf.text("Barangay Captain", 105, 230, { align: "center" });
 
-    // Save the PDF
-    pdf.save('Complaint_Letter.pdf');
+// Date and Barangay details
+doc.text(`Date: ${complaintData.dateNow}`, 15, 95);
+doc.setFont("helvetica", "normal");
+doc.text("To:", 15, 100);
+doc.text("Homeowners Association (HOA)", 15,105);
+doc.text("Mabuhay Homes 2000 Phase V", 15, 110);
+doc.text("Brgy. Salawag Dasmariñas, Cavite", 15, 115);
+
+doc.setFont("helvetica", "bold");
+doc.text("To the Homeowners' Association,", 15, 133);
+doc.setFont("helvetica", "normal");
+
+const content = `
+This is to formally notify you that the complaint submitted to our Barangay, dated ${complaintData.dateSubmit}, regarding ${complaintData.complaintType} of ${complaintData.complainantName} in ${complaintData.complainantAddress} has been reviewed and resolved.
+
+The necessary actions have been taken to address the matter, and we confirm that no further intervention is required at this time. 
+
+We appreciate the attention and cooperation of the Homeowners' Association in ensuring that community concerns are promptly addressed 
+and resolved. Your support in maintaining peace and order within our barangay is highly valued.
+
+Should you need further clarification or documentation, please feel free to contact our office.
+
+Thank you for your cooperation and understanding.
+
+Sincerely,
+    `;
+doc.setFont("helvetica", "bold");
+doc.text("Sec. Dennis Q. De La Peña", 15, 220);
+doc.text("Barangay Salawag", 15, 225);
+doc.setFont("helvetica", "normal");
+
+// Split content into lines
+const lines = doc.splitTextToSize(content, 180); // Adjust width as needed
+doc.text(lines, 15, 135);
+
+    
+
+const fileName = `Settled-Letter-${complaintData.complaintNumber}.pdf`; // Dynamic file name based on the complaint number
+const pdfData = doc.output('arraybuffer'); 
+sendToServer(pdfData, fileName); 
+// doc.save(fileName);
+ // Update the input field with the generated file name
+ document.getElementById('generatedFileName').value = fileName;
 }
 
-// Attach to a button
-document.getElementById('generatePdfBtn').addEventListener('click', generateCustomPdf);
+// Function to send the generated PDF to the server
+function sendToServer(pdfData, fileName) {
+    const formData = new FormData();
+    formData.append('pdfFile', new Blob([pdfData], { type: 'application/pdf' }), fileName);
+    formData.append('action', 'brngy_save_pdf'); // Action parameter to specify the save operation
 
-
-
-window.addEventListener('load', function() {
-    BRNGYfetchComplaints();
-    BRNGYHistoryBadge();
+    fetch('PHPBackend/Complaint.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.text()) // Get the raw response text first
+.then(rawResponse => {
+    console.log('Raw Response:', rawResponse);  // Log the raw response to check for any extra characters
+    try {
+        const data = JSON.parse(rawResponse);  // Parse the raw response as JSON
+        if (data.success) {
+            console.log('Success:', data.message); // Handle success
+        } else {
+            console.error('Error:', data.message); // Handle error
+        }
+    } catch (error) {
+        console.error('Error parsing JSON:', error); // Handle JSON parsing error
+    }
+})
+.catch(error => {
+    console.error('Request failed', error); // Handle fetch error
 });
+}
+

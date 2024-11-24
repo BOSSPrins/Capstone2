@@ -278,9 +278,8 @@ if (isset($_SESSION['unique_id'])) {
                                 <label class="LabelCompDeta"> Current Status: </label>
                                 <input class="inputCompDeta" type="text" id="Status">
                             </div>
-
                             <div style="display: flex; margin-bottom: 15px; align-items:center;">
-                                <label class="LabelCompDeta"> File: </label>
+                                <label class="LabelCompDeta"> Proof Images: </label>
                                 <button class="BiewwPicture"> View </button>
                                  <!-- Modal for Image Preview -->
                                 <div class="imageModal" style="display: none;">
@@ -292,14 +291,22 @@ if (isset($_SESSION['unique_id'])) {
             
                                 <!-- <img id="ProofFileName" alt="Proof Image" style="max-width: 300px; max-height: 200px;"></img> -->
 
-                            </div>                   
+                            </div>      
+                            <div id="pdfSection" style="display: none;">
+                                <div style="display: flex; margin-bottom: 15px; align-items:center;">
+                                    <label class="LabelCompDeta"> Previous Complaint Report: </label>
+                                    <div id="pdfLinksContainer" style="margin-left: 10px; display: flex; flex-wrap: wrap; gap: 10px;">
+                                        <!-- This will hold the links -->
+                                    </div>
+                                </div>
+                            </div>
+             
                             <form method="POST" enctype="multipart/form-data">
                                 <div style="display: flex; margin-bottom: 15px; margin-top: 10px; align-items:center;">
                                     <input type="hidden" id="NewStatus" value="In-Process">
                                     <input type="hidden" id="ComplaintID">
                                     <label class="LabelCompDeta"> Action: </label>
                                     <button class="TabkeActionBtn" onclick="submitComplaintUpdate()"> Take Action </button>
-                                    <button id="generatePdfBtn" disabled>Generate Complaint Letter</button>
                                 </div>
                             </form>
                         </div>

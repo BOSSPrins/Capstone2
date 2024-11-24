@@ -861,3 +861,60 @@
   justify-content: center;
   align-items: center;
 }
+
+
+/* Container to hold PDF cards */
+#pdfLinksContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+/* Style for individual PDF card (rectangular shape) */
+.pdf-card {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  padding: 10px 20px;
+  width: 300px;  /* Set width to make it rectangular */
+  display: flex;
+  align-items: center;  /* Align icon and text horizontally */
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out;
+  cursor: pointer; /* Makes the card clickable */
+}
+
+/* Hover effect for the PDF card */
+.pdf-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* PDF icon styling */
+.pdf-card img {
+  width: 40px;  /* Slightly larger icon */
+  height: 40px;
+  margin-right: 15px; /* Space between icon and filename */
+}
+
+/* Styling for the PDF file name */
+.pdf-card .file-name {
+  font-weight: bold;
+  color: #333;
+  flex-grow: 1;  /* Ensures the file name takes up remaining space */
+  text-overflow: ellipsis;  /* Add ellipsis for overflow text */
+  white-space: nowrap;  /* Prevent file name from wrapping */
+  overflow: hidden;  /* Hide text that overflows */
+}
+
+
+/* CSS BUTTON PARA SA GENERATE NG LETTER PA BARANGAY */
+.BtnDownloadModal {
+  display: none;
+  background: rgb(2, 118, 0);
+  padding: 10px 10px 10px 10px;
+  margin: 15px 0px 0px 11.5%;
+  cursor: pointer;
+  color: white;
+}
