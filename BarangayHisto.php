@@ -131,7 +131,7 @@ if (isset($_SESSION['unique_id'])) {
                             <table class="TableBarangDet">
                                 <thead>
                                     <th> Complaint No. </th>
-                                    <th> Name </th>
+                                    <th> Complaint </th>
                                     <th> Date Submitted </th>
                                     <th> Status </th>
                                     <th> Action </th>
@@ -209,7 +209,11 @@ if (isset($_SESSION['unique_id'])) {
                                 <input class="inputCompDeta" type="text" id="Status">
                             </div>
                             <div style="display: flex; margin-bottom: 15px; align-items:center;">
-                                <label class="LabelCompDeta"> File: </label>
+                                <label class="LabelCompDeta"> Processed Date: </label>
+                                <input class="inputCompDeta" type="text" id="ProcessDate">
+                            </div>
+                            <div style="display: flex; margin-bottom: 15px; align-items:center;">
+                                <label class="LabelCompDeta"> Proof Images: </label>
                                 <button class="BiewPictures"> View </button>
                                  <!-- Modal for Image Preview -->
                                 <div class="imageModalHistory" style="display: none;">
@@ -219,6 +223,21 @@ if (isset($_SESSION['unique_id'])) {
                                     <button class="nextImage" onclick="changeHistoImg(1)">&#10095;</button>
                                 </div>
                             </div>
+                            <div id="pdfSection" style="display: none;">
+                                <div style="display: flex; margin-bottom: 15px; align-items:center;">
+                                    <label class="LabelCompDeta"> Previous Complaint Report: </label>
+                                    <div id="pdfLinksContainer" style="margin-left: 10px; display: flex; flex-wrap: wrap; gap: 10px;">
+                                        <!-- This will hold the links -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="display: flex; margin-bottom: 15px; align-items:center;">
+                                <label class="LabelCompDeta"> HOA Turn Over Report: </label>
+                                <div id="HoaReport" style="margin-left: 10px; display: flex; flex-wrap: wrap; gap: 10px;">
+                                    <!-- This will hold the links -->
+                                </div>
+                            </div>
+             
 
                             <!-- Galing Pending Lagayan -->
                             <h2>First Remark:</h2>

@@ -416,10 +416,11 @@ function fetchComplaintDetails(complaintId) {
                 
                 document.getElementById('ComplainantName').value = response.data.complainantName;
                 document.getElementById('ComplainantAddress').value = response.data.complainantAddress;
-                document.getElementById('DateSubmit').value = formatDateTimeToWords(response.data.filed_date)
+                document.getElementById('DateSubmit').value = formatDateTimeToWords(response.data.filed_date);
                 document.getElementById('ComplaintType').value = response.data.complaint;
                 document.getElementById('Description').value = response.data.description;
                 document.getElementById('Status').value = response.data.status;
+                document.getElementById('ProcessDate').value = formatDateTimeToWords(response.data.processed_date);
 
                 document.getElementById('FirstRemark').value = response.data.Remark1;
                 document.getElementById('FirstRemarkBy').value = response.data.RemarkBy1;
@@ -443,6 +444,49 @@ function fetchComplaintDetails(complaintId) {
 
                 // Store the images for modal use
                 document.querySelector('.BiewwPicture').dataset.proofImages = JSON.stringify(images);
+
+                const pdfFiles = response.data.pdf_files || [];  // This will be the array of PDF filenames
+
+                const pdfSection = document.getElementById('pdfSection');
+
+                // Clear existing links if any
+                const pdfLinksContainer = document.getElementById('pdfLinksContainer');
+                pdfLinksContainer.innerHTML = '';
+
+                    // Check if there are any PDF files
+                    if (pdfFiles.length > 0) {
+                        // Show the section
+                        pdfSection.style.display = 'block';
+
+                        // Loop through each PDF file and create a styled download card
+                        pdfFiles.forEach(file => {
+                            const card = document.createElement('div');
+                            card.classList.add('pdf-card');
+
+                            // Create the PDF icon
+                            const pdfIcon = document.createElement('img');
+                            pdfIcon.src = 'Pictures/pdf.png';  // Use the actual path to your PDF icon
+                            card.appendChild(pdfIcon);
+
+                            // Create the file name display
+                            const fileName = document.createElement('div');
+                            fileName.classList.add('file-name');
+                            fileName.innerText = file;
+                            card.appendChild(fileName);
+
+                            // When the card is clicked, download the PDF and change favicon
+                            card.onclick = function () {
+
+                                window.open("view_pdf.php?file=PDF_Reports/" + file, "_blank");
+                            };
+
+                            // Append the card to the container
+                            pdfLinksContainer.appendChild(card);
+                        });
+                    } else {
+                        // Hide the section if no PDFs
+                        pdfSection.style.display = 'none';
+                    }
 
                 const secondRemarkSection = document.getElementById('SecondRemarkSectionContainer');
                  if (!response.data.Remark2 && !response.data.RemarkBy2 && !response.data.status2 && !response.data.RemarkDate2) {

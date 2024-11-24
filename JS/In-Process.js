@@ -267,10 +267,25 @@ function toggleDropdown() {
 
 function setStatus(status) {
     const display = document.querySelector('.dropdown-display');
-    display.textContent = status;
-    document.querySelector('.dropdown-options').style.display = 'none';
-}
+    const generatePdfBtn = document.getElementById('generatePdfBtn');
 
+    // Set the dropdown display text
+    display.textContent = status;
+
+    // Hide the dropdown options
+    document.querySelector('.dropdown-options').style.display = 'none';
+
+    // Show or hide the button based on the selected status
+    if (status === 'Escalated') {
+        generatePdfBtn.style.display = 'block'; // Show the button
+        generatePdfBtn.disabled = false;
+    } else {
+        generatePdfBtn.style.display = 'none'; // Hide the button
+        
+    }
+
+    
+}
 
 // FUNCTION PARA SA MGA TEXTAREA
 // Select all textareas with the class "textAreaCompDeta"
@@ -413,7 +428,6 @@ function fetchComplaintDetails(complaintId) {
                 }
 
 
-
                 document.getElementById('ComplaineeName').value = response.data.complainee;
                 document.getElementById('ComplaineeAddress').value = response.data.complaineeAddress;
                 document.getElementById('ComplainantName').value = response.data.complainantName;
@@ -422,6 +436,7 @@ function fetchComplaintDetails(complaintId) {
                 document.getElementById('ComplaintType').value = response.data.complaint;
                 document.getElementById('Description').value = response.data.description;
                 document.getElementById('Status').value = response.data.status;
+                document.getElementById('ProcessDate').value = formatDateTimeToWords(response.data.processed_date);
 
                  // Parse the proof field as JSON
                 const proofFiles = JSON.parse(response.data.proof);
@@ -435,6 +450,64 @@ function fetchComplaintDetails(complaintId) {
 
                 // Store the images for modal use
                 document.querySelector('.BiewwPicture').dataset.proofImages = JSON.stringify(images);
+
+                const pdfFiles = response.data.pdf_files || [];  // This will be the array of PDF filenames
+
+                const pdfSection = document.getElementById('pdfSection');
+
+                // Clear existing links if any
+                const pdfLinksContainer = document.getElementById('pdfLinksContainer');
+                pdfLinksContainer.innerHTML = '';
+
+                    // Check if there are any PDF files
+                    if (pdfFiles.length > 0) {
+                        // Show the section
+                        pdfSection.style.display = 'block';
+
+                        // Loop through each PDF file and create a styled download card
+                        pdfFiles.forEach(file => {
+                            const card = document.createElement('div');
+                            card.classList.add('pdf-card');
+
+                            // Create the PDF icon
+                            const pdfIcon = document.createElement('img');
+                            pdfIcon.src = 'Pictures/pdf.png';  // Use the actual path to your PDF icon
+                            card.appendChild(pdfIcon);
+
+                            // Create the file name display
+                            const fileName = document.createElement('div');
+                            fileName.classList.add('file-name');
+                            fileName.innerText = file;
+                            card.appendChild(fileName);
+
+                            // When the card is clicked, download the PDF and change favicon
+                            card.onclick = function () {
+
+                                window.open("view_pdf.php?file=PDF_Reports/" + file, "_blank");
+                            };
+
+                            // Append the card to the container
+                            pdfLinksContainer.appendChild(card);
+                        });
+                    } else {
+                        // Hide the section if no PDFs
+                        pdfSection.style.display = 'none';
+                    }
+
+                    const complaintData = {
+                        complaintNumber: response.data.complaint_number,  
+                        complaintType: response.data.complaint,
+                        complaineeName: response.data.complainee,
+                        complaineeAddress: response.data.complaineeAddress,
+                        complaintDescription: response.data.description,
+                        complainantName: response.data.complainantName,
+                        complainantAddress: response.data.complainantAddress,
+                        dateSubmit: formatDateTimeToWords(response.data.filed_date),
+                        dateNow: formatDateTimeToWords(new Date()) // Use your existing function
+                        
+                      };
+
+                    document.getElementById('generatePdfBtn').setAttribute('data-complaint-data', JSON.stringify(complaintData));
 
                 // Display the details section only after data is loaded
                 togglePage('PangalawangCon');
@@ -453,6 +526,7 @@ function submitComplaintUpdate() {
     const status = document.getElementById('RemarkStatus').innerText;
     const remark = document.getElementById('NewRemark').value;
     const role = document.getElementById('RemarkRole').value;
+    const generatedFileName = document.getElementById('generatedFileName').value;
 
     fetch('PHPBackend/Complaint.php', {
         method: 'POST',
@@ -464,7 +538,8 @@ function submitComplaintUpdate() {
             complaint_id: complaintId,
             status: status,
             remark: remark,
-            role: role
+            role: role,
+            generatedFileName: generatedFileName
         })
     })
     .then(response => response.json())
@@ -512,54 +587,13 @@ function updateComplaintCounts() {
 setInterval(updateComplaintCounts, 60000); // Refresh every 60 seconds
 
 
-window.onload = function () {
+window.addEventListener('load', function() {
     fetchComplaints();
     updateComplaintCounts();
-};
+});
 
 
-// Example list of images that you want to display in the modal (use your actual image list here)
-// const images = [
-//     "image1.jpg", // Replace with actual image URLs
-//     "image2.jpg",
-//     "image3.jpg"
-// ];
 
-// // Modal and Image elements
-// const modal = document.querySelector('.imageModal');
-// const modalImage = document.querySelector('.modalImage');
-// let currentIndex = 0;  // Track the current image index
-
-// // Show the modal and display the first image
-// document.querySelector('.BiewwPicture').addEventListener('click', function() {
-//     currentIndex = 0;  // Reset to first image
-//     showModal();
-// });
-
-// // Function to display the modal and set the image
-// function showModal() {
-//     modal.style.display = 'flex';  // Show the modal
-//     modalImage.src = images[currentIndex];  // Set the image source
-// }
-
-// // Close the modal when clicking the close button
-// document.querySelector('.closeModal').addEventListener('click', function() {
-//     modal.style.display = 'none';  // Hide the modal
-// });
-
-// // Function to change the image when clicking next or previous
-// function changeImage(direction) {
-//     currentIndex += direction;
-
-//     // Loop the images: if we're at the start or end, loop around
-//     if (currentIndex < 0) {
-//         currentIndex = images.length - 1;  // Go to last image
-//     } else if (currentIndex >= images.length) {
-//         currentIndex = 0;  // Go to first image
-//     }
-
-//     modalImage.src = images[currentIndex];  // Update the image source
-// }
 
 // FUNCTION PARA SA PICTURE MODAL PREVIEW 
 const modal = document.querySelector('.imageModal');
@@ -610,4 +644,164 @@ function changeImage(direction) {
     }
 
     modalImage.src = images[currentIndex]; // Update the image source
+}
+
+// Pagclick ng generate letter
+document.getElementById('generatePdfBtn').addEventListener('click', function (event) {
+    event.preventDefault();
+    const complaintData = JSON.parse(event.target.getAttribute("data-complaint-data") || "{}");
+    if (!complaintData || Object.keys(complaintData).length === 0) {
+        console.error("generatePDF called with undefined or null complaintData.");
+        return;
+    }
+    generatePDF(complaintData);
+});
+
+
+// Load jsPDF library (if not already loaded)
+const { jsPDF } = window.jspdf;
+
+// Function to generate the PDF
+function generatePDF(complaintData) {
+    if (!complaintData || Object.keys(complaintData).length === 0) {
+        console.error("generatePDF called with undefined or null complaintData.");
+        return; // Stop execution
+    }
+    console.log("Starting generatePDF function."); // Debug
+    console.log("Received complaintData:", complaintData); // Debug
+    
+const doc = new jsPDF();
+
+// Add logo image
+doc.addImage('Pictures/Mabuhay_Logo.png', 'PNG', 20, 10, 40, 40); // Adjust the position and size as needed
+
+// Set text styles for the NameOfMabuhay
+doc.setFont("Helvetica", "bold");
+doc.setFontSize(22);
+doc.setTextColor(0, 0, 154); // Color for "MABUHAY HOMES 2000 PHASE V"
+doc.text("MABUHAY HOMES 2000 PHASE V", 70, 20 ); // Adjust position
+
+// Address line
+doc.setFontSize(14);
+doc.setTextColor(7, 7, 178); // Address color
+doc.text("Brgy. Salawag, Dasmarinas, Cavite", 93, 30); // Adjust position
+
+// HLURB REGISTRATION
+doc.setTextColor(214, 0, 0); // Color for "HLURB REG. #"
+doc.text("HLURB REG. # 04-3792", 107, 37); // Adjust position
+
+// Tel. No.
+doc.setTextColor(7, 7, 178); // Color for Tel. No.
+doc.text("Tel. No. 973-9422", 114, 44); // Adjust position
+
+// Add horizontal line (using rectangle as a line)
+doc.setLineWidth(0.5);
+doc.setDrawColor(0, 81, 168); // Line color
+doc.line(15, 60, 200, 60); // Adjust the line's position
+
+doc.setFont("Helvetica", "normal");
+doc.setFontSize(12); // Change font size for the letter content
+doc.setTextColor(0, 0, 0); // Black color for the body text
+
+    
+    // Letterhead
+    doc.setFontSize(12);
+    doc.setFont("helvetica", "bold");
+    doc.text("Homeowners Association (HOA)", 15, 70);
+    doc.text("Mabuhay Homes 2000 Phase V", 15, 75);
+    doc.text("Brgy. Salawag, Dasmariñas, Cavite", 15, 80);
+    doc.setFont("helvetica", "normal");
+
+    // Date and Barangay details
+    doc.text(`Date: ${complaintData.dateNow}`, 15, 95);
+    doc.text("To:", 15, 100);
+    doc.text("Barangay Captain/Barangay Office", 15,105);
+    doc.text("Brgy. Salawag", 15, 110);
+    doc.text("Dasmariñas, Cavite", 15, 115);
+
+    // Subject of the letter
+    doc.setFont("helvetica", "bold");
+    doc.text("Subject: Endorsement of Complaint for Resolution", 15, 120);
+    doc.setFont("helvetica", "normal");
+
+    doc.setFont("helvetica", "bold");
+    doc.text("Dear Barangay Captain,", 15, 135);
+    doc.setFont("helvetica", "normal");
+    
+    // Body of the letter
+  const bodyText = `
+We, the Homeowners Association (HOA), would like to formally endorse the following complaint for your office’s action and resolution. Due to the nature and complexity of the issue, the HOA is unable to address it effectively and believes it falls under the Barangay's jurisdiction. 
+We trust that your office will handle the matter with diligence and fairness.
+    `;
+    doc.text(bodyText, 15, 138, { maxWidth: 180, align: "justify" });
+
+    // Complaint details
+    doc.setFont("helvetica", "bold");
+    doc.text("Details of the Complaint:", 15, 170);
+    doc.setFont("helvetica", "normal");
+    doc.text(`Complainant: ${complaintData.complainantName}`, 15, 175);
+    doc.text(`Address: ${complaintData.complainantAddress}`, 15, 180);
+
+    // Only include Complainee information if not empty
+    if (complaintData.complaineeName || complaintData.complaineeAddress) {
+        doc.text(`Complainee: ${complaintData.complaineeName}`, 15, 185);
+        doc.text(`Address: ${complaintData.complaineeAddress}`, 15, 190);
+    }
+
+    doc.text(`Date Submitted: ${complaintData.dateSubmit}`, 15, 195);
+    doc.text(`Complaint Type: ${complaintData.complaintType}`, 15, 200);
+    doc.text("Description:", 15, 205);
+    doc.text(complaintData.complaintDescription, 15, 210, { maxWidth: 180, align: "justify" });
+
+    // Closing remarks
+    const closingText = `
+We hope for your immediate attention to this matter. Should you require additional information or documentation, please do not hesitate to contact the HOA office.Thank you for your continued 
+    `;
+
+    doc.text("service and support to our community.", 15, 245);
+
+    doc.text(closingText, 15, 230, { maxWidth: 180, align: "justify" });
+
+    // Signature
+    doc.text("Sincerely,", 15, 260);
+    doc.setFont("helvetica", "bold");
+    doc.text("The Homeowners Association (HOA)", 15, 265);
+
+    // Save the PDF
+    // Save the PDF
+const fileName = `Turn-Over-Letter-${complaintData.complaintNumber}.pdf`; // Dynamic file name based on the complaint number
+const pdfData = doc.output('arraybuffer'); // Get the PDF as a byte array
+sendToServer(pdfData, fileName); // Send to PHP for saving
+
+ // Update the input field with the generated file name
+ document.getElementById('generatedFileName').value = fileName;
+}
+
+// Function to send the generated PDF to the server
+function sendToServer(pdfData, fileName) {
+    const formData = new FormData();
+    formData.append('pdfFile', new Blob([pdfData], { type: 'application/pdf' }), fileName);
+    formData.append('action', 'save_pdf'); // Action parameter to specify the save operation
+
+    fetch('PHPBackend/Complaint.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.text()) // Get the raw response text first
+.then(rawResponse => {
+    console.log('Raw Response:', rawResponse);  // Log the raw response to check for any extra characters
+    try {
+        const data = JSON.parse(rawResponse);  // Parse the raw response as JSON
+        if (data.success) {
+            console.log('Success:', data.message); // Handle success
+        } else {
+            console.error('Error:', data.message); // Handle error
+        }
+    } catch (error) {
+        console.error('Error parsing JSON:', error); // Handle JSON parsing error
+    }
+})
+.catch(error => {
+    console.error('Request failed', error); // Handle fetch error
+});
 }

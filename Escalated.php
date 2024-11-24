@@ -266,7 +266,11 @@ if (isset($_SESSION['unique_id'])) {
                                 <input class="inputCompDeta" type="text" id="Status">
                             </div>
                             <div style="display: flex; margin-bottom: 15px; align-items:center;">
-                                <label class="LabelCompDeta"> File: </label>
+                                <label class="LabelCompDeta"> Processed Date: </label>
+                                <input class="inputCompDeta" type="text" id="ProcessDate">
+                            </div>
+                            <div style="display: flex; margin-bottom: 15px; align-items:center;">
+                                <label class="LabelCompDeta"> Proof Images: </label>
                                 <button class="BiewwPicture"> View </button>
                                  <!-- Modal for Image Preview -->
                                 <div class="imageModal" style="display: none;">
@@ -278,7 +282,16 @@ if (isset($_SESSION['unique_id'])) {
             
                                 <!-- <img id="ProofFileName" alt="Proof Image" style="max-width: 300px; max-height: 200px;"></img> -->
 
-                            </div>                           
+                            </div>  
+                            <div id="pdfSection" style="display: none;">
+                                <div style="display: flex; margin-bottom: 15px; align-items:center;">
+                                    <label class="LabelCompDeta"> Previous Complaint Report: </label>
+                                    <div id="pdfLinksContainer" style="margin-left: 10px; display: flex; flex-wrap: wrap; gap: 10px;">
+                                        <!-- This will hold the links -->
+                                    </div>
+                                </div>
+                            </div>
+                                      
 
                             <!-- Galing Pending Lagayan -->
                             <h2>First Remark:</h2>

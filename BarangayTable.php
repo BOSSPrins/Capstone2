@@ -208,9 +208,13 @@ if (isset($_SESSION['unique_id'])) {
                                 <label class="LabelCompDeta"> Current Status: </label>
                                 <input class="inputCompDeta" type="text" id="Status">
                             </div>
+                            <div style="display: flex; margin-bottom: 15px; align-items:center;">
+                                <label class="LabelCompDeta"> Processed Date: </label>
+                                <input class="inputCompDeta" type="text" id="ProcessDate">
+                            </div>
 
                             <div style="display: flex; margin-bottom: 15px; align-items:center;">
-                                <label class="LabelCompDeta"> File: </label>
+                                <label class="LabelCompDeta"> Proof Images: </label>
                                 <button class="BiewwPicture"> View </button>
                                  <!-- Modal for Image Preview -->
                                 <div class="imageModal" style="display: none;">
@@ -220,6 +224,21 @@ if (isset($_SESSION['unique_id'])) {
                                     <button class="nextImage" onclick="changeImage(1)">&#10095;</button>
                                 </div>
                             </div>
+                            <div id="pdfSection" style="display: none;">
+                                <div style="display: flex; margin-bottom: 15px; align-items:center;">
+                                    <label class="LabelCompDeta"> Previous Complaint Report: </label>
+                                    <div id="pdfLinksContainer" style="margin-left: 10px; display: flex; flex-wrap: wrap; gap: 10px;">
+                                        <!-- This will hold the links -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="display: flex; margin-bottom: 15px; align-items:center;">
+                                <label class="LabelCompDeta"> HOA Turn Over Report: </label>
+                                <div id="HoaReport" style="margin-left: 10px; display: flex; flex-wrap: wrap; gap: 10px;">
+                                    <!-- This will hold the links -->
+                                </div>
+                            </div>
+             
 
                             <!-- Galing Pending Lagayan -->
                             <h2>Remark:</h2>
@@ -243,8 +262,7 @@ if (isset($_SESSION['unique_id'])) {
                             </div>
                             <div style="display: flex; margin-bottom: 15px; margin-top: 10px; align-items:center;">
                                 <label class="LabelCompDeta"> Action: </label>
-                                <button class="TabkeActionBtn" onclick="toggleStatusFields()"> Take Action </button>
-                                <button class="DownloadBtn" id="generatePdfBtn" disabled> Generate Complaint Letter </button>
+                                <button class="TabkeActionBtn" onclick="toggleStatusFields()"> Take Action </button>                              
                             </div>
 
                             <!-- Laman Ng Take Action -->
@@ -252,9 +270,9 @@ if (isset($_SESSION['unique_id'])) {
                                 <div class="Take-Action" id="status-container" style="display:none;">
                                     <div style="display: flex; margin-bottom: 15px; width: 50%; align-items:center;">
                                         <label class="LabelCompDeta">Status: </label>
-                                        <input class="dropdown-display" type="text" id="RemarkStatus" value="Resolved"><br>
-                                        <input type="text" id="ComplaintID">
-                                        <input type="text" id="RemarkRole" value="<?php echo $_SESSION['role']?>">
+                                        <input class="dropdown-display" type="text" id="RemarkStatus" value="Resolved">
+                                        <input type="hidden" id="ComplaintID">
+                                        <input type="hidden" id="RemarkRole" value="<?php echo $_SESSION['role']?>">
                                         <!-- <div class="custom-dropdown">
                                             <div class="dropdown-display" onclick="toggleDropdown()"> --- </div>
                                             <div class="dropdown-options" style="display: none;">
@@ -268,8 +286,10 @@ if (isset($_SESSION['unique_id'])) {
                                         <label class="LabelCompDeta">Remark: </label>
                                         <textarea class="textAreaBarangDeta" id="NewRemark"></textarea>
                                     </div>
+                                    <button class="DownloadBtn" id="generatePdfBtn" disabled> Generate Settled Letter </button>
+                                    <input type="text" id="generatedFileName" readonly style="padding: 20px 40px 10px 10px; margin-left: 11%;"/>
                                     <div style="display: flex; justify-content: space-between; width: 100%; margin-top: 10px;">
-                                        <button style="padding: 10px 30px;" onclick="BRNGYsubmitComplaintUpdate()"> Submit </button>
+                                        <button type="button" style="padding: 10px 30px;" onclick="BRNGYsubmitComplaintUpdate()"> Submit </button>
                                     </div>
                                 </div>
                             </form>    
