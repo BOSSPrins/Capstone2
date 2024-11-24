@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title> Mabuhay Website </title>
-  <link rel="stylesheet" href="AnnouncementTable.css">
+  <link rel="stylesheet" href="CSS/AnnounceHistory.css">
 </head>
 <body>
 <div class="mainDashboardContainer">
@@ -174,6 +174,6 @@
             </div>
         </div>
     </div>
-    <script src="AnnounceHistory.js"></script>
+    <script src="JS/AnnounceHistory.js"></script>
 </body>
 </html>

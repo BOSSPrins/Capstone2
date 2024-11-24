@@ -22,8 +22,8 @@ if (isset($_SESSION['unique_id'])) {
   <title> Mabuhay Website </title>
     <link rel="icon" type="image/x-icon" href="Pictures/Dasma_City_Icon.ico">
     <link rel="stylesheet" href="CSS/AnnouncementTable.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="sidebar.js"></script>
+    <script src="jQuery/jquery.min.js"></script>
+    <script src="JS/sidebar.js"></script>
 </head>
 <body>
 <div class="mainDashboardContainer">
@@ -182,8 +182,8 @@ if (isset($_SESSION['unique_id'])) {
                     </div>
                 </div>
                 <div class="AnnounceNav">
-                    <a href="AnnouncementTable.html" class="AnnNavv AnnActive"> Table Posting </a>
-                    <a href="AnnounceHistory.html" class="AnnNavv"> History </a>
+                    <a href="AnnouncementTable.php" class="AnnNavv AnnActive"> Table Posting </a>
+                    <a href="AnnounceHistory.php" class="AnnNavv"> History </a>
                 </div>
                 <div class="MainContainerForTables">
                     <div class="EachContainerAnnounce" id="AnnounceTab">
@@ -346,6 +346,6 @@ if (isset($_SESSION['unique_id'])) {
             </div>
         </div>
     </div>
-    <script src="AnnouncementTable.js"></script>
+    <script src="JS/AnnouncementTable.js"></script>
 </body>
 </html>
