@@ -151,17 +151,22 @@ scrollbar-width: thin; /* For Firefox */
 }
 
 /* ========== SUB MENU SIDEBAR ========== */
-.subMenuComp{
+.subMenuComp,
+.subMenuDocs {
   display: none;
   margin-left: 35px;
   transition: all 0.3s;
 }
 
-.submenu-visible {
-  display: block; 
+.CompSubMenuVisible {
+  display: block;
 }
 
-.subMenuComp li a{
+.DocsSubmenuVisible {
+  display: block;
+}
+
+.subMenuDocs li a, .subMenuComp li a {
   position: relative;
   display: flex;
   color: var(--color-info-dark);
@@ -170,12 +175,13 @@ scrollbar-width: thin; /* For Firefox */
   transition: all 300ms ease;
 }
 
-/* Active state for submenu items */
+.subMenuDocs li a.baractive,
 .subMenuComp li a.baractive {
   background: var(--color-light);
   color: var(--color-primary);
 }
 
+.subMenuDocs li a.baractive::before,
 .subMenuComp li a.baractive::before {
   content: '';
   width: 4px;
@@ -187,41 +193,44 @@ scrollbar-width: thin; /* For Firefox */
   margin-left: 2px;
 }
 
-.eme2{
+/* Hover effect for submenu item icons */
+.subMenuComp li a:hover .img-subMenu,
+.subMenuDocs li a:hover .img-subMenu {
+  margin-left: 1rem;
+}
+
+.subMenuComp li a .img-subMenu,
+.subMenuDocs li a .img-subMenu {
+  font-size: 1.6rem;
+  transition: all 300ms ease;
+}
+
+.eme2, .eme3 {
   width: 0;
   height: 0;
   border-left: 5px solid transparent;
   border-right: 5px solid transparent;
   border-top: 6px solid #aeaeae;
   transition: 0.3s;
-  z-index: 2;
 }
 
-.buttonEme2{
+.buttonEme2, .buttonEme3 {
   padding: 10px 15px;
   margin-left: 5px;
   cursor: pointer;
-  z-index: 2;
 }
 
-.eme2-rotate{
+.eme2-rotate, .eme3-rotate {
   transform: rotate(180deg);
 }
 
-.subMenuComp li a.active{
-  background: var(--color-light);
-  color: var(--color-primary);
-  height: 100%;
-  margin-left: 5px;
-}
-
-/* ===== SUB MENU CHAT IMAGE ==== */
-.img-subMenu{
+/* Submenu image and label */
+.img-subMenu {
   width: 20px;
   margin-right: 5px;
 }
 
-.sub-spa{
+.sub-spa {
   margin-top: 5px;
 }
 

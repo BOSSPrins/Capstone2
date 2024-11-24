@@ -130,39 +130,56 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // FUNCTION PARA SA TOGGLE PASSWORD SHOW AND HIDE IN LOGIN 
 function togglePasswordVisibilityLog(showIconId, hideIconId) {
-  var passwordInput = document.getElementById('loginpassword');
-  var showIcon = document.getElementById(showIconId);
-  var hideIcon = document.getElementById(hideIconId);
+  var passwordInput1 = document.getElementById('loginpassword');
+  var showIcon1 = document.getElementById(showIconId);
+  var hideIcon1 = document.getElementById(hideIconId);
 
   // Toggle the password visibility (input type)
-  if (passwordInput.type === 'password') {
-      passwordInput.type = 'text'; // Show the password
+  if (passwordInput1.type === 'password') {
+      passwordInput1.type = 'text'; // Show the password
   } else {
-      passwordInput.type = 'password'; // Hide the password
+      passwordInput1.type = 'password'; // Hide the password
   }
 
   // Toggle visibility of the icons
-  showIcon.style.display = 'none'; // Hide the "show" icon
-  hideIcon.style.display = 'inline'; // Show the "hide" icon
+  showIcon1.style.display = 'none'; // Hide the "show" icon
+  hideIcon1.style.display = 'inline'; // Show the "hide" icon
 }
 
 
 // FUNCTION PARA SA TOGGLE PASSWORD SHOW AND HIDE IN SIGN UP 
-function togglePasswordVisibilitySign(showIconId, hideIconId, inputFieldId) {
-  // Reference to the password input and the icons
-  var passwordInput = document.getElementById(inputFieldId);
-  var showIcon = document.getElementById(showIconId);
-  var hideIcon = document.getElementById(hideIconId);
+function togglePasswordVisibilitySign(showIconId, hideIconId) {
+  var passwordInput2 = document.getElementById('password');  // Reference to the password input
+  var showIcon2 = document.getElementById(showIconId);       // Icon to show (open eye)
+  var hideIcon2 = document.getElementById(hideIconId);       // Icon to hide (closed eye)
 
-  // Toggle the password visibility
-  if (passwordInput.type === 'password') {
-      passwordInput.type = 'text';  // Show the password
-      showIcon.style.display = 'inline'; // Show the "show" icon
-      hideIcon.style.display = 'none';   // Hide the "hide" icon
+  // Toggle the password visibility (input type)
+  if (passwordInput2.type === 'password') {
+      passwordInput2.type = 'text';  // Show the password
   } else {
-      passwordInput.type = 'password';  // Hide the password
-      showIcon.style.display = 'none';  // Hide the "show" icon
-      hideIcon.style.display = 'inline'; // Show the "hide" icon
+      passwordInput2.type = 'password';  // Hide the password
   }
+
+  // Toggle visibility of the icons
+  showIcon2.style.display = 'none'; // Hide the "show" icon
+  hideIcon2.style.display = 'inline'; // Show the "hide" icon
+}
+
+// FUNCTION PARA SA TOGGLE PASSWORD SHOW AND HIDE IN RE-TYPE
+function togglePasswordVisibilitySign2(showIconId, hideIconId) {
+  var passwordInput3 = document.getElementById('confirmPassword');  // Reference to the password input
+  var showIcon3 = document.getElementById(showIconId);      // Icon to show (open eye)
+  var hideIcon3 = document.getElementById(hideIconId);       // Icon to hide (closed eye)
+
+  // Toggle the password visibility (input type)
+  if (passwordInput3.type === 'password') {
+      passwordInput3.type = 'text';  // Show the password
+  } else {
+      passwordInput3.type = 'password';  // Hide the password
+  }
+
+  // Toggle visibility of the icons
+  showIcon3.style.display = 'none'; // Hide the "show" icon
+  hideIcon3.style.display = 'inline'; // Show the "hide" icon
 }
 

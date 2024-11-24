@@ -65,148 +65,173 @@ html{
   
 /* ===== SIDEBAR DESIGN ===== */
 .sidebarContainer {
-    position: fixed;
-    display: flex;
-    flex-direction: column;
-    bottom: 0;
-    top: 0;
-    background-color: rgb(255, 255, 255);
-    width: 275px;
-    transition: all 0.3s;
-  }
-  
-  .DagdagNanaman {
-    flex: 1; /* Allow the div to grow and fill available space */
-    overflow-y: auto; /* Enable vertical scrolling */
-    /* background-color: gray; */
-    scrollbar-width: thin; /* For Firefox */
-  }
-  
-  .DagdagNanaman span{
-      font-size: 14.5px;
-      font-weight: 500;
-  }
-    
-  .DagdagNanaman .sideside{
-      display: flex;
-      color: var(--color-info-dark);
-      padding-left: 25px;
-      gap: 1rem;
-      align-items: center;
-      position: relative;
-      height: 3.6rem;
-      transition: all 300ms ease;
-  }
-    
-  .DagdagNanaman .sideside .img-sideboard{
-      font-size: 1.6rem;
-      transition: all 300ms ease;
-  }
-    
-  .DagdagNanaman .sideside:last-child{
-      bottom: 1px;
-  }
-    
-  .DagdagNanaman .sideside.baractive{
-      background: var(--color-light);
-      color: var(--color-primary);
-  }
-    
-  .DagdagNanaman .sideside.baractive .img-sideboard{
-      margin-left: calc(1rem -3rem);
-  }
-    
-  .DagdagNanaman .sideside:hover{
-      color: var(--color-primary);
-  }
-    
-  .DagdagNanaman .sideside:hover .img-sideboard{
-      margin-left: 1rem;
-  }
-  
+position: fixed;
+display: flex;
+flex-direction: column;
+bottom: 0;
+top: 0;
+background-color: rgb(255, 255, 255);
+width: 275px;
+transition: all 0.3s;
+}
+
+.DagdagNanaman {
+flex: 1; /* Allow the div to grow and fill available space */
+overflow-y: auto; /* Enable vertical scrolling */
+/* background-color: gray; */
+scrollbar-width: thin; /* For Firefox */
+}
+
+.DagdagNanaman span{
+  font-size: 14.5px;
+  font-weight: 500;
+}
+
+.DagdagNanaman .sideside{
+  display: flex;
+  color: var(--color-info-dark);
+  padding-left: 25px;
+  gap: 1rem;
+  align-items: center;
+  position: relative;
+  height: 3.6rem;
+  transition: all 300ms ease;
+}
+
+.DagdagNanaman .sideside .img-sideboard{
+  font-size: 1.6rem;
+  transition: all 300ms ease;
+}
+
+.DagdagNanaman .sideside:last-child{
+  bottom: 1px;
+}
+
+/* Active state for sidebar items */
+.sideside.baractive {
+  background: var(--color-light);
+  color: var(--color-primary);
+}
+
+.sideside.baractive::before{
+  content: '';
+  width: 4px;
+  height: 100%;
+  background: var(--color-primary);
+  position: absolute;
+  left: 0;
+  top: 0;
+  margin-left: 2px;
+}
+
+.DagdagNanaman .sideside.baractive .img-sideboard{
+  margin-left: calc(1rem -3rem);
+}
+
+.DagdagNanaman .sideside:hover{
+  color: var(--color-primary);
+}
+
+.DagdagNanaman .sideside:hover .img-sideboard{
+  margin-left: 1rem;
+}
+
 /* SIDEBAR ACTIVE */
 .sidebarActive {
-    transform: translateX(250px); /* Move sidebar into view */
+  transform: translateX(250px); 
 }
-  
+
 /* .MonthlyDuessContainerr.MonthlyDuessConActivee {
-    margin-left: 5px;
+  margin-left: 5px;
 } */
-  
+
 /* ===== SIDEBAR IMAGE SIZE ===== */
-  .img-sideboard{
-    width: 20px;
+.img-sideboard{
+  width: 20px;
 }
-  
+
 /* ========== SUB MENU SIDEBAR ========== */
-  .subMenuComp{
-    display: none;
-    margin-left: 35px;
-    transition: all 0.3s;
+.subMenuComp,
+.subMenuDocs {
+  display: none;
+  margin-left: 35px;
+  transition: all 0.3s;
 }
-  
-.submenu-visible {
-    display: block; 
+
+.CompSubMenuVisible {
+  display: block;
 }
-  
-.subMenuComp li a{
-    position: relative;
-    display: flex;
-    color: var(--color-info-dark);
-    padding: 10px;
-    position: relative;
-    transition: all 300ms ease;
+
+.DocsSubmenuVisible {
+  display: block;
 }
-  
-.eme2{
-    width: 0;
-    height: 0;
-    border-left: 5px solid transparent;
-    border-right: 5px solid transparent;
-    border-top: 6px solid #aeaeae;
-    transition: 0.3s;
+
+.subMenuDocs li a, .subMenuComp li a {
+  position: relative;
+  display: flex;
+  color: var(--color-info-dark);
+  padding: 10px;
+  position: relative;
+  transition: all 300ms ease;
 }
-  
-.buttonEme2{
-    padding: 10px 15px;
-    margin-left: 5px;
-    cursor: pointer;
-  }
-  
-.eme2-rotate{
-    transform: rotate(180deg);
+
+.subMenuDocs li a.baractive,
+.subMenuComp li a.baractive {
+  background: var(--color-light);
+  color: var(--color-primary);
 }
-  
-.subMenuComp li a.active{
-    background: var(--color-light);
-    color: var(--color-primary);
-    height: 100%;
-    margin-left: 5px;
+
+.subMenuDocs li a.baractive::before,
+.subMenuComp li a.baractive::before {
+  content: '';
+  width: 4px;
+  height: 100%;
+  background: var(--color-primary);
+  position: absolute;
+  left: 0;
+  top: 0;
+  margin-left: 2px;
 }
-  
-.sidebarContainer li a:hover{
-    color: var(--color-primary);
-    margin-left: 1rem;
+
+/* Hover effect for submenu item icons */
+.subMenuComp li a:hover .img-subMenu,
+.subMenuDocs li a:hover .img-subMenu {
+  margin-left: 1rem;
 }
-  
-.subMenuComp li a.active::before {
-    content: '';
-    width: 4px;
-    height: 100%;
-    background: var(--color-primary);
-    position: absolute;
-    left: 0;
-    top: 0;
+
+.subMenuComp li a .img-subMenu,
+.subMenuDocs li a .img-subMenu {
+  font-size: 1.6rem;
+  transition: all 300ms ease;
 }
-  
-/* ===== SUB MENU CHAT IMAGE ==== */
-  .img-subMenu{
-    width: 20px;
-    margin-right: 5px;
+
+.eme2, .eme3 {
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 6px solid #aeaeae;
+  transition: 0.3s;
 }
-  
-.sub-spa{
-    margin-top: 5px;
+
+.buttonEme2, .buttonEme3 {
+  padding: 10px 15px;
+  margin-left: 5px;
+  cursor: pointer;
+}
+
+.eme2-rotate, .eme3-rotate {
+  transform: rotate(180deg);
+}
+
+/* Submenu image and label */
+.img-subMenu {
+  width: 20px;
+  margin-right: 5px;
+}
+
+.sub-spa {
+  margin-top: 5px;
 }
   
 /* ========== MAIN DASHBOARD DESIGN ========== */

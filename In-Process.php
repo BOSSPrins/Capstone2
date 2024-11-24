@@ -46,10 +46,23 @@ if (isset($_SESSION['unique_id'])) {
                         <img class="img-sideboard" src="Pictures/Residents2.png">
                         <span> Residents </span>
                     </a>
-                    <a href="Documents.php" class="sideside">
-                        <img class="img-sideboard" src="Pictures/Documents2.png">
-                        <span> Documents </span>
-                    </a>
+                    <div class="documentsContainer">
+                        <a href="Documents.php" class="sideside" id="documentsDropdown">
+                            <img class="img-sideboard" src="Pictures/Documents2.png">
+                            <span> Documents </span>
+                            <button class="buttonEme3">
+                                <div class="eme3"></div>
+                            </button>
+                        </a>
+                        <ul class="subMenuDocs" id="documentsSubMenu">
+                            <li>
+                                <a href="#">
+                                    <img class="img-subMenu" src="">
+                                    <label class="sub-spa"> ehe </label>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
                     <div class="complaintsContainer">
                         <a href="Complaints.php" class="sideside" id="complaintsDropdown">
                             <img class="img-sideboard" src="Pictures/ComplaintsCap.png">
@@ -63,16 +76,14 @@ if (isset($_SESSION['unique_id'])) {
                                 <a href="In-Process.php">
                                     <img class="img-subMenu" src="Pictures/In-Process.png">
                                     <label class="sub-spa"> In-Process </label>
-                                    <span class="badge badge-yellow" id="inProcessBadge">0</span>
                                 </a> 
                                 <a href="Resolved.php">
                                     <img class="img-subMenu" src="Pictures/resolved.png">
-                                    <label class="sub-spa"> Resolved </label>                                   
+                                    <label class="sub-spa"> Resolved </label>
                                 </a> 
                                 <a href="Escalated.php">
                                     <img class="img-subMenu" src="Pictures/warning.png">
                                     <label class="sub-spa"> Escalated </label>
-                                    <span class="badge badge-red" id="escalatedBadge">0</span>
                                 </a> 
                                 <a href="MainChat.php">
                                     <img class="img-subMenu" src="Pictures/Chat.png">

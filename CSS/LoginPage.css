@@ -260,7 +260,7 @@
 .formSignup{
     position: relative;
     max-width: 470px;
-    height: 400px;
+    /* height: 400px; */
     width: 100%;
     /* background-color: var(--color-white);
     border-radius: var(--color-border-radius);

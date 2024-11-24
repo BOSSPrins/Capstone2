@@ -22,6 +22,7 @@ if (isset($_SESSION['unique_id'])) {
     <link rel="icon" type="image/x-icon" href="Pictures/Mabuhay_Logo.ico">
     <link rel="stylesheet" href="CSS/Residents.css">
     <script src="jQuery/jquery.min.js"></script>
+    <script src="JS/sidebar.js"></script>
 </head>
 </head>
 <body>
@@ -33,7 +34,7 @@ if (isset($_SESSION['unique_id'])) {
                     <h2 class="MabuhayName"> Mabuhay Homes 2000 <br> Phase 5 </h2>
                 </div>
                 <div class="DagdagNanaman">
-                    <a href="DashBoard.php" class="sideside baractive">
+                    <a href="DashBoard.php" class="sideside">
                         <img class="img-sideboard" src="Pictures/Dashboard2.png">
                         <span> Dasboard </span>
                     </a>
@@ -45,10 +46,23 @@ if (isset($_SESSION['unique_id'])) {
                         <img class="img-sideboard" src="Pictures/Residents2.png">
                         <span> Residents </span>
                     </a>
-                    <a href="Documents.php" class="sideside">
-                        <img class="img-sideboard" src="Pictures/Documents2.png">
-                        <span> Documents </span>
-                    </a>
+                    <div class="documentsContainer">
+                        <a href="Documents.php" class="sideside" id="documentsDropdown">
+                            <img class="img-sideboard" src="Pictures/Documents2.png">
+                            <span> Documents </span>
+                            <button class="buttonEme3">
+                                <div class="eme3"></div>
+                            </button>
+                        </a>
+                        <ul class="subMenuDocs" id="documentsSubMenu">
+                            <li>
+                                <a href="#">
+                                    <img class="img-subMenu" src="">
+                                    <label class="sub-spa"> ehe </label>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
                     <div class="complaintsContainer">
                         <a href="Complaints.php" class="sideside" id="complaintsDropdown">
                             <img class="img-sideboard" src="Pictures/ComplaintsCap.png">
