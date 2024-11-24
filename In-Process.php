@@ -76,6 +76,7 @@ if (isset($_SESSION['unique_id'])) {
                                 <a href="In-Process.php">
                                     <img class="img-subMenu" src="Pictures/In-Process.png">
                                     <label class="sub-spa"> In-Process </label>
+                                    <span class="badge badge-yellow" id="inProcessBadge">0</span>
                                 </a> 
                                 <a href="Resolved.php">
                                     <img class="img-subMenu" src="Pictures/resolved.png">
@@ -84,6 +85,7 @@ if (isset($_SESSION['unique_id'])) {
                                 <a href="Escalated.php">
                                     <img class="img-subMenu" src="Pictures/warning.png">
                                     <label class="sub-spa"> Escalated </label>
+                                    <span class="badge badge-red" id="escalatedBadge">0</span>  
                                 </a> 
                                 <a href="MainChat.php">
                                     <img class="img-subMenu" src="Pictures/Chat.png">
@@ -351,7 +353,7 @@ if (isset($_SESSION['unique_id'])) {
 
                                     <button class="BtnDownloadModal" id="generatePdfBtn" disabled> Generate Turn-over Letter </button>
 
-                                    <input type="text" id="generatedFileName" readonly style="padding: 20px 40px 10px 10px; margin-left: 11%;"/>
+                                    <input type="text" id="generatedFileName" readonly style="display: none; padding: 20px 40px 10px 10px; margin-left: 11%;"/>
 
                                     <input type="hidden" id="RemarkRole" value="<?php echo $_SESSION['role']?>">
                                     <input type="hidden" id="ComplaintID">

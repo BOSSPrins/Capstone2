@@ -239,8 +239,10 @@ function togglePage(pageId) {
 
 // Check local storage on page load to determine which container to show
 window.onload = function() {
-    const activeContainer = localStorage.getItem('activeContainer');
-    togglePage(activeContainer || 'tableCon'); // Default to 'tableCon'
+    // const activeContainer = localStorage.getItem('activeContainer');
+    
+        togglePage('tableCon'); // Default to tableCon
+    
 }
 
 // FUNCTION PARA SA TAKE ACTION BUTTON 
@@ -268,6 +270,7 @@ function toggleDropdown() {
 function setStatus(status) {
     const display = document.querySelector('.dropdown-display');
     const generatePdfBtn = document.getElementById('generatePdfBtn');
+    const generatedFileName = document.getElementById('generatedFileName');
 
     // Set the dropdown display text
     display.textContent = status;
@@ -279,7 +282,11 @@ function setStatus(status) {
     if (status === 'Escalated') {
         generatePdfBtn.style.display = 'block'; // Show the button
         generatePdfBtn.disabled = false;
-    } else {
+        generatedFileName.style.display = 'block';
+    } else if (status === 'Resolved'){
+        generatePdfBtn.style.display = 'none'; // Hide the button
+        generatedFileName.style.display = 'none';
+    } else if (status === ''){
         generatePdfBtn.style.display = 'none'; // Hide the button
         
     }
