@@ -4,7 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title> Mabuhay Website </title>
-  <link rel="stylesheet" href="AnnouncementTable.css">
+  <link rel="stylesheet" href="CSS/AnnounceHistory.css">
+  <script src="JS/sidebar.js"></script>
 </head>
 <body>
 <div class="mainDashboardContainer">
@@ -15,7 +16,7 @@
                     <h2 class="MabuhayName"> Mabuhay Homes 2000 <br> Phase 5 </h2>
                 </div>
                 <div class="DagdagNanaman">
-                    <a href="DashBoard.php" class="sideside baractive">
+                    <a href="DashBoard.php" class="sideside">
                         <img class="img-sideboard" src="Pictures/Dashboard2.png">
                         <span> Dasboard </span>
                     </a>
@@ -73,7 +74,7 @@
                             </li>
                         </ul>
                     </div>
-                    <a href="Announcement.php" class="sideside">
+                    <a href="AnnouncementTable.php" class="sideside">
                         <img class="img-sideboard" src="Pictures/Announcement.png">
                         <span> Announcement </span>
                     </a>
@@ -163,8 +164,8 @@
                     </div>
                 </div>
                 <div class="AnnounceNav">
-                    <a href="AnnouncementTable.html" class="AnnNavv AnnActive"> Table Posting </a>
-                    <a href="AnnounceHistory.html" class="AnnNavv"> History </a>
+                    <a href="AnnouncementTable.php" class="AnnNavv AnnActive"> Table Posting </a>
+                    <a href="AnnounceHistory.php" class="AnnNavv"> History </a>
                 </div>
                 <div class="MainContainerForTables">
                     <div class="EachContainerAnnounce" id="AnnounceTab">
@@ -174,6 +175,6 @@
             </div>
         </div>
     </div>
-    <script src="AnnounceHistory.js"></script>
+    <script src="JS/AnnounceHistory.js"></script>
 </body>
 </html>

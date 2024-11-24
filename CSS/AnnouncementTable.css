@@ -840,13 +840,13 @@ width: 100%;
 max-height: 610px;
 }
 
-/* .uploaderImg{
-width: 70px;
-} */
-
-.editingLagayanText {
-margin-top: 10px;
+.uploaderImg{
+width: 30px;
 }
+
+/* .editingLagayanText {
+padding-bottom: 5px;
+} */
 
 .creatingAnnounceRap .upperUpload{
 color: #3056b5;
@@ -869,7 +869,7 @@ cursor: pointer;
 }
 
 .creatingAnnouncementForm p{
-margin-top: 15px;
+margin-top: 5px;
 }
 
 .announceInput,
@@ -990,9 +990,9 @@ width: 100%;
 max-height: 500px;
 }
 
-/* .editingImgModal {
-width: 60px;
-} */
+.editingImgModal {
+width: 30px;
+}
 
 .EditingPics {
 display: flex;

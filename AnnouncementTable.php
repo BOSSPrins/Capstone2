@@ -1,29 +1,11 @@
-<?php 
-include_once "Connect/Connection.php";
-session_start();
-
-if (isset($_SESSION['unique_id'])) {
-    if ($_SESSION['role'] == 'user') {
-        header("Location: LoginPage.php");
-        exit();
-    }
-  } else {
-    header("Location: LoginPage.php");
-    exit();
-  }
-
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title> Mabuhay Website </title>
-    <link rel="icon" type="image/x-icon" href="Pictures/Dasma_City_Icon.ico">
-    <link rel="stylesheet" href="CSS/AnnouncementTable.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="sidebar.js"></script>
+  <title> Dashboard </title>
+  <link rel="stylesheet" href="CSS/AnnouncementTable.css">
+  <script src="JS/sidebar.js"></script>
 </head>
 <body>
 <div class="mainDashboardContainer">
@@ -34,7 +16,7 @@ if (isset($_SESSION['unique_id'])) {
                     <h2 class="MabuhayName"> Mabuhay Homes 2000 <br> Phase 5 </h2>
                 </div>
                 <div class="DagdagNanaman">
-                    <a href="DashBoard.php" class="sideside baractive">
+                    <a href="DashBoard.php" class="sideside">
                         <img class="img-sideboard" src="Pictures/Dashboard2.png">
                         <span> Dasboard </span>
                     </a>
@@ -92,7 +74,7 @@ if (isset($_SESSION['unique_id'])) {
                             </li>
                         </ul>
                     </div>
-                    <a href="Announcement.php" class="sideside">
+                    <a href="AnnouncementTable.php" class="sideside">
                         <img class="img-sideboard" src="Pictures/Announcement.png">
                         <span> Announcement </span>
                     </a>
@@ -182,8 +164,8 @@ if (isset($_SESSION['unique_id'])) {
                     </div>
                 </div>
                 <div class="AnnounceNav">
-                    <a href="AnnouncementTable.html" class="AnnNavv AnnActive"> Table Posting </a>
-                    <a href="AnnounceHistory.html" class="AnnNavv"> History </a>
+                    <a href="AnnouncementTable.php" class="AnnNavv NavActive"> Table Posting </a>
+                    <a href="AnnounceHistory.php" class="AnnNavv"> History </a>
                 </div>
                 <div class="MainContainerForTables">
                     <div class="EachContainerAnnounce" id="AnnounceTab">
@@ -346,6 +328,6 @@ if (isset($_SESSION['unique_id'])) {
             </div>
         </div>
     </div>
-    <script src="AnnouncementTable.js"></script>
+    <script src="JS/AnnouncementTable.js"></script>
 </body>
 </html>
