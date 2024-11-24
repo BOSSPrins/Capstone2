@@ -503,11 +503,11 @@ height: 100vh;
 /* DESIGN PARA SA DROPDOWN TYPE */
 .TypeDrop{
     position: relative;
-    width: 100%;
+    width: 40%;
 }
 
 .TypeDisplay{
-  margin-left: 20px;
+  /* margin-left: 20px; */
   background-color: #ffffff;
   padding: 10px;
   cursor: pointer;
@@ -518,7 +518,7 @@ height: 100vh;
 .TypedropOptions{
     position: absolute;
     top: 100%;
-    left: 20px;
+    left: 0px;
     right: 0;
     background-color: white;
     border: 1px solid #ccc;
@@ -665,25 +665,18 @@ height: 100vh;
 }
 
 /* DESIGN PARA SA PAG UPLOAD NG PICTURES */
-.file-upload-container {
-  position: relative;
-  display: inline-block;
-  width: 50%;  /* Adjust width of upload area */
-  height: 50px;
-  border-radius: 5px;
-  border: dotted rgba(62, 65, 71, 0.4);
-  cursor: pointer;
-  text-align: center;
-  padding-top: 10px;  /* Center the '+' icon vertically */
-}
 
 /* Wrapper to contain both file upload and preview container */
 .file-upload-wrapper {
   display: flex;
   flex-direction: column;
-  align-items: center; /* Centers content horizontally */
+  align-items: center;
+  justify-content: center;
   width: 100%;
-  margin-bottom: 20px;
+  height: 80px;
+  border-radius: 5px;
+  border: 2px dashed #3056b5;
+  cursor: pointer;
 } 
 
 /* Hide default file input */
@@ -718,6 +711,7 @@ height: 100vh;
 .image-preview-container {
   margin-top: 15px;
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
   gap: 10px;
 }
@@ -753,6 +747,10 @@ height: 100vh;
   color: #666;
   text-align: center;
   margin-top: 5px;
+}
+
+.Panira2 {
+  width: 100%;
 }
 
 /* Lightbox styles (overlay background) */
@@ -845,6 +843,7 @@ height: 100vh;
   border-radius: 5px;
   border: 1px solid rgba(62, 65, 71, 0.4);
   cursor: pointer;
+  width: 100%;
 }
 
 .BtnInputGendrop {
@@ -870,7 +869,6 @@ height: 100vh;
 .GenComplainUser, .DescripUserGen, .GenComplainUser2 {
   display: flex;
   align-items: center;
-  margin-bottom: 20px;
 }
 
 .GenComplainUser label, .DescripUserGen label, .GenComplainUser2 label {
@@ -899,39 +897,26 @@ height: 100vh;
   padding: 5px;
 }
 
-
-/* DESIGN PARA SA PROOF GENERAL */
 .FileUploadWrapp {
   display: flex;
   flex-direction: column;
-  align-items: center; /* Centers content horizontally */
+  align-items: center;
+  justify-content: center;
   width: 100%;
-  margin-bottom: 20px;
-} 
-
-.FileUploadCont {
-  position: relative;
-  display: inline-block;
-  width: 50%;  /* Adjust width of upload area */
-  height: 50px;
+  margin: 10px 0;
+  height: 80px;
   border-radius: 5px;
-  border: dotted rgba(62, 65, 71, 0.4);
+  border: 2px dashed #3056b5;
   cursor: pointer;
-  text-align: center;
-  padding-top: 10px;  /* Center the '+' icon vertically */
+  /* margin-left: 20px; */
 }
 
-.InputFileGen{
+.uploaderImg {
+  width: 30px;
+}
+
+.InputFileGen {
   display: none;
-}
-
-.FileUploadGen{
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: #333;
-  cursor: pointer;
 }
 
 .plusIconGen {
@@ -946,9 +931,11 @@ height: 100vh;
   color: rgb(0, 0, 164); /* Hover effect */
 }
 
-.ImagePreviewCon{
+/* ===== IMAGE PREVIEWS ===== */
+.ImagePreviewCon {
   margin-top: 15px;
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
   gap: 10px;
 }
@@ -978,6 +965,15 @@ height: 100vh;
   cursor: pointer;
 }
 
+.removeImageProofGen:hover {
+  background: rgba(255, 0, 0, 0.8);
+}
+
+.Panira {
+  width: 100%;
+  margin-left: 23px;
+}
+
 /* Display file names if not an image */
 .fileNameGen {
   font-size: 12px;
@@ -986,7 +982,7 @@ height: 100vh;
   margin-top: 5px;
 }
 
-/* Lightbox styles (overlay background) */
+/* ===== LIGHTBOX STYLES ===== */
 .lightboxGen {
   position: fixed;
   top: 0;
@@ -1024,6 +1020,10 @@ height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.LightBoxClose:hover {
+  background-color: rgba(255, 255, 255, 0.7);
 }
 
 .footerUserSubGen {

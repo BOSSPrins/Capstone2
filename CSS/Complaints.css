@@ -700,11 +700,8 @@ html{
 .TableComPend td {
   font-size: 14px;
   border-bottom: 1px solid #576574;
-  padding: 10px 12px;
-}
-
-.TableComPend td{
-  padding: 5px;
+  /* padding: 10px 12px; */
+  padding: 8px;
   border: 1px solid rgb(179, 172, 172); /* Outline partition */
 }
 

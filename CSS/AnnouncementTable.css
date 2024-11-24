@@ -1,0 +1,1103 @@
+:root{
+  --color-primary: #1828b8;
+  --color-danger: #ff7782;
+  --color-success: #41f1b6;
+  --color-warning: #ffbb55;
+  --color-white: #fff;
+  --color-info-dark: #1e1e1f;
+  --color-info-light: #939fb6;
+  --color-dark: #363949;
+  --color-light: rgba(61, 109, 176, 0.18);
+  --color-light-2: rgba(52, 58, 116, 0.20);
+  --color-primary-variant: #111e88;
+  --color-dark-variant: #677483;
+  --color-background: #f0f0f0;
+
+  --light: #f9f9f9;
+  --blue: #3c91e6;
+  --light-blue: #a9d5ff;
+  --light-red: #f38c8c;
+  --light-green: #a7f9d0;
+  --grey: #eee;
+  --dark-grey: #aaaaaa;
+  --drak: #342e37;
+  --red:  #e88383;
+  --green: rgb(94, 232, 129);
+  --color-info-dark: #919497;
+
+  --color-border-radius: 2rem;
+  --color-border-radius-1: 0.4rem;
+  --color-border-radius-2: 0.8rem;
+  --color-border-radius-3: 1.2rem;
+
+
+  --card-padding: 1.8rem;
+  --padding-1: 1.2rem;
+
+  --box-shadow: 0 2rem 3rem var(--color-light);
+}
+
+*{
+  margin: 0;
+  padding: 0;
+  outline: none;
+  appearance: none;
+  border: 0;
+  text-decoration: none;
+  list-style: none;
+  box-sizing: border-box;
+}
+
+html{
+  font-size: 14px;
+}
+
+.mainDashboardContainer{
+  width: 100vw;
+  height: 100vh;
+  font-family: Arial, sans-serif;
+  font-size: 0.88rem;
+  background: var(--color-background);
+  user-select: none;
+  overflow-x: hidden;
+  color: var(--color-dark);
+}
+
+/* ===== SIDEBAR DESIGN ===== */
+.sidebarContainer {
+position: fixed;
+display: flex;
+flex-direction: column;
+bottom: 0;
+top: 0;
+background-color: rgb(255, 255, 255);
+width: 275px;
+transition: all 0.3s;
+}
+
+.DagdagNanaman {
+flex: 1; /* Allow the div to grow and fill available space */
+overflow-y: auto; /* Enable vertical scrolling */
+/* background-color: gray; */
+scrollbar-width: thin; /* For Firefox */
+}
+
+.DagdagNanaman span{
+font-size: 14.5px;
+font-weight: 500;
+}
+
+.DagdagNanaman .sideside{
+display: flex;
+color: var(--color-info-dark);
+padding-left: 25px;
+gap: 1rem;
+align-items: center;
+position: relative;
+height: 3.6rem;
+transition: all 300ms ease;
+}
+
+.DagdagNanaman .sideside .img-sideboard{
+font-size: 1.6rem;
+transition: all 300ms ease;
+}
+
+.DagdagNanaman .sideside:last-child{
+bottom: 1px;
+}
+
+/* Active state for sidebar items */
+.sideside.baractive {
+background: var(--color-light);
+color: var(--color-primary);
+}
+
+.sideside.baractive::before{
+content: '';
+width: 4px;
+height: 100%;
+background: var(--color-primary);
+position: absolute;
+left: 0;
+top: 0;
+margin-left: 2px;
+}
+
+.DagdagNanaman .sideside.baractive .img-sideboard{
+margin-left: calc(1rem -3rem);
+}
+
+.DagdagNanaman .sideside:hover{
+color: var(--color-primary);
+}
+
+.DagdagNanaman .sideside:hover .img-sideboard{
+margin-left: 1rem;
+}
+
+/* SIDEBAR ACTIVE */
+.sidebarActive {
+transform: translateX(250px); 
+}
+
+/* .MonthlyDuessContainerr.MonthlyDuessConActivee {
+margin-left: 5px;
+} */
+
+/* ===== SIDEBAR IMAGE SIZE ===== */
+.img-sideboard{
+width: 20px;
+}
+
+/* ===== SIDEBAR DESIGN ===== */
+.sidebarContainer {
+position: fixed;
+display: flex;
+flex-direction: column;
+bottom: 0;
+top: 0;
+background-color: rgb(255, 255, 255);
+width: 275px;
+transition: all 0.3s;
+}
+
+.DagdagNanaman {
+flex: 1; /* Allow the div to grow and fill available space */
+overflow-y: auto; /* Enable vertical scrolling */
+/* background-color: gray; */
+scrollbar-width: thin; /* For Firefox */
+}
+
+.DagdagNanaman span{
+font-size: 14.5px;
+font-weight: 500;
+}
+
+.DagdagNanaman .sideside{
+display: flex;
+color: var(--color-info-dark);
+padding-left: 25px;
+gap: 1rem;
+align-items: center;
+position: relative;
+height: 3.6rem;
+transition: all 300ms ease;
+}
+
+.DagdagNanaman .sideside .img-sideboard{
+font-size: 1.6rem;
+transition: all 300ms ease;
+}
+
+.DagdagNanaman .sideside:last-child{
+bottom: 1px;
+}
+
+/* Active state for sidebar items */
+.sideside.baractive {
+background: var(--color-light);
+color: var(--color-primary);
+}
+
+.sideside.baractive::before{
+content: '';
+width: 4px;
+height: 100%;
+background: var(--color-primary);
+position: absolute;
+left: 0;
+top: 0;
+margin-left: 2px;
+}
+
+.DagdagNanaman .sideside.baractive .img-sideboard{
+margin-left: calc(1rem -3rem);
+}
+
+.DagdagNanaman .sideside:hover{
+color: var(--color-primary);
+}
+
+.DagdagNanaman .sideside:hover .img-sideboard{
+margin-left: 1rem;
+}
+
+/* SIDEBAR ACTIVE */
+.sidebarActive {
+transform: translateX(250px); 
+}
+
+/* .MonthlyDuessContainerr.MonthlyDuessConActivee {
+margin-left: 5px;
+} */
+
+/* ===== SIDEBAR IMAGE SIZE ===== */
+.img-sideboard{
+width: 20px;
+}
+
+/* ========== SUB MENU SIDEBAR ========== */
+.subMenuComp,
+.subMenuDocs {
+display: none;
+margin-left: 35px;
+transition: all 0.3s;
+}
+
+.CompSubMenuVisible {
+display: block;
+}
+
+.DocsSubmenuVisible {
+display: block;
+}
+
+.subMenuDocs li a, .subMenuComp li a {
+position: relative;
+display: flex;
+color: var(--color-info-dark);
+padding: 10px;
+position: relative;
+transition: all 300ms ease;
+}
+
+.subMenuDocs li a.baractive,
+.subMenuComp li a.baractive {
+background: var(--color-light);
+color: var(--color-primary);
+}
+
+.subMenuDocs li a.baractive::before,
+.subMenuComp li a.baractive::before {
+content: '';
+width: 4px;
+height: 100%;
+background: var(--color-primary);
+position: absolute;
+left: 0;
+top: 0;
+margin-left: 2px;
+}
+
+/* Hover effect for submenu item icons */
+.subMenuComp li a:hover .img-subMenu,
+.subMenuDocs li a:hover .img-subMenu {
+margin-left: 1rem;
+}
+
+.subMenuComp li a .img-subMenu,
+.subMenuDocs li a .img-subMenu {
+font-size: 1.6rem;
+transition: all 300ms ease;
+}
+
+.eme2, .eme3 {
+width: 0;
+height: 0;
+border-left: 5px solid transparent;
+border-right: 5px solid transparent;
+border-top: 6px solid #aeaeae;
+transition: 0.3s;
+}
+
+.buttonEme2, .buttonEme3 {
+padding: 10px 15px;
+margin-left: 5px;
+cursor: pointer;
+}
+
+.eme2-rotate, .eme3-rotate {
+transform: rotate(180deg);
+}
+
+/* Submenu image and label */
+.img-subMenu {
+width: 20px;
+margin-right: 5px;
+}
+
+.sub-spa {
+margin-top: 5px;
+}
+
+/* ========== MAIN DASHBOARD DESIGN ========== */
+.MainBodyContainerr {
+padding-left: 275px;
+display: flex; 
+flex-direction: column; 
+height: 100vh; 
+}
+
+.MainContainerForTables {
+display: flex;
+justify-content: center;
+width: 100%;
+flex: 1;
+overflow: hidden; 
+}
+
+.EachContainerAnnounce{
+display: flex;
+flex-direction: column; /* Stack children vertically */
+width: 100%;
+padding: 10px;
+background-color: #ffffff;
+border: 1px solid rgb(179, 172, 172);
+margin-left: 10px;
+margin-right: 10px;
+margin-bottom: 10px;
+flex: 1; /* Allow it to grow and take available space */
+}
+
+/* DESIGN PARA TO SA HEADER NG SIDEBAR AT SA MAIN */
+.headerTop{
+align-items: center;
+text-align: center;
+background: rgb(229, 229, 229);
+height: 160px;
+width: 100%;
+padding-top: 10px;
+box-shadow: 0 8px 8px -10px #888888;
+}
+
+.img-logo{
+width: 100px;
+}
+
+.headerTopMain{
+position: sticky;
+display: flex;
+align-items: center;
+justify-content: space-between;
+height: 50px;
+width: 100%;
+background: rgb(255, 255, 255);
+padding: 20px;
+top: 0;
+box-shadow: 5px 10px 18px #888888;
+box-shadow: 0 8px 8px -10px black;
+z-index: 1;
+}
+
+.HamburgerandOthers{
+display: flex;
+align-items: center;
+}
+
+.namePerModule{
+padding-left: 20px;
+}
+
+.menu{
+width: 25px;
+cursor: pointer;
+}
+
+.ProfileViewww{
+display: flex;
+align-items: center;
+}
+
+.user-img{
+width: 30px;
+height: 30px;
+background: rgb(0, 0, 0);
+border-radius: 20px;
+}
+
+.profileBtn{
+  padding: 5px 20px;
+  margin-right: 5px;
+  cursor: pointer;
+}
+
+.profileBtn label{
+  cursor: pointer;
+}
+
+/* ===== PROFILE MODAL DESIGN ===== */
+.modal{
+  display: none;
+}
+
+.subModal{
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+  display: flex;
+  background: var(--color-background);
+  width: 800px;
+  height: 500px; /* Set the desired height */
+  overflow: hidden; /* Hide overflow */
+  border-radius: 10px;
+}
+
+.profileSidebar{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  width: 150px;
+  height: 100%;
+  border-radius: 10px;
+}
+
+.profileSidebar a{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 4rem;
+  margin-bottom: 5px;
+  /* background: rgb(192, 184, 184); */
+  color: var(--color-info-dark);
+}
+
+.profileSidebar a:hover{
+  color: var(--color-primary);
+}
+
+.profilePages{
+  width: 100%;
+  margin-left: 10px;
+}
+
+.closeProf{
+  display: flex;
+  justify-content: end;
+  margin-right: 5px;
+  color: #000000;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* Hide all pages initially */
+.page {
+  display: none;
+}
+
+/* Show active page */
+.activeProfModal{
+  display: block;
+}
+
+/* ===== CHANGING PASSWORD ===== */
+.changingPassword {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 20px;
+  margin-left: 50px;
+  margin-right: 50px;
+}
+
+.changingInputBox{
+  width: 100%;
+  margin-bottom: 50px;
+}
+
+.changingInputBoxLast{
+  width: 100%;
+}
+
+.changingInputBox .inputngChanging,
+.changingInputBoxLast .inputngChanging{
+  width: 100%;
+  padding: 15px;
+  font-size: 20px;
+  border-radius: 10px;
+  border: 1px solid rgba(62, 65, 71, 0.4);
+}
+
+.changingInputBox .inputngChanging:focus,
+.changingInputBoxLast .inputngChanging:focus{
+  border-color: var(--color-primary);
+}
+
+.changingForgotPass {
+  display: flex;
+  justify-content: end;
+  margin-top: 15px;
+  font-size: 17.5px;
+  width: 100%;
+}
+
+.forgotpassAs{
+  color: var(--color-primary);
+}
+
+.forgotpassAs:hover{
+  text-decoration: underline;
+}
+
+.paragChange{
+  margin-top: 10px;
+}
+
+.buttonSapagPalit{
+  margin-top: 10px;
+  width: 100%;
+  padding: 15px;
+  background: var(--color-primary);
+  color: white;
+  font-size: 17.5px;
+  cursor: pointer;
+}
+
+/* DESIGN PARA SA ANNOUNCEMENT NAVIGATION */
+.AnnounceNav {
+margin: 10px 10px 0px 10px;
+font-size: 0; /* Removes any unwanted spacing around inline-block elements */
+display: flex; /* Use flexbox to distribute space evenly */
+gap: 10px; /* Adds a gap between the anchor tags */
+margin-top: 15px;
+}
+
+.AnnounceNav a {
+flex: 1; /* Each anchor tag takes up equal space */
+padding: 5px 20px;
+background-color: #dfdfdf;
+color: black;
+text-decoration: none;
+font-size: 16px; /* Reset font-size for anchor tags */
+text-align: center; /* Centers the text inside the anchor tags */
+}
+
+.AnnounceNav a.NavActive {
+background: #c7b216; /* Change the background color when active */
+color: white; /* Optional: Change text color when active */
+}
+
+.AnnounceNav a:hover {
+background: #c7b216;
+color: white;
+}
+
+.ConNavHidden {
+display: none;
+}
+
+/* DESIGN FOR DROPDOWN */
+.AnnHeader{
+display: flex;
+justify-content: space-between;
+align-items: center;
+margin-bottom: 6px;
+}
+
+.AnnItemCon,
+.searchTablee{
+display: flex;
+align-items: center;
+}
+
+.dropdown {
+position: relative;
+display: inline-block;
+cursor: pointer;
+margin: 0 7px;
+}
+
+.ArrowandPlace{
+display: flex;
+justify-content: center;
+align-items: center;
+}
+
+.selected {
+display: flex;
+align-items: center;
+justify-content: center;
+padding: 5px;
+border: 1px solid #ccc;
+background-color: #fff;
+width: 70px;
+user-select: none;
+z-index: 1;
+}
+
+.options {
+display: none;
+position: absolute;
+background-color: #fff;
+box-shadow: 0 4px 8px 0 rgba(0,0,0,0.1);
+top: 100%;
+left: 0;
+width: 70px;
+z-index: 1;
+}
+
+.option {
+text-align: center;
+padding: 8px;
+cursor: pointer;
+border-top: 1px solid #ccc;
+width: 100%;
+box-sizing: border-box;
+z-index: 1;
+}
+
+.open .options {
+display: block;
+}
+
+.inputSearchhh{
+padding: 5px;
+font-size: 16px;
+width: 300px;
+margin-left: 5px;
+}
+
+/* DESIGN PARA SA BUTTON NG POST NEW ANNOUNCE */
+.NewAnnounce {
+padding: 10px 25px;
+margin-bottom: 10px;
+background: #0e1b7b;
+color: white;
+border-radius: 15px;
+cursor: pointer;
+}
+
+.NewAnnounce:hover {
+background: #045c9a;
+}
+
+/* DESIGN PARA SA LIST TABLE */
+.TableAnnCon {
+flex: 1; /* Allow this div to grow and take all available space */
+padding: 10px;
+background-color: #f9f9f9;
+overflow-y: auto; /* Scroll within this section if necessary */
+}
+
+.TableAnnDetails {
+width: 100%;
+border-collapse: collapse;
+/* margin-top: 20px; */
+}
+
+.TableAnnDetails thead {
+background: var(--color-primary);
+color: white;
+}
+
+.TableAnnDetails th {
+padding: 15px;
+cursor: pointer;
+position: relative;
+font-size: 12px;
+white-space: nowrap;
+user-select: none;
+transition: all linear 0.16s;
+border: 1px solid rgb(179, 172, 172); /* Outline partition */
+}
+
+.TableAnnDetails td {
+font-size: 14px;
+border-bottom: 1px solid #576574;
+/* padding: 10px 12px; */
+padding: 8px;
+border: 1px solid rgb(179, 172, 172); /* Outline partition */
+color: black;
+}
+
+.TableAnnDetails tbody {
+background: var(--color-white);
+text-align: center;
+}
+
+.TableAnnDetails tr:nth-child(even) {
+background: var(--color-light);
+}
+
+.EditingAnn {
+background: none;
+text-decoration: underline;
+cursor: pointer;
+color: blue;
+}
+
+/* DESIGN PARA SA BACK BUTTON */
+.ButtonBack {
+font-size: 20px;
+font-weight: bold;
+border-radius: 50%;
+padding: 5px 10px;
+cursor: pointer;
+color: white;
+background: #04007a;
+}
+
+/* DESIGN PARA SA DATE AND TIME */
+.DateTimeInt {
+border: 1px solid rgba(62, 65, 71, 0.4);
+padding: 10px;
+}
+
+/* DESIGN PARA SA CONTENT */
+.LamanContainer{
+flex: 1; /* Allow this div to grow and take all available space */
+padding: 10px;
+background-color: #f9f9f9;
+overflow-y: auto; /* Scroll within this section if necessary */
+}
+
+/* DESIGN PARA SA EDIT PAGE */
+.EditDateTime,
+.NewPostDatetime {
+display: flex;
+justify-content: space-between;
+margin: 17px 0px;
+}
+
+/* Use flexbox to align label and input side by side */
+.input-container,
+.input-Field {
+display: flex;
+align-items: center;
+margin-bottom: 30px; /* Optional: for spacing between inputs */
+}
+
+.input-container label,
+.input-Field label {
+display: inline-block;
+align-items: center;
+margin-right: 10px; /* Space between label and input */
+width: 180px; /* You can adjust this as needed */
+font-weight: bold;
+}
+
+.input-container input,
+.input-Field input {
+width: 100%;
+/* padding: 8px; */
+/* margin-bottom: 10px; */
+/* border: 1px solid #ddd; */
+border: 1px solid rgba(62, 65, 71, 0.4);
+border-radius: 4px;
+}
+
+.input-container textarea,
+.input-Field textarea{
+resize: none;
+max-height: 200px;
+width: 100%;
+border-radius: 5px;
+border: 1px solid rgba(62, 65, 71, 0.4);
+font-size: medium;
+font-family: Arial;
+padding: 5px;
+}
+
+.ButtonEdit {
+display: flex;
+justify-content: space-between;
+}
+
+.buttonDeletee {
+background: rgb(160, 0, 0);
+color: white;
+padding: 8px 35px;
+cursor: pointer;
+font-weight: bold;
+}
+
+.buttonDeletee:hover {
+background: rgb(213, 5, 5);
+}
+
+.edit-btn {
+background: rgb(13, 120, 1);
+color: white;
+padding: 8px 35px;
+cursor: pointer;
+font-weight: bold;
+}
+
+.edit-btn:hover {
+background: rgb(17, 166, 0);
+}
+
+/* ===== ANNOUNCEMENT UPLOADING PICTURE ===== */
+.creatingAnnounceRap{
+display: flex;
+flex-direction: column;
+align-items: center;
+width: 100%;
+max-height: 610px;
+}
+
+/* .uploaderImg{
+width: 70px;
+} */
+
+.editingLagayanText {
+margin-top: 10px;
+}
+
+.creatingAnnounceRap .upperUpload{
+color: #3056b5;
+font-size: 19px;
+font-weight: 600;
+text-align: center;
+}
+
+.creatingAnnounceRap .creatingAnnouncementForm{
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+width: 100%;
+margin: 10px 0;
+height: 80px;
+border-radius: 5px;
+border: 2px dashed #3056b5;
+cursor: pointer;
+}
+
+.creatingAnnouncementForm p{
+margin-top: 15px;
+}
+
+.announceInput,
+.Pic{
+visibility: hidden;
+}
+
+.spanNiya{
+color: var(--color-primary);
+}
+
+.uploadingImages {
+display: flex;
+flex-wrap: wrap;              /* Allow items to wrap to the next line */
+gap: 10px;                    /* Space between images */
+margin-top: 15px;             /* Space above the uploaded images */
+justify-content: flex-start;  /* Align images to the left */
+}
+
+.uploadedImages {
+position: relative;
+width: 100px;                 /* Fixed width for image previews */
+height: 100px;                /* Fixed height for image previews */
+border-radius: 5px;           /* Rounded corners for the image previews */
+overflow: hidden;             /* Ensure the image doesn't spill out of the border */
+}
+
+.uploadedImages img {
+width: 100%;
+height: 100%;
+object-fit: cover;            /* Ensure the image fills the box without distorting */
+border-radius: 5px;           /* Make the image corners rounded */
+cursor: pointer;             /* Pointer cursor for clickable images */
+}
+
+/* Remove button */
+.remove-btn {
+position: absolute;
+top: 0;
+right: 0;
+background: rgba(255, 0, 0, 0.6);
+color: white;
+font-size: 16px;
+padding: 2px 6px;
+border-radius: 50%;
+cursor: pointer;
+transition: background-color 0.3s ease;
+}
+
+.remove-btn:hover {
+background: rgba(255, 0, 0, 0.8);  /* Darker red on hover */
+}
+
+.buttonToPost {
+display: flex;
+justify-content: end;
+width: 100%;
+}
+
+.buttonPostInputSub {
+font-size: 15px;
+padding: 10px 30px;
+background: var(--color-primary);
+color: var(--color-white);
+cursor: pointer;
+}
+
+/* Lightbox styles (overlay background) */
+.lightbox {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background-color: rgba(0, 0, 0, 0.8); /* Dark background */
+display: none; /* Hidden by default */
+justify-content: center;
+align-items: center;
+z-index: 1000;
+cursor: pointer;
+}
+
+.lightbox-image {
+max-width: 80%;   /* Maximum width of the image in the lightbox */
+max-height: 80%;  /* Maximum height of the image in the lightbox */
+object-fit: contain; /* Ensure image maintains aspect ratio */
+}
+
+.LightBoxClose {
+position: absolute;
+top: 10px;
+right: 10px;
+background-color: rgba(255, 255, 255, 0.5);
+color: white;
+font-size: 20px;
+padding: 5px;
+height: 30px;
+width: 30px;
+border-radius: 50%;
+cursor: pointer;
+
+/* Center the "X" horizontally and vertically */
+display: flex;
+justify-content: center;
+align-items: center;
+}
+
+.LightBoxClose:hover {
+background-color: rgba(255, 255, 255, 0.7);
+}
+
+/* DESIGN PARA NAMAN SA UPLOAD PICTURE EDIT */
+.EditingPicturesModal {
+display: flex;
+flex-direction: column;
+align-items: center;
+width: 100%;
+max-height: 500px;
+}
+
+/* .editingImgModal {
+width: 60px;
+} */
+
+.EditingPics {
+display: flex;
+flex-direction: column;
+align-items: center;
+width: 100%;
+height: 70px;
+border-radius: 5px;
+border: 2px dashed #3056b5;
+cursor: pointer;
+}
+
+.editingInput {
+visibility: hidden;
+}
+
+.spanNiyaModal {
+color: var(--color-primary);
+}
+
+/* Styling for uploaded images */
+.editingUploadedImages {
+display: flex;
+flex-wrap: wrap;              /* Allow items to wrap to the next line */
+gap: 10px;                    /* Space between images */
+margin-top: 15px;             /* Space above the uploaded images */
+justify-content: flex-start; 
+}
+
+.uploadedImagesModal {
+width: 100px;  /* Same width as image previews in uploadingImages */
+height: 100px; /* Maintain consistent height for previews */
+object-fit: cover; /* Make sure the image maintains its aspect ratio and fills the container */
+border-radius: 5px;
+cursor: pointer;
+position: relative;
+}
+
+.editingUploadedImages img {
+width: 100%;
+height: 100%;
+object-fit: cover;            /* Ensure the image fills the box without distorting */
+border-radius: 5px;           /* Make the image corners rounded */
+cursor: pointer;             /* Pointer cursor for clickable images */
+}
+
+/* Remove button styling */
+.removeBtnModal {
+position: absolute;
+top: 0;
+right: 0;
+background: rgba(255, 0, 0, 0.6);
+color: white;
+font-size: 16px;
+padding: 2px 6px;
+border-radius: 50%;
+cursor: pointer;
+transition: background-color 0.3s;
+}
+
+.removeBtnModal:hover {
+background-color: rgba(255, 0, 0, 0.8);
+}
+
+/* Custom Lightbox styles (overlay background) */
+.custom-lightbox {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background-color: rgba(0, 0, 0, 0.8);
+display: none;
+justify-content: center;
+align-items: center;
+z-index: 1000;
+cursor: pointer;
+}
+
+.custom-lightbox-image {
+max-width: 80%;
+max-height: 80%;
+object-fit: contain;
+}
+
+/* Close button style for the custom lightbox */
+.custom-LightBoxClose {
+position: absolute;
+top: 10px;
+right: 10px;
+background-color: rgba(255, 255, 255, 0.5);
+color: white;
+font-size: 20px;
+padding: 5px;
+height: 30px;
+width: 30px;
+border-radius: 50%;
+cursor: pointer;
+
+/* Center the "X" horizontally and vertically */
+display: flex;
+justify-content: center;
+align-items: center;
+}
+
+.custom-LightBoxClose:hover {
+background-color: rgba(255, 255, 255, 0.7);
+}

@@ -298,11 +298,11 @@ $encoded_id = urlencode($admin_unique_id);
                         </div>
                         <br>
                         <!-- <hr style="border: 1px solid #d0d0d0; width: 100%; margin: 20px auto;"> -->
-                        <header style="display: flex; align-items: center; width: 40%; margin-bottom: 10px;">
-                            <label style="width: 50%; font-weight: bold;"> Select type of Complaint: </label>
+                        <header style="display: flex; align-items: center; width: 100%; margin-bottom: 10px;">
+                            <label style="width: 175px; font-weight: bold;"> Select type of Complaint: </label>
                             <div class="TypeDrop">
                                 <!-- Clicking this div will trigger the dropdown toggle -->
-                                <div class="TypeDisplay" onclick="toggleType()"> ---- </div>
+                                <div class="TypeDisplay" onclick="toggleType()"> General Complaint </div>
                                 <!-- Hidden dropdown options -->
                                 <div class="TypedropOptions" style="display: none;">
                                     <div class="TypeDropOption" onclick="setType('General Complaint')"> General Complaint </div>
@@ -341,20 +341,19 @@ $encoded_id = urlencode($admin_unique_id);
                             <!-- Proof Section with Multiple Image Upload -->
                             <div class="GenComplainUser2">
                                 <label> Proof: </label>
-                                <div class="FileUploadWrapp">
-                                    <div class="FileUploadCont">
-                                        <input class="InputFileGen" type="file" id="ProofGen" accept=".jpg, .jpeg, .png" multiple> <!-- Allow multiple file selection -->
-                                        <div class="FileUploadGen">
-                                            <span class="plusIconGen">+ <br> Upload Pictures here... </br> </span>
-                                        </div>
+                                <div class="Panira">
+                                    <div class="FileUploadWrapp">
+                                        <input class="InputFileGen" type="file" id="ProofGen" accept=".jpg, .jpeg, .png, .pdf, .docx" multiple> <!-- Allow multiple file selection -->
+                                        <img class="uploaderImg" src="Pictures/cloudUpload.png" alt="Upload Icon">
+                                        <p class="plusIconGen"> Upload Pictures here... </p>
                                     </div>
 
                                     <!-- Image previews will appear here -->
                                     <div class="ImagePreviewCon"></div>
-                                </div>
 
-                                <!-- Display non-image file names here -->
-                                <div id="fileListGenn"></div>
+                                    <!-- Display non-image file names here -->
+                                    <div id="fileListGenn"></div>
+                                </div>
                             </div>
 
                             <!-- Submit Button -->
@@ -410,33 +409,33 @@ $encoded_id = urlencode($admin_unique_id);
                             </div>
                             <div class="ComplainUser3">
                                 <label>Proof:</label>
-                                <div class="file-upload-wrapper">
-                                    <div class="file-upload-container">
+                                <div class="Panira2">
+                                    <!-- File Upload Section -->
+                                    <div class="file-upload-wrapper">
                                         <input class="inputFile" type="file" id="Proof" accept=".jpg, .jpeg, .png" multiple>
-                                        <div class="file-upload-btn">
-                                            <span class="plus-icon">+ <br> Upload Pictures here... </br> </span>
-                                        </div>
+                                        <img class="uploaderImg" src="Pictures/cloudUpload.png" alt="Upload Icon">
+                                        <p class="plus-icon"> Upload Pictures here... </p>
                                     </div>
 
-                                    <!-- Image previews will appear here -->
+                                    <!-- Image Previews Section -->
                                     <div class="image-preview-container" id="imagePreviewContainer"></div>
+
+                                    <!-- Non-Image File Names -->
+                                    <div id="fileList"></div>
                                 </div>
-                    
-                                <!-- Display non-image file names here -->
-                                <div id="fileList"></div>
                             </div>
-                    
+
                             <!-- Submit Button -->
                             <footer class="footerUserSubmitt">
                                 <button class="submittUserComp" id="Submit">Submit</button>
                             </footer>
+
+                            <!-- Lightbox modal -->
+                            <div id="lightbox" class="lightbox" style="display: none;">
+                                <span id="closeLightbox" class="close-lightbox">×</span>
+                                <img id="lightboxImage" class="lightbox-image" />
+                            </div>
                         </div>
-                    
-                        <!-- Lightbox modal -->
-                        <div id="lightbox" class="lightbox">
-                            <span id="closeLightbox" class="close-lightbox">×</span>
-                            <img id="lightboxImage" class="lightbox-image" />
-                        </div>                       
                     </div>
                 </div>
             </div>

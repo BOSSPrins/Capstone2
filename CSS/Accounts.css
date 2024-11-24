@@ -493,7 +493,7 @@ thead{
 }
   
 th{
-    padding: 20px;
+    padding: 15px;
     cursor: pointer;
     position: relative;
     font-size: 12px;
@@ -536,13 +536,14 @@ table th.desc::after {
 }
   
 table td {
-    font-size: 14px;
-    border-bottom: 1px solid #576574;
-    padding: 10px 12px;
+  font-size: 14px;
+  border-bottom: 1px solid #576574;
+  /* padding: 10px 12px; */
+  padding: 8px;
 }
   
 td{
-    padding: 5px;
+    /* padding: 5px; */
     border: 1px solid rgb(179, 172, 172); /* Outline partition */
 }
   
@@ -560,9 +561,10 @@ tr:nth-child(even){
 }
 
 .AccViewBtn{
-    border-radius: 5px;
-    padding: 0.4rem 2rem;
-    cursor: pointer;
+  background: none;
+  text-decoration: underline;
+  cursor: pointer;
+  color: blue;
 }
 
 /* DESIGN PARA SA VIEW MODAL */

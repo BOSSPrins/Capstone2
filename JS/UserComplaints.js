@@ -29,6 +29,7 @@ function openPage(pageName) {
 
 
 // FUNCTION PARA SA PAGES NG TABLE LIST AT FILE NEW COMPLAINTS 
+// Function to toggle between containers
 function togglePageNewAndTbl(pageId) {
     // Hide all containers
     const pages = document.querySelectorAll('.ContainerForComplaints');
@@ -41,16 +42,23 @@ function togglePageNewAndTbl(pageId) {
     if (selectedPage) {
         selectedPage.style.display = 'flex'; // Use flex to maintain the layout
     }
-
-    // Store the active page in local storage
-    localStorage.setItem('activeComplaintContainer', pageId);
 }
 
-// Check local storage on page load to determine which container to show // 
+// Always show the tblConforComplaints section on page load
 window.onload = function() {
-    const activeContainer = localStorage.getItem('activeComplaintContainer');
-    togglePageNewAndTbl(activeContainer || 'tblConforComplaints'); // Default to 'tblConforComplaints'
-}
+    // Hide all containers initially
+    const pages = document.querySelectorAll('.ContainerForComplaints');
+    pages.forEach(page => {
+        page.style.display = 'none'; // Hide all containers
+    });
+
+    // Always show the tblConforComplaints section by default
+    const tblConforComplaints = document.getElementById('tblConforComplaints');
+    if (tblConforComplaints) {
+        tblConforComplaints.style.display = 'flex'; // Use flex to maintain the layout
+    }
+};
+
 
 // FUNCTION PARA SA STATUS CHANGE DROPDOWN 
 // This function toggles the visibility of the dropdown options
@@ -65,22 +73,26 @@ function setType(type) {
     typeDisplay.textContent = type;  // Set the text of the selected type
     document.querySelector('.TypedropOptions').style.display = 'none';  // Hide the dropdown
 
-    // Hide both content sections
-    document.getElementById('generalContent').style.display = 'none';
-    document.getElementById('directContent').style.display = 'none';
-
-    // Show the corresponding content based on the selected type
+    // Ensure that the default content is displayed first
     if (type === 'General Complaint') {
         document.getElementById('generalContent').style.display = 'block';
+        document.getElementById('directContent').style.display = 'none';
     } else if (type === 'Direct Complaint') {
+        document.getElementById('generalContent').style.display = 'none';
         document.getElementById('directContent').style.display = 'block';
     }
 }
 
+// Ensure generalContent is shown by default on page load
+document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('generalContent').style.display = 'block';
+    document.getElementById('directContent').style.display = 'none';
+});
+
 
 // FUNCTION PARA SA PAG UPLOAD NG PICTURES DIRECT
-// When the file-upload-container is clicked, trigger the file input dialog
-document.querySelector('.file-upload-container').addEventListener('click', function() {
+// When the file-upload-wrapper is clicked, trigger the file input dialog
+document.querySelector('.file-upload-wrapper').addEventListener('click', function() {
     document.querySelector('.inputFile').click();  // Open the file selection dialog
 });
 
@@ -88,9 +100,6 @@ document.querySelector('.file-upload-container').addEventListener('click', funct
 document.querySelector('.inputFile').addEventListener('change', function(event) {
     let fileList = event.target.files;
     let imagePreviewContainer = document.getElementById('imagePreviewContainer');
-
-    // Clear previous previews
-    imagePreviewContainer.innerHTML = '';
 
     // Iterate over selected files and preview them
     Array.from(fileList).forEach(file => {
@@ -225,8 +234,8 @@ function selectGenComplaint(value) {
 
 
 // FUNCTION PARA SA PAG UPLOAD NG PICTURES GENERAL COMPLAINT
-// When the file-upload-container is clicked, trigger the file input dialog
-document.querySelector('.FileUploadCont').addEventListener('click', function() {
+// When the file-upload-wrapper is clicked, trigger the file input dialog
+document.querySelector('.FileUploadWrapp').addEventListener('click', function() {
     document.querySelector('.InputFileGen').click();  // Open the file selection dialog
 });
 
@@ -234,9 +243,6 @@ document.querySelector('.FileUploadCont').addEventListener('click', function() {
 document.querySelector('.InputFileGen').addEventListener('change', function(event) {
     let fileList = event.target.files;
     let imagePreviewContainer = document.querySelector('.ImagePreviewCon');
-
-    // Clear previous previews
-    imagePreviewContainer.innerHTML = '';
 
     // Iterate over selected files and preview them
     Array.from(fileList).forEach(file => {

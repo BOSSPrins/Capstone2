@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title> Dashboard </title>
-  <link rel="stylesheet" href="CSS/Announcement.css">
+  <title> Mabuhay Website </title>
+  <link rel="stylesheet" href="AnnouncementTable.css">
 </head>
 <body>
 <div class="mainDashboardContainer">
@@ -27,10 +27,23 @@
                         <img class="img-sideboard" src="Pictures/Residents2.png">
                         <span> Residents </span>
                     </a>
-                    <a href="Documents.php" class="sideside">
-                        <img class="img-sideboard" src="Pictures/Documents2.png">
-                        <span> Documents </span>
-                    </a>
+                    <div class="documentsContainer">
+                        <a href="Documents.php" class="sideside" id="documentsDropdown">
+                            <img class="img-sideboard" src="Pictures/Documents2.png">
+                            <span> Documents </span>
+                            <button class="buttonEme3">
+                                <div class="eme3"></div>
+                            </button>
+                        </a>
+                        <ul class="subMenuDocs" id="documentsSubMenu">
+                            <li>
+                                <a href="#">
+                                    <img class="img-subMenu" src="">
+                                    <label class="sub-spa"> ehe </label>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
                     <div class="complaintsContainer">
                         <a href="Complaints.php" class="sideside" id="complaintsDropdown">
                             <img class="img-sideboard" src="Pictures/ComplaintsCap.png">
@@ -150,21 +163,17 @@
                     </div>
                 </div>
                 <div class="AnnounceNav">
-                    <a href="Announcement" onclick="toggleNavAnn('TableAnnounce')"> Table </a>
-                    <a href="#" onclick="toggleNavAnn('TablePost')"> Posting </a>
-                    <a href="#" onclick="toggleNavAnn('TablePost')"> History </a>
+                    <a href="AnnouncementTable.html" class="AnnNavv AnnActive"> Table Posting </a>
+                    <a href="AnnounceHistory.html" class="AnnNavv"> History </a>
                 </div>
                 <div class="MainContainerForTables">
                     <div class="EachContainerAnnounce" id="AnnounceTab">
-                        
-                    </div>
-                    <div class="EachContainerAnnounce" id="AnnouncePost">
-                        
+                       
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <script src="JS/Announcement.js"></script>
+    <script src="AnnounceHistory.js"></script>
 </body>
 </html>

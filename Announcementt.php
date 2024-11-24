@@ -86,7 +86,7 @@ if (isset($_SESSION['unique_id'])) {
                             <p class="editingLagayanText">Select new images or <span class="spanNiyaModal">browse</span>.</p>
                         </div>
                         <div class="editingUploadedImages Imagess" id="Images"></div>
-                        <input type="hidden" id="PicNames"> 
+                            <input type="hidden" id="PicNames"> 
                         <div id="selectedFileNames" hidden></div>
                             
                         </div>

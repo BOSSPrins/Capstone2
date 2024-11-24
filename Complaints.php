@@ -208,7 +208,7 @@ if (isset($_SESSION['unique_id'])) {
                                 <thead>
                                     <!-- <th style="width:10%"> Complain No.</th> -->
                                     <th style="width:12%"> Complaint No. </th>
-                                    <th style="width:25%" data-sort onclick="sortTable(0, event)"> Complaint </th>
+                                    <th style="width:20%" data-sort onclick="sortTable(0, event)"> Complaint </th>
                                     <th style="width:15%"> Date Submitted </th>
                                     <th style="width:12%" > Status </th>                                   
                                     <th style="width:15%" > Action </th>
