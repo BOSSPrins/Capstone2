@@ -3,17 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<<<<<<< HEAD
-  <title> Dashboard </title>
-  <link rel="stylesheet" href="CSS/AnnouncementTable.css">
-  <script src="JS/sidebar.js"></script>
-=======
   <title> Mabuhay Website </title>
     <link rel="icon" type="image/x-icon" href="Pictures/Dasma_City_Icon.ico">
     <link rel="stylesheet" href="CSS/AnnouncementTable.css">
     <script src="jQuery/jquery.min.js"></script>
     <script src="JS/sidebar.js"></script>
->>>>>>> 1133df5f7c13ffb50553729ff47a5e6bde9a3158
 </head>
 <body>
 <div class="mainDashboardContainer">
@@ -172,11 +166,7 @@
                     </div>
                 </div>
                 <div class="AnnounceNav">
-<<<<<<< HEAD
                     <a href="AnnouncementTable.php" class="AnnNavv NavActive"> Table Posting </a>
-=======
-                    <a href="AnnouncementTable.php" class="AnnNavv AnnActive"> Table Posting </a>
->>>>>>> 1133df5f7c13ffb50553729ff47a5e6bde9a3158
                     <a href="AnnounceHistory.php" class="AnnNavv"> History </a>
                 </div>
                 <div class="MainContainerForTables">

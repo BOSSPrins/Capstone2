@@ -1,3 +1,21 @@
+// FUNCTION PARA SA PAGLABAS NG DROPDOWN CHAT 
+document.addEventListener("DOMContentLoaded", function() {
+    const buttonEme2 = document.querySelector('.buttonEme2');
+    const eme2 = buttonEme2.querySelector('.eme2');
+    const complaintsSubMenu = document.getElementById('complaintsSubMenu');
+
+    // Dropdown & Rotation Functionality
+    function toggleSubMenu() {
+        complaintsSubMenu.classList.toggle('submenu-visible');
+        eme2.classList.toggle('eme2-rotate');
+    }
+
+    buttonEme2.addEventListener('click', function(event) {
+        event.preventDefault();
+        toggleSubMenu();
+    });
+});
+
 // FUNCTION PARA SA PROFILE 
 const profModal = document.getElementById("profileModal");
 const profModalBtn = document.getElementById("myProfileBtn");
@@ -344,7 +362,7 @@ document.querySelector('.BtnInputGendrop').addEventListener('click', toggleDropd
 
 
 
-// DUNCTION PARA SA PAG SHOW NG MODAL TRACKING
+// FUNCTION PARA SA PAG SHOW NG MODAL TRACKING
 
 // Nasa USERviewDetails function na to
 // const btn = document.getElementById('viewDetailsBtn');

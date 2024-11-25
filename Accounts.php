@@ -93,7 +93,7 @@ $conn = connection();
                             </li>
                         </ul>
                     </div>
-                    <a href="Announcement.php" class="sideside">
+                    <a href="AnnouncementTable.php" class="sideside">
                         <img class="img-sideboard" src="Pictures/Announcement.png">
                         <span> Announcement </span>
                     </a>

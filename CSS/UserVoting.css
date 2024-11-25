@@ -782,12 +782,12 @@
 /* Overlay kapag tapos na botohan */
 .Overlay {
   position: fixed;
-  display: none;
+  /* display: none; */
   z-index: 2;
-  left: 250px;  /* Adjust this as needed */
+  left: 275px;  /* Adjust this as needed */
   top: 50px;
-  width: 90%;
-  height: 100%;
+  width: calc(100% - 275px);
+  height: calc(100% - 50px);
   background-color: rgba(56, 56, 56, 0.8);
 }
 
