@@ -42,7 +42,7 @@ function sendConfirmationEmail($user_email) {
         // Content
         $mail->isHTML(true);
         $mail->Subject = 'Account Confirmation';
-        $mail->addEmbeddedImage('../Pictures/Dasma_City_Logo.png', 'logo_cid');
+        $mail->addEmbeddedImage('../Pictures/Mabuhay_Logo.png', 'logo_cid');
         $mail->Body = '
                     <!DOCTYPE html>
                     <html lang="en">
@@ -73,6 +73,7 @@ function sendConfirmationEmail($user_email) {
                             h1 {
                                 color: #333;
                                 text-align: center;
+                                padding-right: 50px;
                             }
 
                             .logo {
@@ -81,7 +82,8 @@ function sendConfirmationEmail($user_email) {
                                 margin-bottom: 20px;
                             }
                             .logo img {
-                                height: 40px; /* Adjust the height of the logo */
+                               height: 180px;
+                               margin-left: 180px;
                             }
 
                             p {
@@ -116,7 +118,7 @@ function sendConfirmationEmail($user_email) {
                             <h1>Account Confirmation</h1>
                             <p>Hello,</p>
                             <p>Your account has been confirmed. You can now access the website. Thank you!</p>
-                            <p>If you have any questions, feel free to contact us at out website.</p>
+                            <p>If you have any questions, feel free to contact us at our website.</p>
                             <p><a href="http://localhost/Mabuhay/LoginPage.php" class="button">Go to Login Page </a></p>
                         </div>
                     </body>

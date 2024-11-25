@@ -76,6 +76,7 @@ if (isset($_SESSION['unique_id'])) {
                                 <a href="In-Process.php">
                                     <img class="img-subMenu" src="Pictures/In-Process.png">
                                     <label class="sub-spa"> In-Process </label>
+                                    <span class="badge badge-yellow" id="inProcessBadge">0</span>
                                 </a> 
                                 <a href="Resolved.php">
                                     <img class="img-subMenu" src="Pictures/resolved.png">
@@ -84,6 +85,7 @@ if (isset($_SESSION['unique_id'])) {
                                 <a href="Escalated.php">
                                     <img class="img-subMenu" src="Pictures/warning.png">
                                     <label class="sub-spa"> Escalated </label>
+                                    <span class="badge badge-red" id="escalatedBadge">0</span>  
                                 </a> 
                                 <a href="MainChat.php">
                                     <img class="img-subMenu" src="Pictures/Chat.png">
@@ -243,40 +245,44 @@ if (isset($_SESSION['unique_id'])) {
                                 <h2> Complainee </h2>
                                 <div style="display: flex; margin-bottom: 15px; align-items:center;">
                                     <label class="LabelCompDeta"> Name: </label>
-                                    <input class="inputCompDeta" type="text" id="ComplaineeName">
+                                    <input class="inputCompDeta" type="text" id="ComplaineeName" readonly>
                                 </div>
                                 <div style="display: flex; margin-bottom: 15px; align-items:center;">
                                     <label class="LabelCompDeta"> Address: </label>
-                                    <input class="inputCompDeta" type="text" id="ComplaineeAddress">
+                                    <input class="inputCompDeta" type="text" id="ComplaineeAddress" readonly>
                                 </div>
                             </div>
 
 
                             <h2> Complainant </h2>
+
+                            <input class="inputCompDeta" type="hidden" id="complainantUID" readonly>
+                            <input class="inputCompDeta" type="hidden" id="complaint_number" readonly>
+
                             <div style="display: flex; margin-bottom: 15px; align-items:center;">
                                 <label class="LabelCompDeta"> Name: </label>
-                                <input class="inputCompDeta" type="text" id="ComplainantName">
+                                <input class="inputCompDeta" type="text" id="ComplainantName" readonly>
                             </div>
                             <div style="display: flex; margin-bottom: 15px; align-items:center;">
                                 <label class="LabelCompDeta"> Address: </label>
-                                <input class="inputCompDeta" type="text" id="ComplainantAddress">
+                                <input class="inputCompDeta" type="text" id="ComplainantAddress" readonly>
                             </div>
                             <div style="display: flex; margin-bottom: 15px; align-items:center;">
                                 <label class="LabelCompDeta"> Date Submitted: </label>
-                                <input class="inputCompDeta" type="text" id="DateSubmit">
+                                <input class="inputCompDeta" type="text" id="DateSubmit" readonly>
                             </div>
                             <div style="display: flex; margin-bottom: 15px; align-items:center;">
                                 <label class="LabelCompDeta"> Nature Of Complaint: </label>
-                                <input class="inputCompDeta" type="text" id="ComplaintType">
+                                <input class="inputCompDeta" type="text" id="ComplaintType" readonly>
                             </div>
                             <h2> Details </h2>
                             <div style="display: flex; margin-bottom: 15px;">
                                 <label class="LabelCompDeta"> Description: </label>
-                                <textarea class="textAreaCompDeta" id="Description"> </textarea>
+                                <textarea class="textAreaCompDeta" id="Description" readonly></textarea>
                             </div>
                             <div style="display: flex; margin-bottom: 15px; align-items:center;">
                                 <label class="LabelCompDeta"> Current Status: </label>
-                                <input class="inputCompDeta" type="text" id="Status">
+                                <input class="inputCompDeta" type="text" id="Status" readonly>
                             </div>
                             <div style="display: flex; margin-bottom: 15px; align-items:center;">
                                 <label class="LabelCompDeta"> Proof Images: </label>

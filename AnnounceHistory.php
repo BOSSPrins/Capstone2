@@ -5,10 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title> Mabuhay Website </title>
   <link rel="stylesheet" href="CSS/AnnounceHistory.css">
-<<<<<<< HEAD
   <script src="JS/sidebar.js"></script>
-=======
->>>>>>> 1133df5f7c13ffb50553729ff47a5e6bde9a3158
 </head>
 <body>
 <div class="mainDashboardContainer">

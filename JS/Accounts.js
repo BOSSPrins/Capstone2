@@ -108,6 +108,7 @@ const complaintsSubMenu = document.getElementById('complaintsSubMenu');
                             alert("Error: " + response.error);
                         } else {
                             alert("Confirmation Email sent successfully.");
+                            location.reload();
                         }
                     } catch (e) {
                         alert("Failed to parse JSON response: " + xhr.responseText);
@@ -230,7 +231,6 @@ const complaintsSubMenu = document.getElementById('complaintsSubMenu');
                                 sendConfirmationEmail(confirm_userID);
                                 $("tr:has(td.user_id:contains('" + confirm_userID + "'))").remove(); 
                                 closeModal();
-                                location.reload();
                     
                         } else {
                             console.error('Failed to remove record:', jsonData.error);
@@ -276,6 +276,7 @@ const complaintsSubMenu = document.getElementById('complaintsSubMenu');
                             alert("Error: " + response.error);
                         } else {
                             alert("Rejection Email sent successfully.");
+                            location.reload();
                         }
                     } catch (e) {
                         alert("Failed to parse JSON response: " + xhr.responseText);
@@ -322,7 +323,7 @@ const complaintsSubMenu = document.getElementById('complaintsSubMenu');
                             $("tr:has(td.user_id:contains('" + reject_userID + "'))").remove(); 
                             // Optionally close the modal or reload the page
                             // closeModal();
-                            location.reload();
+                            
                         } else {
                             console.error('Failed to remove record:', jsonData.error);
                         }

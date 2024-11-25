@@ -190,43 +190,43 @@ $encoded_id = urlencode($admin_unique_id);
                                                 <h2> Complainee </h2>
                                                 <div style="display: flex; margin-bottom: 15px; align-items:center;">
                                                     <label class="LabelModalDet"> Name: </label>
-                                                    <input class="InputModalDet" type="text" id="UserComplaineeName">
+                                                    <input class="InputModalDet" type="text" id="UserComplaineeName" readonly>
                                                 </div>
                                                 <div style="display: flex; margin-bottom: 15px; align-items:center;">
                                                     <label class="LabelModalDet"> Address: </label>
-                                                    <input class="InputModalDet" type="text" id="UserComplaineeAddress">
+                                                    <input class="InputModalDet" type="text" id="UserComplaineeAddress" readonly>
                                                 </div>
                                             </div>
                                             
                                             <h2> Complainant </h2>
                                             <div style="display: flex; margin-bottom: 15px; align-items:center;">
                                                 <label class="LabelModalDet"> Name: </label>
-                                                <input class="InputModalDet" type="text" id="UserComplainantName">
+                                                <input class="InputModalDet" type="text" id="UserComplainantName" readonly>
                                             </div>
                                             <div style="display: flex; margin-bottom: 15px; align-items:center;">
                                                 <label class="LabelModalDet"> Address: </label>
-                                                <input class="InputModalDet" type="text" id="UserComplainantAddress">
+                                                <input class="InputModalDet" type="text" id="UserComplainantAddress" readonly>
                                             </div>
                                             <div style="display: flex; margin-bottom: 15px; align-items:center;">
                                                 <label class="LabelModalDet"> Date Submitted: </label>
-                                                <input class="InputModalDet" type="text" id="UserDateSubmit">
+                                                <input class="InputModalDet" type="text" id="UserDateSubmit" readonly>
                                             </div>
                                             <div style="display: flex; margin-bottom: 15px; align-items:center;">
                                                 <label class="LabelModalDet"> Nature Of Complaint: </label>
-                                                <input class="InputModalDet" type="text" id="UserComplaintType">
+                                                <input class="InputModalDet" type="text" id="UserComplaintType" readonly>
                                             </div>
                                             <h2> Details </h2>
                                             <div style="display: flex; margin-bottom: 15px; align-items:center;">
                                                 <label class="LabelModalDet"> Description: </label>
-                                                <textarea class="textAreaModalDet" id="UserDescription"></textarea>
+                                                <textarea class="textAreaModalDet" id="UserDescription" readonly></textarea>
                                             </div>
                                             <div style="display: flex; margin-bottom: 15px; align-items:center;">
                                                 <label class="LabelModalDet"> Current Status: </label>
-                                                <input class="InputModalDet" type="text" id="UserStatus">
+                                                <input class="InputModalDet" type="text" id="UserStatus" readonly>
                                             </div>
                                             <div style="display: flex; margin-bottom: 15px; align-items:center;">
                                                 <label class="LabelModalDet"> Processed Date: </label>
-                                                <input class="InputModalDet" type="text" id="UserProcessDate">
+                                                <input class="InputModalDet" type="text" id="UserProcessDate" readonly>
                                             </div>
                                             <div style="display: flex; margin-bottom: 15px; align-items:center;">
                                                 <label class="LabelModalDet"> Proof Images: </label>

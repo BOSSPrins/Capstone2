@@ -9,19 +9,19 @@ error_reporting(E_ALL);
 error_log("Starting PHP script");
 
 $access = "Pending";
-$fname = mysqli_real_escape_string($conn, $_POST['fname']);
+$fname = isset($_POST['fname']) ? mysqli_real_escape_string($conn, $_POST['fname']) : '';
 $mname = isset($_POST['mname']) ? mysqli_real_escape_string($conn, $_POST['mname']) : '';
-$lname = mysqli_real_escape_string($conn, $_POST['lname']);
+$lname = isset($_POST['lname']) ? mysqli_real_escape_string($conn, $_POST['lname']) : '';
 $suffix = isset($_POST['suffix']) ? mysqli_real_escape_string($conn, $_POST['suffix']) : '';
-$gender = mysqli_real_escape_string($conn, $_POST['gender']);
-$dob = mysqli_real_escape_string($conn, $_POST['dob']);
-$age = mysqli_real_escape_string($conn, $_POST['age']);
-$phonenum = mysqli_real_escape_string($conn, $_POST['phonenum']);
-$block = mysqli_real_escape_string($conn, $_POST['block']);
-$lot = mysqli_real_escape_string($conn, $_POST['lot']);
+$gender = isset($_POST['gender']) ? mysqli_real_escape_string($conn, $_POST['gender']) : ''; // Ensure 'gender' is set
+$dob = isset($_POST['dob']) ? mysqli_real_escape_string($conn, $_POST['dob']) : '';
+$age = isset($_POST['age']) ? mysqli_real_escape_string($conn, $_POST['age']) : '';
+$phonenum = isset($_POST['phonenum']) ? mysqli_real_escape_string($conn, $_POST['phonenum']) : '';
+$block = isset($_POST['block']) ? mysqli_real_escape_string($conn, $_POST['block']) : '';
+$lot = isset($_POST['lot']) ? mysqli_real_escape_string($conn, $_POST['lot']) : '';
 $street = isset($_POST['street']) ? mysqli_real_escape_string($conn, $_POST['street']) : '';
-$email = mysqli_real_escape_string($conn, $_POST['email']);
-$password = mysqli_real_escape_string($conn, $_POST['password']);
+$email = isset($_POST['email']) ? mysqli_real_escape_string($conn, $_POST['email']) : '';
+$password = isset($_POST['password']) ? mysqli_real_escape_string($conn, $_POST['password']) : '';
 $role = "user";
 
 $disabilities = isset($_POST['disabilities']) ? mysqli_real_escape_string($conn, $_POST['disabilities']) : 'No';
