@@ -174,43 +174,43 @@ if (isset($_SESSION['unique_id'])) {
                                 <h2> Complainee </h2>
                                 <div style="display: flex; margin-bottom: 15px; align-items:center;">
                                     <label class="LabelCompDeta"> Name: </label>
-                                    <input class="inputCompDeta" type="text" id="ComplaineeName">
+                                    <input class="inputCompDeta" type="text" id="ComplaineeName" readonly>
                                 </div>
                                 <div style="display: flex; margin-bottom: 15px; align-items:center;">
                                     <label class="LabelCompDeta"> Address: </label>
-                                    <input class="inputCompDeta" type="text" id="ComplaineeAddress">
+                                    <input class="inputCompDeta" type="text" id="ComplaineeAddress" readonly>
                                 </div>
                             </div>
                         
                             <h2> Complainant </h2>
                             <div style="display: flex; margin-bottom: 15px; align-items:center;">
                                 <label class="LabelCompDeta"> Name: </label>
-                                <input class="inputCompDeta" type="text" id="ComplainantName">
+                                <input class="inputCompDeta" type="text" id="ComplainantName" readonly>
                             </div>
                             <div style="display: flex; margin-bottom: 15px; align-items:center;">
                                 <label class="LabelCompDeta"> Address: </label>
-                                <input class="inputCompDeta" type="text" id="ComplainantAddress">
+                                <input class="inputCompDeta" type="text" id="ComplainantAddress" readonly>
                             </div>
                             <div style="display: flex; margin-bottom: 15px; align-items:center;">
                                 <label class="LabelCompDeta"> Date Submitted: </label>
-                                <input class="inputCompDeta" type="text" id="DateSubmit">
+                                <input class="inputCompDeta" type="text" id="DateSubmit" readonly>
                             </div>
                             <div style="display: flex; margin-bottom: 15px; align-items:center;">
                                 <label class="LabelCompDeta"> Nature Of Complaint: </label>
-                                <input class="inputCompDeta" type="text" id="ComplaintType">
+                                <input class="inputCompDeta" type="text" id="ComplaintType" readonly>
                             </div>
                             <h2> Details </h2>
                             <div style="display: flex; margin-bottom: 15px;">
                                 <label class="LabelCompDeta"> Description: </label>
-                                <textarea class="textAreaBarangDeta2" id="Description"> </textarea>
+                                <textarea class="textAreaBarangDeta2" id="Description" readonly></textarea>
                             </div>
                             <div style="display: flex; margin-bottom: 15px; align-items:center;">
                                 <label class="LabelCompDeta"> Current Status: </label>
-                                <input class="inputCompDeta" type="text" id="Status">
+                                <input class="inputCompDeta" type="text" id="Status" readonly>
                             </div>
                             <div style="display: flex; margin-bottom: 15px; align-items:center;">
                                 <label class="LabelCompDeta"> Processed Date: </label>
-                                <input class="inputCompDeta" type="text" id="ProcessDate">
+                                <input class="inputCompDeta" type="text" id="ProcessDate" readonly>
                             </div>
                             <div style="display: flex; margin-bottom: 15px; align-items:center;">
                                 <label class="LabelCompDeta"> Proof Images: </label>

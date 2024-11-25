@@ -434,6 +434,8 @@ function fetchComplaintDetails(complaintId) {
                     complaineeSection.style.display = 'block';
                 }
 
+                document.getElementById('complainantUID').value = response.data.complainantUID;
+                document.getElementById('complaint_number').value = response.data.complaint_number;
 
                 document.getElementById('ComplaineeName').value = response.data.complainee;
                 document.getElementById('ComplaineeAddress').value = response.data.complaineeAddress;
@@ -535,6 +537,10 @@ function submitComplaintUpdate() {
     const role = document.getElementById('RemarkRole').value;
     const generatedFileName = document.getElementById('generatedFileName').value;
 
+    const complainantUID = document.getElementById('complainantUID').value;
+    const complaint_number = document.getElementById('complaint_number').value;
+    const Description = document.getElementById('Description').value;
+
     fetch('PHPBackend/Complaint.php', {
         method: 'POST',
         headers: {
@@ -551,9 +557,11 @@ function submitComplaintUpdate() {
     })
     .then(response => response.json())
     .then(data => {
+        console.log(data); 
         if (data.success) {
             alert('Complaint updated successfully!');
             // Optionally refresh or update the page content here
+            sendEmailToComplainant(complainantUID, complaint_number, Description, status);
         } else {
             console.error('Error updating complaint:', data.error);
         }
@@ -562,6 +570,45 @@ function submitComplaintUpdate() {
         console.error('Request failed:', error);
     });
 }
+
+function sendEmailToComplainant(complainantUID, complaint_number, Description, status) {
+    let emailEndpoint;
+
+    if (status === 'Resolved') {
+        emailEndpoint = 'Emailer/ResolvedEmail.php';
+    } else if (status === 'Escalated') {
+        emailEndpoint = 'Emailer/EscalatedEmail.php';
+    }
+    fetch(emailEndpoint, {
+        method: 'POST',
+        body: new URLSearchParams({
+            complainantUID: complainantUID,
+            complaint_number,
+            Description
+        }),
+    })
+    .then(response => response.json())  // Get raw response as text
+.then(data => {
+    console.log(data);  // Log the raw response for debugging
+    try {
+        
+        console.log("Parsed response:", data);
+        if (data.success) {
+            console.log("Email sent successfully.");
+        } else {
+            console.error("Error:", data.error);
+            alert('Email failed: ' + data.message);
+        }
+    } catch (error) {
+        console.error("Failed to parse JSON:", error);
+    }
+})
+.catch(error => console.error("AJAX error:", error));
+}
+
+
+
+
 
 
 function updateComplaintCounts() {

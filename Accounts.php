@@ -199,7 +199,7 @@ $conn = connection();
 
                                     <tbody>
                                         <?php
-                                            $query = "SELECT * FROM tblresident WHERE access = 'Pending' ";
+                                            $query = "SELECT * FROM tblresident WHERE access = 'Pending' ORDER BY user_id DESC ";
 
                                             $result = mysqli_query($conn, $query);
 

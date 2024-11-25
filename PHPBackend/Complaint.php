@@ -10,9 +10,13 @@ header('Content-Type: application/json');
 
 // Start session and include database connection
 session_start();
-include_once "../Connect/Connection.php"; // Adjust the path to your Connection file
+include_once "../Connect/Connection.php"; // Adjust the path to your Connection file // Include the emailer
 $conn = connection();
 
+include_once '../Emailer/ComplaintsEmail.php';
+include_once '../Emailer/ResolvedEmail.php';
+include_once '../Emailer/EscalatedEmail.php';
+include_once '../Emailer/BrngyEmail.php';
 // Error handler function
 function handleError($errno, $errstr, $errfile, $errline) {
     echo json_encode(['success' => false, 'error' => "$errstr in $errfile on line $errline"]);
@@ -245,7 +249,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } elseif ($action === 'fetchDetails') {
         $complaint_id = $_POST['complaint_id'];
     
-        $sql = "SELECT complaint_number, complainee, complaineeAddress, complainantName, complainantAddress, filed_date, complaint, description, proof, pdf, status
+        $sql = "SELECT complainantUID, complaint_number, complainee, complaineeAddress, complainantName, complainantAddress, filed_date, complaint, description, proof, pdf, status
                 FROM complaints
                 WHERE complaint_number = ?";
         $stmt = $conn->prepare($sql);
@@ -313,7 +317,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } elseif ($action === 'fetch_In-process') {
         $complaint_id = $_POST['complaint_id'];
     
-        $sql = "SELECT complaint_number, complainee, complaineeAddress, complainantName, complainantAddress, filed_date, complaint, description, proof, pdf, status,  processed_date
+        $sql = "SELECT complainantUID, complaint_number, complainee, complaineeAddress, complainantName, complainantAddress, filed_date, complaint, description, proof, pdf, status,  processed_date
                 FROM complaints
                 WHERE complaint_number = ?";
         $stmt = $conn->prepare($sql);
@@ -363,7 +367,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         WHERE status = 'Resolved' 
         ORDER BY filed_date DESC";
         $result = $conn->query($sql);
-    
+
         if ($result && $result->num_rows > 0) {
             $complaints = [];
             while ($row = $result->fetch_assoc()) {
@@ -373,10 +377,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } else {
             echo json_encode(['success' => false, 'error' => 'No complaints found']); 
         }
-    
+
         $conn->close();
-        exit;
-    
+    exit;
+
     } elseif ($action === 'fetch_Resolved') {
         $complaint_id = $_POST['complaint_id'];
     
@@ -577,7 +581,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } elseif ($action === 'BRNGYfetchDetails') {
         $complaint_id = $_POST['complaint_id'];
     
-        $sql = "SELECT complaint_number, complainee, complaineeAddress, complainantName, complainantAddress, filed_date, complaint, description, proof, pdf, status, processed_date, Remark1, RemarkBy1, status1, RemarkDate1, escaLetter
+        $sql = "SELECT complainantUID, complaint_number, complainee, complaineeAddress, complainantName, complainantAddress, filed_date, complaint, description, proof, pdf, status, processed_date, Remark1, RemarkBy1, status1, RemarkDate1, escaLetter
                 FROM complaints
                 WHERE complaint_number = ?";
         $stmt = $conn->prepare($sql);

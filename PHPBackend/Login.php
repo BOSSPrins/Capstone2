@@ -31,7 +31,7 @@ if (!empty($email) && !empty($password)) {
         // Check if the user is already logged in with a different session
         if (isset($_SESSION['unique_id']) && $_SESSION['unique_id'] != $row['unique_id']) {
             // Trigger logout for the current session
-            $logoutUrl = "../PHPBackend/Logout.php"; // Path to your logout script
+            $logoutUrl = "../Logout.php"; // Path to your logout script
             file_get_contents($logoutUrl); // Send a request to log out the previous session
         }
 
