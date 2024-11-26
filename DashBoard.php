@@ -127,10 +127,70 @@ if (isset($_SESSION['unique_id'])) {
         
                         <div class="profilePages">
                             <span class="closeProf">&times;</span>
-                            <div id="Edit Profile" class="page">
-                                <h2>Edit Profile Page</h2>
-                                <p>Welcome to the Edit Profile page.</p>
-                            </div>
+                            <form method="post" enctype="multipart/form-data">
+                                <div id="Edit Profile" class="page">
+                                    <h2>Edit Profile Page</h2>
+                                    <p>Welcome to the Edit Profile page.</p>
+                                    <h2>Name:</h2>
+                                    <div class="Profilebyu">
+                                        <label> First Name: </label>
+                                        <input type="text" name="" id="fname">
+                                        <label> Middle Name: </label>
+                                        <input type="text" name="" id="mname">
+                                    </div>
+                                    <div class="Profilebyu">
+                                        <label> Last Name: </label>
+                                        <input type="text" name="" id="lname">
+                                        <label> Suffix: </label>
+                                        <input type="text" name="" id="suffix">
+                                    </div>
+                                    <div class="Profilebyu">
+                                        <label> Date of Birth: </label>
+                                        <input type="text" name="" id="bday">
+                                        <label> Age: </label>
+                                        <input type="text" name="" id="age">
+                                    </div>
+                                    <div class="Profilebyu">
+                                        <label> Sex: </label>
+                                        <input type="text" name="" id="sex">
+                                        <label> Contact Number: </label>
+                                        <input type="text" name="" id="contNum">
+                                    </div>
+                                    <h2>Person with Disability:</h2>
+                                    <div class="Profilebyu">
+                                        <label>
+                                        <input type="checkbox" id="pwdYes"> Yes
+                                        </label>
+                                        <label>
+                                        <input type="checkbox" id="pwdNo"> No
+                                        </label>
+                                    </div>
+                                    <h2>Address:</h2>
+                                    <div class="Profilebyu">
+                                        <label> Block: </label>
+                                        <input type="text" name="" id="blk" readonly>
+                                        <label> Lot: </label>
+                                        <input type="text" name="" id="lot" readonly>                                        
+                                    </div>
+                                    <div class="Profilebyu">
+                                        <label> Street: </label>
+                                        <input type="text" name="" id="street" readonly>
+                                    </div>
+                                    <h2>Emergency Contact: </h2> 
+                                    <div class="Profilebyu">                                                               
+                                        <label> Name: </label>   
+                                        <input type="text" name="" id="ecName">
+                                        <label> Contact Number: </label>
+                                        <input type="text" name="" id="ecPhoneNum">
+                                    </div>
+                                    <div class="Profilebyu">                                                               
+                                        <label> Relationship: </label>   
+                                        <input type="text" name="" id="relasyon">
+                                        <label> Address: </label>
+                                        <input type="text" name="" id="address">
+                                    </div>
+                                </div>
+                            </form>
                             <div id="Edit Email" class="page">
                                 <h2>Edit Email Page</h2>
                                 <p>Welcome to the Edit Email page.</p>
@@ -286,5 +346,6 @@ if (isset($_SESSION['unique_id'])) {
         </div>
     </div>
     <script src="JS/DashBoard.js"></script>
+    <script src="JS/checkSessionStatus.js"></script>
 </body>
 </html>

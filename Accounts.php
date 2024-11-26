@@ -199,7 +199,12 @@ $conn = connection();
 
                                     <tbody>
                                         <?php
-                                            $query = "SELECT * FROM tblresident WHERE access = 'Pending' ORDER BY user_id DESC ";
+                                            $query = "SELECT tblresident.*, tblaccounts.otp, tblaccounts.unique_id
+                                                        FROM tblresident
+                                                        JOIN tblaccounts ON tblresident.unique_id = tblaccounts.unique_id
+                                                        WHERE tblresident.access = 'Pending' AND tblaccounts.otp = 'Verified'
+                                                        ORDER BY tblresident.user_id DESC;
+                                                        ";
 
                                             $result = mysqli_query($conn, $query);
 
@@ -227,7 +232,7 @@ $conn = connection();
                                                 } else {
                                                 ?>
                                                   <tr>    
-                                                      <td colspan="4">No pending account found.</td>
+                                                      <td colspan="3">No pending account found.</td>
                                                   </tr>
                                                 <?php
                                                 }
@@ -349,5 +354,6 @@ $conn = connection();
         </div>
     </div>
     <script src="JS/Accounts.js"></script>
+    <script src="JS/checkSessionStatus.js"></script>
 </body>
 </html>

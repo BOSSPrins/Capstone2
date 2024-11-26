@@ -409,5 +409,6 @@ if (isset($_SESSION['unique_id'])) {
         </div>
     </div>
     <script src="JS/Resolved.js"></script>
+    <script src="JS/checkSessionStatus.js"></script>
 </body>
 </html>

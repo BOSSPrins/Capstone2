@@ -213,7 +213,7 @@ if (isset($_SESSION['unique_id'])) {
                                 <input class="inputCompDeta" type="text" id="ProcessDate" readonly>
                             </div>
                             <div style="display: flex; margin-bottom: 15px; align-items:center;">
-                                <label class="LabelCompDeta"> Proof Images: </label>
+                                   <label class="LabelCompDeta"> Proof Images: </label>
                                 <button class="BiewPictures"> View </button>
                                  <!-- Modal for Image Preview -->
                                 <div class="imageModalHistory" style="display: none;">

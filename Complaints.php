@@ -350,5 +350,6 @@ if (isset($_SESSION['unique_id'])) {
         </div>
     </div>
     <script src="JS/Complaints.js"></script>
+    <script src="JS/checkSessionStatus.js"></script>
 </body>
 </html>

@@ -213,6 +213,11 @@ input[type="password"]::-ms-reveal {
     color: var(--color-primary);
 }
 
+.forgot-text.Verify{
+    color: var(--color-primary);
+    margin-right: 170px;
+}
+
 /* ===== Login Button Design ===== */
 
 .btn-login {

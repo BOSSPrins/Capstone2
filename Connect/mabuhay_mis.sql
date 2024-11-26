@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 24, 2024 at 05:03 PM
+-- Generation Time: Nov 26, 2024 at 10:49 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -123,7 +123,8 @@ INSERT INTO `complaints` (`complaint_id`, `complaint_number`, `complaint_type`, 
 (22, 999220120, 'Direct Complaint', 'nice', 'Noise Complaint', 'good job', '[\"malupiton.png\",\"malupiton3.jpg\",\"meow.jpg\"]', '', '2024-11-16 14:18:03', 'one', 1581632830, 'Wela A Magsino', 'Blk 9 Lot 18', 'Resolved', '2024-11-18 22:38:24', 'Okay na pi', 'barangay', 'Resolved', '2024-11-18 22:48:10', '', '', '', '', '', ''),
 (23, 866088832, 'General Complaint', '', 'Noise Complaint', 'nice', '[\"arkana.png\",\"arle.png\",\"awtlas.png\",\"bebetime.jpg\"]', '', '2024-11-16 14:18:42', '', 1581632830, 'Wela A Magsino', 'Blk 9 Lot 18', 'Resolved', '2024-11-18 22:37:21', 'Test', 'admin', 'Escalated', '2024-11-18 22:52:06', '', 'oki na pi', 'barangay', 'Resolved', '2024-11-18 22:55:42', ''),
 (31, 918316644, 'Direct Complaint', 'Test', 'Pet Issues', 'Test', '[\"bike.jpg\"]', '[\"Complaint-999220120.pdf\",\"Complaint-866088832.pdf\"]', '2024-11-22 12:27:56', 'Test', 1581632830, 'Wela A Magsino', 'Blk 9 Lot 18', 'Resolved', '2024-11-22 22:39:53', 'Turn over na ekis na', 'admin', 'Escalated', '2024-11-23 01:31:07', '', 'All goods na', 'barangay', 'Resolved', '2024-11-23 01:53:10', ''),
-(32, 883927647, 'Direct Complaint', '', 'Property Maintenance', 'Yung gate nya umabot na sa gate ko', '[\"boss.jpg\",\"bossing.jpg\",\"malupiton.png\",\"malupiton2.png\",\"malupiton3.jpg\"]', '[\"Complaint-999220120.pdf\",\"Complaint-866088832.pdf\"]', '2024-11-23 15:17:28', 'Blk 10 Lot 78', 1581632830, 'Wela A Magsino', 'Blk 9 Lot 18', 'Resolved', '2024-11-23 23:24:24', 'Turn over ko na to makulit na e ', 'admin', 'Escalated', '2024-11-23 23:25:16', 'Turn-Over-Letter-883927647.pdf', 'Eto na talaga pramis okay na to', 'barangay', 'Resolved', '2024-11-24 04:45:28', 'Settled-Letter-883927647.pdf');
+(32, 883927647, 'Direct Complaint', '', 'Property Maintenance', 'Yung gate nya umabot na sa gate ko', '[\"boss.jpg\",\"bossing.jpg\",\"malupiton.png\",\"malupiton2.png\",\"malupiton3.jpg\"]', '[\"Complaint-999220120.pdf\",\"Complaint-866088832.pdf\"]', '2024-11-23 15:17:28', 'Blk 10 Lot 78', 1581632830, 'Wela A Magsino', 'Blk 9 Lot 18', 'Resolved', '2024-11-23 23:24:24', 'Turn over ko na to makulit na e ', 'admin', 'Escalated', '2024-11-23 23:25:16', 'Turn-Over-Letter-883927647.pdf', 'Eto na talaga pramis okay na to', 'barangay', 'Resolved', '2024-11-24 04:45:28', 'Settled-Letter-883927647.pdf'),
+(33, 1643921437, 'General Complaint', '', 'Noise Complaint', 'Ingay po', '[\"malupiton2.png\",\"malupiton3.jpg\",\"malupiton4.jpg\"]', '', '2024-11-24 13:57:02', '', 916555761, 'Tanjiro Dela Cruz', 'Blk 78 Lot 10', 'Resolved', '2024-11-25 06:13:43', 'Lipat na sa barangay', 'admin', 'Escalated', '2024-11-25 07:47:08', 'Turn-Over-Letter-1643921437.pdf', 'Oks na', 'barangay', 'Resolved', '2024-11-25 07:53:07', 'Settled-Letter-1643921437.pdf');
 
 -- --------------------------------------------------------
 
@@ -309,6 +310,26 @@ INSERT INTO `officials` (`bod_id`, `roles`, `name`, `img`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `otp_verifications`
+--
+
+CREATE TABLE `otp_verifications` (
+  `otp_id` int(11) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `otp` varchar(6) NOT NULL,
+  `expiry` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `otp_verifications`
+--
+
+INSERT INTO `otp_verifications` (`otp_id`, `email`, `otp`, `expiry`) VALUES
+(1, 'vardump007@gmail.com', '473498', '2024-11-25 23:33:14');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `payments`
 --
 
@@ -375,35 +396,37 @@ CREATE TABLE `tblaccounts` (
   `img` varchar(255) NOT NULL,
   `status` varchar(255) NOT NULL,
   `role` varchar(255) NOT NULL,
-  `access` varchar(255) NOT NULL
+  `access` varchar(255) NOT NULL,
+  `otp` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `tblaccounts`
 --
 
-INSERT INTO `tblaccounts` (`user_id`, `unique_id`, `email`, `password`, `img`, `status`, `role`, `access`) VALUES
-(2, 1589571584, 'admin@gmail.com', '21232f297a57a5a743894a0e4a801fc3', '1715091144pusi.jpg', 'Offline now', 'admin', 'Approved'),
-(4, 1357825271, 'senpai@gmail.com', '1e5db03ce967cfef4e21ada16da09b06', '1715105349271713718_1999144396919159_608519389647854942_n.jpg', 'Offline now', 'user', 'Rejected'),
-(19, 112466338, 'Prins@gmail.com', '0a9e0db6e95c394ee792ecbc6e510791', '1717745936pitikvermo.jpg', 'Pending', 'user', 'Approved'),
-(21, 1017731196, 'tnjrdlcrz@gmail.com', '202cb962ac59075b964b07152d234b70', '1717937589pitikvermo.jpg', 'Pending', 'user', 'Approved'),
-(22, 1593518745, 'aawafawf@gmail.com', '2310553235ab181ae0c551c242988734', 'Mabuhay_Logo.png', 'Pending', 'user', 'Pending'),
-(23, 1469021725, 'adadawda@gmail.com', '32db117b68ab7598389c18b68f721116', 'Mabuhay_Logo.png', 'Pending', 'user', 'Pending'),
-(24, 1433443368, 'waeaewea@gmail.com', '458e5a124f7ed72d143d837a9a3bd76e', 'Mabuhay_Logo.png', 'Pending', 'user', 'Pending'),
-(25, 1095492376, 'daadaaw@gmail.com', 'f2a85c6878e7978563609d089ee1173a', 'Mabuhay_Logo.png', 'Pending', 'user', 'Pending'),
-(26, 911851766, 'aSbkghjgsghj@gmail.com', '4e3b9566b4b9abfd8f6671f7b4e423a7', 'Mabuhay_Logo.png', 'Pending', 'user', 'Pending'),
-(27, 509858760, 'Tiklop@gmail.com', '9f4a66a0bac35d6f7f25b5fd931c7abe', 'Mabuhay_Logo.png', 'Pending', 'user', 'Pending'),
-(28, 1581632830, 'wela@gmail.com', 'f9395f741e6f4da0f873c08008ed5760', 'Mabuhay_Logo.png', 'Offline now', 'user', 'Approved'),
-(29, 821155870, 'Renz@gmail.com', 'b55dc472db84256de67972b96657e7b9', 'Mabuhay_Logo.png', 'Active now', 'user', 'Approved'),
-(30, 776313154, 'Pat@gmail.com', '532762fa5a5b7169aa4dd24717ba9df9', 'Mabuhay_Logo.png', 'Offline now', 'user', 'Approved'),
-(31, 1590469844, 'Pao@gmail.com', '1b6203e2e1b7e63e7b3677cdd932001f', 'Mabuhay_Logo.png', 'Offline now', 'user', 'Approved'),
-(32, 1308040957, 'John@gmail.com', '61409aa1fd47d4a5332de23cbf59a36f', 'Mabuhay_Logo.png', 'Offline now', 'user', 'Approved'),
-(33, 931588206, 'Jane@gmail.com', '2b95993380f8be6bd4bd46bf44f98db9', 'Mabuhay_Logo.png', 'Offline now', 'user', 'Approved'),
-(34, 662462528, 'Hev@gmail.com', '84f60ea382314109784cb42b9b4b8e42', 'Mabuhay_Logo.png', 'Offline now', 'user', 'Approved'),
-(35, 499733408, 'Ethan@gmail.com', 'e05699b45eae134804f4419d3fbb3139', 'Mabuhay_Logo.png', 'Offline now', 'user', 'Approved'),
-(36, 1434008263, 'Rose@gmail.com', '0df4dccc4aac3f6f36e00ef2a6a4bfac', 'Mabuhay_Logo.png', 'Offline now', 'user', 'Approved'),
-(37, 1195874011, 'Mia@gmail.com', '46e6f8781dd60e2635430b61db511262', 'Mabuhay_Logo.png', 'Offline now', 'user', 'Approved'),
-(38, 724357114, 'barangay@gmail.com', '1ee0fa80acf1af702cf55d07704548f6', 'Mabuhay_Logo.png', 'Offline now', 'barangay', 'Approved');
+INSERT INTO `tblaccounts` (`user_id`, `unique_id`, `email`, `password`, `img`, `status`, `role`, `access`, `otp`) VALUES
+(2, 1589571584, 'admin@gmail.com', '21232f297a57a5a743894a0e4a801fc3', '1715091144pusi.jpg', 'Active now', 'admin', 'Approved', 'Verified'),
+(4, 1357825271, 'senpai@gmail.com', '1e5db03ce967cfef4e21ada16da09b06', '1715105349271713718_1999144396919159_608519389647854942_n.jpg', 'Offline now', 'user', 'Rejected', 'Verified'),
+(19, 112466338, 'Prins@gmail.com', '0a9e0db6e95c394ee792ecbc6e510791', '1717745936pitikvermo.jpg', 'Pending', 'user', 'Approved', ''),
+(21, 1017731196, 'tnjrdlcrz@gmail.com', '202cb962ac59075b964b07152d234b70', '1717937589pitikvermo.jpg', 'Pending', 'user', 'Approved', ''),
+(22, 1593518745, 'aawafawf@gmail.com', '2310553235ab181ae0c551c242988734', 'Mabuhay_Logo.png', 'Pending', 'user', 'Pending', ''),
+(23, 1469021725, 'adadawda@gmail.com', '32db117b68ab7598389c18b68f721116', 'Mabuhay_Logo.png', 'Pending', 'user', 'Pending', ''),
+(24, 1433443368, 'waeaewea@gmail.com', '458e5a124f7ed72d143d837a9a3bd76e', 'Mabuhay_Logo.png', 'Pending', 'user', 'Pending', ''),
+(25, 1095492376, 'daadaaw@gmail.com', 'f2a85c6878e7978563609d089ee1173a', 'Mabuhay_Logo.png', 'Pending', 'user', 'Pending', ''),
+(26, 911851766, 'aSbkghjgsghj@gmail.com', '4e3b9566b4b9abfd8f6671f7b4e423a7', 'Mabuhay_Logo.png', 'Pending', 'user', 'Pending', ''),
+(27, 509858760, 'Tiklop@gmail.com', '9f4a66a0bac35d6f7f25b5fd931c7abe', 'Mabuhay_Logo.png', 'Pending', 'user', 'Pending', ''),
+(28, 1581632830, 'wela@gmail.com', 'f9395f741e6f4da0f873c08008ed5760', 'Mabuhay_Logo.png', 'Offline now', 'user', 'Approved', 'Verified'),
+(29, 821155870, 'Renz@gmail.com', 'b55dc472db84256de67972b96657e7b9', 'Mabuhay_Logo.png', 'Active now', 'user', 'Approved', 'Verified'),
+(30, 776313154, 'Pat@gmail.com', '532762fa5a5b7169aa4dd24717ba9df9', 'Mabuhay_Logo.png', 'Offline now', 'user', 'Approved', 'Verified'),
+(31, 1590469844, 'Pao@gmail.com', '1b6203e2e1b7e63e7b3677cdd932001f', 'Mabuhay_Logo.png', 'Offline now', 'user', 'Approved', 'Verified'),
+(32, 1308040957, 'John@gmail.com', '61409aa1fd47d4a5332de23cbf59a36f', 'Mabuhay_Logo.png', 'Offline now', 'user', 'Approved', 'Verified'),
+(33, 931588206, 'Jane@gmail.com', '2b95993380f8be6bd4bd46bf44f98db9', 'Mabuhay_Logo.png', 'Offline now', 'user', 'Approved', 'Verified'),
+(34, 662462528, 'Hev@gmail.com', '84f60ea382314109784cb42b9b4b8e42', 'Mabuhay_Logo.png', 'Offline now', 'user', 'Approved', 'Verified'),
+(35, 499733408, 'Ethan@gmail.com', 'e05699b45eae134804f4419d3fbb3139', 'Mabuhay_Logo.png', 'Offline now', 'user', 'Approved', 'Verified'),
+(36, 1434008263, 'Rose@gmail.com', '0df4dccc4aac3f6f36e00ef2a6a4bfac', 'Mabuhay_Logo.png', 'Offline now', 'user', 'Approved', 'Verified'),
+(37, 1195874011, 'Mia@gmail.com', '46e6f8781dd60e2635430b61db511262', 'Mabuhay_Logo.png', 'Offline now', 'user', 'Approved', 'Verified'),
+(38, 724357114, 'barangay@gmail.com', '1ee0fa80acf1af702cf55d07704548f6', 'Mabuhay_Logo.png', 'Active now', 'barangay', 'Approved', 'Verified'),
+(39, 916555761, 'vardump007@gmail.com', 'b2145aac704ce76dbe1ac7adac535b23', 'Mabuhay_Logo.png', 'Offline now', 'user', 'Approved', 'Verified');
 
 -- --------------------------------------------------------
 
@@ -460,7 +483,31 @@ INSERT INTO `tblresident` (`user_id`, `unique_id`, `access`, `first_name`, `midd
 (37, '499733408', 'Approved', 'Ethan', '', 'Winters', '', 'Male', 7, 'Yes', '2017-02-24', '', '', 1, 1, '', 131132123, '', 0, '', ''),
 (38, '1434008263', 'Approved', 'Rose', '', 'Winters', '', 'Female', 3, 'No', '2021-02-25', '', '', 2, 2, '', 123123123, '', 0, '', ''),
 (39, '1195874011', 'Approved', 'Mia', '', 'Winters', '', 'Female', 5, 'Yes', '2019-03-01', '', '', 6, 6, 'Mold', 312313132313, '', 0, '', ''),
-(40, '724357114', 'Approved', 'N/A', 'N/A', 'N/A', 'N/A', 'Preferred not to say', 1, 'No', '2023-11-18', '', '', 0, 0, 'N/A', 0, '', 0, '', '');
+(40, '724357114', 'Approved', 'N/A', 'N/A', 'N/A', 'N/A', 'Preferred not to say', 1, 'No', '2023-11-18', '', '', 0, 0, 'N/A', 0, '', 0, '', ''),
+(41, '916555761', 'Approved', 'Tanjiro', '', 'Dela Cruz', '', 'Male', 32, 'No', '1992-05-20', '', '', 78, 10, '', 909090909, '', 0, '', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_sessions`
+--
+
+CREATE TABLE `tbl_sessions` (
+  `session_id` varchar(255) NOT NULL,
+  `unique_id` int(11) NOT NULL,
+  `last_activity` timestamp NOT NULL DEFAULT current_timestamp(),
+  `device_ip` varchar(255) DEFAULT NULL,
+  `status` enum('active','inactive') DEFAULT 'inactive'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tbl_sessions`
+--
+
+INSERT INTO `tbl_sessions` (`session_id`, `unique_id`, `last_activity`, `device_ip`, `status`) VALUES
+('56htq7vh3dcstor8pubar342gh', 1581632830, '2024-11-25 07:55:33', '::1', 'inactive'),
+('806gfh10fgskgvdcr4bm69855o', 1589571584, '2024-11-26 02:26:15', '::1', 'active'),
+('jrsdp4em90angoisbm694npi0b', 1581632830, '2024-11-25 07:57:10', '::1', 'inactive');
 
 -- --------------------------------------------------------
 
@@ -719,6 +766,13 @@ ALTER TABLE `officials`
   ADD PRIMARY KEY (`bod_id`);
 
 --
+-- Indexes for table `otp_verifications`
+--
+ALTER TABLE `otp_verifications`
+  ADD PRIMARY KEY (`otp_id`),
+  ADD UNIQUE KEY `email` (`email`);
+
+--
 -- Indexes for table `payments`
 --
 ALTER TABLE `payments`
@@ -741,6 +795,12 @@ ALTER TABLE `tblaccounts`
 --
 ALTER TABLE `tblresident`
   ADD PRIMARY KEY (`user_id`);
+
+--
+-- Indexes for table `tbl_sessions`
+--
+ALTER TABLE `tbl_sessions`
+  ADD PRIMARY KEY (`session_id`);
 
 --
 -- Indexes for table `user_votes`
@@ -780,7 +840,7 @@ ALTER TABLE `announcements`
 -- AUTO_INCREMENT for table `complaints`
 --
 ALTER TABLE `complaints`
-  MODIFY `complaint_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `complaint_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `forms`
@@ -801,6 +861,12 @@ ALTER TABLE `officials`
   MODIFY `bod_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
+-- AUTO_INCREMENT for table `otp_verifications`
+--
+ALTER TABLE `otp_verifications`
+  MODIFY `otp_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
 -- AUTO_INCREMENT for table `payments`
 --
 ALTER TABLE `payments`
@@ -816,13 +882,13 @@ ALTER TABLE `payment_history`
 -- AUTO_INCREMENT for table `tblaccounts`
 --
 ALTER TABLE `tblaccounts`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- AUTO_INCREMENT for table `tblresident`
 --
 ALTER TABLE `tblresident`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT for table `user_votes`

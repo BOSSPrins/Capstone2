@@ -285,7 +285,7 @@ if (isset($_SESSION['unique_id'])) {
                                             </div>
                                             <div class="row">
                                                 <div class="inputboxView">
-                                                    <label> Gender: </label>
+                                                    <label> Sex: </label>
                                                     <input class="inputngViewModalTo"  type="text" id="Sex" name="sex">
                                                 </div>
                                                 <div class="inputboxView">
@@ -349,5 +349,6 @@ if (isset($_SESSION['unique_id'])) {
     </div>
 
     <script src="JS/Residents.js"></script>
+    <script src="JS/checkSessionStatus.js"></script>
 </body>
 </html>

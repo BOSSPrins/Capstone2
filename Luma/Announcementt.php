@@ -3,7 +3,7 @@ include_once "Connect/Connection.php";
 session_start();
 
 if (isset($_SESSION['unique_id'])) {
-    if ($_SESSION['role'] == 'user') {
+    if ($_SESSION['role'] == 'user' || $_SESSION['role'] == 'barangay') {
         header("Location: LoginPage.php");
         exit();
     }
@@ -392,6 +392,6 @@ if (isset($_SESSION['unique_id'])) {
     </div>
     
     <script src="JS/Announcementt.js"></script>
-
+    <script src="JS/checkSessionStatus.js"></script>                                           
 </body>
 </html>
