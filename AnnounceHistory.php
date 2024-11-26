@@ -164,7 +164,7 @@
                     </div>
                 </div>
                 <div class="AnnounceNav">
-                    <a href="AnnouncementTable.php" class="AnnNavv AnnActive"> Table Posting </a>
+                    <a href="AnnouncementTable.php" class="AnnNavv NavActive"> Table Posting </a>
                     <a href="AnnounceHistory.php" class="AnnNavv"> History </a>
                 </div>
                 <div class="MainContainerForTables">

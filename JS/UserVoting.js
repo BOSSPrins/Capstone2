@@ -467,80 +467,80 @@ function checkVotingHistory() {
 
 
 
-// Function kung tapos na yung botohan e buong voting may overlay na
-function fetchOverlayMessage() {
-    $.ajax({
-        type: 'POST',
-        url: 'PHPBackend/DeclareWinner.php',
-        data: { action: 'fetch_overlay_message' },
-        dataType: 'json',
-        success: function(response) {
-            console.log("fetchOverlayMessage response:", response);
+// // Function kung tapos na yung botohan e buong voting may overlay na
+// function fetchOverlayMessage() {
+//     $.ajax({
+//         type: 'POST',
+//         url: 'PHPBackend/DeclareWinner.php',
+//         data: { action: 'fetch_overlay_message' },
+//         dataType: 'json',
+//         success: function(response) {
+//             console.log("fetchOverlayMessage response:", response);
 
-            if (response.success && response.status === 'VotingEnded') {
-                document.getElementById('FirstVotingContainer').style.display = 'none';
-                document.getElementById('Overlay').style.display = 'flex';  // Show overlay with flex
+//             if (response.success && response.status === 'VotingEnded') {
+//                 document.getElementById('FirstVotingContainer').style.display = 'none';
+//                 document.getElementById('Overlay').style.display = 'flex';  // Show overlay with flex
 
-                // Get the overlay content div to append winners
-                var overlayContent = document.querySelector('#Overlay .TanginangOverlay');
+//                 // Get the overlay content div to append winners
+//                 var overlayContent = document.querySelector('#Overlay .TanginangOverlay');
                 
-                // Add winners section
-                let winnersHtml = `
-                    <div class="CongratsHeader">
-                        <p> CONGRATULATIONS TO THE WINNERS: </p>
-                    </div>
-                    <div class="winner-list">`;
+//                 // Add winners section
+//                 let winnersHtml = `
+//                     <div class="CongratsHeader">
+//                         <p> CONGRATULATIONS TO THE WINNERS: </p>
+//                     </div>
+//                     <div class="winner-list">`;
 
-                response.winners.forEach(function(winner) {
-                    winnersHtml += `
-                        <div class="winner-item">
-                            <img src="Pictures/${winner.img}" alt="${winner.candidate_name}">
-                            <p>${winner.candidate_name}</p>
-                        </div>
-                    `;
-                });
+//                 response.winners.forEach(function(winner) {
+//                     winnersHtml += `
+//                         <div class="winner-item">
+//                             <img src="Pictures/${winner.img}" alt="${winner.candidate_name}">
+//                             <p>${winner.candidate_name}</p>
+//                         </div>
+//                     `;
+//                 });
 
-                winnersHtml += `</div>`; // Close the winner list div
+//                 winnersHtml += `</div>`; // Close the winner list div
 
-                // Append winners' HTML to the overlay content
-                overlayContent.innerHTML = winnersHtml;
+//                 // Append winners' HTML to the overlay content
+//                 overlayContent.innerHTML = winnersHtml;
 
-            } else {
-                checkVotingHistory();
-            }
-        },
-        error: function(xhr, status, error) {
-            console.error('AJAX error:', status, error);
-            checkVotingHistory();
-        }
-    });
-}
-
-
-function formatDate(now) {
-    const year = now.getFullYear();
-    const month = String(now.getMonth() + 1).padStart(2, '0'); // Add leading zero
-    const day = String(now.getDate()).padStart(2, '0');
-    const hours = String(now.getHours()).padStart(2, '0'); // 24-hour format
-    const minutes = String(now.getMinutes()).padStart(2, '0');
-    const seconds = String(now.getSeconds()).padStart(2, '0');
-
-    return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
-}
-
-function updateTimestamp() {
-    const now = new Date();
-    const formattedDate = formatDate(now);
-
-    document.getElementById('timestamp1').textContent = formattedDate;
-}
-
-// Optionally update the timestamp every second
-setInterval(updateTimestamp, 1000);
+//             } else {
+//                 checkVotingHistory();
+//             }
+//         },
+//         error: function(xhr, status, error) {
+//             console.error('AJAX error:', status, error);
+//             checkVotingHistory();
+//         }
+//     });
+// }
 
 
-// Call the function when the page loads
-window.onload = function () {
-    updateTimestamp();
-    fetchOverlayMessage();
-};
+// function formatDate(now) {
+//     const year = now.getFullYear();
+//     const month = String(now.getMonth() + 1).padStart(2, '0'); // Add leading zero
+//     const day = String(now.getDate()).padStart(2, '0');
+//     const hours = String(now.getHours()).padStart(2, '0'); // 24-hour format
+//     const minutes = String(now.getMinutes()).padStart(2, '0');
+//     const seconds = String(now.getSeconds()).padStart(2, '0');
+
+//     return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+// }
+
+// function updateTimestamp() {
+//     const now = new Date();
+//     const formattedDate = formatDate(now);
+
+//     document.getElementById('timestamp1').textContent = formattedDate;
+// }
+
+// // Optionally update the timestamp every second
+// setInterval(updateTimestamp, 1000);
+
+
+// // Call the function when the page loads
+// window.onload = function () {
+//     updateTimestamp();
+//     fetchOverlayMessage();
+// };

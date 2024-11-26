@@ -16,7 +16,7 @@ if (isset($_SESSION['unique_id'])) {
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> Mabuhay Website </title>
     <link rel="icon" type="image/x-icon" href="Pictures/Mabuhay_Logo.ico">
@@ -24,25 +24,7 @@ if (isset($_SESSION['unique_id'])) {
     <script src="jQuery/jquery.min.js"></script>
     <script src="JS/sidebar.js"> </script>
 </head>
-</head>
 <body>
-
-<div class="SuccessModalIto" id="successModal">
-        <div class="subSuccessModalContent">
-            <div class="successModalContent">
-                <div class="successText">
-                    <img class="successImg" src="Pictures/success.png">
-                    <h2 class="paragSuccess">Updated Successfully!</h2>
-                </div>
-                <hr class="hrSuccess"> 
-                <div class="successButtons">
-                    <button class="buttonSuccess okButn OkSaModal">OK</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- MODAL NG SUCCESS -->
-
 <div class="mainDashboardContainer">
         <div class="secMainDash">
             <div class="sidebarContainer sideActive" id="sidebar">
@@ -199,167 +181,56 @@ if (isset($_SESSION['unique_id'])) {
                     </div>
                 </div>
                 <div class="MainContainerForTables">
-                    <div class="MainContainerAll">
-                        <div class="subofficialCards">
+                    <div class="HoaContainer">
+                        <div class="HoaTableCon">
+                            <table class="HoaTbl">
+                                <thead>
+                                    <th> Pictures </th>
+                                    <th> Positions </th>
+                                    <th> Name </th>
+                                    <th> Action </th>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td> Wala pa </td>
+                                        <td> President </td>
+                                        <td> Solomon Malit </td>
+                                        <td>
+                                            <button class="HoaEditing" id="HoaEditing" onclick="toggleModalEdit()"> Edit </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
 
-                            <!-- PRESIDENT  -->
-                            <div class="everyConOfficial" id="PresContainer">
-                                <div class="officialLaman" id="imageContainer">
-                                    <!-- Image will be displayed here -->
-                                </div>
-                                <h2 class="LabelUpo" value="President"> PRESIDENT </h2>
-                                <input class="inputNgUUpo" type="text" id="PresName">
-                                <div class="buttonsNgOffi">
-                                    <div class="btnOne">
-                                        <button class="buttonSiv UploadPics">Upload Picture</button>
-                                        <input class="inputFileCert inputts" type="file" id="PresPic" style="display: none;">
-                                    </div>
-                                    <div class="btnTwo">
-                                        <button class="buttonSiv SaveBtn"> Save </button>
-                                    </div>
-                                </div>
-                            </div>
 
-                            <!-- VICE PRESIDENT -->
-                            <div class="everyConOfficial" id="ViceContainer">
-                                <div class="officialLaman" id="imageContainer2">
-                                    <!-- Image will be displayed here -->
-                                </div>
-                                <h2 class="LabelUpo" value="VicePresident">  VICE PRESIDENT </h2>
-                                <input class="inputNgUUpo" type="text" id="ViceName">
-                                <div class="buttonsNgOffi">
-                                    <div class="btnOne">
-                                        <button class="buttonSiv UploadPics2">Upload Picture</button>
-                                        <input class="inputFileCert2 inputts" type="file" id="VicePic" style="display: none;">
-                                    </div>
-                                    <div class="btnTwo">
-                                        <button class="buttonSiv SaveBtn"> Save </button>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- SECRETARY -->
-                            <div class="everyConOfficial" id="SecContainer">
-                                <div class="officialLaman" id="imageContainer3">
-                                    <!-- Image will be displayed here -->
-                                </div>
-                                <h2 class="LabelUpo" value="Secretary"> SECRETARY </h2>
-                                <input class="inputNgUUpo" type="text" id="SecName">
-                                <div class="buttonsNgOffi">
-                                    <div class="btnOne">
-                                        <button class="buttonSiv UploadPics3">Upload Picture</button>
-                                        <input class="inputFileCert3 inputts" type="file" id="SecPic" style="display: none;">
-                                    </div>
-                                    <div class="btnTwo">
-                                        <button class="buttonSiv SaveBtn"> Save </button>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- TREASURER -->
-                            <div class="everyConOfficial" id="TresContainer">
-                                <div class="officialLaman" id="imageContainer4">
-                                    <!-- Image will be displayed here -->
-                                </div>
-                                <h2 class="LabelUpo" value="Treasurer"> TREASURER </h2>
-                                <input class="inputNgUUpo" type="text" id="TresName">
-                                <div class="buttonsNgOffi">
-                                    <div class="btnOne">
-                                        <button class="buttonSiv UploadPics4">Upload Picture</button>
-                                        <input class="inputFileCert4 inputts" type="file" id="TresPic" style="display: none;">
-                                    </div>
-                                    <div class="btnTwo">
-                                        <button class="buttonSiv SaveBtn"> Save </button>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- AUDITOR -->
-                            <div class="everyConOfficial" id="AudContainer">
-                                <div class="officialLaman" id="imageContainer5">
-                                    <!-- Image will be displayed here -->
-                                </div>
-                                <h2 class="LabelUpo" value="Auditor"> AUDITOR </h2>
-                                <input class="inputNgUUpo" type="text" id="AudName">
-                                <div class="buttonsNgOffi">
-                                    <div class="btnOne">
-                                        <button class="buttonSiv UploadPics5">Upload Picture</button>
-                                        <input class="inputFileCert5 inputts" type="file" id="AudPic" style="display: none;">
-                                    </div>
-                                    <div class="btnTwo">
-                                        <button class="buttonSiv SaveBtn"> Save </button>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- PEACE IN ORDER -->
-                            <div class="everyConOfficial" id="PeaceContainer">
-                                <div class="officialLaman" id="imageContainer6">
-                                    <!-- Image will be displayed here -->
-                                </div>
-                                <h2 class="LabelUpo" value="PeaceInOrder"> PEACE IN ORDER </h2>
-                                <input class="inputNgUUpo" type="text" id="PeaceName">
-                                <div class="buttonsNgOffi">
-                                    <div class="btnOne">
-                                        <button class="buttonSiv UploadPics6">Upload Picture</button>
-                                        <input class="inputFileCert6 inputts" type="file" id="PeacePic" style="display: none;">
-                                    </div>
-                                    <div class="btnTwo">
-                                        <button class="buttonSiv SaveBtn"> Save </button>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- DIRECTOR 1 -->
-                            <div class="everyConOfficial" id="Direc1Container">
-                                <div class="officialLaman" id="imageContainer7">
-                                    <!-- Image will be displayed here -->
-                                </div>
-                                <h2 class="LabelUpo" value="Director1"> DIRECTOR </h2>
-                                <input class="inputNgUUpo" type="text" id="Direc1Name">
-                                <div class="buttonsNgOffi">
-                                    <div class="btnOne">
-                                        <button class="buttonSiv UploadPics7">Upload Picture</button>
-                                        <input class="inputFileCert7 inputts" type="file" id="Direc1Pic" style="display: none;">
-                                    </div>
-                                    <div class="btnTwo">
-                                        <button class="buttonSiv SaveBtn"> Save </button>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- DIRECTOR 2  -->
-                            <div class="everyConOfficial" id="Direc2Container">
-                                <div class="officialLaman" id="imageContainer8">
-                                    <!-- Image will be displayed here -->
-                                </div>
-                                <h2 class="LabelUpo" value="Director2"> DIRECTOR </h2>
-                                <input class="inputNgUUpo" type="text" id="Direc2Name">
-                                <div class="buttonsNgOffi">
-                                    <div class="btnOne">
-                                        <button class="buttonSiv UploadPics8">Upload Picture</button>
-                                        <input class="inputFileCert8 inputts" type="file" id="Direc2Pic" style="display: none;">
-                                    </div>
-                                    <div class="btnTwo">
-                                        <button class="buttonSiv SaveBtn"> Save </button>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- DIRECTOR 3  -->
-                            <div class="everyConOfficial" id="Direc3Container">
-                                <div class="officialLaman" id="imageContainer9">
-                                    <!-- Image will be displayed here -->
-                                </div>
-                                <h2 class="LabelUpo" value="Director3"> DIRECTOR </h2>
-                                <input class="inputNgUUpo" type="text" id="Direc3Name">
-                                <div class="buttonsNgOffi">
-                                    <div class="btnOne">
-                                        <button class="buttonSiv UploadPics9">Upload Picture</button>
-                                        <input class="inputFileCert9 inputts" type="file" id="Direc3Pic" style="display: none;">
-                                    </div>
-                                    <div class="btnTwo">
-                                        <button class="buttonSiv SaveBtn"> Save </button>
+                            <div class="ModalEditingPos">
+                                <div class="SubEditingMod">
+                                    <div class="EditingContent">
+                                        <header class="ConEkis">
+                                            <span class="EkisHo"> &times; </span>
+                                        </header>
+                                        <div class="LamanNgModalEd">
+                                            <div class="Paniraa">
+                                                <div class="PictureWrapper" id="PictureWrapper">
+                                                    <input class="InputPic" type="file" id="Picturee">
+                                                    <img class="PictureImgIcon" src="Pictures/cloudUpload.png" alt="Upload Icon">
+                                                    <p class="TextIcon"> Select new images or <span class="spanNiyaModal">browse</span>.</p>
+                                                </div>
+                                            
+                                                <div class="imgContainerr" id="imgContainerr"> </div>
+                                            </div>
+                                            <div style="margin-top: 10px;" class="Coonn">
+                                                <label class="LabelEd"> Position: </label>
+                                                <input class="InputEd" type="text">
+                                            </div> 
+                                            <div class="Coonn">
+                                                <label class="LabelEd"> Name: </label>
+                                                <input class="InputEd" type="text">
+                                            </div>                                           
+                                        </div>
+                                        <footer class="FooterSave">
+                                            <button class="SaveEditing"> Save </button>
+                                        </footer>
                                     </div>
                                 </div>
                             </div>

@@ -1,68 +1,68 @@
 :root{
-  --color-primary: #1828b8;
-  --color-danger: #ff7782;
-  --color-success: #41f1b6;
-  --color-warning: #ffbb55;
-  --color-white: #fff;
-  --color-info-dark: #1e1e1f;
-  --color-info-light: #939fb6;
-  --color-dark: #363949;
-  --color-light: rgba(61, 109, 176, 0.18);
-  --color-light-2: rgba(52, 58, 116, 0.20);
-  --color-primary-variant: #111e88;
-  --color-dark-variant: #677483;
-  --color-background: #f0f0f0;
-
-  --light: #f9f9f9;
-  --blue: #3c91e6;
-  --light-blue: #a9d5ff;
-  --light-red: #f38c8c;
-  --light-green: #a7f9d0;
-  --grey: #eee;
-  --dark-grey: #aaaaaa;
-  --drak: #342e37;
-  --red:  #e88383;
-  --green: rgb(94, 232, 129);
-  --color-info-dark: #919497;
-
-  --color-border-radius: 2rem;
-  --color-border-radius-1: 0.4rem;
-  --color-border-radius-2: 0.8rem;
-  --color-border-radius-3: 1.2rem;
-
-
-  --card-padding: 1.8rem;
-  --padding-1: 1.2rem;
-
-  --box-shadow: 0 2rem 3rem var(--color-light);
+    --color-primary: #1828b8;
+    --color-danger: #ff7782;
+    --color-success: #41f1b6;
+    --color-warning: #ffbb55;
+    --color-white: #fff;
+    --color-info-dark: #1e1e1f;
+    --color-info-light: #939fb6;
+    --color-dark: #363949;
+    --color-light: rgba(61, 109, 176, 0.18);
+    --color-light-2: rgba(52, 58, 116, 0.20);
+    --color-primary-variant: #111e88;
+    --color-dark-variant: #677483;
+    --color-background: #f0f0f0;
+  
+    --light: #f9f9f9;
+    --blue: #3c91e6;
+    --light-blue: #a9d5ff;
+    --light-red: #f38c8c;
+    --light-green: #a7f9d0;
+    --grey: #eee;
+    --dark-grey: #aaaaaa;
+    --drak: #342e37;
+    --red:  #e88383;
+    --green: rgb(94, 232, 129);
+    --color-info-dark: #919497;
+  
+    --color-border-radius: 2rem;
+    --color-border-radius-1: 0.4rem;
+    --color-border-radius-2: 0.8rem;
+    --color-border-radius-3: 1.2rem;
+  
+  
+    --card-padding: 1.8rem;
+    --padding-1: 1.2rem;
+  
+    --box-shadow: 0 2rem 3rem var(--color-light);
 }
-
+  
 *{
-  margin: 0;
-  padding: 0;
-  outline: none;
-  appearance: none;
-  border: 0;
-  text-decoration: none;
-  list-style: none;
-  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    outline: none;
+    appearance: none;
+    border: 0;
+    text-decoration: none;
+    list-style: none;
+    box-sizing: border-box;
 }
-
+  
 html{
-  font-size: 14px;
+    font-size: 14px;
 }
-
+  
 .mainDashboardContainer{
-  width: 100vw;
-  height: 100vh;
-  font-family: Arial, sans-serif;
-  font-size: 0.88rem;
-  background: var(--color-background);
-  user-select: none;
-  overflow-x: hidden;
-  color: var(--color-dark);
+    width: 100vw;
+    height: 100vh;
+    font-family: Arial, sans-serif;
+    font-size: 0.88rem;
+    background: var(--color-background);
+    user-select: none;
+    overflow-x: hidden;
+    color: var(--color-dark);
 }
-
+  
 /* ===== SIDEBAR DESIGN ===== */
 .sidebarContainer {
   position: fixed;
@@ -73,21 +73,21 @@ html{
   background-color: rgb(255, 255, 255);
   width: 275px;
   transition: all 0.3s;
-  }
-  
-  .DagdagNanaman {
+}
+
+.DagdagNanaman {
   flex: 1; /* Allow the div to grow and fill available space */
   overflow-y: auto; /* Enable vertical scrolling */
   /* background-color: gray; */
   scrollbar-width: thin; /* For Firefox */
-  }
-  
-  .DagdagNanaman span{
+}
+
+.DagdagNanaman span{
     font-size: 14.5px;
     font-weight: 500;
-  }
+}
   
-  .DagdagNanaman .sideside{
+.DagdagNanaman .sideside{
     display: flex;
     color: var(--color-info-dark);
     padding-left: 25px;
@@ -96,61 +96,60 @@ html{
     position: relative;
     height: 3.6rem;
     transition: all 300ms ease;
-  }
+}
   
-  .DagdagNanaman .sideside .img-sideboard{
+.DagdagNanaman .sideside .img-sideboard{
     font-size: 1.6rem;
     transition: all 300ms ease;
-  }
+}
   
-  .DagdagNanaman .sideside:last-child{
+.DagdagNanaman .sideside:last-child{
     bottom: 1px;
-  }
+}
   
-  /* Active state for sidebar items */
-  .sideside.baractive {
+.DagdagNanaman .sideside.baractive{
     background: var(--color-light);
     color: var(--color-primary);
-  }
+}
+
+.sideside.baractive::before{
+  content: '';
+  width: 4px;
+  height: 100%;
+  background: var(--color-primary);
+  position: absolute;
+  left: 0;
+  top: 0;
+  margin-left: 2px;
+}
   
-  .sideside.baractive::before{
-    content: '';
-    width: 4px;
-    height: 100%;
-    background: var(--color-primary);
-    position: absolute;
-    left: 0;
-    top: 0;
-    margin-left: 2px;
-  }
-  
-  .DagdagNanaman .sideside.baractive .img-sideboard{
+.DagdagNanaman .sideside.baractive .img-sideboard{
     margin-left: calc(1rem -3rem);
-  }
+}
   
-  .DagdagNanaman .sideside:hover{
+.DagdagNanaman .sideside:hover{
     color: var(--color-primary);
-  }
+}
   
-  .DagdagNanaman .sideside:hover .img-sideboard{
+.DagdagNanaman .sideside:hover .img-sideboard{
     margin-left: 1rem;
-  }
+}
   
-  /* SIDEBAR ACTIVE */
-  .sidebarActive {
-    transform: translateX(250px); 
-  }
+/* SIDEBAR ACTIVE */
+.sidebarActive {
+    transform: translateX(250px); /* Move sidebar into view */
+}
   
-  /* .MonthlyDuessContainerr.MonthlyDuessConActivee {
+/* .MonthlyDuessContainerr.MonthlyDuessConActivee {
     margin-left: 5px;
-  } */
+} */
   
-  /* ===== SIDEBAR IMAGE SIZE ===== */
+/* ===== SIDEBAR IMAGE SIZE ===== */
   .img-sideboard{
     width: 20px;
-  }
+}
   
-  /* ========== SUB MENU SIDEBAR ========== */
+/* ========== SUB MENU SIDEBAR ========== */
 .subMenuComp,
 .subMenuDocs {
   display: none;
@@ -233,10 +232,36 @@ html{
 .sub-spa {
   margin-top: 5px;
 }
-
-
-/* DESIGN PARA TO SA HEADER NG SIDEBAR AT SA MAIN */
-.headerTop{
+  
+/* ========== MAIN DASHBOARD DESIGN ========== */
+.MainBodyContainerr{
+  padding-left: 275px;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+  
+.MainContainerForTables{
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  flex: 1;
+  overflow: hidden;
+}
+  
+.MainContainerAll{
+  display: flex;
+  flex-direction: column; /* Stack children vertically */
+  width: 100%;
+  padding: 10px;
+  background-color: #ffffff;
+  border: 1px solid rgb(179, 172, 172);
+  margin: 10px;
+  flex: 1; /* Allow it to grow and take available space */
+}
+  
+  /* DESIGN PARA TO SA HEADER NG SIDEBAR AT SA MAIN */
+  .headerTop{
     align-items: center;
     text-align: center;
     background: rgb(229, 229, 229);
@@ -440,237 +465,140 @@ html{
     color: white;
     font-size: 17.5px;
     cursor: pointer;
-  }  
+  }
 
-/* ========== MAIN DASHBOARD DESIGN ========== */
-.MainBodyContainerr {
-  padding-left: 275px;
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
+
+  /* DESIGN PARA SA OFFICIALS DIVS */
+.subofficialCards{
+  display: grid;
+  padding: 10px;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 1.6rem;
+  overflow-y: auto; 
+  flex: 1; 
 }
 
-.MainContainerForTables {
+.everyConOfficial {
+    display: flex;
+    flex-direction: column;
+    background: var(--color-white);
+    padding: 10px;
+    /* border-radius: var(--color-border-radius); */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    transition: all 300ms ease;
+    height: 400px;
+}
+
+.officialLaman{
     display: flex;
     justify-content: center;
+    height: 300px; /* Set a fixed height */
     width: 100%;
-    flex: 1;
-    overflow: hidden;
-}
-  
-.DocsTablessContainer {
-    display: flex;
-    flex-direction: column; /* Stack children vertically */
-    width: 100%;
-    padding: 10px;
-    background-color: #ffffff;
-    border: 1px solid rgb(179, 172, 172);
-    margin: 10px;
-    flex: 1; /* Allow it to grow and take available space */
-    overflow: auto;
+    border: 2px rgb(3, 1, 139) solid;
+    overflow: hidden; /* Ensure overflow is hidden to contain images */
+    margin-bottom: 15px;
 }
 
-/* DESIGN PARA SA SORTING SHOW */
-.TableHeaderr{
+.officialLaman img {
+    width: 65%;
+    height: 100%;
+    /* object-fit: cover; Ensure the image fits without stretching */
+}
+
+.LabelUpo{
+    text-align: center;
+  }
+
+.buttonsNgOffi{
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    margin-bottom: 6px;
-}
-  
-.itemsController,
-.searchTablee{
-    display: flex;
-    align-items: center;
-}
-  
-.dropdown {
-    position: relative;
-    display: inline-block;
-    cursor: pointer;
-    margin: 0 7px;
-}
-  
-.ArrowandPlace{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-  
-.selected {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 5px;
-    border: 1px solid #ccc;
-    background-color: #fff;
-    width: 70px;
-    user-select: none;
-    z-index: 1;
-}
-  
-.options {
-    display: none;
-    position: absolute;
-    background-color: #fff;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.1);
-    top: 100%;
-    left: 0;
-    width: 70px;
-    z-index: 1;
-}
-  
-.option {
-    text-align: center;
-    padding: 8px;
-    cursor: pointer;
-    border-top: 1px solid #ccc;
-    width: 100%;
-    box-sizing: border-box;
-    z-index: 1;
-}
-  
-.open .options {
-    display: block;
-}
-  
-.inputSearchhh{
-    padding: 5px;
-    font-size: 16px;
-    width: 300px;
-    margin-left: 5px;
 }
 
-/* DESIGN PARA SA PAGINATION */
-.bottom-field{
-    width: 100%;
+.inputNgUUpo{
+    border: 2px rgb(3, 1, 139) solid;
+    padding: 5px;
+    font-size: 17px;
     margin-top: 10px;
 }
 
-.pagination{
-    display: flex;
-    justify-content: end;
-    align-items: center;
-}
-  
-.pagination li{
-  list-style: none;
-  flex-shrink: 0;
-  text-align: center;
-  border: 1px solid #999;
-  color: #000000;
-}
-  
-.pagination a.Pageactive{
-    background: #04007a;
-    color: white;
-    border-color: #32d6aa;
-}
-  
-.pagination li a{
-  text-decoration: none;
-  padding: 3px 8px;
-  color: inherit;
-  display: block;
-  font-family: sans-serif;
-  font-size: 13px;
-}
-  
-.prevv:hover,
-.nextt:hover{
-    background: rgb(182, 182, 182);
-}
-
-/* DESIGN PARA SA DOCUMENTS TABLE */
-.TableDocsPen {
-    flex: 1; /* Allow this div to grow and take all available space */
-    padding: 10px;
-    background-color: #f9f9f9;
-    overflow-y: auto; /* Scroll within this section if necessary */
-}
-
-.TableDocPend {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-.TableDocPend thead {
-    background: var(--color-primary);
-    color: white;
-}
-
-.TableDocPend th {
-    padding: 15px;
+.buttonSiv{
+    margin-top: 10px;
+    padding: 5px 30px;
+    font-size: medium;
+    border-radius: 5px;
     cursor: pointer;
-    position: relative;
-    font-size: 12px;
-    white-space: nowrap;
-    user-select: none;
-    transition: all linear 0.16s;
-    border: 1px solid rgb(179, 172, 172); /* Outline partition */
+}
+  
+.inputts{
+    position: absolute;
+    visibility: hidden;
 }
 
-.TableDocPend td {
-    font-size: 14px;
-    border-bottom: 1px solid #576574;
-    /* padding: 10px 12px; */
-    padding: 8px;
-    border: 1px solid rgb(179, 172, 172); /* Outline partition */
-    color: black;
+/* ===== MODAL SA SUCCESS */
+.SuccessModalIto {
+  display: none;
 }
 
-.TableDocPend tbody {
-    background: var(--color-white);
-    text-align: center;
+.subSuccessModalContent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  z-index: 2;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
 }
 
-.TableDocPend tr:nth-child(even) {
-    background: var(--color-light);
-}
-
-.BiewwPrndDocs {
-  background: none;
-  text-decoration: underline;
-  cursor: pointer;
-  color: blue;
-}
-
-/* DESIGN PARA SA DETAILS LAMAN */
-.BtnNgNameBack {
-  font-size: 20px;
-  font-weight: bold;
-  border-radius: 50%;
-  padding: 5px 10px;
-  cursor: pointer;
-  color: white;
-  background: #04007a;
-}
-
-.DetailsLaman {
-  margin-top: 20px;
+.successModalContent {
   display: flex;
   flex-direction: column;
-  flex: 1; /* Allow it to grow and take available space */
-}
-
-.ContainerEachh {
-  display: flex;
-  margin-bottom: 15px;
+  justify-content: space-between;
   align-items: center;
+  background: white;
+  border-radius: 10px;
+  width: 400px;
+  height: 150px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-.LabelDocsDet {
-  display: inline-block;
-  width: 180px; /* Set width for label */
-  margin-right: 10px; /* Space between label and input */
-  font-weight: bold;
+.paragSuccess {
+  margin-top: 5px;
 }
 
-.inputDocsDet {
+.successText {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.successButtons {
+  display: flex;
+  justify-content: center;
   width: 100%;
-  padding: 8px;
-  /* margin-bottom: 10px; */
-  border: 1px solid #ddd;
+  
+}
+
+.successImg {
+  width: 50px;
+  display: block;
+  margin: 0 auto;
+}
+
+.buttonSuccess {
+  padding: 10px 45px;
+  cursor: pointer;
   border-radius: 4px;
-  flex-grow: 1; /* Allow input to take up remaining space */
+  margin: 10px;
+  margin-top: 10px;
+}
+
+.okButn {
+  background: rgb(76, 175, 80);
+  color: white;
+}
+
+.okButn:hover {
+  background: rgb(56, 142, 60);
 }

@@ -1,18 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title> Dashboard </title>
-  <link rel="stylesheet" href="CSS/UserAnnouncement.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Mabuhay Website </title>
+    <link rel="icon" type="image/x-icon" href="Pictures/Mabuhay_Logo.ico">
+    <link rel="stylesheet" href="CSS/UserDocuments.css">
 </head>
 <body>
 <div class="mainDashboardContainer">
         <div class="secMainDash">
             <div class="sidebarContainer sideActive" id="sidebar">
                 <div class="headerTop">
-                    <img class="img-logo" src="Pictures/Dasma_City_Logo.png">
+                    <img class="img-logo" src="Pictures/Mabuhay_Logo.png">
                     <h2 class="MabuhayName"> Mabuhay Homes 2000 Phase 5 </h2>
+                </div>
+                <div class="DagdagNanaman">
+                    
                 </div>
                 <a href="UserDashBoard.php" class="sideside baractive">
                     <img class="img-sideboard" src="Pictures/Dashboard2.png">
@@ -32,7 +36,7 @@
                     </a>  
                     <ul class="subMenuComp" id="complaintsSubMenu">
                         <li> 
-                            <a href="UserChat.php">
+                            <a href="UserChat.php?user_id=<?php echo $encoded_id?>">
                                 <img class="img-subMenu" src="Pictures/Chat.png">
                                 <label class="sub-spa"> Chat </label>
                             </a> 
@@ -47,7 +51,7 @@
                     <img class="img-sideboard" src="Pictures/voting.png">
                     <span> Voting </span>
                 </a>
-                <a href="#" class="sideside">
+                <a href="Logout.php" class="sideside">
                     <img class="img-sideboard" src="Pictures/logout.png">
                     <span> Logout </span>
                 </a>
@@ -120,8 +124,78 @@
                     </div>
                 </div>
                 <div class="MainContainerForTables">
-                    <div class="MainContainerAll">
-                        
+                    <!-- TABLE LIST FOR REQUEST -->
+                    <div class="ContainerForDocuments" id="TblConForDocs">
+                        <header style="margin-bottom: 10px;">
+                            <h2> List Of Requested Documents </h2>
+                            <button class="NewReqDocu" onclick="togglePageNewReqAndTbl('RequestingDocu')"> Request New Document </button>
+                        </header>
+                        <hr style="width: 100%; height: 0.5px; background: rgb(196, 196, 196); margin-bottom: 5px;">
+                        <div class="TblListDocu">
+                            <table class="ListReqTable">
+                                <thead>
+                                    <tr>
+                                        <th> Request No.</th>
+                                        <th> Requested Document </th>
+                                        <th> Requested Date </th>
+                                        <th> Status </th>
+                                        <th> Action </th>
+                                    </tr>
+                                    <tbody>
+                                        <tr>
+                                            <td> 123456 </td>
+                                            <td> Move In </td>
+                                            <td> 02-02-23  02:23 </td>
+                                            <td> Pending </td>
+                                            <td> 
+                                                <button class="ViewDetBtn" id="ViewDetBtn"> View Details </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </thead>
+                            </table>
+
+                            <div class="BiewwModalPoIto">
+                                <div class="SubBieww">
+                                    <div class="ViewDetailsLaman">
+                                        <header class="PangEkis">
+                                            <span class="EkisToo"> &times; </span>
+                                        </header>
+                                        <div class="LoobToNgBiew">
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- REQUESTING NEW DOCUMENTS -->
+                    <div class="ContainerForDocuments" id="RequestingDocu">
+                        <div class="ContainerNewReq" onclick="togglePageNewReqAndTbl('TblConForDocs')">
+                            <span style="font-size: 17px; color: blue; cursor: pointer;"> &larr; </span>
+                            <span style="color: blue; cursor: pointer;"> Back to List Of Complaint </span> 
+                        </div>
+                        <br>
+                        <header style="display: flex; align-items: center; width: 100%; margin-bottom: 10px;">
+                            <label class="LabelDocument" style="font-weight: bold;"> Select type of Document: </label>
+                            <div class="TypeDocuDrop">
+                                <div class="TyDis" onclick="toggleTypeDoc()"> Move Out</div>
+                                <div class="TypeDropOptionsDoc" style="display: none;">
+                                    <div class="TypeDropOpt" onclick="TypeSet('Move Out')"> Move Out </div>
+                                    <div class="TypeDropOpt" onclick="TypeSet('Move In')"> Move In </div>
+                                </div>
+                            </div>
+                        </header>
+
+                        <div id="moveOutCon" class="ConttentParehas" style="display: none;">
+                            Move Out To
+                        </div>
+
+                        <div id="moveInCon" class="ConttentParehas" style="display: none;">
+                            Move In To
+                        </div>
                     </div>
                 </div>
             </div>
