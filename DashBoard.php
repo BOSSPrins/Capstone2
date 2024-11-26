@@ -124,15 +124,16 @@ if (isset($_SESSION['unique_id'])) {
                         </header>
                         <div class="modal-content">
                             <div class="profileSidebar">
-                                <a href="#" onclick="openPage('Edit Profile')"> Edit Profile </a>
-                                <a href="#" onclick="openPage('Edit Email')"> Edit Email </a>
-                                <a href="#" onclick="openPage('Change Password')"> Change Password </a>
+                                <input type="hidden" value="<?php echo $_SESSION['unique_id'];?>" id="fetchUID">
+                                <a href="#" onclick="openPage('EditProfile')"> Edit Profile </a>
+                                <a href="#" onclick="openPage('EditEmail')"> Edit Email </a>
+                                <a href="#" onclick="openPage('ChangePassword')"> Change Password </a>
                             </div>
                             <div class="profilePages">
-                                <form method="post" enctype="multipart/form-data">
-                                    <div id="Edit Profile" class="page">
+                                <!-- <span class="closeProf">&times;</span> -->
+                                <form method="POST" enctype="multipart/form-data" id="editProfileForm">
+                                    <div id="EditProfile" name="ProfileName" class="page">
                                         <h2 class="H2">Edit Profile </h2>
-
                                         <div class="UserProfilee">
                                             <div class="UserImgCon">
                                                 <img class="Imggg" src="Pictures/Ako.jpg">
@@ -144,8 +145,7 @@ if (isset($_SESSION['unique_id'])) {
                                                 </div>
                                             </div>
                                         </div>
-                        
-                                        <h3>Name:</h2>
+                                        <h2>Name:</h2>
                                         <div class="Profilebyu">
                                             <div class="Input-Roww">
                                                 <label> First Name: </label>
@@ -186,13 +186,15 @@ if (isset($_SESSION['unique_id'])) {
                                                 <input type="text" name="" id="contNum">
                                             </div>
                                         </div>
-                                        <h3>Person with Disability:</h2>
+                                        <h2>Person with Disability:</h2>
                                         <div class="Profilebyu">
                                             <label>
                                             <input type="checkbox" id="pwdYes"> Yes
+                                            <input type="checkbox" name="pwd_yes" id="pwdYes" disabled value="1"> Yes
                                             </label>
                                             <label>
                                             <input type="checkbox" id="pwdNo"> No
+                                            <input type="checkbox" name="pwd_no" id="pwdNo" disabled value="1"> No
                                             </label>
                                         </div>
                                         <h3>Address:</h2>
@@ -231,12 +233,18 @@ if (isset($_SESSION['unique_id'])) {
                                         </div>
                                     </div>
                                 </form>
+                                <form method="POST" enctype="multipart/form-data" id="formEmail">
+                                    <div id="EditEmail" class="page">
+                                        <h2>Edit Email Page</h2>
+                                        <p>Welcome to the Edit Email page.</p>
 
-                                <div id="Edit Email" class="page">
-                                    <h2>Edit Email Page</h2>
-                                    <p>Welcome to the Edit Email page.</p>
-                                </div>
-                                <div id="Change Password" class="page">
+                                        <input type="text" id="oldEmail" value="<?php echo $_SESSION['email'];?>">
+                                        <input type="text" id="newEmail" required>
+                                        <button type="submit" id="submitEmail">Submit</button>
+
+                                    </div>
+                                </form>
+                                <div id="ChangePassword" class="page">
                                     <h2> Change Password </h2>
                                     <p class="paragChange">
                                         Your password must be at least 6 character and should include a 
@@ -248,16 +256,16 @@ if (isset($_SESSION['unique_id'])) {
                                             <input class="inputngChanging" type="password" placeholder="Current Password">
                                         </div>
                                         <div class="changingInputBox">
-                                            <input class="inputngChanging" type="password" placeholder="New Password">
+                                                <input class="inputngChanging" type="password" placeholder="New Password">
                                         </div>
                                         <div class="changingInputBoxLast">
-                                            <input class="inputngChanging" type="password" placeholder="Re-type Password">
+                                                <input class="inputngChanging" type="password" placeholder="Re-type Password">
                                         </div>
                                         <div class="changingForgotPass">
-                                            <a class="forgotpassAs" href="#"> Forgot Password? </a>
+                                                <a class="forgotpassAs" href="#"> Forgot Password? </a>
                                         </div>
                                         <div class="changingButton">
-                                            <button class="buttonSapagPalit" type="submit"> Change Password </button>
+                                                <button class="buttonSapagPalit" type="submit"> Change Password </button>
                                         </div>
                                     </div>
                                 </div>

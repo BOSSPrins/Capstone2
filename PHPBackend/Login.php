@@ -47,6 +47,8 @@ if (!empty($email) && !empty($password)) {
                 $_SESSION['last_name'] = $row['last_name'];
                 $_SESSION['block'] = $row['block'];
                 $_SESSION['lot'] = $row['lot'];
+                $_SESSION['email'] = $row['email'];
+
 
 
                 

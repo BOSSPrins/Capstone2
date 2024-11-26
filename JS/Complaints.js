@@ -625,10 +625,10 @@ function updateComplaintCounts() {
 setInterval(updateComplaintCounts, 60000); // Refresh every 60 seconds
 
 
-window.onload = function () {
+window.addEventListener('load', function() {
     fetchComplaints();
     updateComplaintCounts();
-};
+});
 
 
 // FUNCTION PARA SA PICTURE MODAL PREVIEW 

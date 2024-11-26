@@ -117,6 +117,8 @@
 
     <button onclick="generatePDF()">Generate Letter</button>
 
+    <input type="checkbox" name="" id="">
+
 <script>
     
     document.addEventListener('DOMContentLoaded', function() {
