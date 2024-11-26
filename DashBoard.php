@@ -120,82 +120,96 @@ if (isset($_SESSION['unique_id'])) {
                 <div class="subModal">
                     <div class="modal-content">
                         <div class="profileSidebar">
-                            <a href="#" onclick="openPage('Edit Profile')"> Edit Profile </a>
-                            <a href="#" onclick="openPage('Edit Email')"> Edit Email </a>
-                            <a href="#" onclick="openPage('Change Password')"> Change Password </a>
+                            <input type="hidden" value="<?php echo $_SESSION['unique_id'];?>" id="fetchUID">
+                            <a href="#" onclick="openPage('EditProfile')"> Edit Profile </a>
+                            <a href="#" onclick="openPage('EditEmail')"> Edit Email </a>
+                            <a href="#" onclick="openPage('ChangePassword')"> Change Password </a>
                         </div>
         
                         <div class="profilePages">
                             <span class="closeProf">&times;</span>
-                            <form method="post" enctype="multipart/form-data">
-                                <div id="Edit Profile" class="page">
+                            <form method="POST" enctype="multipart/form-data" id="editProfileForm">
+                                <div id="EditProfile" name="ProfileName" class="page">
                                     <h2>Edit Profile Page</h2>
                                     <p>Welcome to the Edit Profile page.</p>
                                     <h2>Name:</h2>
                                     <div class="Profilebyu">
                                         <label> First Name: </label>
-                                        <input type="text" name="" id="fname">
+                                        <input type="text" name="fname" id="fname" readonly>
                                         <label> Middle Name: </label>
-                                        <input type="text" name="" id="mname">
+                                        <input type="text" name="mname" id="mname" readonly>
                                     </div>
                                     <div class="Profilebyu">
                                         <label> Last Name: </label>
-                                        <input type="text" name="" id="lname">
+                                        <input type="text" name="lname" id="lname" readonly>
                                         <label> Suffix: </label>
-                                        <input type="text" name="" id="suffix">
+                                        <input type="text" name="suffix" id="suffix" readonly>
                                     </div>
                                     <div class="Profilebyu">
                                         <label> Date of Birth: </label>
-                                        <input type="text" name="" id="bday">
+                                        <input type="text" name="bday" id="bday" readonly>
                                         <label> Age: </label>
-                                        <input type="text" name="" id="age">
+                                        <input type="text" name="age" id="age" readonly>
                                     </div>
                                     <div class="Profilebyu">
                                         <label> Sex: </label>
-                                        <input type="text" name="" id="sex">
+                                        <input type="text" name="sex" id="sex" readonly>
                                         <label> Contact Number: </label>
-                                        <input type="text" name="" id="contNum">
+                                        <input type="text" name="contNum" id="contNum" readonly>
                                     </div>
                                     <h2>Person with Disability:</h2>
                                     <div class="Profilebyu">
                                         <label>
-                                        <input type="checkbox" id="pwdYes"> Yes
+                                        <input type="checkbox" name="pwd_yes" id="pwdYes" disabled value="1"> Yes
                                         </label>
                                         <label>
-                                        <input type="checkbox" id="pwdNo"> No
+                                        <input type="checkbox" name="pwd_no" id="pwdNo" disabled value="1"> No
                                         </label>
                                     </div>
                                     <h2>Address:</h2>
                                     <div class="Profilebyu">
                                         <label> Block: </label>
-                                        <input type="text" name="" id="blk" readonly>
+                                        <input type="text" name="blk" id="blk" readonly>
                                         <label> Lot: </label>
-                                        <input type="text" name="" id="lot" readonly>                                        
+                                        <input type="text" name="lot" id="lot" readonly>                                        
                                     </div>
                                     <div class="Profilebyu">
                                         <label> Street: </label>
-                                        <input type="text" name="" id="street" readonly>
+                                        <input type="text" name="street" id="street" readonly>
                                     </div>
                                     <h2>Emergency Contact: </h2> 
                                     <div class="Profilebyu">                                                               
                                         <label> Name: </label>   
-                                        <input type="text" name="" id="ecName">
+                                        <input type="text" name="ecName" id="ecName" readonly>
                                         <label> Contact Number: </label>
-                                        <input type="text" name="" id="ecPhoneNum">
+                                        <input type="text" name="ecPhoneNum" id="ecPhoneNum" readonly>
                                     </div>
                                     <div class="Profilebyu">                                                               
                                         <label> Relationship: </label>   
-                                        <input type="text" name="" id="relasyon">
+                                        <input type="text" name="relasyon" id="relasyon" readonly>
                                         <label> Address: </label>
-                                        <input type="text" name="" id="address">
+                                        <input type="text" name="ecAddress" id="ecAddress" readonly>
+                                    </div>
+
+                                    <div class="buttons">
+                                        <button type="button" id="editButton">Edit</button>
+                                        <button type="submit" id="updateButton" style="display: none;">Update</button>
+                                        <button id="cancelButton" style="display: none;">Cancel</button>
                                     </div>
                                 </div>
                             </form>
-                            <div id="Edit Email" class="page">
-                                <h2>Edit Email Page</h2>
-                                <p>Welcome to the Edit Email page.</p>
-                            </div>
-                            <div id="Change Password" class="page">
+                            <form method="POST" enctype="multipart/form-data" id="formEmail">
+                                <div id="EditEmail" class="page">
+                                    <h2>Edit Email Page</h2>
+                                    <p>Welcome to the Edit Email page.</p>
+
+                                    <input type="text" id="oldEmail" value="<?php echo $_SESSION['email'];?>">
+                                    <input type="text" id="newEmail" required>
+                                    <button type="submit" id="submitEmail">Submit</button>
+
+                                </div>
+                            </form>
+                            <div id="ChangePassword" class="page">
                                 <h2> Change Password </h2>
                                 <p class="paragChange">
                                     Your password must be at least 6 character and should include a 

@@ -118,7 +118,7 @@ function sendConfirmationEmail($user_email) {
                             <h1>Account Confirmation</h1>
                             <p>Hello,</p>
                             <p>Your account has been confirmed. You can now access the website. Thank you!</p>
-                            <p>If you have any questions, feel free to contact us at our website.</p>
+                            <p>If you have any questions or concerns, please feel free to contact us through our website.</p>
                             <p><a href="http://localhost/Mabuhay/LoginPage.php" class="button">Go to Login Page </a></p>
                         </div>
                     </body>
