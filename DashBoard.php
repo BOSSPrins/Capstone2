@@ -116,107 +116,149 @@ if (isset($_SESSION['unique_id'])) {
                 </div>
             </div>
 
-            <div id="profileModal" class="modal">
-                <div class="subModal">
-                    <div class="modal-content">
-                        <div class="profileSidebar">
-                            <a href="#" onclick="openPage('Edit Profile')"> Edit Profile </a>
-                            <a href="#" onclick="openPage('Edit Email')"> Edit Email </a>
-                            <a href="#" onclick="openPage('Change Password')"> Change Password </a>
-                        </div>
-        
-                        <div class="profilePages">
-                            <span class="closeProf">&times;</span>
-                            <form method="post" enctype="multipart/form-data">
-                                <div id="Edit Profile" class="page">
-                                    <h2>Edit Profile Page</h2>
-                                    <p>Welcome to the Edit Profile page.</p>
-                                    <h2>Name:</h2>
-                                    <div class="Profilebyu">
-                                        <label> First Name: </label>
-                                        <input type="text" name="" id="fname">
-                                        <label> Middle Name: </label>
-                                        <input type="text" name="" id="mname">
-                                    </div>
-                                    <div class="Profilebyu">
-                                        <label> Last Name: </label>
-                                        <input type="text" name="" id="lname">
-                                        <label> Suffix: </label>
-                                        <input type="text" name="" id="suffix">
-                                    </div>
-                                    <div class="Profilebyu">
-                                        <label> Date of Birth: </label>
-                                        <input type="text" name="" id="bday">
-                                        <label> Age: </label>
-                                        <input type="text" name="" id="age">
-                                    </div>
-                                    <div class="Profilebyu">
-                                        <label> Sex: </label>
-                                        <input type="text" name="" id="sex">
-                                        <label> Contact Number: </label>
-                                        <input type="text" name="" id="contNum">
-                                    </div>
-                                    <h2>Person with Disability:</h2>
-                                    <div class="Profilebyu">
-                                        <label>
-                                        <input type="checkbox" id="pwdYes"> Yes
-                                        </label>
-                                        <label>
-                                        <input type="checkbox" id="pwdNo"> No
-                                        </label>
-                                    </div>
-                                    <h2>Address:</h2>
-                                    <div class="Profilebyu">
-                                        <label> Block: </label>
-                                        <input type="text" name="" id="blk" readonly>
-                                        <label> Lot: </label>
-                                        <input type="text" name="" id="lot" readonly>                                        
-                                    </div>
-                                    <div class="Profilebyu">
-                                        <label> Street: </label>
-                                        <input type="text" name="" id="street" readonly>
-                                    </div>
-                                    <h2>Emergency Contact: </h2> 
-                                    <div class="Profilebyu">                                                               
-                                        <label> Name: </label>   
-                                        <input type="text" name="" id="ecName">
-                                        <label> Contact Number: </label>
-                                        <input type="text" name="" id="ecPhoneNum">
-                                    </div>
-                                    <div class="Profilebyu">                                                               
-                                        <label> Relationship: </label>   
-                                        <input type="text" name="" id="relasyon">
-                                        <label> Address: </label>
-                                        <input type="text" name="" id="address">
-                                    </div>
-                                </div>
-                            </form>
-                            <div id="Edit Email" class="page">
-                                <h2>Edit Email Page</h2>
-                                <p>Welcome to the Edit Email page.</p>
+            <div id="profileModal" class="ParentModalProf">
+                <div class="modal">
+                    <div class="subModal">
+                        <header class="PangEkis">
+                            <span class="EkisToo"> &times; </span>
+                        </header>
+                        <div class="modal-content">
+                            <div class="profileSidebar">
+                                <a href="#" onclick="openPage('Edit Profile')"> Edit Profile </a>
+                                <a href="#" onclick="openPage('Edit Email')"> Edit Email </a>
+                                <a href="#" onclick="openPage('Change Password')"> Change Password </a>
                             </div>
-                            <div id="Change Password" class="page">
-                                <h2> Change Password </h2>
-                                <p class="paragChange">
-                                    Your password must be at least 6 character and should include a 
-                                    combination of numbers, letters and special characters (&#33; &#36; &#64; &#37;)
-                                </p>
+                            <div class="profilePages">
+                                <form method="post" enctype="multipart/form-data">
+                                    <div id="Edit Profile" class="page">
+                                        <h2 class="H2">Edit Profile </h2>
 
-                                <div class="changingPassword">
-                                    <div class="changingInputBox">
-                                        <input class="inputngChanging" type="password" placeholder="Current Password">
+                                        <div class="UserProfilee">
+                                            <div class="UserImgCon">
+                                                <img class="Imggg" src="Pictures/Ako.jpg">
+                                            </div>
+                                            <div class="ContainerFile">
+                                                <input type="file" id="UploadPicUser">
+                                                <div class="CameraFileUp" id="uploadBtn">
+                                                    <img class="camera" src="Pictures/camera.png">
+                                                </div>
+                                            </div>
+                                        </div>
+                        
+                                        <h3>Name:</h2>
+                                        <div class="Profilebyu">
+                                            <div class="Input-Roww">
+                                                <label> First Name: </label>
+                                                <input type="text" name="" id="fname">
+                                            </div>
+                                            <div class="Input-Roww">
+                                                <label> Middle Name: </label>
+                                                <input type="text" name="" id="mname">
+                                            </div>
+                                        </div>
+                                        <div class="Profilebyu">
+                                            <div class="Input-Roww">
+                                                <label> Last Name: </label>
+                                                <input type="text" name="" id="lname">
+                                            </div>
+                                            <div class="Input-Roww">
+                                                <label> Suffix: </label>
+                                                <input type="text" name="" id="suffix">
+                                            </div>
+                                        </div>
+                                        <div class="Profilebyu">
+                                            <div class="Input-Roww">
+                                                <label> Date of Birth: </label>
+                                                <input type="text" name="" id="bday">
+                                            </div>
+                                            <div class="Input-Roww">
+                                                <label> Age: </label>
+                                                <input type="text" name="" id="age">
+                                            </div>
+                                        </div>
+                                        <div class="Profilebyu">
+                                            <div class="Input-Roww">
+                                                <label> Sex: </label>
+                                                <input type="text" name="" id="sex">
+                                            </div>
+                                            <div class="Input-Roww">
+                                                <label> Contact Number: </label>
+                                                <input type="text" name="" id="contNum">
+                                            </div>
+                                        </div>
+                                        <h3>Person with Disability:</h2>
+                                        <div class="Profilebyu">
+                                            <label>
+                                            <input type="checkbox" id="pwdYes"> Yes
+                                            </label>
+                                            <label>
+                                            <input type="checkbox" id="pwdNo"> No
+                                            </label>
+                                        </div>
+                                        <h3>Address:</h2>
+                                        <div class="Profilebyu2">
+                                            <div class="Input-Roww2">
+                                                <label> Block: </label>
+                                                <input type="text" name="" id="blk" readonly>
+                                            </div>
+                                            <div class="Input-Roww2">
+                                                <label> Lot: </label>
+                                                <input type="text" name="" id="lot" readonly>  
+                                            </div> 
+                                            <div class="Input-Roww2">
+                                                <label> Street: </label>
+                                                <input type="text" name="" id="street" readonly>
+                                            </div>                                     
+                                        </div>
+                                        <h3>Emergency Contact: </h2> 
+                                        <div class="Profilebyu"> 
+                                            <div class="Input-Roww">
+                                                <label> Name: </label>   
+                                                <input type="text" name="" id="ecName">
+                                            </div>                                                              
+                                            <div class="Input-Roww">
+                                                <label> Contact Number: </label>
+                                                <input type="text" name="" id="ecPhoneNum">
+                                            </div>
+                                        </div>
+                                        <div class="Profilebyu">                                                               
+                                            <label style="font-weight: 550;" > Relationship: </label>   
+                                            <input class="In" type="text" name="" id="relasyon">
+                                        </div>
+                                        <div class="Profilebyu">                                                               
+                                            <label style="font-weight: 550;"> Address: </label>
+                                            <input class="In" type="text" name="" id="address">
+                                        </div>
                                     </div>
-                                    <div class="changingInputBox">
-                                        <input class="inputngChanging" type="password" placeholder="New Password">
-                                    </div>
-                                    <div class="changingInputBoxLast">
-                                        <input class="inputngChanging" type="password" placeholder="Re-type Password">
-                                    </div>
-                                    <div class="changingForgotPass">
-                                        <a class="forgotpassAs" href="#"> Forgot Password? </a>
-                                    </div>
-                                    <div class="changingButton">
-                                        <button class="buttonSapagPalit" type="submit"> Change Password </button>
+                                </form>
+
+                                <div id="Edit Email" class="page">
+                                    <h2>Edit Email Page</h2>
+                                    <p>Welcome to the Edit Email page.</p>
+                                </div>
+                                <div id="Change Password" class="page">
+                                    <h2> Change Password </h2>
+                                    <p class="paragChange">
+                                        Your password must be at least 6 character and should include a 
+                                        combination of numbers, letters and special characters (&#33; &#36; &#64; &#37;)
+                                    </p>
+
+                                    <div class="changingPassword">
+                                        <div class="changingInputBox">
+                                            <input class="inputngChanging" type="password" placeholder="Current Password">
+                                        </div>
+                                        <div class="changingInputBox">
+                                            <input class="inputngChanging" type="password" placeholder="New Password">
+                                        </div>
+                                        <div class="changingInputBoxLast">
+                                            <input class="inputngChanging" type="password" placeholder="Re-type Password">
+                                        </div>
+                                        <div class="changingForgotPass">
+                                            <a class="forgotpassAs" href="#"> Forgot Password? </a>
+                                        </div>
+                                        <div class="changingButton">
+                                            <button class="buttonSapagPalit" type="submit"> Change Password </button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

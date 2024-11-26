@@ -1,33 +1,50 @@
-// Modal functionality (unchanged)
 const profModal = document.getElementById("profileModal");
 const profModalBtn = document.getElementById("myProfileBtn");
-const spanEkis = document.getElementsByClassName("closeProf")[0];
+const spanEkis = document.getElementsByClassName("EkisToo")[0];
 
 profModalBtn.onclick = function() {
-    profModal.style.display = "block";
+    profModal.style.display = "block";  // Show modal
     const sidebarLinks = document.querySelectorAll(".profileSidebar a");
     sidebarLinks.forEach(function(link) {
-        link.classList.remove("active");
+        link.classList.remove("active");  // Remove 'active' class from sidebar links
     });
+
+    // Set the "Edit Profile" page as default active
+    openPage('Edit Profile');
 }
 
 spanEkis.onclick = function() {
-    profModal.style.display = "none";
+    profModal.style.display = "none";  // Hide modal
     const pages = document.getElementsByClassName("page");
     for(var i = 0; i < pages.length; i++) {
-        pages[i].classList.remove("activeProfModal");
+        pages[i].classList.remove("activeProfModal");  // Remove 'activeProfModal' class from all pages
     }
 }
 
 function openPage(pageName) {
     const pages = document.getElementsByClassName("page");
     for (var i = 0; i < pages.length; i++) {
-        pages[i].classList.remove("activeProfModal");
+        pages[i].classList.remove("activeProfModal");  // Remove 'activeProfModal' class from all pages
     }
-    document.getElementById(pageName).classList.add("activeProfModal");
+    document.getElementById(pageName).classList.add("activeProfModal");  // Add 'activeProfModal' class to selected page
 }
 
 
+document.getElementById('uploadBtn').addEventListener('click', function() {
+    document.getElementById('UploadPicUser').click();  // Trigger the file input click when the button is clicked
+  });
+  
+  document.getElementById('UploadPicUser').addEventListener('change', function(event) {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        document.querySelector('.Imggg').src = e.target.result;  // Change the profile image to the new one
+      };
+      reader.readAsDataURL(file);
+    }
+  });
+  
 
 //FUNCTION SA SUB-SIDEBAR 
 // document.addEventListener("DOMContentLoaded", function() {
