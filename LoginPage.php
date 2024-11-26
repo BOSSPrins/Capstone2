@@ -67,7 +67,8 @@ if (isset($_SESSION['role'])) {
                                     </div>
 
                                     <div class="forgotpass-container">
-                                        <a href="#" class="forgot-text">Forgot Password?</a>
+                                        <a href="OTP.php" class="forgot-text Verify">Verify Account</a>
+                                        <a href="ForgotPass.php" class="forgot-text">Forgot Password?</a>                                      
                                     </div>
 
                                     <div class="btn-login">

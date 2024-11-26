@@ -522,3 +522,12 @@ overflow-y: auto; /* Optional: Add scrollbar if content overflows */
   margin-bottom: 5px;
   margin-left: 15px;
 }
+
+
+/* DESIGN NG PROFILE  */
+.Profilebyu {
+  display: flex;
+  column-gap: 15px;
+  margin-top: 10px;
+  margin-bottom: 13px;
+}

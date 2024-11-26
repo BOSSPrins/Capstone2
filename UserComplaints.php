@@ -492,5 +492,6 @@ $encoded_id = urlencode($admin_unique_id);
     </div>
 
     <script src="JS/UserComplaints.js"></script>
+    <script src="JS/checkSessionStatus.js"></script>
 </body>
 </html>

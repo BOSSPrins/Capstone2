@@ -130,7 +130,53 @@ if (isset($_SESSION['unique_id'])) {
                             <div id="Edit Profile" class="page">
                                 <h2>Edit Profile Page</h2>
                                 <p>Welcome to the Edit Profile page.</p>
+                                <div class="Profilebyu">
+                                    <label> First Name: </label>
+                                    <input type="text" name="" id="">
+                                    <label> Middle Name: </label>
+                                    <input type="text" name="" id="">
+                                </div>
+                                <div class="Profilebyu">
+                                    <label> Last Name: </label>
+                                    <input type="text" name="" id="">
+                                    <label> Suffix: </label>
+                                    <input type="text" name="" id="">
+                                </div>
+                                <div class="Profilebyu">
+                                    <label> Date of Birth: </label>
+                                    <input type="text" name="" id="">
+                                    <label> Age: </label>
+                                    <input type="text" name="" id="">
+                                </div>
+                                <div class="Profilebyu">
+                                    <label> Sex: </label>
+                                    <input type="text" name="" id="">
+                                    <label> Contact Number: </label>
+                                    <input type="text" name="" id="">
+                                </div>
+                                <div class="Profilebyu">
+                                    <label> Block: </label>
+                                    <input type="text" name="" id="">
+                                    <label> Lot: </label>
+                                    <input type="text" name="" id="">
+                                    <label> Street: </label>
+                                    <input type="text" name="" id="">
+                                </div>
+                                <h2>Emergency Contact: </h2> 
+                                <div class="Profilebyu">                                                               
+                                    <label> Name: </label>   
+                                    <input type="text" name="" id="">
+                                    <label> Contact Number: </label>
+                                    <input type="text" name="" id="">
+                                </div>
+                                <div class="Profilebyu">                                                               
+                                    <label> Relationship: </label>   
+                                    <input type="text" name="" id="">
+                                    <label> Address: </label>
+                                    <input type="text" name="" id="">
+                                </div>
                             </div>
+
                             <div id="Edit Email" class="page">
                                 <h2>Edit Email Page</h2>
                                 <p>Welcome to the Edit Email page.</p>
@@ -286,5 +332,6 @@ if (isset($_SESSION['unique_id'])) {
         </div>
     </div>
     <script src="JS/DashBoard.js"></script>
+    <script src="JS/checkSessionStatus.js"></script>
 </body>
 </html>

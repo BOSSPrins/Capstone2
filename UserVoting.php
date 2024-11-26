@@ -325,3 +325,7 @@ $user_UID = $_SESSION['unique_id'];
         </div>
     </div>
     <script src="JS/UserVoting.js"></script>
+    <script src="JS/checkSessionStatus.js"></script>
+
+</body>
+</html>

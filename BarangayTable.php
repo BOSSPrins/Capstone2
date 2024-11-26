@@ -305,5 +305,6 @@ if (isset($_SESSION['unique_id'])) {
     </div>
 
     <script src="JS/BarangayTable.js"></script>
+    <script src="JS/checkSessionStatus.js"></script>
 </body>
 </html>

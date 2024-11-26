@@ -227,5 +227,6 @@ if (isset($_SESSION['unique_id'])) {
 
     <script src="JS/Chat.js"></script>
     <script src="JS/SendMsg.js"></script>
+    <script src="JS/checkSessionStatus.js"></script>
 </body>
 </html>

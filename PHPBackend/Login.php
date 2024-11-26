@@ -23,18 +23,16 @@ if (!empty($email) && !empty($password)) {
         $row = mysqli_fetch_assoc($sql);
         $enc_pass = $row['password'];
 
-        if ($row['access'] == 'Pending'){
-            echo "Please wait for confirmation";
+        if ($row['otp'] != 'Verified') { // Assuming '1' indicates verified; adjust based on your database logic
+            echo "Verify your account first.";
             exit();
         }
 
-        // Check if the user is already logged in with a different session
-        if (isset($_SESSION['unique_id']) && $_SESSION['unique_id'] != $row['unique_id']) {
-            // Trigger logout for the current session
-            $logoutUrl = "../Logout.php"; // Path to your logout script
-            file_get_contents($logoutUrl); // Send a request to log out the previous session
+        if ($row['access'] == 'Pending'){
+            echo "Please wait for your account confirmation";
+            exit();
         }
-
+       
         if (md5($password) === $enc_pass) {
             $status = "Active now";
             $sql2 = mysqli_query($conn, "UPDATE tblaccounts SET status = '{$status}' WHERE unique_id = {$row['unique_id']}");
@@ -51,15 +49,44 @@ if (!empty($email) && !empty($password)) {
                 $_SESSION['lot'] = $row['lot'];
 
 
+                
                 // Check if role exists before setting the session
-                if (isset($row['role'])) {
-                    $_SESSION['role'] = $row['role'];
-                } else {
-                    // Handle case where role is empty (e.g., assign default role)
-                    $_SESSION['role'] = 'default_role';  // Replace with your desired default role
-                    echo "User role not found. Assigned default role.";
+                $_SESSION['role'] = $row['role'] ?? 'default_role';
+
+                // Start session management logic
+                mysqli_begin_transaction($conn);
+
+                try {
+                    $current_session = session_id();
+                    $unique_id = $row['unique_id'];
+
+                    // Logout all other active sessions for this user
+                    $existing_session_sql = "UPDATE tbl_sessions SET status = 'inactive' WHERE unique_id = {$unique_id} AND status = 'active'";
+                    mysqli_query($conn, $existing_session_sql);
+
+                    // Check if the current session already exists in the database
+                    $check_session_sql = "SELECT * FROM tbl_sessions WHERE session_id = '{$current_session}'";
+                    $check_session_result = mysqli_query($conn, $check_session_sql);
+
+                    if (mysqli_num_rows($check_session_result) > 0) {
+                        // Update the existing session
+                        $update_sql = "UPDATE tbl_sessions 
+                                       SET unique_id = {$unique_id}, device_ip = '{$_SERVER['REMOTE_ADDR']}', status = 'active' 
+                                       WHERE session_id = '{$current_session}'";
+                        mysqli_query($conn, $update_sql);
+                    } else {
+                        // Insert a new session
+                        $insert_sql = "INSERT INTO tbl_sessions (session_id, unique_id, device_ip, status) 
+                                       VALUES ('{$current_session}', {$unique_id}, '{$_SERVER['REMOTE_ADDR']}', 'active')";
+                        mysqli_query($conn, $insert_sql);
+                    }
+
+                    mysqli_commit($conn); // Commit transaction
+                    echo $row['role']; // Return only the session role
+                } catch (Exception $e) {
+                    mysqli_rollback($conn); // Rollback transaction
+                    echo "Error: " . $e->getMessage();
                 }
-                echo $row['role']; // Return only the session role (modified)
             } else {
                 echo "Something went wrong. Please try again!";
             }
@@ -67,23 +94,10 @@ if (!empty($email) && !empty($password)) {
             echo "Password is Incorrect!";
         }
     } else {
-        echo "$email - This email does not exist!";
+        echo "Please Signup First";
+        //"$email - This email does not exist!";
     }
 } else {
     echo "All input fields are required!";
 }
-
-
-// $sql = "SELECT * FROM tblaccounts";
-// $result = $conn->query($sql);
-
-// if ($result->num_rows > 0) {
-//     $accounts = [];
-//     while ($row = $result->fetch_assoc()) {
-//         $accounts[] = $row;
-//     }
-//     closeConnectionAndRespond($conn, ['success' => true, 'accounts' => $accounts]);
-// } else {
-//     closeConnectionAndRespond($conn, ['success' => false, 'error' => 'No accounts found']);
-// }
 ?>

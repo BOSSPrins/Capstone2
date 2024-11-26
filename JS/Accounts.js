@@ -246,94 +246,86 @@ const complaintsSubMenu = document.getElementById('complaintsSubMenu');
             });
         });  
 
+
+
         // email ng reejct
-        function sendRejectingEmail(userId) {
-        // Get the user_id from the data-news-id attribute
-        // var userId = button.getAttribute('data-news-id');
-        console.log("Sending email to user with ID:", userId);
-        
-        // Log the user_id to the console for debugging purposes
-        console.log("User ID:", userId);
-        
-        // Check if userId is empty
-        if (!userId) {
-            alert("User ID is not set.");
-            return;
-        }
-        
-        // Example: Make an AJAX call to send the user_id to the PHP script
-        var xhr = new XMLHttpRequest();
-        xhr.open("POST", "Emailer/RejectEmail.php", true); // Ensure this path is correct
-        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState === 4) {
-                if (xhr.status === 200) {
-                    // Handle the response from the server
-                    console.log(xhr.responseText);
-                    try {
-                        var response = JSON.parse(xhr.responseText);
-                        if (response.error) {
-                            alert("Error: " + response.error);
-                        } else {
-                            alert("Rejection Email sent successfully.");
-                            location.reload();
-                        }
-                    } catch (e) {
-                        alert("Failed to parse JSON response: " + xhr.responseText);
-                    }
-                } else {
-                    alert("Failed to communicate with the server. Status: " + xhr.status);
-                }
-            }
-        };
-        xhr.send("user_id=" + encodeURIComponent(userId));
-    }
-
-        // Pagbago ng access ni user to reject
-        // $(document).on("click", ".rejBOTON", function(){
-        //     var user_id = $(this).closest('tr').find('.user_id').text();
-            
-        //     $('.reject_userID').val(user_id);
-        //     console.log("Hilo", user_id);               
-        // });
-
-        $(document).on("click", ".DecBtn", function(e) {
+        $(document).on("click", ".DecBtn", function (e) {
             e.preventDefault();
-            
-            // Get the user ID from the input with the class 'reject_userID'
+        
             var reject_userID = $('#userID').val();
             console.log('reject_userID:', reject_userID);
-            
-            // Perform the AJAX request
-            $.ajax({
-                type: "POST",
-                url: "PHPBackend/RejectProcess.php",
-                data: {
-                    'reject_user': true,
-                    'reject_userID': reject_userID
-                },
-                success: function(response) {
-                    try {
-                        var jsonData = JSON.parse(response);
-                        if (jsonData.success) {
-                            console.log('User rejected successfully');
-                            
-                            // Remove the table row containing the rejected user ID
-                            sendRejectingEmail(reject_userID)
-                            $("tr:has(td.user_id:contains('" + reject_userID + "'))").remove(); 
-                            // Optionally close the modal or reload the page
-                            // closeModal();
-                            
-                        } else {
-                            console.error('Failed to remove record:', jsonData.error);
+        
+            // Send the rejection email first
+            sendRejectingEmail(reject_userID, function (emailSuccess) {
+                if (emailSuccess) {
+                    // Proceed with deleting the user after the email is sent
+                    $.ajax({
+                        type: "POST",
+                        url: "PHPBackend/RejectProcess.php",
+                        data: {
+                            'reject_user': true,
+                            'reject_userID': reject_userID
+                        },
+                        success: function (response) {
+                            try {
+                                var jsonData = JSON.parse(response);
+                                if (jsonData.success) {
+                                    console.log('User rejected successfully');
+                                    // Remove the table row containing the rejected user ID
+                                    $("tr:has(td.user_id:contains('" + reject_userID + "'))").remove();
+                                } else {
+                                    console.error('Failed to remove record:', jsonData.error);
+                                }
+                            } catch (error) {
+                                console.error('Error parsing remove response:', error);
+                            }
+                        },
+                        error: function (xhr, status, error) {
+                            console.error('Delete AJAX error:', error);
                         }
-                    } catch (error) {
-                        console.error('Error parsing remove response:', error);
-                    }
-                },
-                error: function(xhr, status, error) {
-                    console.error('Delete AJAX error:', error);
+                    });
+                } else {
+                    alert("Failed to send rejection email. User deletion aborted.");
                 }
             });
-        }); 
+        });
+        
+        // Adjusted sendRejectingEmail function
+        function sendRejectingEmail(userId, callback) {
+            console.log("Sending email to user with ID:", userId);
+        
+            if (!userId) {
+                alert("User ID is not set.");
+                callback(false);
+                return;
+            }
+        
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "Emailer/RejectEmail.php", true);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                    if (xhr.status === 200) {
+                        try {
+                            var response = JSON.parse(xhr.responseText);
+                            if (response.error) {
+                                alert("Error: " + response.error);
+                                callback(false);
+                            } else {
+                                alert("Rejection Email sent successfully.");
+                                callback(true);
+                            }
+                        } catch (e) {
+                            alert("Failed to parse JSON response: " + xhr.responseText);
+                            callback(false);
+                        }
+                    } else {
+                        alert("Failed to communicate with the server. Status: " + xhr.status);
+                        callback(false);
+                    }
+                }
+            };
+            xhr.send("user_id=" + encodeURIComponent(userId));
+        }
+        
     });
