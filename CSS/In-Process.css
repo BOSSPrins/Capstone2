@@ -955,3 +955,59 @@
   align-items: center;
   justify-content: center;
 }
+
+
+/* PDF card container */
+/* PDF card container */
+#pdfContainerNew {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+/* Style for the PDF card */
+.pdf-card-new {
+  background-color: #e8e8e8;
+  border: 1px solid #bbb;
+  padding: 12px 18px;
+  width: 280px;
+  display: flex;
+  align-items: center;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out;
+  cursor: pointer;
+  margin-left: 12%;
+}
+
+/* Hover effect */
+.pdf-card-new:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* PDF icon styling */
+.pdf-card-new img {
+  width: 45px;
+  height: 45px;
+  margin-right: 18px;
+}
+
+/* File name styling */
+.pdf-card-new .pdf-file-name {
+  font-weight: bold;
+  color: #2c2c2c;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+/* DESIGN PARA SA DOWNLOADABLE */
+.DownloadBtn{
+  background: rgb(2, 118, 0);
+  padding: 10px 30px;
+  cursor: pointer;
+  margin-left: 12%;
+  margin-top: 15px;
+  color: white;
+}

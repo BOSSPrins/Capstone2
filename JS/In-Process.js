@@ -268,7 +268,7 @@ function toggleDropdown() {
 function setStatus(status) {
     const display = document.querySelector('.dropdown-display');
     const generatePdfBtn = document.getElementById('generatePdfBtn');
-    const generatedFileName = document.getElementById('generatedFileName');
+    // const generatedFileName = document.getElementById('generatedFileName');
 
     // Set the dropdown display text
     display.textContent = status;
@@ -280,11 +280,11 @@ function setStatus(status) {
     if (status === 'Escalated') {
         generatePdfBtn.style.display = 'block'; // Show the button
         generatePdfBtn.disabled = false;
-        generatedFileName.style.display = 'block';
+        // generatedFileName.style.display = 'block';
     } else if (status === 'Resolved'){
         generatePdfBtn.style.display = 'none'; // Hide the button
-        generatedFileName.style.display = 'none';
-    } else if (status === ''){
+        // generatedFileName.style.display = 'none';
+    } else {
         generatePdfBtn.style.display = 'none'; // Hide the button
         
     }
@@ -826,7 +826,10 @@ const fileName = `Turn-Over-Letter-${complaintData.complaintNumber}.pdf`; // Dyn
 const pdfData = doc.output('arraybuffer'); // Get the PDF as a byte array
 sendToServer(pdfData, fileName); // Send to PHP for saving
 
- // Update the input field with the generated file name
+ // Create PDF card and display it
+ createPdfCard(fileName); // Function to create the card in the UI
+
+ // Update the hidden input field with the generated file name
  document.getElementById('generatedFileName').value = fileName;
 }
 
@@ -857,4 +860,19 @@ function sendToServer(pdfData, fileName) {
 .catch(error => {
     console.error('Request failed', error); // Handle fetch error
 });
+}
+
+function createPdfCard(fileName) {
+    const pdfContainer = document.getElementById('pdfContainerNew');
+    pdfContainer.style.display = 'flex'; // Make the container visible
+
+    // Clear existing content and add the new card
+    const cardHTML = `
+        <div class="pdf-card-new">
+            <img src="Pictures/pdf.png" alt="PDF Icon">
+            <span class="pdf-file-name">${fileName}</span>
+        </div>
+    `;
+
+    pdfContainer.innerHTML = cardHTML; // Add the new PDF card to the container
 }

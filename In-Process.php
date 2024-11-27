@@ -357,9 +357,19 @@ if (isset($_SESSION['unique_id'])) {
                                         <textarea class="textAreaCompDeta" id="NewRemark"></textarea>
                                     </div>
 
-                                    <button class="BtnDownloadModal" id="generatePdfBtn" disabled> Generate Turn-over Letter </button>
+                                    <!-- Generate Button -->
+                                    <button class="DownloadBtn" id="generatePdfBtn" disabled hidden>Generate Turn-over Letter</button>
 
-                                    <input type="text" id="generatedFileName" readonly style="display: none; padding: 20px 40px 10px 10px; margin-left: 11%;"/>
+                                    <div id="pdfContainerNew" style="display: none; margin-top: 15px;">
+                                        <!-- Dynamically generated PDF card will appear here -->
+                                    </div>
+
+
+                                    <!-- Hidden Input Field for File Name -->
+                                    <input type="text" id="generatedFileName" readonly style="display: none;" />
+
+
+
 
                                     <input type="hidden" id="RemarkRole" value="<?php echo $_SESSION['role']?>">
                                     <input type="hidden" id="ComplaintID">
