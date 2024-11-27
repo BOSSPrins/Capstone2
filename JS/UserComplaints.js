@@ -1019,8 +1019,10 @@ doc.setFontSize(12); // Change font size for the letter content
 doc.setTextColor(0, 0, 0); // Black color for the body text
 
 // Constructing the letter content
+doc.setFont("Helvetica", "bold");
+doc.text(`${complaintData.complainantName1}`, 20, 70);
+doc.setFont("Helvetica", "normal");
 let letter = `
-${complaintData.complainantName1}
 ${complaintData.complainantAddress}
 Mabuhay Homes 2000 Phase V
 Brgy. Salawag, Dasmariñas, Cavite
@@ -1028,7 +1030,7 @@ Brgy. Salawag, Dasmariñas, Cavite
 `;
 
 doc.setFont("Helvetica", "bold");
-doc.text(`Date: ${complaintData.dateNow}`, 20, 100);
+doc.text(`Date: ${complaintData.dateNow}`, 20, 96);
 doc.setFont("Helvetica", "normal");
 
 letter += `
@@ -1038,7 +1040,7 @@ To:
 `;
 
 doc.setFont("Helvetica", "bold");
-doc.text(`Homeowners Association (HOA)`, 20, 118);
+doc.text(`Homeowners Association (HOA)`, 20, 114);
 doc.setFont("Helvetica", "normal");
 
 letter += `
@@ -1049,7 +1051,7 @@ Brgy. Salawag, Dasmariñas, Cavite
 `;
 
 doc.setFont("Helvetica", "bold");
-doc.text(`Dear Mabuhay Homes HOA,`, 20, 141);
+doc.text(`Dear Mabuhay Homes HOA,`, 20, 138);
 doc.setFont("Helvetica", "normal");
 
 letter += `
@@ -1090,7 +1092,7 @@ Thank you for your time and attention. I look forward to your response.
 Sincerely,`;
 
 doc.setFont("Helvetica", "bold");
-doc.text(`${complaintData.complainantName2}`, 20, 257);
+doc.text(`${complaintData.complainantName2}`, 20, 250);
 doc.setFont("Helvetica", "normal");
 
 

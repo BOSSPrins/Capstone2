@@ -526,7 +526,9 @@ function fetchComplaintDetails(complaintId) {
 }
 
 
-function submitComplaintUpdate() {
+function submitComplaintUpdate(event) {
+    event.preventDefault();
+
     const complaintId = document.getElementById('ComplaintID').value;
     const status = document.getElementById('NewStatus').value;
 
@@ -550,7 +552,7 @@ function submitComplaintUpdate() {
     .then(response => response.json())
     .then(data => {
         if (data.success) {
-            alert('Complaint updated successfully!');
+            
             // Optionally refresh or update the page content here
             sendEmailToComplainant(complainantUID, complaint_number, Description);
         } else {
@@ -563,6 +565,8 @@ function submitComplaintUpdate() {
 }
 
 function sendEmailToComplainant(complainantUID, complaint_number, Description) {
+    const loadingIndicator = document.getElementById('loading-indicator');
+    loadingIndicator.style.setProperty('display', 'flex', 'important'); // Show loading indicator
 
     fetch('Emailer/ComplaintsEmail.php', {
         method: 'POST',
@@ -572,27 +576,27 @@ function sendEmailToComplainant(complainantUID, complaint_number, Description) {
             Description
         }),
     })
-    .then(response => response.json())  // Get raw response as text
-.then(data => {
-    console.log(data);  // Log the raw response for debugging
-    try {
-        
-        console.log("Parsed response:", data);
-        if (data.success) {
-            console.log("Email sent successfully.");
-        } else {
-            console.error("Error:", data.error);
-            alert('Email failed: ' + data.message);
+    .then(response => response.json())
+    .then(data => {
+        try {
+            console.log("Parsed response:", data);
+            if (data.success) {
+                console.log("Email sent successfully.");
+                alert('Complaint updated successfully!');
+                location.reload();
+            } else {
+                console.error("Error:", data.error);
+                alert('Email failed: ' + data.message);
+            }
+        } catch (error) {
+            console.error("Failed to parse JSON:", error);
         }
-    } catch (error) {
-        console.error("Failed to parse JSON:", error);
-    }
-})
-.catch(error => console.error("AJAX error:", error));
+    })
+    .catch(error => console.error("AJAX error:", error))
+    .finally(() => {
+        loadingIndicator.style.setProperty('display', 'none', 'important'); // Hide loading indicator when email is processed
+    });
 }
-
-
-
 
 
 function updateComplaintCounts() {
@@ -625,10 +629,10 @@ function updateComplaintCounts() {
 setInterval(updateComplaintCounts, 60000); // Refresh every 60 seconds
 
 
-window.addEventListener('load', function() {
+window.onload = function () {
     fetchComplaints();
     updateComplaintCounts();
-});
+};
 
 
 // FUNCTION PARA SA PICTURE MODAL PREVIEW 

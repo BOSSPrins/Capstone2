@@ -245,8 +245,11 @@ $conn = connection();
                                 </thead>
                             </table>
 
-                            <div class="containerNgViewModalAcc" id="ViewModalReqAccounts">
+                            <div class="containerNgViewModalAcc" id="ViewModalReqAccounts">                               
                                 <div class="subContainerViewModal">
+                                    <div id="loading-indicator">
+                                        <div class="loader"></div>
+                                    </div>
                                     <div class="viewItongmodal">
                                         <header class="titleHeaderView">
                                             <h1 id="modalViewtitle"> Resident's Information </h1>

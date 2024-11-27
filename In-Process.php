@@ -309,7 +309,9 @@ if (isset($_SESSION['unique_id'])) {
                                     </div>
                                 </div>
                             </div>
-                            
+                            <div id="loading-indicator">
+                                <div class="loader"></div>
+                            </div>
 
                             <!-- Galing Pending Lagayan -->
                             <!-- <h2>First Remark:</h2>

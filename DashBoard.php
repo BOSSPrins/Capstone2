@@ -209,31 +209,33 @@ if (isset($_SESSION['unique_id'])) {
 
                                 </div>
                             </form>
-                            <div id="ChangePassword" class="page">
-                                <h2> Change Password </h2>
-                                <p class="paragChange">
-                                    Your password must be at least 6 character and should include a 
-                                    combination of numbers, letters and special characters (&#33; &#36; &#64; &#37;)
-                                </p>
+                            <form method="POST" enctype="multipart/form-data" id="profileChangePass">
+                                <div id="ChangePassword" class="page">
+                                    <h2> Change Password </h2>
+                                    <p class="paragChange">
+                                        Your password must be at least 6 character and should include a 
+                                        combination of numbers, letters and special characters (&#33; &#36; &#64; &#37;)
+                                    </p>
 
-                                <div class="changingPassword">
-                                    <div class="changingInputBox">
-                                        <input class="inputngChanging" type="password" placeholder="Current Password">
-                                    </div>
-                                    <div class="changingInputBox">
-                                        <input class="inputngChanging" type="password" placeholder="New Password">
-                                    </div>
-                                    <div class="changingInputBoxLast">
-                                        <input class="inputngChanging" type="password" placeholder="Re-type Password">
-                                    </div>
-                                    <div class="changingForgotPass">
-                                        <a class="forgotpassAs" href="#"> Forgot Password? </a>
-                                    </div>
-                                    <div class="changingButton">
-                                        <button class="buttonSapagPalit" type="submit"> Change Password </button>
+                                    <div class="changingPassword">
+                                        <div class="changingInputBox">
+                                            <input class="inputngChanging" type="password" placeholder="Current Password" id="OldPass">
+                                        </div>
+                                        <div class="changingInputBox">
+                                            <input class="inputngChanging" type="password" placeholder="New Password" id="NewPass">
+                                        </div>
+                                        <div class="changingInputBoxLast">
+                                            <input class="inputngChanging" type="password" placeholder="Re-type Password" id="confirmNewPass">
+                                        </div>
+                                        <div class="changingForgotPass">
+                                            <a class="forgotpassAs" href="#"> Forgot Password? </a>
+                                        </div>
+                                        <div class="changingButton">
+                                            <button class="buttonSapagPalit" type="submit" id="submitChangePass"> Change Password </button>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -253,8 +255,9 @@ if (isset($_SESSION['unique_id'])) {
                         <button id="myProfileBtn" type="button" class="profileBtn">
                             <label> Profile </label>
                         </button>
-                        <div class="user-img"></div>
+                        <div class="user-img" style="background-image: url('Pictures/<?php echo $_SESSION['img']; ?>');"></div>
                     </div>
+
                 </div>
                 <div class="MainContainerForTables">
                     <div class="MainContainerAll">

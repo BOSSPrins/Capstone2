@@ -239,10 +239,8 @@ function togglePage(pageId) {
 
 // Check local storage on page load to determine which container to show
 window.onload = function() {
-    // const activeContainer = localStorage.getItem('activeContainer');
-    
-        togglePage('tableCon'); // Default to tableCon
-    
+    const activeContainer = localStorage.getItem('activeContainer');
+    togglePage(activeContainer || 'tableCon'); // Default to 'tableCon'
 }
 
 // FUNCTION PARA SA TAKE ACTION BUTTON 
@@ -559,7 +557,7 @@ function submitComplaintUpdate() {
     .then(data => {
         console.log(data); 
         if (data.success) {
-            alert('Complaint updated successfully!');
+            
             // Optionally refresh or update the page content here
             sendEmailToComplainant(complainantUID, complaint_number, Description, status);
         } else {
@@ -572,8 +570,10 @@ function submitComplaintUpdate() {
 }
 
 function sendEmailToComplainant(complainantUID, complaint_number, Description, status) {
-    let emailEndpoint;
+    const loadingIndicator = document.getElementById('loading-indicator');
+    loadingIndicator.style.setProperty('display', 'flex', 'important'); // Show loading indicator
 
+    let emailEndpoint;
     if (status === 'Resolved') {
         emailEndpoint = 'Emailer/ResolvedEmail.php';
     } else if (status === 'Escalated') {
@@ -588,27 +588,27 @@ function sendEmailToComplainant(complainantUID, complaint_number, Description, s
         }),
     })
     .then(response => response.json())  // Get raw response as text
-.then(data => {
-    console.log(data);  // Log the raw response for debugging
-    try {
-        
-        console.log("Parsed response:", data);
-        if (data.success) {
-            console.log("Email sent successfully.");
-        } else {
-            console.error("Error:", data.error);
-            alert('Email failed: ' + data.message);
+    .then(data => {
+        console.log(data);  // Log the raw response for debugging
+        try {
+            
+            console.log("Parsed response:", data);
+            if (data.success) {
+                alert('Complaint updated successfully!');
+                location.reload();
+            } else {
+                console.error("Error:", data.error);
+                alert('Email failed: ' + data.message);
+            }
+        } catch (error) {
+            console.error("Failed to parse JSON:", error);
         }
-    } catch (error) {
-        console.error("Failed to parse JSON:", error);
-    }
-})
-.catch(error => console.error("AJAX error:", error));
+    })
+    .catch(error => console.error("AJAX error:", error))
+    .finally(() => {
+        loadingIndicator.style.setProperty('display', 'none', 'important'); // Hide loading indicator when email is processed
+    });
 }
-
-
-
-
 
 
 function updateComplaintCounts() {
@@ -641,11 +641,10 @@ function updateComplaintCounts() {
 setInterval(updateComplaintCounts, 60000); // Refresh every 60 seconds
 
 
-window.addEventListener('load', function() {
+window.onload = function () {
     fetchComplaints();
     updateComplaintCounts();
-});
-
+};
 
 
 

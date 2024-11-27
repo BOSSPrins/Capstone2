@@ -1301,6 +1301,7 @@ document.addEventListener("DOMContentLoaded", function() {
                             console.log("Start and end times stored successfully.");
                             updateDisplay();
                             startCountdown();
+                            // sendAllEmail();
                         } else {
                             console.error("Failed to store times: ", response.error);
                         }
@@ -1320,6 +1321,36 @@ document.addEventListener("DOMContentLoaded", function() {
         let params = `action=store_end_time&start_time=${encodeURIComponent(formattedStartTime)}&end_time=${encodeURIComponent(formattedEndTime)}&voting_status=${encodeURIComponent(votingStatus)}`;
         xhrStoreTimes.send(params);
     }
+
+
+    // function sendAllEmail() {
+    //     console.log("sendAllEmail function is called!");
+    //     var xhrSendEmail = new XMLHttpRequest();
+    //     xhrSendEmail.open("POST", "Emailer/SendAllEmails.php", true);
+    //     xhrSendEmail.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    
+    //     xhrSendEmail.onreadystatechange = function() {
+    //         if (xhrSendEmail.readyState === XMLHttpRequest.DONE) {
+    //             if (xhrSendEmail.status === 200) {
+    //                 try {
+    //                     let response = JSON.parse(xhrSendEmail.responseText);
+    //                     if (response.success) {
+    //                         console.log("Emails sent successfully to all accounts.");
+    //                     } else {
+    //                         console.error("Failed to send emails: ", response.error);
+    //                     }
+    //                 } catch (e) {
+    //                     console.error("Failed to parse JSON: ", e);
+    //                 }
+    //             } else {
+    //                 console.error("Error in response: ", xhrSendEmail.statusText);
+    //             }
+    //         }
+    //     };
+    
+    //     let params = `action=send_emails`;
+    //     xhrSendEmail.send(params);
+    // }
 
     function resetVotingStatus() {
         var xhrResetVoting = new XMLHttpRequest();

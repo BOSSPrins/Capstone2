@@ -306,13 +306,18 @@ if (isset($_SESSION['unique_id'])) {
                                     </div>
                                 </div>
                             </div>
+                            <div id="loading-indicator">
+                                <div class="loader"></div>
+                            </div>
+                            
+
              
                             <form method="POST" enctype="multipart/form-data">
                                 <div style="display: flex; margin-bottom: 15px; margin-top: 10px; align-items:center;">
                                     <input type="hidden" id="NewStatus" value="In-Process">
                                     <input type="hidden" id="ComplaintID">
                                     <label class="LabelCompDeta"> Action: </label>
-                                    <button class="TabkeActionBtn" onclick="submitComplaintUpdate()"> Take Action </button>
+                                    <button class="TabkeActionBtn" onclick="submitComplaintUpdate(event)"> Take Action </button>
                                 </div>
                             </form>
                         </div>

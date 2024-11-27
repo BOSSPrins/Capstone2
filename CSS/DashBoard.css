@@ -311,12 +311,23 @@ overflow-y: auto; /* Optional: Add scrollbar if content overflows */
   align-items: center;
 }
 
-.user-img{
+.user-img {
   width: 30px;
   height: 30px;
-  background: rgb(0, 0, 0);
-  border-radius: 20px;
+  background-color: rgb(0, 0, 0); /* Default background color */
+  border-radius: 50%; /* To make it round */
+  background-size: cover; /* To cover the entire area of the div */
+  background-position: center; /* Center the image within the container */
 }
+.user-img {
+  width: 30px;
+  height: 30px;
+  background-color: rgb(0, 0, 0); /* Default background color */
+  border-radius: 50%; /* To make it round */
+  background-size: cover; /* To cover the entire area of the div */
+  background-position: center; /* Center the image within the container */
+}
+
 
 .profileBtn{
   padding: 5px 20px;

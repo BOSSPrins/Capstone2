@@ -80,34 +80,28 @@ const complaintsSubMenu = document.getElementById('complaintsSubMenu');
 
 
     function sendConfirmationEmail(userId) {
-        // Get the user_id from the data-news-id attribute
-        // var userId = button.getAttribute('data-news-id');
-        console.log("Sending email to user with ID:", userId);
-        
-        // Log the user_id to the console for debugging purposes
-        console.log("User ID:", userId);
-        
-        // Check if userId is empty
+        const loadingIndicator = document.getElementById('loading-indicator');
+        loadingIndicator.style.setProperty('display', 'flex', 'important'); // Show loading indicator
+    
         if (!userId) {
             alert("User ID is not set.");
+            loadingIndicator.style.setProperty('display', 'none', 'important'); // Hide if error
             return;
         }
-        
-        // Example: Make an AJAX call to send the user_id to the PHP script
+    
         var xhr = new XMLHttpRequest();
-        xhr.open("POST", "Emailer/ConfirmEmail.php", true); // Ensure this path is correct
+        xhr.open("POST", "Emailer/ConfirmEmail.php", true);
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4) {
                 if (xhr.status === 200) {
-                    // Handle the response from the server
-                    console.log(xhr.responseText);
                     try {
                         var response = JSON.parse(xhr.responseText);
                         if (response.error) {
                             alert("Error: " + response.error);
                         } else {
-                            alert("Confirmation Email sent successfully.");
+                            alert("Account Confirmed Successfully!");
                             location.reload();
                         }
                     } catch (e) {
@@ -118,9 +112,15 @@ const complaintsSubMenu = document.getElementById('complaintsSubMenu');
                 }
             }
         };
-        console.log("Sending user_id:", userId);
+    
+        xhr.onloadend = function () {
+            loadingIndicator.style.setProperty('display', 'none', 'important'); // Hide loading indicator after completion
+        };
+    
         xhr.send("user_id=" + encodeURIComponent(userId));
     }
+    
+    
 
 
     // FUNCTION NG MODAL NG CONFIRM 
@@ -212,6 +212,10 @@ const complaintsSubMenu = document.getElementById('complaintsSubMenu');
 
         $('.ConfBtn').click(function (e) { 
             e.preventDefault();
+        
+            const loadingIndicator = document.getElementById('loading-indicator');
+            loadingIndicator.style.setProperty('display', 'flex', 'important'); // Show loading indicator
+        
             var confirm_userID = $('#userID').val(); 
             console.log('confirm_userID:', confirm_userID);
             
@@ -226,31 +230,36 @@ const complaintsSubMenu = document.getElementById('complaintsSubMenu');
                     try {
                         var jsonData = JSON.parse(response);
                         if (jsonData.success) {
-                            console.log('User confirmed successfully po');
                             console.log('User confirmed successfully');
-                                sendConfirmationEmail(confirm_userID);
-                                $("tr:has(td.user_id:contains('" + confirm_userID + "'))").remove(); 
-                                closeModal();
-                    
+                            sendConfirmationEmail(confirm_userID);
+                            $("tr:has(td.user_id:contains('" + confirm_userID + "'))").remove(); 
+                            closeModal();
                         } else {
                             console.error('Failed to remove record:', jsonData.error);
                         }
                     } catch (error) {
-                        console.error('Error parsing remove response:', error);
+                        console.error('Error parsing response:', error);
                     }
-                    
                 },
                 error: function(xhr, status, error) {
-                    console.error('Delete AJAX error:', error);
-                }
+                    console.error('AJAX error:', error);
+                },
+                // complete: function () {
+                //     loadingIndicator.style.setProperty('display', 'none', 'important'); // Always hide loading indicator
+                // }
             });
-        });  
+        });
+        
+          
 
 
 
-        // email ng reejct
+        // email ng reject
         $(document).on("click", ".DecBtn", function (e) {
             e.preventDefault();
+        
+            const loadingIndicator = document.getElementById('loading-indicator');
+            loadingIndicator.style.setProperty('display', 'flex', 'important'); // Show loading indicator
         
             var reject_userID = $('#userID').val();
             console.log('reject_userID:', reject_userID);
@@ -282,20 +291,28 @@ const complaintsSubMenu = document.getElementById('complaintsSubMenu');
                         },
                         error: function (xhr, status, error) {
                             console.error('Delete AJAX error:', error);
+                        },
+                        complete: function () {
+                            loadingIndicator.style.setProperty('display', 'none', 'important'); // Always hide after process
                         }
                     });
                 } else {
                     alert("Failed to send rejection email. User deletion aborted.");
+                    loadingIndicator.style.setProperty('display', 'none', 'important'); // Hide if email fails
                 }
             });
         });
         
         // Adjusted sendRejectingEmail function
         function sendRejectingEmail(userId, callback) {
+            const loadingIndicator = document.getElementById('loading-indicator');
+            loadingIndicator.style.setProperty('display', 'flex', 'important'); // Show loading indicator
+        
             console.log("Sending email to user with ID:", userId);
         
             if (!userId) {
                 alert("User ID is not set.");
+                loadingIndicator.style.setProperty('display', 'none', 'important'); // Hide if error
                 callback(false);
                 return;
             }
@@ -303,6 +320,7 @@ const complaintsSubMenu = document.getElementById('complaintsSubMenu');
             var xhr = new XMLHttpRequest();
             xhr.open("POST", "Emailer/RejectEmail.php", true);
             xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        
             xhr.onreadystatechange = function () {
                 if (xhr.readyState === 4) {
                     if (xhr.status === 200) {
@@ -312,7 +330,8 @@ const complaintsSubMenu = document.getElementById('complaintsSubMenu');
                                 alert("Error: " + response.error);
                                 callback(false);
                             } else {
-                                alert("Rejection Email sent successfully.");
+                                alert("Account Rejected Successfully.");
+                                location.reload();
                                 callback(true);
                             }
                         } catch (e) {
@@ -325,7 +344,11 @@ const complaintsSubMenu = document.getElementById('complaintsSubMenu');
                     }
                 }
             };
+        
+            xhr.onloadend = function () {
+                loadingIndicator.style.setProperty('display', 'none', 'important'); // Hide loading indicator after completion
+            };
+        
             xhr.send("user_id=" + encodeURIComponent(userId));
         }
-        
-    });
+    });        

@@ -465,7 +465,7 @@ function BRNGYsubmitComplaintUpdate() {
     .then(response => response.json())
     .then(data => {
         if (data.success) {
-            alert('Complaint updated successfully!');
+            
 
             sendEmailToComplainant(complainantUID, complaint_number, Description);
             
@@ -479,6 +479,8 @@ function BRNGYsubmitComplaintUpdate() {
 }
 
 function sendEmailToComplainant(complainantUID, complaint_number, Description) {
+    const loadingIndicator = document.getElementById('loading-indicator');
+    loadingIndicator.style.setProperty('display', 'flex', 'important'); // Show loading indicator
 
     fetch('Emailer/BrngyEmail.php', {
         method: 'POST',
@@ -489,22 +491,26 @@ function sendEmailToComplainant(complainantUID, complaint_number, Description) {
         }),
     })
     .then(response => response.json())  // Get raw response as text
-.then(data => {
-    console.log(data);  // Log the raw response for debugging
-    try {
-        
-        console.log("Parsed response:", data);
-        if (data.success) {
-            console.log("Email sent successfully.");
-        } else {
-            console.error("Error:", data.error);
-            alert('Email failed: ' + data.message);
+    .then(data => {
+        console.log(data);  // Log the raw response for debugging
+        try {
+            
+            console.log("Parsed response:", data);
+            if (data.success) {
+                alert('Complaint updated successfully!');
+
+            } else {
+                console.error("Error:", data.error);
+                alert('Email failed: ' + data.message);
+            }
+        } catch (error) {
+            console.error("Failed to parse JSON:", error);
         }
-    } catch (error) {
-        console.error("Failed to parse JSON:", error);
-    }
-})
-.catch(error => console.error("AJAX error:", error));
+    })
+    .catch(error => console.error("AJAX error:", error))
+    .finally(() => {
+        loadingIndicator.style.setProperty('display', 'none', 'important'); // Hide loading indicator when email is processed
+    });
 }
 
 
@@ -685,8 +691,8 @@ Thank you for your cooperation and understanding.
 Sincerely,
     `;
 doc.setFont("helvetica", "bold");
-doc.text("Sec. Dennis Q. De La Peña", 15, 220);
-doc.text("Barangay Salawag", 15, 225);
+doc.text("Dennis Q. De La Peña", 15, 220);
+doc.text("Secretary of Barangay Salawag", 15, 225);
 doc.setFont("helvetica", "normal");
 
 // Split content into lines

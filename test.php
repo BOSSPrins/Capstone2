@@ -85,6 +85,29 @@
         background-color: #0056b3;
     }
 
+    .loader {
+  border: 8px solid #f3f3f3; /* Lighter gray border */
+  border-radius: 50%;
+  border-top: 8px solid blue; /* Top color */
+  border-bottom: 8px solid blue; /* Bottom color */
+  width: 60px; /* Smaller width */
+  height: 60px; /* Smaller height */
+  -webkit-animation: spin 1.5s linear infinite; /* Slightly faster spin */
+  animation: spin 1.5s linear infinite;
+}
+
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+      
+      
     </style>
 </head>
 <body>
@@ -118,6 +141,12 @@
     <button onclick="generatePDF()">Generate Letter</button>
 
     <input type="checkbox" name="" id="">
+
+    <div id="loading-indicator" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 9999;">
+  <div class="loader"></div>
+</div>
+
+
 
 <script>
     

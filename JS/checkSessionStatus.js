@@ -18,4 +18,4 @@ setInterval(function() {
           console.error('Error during session status check:', error);
           // Handle the error, possibly redirect to an error page or login
       });
-}, 5000); // Check every 5 seconds
+}, 2000); // Check every 5 seconds

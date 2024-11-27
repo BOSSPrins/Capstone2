@@ -105,6 +105,7 @@ document.getElementById('myProfileBtn').addEventListener('click', function() {
 });
 
 
+// Sa profile ng update
 document.addEventListener('DOMContentLoaded', () => {
     const editButton = document.getElementById('editButton');
     const updateButton = document.getElementById('updateButton');
@@ -113,16 +114,21 @@ document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('editProfileForm');
 
     editButton.addEventListener('click', () => {
-        inputs.forEach(input => input.removeAttribute('readonly'));
+        inputs.forEach(input => {
+            // Keep blk, lot, and street fields readonly
+            if (input.id !== 'blk' && input.id !== 'lot' && input.id !== 'street') {
+                input.removeAttribute('readonly');
+            }
+        });
         editButton.style.display = 'none';
         updateButton.style.display = 'inline-block';
         cancelButton.style.display = 'inline-block';
-
+    
         document.getElementById('pwdYes').disabled = false;
         document.getElementById('pwdNo').disabled = false;
     });
 
-    updateButton.addEventListener('click', () => {
+    document.getElementById('updateButton').addEventListener('click', function(event) {
         const uniqueId = document.getElementById('fetchUID').value;
 
         const formData = new FormData(form);
@@ -152,7 +158,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    cancelButton.addEventListener('click', () => {
+    document.getElementById('cancelButton').addEventListener('click', function(event) {
+        event.preventDefault();
         inputs.forEach(input => input.setAttribute('readonly', 'true'));
         toggleButtons();
         resetCheckboxState();
@@ -176,6 +183,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
+//Sa palit ng email
 document.getElementById('submitEmail').addEventListener('click', function(event) {
     event.preventDefault(); // Prevent the default form submission
 
@@ -223,4 +231,61 @@ document.getElementById('submitEmail').addEventListener('click', function(event)
 });
 
 
+// Change pass na
+document.getElementById("profileChangePass").addEventListener("submit", function (event) {
+    event.preventDefault(); // Prevent default form submission
+
+    const form = document.getElementById("profileChangePass");
+    const oldPass = document.getElementById("OldPass").value;
+    const newPass = document.getElementById("NewPass").value;
+    const confirmNewPass = document.getElementById("confirmNewPass").value;
+
+    // Check if old password is provided
+    if (!oldPass) {
+        alert("Please enter your current password.");
+        return;
+    }
+
+    // Validate new password criteria
+    const passwordRegex = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*])[a-zA-Z\d!@#$%^&*]{6,}$/;
+    if (!passwordRegex.test(newPass)) {
+        alert(
+            "Your password must be at least 6 characters long and include a combination of numbers, letters, and special characters."
+        );
+        return;
+    }
+
+    // Check if the new passwords match
+    if (newPass !== confirmNewPass) {
+        alert("New password and confirmation do not match.");
+        return;
+    }
+
+    // Create FormData object to send data
+    const formData = new FormData(form);
+    formData.append("action", "changePassword");
+    formData.append("oldPass", oldPass);
+    formData.append("newPass", newPass);
+
+    // Send AJAX request to PHP
+    fetch("PHPBackend/ProfileAccount.php", {
+        method: "POST",
+        body: formData,
+    })
+        .then((response) => response.json())
+        .then((data) => {
+            console.log('Response Data:', data);
+            if (data.success) {
+                alert("Password updated successfully!");
+                // Optionally reset the form
+                // document.getElementById("profileChangePass").reset();
+            } else {
+                alert("Failed to update password: " + data.message);
+            }
+        })
+        .catch((error) => {
+            console.error("Error:", error);
+            alert("There was an error processing your request.");
+        });
+});
 

@@ -242,6 +242,9 @@ if (isset($_SESSION['unique_id'])) {
                                     <!-- This will hold the links -->
                                 </div>
                             </div>
+                            <div id="loading-indicator">
+                                <div class="loader"></div>
+                            </div>
              
 
                             <!-- Galing Pending Lagayan -->
