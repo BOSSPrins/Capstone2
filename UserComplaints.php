@@ -418,6 +418,7 @@ $encoded_id = urlencode($admin_unique_id);
                                 <div>
                                     <label>Address:</label>
                                     <input class="inputUserComps2" type="text" id="ComplaineeAddress">
+                                    <input class="inputUserComps2" type="text" id="ComplaineeEmail">
                                     <input class="inputUserComps2" type="hidden" id="ComplainantUID" value="<?php echo $_SESSION['unique_id']?>">
                                     <input class="inputUserComps2" type="hidden" id="ComplainantName"   value="<?php echo $_SESSION['first_name'] . ' ' . (!empty($_SESSION['middle_name']) ? $_SESSION['middle_name'] . ' ' : '') . $_SESSION['last_name']; ?>">
                                     <input class="inputUserComps2" type="hidden" id="ComplainantAddress"   value="<?php echo 'Blk' . ' ' . $_SESSION['block'] . ' ' . 'Lot' . ' ' . $_SESSION['lot']; ?>">

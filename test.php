@@ -147,6 +147,12 @@
 </div>
 
 
+<form method="POST" action="PHPBackend/Verify_OTP.php">
+    <input type="text" name="email" id="email" value="vardump007@gmail.com">
+    <input type="hidden" name="action" value="send_otp">
+    <button type="submit">Send OTP</button>
+</form>
+
 
 <script>
     

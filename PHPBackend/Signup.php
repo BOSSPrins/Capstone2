@@ -81,6 +81,9 @@ if(!empty($access) && !empty($fname) && !empty($lname) && !empty($gender) && !em
                 if(mysqli_num_rows($select_sql2) > 0) {
                     $result = mysqli_fetch_assoc($select_sql2);
                     $_SESSION['unique_id'] = $result['unique_id'];
+                    if (isset($_SESSION['otp_status'])) {
+                        unset($_SESSION['otp_status']);
+                    }
                     echo "success";
                 } else {
                     error_log("This email address does not exist!");

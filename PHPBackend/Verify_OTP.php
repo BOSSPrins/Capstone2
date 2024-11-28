@@ -4,32 +4,36 @@ require '../Emailer/OtpEmail.php'; // Email sending function
 
 session_start();
 $conn = connection();
+error_log(print_r($_POST, true));
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
-    $action = $_POST['action'];
+$input = file_get_contents('php://input');
+error_log("Raw Input: " . $input);  // Log raw input to check if it's coming through correctly
+$input = json_decode($input, true);  // Decode JSON data
+error_log("Decoded Input: " . print_r($input, true));  // Log decoded input to see the structure
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($input['action'])) {
+    $action = $input['action'];  // Use $input['action'] for the action from JSON
+    error_log("Action: " . $action);
 
     if ($action === 'send_otp') {
-        $email = $_POST['email'];
+        $email = $input['email'];  // Retrieve email from JSON
 
         // Validate email
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {  // Fix the validation check
             echo json_encode(['success' => false, 'message' => 'Invalid email address.']);
             exit;
         }
 
-        // Store the email in the session
-        $_SESSION['email'] = $email;
-
         // Generate OTP
         $otp = rand(100000, 999999);
-        $expiry = date("Y-m-d H:i:s", strtotime('+10 minutes'));
+        $expiry = date("Y-m-d H:i:s", strtotime('+60 seconds'));
 
         // Store OTP in the database
         $query = "INSERT INTO otp_verifications (email, otp, expiry) VALUES ('$email', '$otp', '$expiry')
                   ON DUPLICATE KEY UPDATE otp = '$otp', expiry = '$expiry'";
         if (mysqli_query($conn, $query)) {
             if (sendOTPEmail($email, $otp)) {
-                echo json_encode(['success' => true, 'message' => 'OTP sent to your email.']);
+                echo json_encode(['success' => true, 'message' => 'OTP sent successfully to ' . $email]);
             } else {
                 echo json_encode(['success' => false, 'message' => 'Failed to send OTP email.']);
             }
@@ -37,8 +41,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
             echo json_encode(['success' => false, 'message' => 'Failed to generate OTP.']);
         }
     } elseif ($action === 'verify_otp') {
-        $email = $_SESSION['email'];
-        $otp = $_POST['otp'];
+        $email = $input['email'];  // Use $input for email in verify_otp
+        $otp = $input['otp'];  // Use $input for OTP in verify_otp
 
         // Fetch OTP from the database
         $query = "SELECT * FROM otp_verifications WHERE email = '$email' AND otp = '$otp' AND expiry > NOW()";
@@ -55,27 +59,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
             }
         } else {
             echo json_encode(['success' => false, 'message' => 'Invalid or expired OTP.']);
-        }
-    } elseif ($action === 'reset_password') {
-        $email = $_SESSION['email'];
-        $new_password = $_POST['new_password'];
-        $confirm_password = $_POST['confirm_password'];
-    
-        // Check if passwords match
-        if ($new_password !== $confirm_password) {
-            echo json_encode(['success' => false, 'message' => 'Passwords do not match.']);
-            exit;
-        }
-    
-        // Hash the new password
-        $hashed_password = md5($new_password);
-    
-        // Update password in the database
-        $update_query = "UPDATE tblaccounts SET password = '$hashed_password' WHERE email = '$email'";
-        if (mysqli_query($conn, $update_query)) {
-            echo json_encode(['success' => true, 'message' => 'Password reset successfully.']);
-        } else {
-            echo json_encode(['success' => false, 'message' => 'Failed to reset password.']);
         }
         
     } else {

@@ -340,11 +340,11 @@ overflow-y: auto; /* Optional: Add scrollbar if content overflows */
 }
 
 /* ===== PROFILE MODAL DESIGN ===== */
-.modal{
+.ParentModalProf {
   display: none;
 }
 
-.subModal{
+.modal {
   position: fixed;
   display: flex;
   align-items: center;
@@ -357,54 +357,71 @@ overflow-y: auto; /* Optional: Add scrollbar if content overflows */
   background-color: rgba(0, 0, 0, 0.4);
 }
 
-.modal-content {
+.subModal {
   display: flex;
-  background: var(--color-background);
+  justify-content: center;
+  height: auto;
+  width: 100%;
   width: 800px;
   height: 500px; /* Set the desired height */
-  overflow: hidden; /* Hide overflow */
+  background: white;
+  overflow: hidden; /* Ensure that content doesn't overflow */
+  display: flex;
+  flex-direction: column; /* To allow profileSidebar and other content to be arranged vertically */
   border-radius: 10px;
 }
 
-.profileSidebar{
+.PangEkis {
+  display: flex;
+  justify-content: end;
+  padding: 0px 10px;
+  background: rgb(0, 26, 141);
+}
+
+.EkisToo {
+  cursor: pointer;
+  font-size: 22px;
+  color: white;
+}
+
+.modal-content {
+  display: flex;
+  height: 100%;
+  overflow: hidden; /* Ensure content inside the modal doesn't overflow */
+  width: 100%;
+}
+
+.profileSidebar {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  background: white;
+  justify-content: center; /* Align items to the top */
+  background: rgb(0, 26, 141);
   width: 150px;
-  height: 100%;
-  border-radius: 10px;
+  height: 100%; /* Takes up the full height of .subModal */
 }
 
-.profileSidebar a{
+.profileSidebar a {
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
   height: 4rem;
   margin-bottom: 5px;
-  /* background: rgb(192, 184, 184); */
-  color: var(--color-info-dark);
+  color: white;
+}
+
+.profilePages {
+  padding: 10px;
+  flex-grow: 1; /* Allow it to expand with content */
+  overflow-y: auto; /* Enable vertical scrolling if content exceeds the modal height */
+  height: 100%; /* Take up remaining space inside the modal */
+  background: rgb(255, 255, 255);
+  scrollbar-width: thin;
 }
 
 .profileSidebar a:hover{
-  color: var(--color-primary);
-}
-
-.profilePages{
-  width: 100%;
-  margin-left: 10px;
-}
-
-.closeProf{
-  display: flex;
-  justify-content: end;
-  margin-right: 5px;
-  color: #000000;
-  font-size: 28px;
-  font-weight: bold;
-  cursor: pointer;
+  color: rgb(197, 197, 197);
 }
 
 /* Hide all pages initially */
@@ -537,8 +554,152 @@ overflow-y: auto; /* Optional: Add scrollbar if content overflows */
 
 /* DESIGN NG PROFILE  */
 .Profilebyu {
-  display: flex;
-  column-gap: 15px;
+  display: flex; /* Arrange items horizontally */
+  gap: 15px; /* Space between the rows */
+  flex-wrap: wrap; /* Allow items to wrap to the next line if the container is too narrow */
   margin-top: 10px;
   margin-bottom: 13px;
 }
+
+.Input-Roww {
+  display: flex; /* Display label and input beside each other */
+  flex-direction: column; /* Stack label above input */
+  width: 48%; /* Ensure the input fields are side by side, adjust as necessary */
+}
+
+.Input-Roww label {
+  font-weight: 550;
+  display: block; /* Make label block-level to appear on top */
+  margin-bottom: 5px; /* Space between label and input */
+}
+
+.Input-Roww input {
+  position: relative;
+  height: 35px;
+  width: 100%;
+  outline: none;
+  font-size: 1rem;
+  color: #000000;
+  margin-top: 5px;
+  border: 1px solid rgba(62, 65, 71, 0.4);
+  border-radius: 5px;
+  background: transparent;
+  padding: 0 15px; /* Adjust padding for icons */
+  box-sizing: border-box; /* Include padding in width calculation */
+}
+
+.Input-Roww input:focus {
+  border-color: var(--color-primary);
+}
+
+.Profilebyu2 {
+  display: flex; /* Arrange child items (input rows) beside each other */
+  gap: 15px; /* Space between the columns */
+  margin-top: 10px;
+  margin-bottom: 13px;
+}
+
+.Input-Roww2 {
+  display: flex; /* Display label and input beside each other */
+  flex-direction: column; /* Stack label on top of input */
+  flex: 1; /* Allow the inputs to grow and take equal space */
+}
+
+.Input-Roww2 label {
+  font-weight: 550;
+  display: block; /* Make label block-level to appear on top */
+  margin-bottom: 5px; /* Space between label and input */
+}
+
+.Input-Roww2 input {
+  position: relative;
+  height: 35px;
+  width: 100%;
+  outline: none;
+  font-size: 1rem;
+  color: #000000;
+  margin-top: 5px;
+  border: 1px solid rgba(62, 65, 71, 0.4);
+  border-radius: 5px;
+  background: transparent;
+  padding: 0 15px; /* Adjust padding for icons */
+  box-sizing: border-box; /* Include padding in width calculation */
+}
+
+.In {
+  position: relative;
+  height: 35px;
+  width: 100%;
+  outline: none;
+  font-size: 1rem;
+  color: #000000;
+  margin-top: 5px;
+  border: 1px solid rgba(62, 65, 71, 0.4);
+  border-radius: 5px;
+  background: transparent;
+  padding: 0 15px; /* Adjust padding for icons */
+}
+
+.In:focus {
+  border-color: var(--color-primary);
+}
+
+.H2 {
+  text-align: center;
+}
+
+/* DESIGN PARA SA PAG UPDATE NG PICTURE */
+.UserProfilee {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.UserImgCon {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  overflow: hidden; /* Ensure the image is cropped into a circle */
+  border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+  margin-left: 35px;
+}
+
+.Imggg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensures the image covers the whole container */
+}
+
+.CameraFileUp {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid #000;
+  background-color: #e1e1e1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  margin-top: 10px; /* Space between the image and the button */
+  top: 40px;
+  right: 40px;
+}
+
+.CameraFileUp::before {
+  font-size: 20px;
+}
+
+#UploadPicUser {
+  display: none;
+}
+
+.camera {
+  width: 20px;
+}
+

@@ -37,6 +37,20 @@ function closeConnectionAndRespond($conn, $response) {
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $action = isset($_POST['action']) ? $_POST['action'] : null;
 
+    if (isset($_SERVER['CONTENT_TYPE']) && strpos($_SERVER['CONTENT_TYPE'], 'application/json') !== false) {
+        // If the request is JSON, decode the input
+        $input = json_decode(file_get_contents('php://input'), true);
+    } else {
+        // Otherwise, use regular POST data
+        $input = $_POST;
+    }
+
+    $action = $input['action'] ?? null;
+    if (!$action) {
+        echo json_encode(['error' => 'Action not provided']);
+        exit;
+    }
+
     if ($action === 'submit_complaint') {
 
         // Get the input values from the POST request
@@ -767,9 +781,66 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             echo json_encode(['success' => false, 'message' => 'No PDF file uploaded.']);
         }
 
-    } else {
-        echo json_encode(['success' => false, 'message' => 'Invalid action.']);
+    } elseif ($action === 'fetchBLOCKnLOT') {
+        // Get block and lot from the request
+        $block = $input['block'] ?? null;
+        $lot = $input['lot'] ?? null;
+
+        // Ensure block and lot are provided
+        if ($block && $lot) {
+            // Prepare the SQL query to fetch the unique_id
+            $stmt = $conn->prepare("SELECT unique_id FROM tblresident WHERE block = ? AND lot = ?");
+            $stmt->bind_param("ss", $block, $lot);
+            $stmt->execute();
+            $result = $stmt->get_result();
+
+            // Check if a result is found
+            if ($result->num_rows > 0) {
+                $row = $result->fetch_assoc();
+                // Return the success response with the unique_id
+                echo json_encode(['success' => true, 'unique_id' => $row['unique_id']]);
+            } else {
+                // If no resident found, return an error response
+                echo json_encode(['success' => false, 'error' => 'No resident found']);
+            }
+
+            // Close the prepared statement
+            $stmt->close();
+        } else {
+            // If block or lot are missing, return an error response
+            echo json_encode(['success' => false, 'error' => 'Invalid block or lot']);
+        }
     }
+     elseif ($action === 'fetch_email') {
+    // Fetch email based on unique_id
+        $data = json_decode(file_get_contents('php://input'), true);
+
+        if (isset($data['unique_id'])) {
+            $unique_id = $data['unique_id'];
+
+            // Query to get the email from tblaccounts
+            $sql = "SELECT email FROM tblaccounts WHERE unique_id = ?";
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param("s", $unique_id);
+            $stmt->execute();
+            $stmt->bind_result($email);
+            $stmt->fetch();
+            
+            if ($email) {
+                echo json_encode(['email' => $email]);
+            } else {
+                echo json_encode(['email' => null]);
+            }
+
+            $stmt->close();
+        } else {
+            echo json_encode(['error' => 'Invalid unique_id']);
+        }
+    } else {
+        error_log("Unrecognized action: " . $action . "\n", 3, "error_log.txt");
+        echo json_encode(['error' => 'Invalid actioners' . $action]);
+    }
+
 
 } else {
     // Handle invalid request method
@@ -777,95 +848,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     closeConnectionAndRespond($conn, $response);
 };
 ?>
-
-
-<!-- if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $action = isset($_POST['action']) ? $_POST['action'] : null;
-
-    if ($action === 'submit_complaint') {
-        // Get the input values from the POST request
-        $complainee = isset($_POST['complainee']) ? trim($_POST['complainee']) : null;
-        $ComplaineeAddress = isset($_POST['ComplaineeAddress']) ? trim($_POST['ComplaineeAddress']) : null;
-
-        $ComplainantUID = isset($_POST['ComplainantUID']) ? trim($_POST['ComplainantUID']) : null;
-        $ComplainantName = isset($_POST['ComplainantName']) ? trim($_POST['ComplainantName']) : null;
-        $ComplainantAddress = isset($_POST['ComplainantAddress']) ? trim($_POST['ComplainantAddress']) : null;
-        $ComplaintStatus = "Pending";
-
-        $complaint = isset($_POST['complaint']) ? trim($_POST['complaint']) : null;
-        $description = isset($_POST['description']) ? trim($_POST['description']) : null;
-
-        // Check if a file was uploaded
-        if (isset($_FILES['proofFileName']) && $_FILES['proofFileName']['error'] === UPLOAD_ERR_OK) {
-            $proof = $_FILES['proofFileName']['name']; // Get the file name
-            $proofTempPath = $_FILES['proofFileName']['tmp_name'];
-
-            // Optional: Move the uploaded file to a designated directory
-            $targetDirectory = "../Pictures/";
-            $targetFilePath = $targetDirectory . basename($proof);
-            if (!move_uploaded_file($proofTempPath, $targetFilePath)) {
-                $response = ['success' => false, 'error' => 'Failed to save uploaded file.'];
-                closeConnectionAndRespond($conn, $response);
-                exit;
-            }
-        } else {
-            $proof = null;
-        }
-
-        // Validate that required fields are provided
-        if ($ComplaineeAddress && $ComplainantUID && $ComplainantAddress && $ComplaintStatus && $complaint && $description && $proof) {
-            // SQL query to insert the complaint data into the database along with the filed timestamp
-            $sql = "INSERT INTO complaints (complainee, complaint, description, proof, filed_date, complaineeAddress, complainantUID, complainantName, complainantAddress, status) VALUES (?, ?, ?, ?, NOW(), ?, ?, ?, ?, ?)";
-
-            if ($stmt = $conn->prepare($sql)) {
-                // Bind the parameters to the SQL query
-                $stmt->bind_param("sssssssss", $complainee, $complaint, $description, $proof, $ComplaineeAddress, $ComplainantUID, $ComplainantName, $ComplainantAddress, $ComplaintStatus);
-                
-                // Execute the query and check if successful
-                if ($stmt->execute()) {
-                    $response = ['success' => true, 'message' => 'Complaint submitted successfully.'];
-                    error_log('Complaint submitted successfully.');
-                } else {
-                    // Log and respond with a database error
-                    error_log("SQL Error: " . $stmt->error);
-                    $response = ['success' => false, 'error' => 'Database error occurred.'];
-                }
-                $stmt->close();
-            } else {
-                // Log and respond with a SQL preparation error
-                error_log("SQL Error: " . $conn->error);
-                $response = ['success' => false, 'error' => 'Database error occurred.'];
-            }
-        } else {
-            // Respond with an error if any required field is missing
-            $response = ['success' => false, 'error' => 'Missing complainee, complaint, description, or proof.'];
-        }
-
-        // Close connection and send JSON response
-        closeConnectionAndRespond($conn, $response);
-
-        // Server-side ng Pending
-    } elseif ($action === 'get_complaints') {
-        // Fetch complaints from the database
-        $sql = "SELECT complaint_id, complainee, complaint, description, proof, filed_date, complaineeAddress, complainantUID, complainantName, complainantAddress, status 
-        FROM complaints 
-        WHERE status = 'Pending' 
-        ORDER BY filed_date DESC";
-        $result = $conn->query($sql);
-    
-        if ($result && $result->num_rows > 0) {
-            $complaints = [];
-            while ($row = $result->fetch_assoc()) {
-                $complaints[] = $row;
-            }
-            echo json_encode(['success' => true, 'data' => $complaints]);
-        } else {
-            echo json_encode(['success' => false, 'error' => 'No complaints found']); 
-        }
-    
-        $conn->close();
-        exit;
-    
-    } 
-
-} -->

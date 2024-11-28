@@ -409,51 +409,44 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
+// Function to check voting history
 function checkVotingHistory() {
-    // Retrieve the unique ID from the hidden input field
     var sessionUniqueId = document.getElementById('sessionUniqueId').value;
 
     $.ajax({
         type: 'POST',
-        url: 'PHPBackend/DeclareWinner.php', // Update this with the correct path
-        data: { action: 'check_voting_history', unique_id: sessionUniqueId }, // Ensure sessionUniqueId is defined
+        url: 'PHPBackend/DeclareWinner.php',
+        data: { action: 'check_voting_history', unique_id: sessionUniqueId },
         dataType: 'json',
         success: function(response) {
             console.log('Parsed response:', response);
             if (response.success) {
-                // Handle successful response
+                var voteContainer = document.getElementById('FirstVotingContainer');
+                var overlay = document.getElementById('Overlay');
+
                 if (response.voted) {
                     console.log('User has already voted.');
+                    // Hide voting container and show overlay
+                    voteContainer.style.display = 'none';
+                    overlay.style.display = 'flex';
 
-                    // Get the voting container
-                    var voteContainer = document.getElementById('FirstVotingContainer');
 
-                    // Create the overlay div and apply the VoteSubmittedOverlay class
-                    var overlay = document.createElement('div');
-                    overlay.classList.add('VoteSubmittedOverlay'); // Add the class from CSS
+                    if (overlay.style.display !== 'flex' || !overlay.querySelector('.winner-list')) {
+                        voteContainer.style.display = 'none';
+                        overlay.style.display = 'flex';
 
-                    // Create the SubVote container and apply the SubVote class
-                    var subVoteContainer = document.createElement('div');
-                    subVoteContainer.classList.add('SubVote'); // Add the class from CSS
-
-                    // Add content inside the SubVote container
-                    subVoteContainer.innerHTML = `
-                        <div style="text-align: center; margin-top: 8%;">
-                            <img src="Pictures/vote.png" alt="Logo" style="width: 200px;">
-                            <p style="color: black; font-size: 25px; margin-left: 15%;">Vote Submitted</p>
-                        </div>
-                    `;
-
-                    // Append the SubVote container to the overlay
-                    overlay.appendChild(subVoteContainer);
-
-                    // Append the overlay to the voting container
-                    voteContainer.appendChild(overlay);
-
-                    // Optionally, make the overlay visible (if needed)
-                    overlay.style.display = 'block';
+                        var overlayContent = overlay.querySelector('.TanginangOverlay');
+                        overlayContent.innerHTML = `
+                            <div style="text-align: center; margin-top: 8%;">
+                                <img src="Pictures/vote.png" alt="Vote Submitted" style="width: 200px;">
+                                <p style="color: black; font-size: 25px;">Vote Submitted</p>
+                            </div>`;
+    }
                 } else {
                     console.log('User has not voted yet.');
+                    // Show voting container and hide overlay
+                    voteContainer.style.display = 'block';
+                    overlay.style.display = 'none';
                 }
             } else {
                 console.error('Error:', response.error);
@@ -463,11 +456,9 @@ function checkVotingHistory() {
             console.error('AJAX error:', status, error);
         }
     });
-};
+}
 
-
-
-// Function kung tapos na yung botohan e buong voting may overlay na
+// Function to fetch overlay message if voting has ended
 function fetchOverlayMessage() {
     $.ajax({
         type: 'POST',
@@ -478,13 +469,26 @@ function fetchOverlayMessage() {
             console.log("fetchOverlayMessage response:", response);
 
             if (response.success && response.status === 'VotingEnded') {
-                document.getElementById('FirstVotingContainer').style.display = 'none';
-                document.getElementById('Overlay').style.display = 'flex';  // Show overlay with flex
+                console.log("Eto yung status:", response.success);
 
-                // Get the overlay content div to append winners
-                var overlayContent = document.querySelector('#Overlay .TanginangOverlay');
-                
-                // Add winners section
+                // Hide voting container and show overlay
+                var voteContainer = document.getElementById('FirstVotingContainer');
+                var overlay = document.getElementById('Overlay');
+                 if (voteContainer.style.display !== 'none') {
+                    voteContainer.style.display = 'none';
+                }
+                if (overlay.style.display !== 'flex') {
+                    overlay.style.display = 'flex';
+                }
+
+                if (response.winners.length === 0) {
+                    console.log("No winners yet, retrying...");
+                    setTimeout(fetchOverlayMessage, 1000); // Retry after 1 second
+                    return; // Stop further execution for this attempt
+                }
+
+                // Populate the overlay with winners
+                var overlayContent = overlay.querySelector('.TanginangOverlay');
                 let winnersHtml = `
                     <div class="CongratsHeader">
                         <p> LIST OF NEW BOARD OF DIRECTORS: </p>
@@ -501,11 +505,12 @@ function fetchOverlayMessage() {
                 });
 
                 winnersHtml += `</div>`; // Close the winner list div
-
-                // Append winners' HTML to the overlay content
                 overlayContent.innerHTML = winnersHtml;
 
+                return;
+
             } else {
+                // If voting has not ended, check user's voting history
                 checkVotingHistory();
             }
         },
@@ -515,6 +520,7 @@ function fetchOverlayMessage() {
         }
     });
 }
+
 
 
 function formatDate(now) {
@@ -543,4 +549,5 @@ setInterval(updateTimestamp, 1000);
 window.onload = function () {
     updateTimestamp();
     fetchOverlayMessage();
+    // checkVotingHistory();
 };

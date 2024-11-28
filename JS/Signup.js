@@ -1,34 +1,140 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const errorText = document.querySelector(".irorSignup");
-  const form = document.querySelector(".saynap");
-  const SaynapBtn = form.querySelector(".SaynapBtn");
+    const errorText = document.querySelector(".irorSignup");
+    const form = document.querySelector(".saynap");
+    const SaynapBtn = form.querySelector(".SaynapBtn");
+    const otpSection = document.getElementById('otpSection');
+    const sendOTPBtn = document.getElementById('sendOTPBtn');
+    const verifyOTPBtn = document.getElementById('verifyOTPBtn');
+    const submitBtn = document.getElementById('submitBtn');
+    const OTPinput = document.getElementById('OTPinput');
 
-  if (SaynapBtn) {
-      console.log("Signup button found");
+    // Ensure submitBtn exists before attempting to disable it
+    if (!submitBtn) {
+        console.error("submitBtn not found in the DOM.");
+        return;
+    }
 
-      SaynapBtn.addEventListener("click", (event) => {
-          console.log("Signup button clicked");
+    function checkOtpStatus() {
+        if (!OTPinput) {
+            console.warn("OTP input not found in the DOM.");
+            return; // Exit if element is not found
+        }
 
-          // Prevent default form submission
-          event.preventDefault();
+        const otpStatus = OTPinput.value || 'Unverified'; // Default to 'Unverified'
+        console.log(otpStatus);
+        submitBtn.disabled = otpStatus !== 'Verified'; // Only disable submitBtn if it exists
+        console.log("OTPinput value on load: ", OTPinput.value);  // Log the value
 
-          const password = document.getElementById("password").value;
-          const confirmPassword = document.getElementById("confirmPassword").value;
-      
-          // Password match validation
-          if (password !== confirmPassword) {
-              errorText.textContent = "Passwords do not match.";
-              errorText.style.display = "block";
-              console.log("Password mismatch error");
-      
-              setTimeout(() => {
-                  errorText.style.display = "none";
-              }, 3000);
-      
-              return;
-          }
+        if (OTPinput) {
+            OTPinput.value = 'Unverified';  // Explicitly set the value
+            console.log("OTPinput value after setting: ", OTPinput.value);  // Log updated value
+        } else {
+            console.error("OTPinput element is not found.");
+        }
+    }
 
-          const ageInput = document.getElementById("age");
+    // Initialize OTP Status Check
+    checkOtpStatus();
+
+    // Add Change Listener for OTP Status Input
+    if (OTPinput) {
+        OTPinput.addEventListener('change', checkOtpStatus);
+    }
+
+    if (sendOTPBtn) {
+    sendOTPBtn.addEventListener('click', () => {
+        console.log('Sending OTP...');
+
+        const email = document.getElementById('emailOTP').value;
+        
+        if (!email) {
+            alert('Please enter an email address.');
+            return;
+        }
+
+        // Send OTP request to PHP backend
+        fetch('PHPBackend/Verify_OTP.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ action: 'send_otp', email: email }) // Send data as JSON
+        })
+        .then(response => response.json()) // Parse the JSON response
+        .then(data => {
+            alert(data.message);
+            if (data.success) {
+                otpSection.style.display = 'block'; // Show OTP input section
+                sendOTPBtn.disabled = true; // Disable the send OTP button
+            } else {
+                alert(data.message); // Alert message if verification failed
+            }
+        })
+        .catch(error => {
+            console.error("Error:", error);
+            alert("An error occurred while sending OTP.");
+        });
+    });
+} else {
+    console.error('sendOTPBtn not found in the DOM.');
+}
+
+    // Handle Verify OTP
+    verifyOTPBtn.addEventListener('click', () => {
+        const otp = document.getElementById('EMAILotp').value;
+        const email = document.getElementById('emailOTP').value;
+
+        if (!otp) {
+            alert('Please enter the OTP.');
+            return;
+        }
+
+        // Verify OTP request to PHP backend
+        fetch('PHPBackend/Verify_OTP.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json', // Set content type to JSON
+            },
+            body: JSON.stringify({ action: 'verify_otp', otp: otp, email: email}) // Send OTP to verify
+        })
+        .then(response => response.json()) // Parse the response
+        .then(data => {
+            alert(data.message);
+            if (data.success) {
+                submitBtn.disabled = false; // Enable the submit button
+                otpSection.style.display = 'none'; // Hide OTP input section
+            }
+        })
+        .catch(error => console.error("Error:", error));
+    });
+
+
+    if (SaynapBtn) {
+        console.log("Signup button found");
+
+        SaynapBtn.addEventListener("click", (event) => {
+            console.log("Signup button clicked");
+
+            // Prevent default form submission
+            event.preventDefault();
+
+            const password = document.getElementById("password").value;
+            const confirmPassword = document.getElementById("confirmPassword").value;
+
+            // Password match validation
+            if (password !== confirmPassword) {
+                errorText.textContent = "Passwords do not match.";
+                errorText.style.display = "block";
+                console.log("Password mismatch error");
+
+                setTimeout(() => {
+                    errorText.style.display = "none";
+                }, 3000);
+
+                return;
+            }
+
+            const ageInput = document.getElementById("age");
             const age = parseInt(ageInput.value, 10);
 
             if (isNaN(age) || age < 18) {
@@ -43,57 +149,57 @@ document.addEventListener("DOMContentLoaded", () => {
                 return;
             }
 
-          let formData = new FormData(form);
+            let formData = new FormData(form);
 
-          // Debugging: Log all form data entries
-          for (const [key, value] of formData.entries()) {
-              console.log(`${key}: ${value}`);
-          }
+            // Debugging: Log all form data entries
+            for (const [key, value] of formData.entries()) {
+                console.log(`${key}: ${value}`);
+            }
 
-          let xhr = new XMLHttpRequest();
-          xhr.open("POST", "PHPBackend/Signup.php", true);
+            let xhr = new XMLHttpRequest();
+            xhr.open("POST", "PHPBackend/Signup.php", true);
 
-          xhr.onload = () => {
-              console.log("AJAX request completed");
+            xhr.onload = () => {
+                console.log("AJAX request completed");
 
-              if (xhr.readyState === XMLHttpRequest.DONE) {
-                  if (xhr.status === 200) {
-                      let data = xhr.response.trim();  // Use trim() to handle unexpected white space
-                      console.log("Response received: ", data);
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        let data = xhr.response.trim();  // Use trim() to handle unexpected white space
+                        console.log("Response received: ", data);
 
-                      if (data === "success") {
-                          console.log("Redirecting to LoginPage.php");
-                          // location.reload();
-                          alert("Account Created Successfully");
-                          location.href = "LoginPage.php";
+                        if (data === "success") {
+                            console.log("Redirecting to LoginPage.php");
+                            // location.reload();
+                            alert("Account Created Successfully");
+                            location.href = "LoginPage.php";
 
-                      } else {
-                          errorText.textContent = data;
-                          errorText.style.display = "block";
-                          console.log("Error text displayed: ", data);
+                        } else {
+                            errorText.textContent = data;
+                            errorText.style.display = "block";
+                            console.log("Error text displayed: ", data);
 
-                          setTimeout(() => {
-                            errorText.style.display = "none";
-                        }, 3000);
-                      }
-                  } else {
-                      console.log("Error: Request status not 200");
-                  }
-              } else {
-                  console.log("Error: XHR readyState is not DONE");
-              }
-          }
+                            setTimeout(() => {
+                                errorText.style.display = "none";
+                            }, 3000);
+                        }
+                    } else {
+                        console.log("Error: Request status not 200");
+                    }
+                } else {
+                    console.log("Error: XHR readyState is not DONE");
+                }
+            }
 
-          xhr.onerror = () => {
-              console.log("Error: AJAX request failed");
-          }
+            xhr.onerror = () => {
+                console.log("Error: AJAX request failed");
+            }
 
-          console.log("Form data being sent: ", formData);
-          xhr.send(formData);
-      });
-  } else {
-      console.log("Signup button not found");
-  }
+            console.log("Form data being sent: ", formData);
+            xhr.send(formData);
+        });
+    } else {
+        console.log("Signup button not found");
+    }
 });
 
 function calculateAge() {

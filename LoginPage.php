@@ -19,6 +19,10 @@ if (isset($_SESSION['role'])) {
     echo 'const sessionRole = null;';
     echo '</script>';
 }
+
+if (!isset($_SESSION['otp_status'])) {
+    $_SESSION['otp_status'] = 'Unverified';
+}
 ?>
 
 <!DOCTYPE html>
@@ -207,7 +211,15 @@ if (isset($_SESSION['role'])) {
                                     <div class="input-field">
                                         <span> Email </span>
                                         <span style="color:red"> &#42; </span>
-                                        <input class="SUF" type="text" id="email" name="email">
+                                        <input class="SUF" type="email" id="emailOTP" name="email" placeholder="Enter Your Email" required>
+                                        <button type="button" id="sendOTPBtn">Send OTP</button>
+                                    </div>
+
+                                    <div class="input-field" id="otpSection" style="display:none;">
+                                        <span>Enter OTP</span>
+                                        <input class="SUF" type="text" id="EMAILotp" name="otp" placeholder="Enter OTP">
+                                        <button type="button" id="verifyOTPBtn">Verify OTP</button>
+                                        <input type="hidden" id="OTPinput" value="<?php echo $_SESSION['otp_status']; ?>" readonly>
                                     </div>
 
                                     <div class="input-field">
@@ -252,7 +264,7 @@ if (isset($_SESSION['role'])) {
                                     </div> -->
 
                                     <div class="btnNgSubmit">
-                                        <button class="SumbitSignUp-Btn SaynapBtn">
+                                        <button class="SumbitSignUp-Btn SaynapBtn" id="submitBtn" disabled>
                                             Submit
                                         </button>
                                     </div>

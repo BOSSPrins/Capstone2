@@ -449,6 +449,60 @@ document.getElementById('PDFDir').addEventListener('change', function () {
     });
 });
 
+document.getElementById('ComplaineeAddress').addEventListener('blur', function() {
+    let address = this.value.trim(); // Get the address value and trim any extra spaces
+    
+    // Normalize input: Replace common abbreviations
+    address = address.replace(/\bblk\b/i, 'Block').replace(/\blt\b/i, 'Lot');
+
+    // Split the address and extract Block and Lot values
+    let addressParts = address.split(' ');
+    let block, lot;
+
+    // Check for the expected format: "Block X Lot Y"
+    if (addressParts.includes('Block') && addressParts.includes('Lot')) {
+        block = addressParts[addressParts.indexOf('Block') + 1]; // Get the value after 'Block'
+        lot = addressParts[addressParts.indexOf('Lot') + 1];   // Get the value after 'Lot'
+
+        // Send AJAX request to fetch resident info based on block and lot
+        fetch('PHPBackend/Complaint.php', {
+            method: 'POST',
+            body: JSON.stringify({ action: 'fetchBLOCKnLOT', block: block, lot: lot }),
+            headers: { 'Content-Type': 'application/json' }
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data); 
+            if (data.unique_id) {
+                // Now use the unique_id to fetch the email from tblaccounts
+                fetchEmailFromUniqueId(data.unique_id);
+            } else {
+                console.log('No resident found for this address.');
+            }
+        })
+        .catch(error => console.error('Error:', error));
+    } else {
+        alert('Invalid address format. Please use "Block X Lot Y".');
+    }
+});
+
+function fetchEmailFromUniqueId(unique_id) {
+    fetch('PHPBackend/Complaint.php', {
+        method: 'POST',
+        body: JSON.stringify({ action: 'fetch_email', unique_id: unique_id }),
+        headers: { 'Content-Type': 'application/json' }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.email) {
+            // Set the email in the ComplaineeEmail input field
+            document.getElementById('ComplaineeEmail').value = data.email;
+        } else {
+            console.log('No email found for this unique_id.');
+        }
+    })
+    .catch(error => console.error('Error:', error));
+}
 
 
 // Function ng submit ng direct complaint

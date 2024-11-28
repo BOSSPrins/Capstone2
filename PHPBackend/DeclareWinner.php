@@ -236,7 +236,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } elseif ($action === 'check_voting_history') {
         // Get the unique_id from the AJAX request data
         $user_unique_id = isset($_POST['unique_id']) ? $_POST['unique_id'] : '';
-        error_log('User unique_id: ' . $user_unique_id);
+        error_log('History User unique_id: ' . $user_unique_id);
 
         if (!empty($user_unique_id)) {
             // Query to check if the user has already voted in the voting history table
@@ -282,7 +282,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             
             if ($row['voting_status'] === 'VotingEnded') {
                 // Query to fetch exactly 9 candidates marked as winners
-                $winners_sql = "SELECT candidate_name, img FROM voting WHERE status = 'Winner' LIMIT 9";
+                $winners_sql = "SELECT candidate_name, img 
+                                FROM voting 
+                                WHERE status = 'Winner' 
+                                ORDER BY vote_id DESC 
+                                LIMIT 9";
                 $winners_result = $conn->query($winners_sql);
                 $winners = [];
     

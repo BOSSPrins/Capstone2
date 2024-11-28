@@ -74,7 +74,7 @@
                             </li>
                         </ul>
                     </div>
-                    <a href="AnnouncementTable.php" class="sideside">
+                    <a href="AnnounceHistory.php" class="sideside">
                         <img class="img-sideboard" src="Pictures/Announcement.png">
                         <span> Announcement </span>
                     </a>

@@ -231,6 +231,7 @@
     border: 1px solid rgb(179, 172, 172);
     margin: 10px;
     flex: 1; /* Allow it to grow and take available space */
+    overflow-y: scroll;
   }
   
   /* DESIGN PARA TO SA HEADER NG SIDEBAR AT SA MAIN */
