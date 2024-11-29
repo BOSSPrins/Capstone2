@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 29, 2024 at 09:56 AM
+-- Generation Time: Nov 29, 2024 at 11:53 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -335,7 +335,8 @@ CREATE TABLE `otp_verifications` (
 INSERT INTO `otp_verifications` (`otp_id`, `email`, `otp`, `expiry`) VALUES
 (1, 'vardump007@gmail.com', '658045', '2024-11-29 08:47:36'),
 (12, 'wela@gmail.com', '329966', '2024-11-28 12:26:27'),
-(16, 'tnjrdlcrz@gmail.com', '972352', '2024-11-28 16:12:28');
+(16, 'tnjrdlcrz@gmail.com', '972352', '2024-11-28 16:12:28'),
+(21, 'prnccrvnts@gmail.com', '715033', '2024-11-29 11:44:45');
 
 -- --------------------------------------------------------
 
@@ -416,7 +417,7 @@ CREATE TABLE `tblaccounts` (
 --
 
 INSERT INTO `tblaccounts` (`user_id`, `unique_id`, `email`, `password`, `img`, `status`, `role`, `access`, `otp`, `naughty_list`) VALUES
-(2, 1589571584, 'admin@gmail.com', '21232f297a57a5a743894a0e4a801fc3', '1715091144pusi.jpg', 'Offline now', 'admin', 'Approved', 'Verified', 0),
+(2, 1589571584, 'admin@gmail.com', '21232f297a57a5a743894a0e4a801fc3', '1715091144pusi.jpg', 'Active now', 'admin', 'Approved', 'Verified', 0),
 (4, 1357825271, 'senpai@gmail.com', '1e5db03ce967cfef4e21ada16da09b06', '1715105349271713718_1999144396919159_608519389647854942_n.jpg', 'Offline now', 'user', 'Rejected', 'Verified', 0),
 (19, 112466338, 'Prins@gmail.com', '0a9e0db6e95c394ee792ecbc6e510791', '1717745936pitikvermo.jpg', 'Pending', 'user', 'Approved', '', 0),
 (21, 1017731196, 'tnjrdlcrz@gmail.com', '202cb962ac59075b964b07152d234b70', '1717937589pitikvermo.jpg', 'Pending', 'user', 'Approved', 'Verified', 0),
@@ -439,7 +440,8 @@ INSERT INTO `tblaccounts` (`user_id`, `unique_id`, `email`, `password`, `img`, `
 (38, 724357114, 'barangay@gmail.com', '1ee0fa80acf1af702cf55d07704548f6', 'Mabuhay_Logo.png', 'Offline now', 'barangay', 'Approved', 'Verified', 0),
 (39, 916555761, 'vardump007@gmail.com', 'b2145aac704ce76dbe1ac7adac535b23', 'Mabuhay_Logo.png', 'Offline now', 'user', 'Approved', 'Verified', 1),
 (47, 939514278, 'vardump07@gmail.com', 'ceb232a461e38a2ed16aae9ab58671a8', 'Mabuhay_Logo.png', 'Offline now', 'user', 'Pending', '', 0),
-(48, 809272943, 'vardump0007@gmail.com', '202cb962ac59075b964b07152d234b70', 'Mabuhay_Logo.png', 'Offline now', 'user', 'Pending', '', 0);
+(48, 809272943, 'vardump0007@gmail.com', '202cb962ac59075b964b07152d234b70', 'Mabuhay_Logo.png', 'Offline now', 'user', 'Pending', '', 0),
+(50, 317446215, 'prnccrvnts@gmail.com', '0627181c88225bba505cecb865120a7d', 'Mabuhay_Logo.png', 'Offline now', 'user', 'Pending', 'Verified', 0);
 
 -- --------------------------------------------------------
 
@@ -499,7 +501,8 @@ INSERT INTO `tblresident` (`user_id`, `unique_id`, `access`, `first_name`, `midd
 (40, '724357114', 'Approved', 'N/A', 'N/A', 'N/A', 'N/A', 'Preferred not to say', 1, 'No', '2023-11-18', '', '', 0, 0, 'N/A', 0, '', 0, '', ''),
 (41, '916555761', 'Approved', 'Tanjiro', '', 'Dela Cruz', '', 'Male', 32, 'No', '1992-05-20', '', '', 78, 10, '', 909090909, '', 0, '', ''),
 (49, '939514278', 'Pending', '1', '1', '1', '', 'Male', 34, 'No', '1990-03-14', '', '', 1, 1, '', 132312313131313, '', 0, '', ''),
-(50, '809272943', 'Pending', '1', '1', '1', '', 'Male', 26, 'No', '1998-02-10', '', '', 1, 1, '', 12331123123123121, '', 0, '', '');
+(50, '809272943', 'Pending', '1', '1', '1', '', 'Male', 26, 'No', '1998-02-10', '', '', 1, 1, '', 12331123123123121, '', 0, '', ''),
+(52, '317446215', 'Pending', 'Prince', '1', '1', '1', 'Male', 43, 'No', '1981-11-25', '', '', 1232, 1, '', 111311, '', 0, '', '');
 
 -- --------------------------------------------------------
 
@@ -525,7 +528,7 @@ INSERT INTO `tbl_sessions` (`session_id`, `unique_id`, `last_activity`, `device_
 ('806gfh10fgskgvdcr4bm69855o', 1589571584, '2024-11-26 02:26:15', '::1', 'inactive'),
 ('avdlcnc21i5846mk7jg0dhpuoq', 724357114, '2024-11-26 20:12:26', '::1', 'inactive'),
 ('e35bng9v3gnt04ndngrer6g8ec', 1589571584, '2024-11-27 22:08:25', '::1', 'inactive'),
-('fptp5hdvi6om2gjmjm2oju6af9', 1589571584, '2024-11-28 21:52:55', '::1', 'inactive'),
+('fptp5hdvi6om2gjmjm2oju6af9', 1589571584, '2024-11-28 21:52:55', '::1', 'active'),
 ('jrsdp4em90angoisbm694npi0b', 1581632830, '2024-11-25 07:57:10', '::1', 'inactive'),
 ('u8ts71fn1jb160mq0m719bjbba', 1589571584, '2024-11-26 15:42:33', '::1', 'inactive');
 
@@ -561,6 +564,26 @@ INSERT INTO `user_votes` (`vote_id`, `unique_id`, `candidate`, `votes`, `status`
 (81, 499733408, 'Ethan  Winters', 3, 'Winner', '2024-11-28 08:20:02', '', 'Declared'),
 (82, 1434008263, 'Rose  Winters', 3, 'Winner', '2024-11-28 08:20:02', '', 'Declared'),
 (83, 1195874011, 'Mia  Winters', 3, 'Winner', '2024-11-28 08:20:02', '', 'Declared');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `verified_email`
+--
+
+CREATE TABLE `verified_email` (
+  `email_id` int(11) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `status` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `verified_email`
+--
+
+INSERT INTO `verified_email` (`email_id`, `email`, `status`) VALUES
+(1, 'prnccrvnts@gmail.com', 'Verified'),
+(2, 'prnccrvnts@gmail.com', 'Verified');
 
 -- --------------------------------------------------------
 
@@ -727,6 +750,12 @@ ALTER TABLE `user_votes`
   ADD PRIMARY KEY (`vote_id`);
 
 --
+-- Indexes for table `verified_email`
+--
+ALTER TABLE `verified_email`
+  ADD PRIMARY KEY (`email_id`);
+
+--
 -- Indexes for table `voting`
 --
 ALTER TABLE `voting`
@@ -782,7 +811,7 @@ ALTER TABLE `officials`
 -- AUTO_INCREMENT for table `otp_verifications`
 --
 ALTER TABLE `otp_verifications`
-  MODIFY `otp_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `otp_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `payments`
@@ -800,19 +829,25 @@ ALTER TABLE `payment_history`
 -- AUTO_INCREMENT for table `tblaccounts`
 --
 ALTER TABLE `tblaccounts`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT for table `tblresident`
 --
 ALTER TABLE `tblresident`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- AUTO_INCREMENT for table `user_votes`
 --
 ALTER TABLE `user_votes`
   MODIFY `vote_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
+
+--
+-- AUTO_INCREMENT for table `verified_email`
+--
+ALTER TABLE `verified_email`
+  MODIFY `email_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `voting`
