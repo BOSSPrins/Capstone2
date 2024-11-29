@@ -1216,6 +1216,7 @@ display: none;
     padding: 5px;
     border: 1px solid #ccc;
     border-radius: 4px;
+    font-size: large;
 }
 
 .SearchDiv{
@@ -1254,6 +1255,7 @@ display: none;
     padding: 3px 10px;
     border: 1px solid #ccc;
     text-align: left;
+    font-size: large;
 }
 
 .autocomplete-wrapper tr:nth-child(even){
