@@ -449,9 +449,9 @@ document.getElementById('PDFDir').addEventListener('change', function () {
     });
 });
 
-document.getElementById('ComplaineeAddress').addEventListener('blur', function() {
+document.getElementById('ComplaineeAddress').addEventListener('blur', function () {
     let address = this.value.trim(); // Get the address value and trim any extra spaces
-    
+
     // Normalize input: Replace common abbreviations
     address = address.replace(/\bblk\b/i, 'Block').replace(/\blt\b/i, 'Lot');
 
@@ -464,27 +464,35 @@ document.getElementById('ComplaineeAddress').addEventListener('blur', function()
         block = addressParts[addressParts.indexOf('Block') + 1]; // Get the value after 'Block'
         lot = addressParts[addressParts.indexOf('Lot') + 1];   // Get the value after 'Lot'
 
-        // Send AJAX request to fetch resident info based on block and lot
-        fetch('PHPBackend/Complaint.php', {
-            method: 'POST',
-            body: JSON.stringify({ action: 'fetchBLOCKnLOT', block: block, lot: lot }),
-            headers: { 'Content-Type': 'application/json' }
-        })
-        .then(response => response.json())
-        .then(data => {
-            console.log(data); 
-            if (data.unique_id) {
-                // Now use the unique_id to fetch the email from tblaccounts
-                fetchEmailFromUniqueId(data.unique_id);
-            } else {
-                console.log('No resident found for this address.');
-            }
-        })
-        .catch(error => console.error('Error:', error));
+        // Validate that Block and Lot values are numbers
+        if (!isNaN(block) && !isNaN(lot)) {
+            // Send AJAX request to fetch resident info based on block and lot
+            fetch('PHPBackend/Complaint.php', {
+                method: 'POST',
+                body: JSON.stringify({ action: 'fetchBLOCKnLOT', block: block, lot: lot }),
+                headers: { 'Content-Type': 'application/json' }
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                    if (data.unique_id) {
+                        // Now use the unique_id to fetch the email from tblaccounts
+                        fetchEmailFromUniqueId(data.unique_id);
+                    } else {
+                        console.log('No resident found for this address.');
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+        } else {
+            alert('Invalid Block or Lot value. Both must be numbers.');
+            this.value = ''; // Clear the invalid input
+        }
     } else {
         alert('Invalid address format. Please use "Block X Lot Y".');
+        this.value = ''; // Clear the invalid input
     }
 });
+
 
 function fetchEmailFromUniqueId(unique_id) {
     fetch('PHPBackend/Complaint.php', {
@@ -509,7 +517,12 @@ function fetchEmailFromUniqueId(unique_id) {
 document.getElementById('Submit').addEventListener('click', function(event) {
     event.preventDefault();
 
+    // Show the loading indicator
+    const loadingIndicator = document.getElementById('loading-indicator');
+    loadingIndicator.style.setProperty('display', 'flex', 'important');
+
     const complainee = document.getElementById('Complainee').value;
+    const ComplaineeEmail = document.getElementById('ComplaineeEmail').value;
     const ComplaineeAddress = document.getElementById('ComplaineeAddress').value;
     const ComplainantUID = document.getElementById('ComplainantUID').value;
     const ComplainantName = document.getElementById('ComplainantName').value;
@@ -523,6 +536,7 @@ document.getElementById('Submit').addEventListener('click', function(event) {
 
     formData.append('action', 'submit_complaint');
     formData.append('complainee', complainee);
+    formData.append('ComplaineeEmail', ComplaineeEmail);
     formData.append('ComplaineeAddress', ComplaineeAddress);
     formData.append('ComplainantUID', ComplainantUID);
     formData.append('ComplainantName', ComplainantName);
@@ -547,11 +561,15 @@ document.getElementById('Submit').addEventListener('click', function(event) {
     xhr.open('POST', 'PHPBackend/Complaint.php', true);
 
     xhr.onload = function() {
+        // Hide the loading indicator when request is completed
+        loadingIndicator.style.setProperty('display', 'none', 'important');
+
         if (xhr.status === 200) {
             console.log('Raw Response:', xhr.responseText); // Log raw response for debugging
             try {
                 const response = JSON.parse(xhr.responseText); // Parse the JSON response
                 alert(response.success ? response.message : response.error);
+                location.reload();
             } catch (error) {
                 console.error('Error parsing JSON:', error);
                 alert('There was an issue with the response format.');
@@ -559,6 +577,12 @@ document.getElementById('Submit').addEventListener('click', function(event) {
         } else {
             alert('There was an issue submitting the complaint.');
         }
+    };
+
+    xhr.onerror = function() {
+        // Hide the loading indicator on error
+        loadingIndicator.style.setProperty('display', 'none', 'important');
+        alert('There was a network error.');
     };
 
     xhr.send(formData);
@@ -656,6 +680,7 @@ document.getElementById('submitGen').addEventListener('click', function(event) {
             try {
                 const response = JSON.parse(xhr.responseText); // Parse the JSON response
                 alert(response.success ? response.message : response.error);
+                location.reload();
             } catch (error) {
                 console.error('Error parsing JSON:', error);
                 alert('There was an issue with the response format.');

@@ -437,6 +437,7 @@ function fetchComplaintDetails(complaintId) {
 
                 document.getElementById('ComplaineeName').value = response.data.complainee;
                 document.getElementById('ComplaineeAddress').value = response.data.complaineeAddress;
+                document.getElementById('ComplaineeEmail').value = response.data.ComplaineeEmail;
                 document.getElementById('ComplainantName').value = response.data.complainantName;
                 document.getElementById('ComplainantAddress').value = response.data.complainantAddress;
                 document.getElementById('DateSubmit').value = formatDateTimeToWords(response.data.filed_date);
@@ -534,6 +535,7 @@ function submitComplaintUpdate() {
     const remark = document.getElementById('NewRemark').value;
     const role = document.getElementById('RemarkRole').value;
     const generatedFileName = document.getElementById('generatedFileName').value;
+    const ComplaineeEmail = document.getElementById('ComplaineeEmail').value;
 
     const complainantUID = document.getElementById('complainantUID').value;
     const complaint_number = document.getElementById('complaint_number').value;
@@ -550,7 +552,8 @@ function submitComplaintUpdate() {
             status: status,
             remark: remark,
             role: role,
-            generatedFileName: generatedFileName
+            generatedFileName: generatedFileName,
+            ComplaineeEmail: ComplaineeEmail
         })
     })
     .then(response => response.json())
@@ -558,6 +561,9 @@ function submitComplaintUpdate() {
         console.log(data); 
         if (data.success) {
             
+            if (status === "Escalated") {
+                updateNaughtyList(ComplaineeEmail);
+            }
             // Optionally refresh or update the page content here
             sendEmailToComplainant(complainantUID, complaint_number, Description, status);
         } else {
@@ -568,6 +574,31 @@ function submitComplaintUpdate() {
         console.error('Request failed:', error);
     });
 }
+
+function updateNaughtyList(ComplaineeEmail) {
+    fetch('PHPBackend/Complaint.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: new URLSearchParams({
+            action: 'update_naughty_list',
+            ComplaineeEmail: ComplaineeEmail
+        })
+    })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                console.log('Naughty list updated successfully.');
+            } else {
+                console.error('Failed to update naughty list:', data.error);
+            }
+        })
+        .catch(error => {
+            console.error('Request failed:', error);
+        });
+}
+
 
 function sendEmailToComplainant(complainantUID, complaint_number, Description, status) {
     const loadingIndicator = document.getElementById('loading-indicator');

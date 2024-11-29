@@ -187,7 +187,7 @@ if (isset($_SESSION['unique_id'])) {
                                             </div>
                                         </div>
                                         <h2>Person with Disability:</h2>
-                                        <div class="Profilebyu">
+                                        <!-- <div class="Profilebyu">
                                             <label>
                                             <input type="checkbox" id="pwdYes"> Yes
                                             <input type="checkbox" name="pwd_yes" id="pwdYes" disabled value="1"> Yes
@@ -196,7 +196,7 @@ if (isset($_SESSION['unique_id'])) {
                                             <input type="checkbox" id="pwdNo"> No
                                             <input type="checkbox" name="pwd_no" id="pwdNo" disabled value="1"> No
                                             </label>
-                                        </div>
+                                        </div> -->
                                         <h3>Address:</h2>
                                         <div class="Profilebyu2">
                                             <div class="Input-Roww2">
