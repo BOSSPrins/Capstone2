@@ -38,6 +38,9 @@ if (!isset($_SESSION['otp_status'])) {
 <body>
     <div class="main">
         <div class="mainContainer">
+            <div id="loading-indicator">
+                <div class="loader"></div>
+            </div>
             <div class="split-screen">
                 <div class="left">
                     <!-- <img src="Pictures/sample_pic.png"> -->
@@ -71,7 +74,6 @@ if (!isset($_SESSION['otp_status'])) {
                                     </div>
 
                                     <div class="forgotpass-container">
-                                        <a href="OTP.php" class="forgot-text Verify">Verify Account</a>
                                         <a href="ForgotPass.php" class="forgot-text">Forgot Password?</a>                                      
                                     </div>
 
@@ -111,24 +113,24 @@ if (!isset($_SESSION['otp_status'])) {
                                     <div class="input-field">
                                         <span> First Name </span>
                                         <span style="color:red"> &#42; </span>
-                                        <input class="SUF" type="text" placeholder="Enter Your First Name" name="fname"> 
+                                        <input class="SUF" type="text" placeholder="Enter Your First Name" name="fname" id="fname"> 
                                     </div>
 
                                     <div class="input-field">
                                         <span> Middle Name </span>
-                                        <input class="SUF" type="text" placeholder="Enter Your Middle Name" name="mname">
+                                        <input class="SUF" type="text" placeholder="Enter Your Middle Name" name="mname" id="mname">
                                     </div>
         
                                     <div class="input-field">
                                         <span> Last Name </span>
                                         <span style="color:red"> &#42; </span>
-                                        <input class="SUF" type="text" placeholder="Enter Your Last Name" name="lname">
+                                        <input class="SUF" type="text" placeholder="Enter Your Last Name" name="lname" id="lname">
                                     </div>
 
                                     <div class="rowFields">
                                         <div class="input-field">
                                             <span> Suffix </span>
-                                            <input class="SUF" type="text" placeholder="Enter Your Suffix" name="suffix">
+                                            <input class="SUF" type="text" placeholder="Enter Your Suffix" name="suffix" id="suffix">
                                         </div>
             
                                         <div class="input-field dropdown">
@@ -212,7 +214,7 @@ if (!isset($_SESSION['otp_status'])) {
                                         <span> Email </span>
                                         <span style="color:red"> &#42; </span>
                                         <input class="SUF" type="email" id="emailOTP" name="email" placeholder="Enter Your Email" required>
-                                        <button type="button" id="sendOTPBtn">Send OTP</button>
+                                        <button type="button" id="sendOTPBtn" style="display: none;">Send OTP</button>
                                     </div>
 
                                     <div class="input-field" id="otpSection" style="display:none;">
@@ -250,19 +252,6 @@ if (!isset($_SESSION['otp_status'])) {
                                                 onclick="togglePasswordVisibilitySign2('SignClosed2', 'SignOpened2', 'confirmPassword')">
                                     </div>
 
-
-                                    <!-- <div class="rowFields">
-                                        <div class="input-field">
-                                            <span> Suffix </span>
-                                            <input type="text" placeholder="Enter Your Suffix">
-                                        </div>
-            
-                                        <div class="input-field">
-                                            <span> Gender </span>
-                                            <input type="text" placeholder="Gender">
-                                        </div>
-                                    </div> -->
-
                                     <div class="btnNgSubmit">
                                         <button class="SumbitSignUp-Btn SaynapBtn" id="submitBtn" disabled>
                                             Submit
@@ -282,36 +271,7 @@ if (!isset($_SESSION['otp_status'])) {
         </div>
     </div>  
     
-    <!-- <script>
-        // JavaScript logic
-        function showSignUpForm() {
-            document.getElementById("loginForm").classList.remove("show");
-            document.getElementById("signUpForm").classList.add("show");
-        }
-    
-        function showLoginForm() {
-            document.getElementById("signUpForm").classList.remove("show");
-            document.getElementById("loginForm").classList.add("show");
-        }
-    
-        const form = document.querySelector(".signup-form");
-        const nextBtn = form.querySelector(".nextBtn");
-        const backBtn = form.querySelector(".backBtn");
-        const allInput = form.querySelectorAll(".first input");
-
-        const genderSelect = form.querySelector("#gender");
-        const PWD = form.querySelector("#pwd"); 
-        // const ecNamee = form.querySelector("#GrdnName");
-        // const ecNumb = form.querySelector("#GrdnNumber");
-        // const ecRels = form.querySelector("#GrdnRelship");
-        // const ecAddr = form.querySelector("#GrdnAdress");
-
-    </script>  -->
     <script src="JS/Signup.js"></script>     
     <script src="JS/Login.js"></script>  
-    <script>
-
-
-    </script>
 </body>
 </html>

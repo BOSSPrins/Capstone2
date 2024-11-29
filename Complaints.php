@@ -251,6 +251,9 @@ if (isset($_SESSION['unique_id'])) {
                                     <label class="LabelCompDeta"> Address: </label>
                                     <input class="inputCompDeta" type="text" id="ComplaineeAddress" readonly>
                                 </div>
+                                <div style="display: flex; margin-bottom: 15px; align-items:center;">
+                                    <input type="hidden" id="ComplaineeEmail">
+                                </div>
                             </div>
 
 

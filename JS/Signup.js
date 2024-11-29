@@ -43,6 +43,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (sendOTPBtn) {
     sendOTPBtn.addEventListener('click', () => {
+
+        const loadingIndicator = document.getElementById('loading-indicator');
+        loadingIndicator.style.setProperty('display', 'flex', 'important'); // Show loading indicator
+
         console.log('Sending OTP...');
 
         const email = document.getElementById('emailOTP').value;
@@ -72,8 +76,13 @@ document.addEventListener("DOMContentLoaded", () => {
         })
         .catch(error => {
             console.error("Error:", error);
-            alert("An error occurred while sending OTP.");
+            alert("An error occurred while sending OTP.");  
+            
+        })
+        .finally(() => {
+            loadingIndicator.style.setProperty('display', 'none', 'important'); // Hide loading indicator when email is processed
         });
+        
     });
 } else {
     console.error('sendOTPBtn not found in the DOM.');
@@ -121,6 +130,16 @@ document.addEventListener("DOMContentLoaded", () => {
             const password = document.getElementById("password").value;
             const confirmPassword = document.getElementById("confirmPassword").value;
 
+            // Validate new password criteria
+            const passwordRegex = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*])[a-zA-Z\d!@#$%^&*]{6,}$/;
+            if (!passwordRegex.test(password)) {
+                alert(
+                    "Your password must be at least 6 characters long and include a combination of numbers, letters, and special characters."
+                );
+                return; 
+            }
+
+
             // Password match validation
             if (password !== confirmPassword) {
                 errorText.textContent = "Passwords do not match.";
@@ -141,6 +160,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 errorText.textContent = "You must be at least 18 years old to sign up.";
                 errorText.style.display = "block";
                 console.log("Age validation failed");
+                ageInput.value = '';
 
                 setTimeout(() => {
                     errorText.style.display = "none";
@@ -250,3 +270,77 @@ document.addEventListener("DOMContentLoaded", () => {
       }
   });
 });
+
+
+// Get all the required inputs
+const requiredInputs = [
+    { id: "fname", name: "First Name" },
+    { id: "lname", name: "Last Name" },
+    { id: "block", name: "Block" },
+    { id: "lot", name: "Lot" },
+    { id: "phonenum", name: "Contact Number" },
+    { id: "dob", name: "Date of Birth" },
+    { id: "age", name: "Age" },
+    { id: "emailOTP", name: "Email" },
+];
+
+const genderInputs = document.querySelectorAll('input[name="gender"]');
+const sendOTPBtn = document.getElementById("sendOTPBtn");
+
+// Function to check if all required inputs are filled
+function validateInputs() {
+    let allFilled = true;
+
+    console.log("Starting validation check...");
+
+    // Check all required inputs
+    requiredInputs.forEach((input) => {
+        const field = document.getElementById(input.id);
+        if (!field || !field.value.trim()) {
+            console.log(`${input.name} is empty or invalid.`);
+            allFilled = false;
+        } else {
+            console.log(`${input.name} has a valid value: ${field.value}`);
+        }
+    });
+
+    // Check if a gender is selected
+    const genderSelected = Array.from(genderInputs).some((input) => input.checked);
+    if (!genderSelected) {
+        console.log("Gender is not selected.");
+        allFilled = false;
+    } else {
+        console.log("Gender is selected.");
+    }
+
+    // Show or hide the Send OTP button based on validation
+    if (allFilled) {
+        sendOTPBtn.style.display = "block";
+        console.log("All inputs are valid. Send OTP button is now visible.");
+    } else {
+        sendOTPBtn.style.display = "none";
+        console.log("Not all inputs are valid. Send OTP button is hidden.");
+    }
+}
+
+// Add blur event listeners to inputs for validation
+requiredInputs.forEach((input) => {
+    const field = document.getElementById(input.id);
+    if (field) {
+        field.addEventListener("blur", () => {
+            console.log(`Blur event triggered on ${input.name}.`);
+            validateInputs();
+        });
+    }
+});
+
+// Add change event listeners for gender radio buttons
+genderInputs.forEach((input) => {
+    input.addEventListener("change", () => {
+        console.log("Change event triggered for gender selection.");
+        validateInputs();
+    });
+});
+
+// Initial validation check
+validateInputs();

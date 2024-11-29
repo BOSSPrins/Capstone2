@@ -450,6 +450,7 @@ function fetchComplaintDetails(complaintId) {
 
                 document.getElementById('ComplaineeName').value = response.data.complainee;
                 document.getElementById('ComplaineeAddress').value = response.data.complaineeAddress;
+                document.getElementById('ComplaineeEmail').value = response.data.ComplaineeEmail;
                 document.getElementById('ComplainantName').value = response.data.complainantName;
                 document.getElementById('ComplainantAddress').value = response.data.complainantAddress;
                 document.getElementById('DateSubmit').value = formatDateTimeToWords(response.data.filed_date);
@@ -536,6 +537,8 @@ function submitComplaintUpdate(event) {
     const complaint_number = document.getElementById('complaint_number').value;
     const Description = document.getElementById('Description').value;
     
+    const ComplaineeEmail = document.getElementById('ComplaineeEmail').value;
+    const ComplaintType = document.getElementById('ComplaintType').value;
 
     fetch('PHPBackend/Complaint.php', {
         method: 'POST',
@@ -553,6 +556,7 @@ function submitComplaintUpdate(event) {
     .then(data => {
         if (data.success) {
             
+            // sendEmailToComplainee(ComplaineeEmail, ComplaintType);
             // Optionally refresh or update the page content here
             sendEmailToComplainant(complainantUID, complaint_number, Description);
         } else {
@@ -597,6 +601,39 @@ function sendEmailToComplainant(complainantUID, complaint_number, Description) {
         loadingIndicator.style.setProperty('display', 'none', 'important'); // Hide loading indicator when email is processed
     });
 }
+
+// function sendEmailToComplainee(ComplaineeEmail, ComplaintType) {
+//     const loadingIndicator = document.getElementById('loading-indicator');
+//     loadingIndicator.style.setProperty('display', 'flex', 'important'); // Show loading indicator
+
+//     fetch('Emailer/In-ProcessComplainee.php', {
+//         method: 'POST',
+//         body: new URLSearchParams({
+//             ComplaineeEmail,
+//             ComplaintType
+//         }),
+//     })
+//     .then(response => response.json())
+//     .then(data => {
+//         try {
+//             console.log("Parsed response:", data);
+//             if (data.success) {
+//                 console.log("Email sent successfully.");
+//                 // alert('Complaint updated successfully!');
+//                 // location.reload();
+//             } else {
+//                 console.error("Error:", data.error);
+//                 alert('Email failed: ' + data.message);
+//             }
+//         } catch (error) {
+//             console.error("Failed to parse JSON:", error);
+//         }
+//     })
+//     .catch(error => console.error("AJAX error:", error))
+//     .finally(() => {
+//         loadingIndicator.style.setProperty('display', 'none', 'important'); // Hide loading indicator when email is processed
+//     });
+// }
 
 
 function updateComplaintCounts() {

@@ -17,6 +17,8 @@ include_once '../Emailer/ComplaintsEmail.php';
 include_once '../Emailer/ResolvedEmail.php';
 include_once '../Emailer/EscalatedEmail.php';
 include_once '../Emailer/BrngyEmail.php';
+include_once '../Emailer/EmailComplainee.php';
+// include_once '../Emailer/In-ProcessComplainee.php';
 // Error handler function
 function handleError($errno, $errstr, $errfile, $errline) {
     echo json_encode(['success' => false, 'error' => "$errstr in $errfile on line $errline"]);
@@ -55,6 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // Get the input values from the POST request
         $complainee = isset($_POST['complainee']) ? trim($_POST['complainee']) : null;
+        $ComplaineeEmail = isset($_POST['ComplaineeEmail']) ? trim($_POST['ComplaineeEmail']) : null;
         $ComplaineeAddress = isset($_POST['ComplaineeAddress']) ? trim($_POST['ComplaineeAddress']) : null;
         $ComplainantUID = isset($_POST['ComplainantUID']) ? trim($_POST['ComplainantUID']) : null;
         $ComplainantName = isset($_POST['ComplainantName']) ? trim($_POST['ComplainantName']) : null;
@@ -113,19 +116,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $pdfFilesJson = empty($pdfFiles) ? "" : json_encode($pdfFiles);
 
         // Insert complaint into the database
-        $sql = "INSERT INTO complaints (complaint_number, complaint_type, complainee, complaint, description, filed_date, complaineeAddress, complainantUID, complainantName, complainantAddress, status, proof, pdf) 
-                VALUES (?, ?, ?, ?, ?, NOW(), ?, ?, ?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO complaints (complaint_number, complaint_type, complainee, complaint, description, filed_date, complaineeAddress, ComplaineeEmail, complainantUID, complainantName, complainantAddress, status, proof, pdf) 
+                VALUES (?, ?, ?, ?, ?, NOW(), ?, ?, ?, ?, ?, ?, ?, ?)";
 
         if ($stmt = $conn->prepare($sql)) {
             // Bind parameters and execute query
             $complaint_number = rand(time(), 100000000);  // Generate complaint number
             $ComplaintType = 'Direct Complaint';  // Default complaint type
 
-            $stmt->bind_param("ssssssssssss", $complaint_number, $ComplaintType, $complainee, $complaint, $description, $ComplaineeAddress, $ComplainantUID, $ComplainantName, $ComplainantAddress, $ComplaintStatus, $proofFilesJson, $pdfFilesJson);
+            $stmt->bind_param("sssssssssssss", $complaint_number, $ComplaintType, $complainee, $complaint, $description, $ComplaineeAddress, $ComplaineeEmail, $ComplainantUID, $ComplainantName, $ComplainantAddress, $ComplaintStatus, $proofFilesJson, $pdfFilesJson);
 
             if ($stmt->execute()) {
-                $response = ['success' => true, 'message' => 'Complaint submitted successfully.'];
-                error_log(json_encode($response));  // Log success response
+                $emailSent = sendEmailToComplainee($ComplaineeEmail, $complaint);
+
+                if ($emailSent) {
+                    // If the email is sent successfully
+                    $response = [
+                        'success' => true,
+                        'message' => 'Complaint submitted successfully!',
+                    ];
+                } else {
+                    // If the email sending fails
+                    $response = [
+                        'success' => true,  // Complaint submission is still successful
+                        'message' => 'Complaint submitted, but email could not be sent.',
+                    ];
+                } // Log success response
             } else {
                 $response = ['success' => false, 'error' => 'Failed to insert complaint.'];
                 error_log(json_encode($response));  // Log error response
@@ -263,7 +279,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } elseif ($action === 'fetchDetails') {
         $complaint_id = $_POST['complaint_id'];
     
-        $sql = "SELECT complainantUID, complaint_number, complainee, complaineeAddress, complainantName, complainantAddress, filed_date, complaint, description, proof, pdf, status
+        $sql = "SELECT complainantUID, complaint_number, complainee, complaineeAddress, complainantName, complainantAddress, filed_date, complaint, description, proof, pdf, status, ComplaineeEmail
                 FROM complaints
                 WHERE complaint_number = ?";
         $stmt = $conn->prepare($sql);
@@ -331,7 +347,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } elseif ($action === 'fetch_In-process') {
         $complaint_id = $_POST['complaint_id'];
     
-        $sql = "SELECT complainantUID, complaint_number, complainee, complaineeAddress, complainantName, complainantAddress, filed_date, complaint, description, proof, pdf, status,  processed_date
+        $sql = "SELECT complainantUID, complaint_number, complainee, complaineeAddress, complainantName, complainantAddress, filed_date, complaint, description, proof, pdf, status, processed_date, ComplaineeEmail
                 FROM complaints
                 WHERE complaint_number = ?";
         $stmt = $conn->prepare($sql);
@@ -374,6 +390,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->close();
         $conn->close();
         exit;
+
+    } elseif ($action === 'update_naughty_list') {
+        $ComplaineeEmail = $_POST['ComplaineeEmail'];
+    
+        // Increment naughty_list for the given ComplaineeEmail
+        $sql = "UPDATE tblaccounts SET naughty_list = naughty_list + 1 WHERE email = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("s", $ComplaineeEmail);
+    
+        if ($stmt->execute()) {
+            echo json_encode(['success' => true]);
+        } else {
+            echo json_encode(['success' => false, 'error' => 'Failed to update naughty list.']);
+        }
+    
+        $stmt->close();
+        $conn->close();
+        exit;
+
     } elseif ($action === 'Resolved_complaints') {
         // Fetch complaints from the database
         $sql = "SELECT complaint_number, complaint, filed_date, status 

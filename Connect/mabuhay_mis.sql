@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 28, 2024 at 03:13 PM
+-- Generation Time: Nov 29, 2024 at 09:56 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -77,6 +77,7 @@ CREATE TABLE `complaints` (
   `pdf` varchar(255) NOT NULL,
   `filed_date` timestamp NOT NULL DEFAULT current_timestamp(),
   `complaineeAddress` varchar(20) NOT NULL,
+  `ComplaineeEmail` varchar(255) NOT NULL,
   `complainantUID` int(11) NOT NULL,
   `complainantName` varchar(255) NOT NULL,
   `complainantAddress` varchar(20) NOT NULL,
@@ -98,35 +99,40 @@ CREATE TABLE `complaints` (
 -- Dumping data for table `complaints`
 --
 
-INSERT INTO `complaints` (`complaint_id`, `complaint_number`, `complaint_type`, `complainee`, `complaint`, `description`, `proof`, `pdf`, `filed_date`, `complaineeAddress`, `complainantUID`, `complainantName`, `complainantAddress`, `status`, `processed_date`, `Remark1`, `RemarkBy1`, `status1`, `RemarkDate1`, `escaLetter`, `Remark2`, `RemarkBy2`, `status2`, `RemarkDate2`, `resolveLetter`) VALUES
-(1, 111111, '', 'Mooda', 'Blocking the Driveway', 'Laging nakaharang yung kotse nya sa gate ko', '[\"bossing.jpg\"]', '', '2024-09-19 12:07:15', 'Blk 54 Lot 1', 0, 'Mark', 'Blk 78 Lot 10', 'Escalated', '', '', 'admin', 'In-Process', '2024-11-10 23:00:38', '', 'Turn over to barangay', 'admin', 'Escalated', '2024-11-10 23:12:40', ''),
-(2, 222222, '', 'Raul', 'Blocking the Driveway', 'Yung tricycle nya dinikit sa kotse ko', '[\"bossing.jpg\"]', '', '2024-09-19 12:07:35', 'Blk 3 Lot 6', 0, 'Sgup', 'Blk 100 Lot 6', 'Escalated', '', 'Processing na po', 'admin', 'In-Process', '2024-11-10 22:52:21', '', 'This Complaint will be turn over to the barangay', 'admin', 'Escalated', '2024-11-10 22:54:21', ''),
-(3, 333333, '', 'Nigs', 'Pet Issues', 'Aso nya laging galit', '[\"awtlas.png\"]', '', '2024-11-08 19:34:38', 'Blk 54 Lot 1', 1581632830, 'Wela A Magsino', 'Blk 9 Lot 18', 'Resolved', '', 'Change to in process', 'admin', 'In-Process', '2024-11-10 02:39:52', '', 'Resolved na', 'admin', 'Resolved', '2024-11-10 21:42:27', ''),
-(4, 444444, '', 'Pat Anoyab', 'Noise Complaint', 'Ingay nila mag asawa', '[\"boss.jpg\"]', '', '2024-11-10 14:57:37', 'Blk 123 Lot 56', 821155870, 'Jhonrenz Berbano', 'Blk 1 Lot 1', 'Resolved', '2024-11-11 21:59:35', 'Done na po', 'admin', 'Resolved', '2024-11-11 22:21:17', '', '', '', '', '', ''),
-(5, 555555, '', '', 'Property Maintenance', 'Yung bintana nya sa third floor tumusok sa bubong ko', '[\"malupiton.png\"]', '', '2024-11-11 14:30:11', 'Blk 9 Lot 6', 1581632830, 'Wela A Magsino', 'Blk 9 Lot 18', 'Escalated', '2024-11-11 22:31:57', 'Turn over na po sa barangay di na namin kaya', 'admin', 'Escalated', '2024-11-11 22:32:16', '', '', '', '', '', ''),
-(6, 1142799674, '', '', 'Noise Complaint', 'Ingay ng aso nila kahit madaling araw nagwawala', '[\"meow.jpg\"]', '', '2024-11-12 15:34:45', 'Blk 60 Lot 60', 1581632830, 'Wela A Magsino', 'Blk 9 Lot 18', 'Resolved', '2024-11-13 00:00:52', 'Okay na po tinapon na namin yung aso', 'admin', 'Resolved', '2024-11-13 00:27:55', '', '', '', '', '', ''),
-(7, 1546759430, '', '', 'Property Maintenance', 'Yung puno nya tumumba sa gate ko', '[\"malupiton.png\"]', '', '2024-11-12 18:35:21', 'Blk 61 Lot 61', 1581632830, 'Wela A Magsino', 'Blk 9 Lot 18', 'In-Process', '2024-11-13 02:38:23', '', '', '', '', '', '', '', '', '', ''),
-(8, 1502036937, '', 'Di ko alam', 'Noise Complaint', 'ingay', '[\"bike.jpg\"]', '', '2024-11-14 17:14:04', 'Blk 6 lot 7', 1581632830, 'Wela A Magsino', 'Blk 9 Lot 18', 'Pending', '', '', '', '', '', '', '', '', '', '', ''),
-(9, 316398639, '', '', 'Noise Complaint', 'Ingay', '[\"673773a2b3bbf_malupiton.png\",\"673773a2b3dc0_malupiton2.png\"]', '', '2024-11-15 16:15:30', 'Blk 0 Lot 1', 1581632830, 'Wela A Magsino', 'Blk 9 Lot 18', 'Pending', '', '', '', '', '', '', '', '', '', '', ''),
-(10, 1310202046, '', '', 'Pet Issues', 'Aso nya di nakatali', '[\"673777811631c_boss.jpg\",\"67377781164ee_bossing.jpg\"]', '', '2024-11-15 16:32:01', 'Blk 9 Lot 9', 1581632830, 'Wela A Magsino', 'Blk 9 Lot 18', 'Pending', '', '', '', '', '', '', '', '', '', '', ''),
-(11, 287290528, '', '', 'Noise Complaint', 'test', '[\"67377976c6b1b_boss.jpg\",\"67377976c6d23_bossing.jpg\"]', '', '2024-11-15 16:40:22', 'test', 1581632830, 'Wela A Magsino', 'Blk 9 Lot 18', 'Pending', '', '', '', '', '', '', '', '', '', '', ''),
-(12, 802553249, '', '', 'Property Maintenance', 'Pagong', '[\"malupiton.png\",\"malupiton2.png\"]', '', '2024-11-15 17:02:21', 'Blk 6 lot 0', 1581632830, 'Wela A Magsino', 'Blk 9 Lot 18', 'Pending', '', '', '', '', '', '', '', '', '', '', ''),
-(13, 644834543, '', '', 'Rule Violation', 'aw', '[\"malupiton.png\",\"malupiton2.png\",\"malupiton3.jpg\",\"meow.jpg\"]', '', '2024-11-15 17:03:25', 'Blk 0 lot 0 ', 1581632830, 'Wela A Magsino', 'Blk 9 Lot 18', 'Resolved', '2024-11-19 01:59:22', 'Dili na kaya', 'admin', 'Escalated', '2024-11-19 01:59:46', '', 'Gg\'s na', 'barangay', 'Resolved', '2024-11-19 02:01:45', ''),
-(14, 709666182, '', '', 'Rule Violation', 'test', '[\"boss.jpg\",\"bossing.jpg\",\"malupiton.png\",\"malupiton2.png\",\"malupiton3.jpg\"]', '', '2024-11-15 17:04:42', 'Test', 1581632830, 'Wela A Magsino', 'Blk 9 Lot 18', 'Pending', '', '', '', '', '', '', '', '', '', '', ''),
-(15, 799350189, 'Direct Complaint', 'test', 'Parking Problems ', 'test', '[\"meow.jpg\"]', '', '2024-11-15 17:13:50', 'test', 1581632830, 'Wela A Magsino', 'Blk 9 Lot 18', 'Pending', '', '', '', '', '', '', '', '', '', '', ''),
-(16, 1341459227, 'Direct Complaint', 'test', 'Parking Problems ', 'test', '[\"re4.png\"]', '', '2024-11-15 17:25:42', 'test', 1581632830, 'Wela A Magsino', 'Blk 9 Lot 18', 'Pending', '', '', '', '', '', '', '', '', '', '', ''),
-(17, 401542834, 'Direct Complaint', 'test', 'Parking Problems ', 'test', '[\"re4.png\"]', '', '2024-11-15 17:33:37', 'test', 1581632830, 'Wela A Magsino', 'Blk 9 Lot 18', 'Pending', '', '', '', '', '', '', '', '', '', '', ''),
-(18, 751353843, 'Direct Complaint', 'qwer', 'Parking Problems ', 'qwer', '[\"boss.jpg\"]', '', '2024-11-15 17:36:03', 'qwer', 1581632830, 'Wela A Magsino', 'Blk 9 Lot 18', 'In-Process', '2024-11-16 21:48:34', '', '', '', '', '', '', '', '', '', ''),
-(19, 1264254659, 'Direct Complaint', 'waea', 'Parking Problems ', 'adawdad', '[\"vote.png\"]', '', '2024-11-15 17:53:05', 'adawda', 1581632830, 'Wela A Magsino', 'Blk 9 Lot 18', 'In-Process', '2024-11-27 05:43:34', '', '', '', '', '', '', '', '', '', ''),
-(20, 446038163, 'Direct Complaint', 'test', 'Parking Problems', 'test', '[\"re4.png\"]', '', '2024-11-15 18:15:09', 'test', 1581632830, 'Wela A Magsino', 'Blk 9 Lot 18', 'In-Process', '2024-11-27 05:21:41', '', '', '', '', '', '', '', '', '', ''),
-(21, 1080101548, 'General Complaint', '', 'Noise Complaint', 'test', '[\"Eternity.jpg\"]', '', '2024-11-16 12:46:19', '', 1581632830, 'Wela A Magsino', 'Blk 9 Lot 18', 'In-Process', '2024-11-27 04:26:43', '', '', '', '', '', '', '', '', '', ''),
-(22, 999220120, 'Direct Complaint', 'nice', 'Noise Complaint', 'good job', '[\"malupiton.png\",\"malupiton3.jpg\",\"meow.jpg\"]', '', '2024-11-16 14:18:03', 'one', 1581632830, 'Wela A Magsino', 'Blk 9 Lot 18', 'Resolved', '2024-11-18 22:38:24', 'Okay na pi', 'barangay', 'Resolved', '2024-11-18 22:48:10', '', '', '', '', '', ''),
-(23, 866088832, 'General Complaint', '', 'Noise Complaint', 'nice', '[\"arkana.png\",\"arle.png\",\"awtlas.png\",\"bebetime.jpg\"]', '', '2024-11-16 14:18:42', '', 1581632830, 'Wela A Magsino', 'Blk 9 Lot 18', 'Resolved', '2024-11-18 22:37:21', 'Test', 'admin', 'Escalated', '2024-11-18 22:52:06', '', 'oki na pi', 'barangay', 'Resolved', '2024-11-18 22:55:42', ''),
-(31, 918316644, 'Direct Complaint', 'Test', 'Pet Issues', 'Test', '[\"bike.jpg\"]', '[\"Complaint-999220120.pdf\",\"Complaint-866088832.pdf\"]', '2024-11-22 12:27:56', 'Test', 1581632830, 'Wela A Magsino', 'Blk 9 Lot 18', 'Resolved', '2024-11-22 22:39:53', 'Turn over na ekis na', 'admin', 'Escalated', '2024-11-23 01:31:07', '', 'All goods na', 'barangay', 'Resolved', '2024-11-23 01:53:10', ''),
-(32, 883927647, 'Direct Complaint', '', 'Property Maintenance', 'Yung gate nya umabot na sa gate ko', '[\"boss.jpg\",\"bossing.jpg\",\"malupiton.png\",\"malupiton2.png\",\"malupiton3.jpg\"]', '[\"Complaint-999220120.pdf\",\"Complaint-866088832.pdf\"]', '2024-11-23 15:17:28', 'Blk 10 Lot 78', 1581632830, 'Wela A Magsino', 'Blk 9 Lot 18', 'Resolved', '2024-11-23 23:24:24', 'Turn over ko na to makulit na e ', 'admin', 'Escalated', '2024-11-23 23:25:16', 'Turn-Over-Letter-883927647.pdf', 'Eto na talaga pramis okay na to', 'barangay', 'Resolved', '2024-11-24 04:45:28', 'Settled-Letter-883927647.pdf'),
-(33, 1643921437, 'General Complaint', '', 'Noise Complaint', 'Ingay po', '[\"malupiton2.png\",\"malupiton3.jpg\",\"malupiton4.jpg\"]', '', '2024-11-24 13:57:02', '', 916555761, 'Tanjiro Dela Cruz', 'Blk 78 Lot 10', 'Resolved', '2024-11-25 06:13:43', 'Lipat na sa barangay', 'admin', 'Escalated', '2024-11-25 07:47:08', 'Turn-Over-Letter-1643921437.pdf', 'Oks na', 'barangay', 'Resolved', '2024-11-25 07:53:07', 'Settled-Letter-1643921437.pdf'),
-(34, 1208717079, 'General Complaint', '', 'Noise Complaint', '123123', '[\"bebetime.jpg\"]', '', '2024-11-26 21:44:13', '', 1581632830, 'Wela A Magsino', 'Blk 9 Lot 18', 'Escalated', '2024-11-27 05:44:25', '123123', 'admin', 'Escalated', '2024-11-27 14:10:02', 'Turn-Over-Letter-1208717079.pdf', '', '', '', '', ''),
-(35, 425320484, 'General Complaint', '', 'Noise Complaint', 'ingay naman kasi', '[\"bebetime.jpg\"]', '', '2024-11-26 21:46:03', '', 916555761, 'Tanjiro Dela Cruz', 'Blk 78 Lot 10', 'Resolved', '2024-11-27 06:31:05', '', 'admin', 'Escalated', '2024-11-27 06:36:31', 'Turn-Over-Letter-425320484.pdf', '', 'barangay', 'Resolved', '2024-11-27 06:56:13', '');
+INSERT INTO `complaints` (`complaint_id`, `complaint_number`, `complaint_type`, `complainee`, `complaint`, `description`, `proof`, `pdf`, `filed_date`, `complaineeAddress`, `ComplaineeEmail`, `complainantUID`, `complainantName`, `complainantAddress`, `status`, `processed_date`, `Remark1`, `RemarkBy1`, `status1`, `RemarkDate1`, `escaLetter`, `Remark2`, `RemarkBy2`, `status2`, `RemarkDate2`, `resolveLetter`) VALUES
+(1, 111111, '', 'Mooda', 'Blocking the Driveway', 'Laging nakaharang yung kotse nya sa gate ko', '[\"bossing.jpg\"]', '', '2024-09-19 12:07:15', 'Blk 54 Lot 1', '', 0, 'Mark', 'Blk 78 Lot 10', 'Escalated', '', '', 'admin', 'In-Process', '2024-11-10 23:00:38', '', 'Turn over to barangay', 'admin', 'Escalated', '2024-11-10 23:12:40', ''),
+(2, 222222, '', 'Raul', 'Blocking the Driveway', 'Yung tricycle nya dinikit sa kotse ko', '[\"bossing.jpg\"]', '', '2024-09-19 12:07:35', 'Blk 3 Lot 6', '', 0, 'Sgup', 'Blk 100 Lot 6', 'Escalated', '', 'Processing na po', 'admin', 'In-Process', '2024-11-10 22:52:21', '', 'This Complaint will be turn over to the barangay', 'admin', 'Escalated', '2024-11-10 22:54:21', ''),
+(3, 333333, '', 'Nigs', 'Pet Issues', 'Aso nya laging galit', '[\"awtlas.png\"]', '', '2024-11-08 19:34:38', 'Blk 54 Lot 1', '', 1581632830, 'Wela A Magsino', 'Blk 9 Lot 18', 'Resolved', '', 'Change to in process', 'admin', 'In-Process', '2024-11-10 02:39:52', '', 'Resolved na', 'admin', 'Resolved', '2024-11-10 21:42:27', ''),
+(4, 444444, '', 'Pat Anoyab', 'Noise Complaint', 'Ingay nila mag asawa', '[\"boss.jpg\"]', '', '2024-11-10 14:57:37', 'Blk 123 Lot 56', '', 821155870, 'Jhonrenz Berbano', 'Blk 1 Lot 1', 'Resolved', '2024-11-11 21:59:35', 'Done na po', 'admin', 'Resolved', '2024-11-11 22:21:17', '', '', '', '', '', ''),
+(5, 555555, '', '', 'Property Maintenance', 'Yung bintana nya sa third floor tumusok sa bubong ko', '[\"malupiton.png\"]', '', '2024-11-11 14:30:11', 'Blk 9 Lot 6', '', 1581632830, 'Wela A Magsino', 'Blk 9 Lot 18', 'Escalated', '2024-11-11 22:31:57', 'Turn over na po sa barangay di na namin kaya', 'admin', 'Escalated', '2024-11-11 22:32:16', '', '', '', '', '', ''),
+(6, 1142799674, '', '', 'Noise Complaint', 'Ingay ng aso nila kahit madaling araw nagwawala', '[\"meow.jpg\"]', '', '2024-11-12 15:34:45', 'Blk 60 Lot 60', '', 1581632830, 'Wela A Magsino', 'Blk 9 Lot 18', 'Resolved', '2024-11-13 00:00:52', 'Okay na po tinapon na namin yung aso', 'admin', 'Resolved', '2024-11-13 00:27:55', '', '', '', '', '', ''),
+(7, 1546759430, '', '', 'Property Maintenance', 'Yung puno nya tumumba sa gate ko', '[\"malupiton.png\"]', '', '2024-11-12 18:35:21', 'Blk 61 Lot 61', '', 1581632830, 'Wela A Magsino', 'Blk 9 Lot 18', 'In-Process', '2024-11-13 02:38:23', '', '', '', '', '', '', '', '', '', ''),
+(8, 1502036937, '', 'Di ko alam', 'Noise Complaint', 'ingay', '[\"bike.jpg\"]', '', '2024-11-14 17:14:04', 'Blk 6 lot 7', '', 1581632830, 'Wela A Magsino', 'Blk 9 Lot 18', 'Pending', '', '', '', '', '', '', '', '', '', '', ''),
+(9, 316398639, '', '', 'Noise Complaint', 'Ingay', '[\"673773a2b3bbf_malupiton.png\",\"673773a2b3dc0_malupiton2.png\"]', '', '2024-11-15 16:15:30', 'Blk 0 Lot 1', '', 1581632830, 'Wela A Magsino', 'Blk 9 Lot 18', 'Pending', '', '', '', '', '', '', '', '', '', '', ''),
+(10, 1310202046, '', '', 'Pet Issues', 'Aso nya di nakatali', '[\"673777811631c_boss.jpg\",\"67377781164ee_bossing.jpg\"]', '', '2024-11-15 16:32:01', 'Blk 9 Lot 9', '', 1581632830, 'Wela A Magsino', 'Blk 9 Lot 18', 'Pending', '', '', '', '', '', '', '', '', '', '', ''),
+(11, 287290528, '', '', 'Noise Complaint', 'test', '[\"67377976c6b1b_boss.jpg\",\"67377976c6d23_bossing.jpg\"]', '', '2024-11-15 16:40:22', 'test', '', 1581632830, 'Wela A Magsino', 'Blk 9 Lot 18', 'Pending', '', '', '', '', '', '', '', '', '', '', ''),
+(12, 802553249, '', '', 'Property Maintenance', 'Pagong', '[\"malupiton.png\",\"malupiton2.png\"]', '', '2024-11-15 17:02:21', 'Blk 6 lot 0', '', 1581632830, 'Wela A Magsino', 'Blk 9 Lot 18', 'Pending', '', '', '', '', '', '', '', '', '', '', ''),
+(13, 644834543, '', '', 'Rule Violation', 'aw', '[\"malupiton.png\",\"malupiton2.png\",\"malupiton3.jpg\",\"meow.jpg\"]', '', '2024-11-15 17:03:25', 'Blk 0 lot 0 ', '', 1581632830, 'Wela A Magsino', 'Blk 9 Lot 18', 'Resolved', '2024-11-19 01:59:22', 'Dili na kaya', 'admin', 'Escalated', '2024-11-19 01:59:46', '', 'Gg\'s na', 'barangay', 'Resolved', '2024-11-19 02:01:45', ''),
+(14, 709666182, '', '', 'Rule Violation', 'test', '[\"boss.jpg\",\"bossing.jpg\",\"malupiton.png\",\"malupiton2.png\",\"malupiton3.jpg\"]', '', '2024-11-15 17:04:42', 'Test', '', 1581632830, 'Wela A Magsino', 'Blk 9 Lot 18', 'Pending', '', '', '', '', '', '', '', '', '', '', ''),
+(15, 799350189, 'Direct Complaint', 'test', 'Parking Problems ', 'test', '[\"meow.jpg\"]', '', '2024-11-15 17:13:50', 'test', '', 1581632830, 'Wela A Magsino', 'Blk 9 Lot 18', 'Pending', '', '', '', '', '', '', '', '', '', '', ''),
+(16, 1341459227, 'Direct Complaint', 'test', 'Parking Problems ', 'test', '[\"re4.png\"]', '', '2024-11-15 17:25:42', 'test', '', 1581632830, 'Wela A Magsino', 'Blk 9 Lot 18', 'Pending', '', '', '', '', '', '', '', '', '', '', ''),
+(17, 401542834, 'Direct Complaint', 'test', 'Parking Problems ', 'test', '[\"re4.png\"]', '', '2024-11-15 17:33:37', 'test', '', 1581632830, 'Wela A Magsino', 'Blk 9 Lot 18', 'Pending', '', '', '', '', '', '', '', '', '', '', ''),
+(18, 751353843, 'Direct Complaint', 'qwer', 'Parking Problems ', 'qwer', '[\"boss.jpg\"]', '', '2024-11-15 17:36:03', 'qwer', '', 1581632830, 'Wela A Magsino', 'Blk 9 Lot 18', 'In-Process', '2024-11-16 21:48:34', '', '', '', '', '', '', '', '', '', ''),
+(19, 1264254659, 'Direct Complaint', 'waea', 'Parking Problems ', 'adawdad', '[\"vote.png\"]', '', '2024-11-15 17:53:05', 'adawda', '', 1581632830, 'Wela A Magsino', 'Blk 9 Lot 18', 'In-Process', '2024-11-27 05:43:34', '', '', '', '', '', '', '', '', '', ''),
+(20, 446038163, 'Direct Complaint', 'test', 'Parking Problems', 'test', '[\"re4.png\"]', '', '2024-11-15 18:15:09', 'test', '', 1581632830, 'Wela A Magsino', 'Blk 9 Lot 18', 'In-Process', '2024-11-27 05:21:41', '', '', '', '', '', '', '', '', '', ''),
+(21, 1080101548, 'General Complaint', '', 'Noise Complaint', 'test', '[\"Eternity.jpg\"]', '', '2024-11-16 12:46:19', '', '', 1581632830, 'Wela A Magsino', 'Blk 9 Lot 18', 'In-Process', '2024-11-27 04:26:43', '', '', '', '', '', '', '', '', '', ''),
+(22, 999220120, 'Direct Complaint', 'nice', 'Noise Complaint', 'good job', '[\"malupiton.png\",\"malupiton3.jpg\",\"meow.jpg\"]', '', '2024-11-16 14:18:03', 'one', '', 1581632830, 'Wela A Magsino', 'Blk 9 Lot 18', 'Resolved', '2024-11-18 22:38:24', 'Okay na pi', 'barangay', 'Resolved', '2024-11-18 22:48:10', '', '', '', '', '', ''),
+(23, 866088832, 'General Complaint', '', 'Noise Complaint', 'nice', '[\"arkana.png\",\"arle.png\",\"awtlas.png\",\"bebetime.jpg\"]', '', '2024-11-16 14:18:42', '', '', 1581632830, 'Wela A Magsino', 'Blk 9 Lot 18', 'Resolved', '2024-11-18 22:37:21', 'Test', 'admin', 'Escalated', '2024-11-18 22:52:06', '', 'oki na pi', 'barangay', 'Resolved', '2024-11-18 22:55:42', ''),
+(31, 918316644, 'Direct Complaint', 'Test', 'Pet Issues', 'Test', '[\"bike.jpg\"]', '[\"Complaint-999220120.pdf\",\"Complaint-866088832.pdf\"]', '2024-11-22 12:27:56', 'Test', '', 1581632830, 'Wela A Magsino', 'Blk 9 Lot 18', 'Resolved', '2024-11-22 22:39:53', 'Turn over na ekis na', 'admin', 'Escalated', '2024-11-23 01:31:07', '', 'All goods na', 'barangay', 'Resolved', '2024-11-23 01:53:10', ''),
+(32, 883927647, 'Direct Complaint', '', 'Property Maintenance', 'Yung gate nya umabot na sa gate ko', '[\"boss.jpg\",\"bossing.jpg\",\"malupiton.png\",\"malupiton2.png\",\"malupiton3.jpg\"]', '[\"Complaint-999220120.pdf\",\"Complaint-866088832.pdf\"]', '2024-11-23 15:17:28', 'Blk 10 Lot 78', '', 1581632830, 'Wela A Magsino', 'Blk 9 Lot 18', 'Resolved', '2024-11-23 23:24:24', 'Turn over ko na to makulit na e ', 'admin', 'Escalated', '2024-11-23 23:25:16', 'Turn-Over-Letter-883927647.pdf', 'Eto na talaga pramis okay na to', 'barangay', 'Resolved', '2024-11-24 04:45:28', 'Settled-Letter-883927647.pdf'),
+(33, 1643921437, 'General Complaint', '', 'Noise Complaint', 'Ingay po', '[\"malupiton2.png\",\"malupiton3.jpg\",\"malupiton4.jpg\"]', '', '2024-11-24 13:57:02', '', '', 916555761, 'Tanjiro Dela Cruz', 'Blk 78 Lot 10', 'Resolved', '2024-11-25 06:13:43', 'Lipat na sa barangay', 'admin', 'Escalated', '2024-11-25 07:47:08', 'Turn-Over-Letter-1643921437.pdf', 'Oks na', 'barangay', 'Resolved', '2024-11-25 07:53:07', 'Settled-Letter-1643921437.pdf'),
+(34, 1208717079, 'General Complaint', '', 'Noise Complaint', '123123', '[\"bebetime.jpg\"]', '', '2024-11-26 21:44:13', '', '', 1581632830, 'Wela A Magsino', 'Blk 9 Lot 18', 'Escalated', '2024-11-27 05:44:25', '123123', 'admin', 'Escalated', '2024-11-27 14:10:02', 'Turn-Over-Letter-1208717079.pdf', '', '', '', '', ''),
+(35, 425320484, 'General Complaint', '', 'Noise Complaint', 'ingay naman kasi', '[\"bebetime.jpg\"]', '', '2024-11-26 21:46:03', '', '', 916555761, 'Tanjiro Dela Cruz', 'Blk 78 Lot 10', 'Resolved', '2024-11-27 06:31:05', '', 'admin', 'Escalated', '2024-11-27 06:36:31', 'Turn-Over-Letter-425320484.pdf', '', 'barangay', 'Resolved', '2024-11-27 06:56:13', ''),
+(36, 1645727274, 'Direct Complaint', 'Test lang sa email', 'Parking Problems', 'Test', '[\"malupiton4.jpg\"]', '', '0000-00-00 00:00:00', '2024-11-28 18:51:56', 'vardump007@gmail.com', 1581632830, 'Wela A Magsino', 'Blk 9 Lot 18', 'Pending', '', '', '', '', '', '', '', '', '', '', ''),
+(37, 1395802853, 'Direct Complaint', 'Test lang ulet sa email', 'Parking Problems', 'Tricycle nya sa gate ko binangga', '[\"malupiton4.jpg\"]', '', '0000-00-00 00:00:00', '2024-11-28 20:51:53', 'vardump007@gmail.com', 1581632830, 'Wela A Magsino', 'Blk 9 Lot 18', 'Pending', '', '', '', '', '', '', '', '', '', '', ''),
+(38, 1604739286, 'Direct Complaint', 'Test sa notify', 'Property Maintenance', 'Kalat nya', '[\"malupiton4.jpg\"]', '', '0000-00-00 00:00:00', '2024-11-28 21:04:51', 'vardump007@gmail.com', 1581632830, 'Wela A Magsino', 'Blk 9 Lot 18', 'Pending', '', '', '', '', '', '', '', '', '', '', ''),
+(39, 1053648047, 'General Complaint', '', 'Noise Complaint', 'test nasira yung filed date', '[\"malupiton4.jpg\"]', '', '2024-11-28 22:15:27', '', '', 1581632830, 'Wela A Magsino', 'Blk 9 Lot 18', 'Pending', '', '', '', '', '', '', '', '', '', '', ''),
+(40, 1430726902, 'Direct Complaint', 'Test sa notice', 'Parking Problems', 'cutie', '[\"malupiton2.png\"]', '', '2024-11-28 22:16:51', 'Blk 78 Lot 10', 'vardump007@gmail.com', 1581632830, 'Wela A Magsino', 'Blk 9 Lot 18', 'Escalated', '2024-11-29 06:30:11', 'Turn over na po di ko na kaya', 'admin', 'Escalated', '2024-11-29 06:42:20', '', '', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -327,8 +333,9 @@ CREATE TABLE `otp_verifications` (
 --
 
 INSERT INTO `otp_verifications` (`otp_id`, `email`, `otp`, `expiry`) VALUES
-(1, 'vardump007@gmail.com', '861744', '2024-11-28 12:42:34'),
-(12, 'wela@gmail.com', '329966', '2024-11-28 12:26:27');
+(1, 'vardump007@gmail.com', '658045', '2024-11-29 08:47:36'),
+(12, 'wela@gmail.com', '329966', '2024-11-28 12:26:27'),
+(16, 'tnjrdlcrz@gmail.com', '972352', '2024-11-28 16:12:28');
 
 -- --------------------------------------------------------
 
@@ -400,38 +407,39 @@ CREATE TABLE `tblaccounts` (
   `status` varchar(255) NOT NULL,
   `role` varchar(255) NOT NULL,
   `access` varchar(255) NOT NULL,
-  `otp` varchar(20) NOT NULL
+  `otp` varchar(20) NOT NULL,
+  `naughty_list` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `tblaccounts`
 --
 
-INSERT INTO `tblaccounts` (`user_id`, `unique_id`, `email`, `password`, `img`, `status`, `role`, `access`, `otp`) VALUES
-(2, 1589571584, 'admin@gmail.com', '21232f297a57a5a743894a0e4a801fc3', '1715091144pusi.jpg', 'Offline now', 'admin', 'Approved', 'Verified'),
-(4, 1357825271, 'senpai@gmail.com', '1e5db03ce967cfef4e21ada16da09b06', '1715105349271713718_1999144396919159_608519389647854942_n.jpg', 'Offline now', 'user', 'Rejected', 'Verified'),
-(19, 112466338, 'Prins@gmail.com', '0a9e0db6e95c394ee792ecbc6e510791', '1717745936pitikvermo.jpg', 'Pending', 'user', 'Approved', ''),
-(21, 1017731196, 'tnjrdlcrz@gmail.com', '202cb962ac59075b964b07152d234b70', '1717937589pitikvermo.jpg', 'Pending', 'user', 'Approved', ''),
-(22, 1593518745, 'aawafawf@gmail.com', '2310553235ab181ae0c551c242988734', 'Mabuhay_Logo.png', 'Pending', 'user', 'Pending', ''),
-(23, 1469021725, 'adadawda@gmail.com', '32db117b68ab7598389c18b68f721116', 'Mabuhay_Logo.png', 'Pending', 'user', 'Pending', ''),
-(24, 1433443368, 'waeaewea@gmail.com', '458e5a124f7ed72d143d837a9a3bd76e', 'Mabuhay_Logo.png', 'Pending', 'user', 'Pending', ''),
-(25, 1095492376, 'daadaaw@gmail.com', 'f2a85c6878e7978563609d089ee1173a', 'Mabuhay_Logo.png', 'Pending', 'user', 'Pending', ''),
-(26, 911851766, 'aSbkghjgsghj@gmail.com', '4e3b9566b4b9abfd8f6671f7b4e423a7', 'Mabuhay_Logo.png', 'Pending', 'user', 'Pending', ''),
-(27, 509858760, 'Tiklop@gmail.com', '9f4a66a0bac35d6f7f25b5fd931c7abe', 'Mabuhay_Logo.png', 'Pending', 'user', 'Pending', ''),
-(28, 1581632830, 'wela@gmail.com', 'f9395f741e6f4da0f873c08008ed5760', 'Mabuhay_Logo.png', 'Active now', 'user', 'Approved', 'Verified'),
-(29, 821155870, 'Renz@gmail.com', 'b55dc472db84256de67972b96657e7b9', 'Mabuhay_Logo.png', 'Active now', 'user', 'Approved', 'Verified'),
-(30, 776313154, 'Pat@gmail.com', '532762fa5a5b7169aa4dd24717ba9df9', 'Mabuhay_Logo.png', 'Offline now', 'user', 'Approved', 'Verified'),
-(31, 1590469844, 'Pao@gmail.com', '1b6203e2e1b7e63e7b3677cdd932001f', 'Mabuhay_Logo.png', 'Offline now', 'user', 'Approved', 'Verified'),
-(32, 1308040957, 'John@gmail.com', '61409aa1fd47d4a5332de23cbf59a36f', 'Mabuhay_Logo.png', 'Offline now', 'user', 'Approved', 'Verified'),
-(33, 931588206, 'Jane@gmail.com', '2b95993380f8be6bd4bd46bf44f98db9', 'Mabuhay_Logo.png', 'Offline now', 'user', 'Approved', 'Verified'),
-(34, 662462528, 'Hev@gmail.com', '84f60ea382314109784cb42b9b4b8e42', 'Mabuhay_Logo.png', 'Offline now', 'user', 'Approved', 'Verified'),
-(35, 499733408, 'Ethan@gmail.com', 'e05699b45eae134804f4419d3fbb3139', 'Mabuhay_Logo.png', 'Offline now', 'user', 'Approved', 'Verified'),
-(36, 1434008263, 'Rose@gmail.com', '0df4dccc4aac3f6f36e00ef2a6a4bfac', 'Mabuhay_Logo.png', 'Offline now', 'user', 'Approved', 'Verified'),
-(37, 1195874011, 'Mia@gmail.com', '46e6f8781dd60e2635430b61db511262', 'Mabuhay_Logo.png', 'Offline now', 'user', 'Approved', 'Verified'),
-(38, 724357114, 'barangay@gmail.com', '1ee0fa80acf1af702cf55d07704548f6', 'Mabuhay_Logo.png', 'Offline now', 'barangay', 'Approved', 'Verified'),
-(39, 916555761, 'vardump007@gmail.com', 'b2145aac704ce76dbe1ac7adac535b23', 'Mabuhay_Logo.png', 'Offline now', 'user', 'Approved', 'Verified'),
-(47, 939514278, 'vardump07@gmail.com', 'ceb232a461e38a2ed16aae9ab58671a8', 'Mabuhay_Logo.png', 'Offline now', 'user', 'Pending', ''),
-(48, 809272943, 'vardump0007@gmail.com', '202cb962ac59075b964b07152d234b70', 'Mabuhay_Logo.png', 'Offline now', 'user', 'Pending', '');
+INSERT INTO `tblaccounts` (`user_id`, `unique_id`, `email`, `password`, `img`, `status`, `role`, `access`, `otp`, `naughty_list`) VALUES
+(2, 1589571584, 'admin@gmail.com', '21232f297a57a5a743894a0e4a801fc3', '1715091144pusi.jpg', 'Offline now', 'admin', 'Approved', 'Verified', 0),
+(4, 1357825271, 'senpai@gmail.com', '1e5db03ce967cfef4e21ada16da09b06', '1715105349271713718_1999144396919159_608519389647854942_n.jpg', 'Offline now', 'user', 'Rejected', 'Verified', 0),
+(19, 112466338, 'Prins@gmail.com', '0a9e0db6e95c394ee792ecbc6e510791', '1717745936pitikvermo.jpg', 'Pending', 'user', 'Approved', '', 0),
+(21, 1017731196, 'tnjrdlcrz@gmail.com', '202cb962ac59075b964b07152d234b70', '1717937589pitikvermo.jpg', 'Pending', 'user', 'Approved', 'Verified', 0),
+(22, 1593518745, 'aawafawf@gmail.com', '2310553235ab181ae0c551c242988734', 'Mabuhay_Logo.png', 'Pending', 'user', 'Pending', '', 0),
+(23, 1469021725, 'adadawda@gmail.com', '32db117b68ab7598389c18b68f721116', 'Mabuhay_Logo.png', 'Pending', 'user', 'Pending', '', 0),
+(24, 1433443368, 'waeaewea@gmail.com', '458e5a124f7ed72d143d837a9a3bd76e', 'Mabuhay_Logo.png', 'Pending', 'user', 'Pending', '', 0),
+(25, 1095492376, 'daadaaw@gmail.com', 'f2a85c6878e7978563609d089ee1173a', 'Mabuhay_Logo.png', 'Pending', 'user', 'Pending', '', 0),
+(26, 911851766, 'aSbkghjgsghj@gmail.com', '4e3b9566b4b9abfd8f6671f7b4e423a7', 'Mabuhay_Logo.png', 'Pending', 'user', 'Pending', '', 0),
+(27, 509858760, 'Tiklop@gmail.com', '9f4a66a0bac35d6f7f25b5fd931c7abe', 'Mabuhay_Logo.png', 'Pending', 'user', 'Pending', '', 0),
+(28, 1581632830, 'wela@gmail.com', 'f9395f741e6f4da0f873c08008ed5760', 'Mabuhay_Logo.png', 'Offline now', 'user', 'Approved', 'Verified', 0),
+(29, 821155870, 'Renz@gmail.com', 'b55dc472db84256de67972b96657e7b9', 'Mabuhay_Logo.png', 'Active now', 'user', 'Approved', 'Verified', 0),
+(30, 776313154, 'Pat@gmail.com', '532762fa5a5b7169aa4dd24717ba9df9', 'Mabuhay_Logo.png', 'Offline now', 'user', 'Approved', 'Verified', 0),
+(31, 1590469844, 'Pao@gmail.com', '1b6203e2e1b7e63e7b3677cdd932001f', 'Mabuhay_Logo.png', 'Offline now', 'user', 'Approved', 'Verified', 0),
+(32, 1308040957, 'John@gmail.com', '61409aa1fd47d4a5332de23cbf59a36f', 'Mabuhay_Logo.png', 'Offline now', 'user', 'Approved', 'Verified', 0),
+(33, 931588206, 'Jane@gmail.com', '2b95993380f8be6bd4bd46bf44f98db9', 'Mabuhay_Logo.png', 'Offline now', 'user', 'Approved', 'Verified', 0),
+(34, 662462528, 'Hev@gmail.com', '84f60ea382314109784cb42b9b4b8e42', 'Mabuhay_Logo.png', 'Offline now', 'user', 'Approved', 'Verified', 0),
+(35, 499733408, 'Ethan@gmail.com', 'e05699b45eae134804f4419d3fbb3139', 'Mabuhay_Logo.png', 'Offline now', 'user', 'Approved', 'Verified', 0),
+(36, 1434008263, 'Rose@gmail.com', '0df4dccc4aac3f6f36e00ef2a6a4bfac', 'Mabuhay_Logo.png', 'Offline now', 'user', 'Approved', 'Verified', 0),
+(37, 1195874011, 'Mia@gmail.com', '46e6f8781dd60e2635430b61db511262', 'Mabuhay_Logo.png', 'Offline now', 'user', 'Approved', 'Verified', 0),
+(38, 724357114, 'barangay@gmail.com', '1ee0fa80acf1af702cf55d07704548f6', 'Mabuhay_Logo.png', 'Offline now', 'barangay', 'Approved', 'Verified', 0),
+(39, 916555761, 'vardump007@gmail.com', 'b2145aac704ce76dbe1ac7adac535b23', 'Mabuhay_Logo.png', 'Offline now', 'user', 'Approved', 'Verified', 1),
+(47, 939514278, 'vardump07@gmail.com', 'ceb232a461e38a2ed16aae9ab58671a8', 'Mabuhay_Logo.png', 'Offline now', 'user', 'Pending', '', 0),
+(48, 809272943, 'vardump0007@gmail.com', '202cb962ac59075b964b07152d234b70', 'Mabuhay_Logo.png', 'Offline now', 'user', 'Pending', '', 0);
 
 -- --------------------------------------------------------
 
@@ -513,10 +521,11 @@ CREATE TABLE `tbl_sessions` (
 
 INSERT INTO `tbl_sessions` (`session_id`, `unique_id`, `last_activity`, `device_ip`, `status`) VALUES
 ('56htq7vh3dcstor8pubar342gh', 1581632830, '2024-11-25 07:55:33', '::1', 'inactive'),
-('77u9luim9024hbt0k2k0oigjci', 1581632830, '2024-11-27 21:28:46', '::1', 'active'),
+('77u9luim9024hbt0k2k0oigjci', 1581632830, '2024-11-27 21:28:46', '::1', 'inactive'),
 ('806gfh10fgskgvdcr4bm69855o', 1589571584, '2024-11-26 02:26:15', '::1', 'inactive'),
 ('avdlcnc21i5846mk7jg0dhpuoq', 724357114, '2024-11-26 20:12:26', '::1', 'inactive'),
 ('e35bng9v3gnt04ndngrer6g8ec', 1589571584, '2024-11-27 22:08:25', '::1', 'inactive'),
+('fptp5hdvi6om2gjmjm2oju6af9', 1589571584, '2024-11-28 21:52:55', '::1', 'inactive'),
 ('jrsdp4em90angoisbm694npi0b', 1581632830, '2024-11-25 07:57:10', '::1', 'inactive'),
 ('u8ts71fn1jb160mq0m719bjbba', 1589571584, '2024-11-26 15:42:33', '::1', 'inactive');
 
@@ -749,7 +758,7 @@ ALTER TABLE `announcements`
 -- AUTO_INCREMENT for table `complaints`
 --
 ALTER TABLE `complaints`
-  MODIFY `complaint_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `complaint_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT for table `forms`
@@ -773,7 +782,7 @@ ALTER TABLE `officials`
 -- AUTO_INCREMENT for table `otp_verifications`
 --
 ALTER TABLE `otp_verifications`
-  MODIFY `otp_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `otp_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `payments`

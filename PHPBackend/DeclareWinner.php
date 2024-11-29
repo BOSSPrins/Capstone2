@@ -392,6 +392,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         tblaccounts.img
                     FROM tblresident
                     INNER JOIN tblaccounts ON tblresident.unique_id = tblaccounts.unique_id
+                    AND tblaccounts.naughty_list <= 2
                     WHERE (CONCAT(tblresident.first_name, ' ', tblresident.middle_name, ' ', tblresident.last_name) LIKE ? 
                         OR tblresident.block LIKE ? 
                         OR tblresident.lot LIKE ?)
