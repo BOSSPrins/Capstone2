@@ -214,6 +214,7 @@ input[type="password"]::-ms-reveal {
 }
 
 .forgot-text.Verify{
+    display: none;
     color: var(--color-primary);
     margin-right: 170px;
 }

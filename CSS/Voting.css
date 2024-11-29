@@ -519,39 +519,30 @@ scrollbar-width: thin; /* For Firefox */
 
 .VotingNavv{
     margin: 10px 10px 0px 10px;
-    /* background: gray; */
-    font-size: 0;
+    font-size: 0; /* Removes any unwanted spacing around inline-block elements */
+    display: flex; /* Use flexbox to distribute space evenly */
+    gap: 10px; /* Adds a gap between the anchor tags */
+    margin-top: 15px;
 }
 
 .VotingNavv a {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #ffcccc;
+    flex: 1; /* Each anchor tag takes up equal space */
+    padding: 5px 20px;
+    background-color: #dfdfdf;
     color: black;
     text-decoration: none;
     font-size: 16px; /* Reset font-size for anchor tags */
+    text-align: center; /* Centers the text inside the anchor tags */
 }
 
-
-.VotingNavv a:nth-child(1){
-    background: rgb(255, 255, 255);
-    border-radius: 7px 7px 0 0;
-    border: 1px solid gray;
-    border-bottom: none;
+.VotingNavv a.VoteActivee{
+    background: #c7b216; /* Change the background color when active */
+    color: white; /* Optional: Change text color when active */
 }
 
-.VotingNavv a:nth-child(2){
-    background: rgb(255, 255, 255);
-    border-radius: 7px 7px 0 0;
-    border: 1px solid gray;
-    border-bottom: none;
-}
-
-.VotingNavv a:nth-child(3){
-    background: rgb(255, 255, 255);
-    border-radius: 7px 7px 0 0;
-    border: 1px solid gray;
-    border-bottom: none;
+.VotingNavv a:hover{
+    background: #c7b216;
+    color: white;
 }
 
 .EachContentsMonth {

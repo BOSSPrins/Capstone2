@@ -1,371 +1,709 @@
 :root{
-    --color-primary: #1828b8;
-    --color-danger: #ff7782;
-    --color-success: #41f1b6;
-    --color-warning: #ffbb55;
-    --color-white: #fff;
-    --color-info-dark: #1e1e1f;
-    --color-info-light: #939fb6;
-    --color-dark: #363949;
-    --color-light: rgba(61, 109, 176, 0.18);
-    --color-light-2: rgba(52, 58, 116, 0.20);
-    --color-primary-variant: #111e88;
-    --color-dark-variant: #677483;
-    --color-background: #f6f6f9;
+  --color-primary: #1828b8;
+  --color-danger: #ff7782;
+  --color-success: #41f1b6;
+  --color-warning: #ffbb55;
+  --color-white: #fff;
+  --color-info-dark: #1e1e1f;
+  --color-info-light: #939fb6;
+  --color-dark: #363949;
+  --color-light: rgba(61, 109, 176, 0.18);
+  --color-light-2: rgba(52, 58, 116, 0.20);
+  --color-primary-variant: #111e88;
+  --color-dark-variant: #677483;
+  --color-background: #f0f0f0;
 
-    --light: #f9f9f9;
-    --blue: #3c91e6;
-    --light-blue: #a9d5ff;
-    --light-red: #f38c8c;
-    --light-green: #a7f9d0;
-    --grey: #eee;
-    --dark-grey: #aaaaaa;
-    --drak: #342e37;
-    --red:  #e88383;
-    --green: rgb(94, 232, 129);
-    --color-info-dark: #919497;
+  --light: #f9f9f9;
+  --blue: #3c91e6;
+  --light-blue: #a9d5ff;
+  --light-red: #f38c8c;
+  --light-green: #a7f9d0;
+  --grey: #eee;
+  --dark-grey: #aaaaaa;
+  --drak: #342e37;
+  --red:  #e88383;
+  --green: rgb(94, 232, 129);
+  --color-info-dark: #919497;
 
-    --color-border-radius: 2rem;
-    --color-border-radius-1: 0.4rem;
-    --color-border-radius-2: 0.8rem;
-    --color-border-radius-3: 1.2rem;
+  --color-border-radius: 2rem;
+  --color-border-radius-1: 0.4rem;
+  --color-border-radius-2: 0.8rem;
+  --color-border-radius-3: 1.2rem;
 
 
-    --card-padding: 1.8rem;
-    --padding-1: 1.2rem;
+  --card-padding: 1.8rem;
+  --padding-1: 1.2rem;
 
-    --box-shadow: 0 2rem 3rem var(--color-light);
-
-    --backgound-hover: rgb(234, 233, 233);
-    --background-hover2: rgba(192, 212, 241, 0.18);
-    --background-active: rgb(147, 200, 245);
+  --box-shadow: 0 2rem 3rem var(--color-light);
 }
 
 *{
-    margin: 0;
-    padding: 0;
-    outline: none;
-    appearance: none;
-    border: 0;
-    text-decoration: none;
-    list-style: none;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  outline: none;
+  appearance: none;
+  border: 0;
+  text-decoration: none;
+  list-style: none;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
 }
 
 html{
-    font-size: 14px;
+  font-size: 14px;
 }
 
-.mainCoversationChatContainer{
-    width: 100vw;
-    max-height: 100vh;
-    font-family: Arial, sans-serif;
-    font-size: 0.88rem;
-    background: var(--color-background);
-    user-select: none;
-    overflow-x: hidden;
-    overflow-y: auto; /* Change to 'auto' */
-    color: var(--color-dark);
-}
-
-/* ===== HEADER DESIGN ===== */
-.headerTop{
-    height: 50px;
-    /* background: rgb(255, 255, 255); */
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    position: fixed;
-    top: 5px;
-    left: 5px;
-    right: 5px;
-    z-index: 1100; /* Increase z-index to ensure it's above the sidebar */
-}
-
-.leftSection{
-    background-color: rgb(255, 255, 255);
-    width: 250px ;
-    display: flex;
-    align-items: center;
-    padding-left: 20px;
-    /* border-bottom-width: 2px;
-    border-bottom-style: solid;
-    border-bottom-color: rgb(161, 161, 161); */
-}
-
-.rightSection{
-    background-color: transparent;
-    width: 250px ;
-    display: flex;
-    align-items: center;
-    justify-content: end;
-}
-
-.headerTop h2{
-    margin-left: 15px;
-}
-
-/* ===== HEADER IMAGE SIZE ===== */ 
-.menu{
-    width: 25px;
-    margin-right: 10px;
-    cursor: pointer;
-}
-
-.user-img{
-    width: 30px;
-    height: 30px;
-    background: rgb(0, 0, 0);
-    border-radius: 20px;
-}
-
-.eme3{
-    width: 0;
-    height: 0;
-    border-left: 5px solid transparent;
-    border-right: 5px solid transparent;
-    border-top: 6px solid #000000;
-    transition: 0.3s;
-    margin-left: 10px;
-    margin-right: 10px;
-}
-
-.img-logo{
-    width: 3.5rem;
-    height: 3.5rem;
+.mainDashboardContainer{
+  width: 100vw;
+  height: 100vh;
+  font-family: Arial, sans-serif;
+  font-size: 0.88rem;
+  background: var(--color-background);
+  user-select: none;
+  overflow-x: hidden;
+  color: var(--color-dark);
 }
 
 /* ===== SIDEBAR DESIGN ===== */
-.sidebarContainer{
-    position: fixed; /* Change position to fixed */
-    display: flex;
-    flex-direction: column;
-    left: 5px;
-    bottom: 5px;
-    top: 55px;
-    background-color:  rgb(255, 255, 255);
-    width: 250px;
-    margin-top: 4px;
-    transition: all 0.3s;
-    z-index: 1000; /* Ensure the sidebar is above other content */
+.sidebarContainer {
+position: fixed;
+display: flex;
+flex-direction: column;
+bottom: 0;
+top: 0;
+background-color: rgb(255, 255, 255);
+width: 275px;
+transition: all 0.3s;
 }
 
-.sidebarContainer span{
-    font-size: 14.5px;
-    font-weight: 500;
+.sidevarhid{
+    display: none;
 }
 
-.sidebarContainer .sideside{
-    display: flex;
-    color: var(--color-info-dark);
-    margin-left: 2rem;
-    gap: 1rem;
-    align-items: center;
-    position: relative;
-    height: 4rem;
-    transition: all 300ms ease;
+.DagdagNanaman {
+flex: 1; /* Allow the div to grow and fill available space */
+overflow-y: auto; /* Enable vertical scrolling */
+/* background-color: gray; */
+scrollbar-width: thin; /* For Firefox */
 }
 
-.sidebarContainer .sideside .img-sideboard{
-    font-size: 1.6rem;
-    transition: all 300ms ease;
+.DagdagNanaman span{
+  font-size: 14.5px;
+  font-weight: 500;
 }
 
-.sidebarContainer .sideside:last-child{
-    position: absolute;
-    bottom: 2rem;
-    width: 100%;
+.DagdagNanaman .sideside{
+  display: flex;
+  color: var(--color-info-dark);
+  padding-left: 25px;
+  gap: 1rem;
+  align-items: center;
+  position: relative;
+  height: 3.6rem;
+  transition: all 300ms ease;
 }
 
-.sidebarContainer .sideside.active{
-    background: var(--color-light);
-    color: var(--color-primary);
-    margin-left: 5px;
+.DagdagNanaman .sideside .img-sideboard{
+  font-size: 1.6rem;
+  transition: all 300ms ease;
 }
 
-.sidebarContainer .sideside.active::before{
-    content: '';
-    width: 6px;
-    height: 100%;
-    background: var(--color-primary);
+.DagdagNanaman .sideside:last-child{
+  bottom: 1px;
 }
 
-.sidebarContainer .sideside.active .img-sideboard{
-    margin-left: calc(1rem -3rem);
+/* Active state for sidebar items */
+.sideside.baractive {
+  background: var(--color-light);
+  color: var(--color-primary);
 }
 
-.sidebarContainer .sideside:hover{
-    color: var(--color-primary);
+.sideside.baractive::before{
+  content: '';
+  width: 4px;
+  height: 100%;
+  background: var(--color-primary);
+  position: absolute;
+  left: 0;
+  top: 0;
+  margin-left: 2px;
 }
 
-.sidebarContainer .sideside:hover .img-sideboard{
-    margin-left: 1rem;
+.DagdagNanaman .sideside.baractive .img-sideboard{
+  margin-left: calc(1rem -3rem);
 }
+
+.DagdagNanaman .sideside:hover{
+  color: var(--color-primary);
+}
+
+.DagdagNanaman .sideside:hover .img-sideboard{
+  margin-left: 1rem;
+}
+
+/* SIDEBAR ACTIVE */
+.sidebarActive {
+  transform: translateX(250px); 
+}
+
+/* .MonthlyDuessContainerr.MonthlyDuessConActivee {
+  margin-left: 5px;
+} */
 
 /* ===== SIDEBAR IMAGE SIZE ===== */
 .img-sideboard{
-    width: 30px;
-}
-
-/* ========== SIDEBAR ACTIVE ========== */
-.sidebarContainer.sideActive{
-    width: 110px;
-}
-
-.sidebarContainer.sideActive .eme2 {
-    display: none;
-}
-
-.sidebarContainer.sideActive .subMenuComp{
-    margin-left: 15px;
-}
-
-.sidebarContainer.sideActive span{
-    display: none;
-}
-
-.mainChatContainerr.mainChathConActivee{
-    padding-left: 120px;
+  width: 20px;
 }
 
 /* ========== SUB MENU SIDEBAR ========== */
-.subMenuComp{
-    display: none;
-    margin-left: 35px;
-    transition: all 0.3s;
+.subMenuComp,
+.subMenuDocs {
+  display: none;
+  margin-left: 35px;
+  transition: all 0.3s;
 }
 
-.submenu-visible {
-    display: block; 
+.CompSubMenuVisible {
+  display: block;
 }
 
-.subMenuComp li a{
-    position: relative;
-    display: flex;
-    color: var(--color-info-dark);
-    padding: 10px;
-    position: relative;
-    transition: all 300ms ease;
+.DocsSubmenuVisible {
+  display: block;
 }
 
-.eme2{
-    width: 0;
-    height: 0;
-    border-left: 5px solid transparent;
-    border-right: 5px solid transparent;
-    border-top: 6px solid #aeaeae;
-    transition: 0.3s;
-    margin-left: 40px;
+.subMenuDocs li a, .subMenuComp li a {
+  position: relative;
+  display: flex;
+  color: var(--color-info-dark);
+  padding: 10px;
+  position: relative;
+  transition: all 300ms ease;
 }
 
-.eme2-rotate{
-    transform: rotate(180deg);
+.subMenuDocs li a.baractive,
+.subMenuComp li a.baractive {
+  background: var(--color-light);
+  color: var(--color-primary);
 }
 
-.subMenuComp li a.active{
-    background: var(--color-light);
-    color: var(--color-primary);
-    height: 100%;
-    margin-left: 5px;
+.subMenuDocs li a.baractive::before,
+.subMenuComp li a.baractive::before {
+  content: '';
+  width: 4px;
+  height: 100%;
+  background: var(--color-primary);
+  position: absolute;
+  left: 0;
+  top: 0;
+  margin-left: 2px;
 }
 
-.sidebarContainer li a:hover{
-    color: var(--color-primary);
-    margin-left: 1rem;
+/* Hover effect for submenu item icons */
+.subMenuComp li a:hover .img-subMenu,
+.subMenuDocs li a:hover .img-subMenu {
+  margin-left: 1rem;
 }
 
-.subMenuComp li a.active::before {
-    content: '';
-    width: 4px;
-    height: 100%;
-    background: var(--color-primary);
-    position: absolute;
-    left: 0;
-    top: 0;
+.subMenuComp li a .img-subMenu,
+.subMenuDocs li a .img-subMenu {
+  font-size: 1.6rem;
+  transition: all 300ms ease;
 }
 
-/* ===== SUB MENU IMAGE ==== */
-.img-subMenu{
-    width: 20px;
-    margin-right: 5px;
+.eme2, .eme3 {
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 6px solid #aeaeae;
+  transition: 0.3s;
 }
 
-.sub-spa{
-    margin-top: 5px;
+.buttonEme2, .buttonEme3 {
+  padding: 10px 15px;
+  margin-left: 5px;
+  cursor: pointer;
 }
 
-/* ========== MAIN CHAT TOP CONTENT DESIGN ========== */
-.mainChatContainerr{
-    position: relative;
-    padding-left: 255px;
-    margin-top: 59px;
-    height: calc(100vh - 59px);
+.eme2-rotate, .eme3-rotate {
+  transform: rotate(180deg);
 }
 
-.chatContentSidebar{
-    position: absolute;
+/* Submenu image and label */
+.img-subMenu {
+  width: 20px;
+  margin-right: 5px;
+}
+
+.sub-spa {
+  margin-top: 5px;
+}
+
+/* ========== MAIN DASHBOARD DESIGN ========== */
+.MainBodyContainerr {
+padding-left: 275px;
+transition: 0.3s ease;
+display: flex; /* Ensure it uses flexbox to manage layout */
+flex-direction: column; /* Stack children vertically */
+height: 100vh; /* Make sure it takes full viewport height */
+}
+
+.MainBodyy{
+    padding: 0;
+}
+
+.MainContainerForTables {
+display: flex;
+justify-content: center;
+width: 100%;
+flex: 1; /* Allow it to grow and take available space */
+overflow: hidden; /* Prevent scrollbars here */
+}
+
+.MainContainerAll {
+    width: 100%;
+    background-color: #ffffff;
+    border: 1px solid rgb(179, 172, 172);
+    margin: 10px;
+    display: flex; /* Use flex to layout the child containers side-by-side */
+    overflow: hidden;
+}
+
+/* DESIGN PARA TO SA HEADER NG SIDEBAR AT SA MAIN */
+.headerTop{
+  align-items: center;
+  text-align: center;
+  background: rgb(229, 229, 229);
+  height: 160px;
+  width: 100%;
+  padding-top: 10px;
+  box-shadow: 0 8px 8px -10px #888888;
+  font-size: 12.4px;
+  color: rgb(60, 60, 60);
+}
+
+.img-logo{
+  width: 100px;
+}
+
+.headerTopMain{
+  position: sticky;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 50px;
+  width: 100%;
+  background: rgb(255, 255, 255);
+  padding: 20px;
+  top: 0;
+  box-shadow: 5px 10px 18px #888888;
+  box-shadow: 0 8px 8px -10px black;
+  z-index: 1;
+}
+
+.HamburgerandOthers{
+  display: flex;
+  align-items: center;
+}
+
+.namePerModule{
+  padding-left: 20px;
+}
+
+.menu{
+  width: 25px;
+  cursor: pointer;
+}
+
+.ProfileViewww{
+  display: flex;
+  align-items: center;
+}
+
+.user-img{
+  width: 30px;
+  height: 30px;
+  background: rgb(0, 0, 0);
+  border-radius: 20px;
+}
+
+.profileBtn{
+  padding: 5px 20px;
+  margin-right: 5px;
+  cursor: pointer;
+}
+
+.profileBtn label{
+  cursor: pointer;
+}
+
+/* ===== PROFILE MODAL DESIGN ===== */
+.ParentModalProf {
+  display: none;
+}
+
+.modal {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.subModal {
+  display: flex;
+  justify-content: center;
+  height: auto;
+  width: 100%;
+  width: 800px;
+  height: 500px; /* Set the desired height */
+  background: white;
+  overflow: hidden; /* Ensure that content doesn't overflow */
+  display: flex;
+  flex-direction: column; /* To allow profileSidebar and other content to be arranged vertically */
+  border-radius: 10px;
+}
+
+.PangEkis {
+  display: flex;
+  justify-content: end;
+  padding: 0px 10px;
+  background: rgb(0, 26, 141);
+}
+
+.EkisToo {
+  cursor: pointer;
+  font-size: 22px;
+  color: white;
+}
+
+.modal-content {
+  display: flex;
+  height: 100%;
+  overflow: hidden; /* Ensure content inside the modal doesn't overflow */
+  width: 100%;
+}
+
+.profileSidebar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; /* Align items to the top */
+  background: rgb(0, 26, 141);
+  width: 150px;
+  height: 100%; /* Takes up the full height of .subModal */
+}
+
+.profileSidebar a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 4rem;
+  margin-bottom: 5px;
+  color: white;
+}
+
+.profilePages {
+  padding: 10px;
+  flex-grow: 1; /* Allow it to expand with content */
+  overflow-y: auto; /* Enable vertical scrolling if content exceeds the modal height */
+  height: 100%; /* Take up remaining space inside the modal */
+  background: rgb(255, 255, 255);
+  scrollbar-width: thin;
+}
+
+.profileSidebar a:hover{
+  color: rgb(197, 197, 197);
+}
+
+/* Hide all pages initially */
+.page {
+  display: none;
+}
+
+/* Show active page */
+.activeProfModal{
+  display: block;
+}
+
+/* ===== CHANGING PASSWORD ===== */
+.changingPassword {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 20px;
+  margin-left: 50px;
+  margin-right: 50px;
+}
+
+.changingInputBox{
+  width: 100%;
+  margin-bottom: 50px;
+}
+
+.changingInputBoxLast{
+  width: 100%;
+}
+
+.changingInputBox .inputngChanging,
+.changingInputBoxLast .inputngChanging{
+  width: 100%;
+  padding: 15px;
+  font-size: 20px;
+  border-radius: 10px;
+  border: 1px solid rgba(62, 65, 71, 0.4);
+}
+
+.changingInputBox .inputngChanging:focus,
+.changingInputBoxLast .inputngChanging:focus{
+  border-color: var(--color-primary);
+}
+
+.changingForgotPass {
+  display: flex;
+  justify-content: end;
+  margin-top: 15px;
+  font-size: 17.5px;
+  width: 100%;
+}
+
+.forgotpassAs{
+  color: var(--color-primary);
+}
+
+.forgotpassAs:hover{
+  text-decoration: underline;
+}
+
+.paragChange{
+  margin-top: 10px;
+}
+
+.buttonSapagPalit{
+  margin-top: 10px;
+  width: 100%;
+  padding: 15px;
+  background: var(--color-primary);
+  color: white;
+  font-size: 17.5px;
+  cursor: pointer;
+}
+
+/* DESIGN NG PROFILE  */
+.Profilebyu {
+  display: flex; /* Arrange items horizontally */
+  gap: 15px; /* Space between the rows */
+  flex-wrap: wrap; /* Allow items to wrap to the next line if the container is too narrow */
+  margin-top: 10px;
+  margin-bottom: 13px;
+}
+
+.Input-Roww {
+  display: flex; /* Display label and input beside each other */
+  flex-direction: column; /* Stack label above input */
+  width: 48%; /* Ensure the input fields are side by side, adjust as necessary */
+}
+
+.Input-Roww label {
+  font-weight: 550;
+  display: block; /* Make label block-level to appear on top */
+  margin-bottom: 5px; /* Space between label and input */
+}
+
+.Input-Roww input {
+  position: relative;
+  height: 35px;
+  width: 100%;
+  outline: none;
+  font-size: 1rem;
+  color: #000000;
+  margin-top: 5px;
+  border: 1px solid rgba(62, 65, 71, 0.4);
+  border-radius: 5px;
+  background: transparent;
+  padding: 0 15px; /* Adjust padding for icons */
+  box-sizing: border-box; /* Include padding in width calculation */
+}
+
+.Input-Roww input:focus {
+  border-color: var(--color-primary);
+}
+
+.Profilebyu2 {
+  display: flex; /* Arrange child items (input rows) beside each other */
+  gap: 15px; /* Space between the columns */
+  margin-top: 10px;
+  margin-bottom: 13px;
+}
+
+.Input-Roww2 {
+  display: flex; /* Display label and input beside each other */
+  flex-direction: column; /* Stack label on top of input */
+  flex: 1; /* Allow the inputs to grow and take equal space */
+}
+
+.Input-Roww2 label {
+  font-weight: 550;
+  display: block; /* Make label block-level to appear on top */
+  margin-bottom: 5px; /* Space between label and input */
+}
+
+.Input-Roww2 input {
+  position: relative;
+  height: 35px;
+  width: 100%;
+  outline: none;
+  font-size: 1rem;
+  color: #000000;
+  margin-top: 5px;
+  border: 1px solid rgba(62, 65, 71, 0.4);
+  border-radius: 5px;
+  background: transparent;
+  padding: 0 15px; /* Adjust padding for icons */
+  box-sizing: border-box; /* Include padding in width calculation */
+}
+
+.In {
+  position: relative;
+  height: 35px;
+  width: 100%;
+  outline: none;
+  font-size: 1rem;
+  color: #000000;
+  margin-top: 5px;
+  border: 1px solid rgba(62, 65, 71, 0.4);
+  border-radius: 5px;
+  background: transparent;
+  padding: 0 15px; /* Adjust padding for icons */
+}
+
+.In:focus {
+  border-color: var(--color-primary);
+}
+
+.H2 {
+  text-align: center;
+}
+
+/* DESIGN PARA SA PAG UPDATE NG PICTURE */
+.UserProfilee {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.UserImgCon {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  overflow: hidden; /* Ensure the image is cropped into a circle */
+  border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+  margin-left: 35px;
+}
+
+.Imggg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensures the image covers the whole container */
+}
+
+.CameraFileUp {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid #000;
+  background-color: #e1e1e1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  margin-top: 10px; /* Space between the image and the button */
+  top: 40px;
+  right: 40px;
+}
+
+.CameraFileUp::before {
+  font-size: 20px;
+}
+
+#UploadPicUser {
+  display: none;
+}
+
+.camera {
+  width: 20px;
+}
+
+/* DESIGN PARA SA RESIDENTS CHAT */
+.chatContentSidebar {
     width: 280px;
     display: flex;
     flex-direction: column;
-    height: 100%; /* Adjusted height to fit within viewport minus header height */
+    height: 100%;
     top: 0;
+    background: rgb(192, 192, 192);
 }
 
-.chatSearch{
-    width: 20px;
-}
+/* .chatContentSidebarTitle {
+    padding: 10px;
+    background: #1828b8;
+} */
 
-.chatContentSidebarTitle{
-    font-size: 25px;
-    font-weight: 600;
-    margin-bottom: 10px;
-    padding-bottom: 12.5px;
-    padding-top: 15px;
-    padding-left: 2px;
-    background:  rgb(255, 255, 255);
-    box-shadow: 0 2px 8px -2px rgb(172, 172, 172);
-}
-
-.chatContentSidebarForm{
+.SeachingChat {
     position: relative;
-    margin-bottom: 10px;
-}
-
-.chatContentSidebarInput{
-    display: block;
-    padding: 8px 10px;
-    background-color: white;
-    border: 1px solid rgba(62, 65, 71, 0.4);
-    outline: none;
+    display: flex;
+    align-items: center;
     width: 100%;
-    border-radius: 5px;
-    padding-right: 36px;
-    /* font-size: 14px; */
 }
 
-.chatContentSidebarInput:focus{
-    border-color: var(--color-primary);
+.chatContentSidebarInput {
+    width: 100%;
+    padding: 0 40px 0 10px; /* Add padding to the left and right of the input field */
+    box-sizing: border-box; /* Ensure padding is included in total width */
+    height: 40px; /* Set input height */
+    margin: 5px;
+    border-radius: 10px;
+    
 }
 
-.chatContentSubmit{
+.chatContentSubmit {
     position: absolute;
-    top: 55%;
-    transform: translateY(-50%);
-    right: 16px;
-    background-color: transparent;
-    outline: transparent;
+    right: 20px; /* Position the button inside the input (right side) */
+    top: 50%;
+    transform: translateY(-50%); /* Vertically center the button */
+    background: none;
     border: none;
+    padding: 0;
     cursor: pointer;
-    transform: color .15s ease-in-out;
 }
 
-/* ========== SIDE CHAT DESIGN ========== */
+.chatSearch {
+    width: 20px; /* Adjust the icon size */
+    height: 20px;
+}
+
 .contentMessages{
     overflow-y: auto;
 }
 
-.contentMessages::-webkit-scrollbar{
-    display: none;
+/* ========== SIDE CHAT DESIGN ========== */
+.contentMessages {
+    overflow-y: auto;
+    flex-grow: 1; /* Make the messages section grow and fill available space */
+    padding: 10px; /* Add padding to the messages list */
+    background: #f1f1f1; /* Optional background for content */
 }
  
 .messagesList {
@@ -449,7 +787,7 @@ html{
 }
 
 .bold {
-    font-weight: bold;                        /*  testing ng font sa userlist sana gumana bukas */
+    font-weight: bold;  
 }
 
 .messagesAtIbapa{
@@ -471,12 +809,13 @@ html{
     font-weight: 500;
 }
 
-/* ========== CHAT MESSAGES CONTENTS ========== */
-.conChatConversation{
-    margin-left: 286px;
-    /* background: gray; */
-    height: 100%;
-    margin-right: 5px;
+/* DESIGN PARA SA CONVERSATION CONTENT */
+.conChatConversation {
+    flex-grow: 2; /* Allow it to grow and take more space */
+    background: #e0e0e0; /* Background color for the chat conversation */
+    overflow-y: auto; /* Ensure scrolling works if content overflows */
+    /* padding: 10px; Add padding to the conversation */
+    margin-left: 5px; /* Space between contentMessages and conChatConversation */
 }
 
 .img-kaliwa{
@@ -484,11 +823,10 @@ html{
 }
 
 .TopngConversation{
-    padding: 8px 16px;
     display: flex;
+    padding: 5px;
     align-items: center;
     background-color: rgb(251, 251, 251);
-    box-shadow: 0 2px 8px -2px rgb(172, 172, 172);
 }
 
 .conversationBack{
@@ -529,7 +867,6 @@ html{
     font-size: 17px;
 }
 
-
 .mgaKausapStatus::after{
     content: '';
      width: 10px;
@@ -544,40 +881,6 @@ html{
 
 .mgaKausapStatus.online::after {
     background: rgb(1, 207, 36); /* Online color */
-}
-
-
-/* === MGA TATANGGALIN */
-.imgPhone{
-    width: 20px;
-} 
-
-.mgaPipindutin{
-    display: flex;
-    align-items: center;
-    margin-left: auto;
-}
-
-.mgaPipindutin > *{
-    width: 36px;
-    height: 36px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    background-color: transparent;
-    border: none;
-    outline: none;
-    cursor: pointer;
-    margin-left: 10px;
-}
-
-.mgaPipindutin > :hover{
-    background: rgb(234, 233, 233);
-}
-
-.mgaPipindutin > :active{
-    background: var(--color-light);
 }
 
 /* ====== CONVERSATION DESIGN ===== */
@@ -604,31 +907,36 @@ html{
 }
 
 .messenger-container {
-    height: calc(100vh - 115px);
+    height: calc(100vh - 125px);
     margin: 0;
     padding: 0;
     display: flex;
     flex-direction: column;
-  }
+}
   
-  .message-display {
-        flex: 1;
-        overflow-y: auto;
-        overflow-x: hidden;
-  }
-  
-  .input-container {
+.message-display {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
     display: flex;
-  }
+    flex-direction: column; /* Stack messages from top to bottom */
+    justify-content: flex-end; /* Ensure new messages appear at the bottom */
+    padding: 10px;
+    gap: 10px;
+}
   
-  .input-container {
+.input-container {
+    display: flex;
+}
+  
+.input-container {
     display: flex;
     align-items: center;
     padding: 10px;
     border-top: 1px solid #ccc;
-  }
+}
   
-  .message-input {
+.message-input {
     flex: 1;
     width: calc(100% - 90px); /* Set width to 100% */
     padding: 10px;
@@ -638,226 +946,226 @@ html{
     max-height: 200px;
     resize: none;
     overflow-y: auto;
-  }
+}
 
-  .message-input::-webkit-scrollbar{
+.message-input::-webkit-scrollbar{
     display: none;
-  }
+}
   
-  /* ========== MAIN CHAT ITEMS DESIGN ========== */
-  .imgMores,
-  .forwardImg,
-  .deleteImg{
-      width: 17px;
-      margin-right: 10px;
-  }
+/* ========== MAIN CHAT ITEMS DESIGN ========== */
+.imgMores,
+.forwardImg,
+.deleteImg{
+    width: 17px;
+    margin-right: 10px;
+}
   
-  .katawanNgChat{
-      overflow-y: auto;
-      height: 100%;
-      height: 515px;
-      margin-left: 10px;
-      padding: 10px;
-  }
+.katawanNgChat{
+    overflow-y: auto;
+    height: 100%;
+    height: 515px;
+    margin-left: 10px;
+    padding: 10px;
+}
   
-  .katawanNgChat::-webkit-scrollbar{
-      display: none;
-  }
+.katawanNgChat::-webkit-scrollbar{
+    display: none;
+}
   
-  .chatRaps{
-     list-style-type: none; 
-     padding: 0;
-     margin: 0;
-  }
+.chatRaps{
+    list-style-type: none; 
+    padding: 0;
+    margin: 0;
+}
   
-  .chatItems{
+.chatItems{
     display: flex;
     align-items: flex-end;
     flex-direction: row-reverse;
     margin-bottom: 16px;
     word-wrap: break-word; 
       
-  }
+}
   
-  .chatItemsGilid{
-      margin-left: 8px;
-  }
+.chatItemsGilid{
+    margin-left: 8px;
+}
   
-  .chatItemsGimage{
-      display: block;
-      width: 35px;
-      height: 35px;
-      border-radius: 50%;
-      object-fit: cover;
-  }
+.chatItemsGimage{
+    display: block;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    object-fit: cover;
+}
   
-  .ItemsConsts{
-      width: 100%;
-  }
+.ItemsConsts{
+    width: 100%;
+}
   
-  .ItemsWrapper:not(:last-child){
-      margin-bottom: 8px;
-  }
+.ItemsWrapper:not(:last-child){
+    margin-bottom: 8px;
+}
   
-  .ItemBoxes{
+.ItemBoxes{
     position: relative;
     max-width: 720px;
     margin-left: auto;
     
-  }
+}
   
-  .ItemBoxTexts{
-      padding: 12px 16px 8px;
-      background: var(--color-white);
-      box-shadow: 0 2px 8px -2px rgba(0, 0, 0, 0.1);
-      color: rgb(45, 45, 45);
-      font-size: 14px;
-      border-radius: 6px;
-      line-height: 1.5;
-  }
+.ItemBoxTexts{
+    padding: 12px 16px 8px;
+    background: var(--color-white);
+    box-shadow: 0 2px 8px -2px rgba(0, 0, 0, 0.1);
+    color: rgb(45, 45, 45);
+    font-size: 14px;
+    border-radius: 6px;
+    line-height: 1.5;
+}
   
-  .ItemBoxTime{
-      display: block;
-      text-align: right;
-      margin-top: 4px;
-      font-size: 10px;
-      color: var(--color-info-dark);
-      line-height: 1;
-  }
+.ItemBoxTime{
+    display: block;
+    text-align: right;
+    margin-top: 4px;
+    font-size: 10px;
+    color: var(--color-info-dark);
+    line-height: 1;
+}
   
-  .ItemsDropDown{
-      position: absolute;
-      top: 0;
-      right: calc(100% + 8px);
-      opacity: 0;
-      visibility: hidden;
-      transition: all 0.15 ease-in-out;
-  }
+.ItemsDropDown{
+    position: absolute;
+    top: 0;
+    right: calc(100% + 8px);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.15 ease-in-out;
+}
   
-  .ItemsWrapper:hover .ItemsDropDown{
-      opacity: 1;
-      visibility: visible;
-  }
+.ItemsWrapper:hover .ItemsDropDown{
+    opacity: 1;
+    visibility: visible;
+}
   
-  .ItemDrop-btn{
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-      background-color: rgb(238, 235, 235);
-      cursor: pointer;
-      outline: none;
-      border: none;
-      transition: all 0.15s ease-in-out;
-      padding-left: 10px;
-  }
+.ItemDrop-btn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: rgb(238, 235, 235);
+    cursor: pointer;
+    outline: none;
+    border: none;
+    transition: all 0.15s ease-in-out;
+    padding-left: 10px;
+}
   
-  .ItemDrop-btn:hover{
-      background: var(--color-light);
-      box-shadow: 0 2px 8px -2px var(--color-primary);
-  }
+.ItemDrop-btn:hover{
+    background: var(--color-light);
+    box-shadow: 0 2px 8px -2px var(--color-primary);
+}
   
-  .ItemDrop-btn.active{
-      background-color: var(--background-active);
-  }
+.ItemDrop-btn.active{
+    background-color: var(--background-active);
+}
   
-  .ItemsDropDownList{
-      position: absolute;
-      top: 100%;
-      left: 0;
-      background: rgb(238, 235, 235);
-      z-index: 10;
-      box-shadow: 0 2px 8px -2px var(--color-primary);
-      border-radius: 4px 0;
-      opacity: 0;
-      visibility: hidden;
-      transform: scale(.9);
-      transform-origin: left top;
-      transition: all 0.15s ease-in-out;
-  }
+.ItemsDropDownList{
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: rgb(238, 235, 235);
+    z-index: 10;
+    box-shadow: 0 2px 8px -2px var(--color-primary);
+    border-radius: 4px 0;
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(.9);
+    transform-origin: left top;
+    transition: all 0.15s ease-in-out;
+}
   
-  .ItemsDropDown.active .ItemsDropDownList{
-      opacity: 1;
-      visibility: visible;
-      transform: scale(1);
-  }
+.ItemsDropDown.active .ItemsDropDownList{
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1);
+}
   
-  .ItemsDropDownList a{
-      display: flex;
-      align-items: center;
-      color: rgb(81, 81, 81);
-      font-size: 13px;
-      padding: 6px 12px;
-  }
+.ItemsDropDownList a{
+    display: flex;
+    align-items: center;
+    color: rgb(81, 81, 81);
+    font-size: 13px;
+    padding: 6px 12px;
+}
   
-  .ItemsDropDownList a:hover{
-      background: var(--color-light);
-  }
+.ItemsDropDownList a:hover{
+    background: var(--color-light);
+}
   
-  .ItemsDropDownList a.active{
-      background: var(--background-active);
-  }
+.ItemsDropDownList a.active{
+    background: var(--background-active);
+}
   
-  .ItemsDropDownList a i{
-      font-size: 16px;
-      margin-right: 8px;
-  }
+.ItemsDropDownList a i{
+    font-size: 16px;
+    margin-right: 8px;
+}
   
-  .dividerngKatawan{
-      position: relative;
-      text-align: center;
-      font-size: 13px;
-      color: rgb(141, 140, 140);
-      margin-bottom: 10px;
-      margin-top: 20px;
-  }
+.dividerngKatawan{
+    position: relative;
+    text-align: center;
+    font-size: 13px;
+    color: rgb(141, 140, 140);
+    margin-bottom: 10px;
+    margin-top: 20px;
+}
   
-  .dividerngKatawan::before{
-      content: '';
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      left: 0;
-      width: 100%;
-      height: 0;
-      border-bottom: 1px solid rgb(141, 140, 140);
-  }
+.dividerngKatawan::before{
+    content: '';
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 0;
+    width: 100%;
+    height: 0;
+    border-bottom: 1px solid rgb(141, 140, 140);
+}
   
-  .dividerngKatawan span{
-      position: relative;
-      display: inline-block;
-      padding: 0 8px;
-      background-color: var(--color-background);
-      z-index: 1;
-  }
+.dividerngKatawan span{
+    position: relative;
+    display: inline-block;
+    padding: 0 8px;
+    background-color: var(--color-background);
+    z-index: 1;
+}
   
-  /* THIS IS THE OTHER SIDE REPLYING */
-  .chatItems.ehe{
-      flex-direction: row;
-  }
+/* THIS IS THE OTHER SIDE REPLYING */
+.chatItems.ehe{
+    flex-direction: row;
+}
   
-  .chatItems.ehe .ItemBoxes{
-      margin-left: unset;
+.chatItems.ehe .ItemBoxes{
+    margin-left: unset;
       
-  }
+}
   
-  .chatItems.ehe .chatItemsGilid{
-      margin-right: 8px;
-  }
+.chatItems.ehe .chatItemsGilid{
+    margin-right: 8px;
+}
   
-  .chatItems.ehe .ItemsDropDown{
-      left: calc(100% + 8px);
-      right: unset;
-  }
+.chatItems.ehe .ItemsDropDown{
+    left: calc(100% + 8px);
+    right: unset;
+}
   
-  .chatItems.ehe .ItemBoxTexts{
-      background: rgb(111, 168, 233);
-      box-shadow: 0 2px 8px -2px var(--color-primary);
-      color: rgba(255, 255, 255, 0.8);
-  }
+.chatItems.ehe .ItemBoxTexts{
+    background: rgb(111, 168, 233);
+    box-shadow: 0 2px 8px -2px var(--color-primary);
+    color: rgba(255, 255, 255, 0.8);
+}
   
-  .chatItems.ehe .ItemBoxTime{
+.chatItems.ehe .ItemBoxTime{
     color: rgba(255, 255, 255, .7);
-  }
+}

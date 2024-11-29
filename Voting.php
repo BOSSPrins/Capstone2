@@ -182,6 +182,7 @@ if (isset($_SESSION['unique_id'])) {
                 </div>
                 <div class="VotingNavv">
                     <a href="#" onclick="toggleContent('CandidateTable')"> Candidates Table </a>
+                    <a href="#" onclick="toggleContent('Logs')"> Logs </a>
                     <a href="#" onclick="toggleContent('History')"> History </a>
                 </div>
                 <div class="MainContainerForTables">
@@ -373,6 +374,10 @@ if (isset($_SESSION['unique_id'])) {
                                 </tbody>
                             </table>
                         </div>
+                    </div>
+
+                    <div id="Logs" class="EachContentsMonth">
+                        
                     </div>
 
                     <!-- Modal for displaying recent winners -->

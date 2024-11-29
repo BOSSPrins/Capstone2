@@ -106,7 +106,7 @@ function sendOTPEmail($email, $otp) {
                       <img src="cid:logo_cid" alt="Logo">
                     </div>
                       <h1>Your OTP for Verification</h1>
-                      <p> "Your OTP is: <strong>'. $otp.'</strong> This code is valid for 10 minutes.";</p>
+                      <p> "Your OTP is: <strong>'. $otp.'</strong> This code is valid for 60 seconds.";</p>
                       
                   </div>
               </body>

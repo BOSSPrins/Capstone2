@@ -674,8 +674,6 @@ height: 100vh;
   justify-content: center;
   width: 100%;
   height: 80px;
-  border-radius: 5px;
-  border: 2px dashed #3056b5;
   cursor: pointer;
 } 
 
@@ -750,7 +748,10 @@ height: 100vh;
 }
 
 .Panira2 {
+  margin-top: 15px;
   width: 100%;
+  border-radius: 5px;
+  border: 2px dashed #3056b5;
 }
 
 /* Lightbox styles (overlay background) */
@@ -866,12 +867,12 @@ height: 100vh;
   transform: rotate(180deg);
 }
 
-.GenComplainUser, .DescripUserGen, .GenComplainUser2 {
+.GenComplainUser, .DescripUserGen, .GenComplainUser2, .GenComplainUser3 {
   display: flex;
   align-items: center;
 }
 
-.GenComplainUser label, .DescripUserGen label, .GenComplainUser2 label {
+.GenComplainUser label, .DescripUserGen label, .GenComplainUser2 label, .GenComplainUser3 label {
   width: 150px;  /* Set a fixed width for all labels */
   font-weight: bold;
   margin-right: 15px;  /* Space between label and input */
@@ -905,8 +906,6 @@ height: 100vh;
   width: 100%;
   margin: 10px 0;
   height: 80px;
-  border-radius: 5px;
-  border: 2px dashed #3056b5;
   cursor: pointer;
   /* margin-left: 20px; */
 }
@@ -970,8 +969,11 @@ height: 100vh;
 }
 
 .Panira {
+  margin-top: 10px;
   width: 100%;
-  margin-left: 23px;
+  border-radius: 5px;
+  border: 2px dashed #3056b5;
+  margin-left: 20px;
 }
 
 /* Display file names if not an image */
