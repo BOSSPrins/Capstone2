@@ -89,8 +89,20 @@ if(!empty($access) && !empty($fname) && !empty($lname) && !empty($gender) && !em
             VALUES ('{$ran_id}', '{$email}', '{$encrypt_pass}', '{$img_name}', '{$status}', '{$role}', '{$access}')");
 
             if($insert_query_account) {
-                $select_sql2 = mysqli_query($conn, "SELECT * FROM tblaccounts WHERE email = '{$email}'");
 
+                $verified_query = mysqli_query($conn, "SELECT email, status FROM verified_email WHERE email = '{$email}' AND status = 'Verified'");
+                if (mysqli_num_rows($verified_query) > 0) {
+                    $verified_data = mysqli_fetch_assoc($verified_query);
+                    $verified_status = $verified_data['status'];
+                    
+                    $update_otp_query = mysqli_query($conn, "UPDATE tblaccounts SET otp = '{$verified_status}' WHERE email = '{$email}'");
+                    if (!$update_otp_query) {
+                        echo "Failed to update OTP status!";
+                        exit();
+                    }
+                }
+
+                $select_sql2 = mysqli_query($conn, "SELECT * FROM tblaccounts WHERE email = '{$email}'");
                 if(mysqli_num_rows($select_sql2) > 0) {
                     $result = mysqli_fetch_assoc($select_sql2);
                     $_SESSION['unique_id'] = $result['unique_id'];

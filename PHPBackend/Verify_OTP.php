@@ -49,17 +49,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($input['action'])) {
         $result = mysqli_query($conn, $query);
 
         if (mysqli_num_rows($result) > 0) {
-            // Mark account as verified
-            $update_query = "UPDATE tblaccounts SET otp = 'Verified' WHERE email = '$email'";
-            if (mysqli_query($conn, $update_query)) {
+            // Insert or update the email in the verified_email table
+            $update_query = "INSERT INTO verified_email (email, status) 
+                             VALUES (?, ?) 
+                             ON DUPLICATE KEY UPDATE status = ?";
+            $status = 'Verified';
+            $stmt_update = mysqli_prepare($conn, $update_query);
+            mysqli_stmt_bind_param($stmt_update, "sss", $email, $status, $status);
+            
+            if (mysqli_stmt_execute($stmt_update)) {
                 $_SESSION['otp_status'] = 'Verified';
+                error_log("OTP update successful for email: $email");
                 echo json_encode(['success' => true, 'message' => 'Account verified successfully.']);
             } else {
+                error_log("Error verifying account: " . mysqli_error($conn));
                 echo json_encode(['success' => false, 'message' => 'Failed to verify account.']);
             }
         } else {
             echo json_encode(['success' => false, 'message' => 'Invalid or expired OTP.']);
         }
+        
         
     } else {
         echo json_encode(['success' => false, 'message' => 'Invalid action specified.']);

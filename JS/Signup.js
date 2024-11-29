@@ -50,7 +50,7 @@ document.addEventListener("DOMContentLoaded", () => {
         console.log('Sending OTP...');
 
         const email = document.getElementById('emailOTP').value;
-        
+            
         if (!email) {
             alert('Please enter an email address.');
             return;
