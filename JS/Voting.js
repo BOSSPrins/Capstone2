@@ -78,32 +78,36 @@ const toggleContent = (contentId) => {
     // Hide all content sections
     const contents = document.querySelectorAll(".EachContentsMonth");
     contents.forEach((content) => {
-        content.style.display = "none";
+        content.style.display = "none";  // Hide each content section
     });
 
-    // Display the selected content or default content if contentId is not provided
+    // Display the selected content
     let selectedContent = document.getElementById(contentId);
-    if (!selectedContent) {
-        // If contentId is not provided or does not exist, retrieve from localStorage
-        const storedContentId = localStorage.getItem('selectedContentId');
-        selectedContent = document.getElementById(storedContentId);
+    if (selectedContent) {
+        selectedContent.style.display = "block";  // Show selected content
+        localStorage.setItem('selectedContentId', contentId);  // Store the selected content ID
     }
 
-    if (selectedContent) {
-        selectedContent.style.display = "block";
-        // Store the selected content ID in localStorage
-        localStorage.setItem('selectedContentId', selectedContent.id);
+    // Add the active state to the clicked link
+    const links = document.querySelectorAll('.VotingNavv a');
+    links.forEach((link) => {
+        link.classList.remove('VoteActivee');  // Remove active class from all links
+    });
+
+    // Find the clicked link and add the active class
+    const clickedLink = document.querySelector(`.VotingNavv a[href='#'][onclick="toggleContent('${contentId}')"]`);
+    if (clickedLink) {
+        clickedLink.classList.add('VoteActivee');  // Add active class to the clicked link
     }
 }
 
 // Function to run when the page loads
 const onPageLoad = () => {
-    // Retrieve the last selected content ID from localStorage
     const storedContentId = localStorage.getItem('selectedContentId');
     if (storedContentId) {
-        toggleContent(storedContentId); // Display the last selected content
+        toggleContent(storedContentId);  // Display the last selected content
     } else {
-        toggleContent('CandidateTable'); // Display 'Payments' content by default if no stored ID
+        toggleContent('CandidateTable');  // Display 'CandidateTable' by default if no stored ID
     }
 }
 

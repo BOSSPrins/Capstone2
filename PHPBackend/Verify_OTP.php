@@ -66,7 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($input['action'])) {
                 echo json_encode(['success' => false, 'message' => 'Failed to verify account.']);
             }
         } else {
-            echo json_encode(['success' => false, 'message' => 'Invalid or expired OTP.']);
+            echo json_encode(['success' => false, 'message' => 'Invalid or OTP.']);
         }
         
         

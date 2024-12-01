@@ -1,3 +1,28 @@
+<?php
+include_once "Connect/Connection.php";
+session_start();
+
+if (isset($_SESSION['unique_id'])) {
+    if ($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'barangay') {
+        header("Location: LoginPage.php");
+        exit();
+    }
+} else {
+    header("Location: LoginPage.php");
+    exit();
+}
+
+
+$admin_unique_id = ''; // Default value if no admin found
+$admin_sql = mysqli_query($conn, "SELECT unique_id FROM tblaccounts WHERE role = 'admin' LIMIT 1");
+if ($admin_sql && mysqli_num_rows($admin_sql) > 0) {
+    $admin_row = mysqli_fetch_assoc($admin_sql);
+    $admin_unique_id = $admin_row['unique_id'];
+}
+$encoded_id = urlencode($admin_unique_id);
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

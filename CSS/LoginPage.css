@@ -255,6 +255,10 @@ input[type="password"]::-ms-reveal {
     margin-bottom: 20px;
 }
 
+.imgLogo2 {
+    width: 130px;
+    margin-bottom: 20px;
+}
 
 .signUp-title{
     font-size: 28px;

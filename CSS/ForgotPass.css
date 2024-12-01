@@ -1,0 +1,154 @@
+* {
+    box-sizing: border-box;
+    font-family: arial;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    padding: 0;
+    margin: 0;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.ForgotForms {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+form {
+    width: 100%;
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.Email, .verify, .newPass {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    height: 100%;
+    width: 100%;
+}
+
+.top {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 20px 0;
+}
+
+.middle {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+    padding: 0 15px;
+    flex-grow: 1;
+}
+
+.middle label {
+    margin-bottom: 5px;
+}
+
+.input-container {
+    position: relative;
+    width: 100%;
+}
+
+.InputEmail {
+    width: 100%;
+    padding: 8px;
+    padding-right: 40px; /* Space for the icons inside the input */
+    margin-top: 5px;
+    border-radius: 5px;
+    font-size: larger;
+    border: 1px solid rgba(118, 147, 193, 0.4);
+    outline: none;
+}
+
+.InputEmail:focus {
+    border: 1px solid blue;
+    outline: none;
+}
+
+.IconMata {
+    position: absolute;
+    right: 10px; /* Position the icons to the right side */
+    top: 50%;
+    transform: translateY(-50%); /* Vertically center the icons */
+    width: 25px; /* Adjust icon size */
+    cursor: pointer;
+    margin-left: 5px;
+}
+
+.bottom {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 10px;
+}
+
+.ForgotImg {
+    width: 150px;
+    margin-left: 15px;
+}
+
+.CircleBackG {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 250px;
+    height: 250px;
+    background: rgb(210, 244, 255);
+    border-radius: 50%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.btnSend {
+    width: 100%;
+    border-radius: 10px;
+    border: none;
+    padding: 15px;
+    font-size: large;
+    background: rgb(0, 94, 255);
+    color: white;
+    cursor: pointer;
+    display: block;
+}
+
+.btnSend:hover {
+    background: rgb(84, 146, 255);
+}
+
+/* Resetting form and input default styling */
+form input,
+form button {
+    font-family: inherit;
+    font-size: inherit;
+    border: none;
+    outline: none;
+}
+
+input[type="password"]::-ms-reveal {
+    display: none;
+}
+
+form button {
+    display: block;
+    width: 100%;
+}

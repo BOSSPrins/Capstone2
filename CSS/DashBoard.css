@@ -497,61 +497,6 @@ overflow-y: auto; /* Optional: Add scrollbar if content overflows */
   cursor: pointer;
 }
 
-/* DESIGN PARA SA DASH CONTAINER */ 
-.ResidentsH3{
-  margin-bottom: 10px;
-}
-
-.img-cards{
-  width: 40px;
-} 
-
-.dashContents{
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  padding-bottom: 20px;
-  /* background: rgb(174, 174, 174); */
-}
-
-.dashboardCards{
-  display: grid;
-  width: 100%;
-  padding-left: var(--card-padding);
-  padding-right: var(--card-padding);
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 1.6rem;
-  /* background: gray; */
-}
-
-.dashboardCards > div{
-  background: rgb(182, 182, 182);
-  padding: var(--card-padding);
-  border-radius: var(--color-border-radius);
-  /* box-shadow: var(--box-shadow); */
-  transition: all 300ms ease;
-  cursor: pointer;
-}
-
-.dashboardCards > div:hover{
-  box-shadow: none;
-}
-
-.dashboardCards > div .center{
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.info-card{
-  color: black;
-  text-align: center;
-  margin-bottom: 5px;
-  margin-left: 15px;
-}
-
-
 /* DESIGN NG PROFILE  */
 .Profilebyu {
   display: flex; /* Arrange items horizontally */
@@ -702,4 +647,61 @@ overflow-y: auto; /* Optional: Add scrollbar if content overflows */
 .camera {
   width: 20px;
 }
+
+/* DESIGN PARA SA DASH CONTAINER */ 
+.ResidentsH3{
+  margin-bottom: 10px;
+}
+
+.img-cards{
+  width: 40px;
+} 
+
+.dashContents{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding-bottom: 20px;
+  /* background: rgb(174, 174, 174); */
+}
+
+.dashboardCards{
+  display: grid;
+  width: 100%;
+  padding-left: var(--card-padding);
+  padding-right: var(--card-padding);
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1.6rem;
+  /* background: gray; */
+}
+
+.dashboardCards > div{
+  background: rgb(182, 182, 182);
+  padding: var(--card-padding);
+  border-radius: var(--color-border-radius);
+  /* box-shadow: var(--box-shadow); */
+  transition: all 300ms ease;
+  cursor: pointer;
+}
+
+.dashboardCards > div:hover{
+  box-shadow: none;
+}
+
+.dashboardCards > div .center{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.info-card{
+  color: black;
+  text-align: center;
+  margin-bottom: 5px;
+  margin-left: 15px;
+}
+
+
+
 

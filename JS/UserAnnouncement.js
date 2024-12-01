@@ -45,3 +45,28 @@ function openPage(pageName) {
     }
     document.getElementById(pageName).classList.add("activeProfModal");
 }
+
+// FUNCTION PARA SA READ MORE 
+function toggleAnnounce(pageId) {
+    // Hide all pages
+    const Dahon = document.querySelectorAll('.AnnouncementCardss');
+    Dahon.forEach(page => {
+        page.style.display = 'none'; // Hide all containers
+    });
+
+    // Show the selected page
+    const selectedPage = document.getElementById(pageId);
+    if (selectedPage) {
+        selectedPage.style.display = 'flex'; // Use flex to maintain the layout
+    }
+
+    // Store the active page in local storage
+    localStorage.setItem('activeContainer', pageId);
+}
+
+// Check local storage on page load to determine which container to show
+window.onload = function() {
+    const activeContainer = localStorage.getItem('activeContainer');
+    toggleAnnounce(activeContainer || 'MainAnnouncements'); // Default to 'tableCon'
+}
+
