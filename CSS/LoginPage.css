@@ -372,6 +372,51 @@ input[type="password"]::-ms-reveal {
     background: #111d89;
 }
 
+/* DESIGN NG MGA BUTTON SA OTP */
+.sendOTP {
+    display: none;
+    width: 30%;
+    padding: 10px 30px;
+    border: none;
+    color: white;
+    background: var(--color-primary);
+    border-radius: 5px;
+    cursor: pointer;
+}
+.sendOTP:hover {
+    background: #111d89;
+}
+
+.verifyOTP {
+    width: 30%;
+    padding: 10px 30px;
+    border: none;
+    color: white;
+    background: var(--color-primary);
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.verifyOTP:hover {
+    background: #111d89;
+}
+
+.resendOTP {
+    display: none;
+    width: 40%;
+    padding: 10px 30px;
+    border: none;
+    color: white;
+    background: var(--color-primary);
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.resendOTP:hover {
+    background: #111d89;
+}
+
+
 /* DESIGN PARA SA IROR AT SA SAKSES */
 .iror{
     color: #721c24;

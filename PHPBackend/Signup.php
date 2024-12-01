@@ -27,7 +27,7 @@ $role = "user";
 $disabilities = isset($_POST['disabilities']) ? mysqli_real_escape_string($conn, $_POST['disabilities']) : 'No';
 
 // Default image path if no image is uploaded
-$default_image_path = 'Mabuhay_Logo.png'; // Update with the actual path to your default image
+$default_image_path = 'default_Image.png'; // Update with the actual path to your default image
 
 if (empty($age) && !empty($dob)) {
     $dobDate = new DateTime($dob);

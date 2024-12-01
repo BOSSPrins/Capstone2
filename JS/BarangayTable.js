@@ -307,6 +307,7 @@ function BRNGYfetchComplaintDetails(complaintId) {
 
                 document.getElementById('ComplaineeName').value = response.data.complainee;
                 document.getElementById('ComplaineeAddress').value = response.data.complaineeAddress;
+                document.getElementById('ComplaineeEmail').value = response.data.ComplaineeEmail;
                 document.getElementById('ComplainantName').value = response.data.complainantName;
                 document.getElementById('ComplainantAddress').value = response.data.complainantAddress;
                 document.getElementById('DateSubmit').value = formatDateTimeToWords(response.data.filed_date);
@@ -441,12 +442,17 @@ function BRNGYsubmitComplaintUpdate() {
     const complainantUID = document.getElementById('complainantUID').value;
     const complaint_number = document.getElementById('complaint_number').value;
     const Description = document.getElementById('Description').value;
+    const ComplaintType = document.getElementById('ComplaintType').value;
+    const ComplaineeEmail = document.getElementById('ComplaineeEmail').value;
     
     const complaintId = document.getElementById('ComplaintID').value;
     const status = document.getElementById('RemarkStatus').value;
     const remark = document.getElementById('NewRemark').value;
     const role = document.getElementById('RemarkRole').value;
     const generatedFileName = document.getElementById('generatedFileName').value;
+
+    const loadingIndicator = document.getElementById('loading-indicator');
+    loadingIndicator.style.setProperty('display', 'flex', 'important'); // Show loading indicator
 
     fetch('PHPBackend/Complaint.php', {
         method: 'POST',
@@ -465,24 +471,31 @@ function BRNGYsubmitComplaintUpdate() {
     .then(response => response.json())
     .then(data => {
         if (data.success) {
-            
-
-            sendEmailToComplainant(complainantUID, complaint_number, Description);
-            
+            return Promise.all([
+                sendEmailToComplainant(complainantUID, complaint_number, Description),
+                sendEmailToComplainee(ComplaineeEmail, ComplaintType)
+            ]);
         } else {
             console.error('Error updating complaint:', data.error);
+            throw new Error('Complaint update failed');
         }
+    })
+    .then(() => {
+        alert('Complaint updated successfully and both parties notified!');
+        location.reload();
     })
     .catch(error => {
         console.error('Request failed:', error);
+        alert('An error occurred: ' + error.message);
+    })
+    .finally(() => {
+        loadingIndicator.style.setProperty('display', 'none', 'important'); // Hide loading indicator when done
     });
 }
 
-function sendEmailToComplainant(complainantUID, complaint_number, Description) {
-    const loadingIndicator = document.getElementById('loading-indicator');
-    loadingIndicator.style.setProperty('display', 'flex', 'important'); // Show loading indicator
 
-    fetch('Emailer/BrngyEmail.php', {
+function sendEmailToComplainant(complainantUID, complaint_number, Description) {
+    return fetch('Emailer/BrngyEmail.php', { // Return the promise
         method: 'POST',
         body: new URLSearchParams({
             complainantUID: complainantUID,
@@ -490,28 +503,46 @@ function sendEmailToComplainant(complainantUID, complaint_number, Description) {
             Description
         }),
     })
-    .then(response => response.json())  // Get raw response as text
+    .then(response => response.json())
     .then(data => {
-        console.log(data);  // Log the raw response for debugging
-        try {
-            
-            console.log("Parsed response:", data);
-            if (data.success) {
-                alert('Complaint updated successfully!');
-
-            } else {
-                console.error("Error:", data.error);
-                alert('Email failed: ' + data.message);
-            }
-        } catch (error) {
-            console.error("Failed to parse JSON:", error);
+        console.log("Parsed response:", data);
+        if (data.success) {
+            console.log("Email sent successfully to complainant.");
+        } else {
+            console.error("Error:", data.error);
+            throw new Error('Email to complainant failed: ' + data.message);
         }
     })
-    .catch(error => console.error("AJAX error:", error))
-    .finally(() => {
-        loadingIndicator.style.setProperty('display', 'none', 'important'); // Hide loading indicator when email is processed
+    .catch(error => {
+        console.error("AJAX error:", error);
+        throw error; // Ensure error propagates to Promise.all
     });
 }
+
+function sendEmailToComplainee(ComplaineeEmail, ComplaintType) {
+    return fetch('Emailer/ComplaineeBrngyEmail.php', { // Return the promise
+        method: 'POST',
+        body: new URLSearchParams({
+            ComplaineeEmail: ComplaineeEmail,
+            ComplaintType
+        }),
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Parsed response:", data);
+        if (data.success) {
+            console.log("Email sent successfully to complainee.");
+        } else {
+            console.error("Error:", data.error);
+            throw new Error('Email to complainee failed: ' + data.message);
+        }
+    })
+    .catch(error => {
+        console.error("AJAX error:", error);
+        throw error; // Ensure error propagates to Promise.all
+    });
+}
+
 
 
 function BRNGYHistoryBadge() {
@@ -705,6 +736,7 @@ const fileName = `Settled-Letter-${complaintData.complaintNumber}.pdf`; // Dynam
 const pdfData = doc.output('arraybuffer'); 
 sendToServer(pdfData, fileName); 
 // doc.save(fileName);
+createPdfCard(fileName);
  // Update the input field with the generated file name
  document.getElementById('generatedFileName').value = fileName;
 }
@@ -720,21 +752,37 @@ function sendToServer(pdfData, fileName) {
         body: formData
     })
     .then(response => response.text()) // Get the raw response text first
-.then(rawResponse => {
-    console.log('Raw Response:', rawResponse);  // Log the raw response to check for any extra characters
-    try {
-        const data = JSON.parse(rawResponse);  // Parse the raw response as JSON
-        if (data.success) {
-            console.log('Success:', data.message); // Handle success
-        } else {
-            console.error('Error:', data.message); // Handle error
+    .then(rawResponse => {
+        console.log('Raw Response:', rawResponse);  // Log the raw response to check for any extra characters
+        try {
+            const data = JSON.parse(rawResponse);  // Parse the raw response as JSON
+            if (data.success) {
+                console.log('Success:', data.message); // Handle success
+            } else {
+                console.error('Error:', data.message); // Handle error
+            }
+        } catch (error) {
+            console.error('Error parsing JSON:', error); // Handle JSON parsing error
         }
-    } catch (error) {
-        console.error('Error parsing JSON:', error); // Handle JSON parsing error
+    })
+    .catch(error => {
+        console.error('Request failed', error); // Handle fetch error
+    });
     }
-})
-.catch(error => {
-    console.error('Request failed', error); // Handle fetch error
-});
+
+
+function createPdfCard(fileName) {
+    const pdfContainer = document.getElementById('pdfContainerNew');
+    pdfContainer.style.display = 'flex'; // Make the container visible
+
+    // Clear existing content and add the new card
+    const cardHTML = `
+        <div class="pdf-card-new">
+            <img src="Pictures/pdf.png" alt="PDF Icon">
+            <span class="pdf-file-name">${fileName}</span>
+        </div>
+    `;
+
+    pdfContainer.innerHTML = cardHTML; // Add the new PDF card to the container
 }
 

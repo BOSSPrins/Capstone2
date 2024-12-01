@@ -843,7 +843,7 @@
 
 .winner-item {
   display: flex;
-  flex-direction: row; /* Align image and text horizontally */
+  flex-direction: column; /* Align image and text horizontally */
   align-items: center;
   background: #f8f8f8;
   padding: 20px 25px;
@@ -862,8 +862,10 @@
 
 /* Styling for the winner's image */
 .winner-item img {
-  width: 100px; /* Increased image size */
-  height: 100px;
+  width: 120px; /* Increased image size */
+  height: 120px;
+  margin-left: 20px;
+  margin-bottom: 15px;
   border-radius: 50%;
   margin-right: 20px; /* Space between image and name */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -874,7 +876,13 @@
   color: #333;
   font-size: 1.1em;
   font-weight: 600;
-  margin: 0;
+  margin: 5px 0;
+}
+
+.winner-item p.bold-position {
+  font-weight: bold; /* Make the position bold */
+  font-size: 1.2em;  /* Optional: adjust font size if needed */
+  margin-top: 10px;  /* Add margin to separate from the candidate name */
 }
 
 /* DESIGN PARA SA VOTE SUBMITTED */

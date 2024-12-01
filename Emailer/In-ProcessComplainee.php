@@ -6,11 +6,6 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\SMTP;
 
-if (session_status() == PHP_SESSION_NONE) {
-  session_start();  // Start the session only if it hasn't been started
-}
-include_once "../Connect/Connection.php";
-
 // Enable error reporting
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
@@ -36,7 +31,7 @@ function sendToComplainee($complaineeEmail, $complaintType) {
 
         // Content
         $mail->isHTML(true);
-        $mail->Subject = 'Complaint Update';
+        $mail->Subject = 'Filed Complaint Update';
         $mail->addEmbeddedImage('../Pictures/Mabuhay_Logo.png', 'logo_cid');
         $mail->Body = '
              <!DOCTYPE html>

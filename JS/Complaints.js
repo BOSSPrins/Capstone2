@@ -540,6 +540,9 @@ function submitComplaintUpdate(event) {
     const ComplaineeEmail = document.getElementById('ComplaineeEmail').value;
     const ComplaintType = document.getElementById('ComplaintType').value;
 
+    const loadingIndicator = document.getElementById('loading-indicator');
+    loadingIndicator.style.setProperty('display', 'flex', 'important'); // Show loading indicator
+
     fetch('PHPBackend/Complaint.php', {
         method: 'POST',
         headers: {
@@ -556,23 +559,29 @@ function submitComplaintUpdate(event) {
     .then(data => {
         if (data.success) {
             
-            // sendEmailToComplainee(ComplaineeEmail, ComplaintType);
-            // Optionally refresh or update the page content here
-            sendEmailToComplainant(complainantUID, complaint_number, Description);
+            return Promise.all([
+            sendEmailToComplainee(ComplaineeEmail, ComplaintType),
+            sendEmailToComplainant(complainantUID, complaint_number, Description)
+            ]);
         } else {
-            console.error('Error updating complaint:', data.error);
+            throw new Error(data.error); // Trigger catch block
         }
     })
+    .then(() => {
+        alert("Complaint updated and both parties are notified successfully!");
+        location.reload();
+    })
     .catch(error => {
-        console.error('Request failed:', error);
+        console.error("Error:", error);
+        alert("An error occurred: " + error.message);
+    })
+    .finally(() => {
+        loadingIndicator.style.setProperty('display', 'none', 'important'); // Hide loading indicator
     });
 }
 
 function sendEmailToComplainant(complainantUID, complaint_number, Description) {
-    const loadingIndicator = document.getElementById('loading-indicator');
-    loadingIndicator.style.setProperty('display', 'flex', 'important'); // Show loading indicator
-
-    fetch('Emailer/ComplaintsEmail.php', {
+    return fetch('Emailer/ComplaintsEmail.php', { // Return the promise
         method: 'POST',
         body: new URLSearchParams({
             complainantUID: complainantUID,
@@ -582,58 +591,44 @@ function sendEmailToComplainant(complainantUID, complaint_number, Description) {
     })
     .then(response => response.json())
     .then(data => {
-        try {
-            console.log("Parsed response:", data);
-            if (data.success) {
-                console.log("Email sent successfully.");
-                alert('Complaint updated successfully!');
-                location.reload();
-            } else {
-                console.error("Error:", data.error);
-                alert('Email failed: ' + data.message);
-            }
-        } catch (error) {
-            console.error("Failed to parse JSON:", error);
+        console.log("Parsed response:", data);
+        if (data.success) {
+            console.log("Email sent successfully.");
+        } else {
+            console.error("Error:", data.error);
+            throw new Error('Email failed: ' + data.message); // Ensure failure propagates
         }
     })
-    .catch(error => console.error("AJAX error:", error))
-    .finally(() => {
-        loadingIndicator.style.setProperty('display', 'none', 'important'); // Hide loading indicator when email is processed
+    .catch(error => {
+        console.error("AJAX error:", error);
+        throw error; // Ensure error propagates to Promise.all
     });
 }
 
-// function sendEmailToComplainee(ComplaineeEmail, ComplaintType) {
-//     const loadingIndicator = document.getElementById('loading-indicator');
-//     loadingIndicator.style.setProperty('display', 'flex', 'important'); // Show loading indicator
+function sendEmailToComplainee(ComplaineeEmail, ComplaintType) {
+    return fetch('Emailer/In-ProcessComplainee.php', { // Return the promise
+        method: 'POST',
+        body: new URLSearchParams({
+            ComplaineeEmail,
+            ComplaintType
+        }),
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Parsed response:", data);
+        if (data.success) {
+            console.log("Email sent successfully.");
+        } else {
+            console.error("Error:", data.error);
+            throw new Error('Email failed: ' + data.message); // Ensure failure propagates
+        }
+    })
+    .catch(error => {
+        console.error("AJAX error:", error);
+        throw error; // Ensure error propagates to Promise.all
+    });
+}
 
-//     fetch('Emailer/In-ProcessComplainee.php', {
-//         method: 'POST',
-//         body: new URLSearchParams({
-//             ComplaineeEmail,
-//             ComplaintType
-//         }),
-//     })
-//     .then(response => response.json())
-//     .then(data => {
-//         try {
-//             console.log("Parsed response:", data);
-//             if (data.success) {
-//                 console.log("Email sent successfully.");
-//                 // alert('Complaint updated successfully!');
-//                 // location.reload();
-//             } else {
-//                 console.error("Error:", data.error);
-//                 alert('Email failed: ' + data.message);
-//             }
-//         } catch (error) {
-//             console.error("Failed to parse JSON:", error);
-//         }
-//     })
-//     .catch(error => console.error("AJAX error:", error))
-//     .finally(() => {
-//         loadingIndicator.style.setProperty('display', 'none', 'important'); // Hide loading indicator when email is processed
-//     });
-// }
 
 
 function updateComplaintCounts() {

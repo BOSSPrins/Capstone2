@@ -282,10 +282,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             
             if ($row['voting_status'] === 'VotingEnded') {
                 // Query to fetch exactly 9 candidates marked as winners
-                $winners_sql = "SELECT candidate_name, img 
+                $winners_sql = "SELECT candidate_name, img, won_date, position
                                 FROM voting 
                                 WHERE status = 'Winner' 
-                                ORDER BY vote_id DESC 
+                                AND status2 != 'Deleted'
+                                ORDER BY won_date DESC 
                                 LIMIT 9";
                 $winners_result = $conn->query($winners_sql);
                 $winners = [];
@@ -518,38 +519,37 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     //     closeConnectionAndRespond($conn, $response);
 
     // } 
-}elseif ($action === 'fetch_history') {
-    // Fetch winners grouped by won_date, including vote_id and candidate_name
-    $sql = "SELECT vote_id, candidate_name, won_date
-            FROM voting
-            WHERE status = 'Winner'
-            ORDER BY won_date DESC";
+    }elseif ($action === 'fetch_history') {
+        // Fetch winners grouped by won_date, including vote_id and candidate_name
+        $sql = "SELECT vote_id, candidate_name, won_date
+                FROM voting
+                WHERE status = 'Winner'
+                ORDER BY won_date DESC";
 
-    if ($result = $conn->query($sql)) {
-        $winnersByDate = [];
-        while ($row = $result->fetch_assoc()) {
-            $won_date = $row['won_date'];
-            $winnersByDate[$won_date][] = [
-                'vote_id' => $row['vote_id'],
-                'candidate_name' => $row['candidate_name']
-            ];
-        }
+        if ($result = $conn->query($sql)) {
+            $winnersByDate = [];
+            while ($row = $result->fetch_assoc()) {
+                $won_date = $row['won_date'];
+                $winnersByDate[$won_date][] = [
+                    'vote_id' => $row['vote_id'],
+                    'candidate_name' => $row['candidate_name']
+                ];
+            }
 
-        if (!empty($winnersByDate)) {
-            $response = [
-                'success' => true,
-                'winners' => $winnersByDate
-            ];
+            if (!empty($winnersByDate)) {
+                $response = [
+                    'success' => true,
+                    'winners' => $winnersByDate
+                ];
+            } else {
+                $response = ['success' => false, 'message' => 'No winners found.'];
+            }
         } else {
-            $response = ['success' => false, 'message' => 'No winners found.'];
+            $response = ['success' => false, 'error' => 'Database error occurred.'];
         }
-    } else {
-        $response = ['success' => false, 'error' => 'Database error occurred.'];
-    }
-    closeConnectionAndRespond($conn, $response);
-}
+        closeConnectionAndRespond($conn, $response);
 
-    else {
+    } else {
         $response = ['success' => false, 'error' => 'Invalid request'];
         closeConnectionAndRespond($conn, $response);
     }

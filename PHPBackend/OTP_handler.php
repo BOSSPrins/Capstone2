@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
 
         // Generate OTP
         $otp = rand(100000, 999999);
-        $expiry = date("Y-m-d H:i:s", strtotime('+10 minutes'));
+        $expiry = date("Y-m-d H:i:s", strtotime('+60 seconds'));
 
         // Store OTP in the database
         $query = "INSERT INTO otp_verifications (email, otp, expiry) VALUES ('$email', '$otp', '$expiry')

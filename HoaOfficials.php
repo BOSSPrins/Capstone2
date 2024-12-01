@@ -192,12 +192,12 @@ if (isset($_SESSION['unique_id'])) {
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td> Wala pa </td>
+                                        <!-- <td> Wala pa </td>
                                         <td> President </td>
                                         <td> Solomon Malit </td>
                                         <td>
                                             <button class="HoaEditing" id="HoaEditing" onclick="toggleModalEdit()"> Edit </button>
-                                        </td>
+                                        </td> -->
                                     </tr>
                                 </tbody>
                             </table>
@@ -205,33 +205,39 @@ if (isset($_SESSION['unique_id'])) {
 
                             <div class="ModalEditingPos">
                                 <div class="SubEditingMod">
-                                    <div class="EditingContent">
-                                        <header class="ConEkis">
-                                            <span class="EkisHo"> &times; </span>
-                                        </header>
-                                        <div class="LamanNgModalEd">
-                                            <div class="Paniraa">
-                                                <div class="PictureWrapper" id="PictureWrapper">
-                                                    <input class="InputPic" type="file" id="Picturee">
-                                                    <img class="PictureImgIcon" src="Pictures/cloudUpload.png" alt="Upload Icon">
-                                                    <p class="TextIcon"> Select new images or <span class="spanNiyaModal">browse</span>.</p>
+                                    <form method="post" enctype="multipart/form-data">
+                                        <div class="EditingContent">
+                                            <header class="ConEkis">
+                                                <span class="EkisHo"> &times; </span>
+                                            </header>
+                                            <div class="LamanNgModalEd">
+                                                <div class="Paniraa">
+                                                    <div class="PictureWrapper" id="PictureWrapper">
+                                                        <input class="InputPic" type="file" id="Picturee" accept=".jpg, .jpeg, .png, .pdf">
+                                                        <img class="PictureImgIcon" src="Pictures/cloudUpload.png" alt="Upload Icon">
+                                                        <p class="TextIcon"> Select new images or <span class="spanNiyaModal">browse</span>.</p>
+                                                    </div>
+                                                
+                                                    <div class="imgContainerr" id="imgContainerr"> </div>
                                                 </div>
-                                            
-                                                <div class="imgContainerr" id="imgContainerr"> </div>
+                                                <div style="margin-top: 10px;" class="Coonn">
+                                                    <label class="LabelEd"> Position: </label>
+                                                    <input class="InputEd" type="text" id="HoaPosition">
+                                                </div> 
+                                                <div class="Coonn">
+                                                    <label class="LabelEd"> Name: </label>
+                                                    <input class="InputEd" type="text" id="HoaName">
+                                                </div>  
+                                                <div class="Coonn">                                                    
+                                                    <input class="InputEd" type="hidden" id="HoaUID">
+                                                </div>                                            
                                             </div>
-                                            <div style="margin-top: 10px;" class="Coonn">
-                                                <label class="LabelEd"> Position: </label>
-                                                <input class="InputEd" type="text">
-                                            </div> 
-                                            <div class="Coonn">
-                                                <label class="LabelEd"> Name: </label>
-                                                <input class="InputEd" type="text">
-                                            </div>                                           
+                                            <footer class="FooterSave">
+                                                <button class="DelEditing" id=""> Delete </button>
+                                                <button class="SaveEditing" id="submit"> Save </button>
+                                            </footer>
                                         </div>
-                                        <footer class="FooterSave">
-                                            <button class="SaveEditing"> Save </button>
-                                        </footer>
-                                    </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
