@@ -70,7 +70,7 @@ $user_UID = $_SESSION['unique_id'];
                     </a>  
                     <ul class="subMenuComp" id="complaintsSubMenu">
                         <li> 
-                            <a href="UserChat.php">
+                            <a href="UserChat.php?user_id=<?php echo $encoded_id?>">
                                 <img class="img-subMenu" src="Pictures/Chat.png">
                                 <label class="sub-spa"> Chat </label>
                             </a> 

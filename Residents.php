@@ -26,7 +26,7 @@ if (isset($_SESSION['unique_id'])) {
 </head>
 </head>
 <body>
-<div class="mainDashboardContainer">
+    <div class="mainDashboardContainer">
         <div class="secMainDash">
             <div class="sidebarContainer sideActive" id="sidebar">
                 <div class="headerTop">

@@ -1,442 +1,507 @@
 :root{
-    --color-primary: #1828b8;
-    --color-danger: #ff7782;
-    --color-success: #41f1b6;
-    --color-warning: #ffbb55;
-    --color-white: #fff;
-    --color-info-dark: #1e1e1f;
-    --color-info-light: #939fb6;
-    --color-dark: #363949;
-    --color-light: rgba(61, 109, 176, 0.18);
-    --color-light-2: rgba(52, 58, 116, 0.20);
-    --color-primary-variant: #111e88;
-    --color-dark-variant: #677483;
-    --color-background: #f0f0f0;
-  
-    --light: #f9f9f9;
-    --blue: #3c91e6;
-    --light-blue: #a9d5ff;
-    --light-red: #f38c8c;
-    --light-green: #a7f9d0;
-    --grey: #eee;
-    --dark-grey: #aaaaaa;
-    --drak: #342e37;
-    --red:  #e88383;
-    --green: rgb(94, 232, 129);
-    --color-info-dark: #919497;
-  
-    --color-border-radius: 2rem;
-    --color-border-radius-1: 0.4rem;
-    --color-border-radius-2: 0.8rem;
-    --color-border-radius-3: 1.2rem;
-  
-  
-    --card-padding: 1.8rem;
-    --padding-1: 1.2rem;
-  
-    --box-shadow: 0 2rem 3rem var(--color-light);
+  --color-primary: #1828b8;
+  --color-danger: #ff7782;
+  --color-success: #41f1b6;
+  --color-warning: #ffbb55;
+  --color-white: #fff;
+  --color-info-dark: #1e1e1f;
+  --color-info-light: #939fb6;
+  --color-dark: #363949;
+  --color-light: rgba(61, 109, 176, 0.18);
+  --color-light-2: rgba(52, 58, 116, 0.20);
+  --color-primary-variant: #111e88;
+  --color-dark-variant: #677483;
+  --color-background: #f0f0f0;
+
+  --light: #f9f9f9;
+  --blue: #3c91e6;
+  --light-blue: #a9d5ff;
+  --light-red: #f38c8c;
+  --light-green: #a7f9d0;
+  --grey: #eee;
+  --dark-grey: #aaaaaa;
+  --drak: #342e37;
+  --red:  #e88383;
+  --green: rgb(94, 232, 129);
+  --color-info-dark: #919497;
+
+  --color-border-radius: 2rem;
+  --color-border-radius-1: 0.4rem;
+  --color-border-radius-2: 0.8rem;
+  --color-border-radius-3: 1.2rem;
+
+
+  --card-padding: 1.8rem;
+  --padding-1: 1.2rem;
+
+  --box-shadow: 0 2rem 3rem var(--color-light);
 }
-  
+
 *{
-    margin: 0;
-    padding: 0;
-    outline: none;
-    appearance: none;
-    border: 0;
-    text-decoration: none;
-    list-style: none;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  outline: none;
+  appearance: none;
+  border: 0;
+  text-decoration: none;
+  list-style: none;
+  box-sizing: border-box;
 }
-  
+
 html{
-    font-size: 14px;
+  font-size: 14px;
 }
-  
+
 .mainDashboardContainer{
-    width: 100vw;
-    height: 100vh;
-    font-family: Arial, sans-serif;
-    font-size: 0.88rem;
-    background: var(--color-background);
-    user-select: none;
-    overflow-x: hidden;
-    color: var(--color-dark);
+  width: 100vw;
+  height: 100vh;
+  font-family: Arial, sans-serif;
+  font-size: 0.88rem;
+  background: var(--color-background);
+  user-select: none;
+  overflow-x: hidden;
+  color: var(--color-dark);
 }
-  
+
 /* ===== SIDEBAR DESIGN ===== */
 .sidebarContainer {
-    position: fixed;
-    display: flex;
-    flex-direction: column;
-    /* left: 5px; */
-    bottom: 0;
-    top: 0;
-    background-color:  rgb(255, 255, 255);
-    width: 250px;
-    /* margin-top: 7px; */
-    transition: all 0.3s;
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  /* left: 5px; */
+  bottom: 0;
+  top: 0;
+  background-color:  rgb(255, 255, 255);
+  width: 250px;
+  /* margin-top: 7px; */
+  transition: all 0.3s;
 }
-  
+
 .sidebarContainer span{
-    font-size: 14.5px;
-    font-weight: 500;
+  font-size: 14.5px;
+  font-weight: 500;
 }
-  
+
 .sidebarContainer .sideside{
-    display: flex;
-    color: var(--color-info-dark);
-    padding-left: 25px;
-    gap: 1rem;
-    align-items: center;
-    position: relative;
-    height: 3.6rem;
-    transition: all 300ms ease;
+  display: flex;
+  color: var(--color-info-dark);
+  padding-left: 25px;
+  gap: 1rem;
+  align-items: center;
+  position: relative;
+  height: 3.6rem;
+  transition: all 300ms ease;
 }
-  
+
 .sidebarContainer .sideside .img-sideboard{
-    font-size: 1.6rem;
-    transition: all 300ms ease;
+  font-size: 1.6rem;
+  transition: all 300ms ease;
 }
-  
+
 .sidebarContainer .sideside:last-child{
-    position: absolute;
-    bottom: 1px;
-    width: 100%;
+  position: absolute;
+  bottom: 1px;
+  width: 100%;
 }
-  
+
 .sidebarContainer .sideside.baractive{
-    background: var(--color-light);
-    color: var(--color-primary);
+  background: var(--color-light);
+  color: var(--color-primary);
 }
-  
+
 .sidebarContainer .sideside.baractive .img-sideboard{
-    margin-left: calc(1rem -3rem);
+  margin-left: calc(1rem -3rem);
 }
-  
+
 .sidebarContainer .sideside:hover{
-    color: var(--color-primary);
+  color: var(--color-primary);
 }
-  
+
 .sidebarContainer .sideside:hover .img-sideboard{
-    margin-left: 1rem;
+  margin-left: 1rem;
 }
-  
+
 /* SIDEBAR ACTIVE */
 .sidebarActive {
-    transform: translateX(250px); /* Move sidebar into view */
+  transform: translateX(250px); /* Move sidebar into view */
 }
-  
+
 /* .MonthlyDuessContainerr.MonthlyDuessConActivee {
-    margin-left: 5px;
+  margin-left: 5px;
 } */
-  
+
 /* ===== SIDEBAR IMAGE SIZE ===== */
-  .img-sideboard{
-    width: 20px;
+.img-sideboard{
+  width: 20px;
 }
-  
+
 /* ========== SUB MENU SIDEBAR ========== */
-  .subMenuComp{
-    display: none;
-    margin-left: 35px;
-    transition: all 0.3s;
+.subMenuComp{
+  display: none;
+  margin-left: 35px;
+  transition: all 0.3s;
 }
-  
+
 .submenu-visible {
-    display: block; 
+  display: block; 
 }
-  
+
 .subMenuComp li a{
-    position: relative;
-    display: flex;
-    color: var(--color-info-dark);
-    padding: 10px;
-    position: relative;
-    transition: all 300ms ease;
+  position: relative;
+  display: flex;
+  color: var(--color-info-dark);
+  padding: 10px;
+  position: relative;
+  transition: all 300ms ease;
 }
-  
+
 .eme2{
-    width: 0;
-    height: 0;
-    border-left: 5px solid transparent;
-    border-right: 5px solid transparent;
-    border-top: 6px solid #aeaeae;
-    transition: 0.3s;
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 6px solid #aeaeae;
+  transition: 0.3s;
 }
-  
+
 .buttonEme2{
-    padding: 10px 15px;
-    margin-left: 45px;
-    cursor: pointer;
+  padding: 10px 15px;
+  margin-left: 45px;
+  cursor: pointer;
 }
-  
+
 .eme2-rotate{
-    transform: rotate(180deg);
+  transform: rotate(180deg);
 }
-  
+
 .subMenuComp li a.active{
-    background: var(--color-light);
-    color: var(--color-primary);
-    height: 100%;
-    margin-left: 5px;
+  background: var(--color-light);
+  color: var(--color-primary);
+  height: 100%;
+  margin-left: 5px;
 }
-  
+
 .sidebarContainer li a:hover{
-    color: var(--color-primary);
-    margin-left: 1rem;
+  color: var(--color-primary);
+  margin-left: 1rem;
 }
-  
+
 .subMenuComp li a.active::before {
-    content: '';
-    width: 4px;
-    height: 100%;
-    background: var(--color-primary);
-    position: absolute;
-    left: 0;
-    top: 0;
+  content: '';
+  width: 4px;
+  height: 100%;
+  background: var(--color-primary);
+  position: absolute;
+  left: 0;
+  top: 0;
 }
-  
+
 /* ===== SUB MENU CHAT IMAGE ==== */
-  .img-subMenu{
-    width: 20px;
-    margin-right: 5px;
+.img-subMenu{
+  width: 20px;
+  margin-right: 5px;
 }
-  
+
 .sub-spa{
-    margin-top: 5px;
+  margin-top: 5px;
 }
-  
+
 /* ========== MAIN DASHBOARD DESIGN ========== */
 .MainBodyContainerr {
-  padding-left: 250px;
-  display: flex; /* Ensure it uses flexbox to manage layout */
-  flex-direction: column; /* Stack children vertically */
-  height: 100vh; /* Make sure it takes full viewport height */
+padding-left: 250px;
+display: flex; /* Ensure it uses flexbox to manage layout */
+flex-direction: column; /* Stack children vertically */
+height: 100vh; /* Make sure it takes full viewport height */
 }
 
 .MainContainerForTables {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  flex: 1; /* Allow it to grow and take available space */
-  overflow: hidden; /* Prevent scrollbars here */
+display: flex;
+justify-content: center;
+width: 100%;
+flex: 1; /* Allow it to grow and take available space */
+overflow: hidden; /* Prevent scrollbars here */
 }
 
-.MainContainerAll {
+.AnnouncementCardss {
+  display: flex;
+  flex-direction: column; /* Stack children vertically */
   width: 100%;
   padding: 10px;
   background-color: #ffffff;
   border: 1px solid rgb(179, 172, 172);
   margin: 10px;
-  /* Allow it to expand within the flex container */
-  /* Remove the fixed height to allow dynamic adjustment */
-  flex: 1; /* Allow it to grow and shrink with available space */
-  overflow-y: auto; /* Optional: Add scrollbar if content overflows */
+  flex: 1; /* Allow it to grow and take available space */
+  overflow: auto;
 }
 
-  /* DESIGN PARA TO SA HEADER NG SIDEBAR AT SA MAIN */
-  .headerTop{
-    align-items: center;
-    text-align: center;
-    background: rgb(229, 229, 229);
-    height: 160px;
-    width: 100%;
-    padding-top: 10px;
-    box-shadow: 0 8px 8px -10px #888888;
-  }
-  
-  .img-logo{
-    width: 100px;
-  }
-  
-  .headerTopMain{
-    position: sticky;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 50px;
-    width: 100%;
-    background: rgb(255, 255, 255);
-    padding: 20px;
-    top: 0;
-    box-shadow: 5px 10px 18px #888888;
-    box-shadow: 0 8px 8px -10px black;
-    z-index: 1;
-  }
-  
-  .HamburgerandOthers{
-    display: flex;
-    align-items: center;
-  }
-  
-  .namePerModule{
-    padding-left: 20px;
-  }
-  
-  .menu{
-    width: 25px;
-    cursor: pointer;
-  }
-  
-  .ProfileViewww{
-    display: flex;
-    align-items: center;
-  }
-  
-  .user-img{
-    width: 30px;
-    height: 30px;
-    background: rgb(0, 0, 0);
-    border-radius: 20px;
-  }
-  
-  .profileBtn{
-    padding: 5px 20px;
-    margin-right: 5px;
-    cursor: pointer;
-  }
-  
-  .profileBtn label{
-    cursor: pointer;
-  }
-  
-  /* ===== PROFILE MODAL DESIGN ===== */
-  .modal{
-    display: none;
-  }
-  
-  .subModal{
-    position: fixed;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 2;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.4);
-  }
-  
-  .modal-content {
-    display: flex;
-    background: var(--color-background);
-    width: 800px;
-    height: 500px; /* Set the desired height */
-    overflow: hidden; /* Hide overflow */
-    border-radius: 10px;
-  }
-  
-  .profileSidebar{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background: white;
-    width: 150px;
-    height: 100%;
-    border-radius: 10px;
-  }
-  
-  .profileSidebar a{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 4rem;
-    margin-bottom: 5px;
-    /* background: rgb(192, 184, 184); */
-    color: var(--color-info-dark);
-  }
-  
-  .profileSidebar a:hover{
-    color: var(--color-primary);
-  }
-  
-  .profilePages{
-    width: 100%;
-    margin-left: 10px;
-  }
-  
-  .closeProf{
-    display: flex;
-    justify-content: end;
-    margin-right: 5px;
-    color: #000000;
-    font-size: 28px;
-    font-weight: bold;
-    cursor: pointer;
-  }
-  
-  /* Hide all pages initially */
-  .page {
-    display: none;
-  }
-  
-  /* Show active page */
-  .activeProfModal{
-    display: block;
-  }
-  
-  /* ===== CHANGING PASSWORD ===== */
-  .changingPassword {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    margin-top: 20px;
-    margin-left: 50px;
-    margin-right: 50px;
-  }
-  
-  .changingInputBox{
-    width: 100%;
-    margin-bottom: 50px;
-  }
-  
-  .changingInputBoxLast{
-    width: 100%;
-  }
-  
-  .changingInputBox .inputngChanging,
-  .changingInputBoxLast .inputngChanging{
-    width: 100%;
-    padding: 15px;
-    font-size: 20px;
-    border-radius: 10px;
-    border: 1px solid rgba(62, 65, 71, 0.4);
-  }
-  
-  .changingInputBox .inputngChanging:focus,
-  .changingInputBoxLast .inputngChanging:focus{
-    border-color: var(--color-primary);
-  }
-  
-  .changingForgotPass {
-    display: flex;
-    justify-content: end;
-    margin-top: 15px;
-    font-size: 17.5px;
-    width: 100%;
-  }
-  
-  .forgotpassAs{
-    color: var(--color-primary);
-  }
-  
-  .forgotpassAs:hover{
-    text-decoration: underline;
-  }
-  
-  .paragChange{
-    margin-top: 10px;
-  }
-  
-  .buttonSapagPalit{
-    margin-top: 10px;
-    width: 100%;
-    padding: 15px;
-    background: var(--color-primary);
-    color: white;
-    font-size: 17.5px;
-    cursor: pointer;
-  }
+/* DESIGN PARA TO SA HEADER NG SIDEBAR AT SA MAIN */
+.headerTop{
+  align-items: center;
+  text-align: center;
+  background: rgb(229, 229, 229);
+  height: 160px;
+  width: 100%;
+  padding-top: 10px;
+  box-shadow: 0 8px 8px -10px #888888;
+}
+
+.img-logo{
+  width: 100px;
+}
+
+.headerTopMain{
+  position: sticky;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 50px;
+  width: 100%;
+  background: rgb(255, 255, 255);
+  padding: 20px;
+  top: 0;
+  box-shadow: 5px 10px 18px #888888;
+  box-shadow: 0 8px 8px -10px black;
+  z-index: 1;
+}
+
+.HamburgerandOthers{
+  display: flex;
+  align-items: center;
+}
+
+.namePerModule{
+  padding-left: 20px;
+}
+
+.menu{
+  width: 25px;
+  cursor: pointer;
+}
+
+.ProfileViewww{
+  display: flex;
+  align-items: center;
+}
+
+.user-img{
+  width: 30px;
+  height: 30px;
+  background: rgb(0, 0, 0);
+  border-radius: 20px;
+}
+
+.profileBtn{
+  padding: 5px 20px;
+  margin-right: 5px;
+  cursor: pointer;
+}
+
+.profileBtn label{
+  cursor: pointer;
+}
+
+/* ===== PROFILE MODAL DESIGN ===== */
+.modal{
+  display: none;
+}
+
+.subModal{
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+  display: flex;
+  background: var(--color-background);
+  width: 800px;
+  height: 500px; /* Set the desired height */
+  overflow: hidden; /* Hide overflow */
+  border-radius: 10px;
+}
+
+.profileSidebar{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  width: 150px;
+  height: 100%;
+  border-radius: 10px;
+}
+
+.profileSidebar a{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 4rem;
+  margin-bottom: 5px;
+  /* background: rgb(192, 184, 184); */
+  color: var(--color-info-dark);
+}
+
+.profileSidebar a:hover{
+  color: var(--color-primary);
+}
+
+.profilePages{
+  width: 100%;
+  margin-left: 10px;
+}
+
+.closeProf{
+  display: flex;
+  justify-content: end;
+  margin-right: 5px;
+  color: #000000;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* Hide all pages initially */
+.page {
+  display: none;
+}
+
+/* Show active page */
+.activeProfModal{
+  display: block;
+}
+
+/* ===== CHANGING PASSWORD ===== */
+.changingPassword {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 20px;
+  margin-left: 50px;
+  margin-right: 50px;
+}
+
+.changingInputBox{
+  width: 100%;
+  margin-bottom: 50px;
+}
+
+.changingInputBoxLast{
+  width: 100%;
+}
+
+.changingInputBox .inputngChanging,
+.changingInputBoxLast .inputngChanging{
+  width: 100%;
+  padding: 15px;
+  font-size: 20px;
+  border-radius: 10px;
+  border: 1px solid rgba(62, 65, 71, 0.4);
+}
+
+.changingInputBox .inputngChanging:focus,
+.changingInputBoxLast .inputngChanging:focus{
+  border-color: var(--color-primary);
+}
+
+.changingForgotPass {
+  display: flex;
+  justify-content: end;
+  margin-top: 15px;
+  font-size: 17.5px;
+  width: 100%;
+}
+
+.forgotpassAs{
+  color: var(--color-primary);
+}
+
+.forgotpassAs:hover{
+  text-decoration: underline;
+}
+
+.paragChange{
+  margin-top: 10px;
+}
+
+.buttonSapagPalit{
+  margin-top: 10px;
+  width: 100%;
+  padding: 15px;
+  background: var(--color-primary);
+  color: white;
+  font-size: 17.5px;
+  cursor: pointer;
+}
+
+/* DESIGN PARA SA CARDS NA ANNOUNCEMENT */
+.ContainerCard {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px; /* Small gap between cards */
+  width: 100%;
+  justify-content: flex-start; /* Align items to the left, will wrap naturally */
+}
+
+.Cardss {
+  background: lightblue;
+  flex: 1 1 calc(25% - 10px); /* Cards take 1/4 of the space, with a small gap between them */
+  box-sizing: border-box; /* Ensures padding/margin doesn't affect the width */
+  cursor: pointer;
+  margin-bottom: 10px;
+  max-width: 300px; /* Optional max width for the cards */
+}
+
+.AnnounceImg {
+  width: 90%;
+  height: auto;
+  margin-bottom: 10px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.CardLaman {
+  padding: 5px;
+}
+
+.Cardss p {
+  height: 75px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 0;
+}
+
+.BtnReadMore {
+  width: 100%;
+  padding: 10px;
+  background: blue;
+  color: white;
+  cursor: pointer;
+}
+
+.BtnReadMore:hover {
+  background: rgb(98, 98, 255);
+}
+
+.DateCon {
+  display: flex;
+  justify-content: end;
+  margin-bottom: 15px;
+}
+
+.TitleCon {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+
+

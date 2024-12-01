@@ -7,11 +7,11 @@
   <link rel="stylesheet" href="CSS/UserAnnouncement.css">
 </head>
 <body>
-<div class="mainDashboardContainer">
+    <div class="mainDashboardContainer">
         <div class="secMainDash">
             <div class="sidebarContainer sideActive" id="sidebar">
                 <div class="headerTop">
-                    <img class="img-logo" src="Pictures/Dasma_City_Logo.png">
+                    <img class="img-logo" src="Pictures/Mabuhay_Logo.png">
                     <h2 class="MabuhayName"> Mabuhay Homes 2000 Phase 5 </h2>
                 </div>
                 <a href="UserDashBoard.php" class="sideside baractive">
@@ -120,8 +120,28 @@
                     </div>
                 </div>
                 <div class="MainContainerForTables">
-                    <div class="MainContainerAll">
-                        
+                    <div class="AnnouncementCardss" id="MainAnnouncements">
+                        <div class="ContainerCard">
+                            <div class="Cardss">
+                                <img class="AnnounceImg" src="Mabuhay_Logo.png">
+                                <div class="CardLaman">
+                                    <div class="DateCon">
+                                        <input class="title" type="text" placeholder="Dito yung date posted">
+                                    </div>
+                                    <div class="TitleCon">
+                                        <input class="Araw" type="text" placeholder="Dito yung title">
+                                    </div>
+                                    <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita 
+                                        voluptatibus ab est vero, magnam aliquid. Consectetur, aspernatur itaque,
+                                        et odit atque numquam ipsum nisi officia quia minima porro iure nihil!
+                                    </p>
+                                    <button class="BtnReadMore" onclick="toggleAnnounce('ReadMorePage')"> Read More </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="AnnouncementCardss" id="ReadMorePage">
+                        <button class="BtnNgNameBack" onclick="toggleAnnounce('MainAnnouncements')"> &#60; </button>
                     </div>
                 </div>
             </div>

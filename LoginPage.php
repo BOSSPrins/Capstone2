@@ -96,7 +96,7 @@ if (!isset($_SESSION['otp_status'])) {
                 <div class="rightt" id="signUpForm">
 
                     <div class="LogoSign-Up">
-                        <img class="imgLogo" src="Pictures/Mabuhay_Logo.png">
+                        <img class="imgLogo2" src="Pictures/Mabuhay_Logo.png">
                     </div>
 
                     <span class="signUp-title"> Sign Up </span>

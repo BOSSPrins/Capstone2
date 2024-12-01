@@ -21,7 +21,6 @@ if ($admin_sql && mysqli_num_rows($admin_sql) > 0) {
 }
 $encoded_id = urlencode($admin_unique_id);
 
-
 ?>
 
 <!DOCTYPE html>
