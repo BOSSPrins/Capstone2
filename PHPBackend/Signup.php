@@ -51,7 +51,7 @@ if(!empty($access) && !empty($fname) && !empty($lname) && !empty($gender) && !em
     // Validate the new password
     if (!preg_match('/^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*])[a-zA-Z\d!@#$%^&*]{6,}$/', $password)) {
         error_log("New password does not meet criteria.");
-        echo json_encode(['success' => false, 'message' => 'New password does not meet the required criteria.']);
+        echo json_encode(['success' => false, 'message' => 'Your password must be at least 6 characters long and include a combination of numbers, letters, and special characters.']);
         exit();
     }
 
