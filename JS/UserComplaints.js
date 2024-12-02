@@ -411,43 +411,44 @@ function adjustTextareaHeight(textarea) {
 
 //Funcion sa pagremove ng multiple pdf sa Direct complaints 
 document.getElementById('PDFDir').addEventListener('change', function () {
-    const DIRproof = this;
-    const DIRpreviewContainer = document.getElementById('DIRpdfPreviewContainer');
-    DIRpreviewContainer.innerHTML = ''; // Clear previous previews
+    const fileInput = this;
+    const previewContainer = document.getElementById('DIRpdfPreviewContainer');
+    previewContainer.innerHTML = ''; // Clear previous previews
 
-    // Display previews and add remove functionality
-    for (let i = 0; i < DIRproof.files.length; i++) {
-        const file = DIRproof.files[i];
-
-        // Create a preview item
+    // Iterate through the selected files and create a card for each
+    Array.from(fileInput.files).forEach((file, index) => {
         const previewItem = document.createElement('div');
-        previewItem.className = 'dir-pdf-preview-item';
+        previewItem.className = 'dir-pdf-card';
+
         previewItem.innerHTML = `
-            <span>${file.name}</span>
-            <button class="dir-remove-pdf" dir-data-index="${i}">Remove</button>
+            <img src="Pictures/pdf.png" alt="PDF Icon" class="dir-pdf-icon">
+            <span class="dir-pdf-name">${file.name}</span>
+            <button class="dir-remove-pdf" dir-data-index="${index}">Remove</button>
         `;
 
-        // Append to the preview container
-        DIRpreviewContainer.appendChild(previewItem);
-    }
+        // Append the card to the preview container
+        previewContainer.appendChild(previewItem);
+    });
 
-    // Add remove functionality
-    DIRpreviewContainer.querySelectorAll('.dir-remove-pdf').forEach((button) => {
+    // Add functionality to remove individual files
+    previewContainer.querySelectorAll('.dir-remove-pdf').forEach((button) => {
         button.addEventListener('click', function () {
-            const index = parseInt(this.getAttribute('dir-data-index'));
+            const index = parseInt(this.getAttribute('dir-data-index'), 10);
 
             // Remove the file from the input
             const dt = new DataTransfer();
-            Array.from(DIRproof.files)
+            Array.from(fileInput.files)
                 .filter((_, i) => i !== index)
                 .forEach((file) => dt.items.add(file));
-                DIRproof.files = dt.files;
+            fileInput.files = dt.files;
 
-            // Update the preview
-            DIRproof.dispatchEvent(new Event('change'));
+            // Trigger a change event to refresh the preview
+            fileInput.dispatchEvent(new Event('change'));
         });
     });
 });
+
+
 
 document.getElementById('ComplaineeAddress').addEventListener('blur', function () {
     let address = this.value.trim(); // Get the address value and trim any extra spaces
@@ -594,29 +595,28 @@ document.getElementById('Submit').addEventListener('click', function(event) {
 // Function sa pdf ng general
 document.getElementById('PDFGen').addEventListener('change', function () {
     const fileInput = this;
-    const previewContainer = document.getElementById('pdfPreviewContainer');
+    const previewContainer = document.getElementById('GENpdfPreviewContainer');
     previewContainer.innerHTML = ''; // Clear previous previews
 
-    // Display previews and add remove functionality
-    for (let i = 0; i < fileInput.files.length; i++) {
-        const file = fileInput.files[i];
-
-        // Create a preview item
+    // Iterate through the selected files and create a card for each
+    Array.from(fileInput.files).forEach((file, index) => {
         const previewItem = document.createElement('div');
-        previewItem.className = 'pdf-preview-item';
+        previewItem.className = 'gen-pdf-card';
+
         previewItem.innerHTML = `
-            <span>${file.name}</span>
-            <button class="remove-pdf" data-index="${i}">Remove</button>
+            <img src="Pictures/pdf.png" alt="PDF Icon" class="gen-pdf-icon">
+            <span class="gen-pdf-name">${file.name}</span>
+            <button class="gen-remove-pdf" gen-data-index="${index}">Remove</button>
         `;
 
-        // Append to the preview container
+        // Append the card to the preview container
         previewContainer.appendChild(previewItem);
-    }
+    });
 
-    // Add remove functionality
-    previewContainer.querySelectorAll('.remove-pdf').forEach((button) => {
+    // Add functionality to remove individual files
+    previewContainer.querySelectorAll('.gen-remove-pdf').forEach((button) => {
         button.addEventListener('click', function () {
-            const index = parseInt(this.getAttribute('data-index'));
+            const index = parseInt(this.getAttribute('gen-data-index'), 10);
 
             // Remove the file from the input
             const dt = new DataTransfer();
@@ -625,7 +625,7 @@ document.getElementById('PDFGen').addEventListener('change', function () {
                 .forEach((file) => dt.items.add(file));
             fileInput.files = dt.files;
 
-            // Update the preview
+            // Trigger a change event to refresh the preview
             fileInput.dispatchEvent(new Event('change'));
         });
     });

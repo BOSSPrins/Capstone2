@@ -7,6 +7,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const verifyOTPBtn = document.getElementById('verifyOTPBtn');
     const submitBtn = document.getElementById('submitBtn');
     const OTPinput = document.getElementById('OTPinput');
+    const resendOTPBtn = document.getElementById("resendOTPBtn");
+    const timerDisplay = document.getElementById("timer");
+    const otpExpiryDuration = 60; // Default OTP expiry time in seconds
+    const timerKey = 'otpExpiryTimestamp';// Key to save timer data in localStorage
+    
+    let timerInterval;
 
     // Ensure submitBtn exists before attempting to disable it
     if (!submitBtn) {
@@ -41,52 +47,97 @@ document.addEventListener("DOMContentLoaded", () => {
         OTPinput.addEventListener('change', checkOtpStatus);
     }
 
-    if (sendOTPBtn) {
-    sendOTPBtn.addEventListener('click', () => {
-
-        const loadingIndicator = document.getElementById('loading-indicator');
-        loadingIndicator.style.setProperty('display', 'flex', 'important'); // Show loading indicator
-
-        console.log('Sending OTP...');
-
-        const email = document.getElementById('emailOTP').value;
-            
-        if (!email) {
-            alert('Please enter an email address.');
+    function startOtpTimer() {
+        const currentTime = Math.floor(Date.now() / 1000); // Current time in seconds
+        const expiryTimestamp = parseInt(localStorage.getItem(timerKey), 10); // Get expiration timestamp
+    
+        if (!expiryTimestamp || currentTime >= expiryTimestamp) {
+            // Timer has expired or not set
+            localStorage.removeItem(timerKey); // Clean up expired key
+            timerDisplay.parentElement.style.display = "none";
+            resendOTPBtn.style.display = "block";
+            clearInterval(timerInterval);
             return;
         }
+    
+        // Calculate remaining time
+        let timeRemaining = expiryTimestamp - currentTime;
+        timerDisplay.parentElement.style.display = "block";
+        resendOTPBtn.style.display = "none";
 
-        // Send OTP request to PHP backend
-        fetch('PHPBackend/Verify_OTP.php', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ action: 'send_otp', email: email }) // Send data as JSON
-        })
-        .then(response => response.json()) // Parse the JSON response
-        .then(data => {
-            alert(data.message);
-            if (data.success) {
-                otpSection.style.display = 'block'; // Show OTP input section
-                sendOTPBtn.disabled = true; // Disable the send OTP button
-            } else {
-                alert(data.message); // Alert message if verification failed
+        timerInterval = setInterval(() => {
+            const minutes = Math.floor(timeRemaining / 60);
+            const seconds = timeRemaining % 60;
+            timerDisplay.textContent = `${minutes}:${seconds < 10 ? "0" + seconds : seconds}`;
+    
+            timeRemaining--;
+    
+            if (timeRemaining < 0) {
+                clearInterval(timerInterval);
+                timerDisplay.parentElement.style.display = "none";
+                resendOTPBtn.style.display = "block";
+                localStorage.removeItem(timerKey); // Clean up when expired
             }
-        })
-        .catch(error => {
-            console.error("Error:", error);
-            alert("An error occurred while sending OTP.");  
-            
-        })
-        .finally(() => {
-            loadingIndicator.style.setProperty('display', 'none', 'important'); // Hide loading indicator when email is processed
+        }, 1000);
+    }
+    
+    function handleSendOtp() {
+        const currentTime = Math.floor(Date.now() / 1000); // Current time in seconds
+        const expiryTimestamp = currentTime + otpExpiryDuration; // Calculate expiration time
+        localStorage.setItem(timerKey, expiryTimestamp); // Save expiration time in localStorage
+        startOtpTimer(); // Start the timer
+    }
+    
+    if (sendOTPBtn) {
+        sendOTPBtn.addEventListener('click', () => {
+            const loadingIndicator = document.getElementById('loading-indicator');
+            loadingIndicator.style.setProperty('display', 'flex', 'important'); // Show loading indicator
+    
+            const email = document.getElementById('emailOTP').value;
+                
+            if (!email) {
+                alert('Please enter an email address.');
+                return;
+            }
+    
+            // Send OTP request to PHP backend
+            fetch('PHPBackend/Verify_OTP.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ action: 'send_otp', email: email }) // Send data as JSON
+            })
+            .then(response => response.json()) // Parse the JSON response
+            .then(data => {
+                alert(data.message);
+                if (data.success) {
+                    otpSection.style.display = 'block'; // Show OTP input section
+                    sendOTPBtn.style.display = 'none'; // Hide the send OTP button
+                    handleSendOtp();
+
+                } else {
+                    alert(data.message); // Alert message if sending failed
+                }
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                alert("An error occurred while sending OTP.");  
+            })
+            .finally(() => {
+                loadingIndicator.style.setProperty('display', 'none', 'important'); // Hide loading indicator when email is processed
+            });
         });
-        
+    } else {
+        console.error('sendOTPBtn not found in the DOM.');
+    }
+    
+
+    resendOTPBtn.addEventListener("click", () => {
+        resendOTPBtn.style.display = "none";
+        sendOTPBtn.click(); // Trigger sending OTP again
     });
-} else {
-    console.error('sendOTPBtn not found in the DOM.');
-}
+
 
     // Handle Verify OTP
     verifyOTPBtn.addEventListener('click', () => {
@@ -98,24 +149,28 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
-        // Verify OTP request to PHP backend
         fetch('PHPBackend/Verify_OTP.php', {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json', // Set content type to JSON
-            },
-            body: JSON.stringify({ action: 'verify_otp', otp: otp, email: email}) // Send OTP to verify
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ action: 'verify_otp', otp: otp, email: email })
         })
-        .then(response => response.json()) // Parse the response
-        .then(data => {
-            alert(data.message);
-            if (data.success) {
-                submitBtn.disabled = false; // Enable the submit button
-                otpSection.style.display = 'none'; // Hide OTP input section
-            }
-        })
-        .catch(error => console.error("Error:", error));
+            .then(response => response.json())
+            .then(data => {
+                alert(data.message);
+                if (data.success) {
+                    submitBtn.disabled = false;
+                    otpSection.style.display = 'none';
+                    timerDisplay.parentElement.style.display = "none";
+                    resendOTPBtn.style.display = "none";
+                    clearInterval(timerInterval);
+                    localStorage.removeItem(timerKey); 
+                }
+            })
+            .catch(error => console.error("Error:", error));
     });
+
+    // Start the timer on page load
+    window.addEventListener('load', startOtpTimer);
 
 
     if (SaynapBtn) {

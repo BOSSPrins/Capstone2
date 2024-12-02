@@ -180,6 +180,9 @@ if (isset($_SESSION['unique_id'])) {
                                     <label class="LabelCompDeta"> Address: </label>
                                     <input class="inputCompDeta" type="text" id="ComplaineeAddress" readonly>
                                 </div>
+                                <div style="display: flex; margin-bottom: 15px; align-items:center;">
+                                    <input type="text" id="ComplaineeEmail">
+                                </div>
                             </div>
                         
                             <h2> Complainant </h2>
@@ -276,7 +279,7 @@ if (isset($_SESSION['unique_id'])) {
                             <form method="POST" enctype="multipart/form-data">
                                 <div class="Take-Action" id="status-container" style="display:none;">
                                     <div style="display: flex; margin-bottom: 15px; width: 50%; align-items:center;">
-                                        <label class="LabelCompDeta">Status: </label>
+                                        <label class="LabelCompDetaSTATUS">Status: </label>
                                         <input class="dropdown-display" type="text" id="RemarkStatus" value="Resolved">
                                         <input type="hidden" id="ComplaintID">
                                         <input type="hidden" id="RemarkRole" value="<?php echo $_SESSION['role']?>">
@@ -293,8 +296,22 @@ if (isset($_SESSION['unique_id'])) {
                                         <label class="LabelCompDeta">Remark: </label>
                                         <textarea class="textAreaBarangDeta" id="NewRemark"></textarea>
                                     </div>
-                                    <button class="DownloadBtn" id="generatePdfBtn" disabled> Generate Settled Letter </button>
-                                    <input type="text" id="generatedFileName" readonly style="padding: 20px 40px 10px 10px; margin-left: 11%;"/>
+
+                                    <!-- Generate Button -->
+                                    <button class="DownloadBtn" id="generatePdfBtn">Generate Turn-over Letter</button>
+
+                                    <div id="pdfContainerNew" style="display: none; margin-top: 15px;">
+                                        <!-- Dynamically generated PDF card will appear here -->
+                                    </div>
+
+
+                                    <!-- Hidden Input Field for File Name -->
+                                    <input type="text" id="generatedFileName" readonly style="display: none;" />
+
+
+
+
+
                                     <div style="display: flex; justify-content: space-between; width: 100%; margin-top: 10px;">
                                         <button type="button" style="padding: 10px 30px;" onclick="BRNGYsubmitComplaintUpdate()"> Submit </button>
                                     </div>

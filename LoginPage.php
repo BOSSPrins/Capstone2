@@ -23,6 +23,7 @@ if (isset($_SESSION['role'])) {
 if (!isset($_SESSION['otp_status'])) {
     $_SESSION['otp_status'] = 'Unverified';
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -214,16 +215,18 @@ if (!isset($_SESSION['otp_status'])) {
                                         <span> Email </span>
                                         <span style="color:red"> &#42; </span>
                                         <input class="SUF" type="email" id="emailOTP" name="email" placeholder="Enter Your Email" required>
-                                        <button type="button" id="sendOTPBtn" style="display: none;">Send OTP</button>
+                                        <button class="sendOTP" type="button" id="sendOTPBtn" style="display: flex;">Send OTP</button>
+                                        <div id="otp-timer" style="color: blue; display: none;">OTP expires in: <span id="timer"></span></div>
                                     </div>
 
                                     <div class="input-field" id="otpSection" style="display:none;">
                                         <span>Enter OTP</span>
                                         <input class="SUF" type="text" id="EMAILotp" name="otp" placeholder="Enter OTP">
-                                        <button type="button" id="verifyOTPBtn">Verify OTP</button>
                                         <input type="hidden" id="OTPinput" value="<?php echo $_SESSION['otp_status']; ?>" readonly>
+                                        <button class="verifyOTP" type="button" id="verifyOTPBtn">Verify OTP</button>
+                                        <button class="resendOTP" type="button" id="resendOTPBtn" style="display:none;">Resend OTP</button>
                                     </div>
-
+                                    
                                     <div class="input-field">
                                         <span>Password</span>
                                         <span style="color:red"> &#42; </span>

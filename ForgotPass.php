@@ -1,13 +1,25 @@
+<?php 
+include_once "Connect/Connection.php";
+
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Password Reset</title>
+    <title> Mabuhay Website </title>
+    <link rel="icon" type="image/x-icon" href="Pictures/Mabuhay_Logo.ico">
     <link rel="stylesheet" href="CSS/ForgotPass.css">
 </head>
 <body>
     <div class="ForgotForms">
+        <div id="loading-indicator">
+            <div class="loader"></div>
+        </div>
         <form id="requestOTPForm">
             <div class="Email">
                 <div class="top">
@@ -31,7 +43,7 @@
 
 
         <form id="verifyOTPForm" style="display:none;">
-            <!-- <input type="email" name="email" value="<?php echo $_SESSION['email']?>" required> -->
+           
             <div class="verify">
                 <div class="top">
                     <h2> Verify Your Email </h2>
@@ -39,11 +51,12 @@
                         <img class="ForgotImg" src="Pictures/emailPassIcon.png">
                     </div>
                     <p> Please Enter The 6 Digit Code Sent To </p>
-                    <input type="email"> 
+                    <input type="email" value="<?php echo isset($_SESSION['email']) ? htmlspecialchars($_SESSION['email']) : ''; ?>" readonly> 
                 </div>
 
                 <div class="middle">
-                    <input class="InputEmail" type="type" name="email" name="otp" placeholder="Enter the OTP" required>
+                    <input type="hidden" name="email" value="<?php echo isset($_SESSION['email']) ? htmlspecialchars($_SESSION['email']) : ''; ?>" readonly required>
+                    <input class="InputEmail" type="type" name="otp" placeholder="Enter the OTP" required>
                 </div>
 
                 <div class="bottom">

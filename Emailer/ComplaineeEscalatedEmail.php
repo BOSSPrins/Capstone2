@@ -7,17 +7,13 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\SMTP;
 
-if (session_status() == PHP_SESSION_NONE) {
-  session_start();  // Start the session only if it hasn't been started
-}
-include_once "../Connect/Connection.php";
 
 // Enable error reporting
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 header('Content-Type: application/json');
-function sendResolvedEmail($user_email, $complaint_number, $Description) {
+function sendToComplainee($complaineeEmail, $complaintType) {
     $mail = new PHPMailer(true);
 
     try {
@@ -33,7 +29,7 @@ function sendResolvedEmail($user_email, $complaint_number, $Description) {
 
         // Recipients
         $mail->setFrom('mabuhayhoa@gmail.com', 'HOA Admin');
-        $mail->addAddress($user_email); // User's email address
+        $mail->addAddress($complaineeEmail); // User's email address
 
         // Content
         $mail->isHTML(true);
@@ -111,11 +107,10 @@ function sendResolvedEmail($user_email, $complaint_number, $Description) {
                           <div class="logo">
                             <img src="cid:logo_cid" alt="Logo">
                           </div>
-                            <h1>Complaint Resolved</h1>
-                            <p>Your complaint with number <strong>' . $complaint_number . '</strong> has been resolved by our officers.</p>
-                            <p>Description: <strong>' . $Description . '</strong></p>
-                            <p>If you have any questions or concerns, please feel free to contact us through our website.</p>
-                          
+                            <p>The complaint filed against you has been escalated for further review.</p>
+                            <p>Complaint Detail: <strong>' . $complaintType . '</strong></p>
+                            <p>If you have any further questions or wish to provide feedback, please contact us through our website.</p>
+                         
                         </div>
                     </body>
                     </html>
@@ -131,30 +126,25 @@ function sendResolvedEmail($user_email, $complaint_number, $Description) {
     }
 }
 
-// Handle the request to send the email
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['complainantUID'])) {
-    $complainantUID = $_POST['complainantUID'];
-    $complaint_number = $_POST['complaint_number'];
-    $Description = $_POST['Description'];
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  $complaineeEmail = isset($_POST['ComplaineeEmail']) ? $_POST['ComplaineeEmail'] : null;
+  $complaintType = isset($_POST['ComplaintType']) ? $_POST['ComplaintType'] : null;
 
-    // Fetch complainant email from the database
-    $conn = connection();
-    $query = "SELECT email FROM tblaccounts WHERE unique_id = ?";
-    $stmt = $conn->prepare($query);
-    $stmt->bind_param("s", $complainantUID);
-    $stmt->execute();
-    $stmt->bind_result($email);
-    $stmt->fetch();
-
-    if ($email) {
-        // Send the email to the complainant
-        if (sendResolvedEmail($email, $complaint_number, $Description)) {
-            echo json_encode(['success' => true, 'message' => 'Email sent successfully.']);  // Success
-        } else {
-            echo json_encode(['success' => false, 'error' => 'Failed to send email']);  // Failure
-        }
-    } else {
-        echo json_encode(['success' => false, 'error' => 'Complainant not found']);  // No email found
-    }
+  if (!$complaineeEmail || !$complaintType) {
+      echo json_encode(['success' => false, 'message' => 'Missing email or complaint type.']);
+      exit;
   }
+
+  // Mock email sending or actual email logic here
+  // For example:
+  $emailSent = sendToComplainee($complaineeEmail, $complaintType);
+
+  if ($emailSent) {
+      echo json_encode(['success' => true]);
+  } else {
+      echo json_encode(['success' => false, 'message' => 'Failed to send email.']);
+  }
+}
+
+
 ?>

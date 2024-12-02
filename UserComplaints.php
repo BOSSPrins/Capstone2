@@ -381,17 +381,13 @@ $encoded_id = urlencode($admin_unique_id);
                                 </div>
                             </div>
 
-                            <div class="GenComplainUser3">
-                                <label> Attach a report letter if this has happened before: </label>
-                                <div class="PDFFileUploadWrapp">
+                            <label class="PangAttach">Attach a report letter if this has happened before:</label>
+                            <div class="ComplainUser3">
+                                <div class="PDFFileUploadWrappGen">
+                                    <label for="PDFGen" class="gen-custom-file-upload">Choose File</label>
                                     <input class="PDFInputFileGen" type="file" id="PDFGen" accept=".pdf" multiple> <!-- Allow multiple file selection -->
-                                    <!-- <div class="PDFFileUploadGen">
-                                        <span class="PDFplusIconGen">+ <br> Upload PDFs here... </br> </span>
-                                    </div> -->
                                 </div>
-
-                                <!-- Preview uploaded PDF files with remove functionality -->
-                                <div id="pdfPreviewContainer"></div>
+                                <div id="GENpdfPreviewContainer" class="gen-pdf-preview-container"></div>                               
                             </div>
 
 
@@ -465,18 +461,15 @@ $encoded_id = urlencode($admin_unique_id);
                                 </div>
                             </div>
 
+                            <label class="PangAttach">Attach a report letter if this has happened before:</label>
                             <div class="ComplainUser3">
-                                <label> Attach a report letter if this has happened before: </label>
                                 <div class="PDFFileUploadWrappDir">
-                                    <input class="PDFInputFileDir" type="file" id="PDFDir" accept=".pdf" multiple> <!-- Allow multiple file selection -->
-                                    <!-- <div class="PDFFileUploadGen">
-                                        <span class="PDFplusIconGen">+ <br> Upload PDFs here... </br> </span>
-                                    </div> -->
+                                    <label for="PDFDir" class="dir-custom-file-upload">Choose File</label>
+                                    <input class="PDFInputFileDir" type="file" id="PDFDir" accept=".pdf" multiple>
                                 </div>
-
-                                <!-- Preview uploaded PDF files with remove functionality -->
-                                <div id="DIRpdfPreviewContainer"></div>
+                                <div id="DIRpdfPreviewContainer" class="dir-pdf-preview-container"></div>
                             </div>
+
                     
                             <!-- Submit Button -->
                             <footer class="footerUserSubmitt">

@@ -541,6 +541,9 @@ function submitComplaintUpdate() {
     const complaint_number = document.getElementById('complaint_number').value;
     const Description = document.getElementById('Description').value;
 
+    const loadingIndicator = document.getElementById('loading-indicator');
+    loadingIndicator.style.setProperty('display', 'flex', 'important'); // Show loading indicator
+
     fetch('PHPBackend/Complaint.php', {
         method: 'POST',
         headers: {
@@ -558,20 +561,31 @@ function submitComplaintUpdate() {
     })
     .then(response => response.json())
     .then(data => {
-        console.log(data); 
+        console.log("Complaint Update Response:", data);
         if (data.success) {
-            
             if (status === "Escalated") {
                 updateNaughtyList(ComplaineeEmail);
             }
-            // Optionally refresh or update the page content here
-            sendEmailToComplainant(complainantUID, complaint_number, Description, status);
+
+            // Trigger both email functions in parallel
+            return Promise.all([
+                sendEmailToComplainant(complainantUID, complaint_number, Description, status),
+                sendEmailToComplainee(ComplaineeEmail, ComplaintType, status)
+            ]);
         } else {
-            console.error('Error updating complaint:', data.error);
+            throw new Error(data.error); // Trigger catch block
         }
     })
+    .then(() => {
+        alert("Complaint updated and both parties are notified successfully!");
+        location.reload();
+    })
     .catch(error => {
-        console.error('Request failed:', error);
+        console.error("Error:", error);
+        alert("An error occurred: " + error.message);
+    })
+    .finally(() => {
+        loadingIndicator.style.setProperty('display', 'none', 'important'); // Hide loading indicator
     });
 }
 
@@ -599,18 +613,15 @@ function updateNaughtyList(ComplaineeEmail) {
         });
 }
 
-
 function sendEmailToComplainant(complainantUID, complaint_number, Description, status) {
-    const loadingIndicator = document.getElementById('loading-indicator');
-    loadingIndicator.style.setProperty('display', 'flex', 'important'); // Show loading indicator
-
     let emailEndpoint;
     if (status === 'Resolved') {
         emailEndpoint = 'Emailer/ResolvedEmail.php';
     } else if (status === 'Escalated') {
         emailEndpoint = 'Emailer/EscalatedEmail.php';
     }
-    fetch(emailEndpoint, {
+    
+    return fetch(emailEndpoint, {
         method: 'POST',
         body: new URLSearchParams({
             complainantUID: complainantUID,
@@ -618,26 +629,42 @@ function sendEmailToComplainant(complainantUID, complaint_number, Description, s
             Description
         }),
     })
-    .then(response => response.json())  // Get raw response as text
+    .then(response => response.json())
     .then(data => {
-        console.log(data);  // Log the raw response for debugging
-        try {
-            
-            console.log("Parsed response:", data);
-            if (data.success) {
-                alert('Complaint updated successfully!');
-                location.reload();
-            } else {
-                console.error("Error:", data.error);
-                alert('Email failed: ' + data.message);
-            }
-        } catch (error) {
-            console.error("Failed to parse JSON:", error);
+        console.log("Complainant Email Response:", data);
+        if (data.success) {
+            console.log('Complainant email sent successfully!');
+        } else {
+            console.error("Error:", data.error);
+            throw new Error(data.message); // Throw error to be caught in Promise.all
         }
+    });
+}
+
+function sendEmailToComplainee(ComplaineeEmail, ComplaintType, status) {
+    let emailEndpoint;
+    if (status === 'Resolved') {
+        emailEndpoint = 'Emailer/ComplaineeResolvedEmail.php';
+    } else if (status === 'Escalated') {
+        emailEndpoint = 'Emailer/ComplaineeEscalatedEmail.php';
+    }
+
+    return fetch(emailEndpoint, {
+        method: 'POST',
+        body: new URLSearchParams({
+            ComplaineeEmail: ComplaineeEmail,
+            ComplaintType
+        }),
     })
-    .catch(error => console.error("AJAX error:", error))
-    .finally(() => {
-        loadingIndicator.style.setProperty('display', 'none', 'important'); // Hide loading indicator when email is processed
+    .then(response => response.json())
+    .then(data => {
+        console.log("Complainee Email Response:", data);
+        if (data.success) {
+            console.log('Complainee email sent successfully!');
+        } else {
+            console.error("Error:", data.error);
+            throw new Error(data.message); // Throw error to be caught in Promise.all
+        }
     });
 }
 
@@ -875,22 +902,22 @@ function sendToServer(pdfData, fileName) {
         body: formData
     })
     .then(response => response.text()) // Get the raw response text first
-.then(rawResponse => {
-    console.log('Raw Response:', rawResponse);  // Log the raw response to check for any extra characters
-    try {
-        const data = JSON.parse(rawResponse);  // Parse the raw response as JSON
-        if (data.success) {
-            console.log('Success:', data.message); // Handle success
-        } else {
-            console.error('Error:', data.message); // Handle error
+    .then(rawResponse => {
+        console.log('Raw Response:', rawResponse);  // Log the raw response to check for any extra characters
+        try {
+            const data = JSON.parse(rawResponse);  // Parse the raw response as JSON
+            if (data.success) {
+                console.log('Success:', data.message); // Handle success
+            } else {
+                console.error('Error:', data.message); // Handle error
+            }
+        } catch (error) {
+            console.error('Error parsing JSON:', error); // Handle JSON parsing error
         }
-    } catch (error) {
-        console.error('Error parsing JSON:', error); // Handle JSON parsing error
-    }
-})
-.catch(error => {
-    console.error('Request failed', error); // Handle fetch error
-});
+    })
+    .catch(error => {
+        console.error('Request failed', error); // Handle fetch error
+    });
 }
 
 function createPdfCard(fileName) {

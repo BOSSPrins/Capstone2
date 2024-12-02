@@ -511,6 +511,13 @@ font-size: 13px;
   font-weight: bold;
 }
 
+.LabelCompDetaSTATUS {
+  display: inline-block;
+  width: 170px; /* Set width for label */
+  font-weight: bold;
+}
+
+
 .inputCompDeta {
   width: 100%;
   padding: 8px;
@@ -575,7 +582,7 @@ font-size: 13px;
   }
   
   .dropdown-display {
-    margin-left: 20px;
+    /* margin-left: 20px; */
     background-color: #ffffff;
     padding: 10px;
     cursor: pointer;
@@ -671,9 +678,10 @@ font-size: 13px;
 /* DESIGN PARA SA DOWNLOADABLE */
 .DownloadBtn{
     background: rgb(2, 118, 0);
-    padding: 10px 30px;
+    padding: 15px 30px;
     cursor: pointer;
-    margin-left: 10px;
+    margin-left: 172px;
+    margin-top: 20px;
     color: white;
 }
 
@@ -818,4 +826,49 @@ font-size: 13px;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+
+/* PDF card container para sa generate ng pdf */
+#pdfContainerNew {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+/* Style for the PDF card */
+.pdf-card-new {
+  background-color: #e8e8e8;
+  border: 1px solid #bbb;
+  padding: 12px 18px;
+  width: 280px;
+  display: flex;
+  align-items: center;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out;
+  cursor: pointer;
+  margin-left: 9%;
+}
+
+/* Hover effect */
+.pdf-card-new:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* PDF icon styling */
+.pdf-card-new img {
+  width: 45px;
+  height: 45px;
+  margin-right: 18px;
+}
+
+/* File name styling */
+.pdf-card-new .pdf-file-name {
+  font-weight: bold;
+  color: #2c2c2c;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }

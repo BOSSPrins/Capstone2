@@ -495,14 +495,18 @@ function fetchOverlayMessage() {
                     </div>
                     <div class="winner-list">`;
 
-                response.winners.forEach(function(winner) {
-                    winnersHtml += `
-                        <div class="winner-item">
-                            <img src="Pictures/${winner.img}" alt="${winner.candidate_name}">
-                            <p>${winner.candidate_name}</p>
-                        </div>
-                    `;
-                });
+                    response.winners.forEach(function(winner) {
+                        // Check if position is empty and set it accordingly
+                        let positionText = winner.position ? `<p><strong>${winner.position}</strong></p>` : '';
+                        
+                        winnersHtml += `
+                            <div class="winner-item">
+                                <img src="Pictures/${winner.img}" alt="${winner.candidate_name}">
+                                <p>${winner.candidate_name}</p>
+                                ${positionText} <!-- Add position on the next line, bold if exists -->
+                            </div>
+                        `;
+                    });
 
                 winnersHtml += `</div>`; // Close the winner list div
                 overlayContent.innerHTML = winnersHtml;

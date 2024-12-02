@@ -663,3 +663,15 @@ html{
 .SaveEditing:hover {
     background: rgb(0, 162, 0);
 }
+
+.DelEditing {
+  padding: 10px 30px;
+  margin-right: 10px;
+  cursor: pointer;
+  background: #c62828; /* Slightly dark red */
+  color: white;
+}
+
+.DelEditing:hover {
+  background: #e53935; /* Less lighter red */
+}

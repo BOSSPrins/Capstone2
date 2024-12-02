@@ -630,7 +630,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } elseif ($action === 'BRNGYfetchDetails') {
         $complaint_id = $_POST['complaint_id'];
     
-        $sql = "SELECT complainantUID, complaint_number, complainee, complaineeAddress, complainantName, complainantAddress, filed_date, complaint, description, proof, pdf, status, processed_date, Remark1, RemarkBy1, status1, RemarkDate1, escaLetter
+        $sql = "SELECT complainantUID, complaint_number, complainee, complaineeAddress, complainantName, complainantAddress, filed_date, complaint, description, proof, pdf, status, processed_date, Remark1, RemarkBy1, status1, RemarkDate1, escaLetter, ComplaineeEmail
                 FROM complaints
                 WHERE complaint_number = ?";
         $stmt = $conn->prepare($sql);

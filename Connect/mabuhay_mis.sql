@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 29, 2024 at 11:53 AM
+-- Generation Time: Dec 02, 2024 at 09:47 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -116,7 +116,7 @@ INSERT INTO `complaints` (`complaint_id`, `complaint_number`, `complaint_type`, 
 (14, 709666182, '', '', 'Rule Violation', 'test', '[\"boss.jpg\",\"bossing.jpg\",\"malupiton.png\",\"malupiton2.png\",\"malupiton3.jpg\"]', '', '2024-11-15 17:04:42', 'Test', '', 1581632830, 'Wela A Magsino', 'Blk 9 Lot 18', 'Pending', '', '', '', '', '', '', '', '', '', '', ''),
 (15, 799350189, 'Direct Complaint', 'test', 'Parking Problems ', 'test', '[\"meow.jpg\"]', '', '2024-11-15 17:13:50', 'test', '', 1581632830, 'Wela A Magsino', 'Blk 9 Lot 18', 'Pending', '', '', '', '', '', '', '', '', '', '', ''),
 (16, 1341459227, 'Direct Complaint', 'test', 'Parking Problems ', 'test', '[\"re4.png\"]', '', '2024-11-15 17:25:42', 'test', '', 1581632830, 'Wela A Magsino', 'Blk 9 Lot 18', 'Pending', '', '', '', '', '', '', '', '', '', '', ''),
-(17, 401542834, 'Direct Complaint', 'test', 'Parking Problems ', 'test', '[\"re4.png\"]', '', '2024-11-15 17:33:37', 'test', '', 1581632830, 'Wela A Magsino', 'Blk 9 Lot 18', 'Pending', '', '', '', '', '', '', '', '', '', '', ''),
+(17, 401542834, 'Direct Complaint', 'test', 'Parking Problems ', 'test', '[\"re4.png\"]', '', '2024-11-15 17:33:37', 'test', '', 1581632830, 'Wela A Magsino', 'Blk 9 Lot 18', 'In-Process', '2024-11-30 19:22:08', '', '', '', '', '', '', '', '', '', ''),
 (18, 751353843, 'Direct Complaint', 'qwer', 'Parking Problems ', 'qwer', '[\"boss.jpg\"]', '', '2024-11-15 17:36:03', 'qwer', '', 1581632830, 'Wela A Magsino', 'Blk 9 Lot 18', 'In-Process', '2024-11-16 21:48:34', '', '', '', '', '', '', '', '', '', ''),
 (19, 1264254659, 'Direct Complaint', 'waea', 'Parking Problems ', 'adawdad', '[\"vote.png\"]', '', '2024-11-15 17:53:05', 'adawda', '', 1581632830, 'Wela A Magsino', 'Blk 9 Lot 18', 'In-Process', '2024-11-27 05:43:34', '', '', '', '', '', '', '', '', '', ''),
 (20, 446038163, 'Direct Complaint', 'test', 'Parking Problems', 'test', '[\"re4.png\"]', '', '2024-11-15 18:15:09', 'test', '', 1581632830, 'Wela A Magsino', 'Blk 9 Lot 18', 'In-Process', '2024-11-27 05:21:41', '', '', '', '', '', '', '', '', '', ''),
@@ -127,12 +127,12 @@ INSERT INTO `complaints` (`complaint_id`, `complaint_number`, `complaint_type`, 
 (32, 883927647, 'Direct Complaint', '', 'Property Maintenance', 'Yung gate nya umabot na sa gate ko', '[\"boss.jpg\",\"bossing.jpg\",\"malupiton.png\",\"malupiton2.png\",\"malupiton3.jpg\"]', '[\"Complaint-999220120.pdf\",\"Complaint-866088832.pdf\"]', '2024-11-23 15:17:28', 'Blk 10 Lot 78', '', 1581632830, 'Wela A Magsino', 'Blk 9 Lot 18', 'Resolved', '2024-11-23 23:24:24', 'Turn over ko na to makulit na e ', 'admin', 'Escalated', '2024-11-23 23:25:16', 'Turn-Over-Letter-883927647.pdf', 'Eto na talaga pramis okay na to', 'barangay', 'Resolved', '2024-11-24 04:45:28', 'Settled-Letter-883927647.pdf'),
 (33, 1643921437, 'General Complaint', '', 'Noise Complaint', 'Ingay po', '[\"malupiton2.png\",\"malupiton3.jpg\",\"malupiton4.jpg\"]', '', '2024-11-24 13:57:02', '', '', 916555761, 'Tanjiro Dela Cruz', 'Blk 78 Lot 10', 'Resolved', '2024-11-25 06:13:43', 'Lipat na sa barangay', 'admin', 'Escalated', '2024-11-25 07:47:08', 'Turn-Over-Letter-1643921437.pdf', 'Oks na', 'barangay', 'Resolved', '2024-11-25 07:53:07', 'Settled-Letter-1643921437.pdf'),
 (34, 1208717079, 'General Complaint', '', 'Noise Complaint', '123123', '[\"bebetime.jpg\"]', '', '2024-11-26 21:44:13', '', '', 1581632830, 'Wela A Magsino', 'Blk 9 Lot 18', 'Escalated', '2024-11-27 05:44:25', '123123', 'admin', 'Escalated', '2024-11-27 14:10:02', 'Turn-Over-Letter-1208717079.pdf', '', '', '', '', ''),
-(35, 425320484, 'General Complaint', '', 'Noise Complaint', 'ingay naman kasi', '[\"bebetime.jpg\"]', '', '2024-11-26 21:46:03', '', '', 916555761, 'Tanjiro Dela Cruz', 'Blk 78 Lot 10', 'Resolved', '2024-11-27 06:31:05', '', 'admin', 'Escalated', '2024-11-27 06:36:31', 'Turn-Over-Letter-425320484.pdf', '', 'barangay', 'Resolved', '2024-11-27 06:56:13', ''),
+(35, 425320484, 'General Complaint', '', 'Noise Complaint', 'ingay naman kasi', '[\"bebetime.jpg\"]', '', '2024-11-26 21:46:03', '', 'vardump007@gmail.com', 916555761, 'Tanjiro Dela Cruz', 'Blk 78 Lot 10', 'Resolved', '2024-11-30 15:24:37', '', 'admin', 'Escalated', '2024-11-30 15:32:03', '', '', 'barangay', 'Resolved', '2024-11-30 15:56:23', ''),
 (36, 1645727274, 'Direct Complaint', 'Test lang sa email', 'Parking Problems', 'Test', '[\"malupiton4.jpg\"]', '', '0000-00-00 00:00:00', '2024-11-28 18:51:56', 'vardump007@gmail.com', 1581632830, 'Wela A Magsino', 'Blk 9 Lot 18', 'Pending', '', '', '', '', '', '', '', '', '', '', ''),
 (37, 1395802853, 'Direct Complaint', 'Test lang ulet sa email', 'Parking Problems', 'Tricycle nya sa gate ko binangga', '[\"malupiton4.jpg\"]', '', '0000-00-00 00:00:00', '2024-11-28 20:51:53', 'vardump007@gmail.com', 1581632830, 'Wela A Magsino', 'Blk 9 Lot 18', 'Pending', '', '', '', '', '', '', '', '', '', '', ''),
 (38, 1604739286, 'Direct Complaint', 'Test sa notify', 'Property Maintenance', 'Kalat nya', '[\"malupiton4.jpg\"]', '', '0000-00-00 00:00:00', '2024-11-28 21:04:51', 'vardump007@gmail.com', 1581632830, 'Wela A Magsino', 'Blk 9 Lot 18', 'Pending', '', '', '', '', '', '', '', '', '', '', ''),
-(39, 1053648047, 'General Complaint', '', 'Noise Complaint', 'test nasira yung filed date', '[\"malupiton4.jpg\"]', '', '2024-11-28 22:15:27', '', '', 1581632830, 'Wela A Magsino', 'Blk 9 Lot 18', 'Pending', '', '', '', '', '', '', '', '', '', '', ''),
-(40, 1430726902, 'Direct Complaint', 'Test sa notice', 'Parking Problems', 'cutie', '[\"malupiton2.png\"]', '', '2024-11-28 22:16:51', 'Blk 78 Lot 10', 'vardump007@gmail.com', 1581632830, 'Wela A Magsino', 'Blk 9 Lot 18', 'Escalated', '2024-11-29 06:30:11', 'Turn over na po di ko na kaya', 'admin', 'Escalated', '2024-11-29 06:42:20', '', '', '', '', '', '');
+(39, 1053648047, 'General Complaint', '', 'Noise Complaint', 'test nasira yung filed date', '[\"malupiton4.jpg\"]', '', '2024-11-28 22:15:27', '', '', 1581632830, 'Wela A Magsino', 'Blk 9 Lot 18', 'In-Process', '2024-11-30 13:10:55', '', '', '', '', '', '', '', '', '', ''),
+(40, 1430726902, 'Direct Complaint', 'Test sa notice', 'Parking Problems', 'cutie', '[\"malupiton2.png\"]', '', '2024-11-28 22:16:51', 'Blk 78 Lot 10', 'vardump007@gmail.com', 1581632830, 'Wela A Magsino', 'Blk 9 Lot 18', 'In-Process', '2024-11-30 13:14:59', 'Turn over na po di ko na kaya', 'admin', 'Escalated', '2024-11-29 06:42:20', '', '', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -333,10 +333,10 @@ CREATE TABLE `otp_verifications` (
 --
 
 INSERT INTO `otp_verifications` (`otp_id`, `email`, `otp`, `expiry`) VALUES
-(1, 'vardump007@gmail.com', '658045', '2024-11-29 08:47:36'),
+(1, 'vardump007@gmail.com', '593512', '2024-11-30 19:05:24'),
 (12, 'wela@gmail.com', '329966', '2024-11-28 12:26:27'),
 (16, 'tnjrdlcrz@gmail.com', '972352', '2024-11-28 16:12:28'),
-(21, 'prnccrvnts@gmail.com', '715033', '2024-11-29 11:44:45');
+(21, 'prnccrvnts@gmail.com', '544814', '2024-12-02 09:46:40');
 
 -- --------------------------------------------------------
 
@@ -417,7 +417,7 @@ CREATE TABLE `tblaccounts` (
 --
 
 INSERT INTO `tblaccounts` (`user_id`, `unique_id`, `email`, `password`, `img`, `status`, `role`, `access`, `otp`, `naughty_list`) VALUES
-(2, 1589571584, 'admin@gmail.com', '21232f297a57a5a743894a0e4a801fc3', '1715091144pusi.jpg', 'Active now', 'admin', 'Approved', 'Verified', 0),
+(2, 1589571584, 'admin@gmail.com', '21232f297a57a5a743894a0e4a801fc3', '1715091144pusi.jpg', 'Offline now', 'admin', 'Approved', 'Verified', 0),
 (4, 1357825271, 'senpai@gmail.com', '1e5db03ce967cfef4e21ada16da09b06', '1715105349271713718_1999144396919159_608519389647854942_n.jpg', 'Offline now', 'user', 'Rejected', 'Verified', 0),
 (19, 112466338, 'Prins@gmail.com', '0a9e0db6e95c394ee792ecbc6e510791', '1717745936pitikvermo.jpg', 'Pending', 'user', 'Approved', '', 0),
 (21, 1017731196, 'tnjrdlcrz@gmail.com', '202cb962ac59075b964b07152d234b70', '1717937589pitikvermo.jpg', 'Pending', 'user', 'Approved', 'Verified', 0),
@@ -438,10 +438,10 @@ INSERT INTO `tblaccounts` (`user_id`, `unique_id`, `email`, `password`, `img`, `
 (36, 1434008263, 'Rose@gmail.com', '0df4dccc4aac3f6f36e00ef2a6a4bfac', 'Mabuhay_Logo.png', 'Offline now', 'user', 'Approved', 'Verified', 0),
 (37, 1195874011, 'Mia@gmail.com', '46e6f8781dd60e2635430b61db511262', 'Mabuhay_Logo.png', 'Offline now', 'user', 'Approved', 'Verified', 0),
 (38, 724357114, 'barangay@gmail.com', '1ee0fa80acf1af702cf55d07704548f6', 'Mabuhay_Logo.png', 'Offline now', 'barangay', 'Approved', 'Verified', 0),
-(39, 916555761, 'vardump007@gmail.com', 'b2145aac704ce76dbe1ac7adac535b23', 'Mabuhay_Logo.png', 'Offline now', 'user', 'Approved', 'Verified', 1),
+(39, 916555761, 'vardump007@gmail.com', 'b2145aac704ce76dbe1ac7adac535b23', 'Mabuhay_Logo.png', 'Offline now', 'user', 'Approved', 'Verified', 4),
 (47, 939514278, 'vardump07@gmail.com', 'ceb232a461e38a2ed16aae9ab58671a8', 'Mabuhay_Logo.png', 'Offline now', 'user', 'Pending', '', 0),
 (48, 809272943, 'vardump0007@gmail.com', '202cb962ac59075b964b07152d234b70', 'Mabuhay_Logo.png', 'Offline now', 'user', 'Pending', '', 0),
-(50, 317446215, 'prnccrvnts@gmail.com', '0627181c88225bba505cecb865120a7d', 'Mabuhay_Logo.png', 'Offline now', 'user', 'Pending', 'Verified', 0);
+(50, 317446215, 'prnccrvnts@gmail.com', '9ea90f1142ff0bdf6b410d0a6b23aacb', 'Mabuhay_Logo.png', 'Offline now', 'user', 'Pending', 'Verified', 0);
 
 -- --------------------------------------------------------
 
@@ -523,13 +523,18 @@ CREATE TABLE `tbl_sessions` (
 --
 
 INSERT INTO `tbl_sessions` (`session_id`, `unique_id`, `last_activity`, `device_ip`, `status`) VALUES
+('1nde3b4afhrmb70ps0j21gg492', 1589571584, '2024-11-30 05:09:06', '::1', 'inactive'),
+('49q5r4vdqbvm72gh5meb29tpsg', 1581632830, '2024-12-01 06:08:34', '::1', 'inactive'),
 ('56htq7vh3dcstor8pubar342gh', 1581632830, '2024-11-25 07:55:33', '::1', 'inactive'),
 ('77u9luim9024hbt0k2k0oigjci', 1581632830, '2024-11-27 21:28:46', '::1', 'inactive'),
 ('806gfh10fgskgvdcr4bm69855o', 1589571584, '2024-11-26 02:26:15', '::1', 'inactive'),
 ('avdlcnc21i5846mk7jg0dhpuoq', 724357114, '2024-11-26 20:12:26', '::1', 'inactive'),
 ('e35bng9v3gnt04ndngrer6g8ec', 1589571584, '2024-11-27 22:08:25', '::1', 'inactive'),
-('fptp5hdvi6om2gjmjm2oju6af9', 1589571584, '2024-11-28 21:52:55', '::1', 'active'),
+('fptp5hdvi6om2gjmjm2oju6af9', 1589571584, '2024-11-28 21:52:55', '::1', 'inactive'),
+('icj7dmhl3g0haj32bh1qk08cb3', 1589571584, '2024-11-29 12:09:35', '::1', 'inactive'),
 ('jrsdp4em90angoisbm694npi0b', 1581632830, '2024-11-25 07:57:10', '::1', 'inactive'),
+('r70l72u2lce0sipvnk6b7kspr5', 1589571584, '2024-12-01 23:19:23', '::1', 'inactive'),
+('smrpil2bg3udr2muskhqplc659', 1581632830, '2024-11-29 12:07:56', '::1', 'inactive'),
 ('u8ts71fn1jb160mq0m719bjbba', 1589571584, '2024-11-26 15:42:33', '::1', 'inactive');
 
 -- --------------------------------------------------------
@@ -583,7 +588,13 @@ CREATE TABLE `verified_email` (
 
 INSERT INTO `verified_email` (`email_id`, `email`, `status`) VALUES
 (1, 'prnccrvnts@gmail.com', 'Verified'),
-(2, 'prnccrvnts@gmail.com', 'Verified');
+(2, 'prnccrvnts@gmail.com', 'Verified'),
+(3, 'prnccrvnts@gmail.com', 'Verified'),
+(4, 'prnccrvnts@gmail.com', 'Verified'),
+(5, 'prnccrvnts@gmail.com', 'Verified'),
+(6, 'prnccrvnts@gmail.com', 'Verified'),
+(7, 'prnccrvnts@gmail.com', 'Verified'),
+(8, 'prnccrvnts@gmail.com', 'Verified');
 
 -- --------------------------------------------------------
 
@@ -596,28 +607,30 @@ CREATE TABLE `voting` (
   `unique_id` int(11) NOT NULL,
   `candidate_name` varchar(255) NOT NULL,
   `img` varchar(255) NOT NULL,
+  `position` varchar(20) NOT NULL,
   `add_date` varchar(20) NOT NULL,
   `status` varchar(20) NOT NULL,
   `won_date` varchar(20) NOT NULL,
   `fail_date` varchar(20) NOT NULL,
-  `access` varchar(20) NOT NULL
+  `access` varchar(20) NOT NULL,
+  `status2` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `voting`
 --
 
-INSERT INTO `voting` (`vote_id`, `unique_id`, `candidate_name`, `img`, `add_date`, `status`, `won_date`, `fail_date`, `access`) VALUES
-(95, 776313154, 'Patrick B Bayona', 'Mabuhay_Logo.png', '2024-11-28 07:15:38', 'Failure', '', '2024-11-28 08:20:02', 'Declared'),
-(96, 1590469844, 'Paolo M Murillo', 'Mabuhay_Logo.png', '2024-11-28 07:15:40', 'Winner', '2024-11-28 08:20:02', '', 'Declared'),
-(97, 821155870, 'Jhonrenz  Berbano', 'Mabuhay_Logo.png', '2024-11-28 07:15:54', 'Winner', '2024-11-28 08:20:02', '', 'Declared'),
-(98, 1308040957, 'John  Doe', 'Mabuhay_Logo.png', '2024-11-28 07:15:56', 'Winner', '2024-11-28 08:20:02', '', 'Declared'),
-(99, 931588206, 'Jane  Doe', 'Mabuhay_Logo.png', '2024-11-28 07:15:58', 'Winner', '2024-11-28 08:20:02', '', 'Declared'),
-(100, 916555761, 'Tanjiro  Dela Cruz', 'Mabuhay_Logo.png', '2024-11-28 07:16:00', 'Winner', '2024-11-28 08:20:02', '', 'Declared'),
-(101, 1581632830, 'Wela A Magsino', 'Mabuhay_Logo.png', '2024-11-28 07:16:27', 'Winner', '2024-11-28 08:20:02', '', 'Declared'),
-(102, 499733408, 'Ethan  Winters', 'Mabuhay_Logo.png', '2024-11-28 07:16:36', 'Winner', '2024-11-28 08:20:02', '', 'Declared'),
-(103, 1434008263, 'Rose  Winters', 'Mabuhay_Logo.png', '2024-11-28 07:16:37', 'Winner', '2024-11-28 08:20:02', '', 'Declared'),
-(104, 1195874011, 'Mia  Winters', 'Mabuhay_Logo.png', '2024-11-28 07:16:39', 'Winner', '2024-11-28 08:20:02', '', 'Declared');
+INSERT INTO `voting` (`vote_id`, `unique_id`, `candidate_name`, `img`, `position`, `add_date`, `status`, `won_date`, `fail_date`, `access`, `status2`) VALUES
+(95, 776313154, 'Patrick B Bayona', 'Mabuhay_Logo.png', '', '2024-11-28 07:15:38', 'Failure', '', '2024-11-28 08:20:02', 'Declared', ''),
+(96, 1590469844, 'Paolo M Murillo', 'default_Image.png', 'Halimaw Ma inlove', '2024-11-28 07:15:40', 'Winner', '2024-11-28 08:20:02', '', 'Declared', ''),
+(97, 821155870, 'Jhonrenz  Berbano', 'default_Image.png', 'President', '2024-11-28 07:15:54', 'Winner', '2024-11-28 08:20:02', '', 'Declared', ''),
+(98, 1308040957, 'John  Doe', 'Mabuhay_Logo.png', '', '2024-11-28 07:15:56', 'Winner', '2024-11-28 08:20:02', '', 'Declared', ''),
+(99, 931588206, 'Jane  Doe', 'Mabuhay_Logo.png', '', '2024-11-28 07:15:58', 'Winner', '2024-11-28 08:20:02', '', 'Declared', ''),
+(100, 916555761, 'Tanjiro  Dela Cruz', 'Mabuhay_Logo.png', '', '2024-11-28 07:16:00', 'Winner', '2024-11-28 08:20:02', '', 'Declared', ''),
+(101, 1581632830, 'Wela A Magsino', 'Mabuhay_Logo.png', '', '2024-11-28 07:16:27', 'Winner', '2024-11-28 08:20:02', '', 'Declared', ''),
+(102, 499733408, 'Ethan  Winters', 'Mabuhay_Logo.png', '', '2024-11-28 07:16:36', 'Winner', '2024-11-28 08:20:02', '', 'Declared', ''),
+(103, 1434008263, 'Rose  Winters', 'Mabuhay_Logo.png', '', '2024-11-28 07:16:37', 'Winner', '2024-11-28 08:20:02', '', 'Declared', ''),
+(104, 1195874011, 'Mia  Winters', 'Mabuhay_Logo.png', '', '2024-11-28 07:16:39', 'Winner', '2024-11-28 08:20:02', '', 'Declared', '');
 
 -- --------------------------------------------------------
 
@@ -811,7 +824,7 @@ ALTER TABLE `officials`
 -- AUTO_INCREMENT for table `otp_verifications`
 --
 ALTER TABLE `otp_verifications`
-  MODIFY `otp_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `otp_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
 
 --
 -- AUTO_INCREMENT for table `payments`
@@ -847,7 +860,7 @@ ALTER TABLE `user_votes`
 -- AUTO_INCREMENT for table `verified_email`
 --
 ALTER TABLE `verified_email`
-  MODIFY `email_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `email_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `voting`
@@ -859,7 +872,7 @@ ALTER TABLE `voting`
 -- AUTO_INCREMENT for table `voting_countdown`
 --
 ALTER TABLE `voting_countdown`
-  MODIFY `countdown_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=121;
+  MODIFY `countdown_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=123;
 
 --
 -- AUTO_INCREMENT for table `voting_history`
