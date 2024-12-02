@@ -58,7 +58,7 @@
                 <div class="top">
                     <h2> Create New Password </h2>
                     <div class="CircleBackG">
-                        <img class="ForgotImg" src="Pitures/NewPass.png">
+                        <img class="ForgotImg" src="Pictures/NewPass.png">
                     </div>
                     <p> Your New Password Must Be Different <br> from Previously Used Password </p>
                 </div>
