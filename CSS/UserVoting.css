@@ -799,7 +799,7 @@
   margin-top: 1%;
   height: auto;             /* Fill the height of the Overlay */
   width: 100%;              /* Take full width */
-  padding: 20px;
+  padding: 30px;
   box-sizing: border-box;   /* Ensure padding doesn't affect width/height */
 }
 
@@ -815,7 +815,7 @@
   display: flex;
   flex-direction: column; /* Stack content vertically */
   max-height: 80vh; /* Max height to ensure it doesn't take too much of the screen */
-  overflow: hidden; /* Hide overflow content outside the modal */
+  overflow: auto; /* Hide overflow content outside the modal */
 }
 
 .CongratsHeader{

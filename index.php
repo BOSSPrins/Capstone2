@@ -46,40 +46,10 @@ include "Connect/Connection.php";
                     <a href="#AboutUs"> About Us </a>
                 </li>
                 <li>
-                    <a href="LoginPage.php"> Services </a>
-                </li>
-                <li>
                     <a href="#HOAOfficials"> HOA Officials </a>
                 </li>
-            </ul>
-        </div>
-    </div>
-
-    <div class="HeaderWithLogo hiddenHeader">
-        <div class="LogoLandingPage">
-            <div class="logoImageCon">
-                <a href="#" class="asLogo">
-                    <img class="Logoo" src="Pictures/Dasma_City_Logo.png">
-                </a>
-            </div>
-            <div class="NameOfSubdi">
-                <h1> MABUHAY HOMES 2000 PH-V </h1>
-                <h3> BRGY. SALAWAG CITY OF DASMARINAS </h3>
-            </div>
-        </div>
-        <div class="MhNavbar">
-            <ul class="MhNavv">
                 <li>
-                    <a href="#Home"> Home </a>
-                </li>
-                <li>
-                    <a href="#AboutUs"> About Us </a>
-                </li>
-                <li>
-                    <a href="LoginPage.php"> Services </a>
-                </li>
-                <li>
-                    <a href="#HOAOfficials"> HOA Officials </a>
+                    <a href="LoginPage.php"> Login </a>
                 </li>
             </ul>
         </div>
