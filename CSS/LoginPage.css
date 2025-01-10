@@ -1,144 +1,237 @@
 :root{
-    --color-primary: #1828b8;
-    --color-danger: #ff7782;
-    --color-success: #41f1b6;
-    --color-warning: #ffbb55;
-    --color-white: #fff;
-    --color-info-dark: #1e1e1f;
-    --color-info-light: #939fb6;
-    --color-dark: #363949;
-    --color-light: rgba(61, 109, 176, 0.18);
-    --color-light-2: rgba(52, 58, 116, 0.20);
-    --color-primary-variant: #111e88;
-    --color-dark-variant: #677483;
-    --color-background: #f6f6f9;
+  --color-primary: #1828b8;
+  --color-danger: #ff7782;
+  --color-success: #41f1b6;
+  --color-warning: #ffbb55;
+  --color-white: #fff;
+  --color-info-dark: #1e1e1f;
+  --color-info-light: #939fb6;
+  --color-dark: #363949;
+  --color-light: rgba(61, 109, 176, 0.18);
+  --color-light-2: rgba(52, 58, 116, 0.20);
+  --color-primary-variant: #111e88;
+  --color-dark-variant: #677483;
+  --color-background: #f0f0f0;
 
-    --light: #f9f9f9;
-    --blue: #3c91e6;
-    --light-blue: #a9d5ff;
-    --light-red: #f38c8c;
-    --light-green: #a7f9d0;
-    --grey: #eee;
-    --dark-grey: #aaaaaa;
-    --drak: #342e37;
-    --red:  #d76161;
-    --green: rgb(94, 232, 129);
-    --color-info-dark: #919497;
+  --light: #f9f9f9;
+  --blue: #3c91e6;
+  --light-blue: #a9d5ff;
+  --light-red: #f38c8c;
+  --light-green: #a7f9d0;
+  --grey: #eee;
+  --dark-grey: #aaaaaa;
+  --drak: #342e37;
+  --red:  #e88383;
+  --green: rgb(94, 232, 129);
+  --color-info-dark: #919497;
 
-    --color-border-radius: 2rem;
-    --color-border-radius-1: 0.4rem;
-    --color-border-radius-2: 0.8rem;
-    --color-border-radius-3: 1.2rem;
+  --color-border-radius: 2rem;
+  --color-border-radius-1: 0.4rem;
+  --color-border-radius-2: 0.8rem;
+  --color-border-radius-3: 1.2rem;
 
 
-    --card-padding: 1.8rem;
-    --padding-1: 1.2rem;
+  --card-padding: 1.8rem;
+  --padding-1: 1.2rem;
 
-    --box-shadow: 0 2rem 3rem var(--color-light);
+  --box-shadow: 0 2rem 3rem var(--color-light);
 }
 
-input[type="password"]::-ms-reveal {
-    display: none;
+*{
+  margin: 0;
+  padding: 0;
+  outline: none;
+  border: 0;
+  text-decoration: none;
+  list-style: none;
+  box-sizing: border-box;
 }
 
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: sans-serif , Arial;
+html{
+  font-size: 16px;
 }
 
-.main {
-    min-height: 100vh;
-    width: 100%;
+.mainDashboardContainer{
+  width: 100vw;
+  height: 100vh;
+  font-family: Arial, sans-serif;
+  font-size: 0.88rem;
+  background: var(--color-background);
+  user-select: none;
+  overflow-x: hidden;
+  color: var(--color-dark);
+}
+
+/* ========== MAIN DASHBOARD DESIGN ========== */
+.arawAtOras{
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
+    padding: 5px 20px;
+    background-color: rgb(0, 0, 0);
+    color: rgb(246, 246, 246);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add box shadow */
 }
 
-/* ===== LEFT DESIGN ===== */
+.MainBodyContainerr {
+display: flex; /* Ensure it uses flexbox to manage layout */
+flex-direction: column; /* Stack children vertically */
+height: 100vh; /* Make sure it takes full viewport height */
+}
 
-.split-screen {
-    position: relative;
-    width: 100%;
-    height: 100vh;
-    display: flex;
+.MainContainerForTables {
+display: flex;
+justify-content: center;
+width: 100%;
+flex: 1; /* Allow it to grow and take available space */
+overflow: hidden; /* Prevent scrollbars here */
+}
+
+.MainContainerAll {
+display: flex;
+width: 100%;
+flex: 1; /* Allow it to grow and shrink with available space */
 }
 
 .left {
     position: relative;
     background: #99b7d1;
-    width: 65%;
+    width: 63%;
     height: 100%;
 }
 
-.left img {
+.HoaOffice {
+    width: 100%;  /* Make the image fill the container width */
+    height: 100%; /* Make the image fill the container height */
+    object-fit: cover; /* Ensure the image covers the container area without stretching */
+}
+
+.MhNavv{
+  display: flex;
+  align-items: center;
+}
+
+.MhNavv a {
+    font-size: 13px;
+    padding: 11px 20px;
+    padding-bottom: 16px; /* Add padding at the bottom for spacing */
+    color: rgb(255, 255, 255);
+    font-weight: 600;
+    text-transform: uppercase;
+    position: relative;
+    overflow: hidden; /* Ensures the pseudo-element doesn't overflow */
+}
+
+/* Animated Bottom Border using ::after */
+.MhNavv a::after {
+    content: '';
     position: absolute;
-    top: 0;
+    bottom: 0;
     left: 0;
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    height: 2px; /* Border height */
+    background-color: #f1f1f1;
+    transform: scaleX(0); /* Start with scaleX(0), so the border is not visible */
+    transform-origin: bottom right;
+    transition: transform 0.3s ease; /* Transition for the animation */
+}
+  
+.MhNavv a:hover::after {
+    transform: scaleX(1); /* Expand the border from left to right */
+    transform-origin: bottom left; /* Origin of the scale from the left */
+}
+  
+/* Active state with bottom border */
+.MhNavv a.activee {
+    color: rgb(207, 207, 207);
+    /* border-bottom: 2px solid #f1f1f1; */
 }
 
-/* ===== RIGHT SIDE DESIGN ==== */
-
-.img-login {
-    width: 20px;
+.MhNavv a.activee::after {
+    width: 50%; /* Half the width of the element */
+    left: 50%; /* Start the border from the center */
+    transform: scaleX(1); /* Ensure the border is visible */
+    transform-origin: bottom left; /* For consistency */
+    margin-left: -25%; /* Center the border (half the width) */
 }
 
-.rightt{
-    display: none; /* Hide the right side initially */
-    background: var(--color-background);
-    max-width: 35%;
+.LogoLandingPage{
+    display: flex;
+    align-items: center;
+}
+
+.Logoo{
+    width: 60px;
+}
+
+.NameOfSubdi{
+    margin-left: 8px;
+    color: white;
+}
+
+/* DESIGN PARA SA HEADER */
+.img-logo{
+  width: 100px;
+}
+
+.headerTopMain{
+  position: sticky;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* height: 50px; */
+  width: 100%;
+  background: var(--color-primary);
+  padding: 15px;
+  top: 0;
+  box-shadow: 5px 10px 18px #888888;
+  box-shadow: 0 8px 8px -10px black;
+  z-index: 1;
+}
+
+/* DESIGN PARA SA RIGHT SIDE */
+.right{
+    /* display: none; */
+    background: white;
+    max-width: 37%;
     width: 100%;
-    height: 100vh;
+    /* height: 100vh; */
     padding: 20px;
+    display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-.rightt.show {
-    display: flex; /* Show the right side when necessary */
-    flex-direction: column;
+.imgLogo {
+    width: 150px;
+    margin-bottom: 20px;
 }
 
-.login-title {
-    font-size: 28px;
-    font-weight: 600;
-    color: #232836;
-}
-
-/* form {
-    margin-top: 20px;
-} */
-
-/*========== LOGIN FORM DESIGN ========= */
 .LogoLog-In{
     display: flex;
     justify-content: center;
 }
 
-.formLogin {
-    max-width: 450px;
-    margin: 20px;
+.LoginForm{
+    max-width: 455px;
+    /* margin: 10px; */
     width: 100%;
-    /*border-radius: 5px;
-    background: white;
-    border-radius: var(--color-border-radius);
-    box-shadow: var(--box-shadow); */
 }
 
 .login-title{
     display: flex;
     justify-content: center;
+    font-size: 28px;
+    font-weight: 600;
+    color: #232836;
 }
 
-.formLogin .forms {
-    padding: 10px;
+/* DESIGN PARA SA LOGIN FORM */
+input[type="password"]::-ms-reveal {
+    display: none;
 }
 
-.forms .login-input-field {
+.LoginInputField {
     height: 40px;
     width: 100px;
     position: relative;
@@ -146,13 +239,13 @@ input[type="password"]::-ms-reveal {
     width: 100%
 }
 
-.login-input-field input {
+.inputLogin {
     position: absolute;
     height: 100%;
     width: 100%;
     padding: 10px;
     border: 1px solid rgba(118, 147, 193, 0.4);
-    background: var(--color-background);
+    background: white;
     border-radius: 5px;
     outline: none;
     color: black;
@@ -160,7 +253,7 @@ input[type="password"]::-ms-reveal {
     transition: 0.5s;
 }
 
-.login-input-field span {
+.SpanLogin {
     position: absolute;
     left: 0;
     padding: 10px;
@@ -171,7 +264,7 @@ input[type="password"]::-ms-reveal {
     transition: 0.2s;
 }
 
-.login-input-field img {
+.ImgIcon {
     position: absolute;
     top: 50%;
     right: 10px;
@@ -179,22 +272,32 @@ input[type="password"]::-ms-reveal {
     font-size: 20px;
 }
 
-.login-input-field input:valid~span,
-.login-input-field input:focus~span {
+.inputLogin:valid~span,
+.inputLogin:focus~span {
     color: var(--color-primary);
     transform: translateX(5px) translateY(-7px);
     font-size: 0.70em;
     padding: 0 3px;
-    background: var(--color-background);
+    background: white;
 }
 
-.login-input-field input:valid,
-.login-input-field input:focus {
+.inputLogin:valid,
+.inputLogin:focus {
     border: 1px solid var(--color-primary);
 }
 
-/* ==== ForgotPass Design ===== */
+/* DESIGN PARA SA MATA NG PASSWORD */
+.MataNgPassword, .ImgIcon {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 20px;
+    width: 23px;
+}
 
+/* ==== ForgotPass Button Design ===== */
 .forgotpass-container {
     display: flex;
     margin-top: 7px;
@@ -214,7 +317,6 @@ input[type="password"]::-ms-reveal {
 }
 
 /* ===== Login Button Design ===== */
-
 .btn-login {
     margin-top: 35px;
 }
@@ -230,98 +332,46 @@ input[type="password"]::-ms-reveal {
 }
 
 /* ===== Sign Up link Design ===== */
-
 .signtext-container {
     margin-top: 10px;
     text-align: center;
 }
 
-.login-signup a {
-    text-decoration: none;
+.BtnSignUp {
+    border: none;
+    background: transparent;
+    color: #1828b8;
+    font-size: medium;
+    cursor: pointer;
 }
 
-.login-signup a:hover {
+.BtnSignUp:hover {
     text-decoration: underline;
 }
 
-.signup-text {
-    color: var(--color-primary);
-
-}
-
-/* ========== SIGN UP FORM DESIGN ========== */
-.imgLogo{
-    width: 150px;
-    margin-bottom: 20px;
-}
-
-.imgLogo2 {
-    width: 130px;
-    margin-bottom: 20px;
-}
-
-.signUp-title{
-    font-size: 28px;
-    font-weight: 600;
-    color: #232836;
-}
-
-.formSignup{
+/* ===== Sign Up Laman Design ===== */
+.SignUpForm {
     position: relative;
-    max-width: 470px;
+    /* max-width: 470px; */
     /* height: 400px; */
     width: 100%;
     /* background-color: var(--color-white);
     border-radius: var(--color-border-radius);
     box-shadow: var(--box-shadow); */
-    margin: 0 15px;
+    /* margin: 0 15px; */
     overflow-y: auto;
     padding: 10px;
+    /* background: gray; */
+    scrollbar-width: thin;
 }
 
-/* .formSignup::-webkit-scrollbar{
-    display: none;
-} */
-
-.formSignup .signup-form .titleniyato{
-    display: block;
-    padding-bottom: 5px;
-    padding-top: 5px;
-    font-size: 17.5px;
-    font-weight: bold;
-    margin: 6px 0;
-    color: #333;
-}
-
-.formSignup .signup-form{
-    position: relative;
-    min-height: 280px;
-    background: var(--color-background);
-    margin-top: 10px;
-}
-
-.signup-form .input-field{
+.OneInputField {
     position: relative;
     width: 100%;
     margin-top: 10px;
 }
 
-.input-field span{
-    font-size: 14px;
-    color: #333;
-}
-
-.toggle-password{
-    position: absolute;
-    top: 70%;
-    right: 10px;
-    transform: translateY(-50%);
-    cursor: pointer;
-    font-size: 20px;
-    width: 23px;
-}
-
-.signup-form .input-field .SUF{
+.SignUpInput {
     position: relative;
     height: 35px;
     width: 100%;
@@ -335,162 +385,22 @@ input[type="password"]::-ms-reveal {
     padding: 0 15px; /* Adjust padding for icons */
 }
 
-.signup-form .input-field input::placeholder{
+.SignUpInput::placeholder {
     color: rgba(71, 77, 86, 0.4);
 }
 
-.signup-form .input-field input:focus {
+.SignUpInput:focus {
     border-color: var(--color-primary);
 }
 
-.signup-form .input-field input:focus::placeholder {
+.SignUpInput:focus::placeholder {
     color: var(--color-primary);
 }
 
-.signup-form .rowFields{
+.RowInputFields {
     display: flex;
     column-gap: 15px;
 }
-
-/* ===== SUBMIT BUTTON ===== */
-.btnNgSubmit {
-    width: 100%;
-    /* display: flex;
-    justify-content: end; */
-    margin-top: 10px;
-    margin-bottom: 10px;
-    /* cursor: pointer; */
-}
-
-.SumbitSignUp-Btn{
-    width: 100%;
-    padding: 10px 30px;
-    border: none;
-    color: white;
-    background: var(--color-primary);
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.SumbitSignUp-Btn:hover{
-    background: #111d89;
-}
-
-/* DESIGN NG MGA BUTTON SA OTP */
-.sendOTP {
-    display: none;
-    width: 30%;
-    padding: 10px 30px;
-    border: none;
-    color: white;
-    background: var(--color-primary);
-    border-radius: 5px;
-    cursor: pointer;
-}
-.sendOTP:hover {
-    background: #111d89;
-}
-
-.verifyOTP {
-    width: 30%;
-    padding: 10px 30px;
-    border: none;
-    color: white;
-    background: var(--color-primary);
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.verifyOTP:hover {
-    background: #111d89;
-}
-
-.resendOTP {
-    display: none;
-    width: 40%;
-    padding: 10px 30px;
-    border: none;
-    color: white;
-    background: var(--color-primary);
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.resendOTP:hover {
-    background: #111d89;
-}
-
-
-/* DESIGN PARA SA IROR AT SA SAKSES */
-.iror{
-    color: #721c24;
-    padding: 8px 10px;
-    text-align: center;
-    border-radius: 5px;
-    background: #f8d7da;
-    border: 1px solid #f5c6cb;
-    margin-bottom: 10px;
-    display: none;
-}
-
-.irorSignup{
-    color: #721c24;
-    padding: 8px 10px;
-    text-align: center;
-    border-radius: 5px;
-    background: #f8d7da;
-    border: 1px solid #f5c6cb;
-    margin-bottom: 10px;
-    display: none;
-}
-.sakses {
-color: #1c7224; /* Changed text color to a shade of green */
-padding: 8px 10px;
-text-align: center;
-border-radius: 5px;
-background: #d7f8da; /* Changed background color to a light green */
-border: 1px solid #c6f5cb; /* Changed border color to a light green */
-margin-bottom: 10px;
-display: none;
-}
-
-
-/* DESIGN NG LOADING */
-.loader {
-    border: 8px solid #e0e0e0; /* Slightly darker light gray border */
-    border-radius: 50%;
-    border-top: 8px solid blue; /* Top color */
-    border-bottom: 8px solid blue; /* Bottom color */
-    width: 90px; /* Smaller width */
-    height: 90px; /* Smaller height */
-    -webkit-animation: spin 1.5s linear infinite; /* Smooth spin */
-    animation: spin 1.5s linear infinite;
-  }
-  
-  @-webkit-keyframes spin {
-    0% { -webkit-transform: rotate(0deg); }
-    100% { -webkit-transform: rotate(360deg); }
-  }
-  
-  @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-  }
-  
-  #loading-indicator {
-    display: none !important; /* Initially hidden */
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(255, 255, 255, 0.5); /* Semi-transparent white background */
-    z-index: 99999; /* Very high value to ensure it appears on top */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
 
 /* DESIGN PARA SA DROPDOWN NG GENDER*/
 .dropdown-button {
@@ -540,10 +450,11 @@ display: none;
 }
 
 /* Hide radio buttons */
-.pagpipilianKasarian {
+.Pili {
     display: none;
 }
 
+/* Design para sa PWD CheckBox */
 .radioButtonPwd{
     display: flex;
     justify-content: center;
@@ -561,31 +472,168 @@ display: none;
     color: red;
 }
 
-@media screen and (max-width: 850px){
-    .signup-form .rowFields{
+/* Design para sa Next Button */
+.NextBtnCon {
+    width: 100%;
+    margin-top: 10px;
+}
+
+.NextBtn {
+    width: 100%;
+    border: none;
+    padding: 10px;
+    font-size: medium;
+    background: var(--color-primary);
+    color: white;
+    cursor: pointer;
+}
+
+.NextBtn:hover {
+    background: #2739e1;
+}
+
+/* Design para sa Email Container */
+.ButtonNextAndBack {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.EmailParag {
+    text-align: center;
+    margin-top: 10px;
+    /* font-style: italic; */
+}
+
+.OtpParagg {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.OtpInt {
+    text-align: center;
+    font-size: medium;
+    border: none;
+}
+
+/* Design para sa pag create ng password */
+.CreatePassSign {
+    position: relative;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.MataSign {
+    position: absolute;
+    right: 10px; /* Position the icons to the right side */
+    top: 56%;
+    transform: translateY(-50%); /* Vertically center the icons */
+    width: 23px; /* Adjust icon size */
+    cursor: pointer;
+    margin-left: 5px;
+}
+
+/* DESIGN PARA SA HAMBURGER PAG LUMIIT YUNG SCREEN */
+.hamburger {
+    display: none;
+    font-size: 30px;
+    cursor: pointer;
+    color: #ffffff;
+    margin-left: auto;
+}
+
+/* For mobile view */
+@media (max-width: 905px) {
+    .MhNavv {
+        display: none; /* Hide navbar items initially on mobile */
+        flex-direction: column;
+        width: 100%;
+        position: absolute;
+        top: 95px;
+        left: 0;
+        background-color: #0400ff;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .MhNavv li {
+        margin: 15px 0;
+        text-align: center;
+        width: 100%; /* Make list items take full width */
+    }
+
+    .MhNavv a {
+        display: block;
+        padding: 15px; /* Adjust padding as needed */
+        width: auto; /* Make the link width auto initially */
+        text-align: center; /* Center align the text */
+    }
+
+    /* When the navbar is active (hamburger clicked), display the items */
+    .MhNavv.active {
+        display: flex;
+    }
+
+    /* When hovering over a link, make it expand to 100% width */
+    .MhNavv a:hover {
+        color: rgb(0, 51, 255);
+        width: 100%; /* Expands the link to take full width */
+        background-color: white; /* Optional background on hover */
+    }
+
+    /* Active state on click in mobile view */
+    .MhNavv a.clicked {
+        color: rgb(0, 51, 255); /* Change text color when clicked */
+        background-color: white; /* Change background color when clicked */
+    }
+
+    /* Show hamburger menu on mobile */
+    .hamburger {
+        display: block;
+    }
+
+    .RowInputFields {
         flex-wrap: wrap;
     }
-}
 
-@media screen and (max-width: 769px){
-    .signup-form .rowFields{
-        flex-wrap: nowrap;
-    }
-}
-    
-
-/* ========== MEDIA ========== */
-@media screen and (max-width: 768px) {
-    .split-screen {
+    .MainContainerAll {
         flex-direction: column;
     }
 
     .left {
         width: 100%;
+        height: 30%;
     }
 
-    .rightt{
+    .right{
         max-width: 100%;
         height: 70%;
     }
+
+    .imgLogo {
+        display: none;
+    }
+}
+
+
+@media (max-width: 550px) {
+    .NameOfSubdi h1 {
+        font-size: x-large;
+        display: flex;
+        /* justify-content: center; */
+    }
+
+    .NameOfSubdi h3 {
+        font-size: small;
+    }
+    
+    .MhNavv {
+        top: 75px;
+    }
+
+    .headerTopMain {
+        padding: 5px;
+    }
+
 }

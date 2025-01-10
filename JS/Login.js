@@ -1,12 +1,16 @@
-function showSignUpForm() {
-    document.getElementById("loginForm").classList.remove("show");
-    document.getElementById("signUpForm").classList.add("show");
+function showForms(formName) {
+  // Hide both forms
+  document.getElementById('LoginFormContainer').style.display = 'none';
+  document.getElementById('SignUpFormContainer').style.display = 'none';
+
+  // Show the selected form based on the form name
+  if (formName === 'LoginForm') {
+      document.getElementById('LoginFormContainer').style.display = 'flex';
+  } else if (formName === 'SignUpForm') {
+      document.getElementById('SignUpFormContainer').style.display = 'flex';
+  }
 }
 
-function showLoginForm() {
-    document.getElementById("signUpForm").classList.remove("show");
-    document.getElementById("loginForm").classList.add("show");
-}
 
 document.addEventListener('DOMContentLoaded', function () {
 // Dropdown elements
@@ -23,109 +27,20 @@ dropdownContent.classList.toggle('show');
 // Update dropdown button text when an option is selected
 options.forEach(option => {
 option.addEventListener('click', function () {
-    const selectedValue = this.querySelector('input').value;
-    dropdownButton.textContent = this.textContent.trim();
-    dropdownContent.classList.remove('show');
+  const selectedValue = this.querySelector('input').value;
+  dropdownButton.textContent = this.textContent.trim();
+  dropdownContent.classList.remove('show');
 });
 });
 
 // Close the dropdown if the user clicks outside of it
 document.addEventListener('click', function (event) {
 if (!dropdownButton.contains(event.target) && !dropdownContent.contains(event.target)) {
-    dropdownContent.classList.remove('show');
+  dropdownContent.classList.remove('show');
 }
 });
 });
 
-document.addEventListener("DOMContentLoaded", () => {
-    const form = document.querySelector(".lagin");
-    const errorText = form.querySelector(".iror");
-    const saksesText = form.querySelector(".sakses");
-    const LoginBtn = form.querySelector(".laginbtn");
-  
-    form.onsubmit = (e) => {
-      // Prevent the form from submitting normally
-      e.preventDefault();
-    };
-  
-    if (LoginBtn) {
-      LoginBtn.onclick = () => {
-        let xhr = new XMLHttpRequest();
-        xhr.open("POST", "PHPBackend/Login.php", true);
-        xhr.onload = () => {
-          if (xhr.readyState === XMLHttpRequest.DONE) {
-            if (xhr.status === 200) {
-              let data = xhr.response;
-              console.log(data);
-  
-              if (data === "admin") {
-                window.location.href = "DashBoard.php";
-              } else if (data === "user") {
-                window.location.href = "UserVoting.php";
-              } else if (data === "barangay") {
-                window.location.href = "BarangayTable.php";
-              } else if (data === "Please wait for confirmation") {
-                // Display success message
-                saksesText.textContent = data;
-                saksesText.style.display = "block";
-                console.log(data);
-                
-                // Hide success text after 5 seconds
-                setTimeout(() => {
-                    saksesText.style.display = "none";
-                }, 5000);           
-
-              } else {
-                errorText.textContent = data;
-                errorText.style.display = "block";
-                console.log(data);
-
-
-                setTimeout(() => {
-                  errorText.style.display = "none";
-              }, 3000);
-              }
-            }
-          }
-        };
-  
-        let formData = new FormData(form);
-        xhr.send(formData);
-      };
-    }
-}); 
-
-
-//   function fetchAccountsData() {
-//     console.log('Fetching accounts data...');
-//     var xhr = new XMLHttpRequest();
-//     xhr.open('GET', 'PHPBackend/Login.php', true); // Point to the PHP script
-
-//     xhr.onreadystatechange = function() {
-//         if (xhr.readyState === XMLHttpRequest.DONE) {
-//             console.log('XHR ReadyState:', xhr.readyState);
-//             console.log('XHR Status:', xhr.status);
-
-//             if (xhr.status === 200) {
-//                 console.log('Response received:', xhr.responseText);
-//                 var response = JSON.parse(xhr.responseText);
-
-//                 if (response.success) {
-//                     console.log('Accounts data:', response.accounts);
-//                 } else {
-//                     console.error('Error:', response.error);
-//                 }
-//             } else {
-//                 console.error('Request failed with status:', xhr.status);
-//             }
-//         }
-//     };
-
-//     xhr.send();
-// }
-
-// // Call the function to fetch and log the accounts data
-// fetchAccountsData();
 
 
 // FUNCTION PARA SA TOGGLE PASSWORD SHOW AND HIDE IN LOGIN 
@@ -146,40 +61,90 @@ function togglePasswordVisibilityLog(showIconId, hideIconId) {
   hideIcon1.style.display = 'inline'; // Show the "hide" icon
 }
 
-
-// FUNCTION PARA SA TOGGLE PASSWORD SHOW AND HIDE IN SIGN UP 
-function togglePasswordVisibilitySign(showIconId, hideIconId) {
-  var passwordInput2 = document.getElementById('password');  // Reference to the password input
-  var showIcon2 = document.getElementById(showIconId);       // Icon to show (open eye)
-  var hideIcon2 = document.getElementById(hideIconId);       // Icon to hide (closed eye)
+// FUNCTION PARA SA TOGGLE PASSWORD SHOW AND HIDE IN SIGN UP
+function toggleEye1(KitaId, TagoId) {
+  var Pass = document.getElementById('Pass');
+  var KitaId = document.getElementById(KitaId);
+  var TagoId = document.getElementById(TagoId);
 
   // Toggle the password visibility (input type)
-  if (passwordInput2.type === 'password') {
-      passwordInput2.type = 'text';  // Show the password
+  if (Pass.type === 'password') {
+      Pass.type = 'text'; // Show the password
   } else {
-      passwordInput2.type = 'password';  // Hide the password
+      Pass.type = 'password'; // Hide the password
   }
 
   // Toggle visibility of the icons
-  showIcon2.style.display = 'none'; // Hide the "show" icon
-  hideIcon2.style.display = 'inline'; // Show the "hide" icon
+  KitaId.style.display = 'none'; // Hide the "show" icon
+  TagoId.style.display = 'inline'; // Show the "hide" icon
 }
 
-// FUNCTION PARA SA TOGGLE PASSWORD SHOW AND HIDE IN RE-TYPE
-function togglePasswordVisibilitySign2(showIconId, hideIconId) {
-  var passwordInput3 = document.getElementById('confirmPassword');  // Reference to the password input
-  var showIcon3 = document.getElementById(showIconId);      // Icon to show (open eye)
-  var hideIcon3 = document.getElementById(hideIconId);       // Icon to hide (closed eye)
+function toggleEye2(Kita2Id, Tago2Id) {
+  var PassCon = document.getElementById('Pass2');
+  var Kita2Id = document.getElementById(Kita2Id);
+  var Tago2Id = document.getElementById(Tago2Id);
 
   // Toggle the password visibility (input type)
-  if (passwordInput3.type === 'password') {
-      passwordInput3.type = 'text';  // Show the password
+  if (PassCon.type === 'password') {
+      PassCon.type = 'text'; // Show the password
   } else {
-      passwordInput3.type = 'password';  // Hide the password
+      PassCon.type = 'password'; // Hide the password
   }
 
   // Toggle visibility of the icons
-  showIcon3.style.display = 'none'; // Hide the "show" icon
-  hideIcon3.style.display = 'inline'; // Show the "hide" icon
+  Kita2Id.style.display = 'none'; // Hide the "show" icon
+  Tago2Id.style.display = 'inline'; // Show the "hide" icon
 }
 
+// FUNCTION PARA SA HAMVURGER 
+function toggleNavbar() {
+  const navbar = document.querySelector('.MhNavv');
+  navbar.classList.toggle('active'); // Toggle the 'active' class to show/hide the navbar
+}
+
+// FUNCTION SA ACTIVE STATE NG NAVBAR 
+const navLinks = document.querySelectorAll('.MhNavv a');
+
+// Function to set active state based on screen size
+function setActiveLink(link) {
+// Remove the 'activee' or 'clicked' class from all links
+navLinks.forEach(link => {
+  link.classList.remove('activee');
+  link.classList.remove('clicked');
+});
+
+// Add the appropriate active class based on screen width
+if (window.innerWidth > 905) {
+  link.classList.add('activee');
+} else {
+  link.classList.add('clicked');
+}
+}
+
+// Handle active link state on click
+navLinks.forEach(link => {
+link.addEventListener('click', function (event) {
+  event.preventDefault(); // Prevent default navigation for anchor links
+  
+  // Set the active state on the clicked link
+  setActiveLink(this);
+
+  // Navigate to the link after setting the active class (allowing navigation only after state change)
+  setTimeout(() => {
+    window.location.href = this.href;
+  }, 150); // Allow time for active state transition before navigating
+});
+});
+
+// On page load, check the current URL or hash to apply active state
+document.addEventListener("DOMContentLoaded", () => {
+const currentUrl = window.location.href; // Get the full current URL
+
+// Find the link that matches the current URL (including the base URL or hash for internal links)
+const activeLink = Array.from(navLinks).find(link => link.href === currentUrl);
+
+// If a matching link is found, set it as active
+if (activeLink) {
+  setActiveLink(activeLink);
+}
+});
