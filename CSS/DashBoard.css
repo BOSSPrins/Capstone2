@@ -703,5 +703,49 @@ overflow-y: auto; /* Optional: Add scrollbar if content overflows */
 }
 
 
+/* Style for read-only or disabled checkboxes */
+.readonly-checkbox:disabled {
+  width: 20px;  /* Adjust the width */
+  height: 20px;  /* Adjust the height */
+  appearance: auto;  /* Use default browser appearance */
+  -webkit-appearance: checkbox; /* Explicitly set checkbox for Webkit browsers */
+  -moz-appearance: checkbox; /* Explicitly set checkbox for Mozilla browsers */
+  background-color: #f0f0f0; /* Light background to simulate "sunken" effect */
+  border: 2px solid #ccc; /* Light border */
+  border-radius: 3px; /* Optional: rounded corners */
+  /*cursor: not-allowed;  Show the not-allowed cursor */
+}
+
+/* Style for when the checkbox is "checked" */
+.readonly-checkbox:checked:disabled {
+  background-color: #d3d3d3; /* Darker background when checked */
+  border-color: #888; /* Darker border when checked */
+}
+
+/* Optional: Style the label for better spacing and alignment */
+.Profilebyu label {
+  font-size: 16px; /* Adjust label text size */
+  margin-right: 10px; /* Space between label and checkbox */
+}
+
+/* Default enabled checkbox style */
+.readonly-checkbox {
+  width: 20px;
+  height: 20px;
+  appearance: auto; /* Default browser appearance */
+  -webkit-appearance: checkbox;
+  -moz-appearance: checkbox;
+  background-color: #fff; /* White background */
+  border: 2px solid #ccc; /* Light border */
+  border-radius: 3px; /* Optional: rounded corners */
+  cursor: pointer; /* Allow pointer interactions */
+}
+
+/* Style for when the checkbox is "checked" */
+.readonly-checkbox:checked {
+  background-color: #d3d3d3; /* Darker background when checked */
+  border-color: #888; /* Darker border when checked */
+}
+
 
 

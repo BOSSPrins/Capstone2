@@ -1,10 +1,25 @@
+<?php
+include_once "Connect/Connection.php";
+session_start();
+
+if (isset($_SESSION['unique_id'])) {
+    if ($_SESSION['role'] == 'user' || $_SESSION['role'] == 'barangay') {
+        header("Location: LoginPage.php");
+        exit();
+    }
+} else {
+    header("Location: LoginPage.php");
+    exit();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title> Mabuhay Website </title>
-    <link rel="icon" type="image/x-icon" href="Pictures/Dasma_City_Icon.ico">
+    <link rel="icon" type="image/x-icon" href="Pictures/Mabuhay_Logo.ico">
     <link rel="stylesheet" href="CSS/AnnouncementTable.css">
     <script src="jQuery/jquery.min.js"></script>
     <script src="JS/sidebar.js"></script>
@@ -203,7 +218,7 @@
                                     <th> Action </th>
                                 </thead>
                                 <tbody>
-                                    <tr>
+                                    <!-- <tr>
                                         <td> Anniversary </td>
                                         <td> 02-02-23 02:23 </td>
                                         <td>
@@ -217,115 +232,120 @@
                                         <td>
                                             <button class="EditingAnn" onclick="toggleAnnounce('AnnounceEdit')"> Edit </button>
                                         </td>
-                                    </tr>
+                                    </tr> -->
                                 </tbody>
                             </table>
                         </div>
                     </div>
 
                     <div style="padding: 10px 25px;" class="EachContainerAnnounce" id="AnnounceEdit">
-                        <div style="display: flex; align-items: center;" class="NameAndBtn">
-                            <button class="ButtonBack" onclick="toggleAnnounce('AnnounceTab')"> &#60; </button>
-                            <h2 style="margin-left: 10px;"> Edit Post   </h2>
-                        </div>
-                        <div class="LamanContainer"> <!-- Kunin yung css ng table, magigiging flex to (optional pa to)-->
-                            <div class="EditDateTime">
-                                <div>
-                                    <input class="DateTimeInt" type="datetime-local" id="StrDateTime">
-                                </div>
-                                <div>
-                                    <input class="DateTimeInt" type="datetime-local" id="EndDateTime">
-                                </div>
+                         <form method="post" enctype="multipart/form-data">
+                            <div style="display: flex; align-items: center;" class="NameAndBtn">
+                                <button class="ButtonBack" onclick="toggleAnnounce('AnnounceTab')"> &#60; </button>
+                                <h2 style="margin-left: 10px;"> Edit Post   </h2>
                             </div>
-                            <div class="input-container">
-                                <label for="Title">Title:</label>
-                                <input style="padding: 8px;" class="titleInput" type="text" id="Title">
-                            </div>
-                            <div class="input-container">
-                                <label for="Descrip">Description:</label>
-                                <textarea class="DescriInput" id="Descrip"></textarea>
-                                <input type="text" id="newsID" hidden>
-                            </div>
-                            <div class="input-container">
-                                <label> File: </label>
-                                <div class="EditingPicturesModal">
-                                    <div id="EditingPics" class="EditingPics">
-                                        <input type="file" class="editingInput newEditingInput" id="PicNames" multiple>
-                                        <img class="editingImgModal" src="Pictures/cloudUpload.png" alt="Upload Icon">
-                                        <p class="editingLagayanText">Select new images or <span class="spanNiyaModal">browse</span>.</p>
+                            <div class="LamanContainer"> <!-- Kunin yung css ng table, magigiging flex to (optional pa to)-->
+                                <div class="EditDateTime">
+                                    <div>
+                                        <input class="DateTimeInt" type="datetime-local" id="StrDateTime">
                                     </div>
-                                    <div class="editingUploadedImages Imagess" id="Images"></div>
-                                    <input type="hidden" id="PicNames">
-                                    <div id="selectedFileNames" hidden></div>
+                                    <div>
+                                        <input class="DateTimeInt" type="datetime-local" id="EndDateTime">
+                                    </div>
                                 </div>
+                                <div class="input-container">
+                                    <label for="Title">Title:</label>
+                                    <input style="padding: 8px;" class="titleInput" type="text" id="Title">
+                                </div>
+                                <div class="input-container">
+                                    <label for="Descrip">Description:</label>
+                                    <textarea class="DescriInput" id="Descrip"></textarea>
+                                    <input type="text" id="newsID" hidden>
+                                </div>
+                                <div class="input-container">
+                                    <label> File: </label>
+                                    <div class="EditingPicturesModal">
+                                        <div id="EditingPics" class="EditingPics">
+                                            <input type="file" class="editingInput newEditingInput" id="PicNames" multiple>
+                                            <img class="editingImgModal" src="Pictures/cloudUpload.png" alt="Upload Icon">
+                                            <p class="editingLagayanText">Select new images or <span class="spanNiyaModal">browse</span>.</p>
+                                        </div>
+                                        <div class="editingUploadedImages Imagess" id="Images"></div>
+                                        <!-- <input type="hidden" id="PicNames"> -->
+                                        <div id="selectedFileNames" hidden></div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Custom Lightbox Modal -->
+                                <div class="custom-lightbox" id="custom-lightbox">
+                                    <span class="custom-LightBoxClose" id="custom-lightboxClose"> × </span>
+                                    <img class="custom-lightbox-image" id="custom-lightboxImage" />
+                                </div>                                                       
                             </div>
-                            
-                            <!-- Custom Lightbox Modal -->
-                            <div class="custom-lightbox" id="custom-lightbox">
-                                <span class="custom-LightBoxClose" id="custom-lightboxClose"> × </span>
-                                <img class="custom-lightbox-image" id="custom-lightboxImage" />
-                            </div>                                                       
-                        </div>
-                       <div class="ButtonEdit"> <!-- kunin naman yung css ng footer page para mag stay sa ibaba (optional pa to)-->
-                            <button class="buttonDeletee cancelButn" onclick="closeDetails()">Cancel</button>
-                            <button class="edit-btn tb-btn" id="Apdeyt">Update</button>
-                        </div>
+                            <div class="ButtonEdit"> <!-- kunin naman yung css ng footer page para mag stay sa ibaba (optional pa to)-->
+                                <button class="buttonDeletee cancelButn" onclick="closeDetails()">Cancel</button>
+                                <button class="edit-btn tb-btn" id="Apdeyt">Update</button>
+                            </div>
+                        </form>
                     </div>
 
+                    
                     <div style="padding: 10px 25px;" class="EachContainerAnnounce" id="AnnounceNewPost">
-                        <div style="display: flex; align-items: center;" class="NameAndBtn">
-                            <button class="ButtonBack" onclick="toggleAnnounce('AnnounceTab')"> &#60; </button>
-                            <h2 style="margin-left: 10px;"> New Post   </h2>
-                        </div>
-                        <div class="LamanContainer"> <!-- Kunin yung css ng table, magigiging flex to (optional pa to)-->
-                            <div class="NewPostDatetime">
-                                <div>
-                                    <input class="DateTimeInt" type="datetime-local" name="start_date" id="start_date">
+                        <form method="post" enctype="multipart/form-data">
+                            <div style="display: flex; align-items: center;" class="NameAndBtn">
+                                <button class="ButtonBack" onclick="toggleAnnounce('AnnounceTab')"> &#60; </button>
+                                <h2 style="margin-left: 10px;"> New Post   </h2>
+                            </div>
+                            <div class="LamanContainer"> <!-- Kunin yung css ng table, magigiging flex to (optional pa to)-->
+                                <div class="NewPostDatetime">
+                                    <div>
+                                        <input class="DateTimeInt" type="datetime-local" name="start_date" id="start_date">
+                                    </div>
+                                    <div>
+                                        <input class="DateTimeInt" type="datetime-local" name="end_time" id="end_date">
+                                    </div>
                                 </div>
-                                <div>
-                                    <input class="DateTimeInt" type="datetime-local" name="end_time" id="end_time">
+                                <div class="input-Field">
+                                    <label> Title: </label>
+                                    <input style="padding: 8px;" class="InputAnn" type="text" placeholder="Title here..." name="title_name" id="title_name">
                                 </div>
-                            </div>
-                            <div class="input-Field">
-                                <label> Title: </label>
-                                <input style="padding: 8px;" class="InputAnn" type="text" placeholder="Title here..." name="title_name">
-                            </div>
-                            <div class="input-Field">
-                                <label> Description: </label>
-                                <textarea class="DescriInput2" placeholder="Enter your text announcement here..." name="description_name" id="description_name"></textarea>
-                            </div>
+                                <div class="input-Field">
+                                    <label> Description: </label>
+                                    <textarea class="DescriInput2" placeholder="Enter your text announcement here..." name="description_name" id="description_name"></textarea>
+                                </div>
 
-                            <div class="input-Field">
-                                <label> File: </label>
-                                <div class="creatingAnnounceRap">
-                                    <p class="upperUpload">
-                                        <span class="uploadInfoValue">0</span> file(s) uploaded.
-                                    </p>
-                                    <div class="creatingAnnouncementForm">
-                                        <!-- File input for selecting images -->
-                                        <input class="announceInput" type="file" name="images[]" multiple>
-                                        <img class="uploaderImg" src="Pictures/cloudUpload.png" alt="Upload Icon">
-                                        <p class="uploadLagayanText">Select images or <span class="spanNiya">browse</span>.</p>
-                                    </div>
-                                    <div class="uploadingImages">
-                                        <!-- Uploaded images will appear here -->
+                                <div class="input-Field">
+                                    <label> File: </label>
+                                    <div class="creatingAnnounceRap">
+                                        <p class="upperUpload">
+                                            <span class="uploadInfoValue">0</span> file(s) uploaded.
+                                        </p>
+                                        <div class="creatingAnnouncementForm">
+                                            <!-- File input for selecting images -->
+                                            <input class="announceInput" type="file" name="images[]" accept=".jpg, .jpeg, .png" multiple>
+                                            <img class="uploaderImg" src="Pictures/cloudUpload.png" alt="Upload Icon">
+                                            <p class="uploadLagayanText">Select images or <span class="spanNiya">browse</span>.</p>
+                                        </div>
+                                        <div class="uploadingImages">
+                                            <!-- Uploaded images will appear here -->
+                                        </div>
                                     </div>
                                 </div>
+                                
+                                <!-- Lightbox Modal -->
+                                <div class="lightbox" id="lightbox">
+                                    <span class="LightBoxClose" id="lightboxClose"> × </span>
+                                    <img class="lightbox-image" id="lightboxImage" />
+                                </div>                                                        
+        
+                                <div class="buttonToPost">
+                                    <input class="buttonPostInputSub" type="submit" id="sabmitBoton">
+                                </div>
+                                <div class="iror"></div>  
+                                <div class="sakses"></div>
                             </div>
-                            
-                            <!-- Lightbox Modal -->
-                            <div class="lightbox" id="lightbox">
-                                <span class="LightBoxClose" id="lightboxClose"> × </span>
-                                <img class="lightbox-image" id="lightboxImage" />
-                            </div>                                                        
-    
-                            <div class="buttonToPost">
-                                <input class="buttonPostInputSub" type="submit" id="sabmitBoton">
-                            </div>
-                            <div class="iror"></div>  
-                            <div class="sakses"></div>
-                        </div>
-                    </div>
+                        </form>
+                    </div>                  
                 </div>
             </div>
         </div>

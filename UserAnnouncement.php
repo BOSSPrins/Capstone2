@@ -3,8 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title> Dashboard </title>
+  <title> Mabuhay Website </title>
+  <link rel="icon" type="image/x-icon" href="Pictures/Mabuhay_Logo.ico">
   <link rel="stylesheet" href="CSS/UserAnnouncement.css">
+  <link rel="stylesheet" href="CSS/logout-modal.css">
+  <script src="JS/logout-modal.js"></script>
 </head>
 <body>
     <div class="mainDashboardContainer">
@@ -47,11 +50,14 @@
                     <img class="img-sideboard" src="Pictures/voting.png">
                     <span> Voting </span>
                 </a>
-                <a href="#" class="sideside">
+                <a href="#" class="sideside" id="uniqueLogoutTrigger">
                     <img class="img-sideboard" src="Pictures/logout.png">
                     <span> Logout </span>
                 </a>
             </div>
+
+            <!-- Placeholder for modal -->
+            <div id="uniqueLogoutModalContainer"></div>
 
             <div id="profileModal" class="modal">
                 <div class="subModal">
@@ -123,7 +129,7 @@
                     <div class="AnnouncementCardss" id="MainAnnouncements">
                         <div class="ContainerCard">
                             <div class="Cardss">
-                                <img class="AnnounceImg" src="Mabuhay_Logo.png">
+                                <img class="AnnounceImg" src="Pictures/Mabuhay_Logo.png">
                                 <div class="CardLaman">
                                     <div class="DateCon">
                                         <input class="title" type="text" placeholder="Dito yung date posted">

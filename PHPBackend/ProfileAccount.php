@@ -38,14 +38,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
       // Your database code to fetch data for the unique_id
       // For example:
-      $sql = "SELECT * FROM tblresident WHERE unique_id = ?";
+      $sql = "
+            SELECT tblresident.*, tblaccounts.img 
+            FROM tblresident 
+            INNER JOIN tblaccounts 
+            ON tblresident.unique_id = tblaccounts.unique_id 
+            WHERE tblresident.unique_id = ?";
       $stmt = $conn->prepare($sql);
       $stmt->bind_param("s", $unique_id);
       $stmt->execute();
       $result = $stmt->get_result();
       
-      if ($result->num_rows > 0) {
+      if ($result->num_rows > 0) {  
           $row = $result->fetch_assoc();
+
+          $pwd_value = $row['pwd'] ?? 'No';
+
           echo json_encode([
               'success' => true,
               'fname' => $row['first_name'] ?? null,
@@ -63,15 +71,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
               'ec_phone_number' => $row['ec_phone_num'] ?? null,
               'relationship' => $row['ec_relship'] ?? null,
               'ec_address' => $row['ec_address'] ?? null,
-              'pwd' => $row['pwd'] ?? null
+              'img' => $row['img'] ?? 'default_Image.png',
+              'pwd' => $pwd_value
+              
           ]);
+          error_log('Fetched PWD value: ' . $row['pwd']);
+          error_log('PWD Yes: ' . ($_POST['pwd_yes'] ?? 'not set'));
+            error_log('PWD No: ' . ($_POST['pwd_no'] ?? 'not set'));
+
+
       } else {
           echo json_encode(['success' => false, 'message' => 'No data found for this user.']);
       }
       $stmt->close();
 
     } elseif ($action === 'update_user_data') {
-      
+        ini_set('display_errors', 1);
+        ini_set('display_startup_errors', 1);
+        error_reporting(E_ALL);
+    
         $unique_id = $_POST['unique_id'];
         $fname = $_POST['fname'];
         $mname = $_POST['mname'];
@@ -81,46 +99,86 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $age = $_POST['age'];
         $sex = $_POST['sex'];
         $contact_number = $_POST['contNum'];
-        // These fields are not used in the query
-        // $block = $_POST['blk'];
-        // $lot = $_POST['lot'];
-        // $street = $_POST['street'];
         $ec_name = $_POST['ecName'];
         $ec_phone_number = $_POST['ecPhoneNum'];
         $ec_relationship = $_POST['relasyon'];
         $ec_address = $_POST['ecAddress'];
-       
-        // Check if password (PWD) status is provided and set it accordingly
+    
         $pwd = isset($_POST['pwd_yes']) ? 'Yes' : (isset($_POST['pwd_no']) ? 'No' : 'Walang laman');
     
-        // Prepare the UPDATE SQL query without block, lot, and street
-        $sql = "UPDATE tblresident SET 
-                    first_name = ?, middle_name = ?, last_name = ?, suffix = ?, 
-                    birthday = ?, age = ?, sex = ?, phone_number = ?, 
-                    ec_name = ?, ec_phone_num = ?, ec_relship = ?, ec_address = ?, pwd = ?
-                WHERE unique_id = ?";
+        // Debug unique_id and form variables
+        error_log("Unique ID: $unique_id");
+        error_log("First Name: $fname, Last Name: $lname");
     
-        // Prepare statement
-        $stmt = $conn->prepare($sql);
+        // Debug FILES data
+        error_log("FILES: " . print_r($_FILES, true));
     
-        // Bind parameters
-        $stmt->bind_param(
-            "sssssisissssss", 
-            $fname, $mname, $lname, $suffix, $bday, $age, $sex, $contact_number, 
+        $image_filename = null;
+        if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
+            $image_name = $_FILES['image']['name']; // Get the original file name
+            $image_tmp_name = $_FILES['image']['tmp_name'];
+            $image_filename = basename($image_name); // Extract only the filename
+    
+            $image_path = '../Pictures/' . $image_filename;
+    
+            error_log("Image Name: $image_name");
+            error_log("Temporary Path: $image_tmp_name");
+            error_log("Target Path: $image_path");
+    
+            // Move the uploaded file to the target directory
+            if (!move_uploaded_file($image_tmp_name, $image_path)) {
+                error_log('File upload failed.');
+                echo json_encode(['success' => false, 'message' => 'Error uploading image.']);
+                exit;
+            }
+        } else {
+            error_log('No image uploaded or file upload error.');
+        }
+    
+        $sql_resident = "UPDATE tblresident SET 
+                            first_name = ?, middle_name = ?, last_name = ?, suffix = ?, 
+                            birthday = ?, age = ?, sex = ?, phone_number = ?, 
+                            ec_name = ?, ec_phone_num = ?, ec_relship = ?, ec_address = ?, pwd = ?
+                        WHERE unique_id = ?";
+        $stmt_resident = $conn->prepare($sql_resident);
+        $stmt_resident->bind_param(
+            "sssssisissssss",
+            $fname, $mname, $lname, $suffix, $bday, $age, $sex, $contact_number,
             $ec_name, $ec_phone_number, $ec_relationship, $ec_address, $pwd, $unique_id
         );
     
-        // Execute the update query
-        if ($stmt->execute()) {
-            echo json_encode(['success' => true, 'message' => 'Profile updated successfully.']);
+        if ($stmt_resident->execute()) {
+            error_log("tblresident updated successfully for Unique ID: $unique_id");
         } else {
-            error_log('Error executing SQL query: ' . $stmt->error);
-            echo json_encode(['success' => false, 'message' => 'Error updating profile: ' . $stmt->error]);
+            error_log("Error updating tblresident: " . $stmt_resident->error);
+            echo json_encode(['success' => false, 'message' => 'Error updating resident data.']);
+            exit;
+        }
+        $stmt_resident->close();
+    
+        // If the image was uploaded, update the tblaccounts table with only the filename
+        if ($image_filename) {
+            $sql_accounts = "UPDATE tblaccounts SET img = ? WHERE unique_id = ?";
+            $stmt_accounts = $conn->prepare($sql_accounts);
+            $stmt_accounts->bind_param("ss", $image_filename, $unique_id); // Store only the filename
+    
+            if ($stmt_accounts->execute()) {
+                error_log("tblaccounts updated successfully for Unique ID: $unique_id with Image: $image_filename");
+            } else {
+                error_log("Error updating tblaccounts: " . $stmt_accounts->error);
+                echo json_encode(['success' => false, 'message' => 'Error updating image.']);
+                exit;
+            }
+            $stmt_accounts->close();
+        } else {
+            error_log("Image not uploaded. tblaccounts update skipped.");
         }
     
-        $stmt->close();
-
-    } elseif ($action === 'updateEmail') {
+        echo json_encode(['success' => true, 'message' => 'Profile updated successfully.']);
+    }
+    
+    
+     elseif ($action === 'updateEmail') {
     // Get the old and new email from the POST request
     $oldEmail = $_POST['oldEmail'];
     $newEmail = $_POST['newEmail'];

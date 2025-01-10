@@ -42,6 +42,8 @@ $user_UID = $_SESSION['unique_id'];
     <title> Mabuhay Website </title>
     <link rel="icon" type="image/x-icon" href="Pictures/Mabuhay_Logo.ico">
     <link rel="stylesheet" href="CSS/UserVoting.css">
+    <link rel="stylesheet" href="CSS/logout-modal.css">
+    <script src="JS/logout-modal.js"></script>
     <script src="jQuery/jquery.min.js"></script>
 </head>
 <body>
@@ -85,11 +87,14 @@ $user_UID = $_SESSION['unique_id'];
                     <img class="img-sideboard" src="Pictures/voting.png">
                     <span> Voting </span>
                 </a>
-                <a href="Logout.php" class="sideside">
+                <a href="#" class="sideside" id="uniqueLogoutTrigger">
                     <img class="img-sideboard" src="Pictures/logout.png">
                     <span> Logout </span>
                 </a>
             </div>
+
+            <!-- Placeholder for modal -->
+            <div id="uniqueLogoutModalContainer"></div>
 
             <div id="profileModal" class="modal">
                 <div class="subModal">

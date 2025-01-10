@@ -48,25 +48,57 @@ function openPage(pageName) {
 
 // FUNCTION PARA SA READ MORE 
 function toggleAnnounce(pageId) {
+    console.log("Toggling Announcement for:", pageId);
+
     // Hide all pages
     const Dahon = document.querySelectorAll('.AnnouncementCardss');
     Dahon.forEach(page => {
         page.style.display = 'none'; // Hide all containers
+        console.log("Hiding:", page.id);
     });
 
     // Show the selected page
     const selectedPage = document.getElementById(pageId);
     if (selectedPage) {
         selectedPage.style.display = 'flex'; // Use flex to maintain the layout
+        console.log("Displaying:", selectedPage.id);
+    } else {
+        console.error("No container found with ID:", pageId);
     }
-
-    // Store the active page in local storage
-    localStorage.setItem('activeContainer', pageId);
 }
 
-// Check local storage on page load to determine which container to show
+// Set a default container on page load
 window.onload = function() {
-    const activeContainer = localStorage.getItem('activeContainer');
-    toggleAnnounce(activeContainer || 'MainAnnouncements'); // Default to 'tableCon'
-}
+    toggleAnnounce('MainAnnouncements'); // Default to 'MainAnnouncements'
+};
+
+// function toggleAnnounce(pageId) {
+//     console.log("Toggling Announcement for:", pageId);
+
+//     // Hide all pages
+//     const Dahon = document.querySelectorAll('.AnnouncementCardss');
+//     Dahon.forEach(page => {
+//         page.style.display = 'none'; // Hide all containers
+//         console.log("Hiding:", page.id);
+//     });
+
+//     // Show the selected page
+//     const selectedPage = document.getElementById(pageId);
+//     if (selectedPage) {
+//         selectedPage.style.display = 'flex'; // Use flex to maintain the layout
+//         console.log("Displaying:", selectedPage.id);
+//     } else {
+//         console.error("No container found with ID:", pageId);
+//     }
+
+//     // Store the active page in local storage
+//     localStorage.setItem('activeContainer', pageId);
+// }
+
+
+// // Check local storage on page load to determine which container to show
+// window.onload = function() {
+//     const activeContainer = localStorage.getItem('activeContainer');
+//     toggleAnnounce(activeContainer || 'MainAnnouncements'); // Default to 'tableCon'
+// }
 

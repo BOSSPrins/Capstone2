@@ -136,10 +136,10 @@ if (isset($_SESSION['unique_id'])) {
                                         <h2 class="H2">Edit Profile </h2>
                                         <div class="UserProfilee">
                                             <div class="UserImgCon">
-                                                <img class="Imggg" src="Pictures/Ako.jpg">
+                                                <img class="Imggg" src="Pictures/Ako.jpg" id="profileImage">
                                             </div>
                                             <div class="ContainerFile">
-                                                <input type="file" id="UploadPicUser">
+                                                <input type="file" id="UploadPicUser" name="image">
                                                 <div class="CameraFileUp" id="uploadBtn">
                                                     <img class="camera" src="Pictures/camera.png">
                                                 </div>
@@ -149,87 +149,89 @@ if (isset($_SESSION['unique_id'])) {
                                         <div class="Profilebyu">
                                             <div class="Input-Roww">
                                                 <label> First Name: </label>
-                                                <input type="text" name="" id="fname">
+                                                <input type="text" name="fname" id="fname">
                                             </div>
                                             <div class="Input-Roww">
                                                 <label> Middle Name: </label>
-                                                <input type="text" name="" id="mname">
+                                                <input type="text" name="mname" id="mname">
                                             </div>
                                         </div>
                                         <div class="Profilebyu">
                                             <div class="Input-Roww">
                                                 <label> Last Name: </label>
-                                                <input type="text" name="" id="lname">
+                                                <input type="text" name="lname" id="lname">
                                             </div>
                                             <div class="Input-Roww">
                                                 <label> Suffix: </label>
-                                                <input type="text" name="" id="suffix">
+                                                <input type="text" name="suffix" id="suffix">
                                             </div>
                                         </div>
                                         <div class="Profilebyu">
                                             <div class="Input-Roww">
                                                 <label> Date of Birth: </label>
-                                                <input type="text" name="" id="bday">
+                                                <input type="text" name="bday" id="bday">
                                             </div>
                                             <div class="Input-Roww">
                                                 <label> Age: </label>
-                                                <input type="text" name="" id="age">
+                                                <input type="text" name="age" id="age">
                                             </div>
                                         </div>
                                         <div class="Profilebyu">
                                             <div class="Input-Roww">
                                                 <label> Sex: </label>
-                                                <input type="text" name="" id="sex">
+                                                <input type="text" name="sex" id="sex">
                                             </div>
                                             <div class="Input-Roww">
                                                 <label> Contact Number: </label>
-                                                <input type="text" name="" id="contNum">
+                                                <input type="text" name="contNum" id="contNum">
                                             </div>
                                         </div>
                                         <h2>Person with Disability:</h2>
                                         <div class="Profilebyu">
-                                            <label>
-                                            <input type="checkbox" id="pwdYes"> Yes
-                                            <input type="checkbox" name="pwd_yes" id="pwdYes" disabled value="1"> Yes
+                                            <!-- Yes Checkbox (disabled, default checked) -->
+                                            <label for="pwdYes2">
+                                                <input type="checkbox" name="pwd_yes" id="pwdYes2" class="readonly-checkbox" value="1" disabled> Yes
                                             </label>
-                                            <label>
-                                            <input type="checkbox" id="pwdNo"> No
-                                            <input type="checkbox" name="pwd_no" id="pwdNo" disabled value="1"> No
+                                            
+                                            <!-- No Checkbox (disabled, default unchecked) -->
+                                            <label for="pwdNo2">
+                                                <input type="checkbox" name="pwd_no" id="pwdNo2" class="readonly-checkbox" value="0" disabled> No
                                             </label>
                                         </div>
+
                                         <h3>Address:</h2>
                                         <div class="Profilebyu2">
                                             <div class="Input-Roww2">
                                                 <label> Block: </label>
-                                                <input type="text" name="" id="blk" readonly>
+                                                <input type="text" name="blk" id="blk" readonly>
                                             </div>
                                             <div class="Input-Roww2">
                                                 <label> Lot: </label>
-                                                <input type="text" name="" id="lot" readonly>  
+                                                <input type="text" name="lot" id="lot" readonly>  
                                             </div> 
                                             <div class="Input-Roww2">
                                                 <label> Street: </label>
-                                                <input type="text" name="" id="street" readonly>
+                                                <input type="text" name="street" id="street" readonly>
                                             </div>                                     
                                         </div>
                                         <h3>Emergency Contact: </h2> 
                                         <div class="Profilebyu"> 
                                             <div class="Input-Roww">
                                                 <label> Name: </label>   
-                                                <input type="text" name="" id="ecName">
+                                                <input type="text" name="ecName" id="ecName">
                                             </div>                                                              
                                             <div class="Input-Roww">
                                                 <label> Contact Number: </label>
-                                                <input type="text" name="" id="ecPhoneNum">
+                                                <input type="text" name="ecPhoneNum" id="ecPhoneNum">
                                             </div>
                                         </div>
                                         <div class="Profilebyu">                                                               
                                             <label style="font-weight: 550;" > Relationship: </label>   
-                                            <input class="In" type="text" name="" id="relasyon">
+                                            <input class="In" type="text" name="relasyon" id="relasyon">
                                         </div>
                                         <div class="Profilebyu">                                                               
                                             <label style="font-weight: 550;"> Address: </label>
-                                            <input class="In" type="text" name="" id="address">
+                                            <input class="In" type="text" name="ecAddress" id="ecAddress">
                                         </div>
                                         <div class="buttons">
                                             <button type="button" id="editButton">Edit</button>

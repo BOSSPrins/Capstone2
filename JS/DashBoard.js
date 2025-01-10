@@ -106,17 +106,29 @@ document.getElementById('myProfileBtn').addEventListener('click', function() {
                     document.getElementById('relasyon').value = data.relationship || 'N/A';
                     document.getElementById('ecAddress').value = data.ec_address || 'N/A';
 
-                    if (data.pwd === 'Yes') {
-                        document.getElementById('pwdYes').checked = true;
-                        document.getElementById('pwdNo').checked = false;
-                    } else if (data.pwd === 'No') {
-                        document.getElementById('pwdYes').checked = false;
-                        document.getElementById('pwdNo').checked = true;
+                    const userImg = document.querySelector('.UserImgCon .Imggg');
+                    if (data.img) {
+                        userImg.src = `Pictures/${data.img}`;
                     } else {
-                        // In case there's no value or invalid value in "pwd"
-                        document.getElementById('pwdYes').checked = false;
-                        document.getElementById('pwdNo').checked = false;
+                        userImg.src = 'Pictures/default_Image.png'; // Set default image
                     }
+                    
+
+                    if (data.pwd === 'Yes') {
+                        document.getElementById('pwdYes2').checked = true;
+                        document.getElementById('pwdNo2').checked = false;
+                        console.log('Checkbox "Yes" checked');
+                    } else if (data.pwd === 'No') {
+                        document.getElementById('pwdYes2').checked = false;
+                        document.getElementById('pwdNo2').checked = true;
+                        console.log('Checkbox "No" checked');
+                    } else {
+                        document.getElementById('pwdYes2').checked = false;
+                        document.getElementById('pwdNo2').checked = false;
+                        console.log('Both checkboxes unchecked');
+                    }
+                    
+                    console.log('PWD value:', data.pwd);
                 } else {
                     console.error('No data found for this user.');
                 }
@@ -144,31 +156,72 @@ document.addEventListener('DOMContentLoaded', () => {
     const editButton = document.getElementById('editButton');
     const updateButton = document.getElementById('updateButton');
     const cancelButton = document.getElementById('cancelButton');
-    const inputs = document.querySelectorAll('#EditProfile input');
     const form = document.getElementById('editProfileForm');
+    const inputs = form.querySelectorAll('#EditProfile input');
+    const checkboxes = form.querySelectorAll('#EditProfile input[type="checkbox"]');
 
-    editButton.addEventListener('click', () => {
+    // Object to store initial states
+    const initialStates = {};
+
+    // Store initial states of all inputs and checkboxes
+    const storeInitialStates = () => {
         inputs.forEach(input => {
-            // Keep blk, lot, and street fields readonly
-            if (input.id !== 'blk' && input.id !== 'lot' && input.id !== 'street') {
-                input.removeAttribute('readonly');
+            initialStates[input.id] = input.type === "checkbox" ? input.checked : input.value;
+        });
+    };
+
+    // Restore initial states
+    const restoreInitialStates = () => {
+        inputs.forEach(input => {
+            if (initialStates[input.id] !== undefined) {
+                if (input.type === "checkbox") {
+                    input.checked = initialStates[input.id];
+                } else {
+                    input.value = initialStates[input.id];
+                }
             }
         });
+    };
+
+
+    // Ensure only one checkbox is checked at a time
+    checkboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', () => {
+            if (checkbox.checked) {
+                checkboxes.forEach(otherCheckbox => {
+                    if (otherCheckbox !== checkbox) {
+                        otherCheckbox.checked = false;
+                    }
+                });
+            }
+        });
+    });
+
+    // Enable inputs and checkboxes for editing
+    editButton.addEventListener('click', () => {
+        storeInitialStates(); // Save initial states before enabling
+
+        inputs.forEach(input => {
+            if (input.type !== "checkbox") {
+                input.removeAttribute('readonly');
+            }
+            input.disabled = false; // Enable all inputs
+        });
+
         editButton.style.display = 'none';
         updateButton.style.display = 'inline-block';
         cancelButton.style.display = 'inline-block';
-    
-        document.getElementById('pwdYes').disabled = false;
-        document.getElementById('pwdNo').disabled = false;
     });
 
-    document.getElementById('updateButton').addEventListener('click', function(event) {
+    // Update button logic
+    updateButton.addEventListener('click', (event) => {
+        event.preventDefault();
         const uniqueId = document.getElementById('fetchUID').value;
 
         const formData = new FormData(form);
         formData.append('action', 'update_user_data');
         formData.append('unique_id', uniqueId);
-    
+
         fetch('PHPBackend/ProfileAccount.php', {
             method: 'POST',
             body: formData,
@@ -176,12 +229,19 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(response => response.json())
         .then(data => {
             console.log(data); // Log the response for debugging
-    
+
             if (data.success) {
                 alert('Profile updated successfully');
                 toggleButtons();
-                resetCheckboxState();
+                
+                if (data.new_img) {
+                    const userImg = document.querySelector('.UserImgCon .Imggg');
+                    userImg.src = `Pictures/${data.new_img}`;
+                }
+                
                 inputs.forEach(input => input.setAttribute('readonly', 'true'));
+                inputs.forEach(input => input.disabled = true); // Disable all inputs
+                checkboxes.forEach(checkbox => checkbox.disabled = true); // Disable checkboxes
             } else {
                 alert('Failed to update profile: ' + (data.message || 'No message returned'));
                 console.log('Failed to update profile: ' + (data.message || 'No message returned'));
@@ -192,30 +252,125 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    document.getElementById('cancelButton').addEventListener('click', function(event) {
-        event.preventDefault();
-        inputs.forEach(input => input.setAttribute('readonly', 'true'));
+    // Cancel editing and restore original states
+    cancelButton.addEventListener('click', (event) => {
+        event.preventDefault(); // Prevent default behavior
+
+        inputs.forEach(input => {
+            if (input.type !== "checkbox") {
+                input.setAttribute('readonly', 'true');
+            }
+            input.disabled = true; // Disable all inputs
+        });
+
+        restoreInitialStates(); // Restore initial states
         toggleButtons();
-        resetCheckboxState();
     });
 
+    // Function to toggle button visibility
     function toggleButtons() {
         editButton.style.display = 'inline-block';
         updateButton.style.display = 'none';
         cancelButton.style.display = 'none';
     }
 
-    function resetCheckboxState() {
-        const pwdYes = document.getElementById('pwdYes');
-        const pwdNo = document.getElementById('pwdNo');
-
-        pwdYes.checked = pwdYes.defaultChecked;
-        pwdNo.checked = pwdNo.defaultChecked;
-
-        pwdYes.disabled = true;
-        pwdNo.disabled = true;
-    }
+    // Automatically store initial states on page load
+    storeInitialStates();
 });
+
+
+// document.addEventListener('DOMContentLoaded', () => {
+//     const editButton = document.getElementById('editButton');
+//     const updateButton = document.getElementById('updateButton');
+//     const cancelButton = document.getElementById('cancelButton');
+//     const inputs = document.querySelectorAll('#EditProfile input');
+//     const checkboxes = document.querySelectorAll('#EditProfile input[type="checkbox"]');
+//     const form = document.getElementById('editProfileForm');
+
+//     editButton.addEventListener('click', () => {
+//         inputs.forEach(input => {
+//             // Keep blk, lot, and street fields readonly
+//             if (input.id !== 'blk' && input.id !== 'lot' && input.id !== 'street') {
+//                 input.removeAttribute('readonly');
+//                 input.disabled = false; // Enable all inputs
+//             }
+//         });
+
+//         // Enable checkboxes
+//         checkboxes.forEach(checkbox => {
+//             checkbox.disabled = false;
+//         });
+
+//         editButton.style.display = 'none';
+//         updateButton.style.display = 'inline-block';
+//         cancelButton.style.display = 'inline-block';
+//     });
+
+//     document.getElementById('updateButton').addEventListener('click', function(event) {
+//         const uniqueId = document.getElementById('fetchUID').value;
+
+//         const formData = new FormData(form);
+//         formData.append('action', 'update_user_data');
+//         formData.append('unique_id', uniqueId);
+
+//         fetch('PHPBackend/ProfileAccount.php', {
+//             method: 'POST',
+//             body: formData,
+//         })
+//         .then(response => response.json())
+//         .then(data => {
+//             console.log(data); // Log the response for debugging
+
+//             if (data.success) {
+//                 alert('Profile updated successfully');
+//                 toggleButtons();
+//                 resetCheckboxState();
+//                 inputs.forEach(input => input.setAttribute('readonly', 'true'));
+//                 // Disable all inputs again
+//                 inputs.forEach(input => input.disabled = true);
+//                 // Disable checkboxes again
+//                 checkboxes.forEach(checkbox => checkbox.disabled = true);
+//             } else {
+//                 alert('Failed to update profile: ' + (data.message || 'No message returned'));
+//                 console.log('Failed to update profile: ' + (data.message || 'No message returned'));
+//             }
+//         })
+//         .catch(error => {
+//             console.error('Error updating profile:', error);
+//         });
+//     });
+
+//     document.getElementById('cancelButton').addEventListener('click', function(event) {
+//         event.preventDefault();
+//         inputs.forEach(input => input.setAttribute('readonly', 'true'));
+//         toggleButtons();
+//         resetCheckboxState();
+//         // Disable all inputs again
+//         inputs.forEach(input => input.disabled = true);
+//         // Disable checkboxes again
+//         checkboxes.forEach(checkbox => checkbox.disabled = true);
+//     });
+
+//     function toggleButtons() {
+//         editButton.style.display = 'inline-block';
+//         updateButton.style.display = 'none';
+//         cancelButton.style.display = 'none';
+//     }
+
+//     function resetCheckboxState() {
+//         const pwdYes2 = document.getElementById('pwdYes2');
+//         const pwdNo2 = document.getElementById('pwdNo2');
+
+//         // Reset checkboxes to their default state
+//         pwdYes2.checked = pwdYes2.defaultChecked;
+//         pwdNo2.checked = pwdNo2.defaultChecked;
+
+//         // Disable checkboxes again
+//         pwdYes2.disabled = true;
+//         pwdNo2.disabled = true;
+//     }
+// });
+
 
 //Sa palit ng email
 document.getElementById('submitEmail').addEventListener('click', function(event) {
