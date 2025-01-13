@@ -40,7 +40,7 @@ include "Connect/Connection.php";
                     <a href="#HOAOfficials"> HOA Officials </a>
                 </li>
                 <li>
-                    <a href="LoginPage.html"> Login </a>
+                    <a href="LoginPage.php"> Login </a>
                 </li>
             </ul>
         </div>

@@ -26,6 +26,30 @@ $role = "user";
 
 $disabilities = isset($_POST['disabilities']) ? mysqli_real_escape_string($conn, $_POST['disabilities']) : 'No';
 
+// Log the received form data
+error_log("Debugging Form Data:");
+error_log("First Name: " . $fname);
+error_log("Middle Name: " . $mname);
+error_log("Last Name: " . $lname);
+error_log("Suffix: " . $suffix);
+error_log("Gender: " . $gender);
+error_log("Date of Birth: " . $dob);
+error_log("Age: " . $age);
+error_log("Phone Number: " . $phonenum);
+error_log("Block: " . $block);
+error_log("Lot: " . $lot);
+error_log("Street: " . $street);
+error_log("Email: " . $email);
+error_log("Password: " . $password);
+error_log("Disabilities: " . $disabilities);
+error_log("Access: " . $access);
+
+if (empty($gender)) {
+    error_log("Gender is required but not provided.");
+    echo json_encode(['success' => false, 'message' => "Gender is required."]);
+    exit();
+}
+
 // Default image path if no image is uploaded
 $default_image_path = 'default_Image.png'; // Update with the actual path to your default image
 
