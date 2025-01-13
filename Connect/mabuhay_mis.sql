@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 02, 2024 at 09:47 AM
+-- Generation Time: Jan 14, 2025 at 07:24 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -30,35 +30,19 @@ SET time_zone = "+00:00";
 CREATE TABLE `announcements` (
   `news_id` int(11) NOT NULL,
   `title` varchar(255) NOT NULL,
-  `context` text NOT NULL,
-  `start_date` date NOT NULL,
-  `start_time` varchar(255) NOT NULL,
-  `end_date` date NOT NULL,
-  `end_time` varchar(255) NOT NULL,
-  `img` varchar(255) NOT NULL
+  `description` text NOT NULL,
+  `start_date` varchar(20) NOT NULL,
+  `end_date` varchar(20) NOT NULL,
+  `images` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `announcements`
 --
 
-INSERT INTO `announcements` (`news_id`, `title`, `context`, `start_date`, `start_time`, `end_date`, `end_time`, `img`) VALUES
-(16, 'kalaguyowwa', 'whgrszbfxv ', '2024-05-19', '02:48', '2024-05-19', '02:48', ''),
-(19, 'GWRVFS', 'gwevrSD', '2024-05-19', '02:49', '2024-05-19', '02:49', 'pusi.jpg'),
-(21, 'ETO', 'tqgsbf', '2024-05-19', '03:23', '2024-05-19', '03:23', ''),
-(22, 'kakakakakak', 'qweq', '2024-05-22', '18:52', '2024-05-23', '17:52', ''),
-(24, '1', '1', '2024-05-22', '22:14', '2024-05-23', '20:14', 'arle.png,bike.jpg'),
-(25, 'kimera', 'antsss', '2024-05-22', '17:15', '2024-05-22', '19:15', 'Eternity.jpg,ella.png,arle.png'),
-(26, 'qwez', 'qwea', '2024-05-22', '19:20', '2024-05-22', '20:20', 'arle.png,bike.jpg'),
-(27, 'qwdasfx', 'erfWADc', '2024-05-22', '20:32', '2024-05-22', '21:32', 'arle.png,bike.jpg'),
-(28, 'nice', 'nice', '2024-05-22', '01:48', '2024-05-22', '00:48', 'arle.png,bike.jpg'),
-(29, 'qweads', 'wqweasd', '2024-05-22', '00:52', '2024-05-22', '03:52', 'arle.png,arle.png'),
-(30, 'gggg', 'ggggg', '2024-05-23', '00:16', '2024-05-23', '02:16', ''),
-(31, 'ETO DIN ', 'wdadawa', '2024-05-23', '04:23', '2024-05-24', '02:23', 'ella.png,ella.png'),
-(34, 'mimanahal', 'ikaw lang \r\n', '2024-05-23', '04:33', '2024-05-25', '03:33', ''),
-(37, 'EETO NA', 'ufvuyfkuvghb', '2024-05-23', '08:38', '2024-05-23', '07:38', 'Calcu.png,arle.png,arle.png,Calcu.png'),
-(39, 'testingi', 'tye', '2024-05-23', '16:16', '2024-05-24', '16:16', ''),
-(40, 'BAGO TO ', 'kiss mo ko ', '2024-06-02', '02:05', '2024-06-03', '04:05', 'vermo1.jpg,vermo2.jpg,pusi.jpg');
+INSERT INTO `announcements` (`news_id`, `title`, `description`, `start_date`, `end_date`, `images`) VALUES
+(1, 'testingers', 'test', '2024-12-08T16:31', '2024-12-09T16:31', 'arle.png,awtlas.png,bebetime.jpg'),
+(2, 'testing', 'test', '2024-12-09T16:33', '2024-12-19T16:33', 'arcana.png,bebetime.jpg');
 
 -- --------------------------------------------------------
 
@@ -417,10 +401,10 @@ CREATE TABLE `tblaccounts` (
 --
 
 INSERT INTO `tblaccounts` (`user_id`, `unique_id`, `email`, `password`, `img`, `status`, `role`, `access`, `otp`, `naughty_list`) VALUES
-(2, 1589571584, 'admin@gmail.com', '21232f297a57a5a743894a0e4a801fc3', '1715091144pusi.jpg', 'Offline now', 'admin', 'Approved', 'Verified', 0),
+(2, 1589571584, 'admin@gmail.com', '21232f297a57a5a743894a0e4a801fc3', 'malupiton4.jpg', 'Offline now', 'admin', 'Approved', 'Verified', 0),
 (4, 1357825271, 'senpai@gmail.com', '1e5db03ce967cfef4e21ada16da09b06', '1715105349271713718_1999144396919159_608519389647854942_n.jpg', 'Offline now', 'user', 'Rejected', 'Verified', 0),
 (19, 112466338, 'Prins@gmail.com', '0a9e0db6e95c394ee792ecbc6e510791', '1717745936pitikvermo.jpg', 'Pending', 'user', 'Approved', '', 0),
-(21, 1017731196, 'tnjrdlcrz@gmail.com', '202cb962ac59075b964b07152d234b70', '1717937589pitikvermo.jpg', 'Pending', 'user', 'Approved', 'Verified', 0),
+(21, 1017731196, 'tnjrdlcr@gmail.com', '202cb962ac59075b964b07152d234b70', '1717937589pitikvermo.jpg', 'Verified', 'user', 'Approved', 'Verified', 0),
 (22, 1593518745, 'aawafawf@gmail.com', '2310553235ab181ae0c551c242988734', 'Mabuhay_Logo.png', 'Pending', 'user', 'Pending', '', 0),
 (23, 1469021725, 'adadawda@gmail.com', '32db117b68ab7598389c18b68f721116', 'Mabuhay_Logo.png', 'Pending', 'user', 'Pending', '', 0),
 (24, 1433443368, 'waeaewea@gmail.com', '458e5a124f7ed72d143d837a9a3bd76e', 'Mabuhay_Logo.png', 'Pending', 'user', 'Pending', '', 0),
@@ -441,7 +425,9 @@ INSERT INTO `tblaccounts` (`user_id`, `unique_id`, `email`, `password`, `img`, `
 (39, 916555761, 'vardump007@gmail.com', 'b2145aac704ce76dbe1ac7adac535b23', 'Mabuhay_Logo.png', 'Offline now', 'user', 'Approved', 'Verified', 4),
 (47, 939514278, 'vardump07@gmail.com', 'ceb232a461e38a2ed16aae9ab58671a8', 'Mabuhay_Logo.png', 'Offline now', 'user', 'Pending', '', 0),
 (48, 809272943, 'vardump0007@gmail.com', '202cb962ac59075b964b07152d234b70', 'Mabuhay_Logo.png', 'Offline now', 'user', 'Pending', '', 0),
-(50, 317446215, 'prnccrvnts@gmail.com', '9ea90f1142ff0bdf6b410d0a6b23aacb', 'Mabuhay_Logo.png', 'Offline now', 'user', 'Pending', 'Verified', 0);
+(50, 317446215, 'prnccrvnts@gmail.com', '9ea90f1142ff0bdf6b410d0a6b23aacb', 'Mabuhay_Logo.png', 'Offline now', 'user', 'Pending', 'Verified', 0),
+(57, 952944985, 'tnjrdlcr@gmail.com', 'c87a4d79950c2a243197daa635ed7e5f', 'default_Image.png', 'Offline now', 'user', 'Approved', 'Verified', 0),
+(58, 601042056, 'tnjrdlcrz@gmail.com', 'c87a4d79950c2a243197daa635ed7e5f', 'default_Image.png', 'Offline now', 'user', 'Pending', '', 0);
 
 -- --------------------------------------------------------
 
@@ -478,7 +464,7 @@ CREATE TABLE `tblresident` (
 --
 
 INSERT INTO `tblresident` (`user_id`, `unique_id`, `access`, `first_name`, `middle_name`, `last_name`, `suffix`, `sex`, `age`, `pwd`, `birthday`, `birthplace`, `citizenship`, `block`, `lot`, `street_name`, `phone_number`, `ec_name`, `ec_phone_num`, `ec_relship`, `ec_address`) VALUES
-(3, '1589571584', 'Approved', 'Welacakes', 'Magsino', 'Cervantes', 'N/A', 'Female', 20, 'Walang laman', 'N/A', '', '', 3, 18, 'N/A', 9434763913, 'Prince Jefferson P. Cervantes', 9666676033, '', 'BLK 9 LOT 18 Ville de Palme Brgy. Santiago, General Trias, Cavite'),
+(3, '1589571584', 'Approved', 'Welacakes', 'Magsino', 'Cervantes', 'N/A', 'Female', 20, 'No', 'N/A', '', '', 3, 18, 'N/A', 9434763913, 'Prince Jefferson P. Cervantes', 9666676033, 'N/A', 'BLK 9 LOT 18 Ville de Palme Brgy. Santiago, General Trias, Cavite'),
 (4, '1357825271', 'Rejected', 'Wela', 'Aguilar', 'Magsino', '', 'Male', 21, '', '', '', '', 3, 23, '', 9434763913, 'Arlenin', 24357345745, 'Secret', 'Blk 9 Lot 18 Anahaw St.'),
 (19, '112466338', 'Approved', 'Prins', 'P', 'Cervs', '', 'Male', 23, '', '', '', '', 4, 3, '', 123, '', 0, '', ''),
 (21, '1017731196', 'Approved', 'bago', 'bago', 'bago', '', 'Rather not say', 123, '', '', '', '', 1, 2, '', 123123, '', 0, '', ''),
@@ -502,7 +488,9 @@ INSERT INTO `tblresident` (`user_id`, `unique_id`, `access`, `first_name`, `midd
 (41, '916555761', 'Approved', 'Tanjiro', '', 'Dela Cruz', '', 'Male', 32, 'No', '1992-05-20', '', '', 78, 10, '', 909090909, '', 0, '', ''),
 (49, '939514278', 'Pending', '1', '1', '1', '', 'Male', 34, 'No', '1990-03-14', '', '', 1, 1, '', 132312313131313, '', 0, '', ''),
 (50, '809272943', 'Pending', '1', '1', '1', '', 'Male', 26, 'No', '1998-02-10', '', '', 1, 1, '', 12331123123123121, '', 0, '', ''),
-(52, '317446215', 'Pending', 'Prince', '1', '1', '1', 'Male', 43, 'No', '1981-11-25', '', '', 1232, 1, '', 111311, '', 0, '', '');
+(52, '317446215', 'Pending', 'Prince', '1', '1', '1', 'Male', 43, 'No', '1981-11-25', '', '', 1232, 1, '', 111311, '', 0, '', ''),
+(59, '952944985', 'Approved', 'Prince', 'Jefferson P.', 'Cervantes', '', 'Male', 2005, 'Wela123!', '2005-07-06', '', '', 101, 20, 'BLK 9 LOT 18 Ville de Palme Brgy. Santiago, General Trias, Cavite', 634636564646, '', 0, '', ''),
+(60, '601042056', 'Pending', 'Flow', 'fgj', 'G', '', 'Male', 1993, 'Wela123!', '1993-11-09', '', '', 9, 9, '', 636445646456, '', 0, '', '');
 
 -- --------------------------------------------------------
 
@@ -523,17 +511,26 @@ CREATE TABLE `tbl_sessions` (
 --
 
 INSERT INTO `tbl_sessions` (`session_id`, `unique_id`, `last_activity`, `device_ip`, `status`) VALUES
+('08f91hjpc2ulfaeo0g57v88s0j', 1589571584, '2024-12-22 12:23:18', '::1', 'inactive'),
 ('1nde3b4afhrmb70ps0j21gg492', 1589571584, '2024-11-30 05:09:06', '::1', 'inactive'),
 ('49q5r4vdqbvm72gh5meb29tpsg', 1581632830, '2024-12-01 06:08:34', '::1', 'inactive'),
 ('56htq7vh3dcstor8pubar342gh', 1581632830, '2024-11-25 07:55:33', '::1', 'inactive'),
 ('77u9luim9024hbt0k2k0oigjci', 1581632830, '2024-11-27 21:28:46', '::1', 'inactive'),
 ('806gfh10fgskgvdcr4bm69855o', 1589571584, '2024-11-26 02:26:15', '::1', 'inactive'),
 ('avdlcnc21i5846mk7jg0dhpuoq', 724357114, '2024-11-26 20:12:26', '::1', 'inactive'),
+('cvgvrrj20ab5uoa9u84i2cgv4f', 1589571584, '2024-12-10 05:31:13', '::1', 'inactive'),
+('dckfggtj6q9qoothuat1pd9qce', 1589571584, '2024-12-23 09:47:50', '::1', 'inactive'),
 ('e35bng9v3gnt04ndngrer6g8ec', 1589571584, '2024-11-27 22:08:25', '::1', 'inactive'),
+('fo1sqp561i2qu33pod063bt7tu', 1589571584, '2025-01-13 19:42:55', '::1', 'inactive'),
 ('fptp5hdvi6om2gjmjm2oju6af9', 1589571584, '2024-11-28 21:52:55', '::1', 'inactive'),
+('hd8hrbllvtejbd453pdvqtd52q', 1589571584, '2024-12-09 16:53:26', '::1', 'inactive'),
 ('icj7dmhl3g0haj32bh1qk08cb3', 1589571584, '2024-11-29 12:09:35', '::1', 'inactive'),
 ('jrsdp4em90angoisbm694npi0b', 1581632830, '2024-11-25 07:57:10', '::1', 'inactive'),
-('r70l72u2lce0sipvnk6b7kspr5', 1589571584, '2024-12-01 23:19:23', '::1', 'inactive'),
+('oniu1v844a1a2cgbjoul7sp34k', 1581632830, '2024-12-08 05:35:22', '::1', 'inactive'),
+('p3g5la4sf4q1j2hdl7q8s92b6o', 1581632830, '2024-12-22 11:29:52', '::1', 'inactive'),
+('q4bra76vjgujp2lnu7fk4ttc7l', 1589571584, '2025-01-10 17:16:10', '::1', 'inactive'),
+('r70l72u2lce0sipvnk6b7kspr5', 1581632830, '2024-12-01 23:19:23', '::1', 'inactive'),
+('sf6v5ha52s75s9fhpi6i5aus6b', 1589571584, '2024-12-22 12:16:20', '::1', 'inactive'),
 ('smrpil2bg3udr2muskhqplc659', 1581632830, '2024-11-29 12:07:56', '::1', 'inactive'),
 ('u8ts71fn1jb160mq0m719bjbba', 1589571584, '2024-11-26 15:42:33', '::1', 'inactive');
 
@@ -794,7 +791,7 @@ ALTER TABLE `voting_history`
 -- AUTO_INCREMENT for table `announcements`
 --
 ALTER TABLE `announcements`
-  MODIFY `news_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `news_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `complaints`
@@ -842,13 +839,13 @@ ALTER TABLE `payment_history`
 -- AUTO_INCREMENT for table `tblaccounts`
 --
 ALTER TABLE `tblaccounts`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 
 --
 -- AUTO_INCREMENT for table `tblresident`
 --
 ALTER TABLE `tblresident`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 
 --
 -- AUTO_INCREMENT for table `user_votes`
