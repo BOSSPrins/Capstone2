@@ -1,7 +1,7 @@
 <?php
 session_start();
 include_once "../Connect/Connection.php";
-include_once "../Emailer/OtpEmail.php"; // Include the emailer file
+// Removed OtpEmail.php since we no longer need it
 
 $conn = connection();
 
@@ -25,11 +25,11 @@ if (empty($fname) || empty($lname) || empty($email) || empty($password) || empty
 }
 
 // Check if the block and lot already exist in the database (duplicate household)
-$block_lot_check = mysqli_query($conn, "SELECT * FROM tblresident WHERE block = '{$block}' AND lot = '{$lot}'");
-if (mysqli_num_rows($block_lot_check) > 0) {
-    echo json_encode(['success' => false, 'message' => 'This household is already registered!']);
-    exit();
-}
+// $block_lot_check = mysqli_query($conn, "SELECT * FROM tblresident WHERE block = '{$block}' AND lot = '{$lot}'");
+// if (mysqli_num_rows($block_lot_check) > 0) {
+//     echo json_encode(['success' => false, 'message' => 'This household is already registered!']);
+//     exit();
+// }
 
 // Check if the email already exists in the tblaccounts
 $sql = mysqli_query($conn, "SELECT * FROM tblaccounts WHERE email = '{$email}'");
@@ -64,20 +64,9 @@ $insert_query_account = mysqli_query($conn, "INSERT INTO tblaccounts (unique_id,
             VALUES ('{$ran_id}', '{$email}', '{$encrypt_pass}', '{$img_name}', 'Offline now', 'user', 'Pending')");
 
 if ($insert_query_account) {
-    // Generate OTP and store it in session
-    $otp = rand(100000, 999999);  // Generate a 6-digit OTP
-    $_SESSION['otp'] = $otp;
-    $_SESSION['otp_email'] = $email;  // Store the email for later verification
-    $_SESSION['otp_expiry'] = time() + 60;  // OTP valid for 1 minute
+    // Removed OTP generation and sending
     
-    error_log("Generated OTP: " . $otp);
-
-    // Send OTP to the user’s email using the emailer function
-    if (sendOTPEmail($email, $otp)) {
-        echo json_encode(['success' => true, 'message' => 'Personal details saved. OTP sent to your email.']);
-    } else {
-        echo json_encode(['success' => false, 'message' => 'Failed to send OTP.']);
-    }
+    echo json_encode(['success' => true, 'message' => 'Personal details saved. Account created successfully.']);
 } else {
     echo json_encode(['success' => false, 'message' => 'Failed to create user account.']);
 }

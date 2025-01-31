@@ -486,19 +486,63 @@ function showSuccessNotification(message) {
     }, 5000); // Wait for 5 seconds before starting the fade-out
 }
 
+// Testing kung gagana
+function showSuccessNotification2(message) {
+    const successNotifications = document.querySelector('.successNotifications');
 
-function validatePhoneNumber(input) {
-    // Ensure the input always starts with +63
-    if (!input.value.startsWith("+63")) {
-        input.value = "+63";
+    const notification = document.createElement('div');
+    notification.classList.add('successNotification');
+
+    // Create the notification header with "Success" text and a close button (X)
+    const notificationHeader = document.createElement('div');
+    notificationHeader.classList.add('saksesnotificationHeader');
+    notificationHeader.innerHTML = "Success";
+
+    const closeButton = document.createElement('span');
+    closeButton.classList.add('saksescloseButton');
+    closeButton.innerHTML = "&times;"; // "X" symbol for close
+
+    // Append close button to the header
+    notificationHeader.appendChild(closeButton);
+
+    // Append header and message to the notification
+    notification.appendChild(notificationHeader);
+    const messageContainer = document.createElement('div');
+    messageContainer.classList.add('saksesmessageContent');
+    messageContainer.innerHTML = message;
+    notification.appendChild(messageContainer);
+
+    // Append the new success notification to the container
+    successNotifications.appendChild(notification);
+
+    // Function to remove notification and reload page
+    function removeNotificationAndReload() {
+        notification.classList.add('fadeOut');
+        setTimeout(() => {
+            notification.remove();
+            location.reload(); // ✅ Reload page after notification disappears
+        }, 1000); // Wait for fade-out animation to complete
     }
 
-    // Allow only numbers after +63 and limit the length to 10 digits
-    const phoneNumber = input.value.slice(3).replace(/[^0-9]/g, '').slice(0, 10);
+    // Close notification when clicking the "X" button
+    closeButton.addEventListener('click', removeNotificationAndReload);
 
-    // Update the input value
-    input.value = "+63" + phoneNumber;
+    // Auto-remove notification after 5 seconds
+    setTimeout(removeNotificationAndReload, 5000);
 }
+
+
+
+function validatePhoneNumber(input) {
+    // Remove non-numeric characters
+    input.value = input.value.replace(/\D/g, '');
+
+    // Limit to 11 digits
+    if (input.value.length > 11) {
+        input.value = input.value.slice(0, 11);
+    }
+}
+
 
 
 
@@ -671,17 +715,17 @@ document.querySelectorAll('.SignUpInput').forEach(input => {
 });
 
 // Function to toggle form visibility and check for errors
-function toggleFormsVisibility(form) {
-    const emailForm = document.querySelector(".EmailForm");
-    const personalDetailsForm = document.querySelector(".PersonalDetails");
+// function toggleFormsVisibility(form) {
+//     const emailForm = document.querySelector(".EmailForm");
+//     const personalDetailsForm = document.querySelector(".PersonalDetails");
 
-    if (checkRequiredInputs(form)) {
-        if (form.classList.contains("PersonalDetails")) {
-            personalDetailsForm.style.display = "none";
-            emailForm.style.display = "block";
-        }
-    }
-}
+//     if (checkRequiredInputs(form)) {
+//         if (form.classList.contains("PersonalDetails")) {
+//             personalDetailsForm.style.display = "none";
+//             emailForm.style.display = "block";
+//         }
+//     }
+// }
 
 document.addEventListener("DOMContentLoaded", () => {
     const personalDetailsForm = document.querySelector(".PersonalDetails");
@@ -691,41 +735,141 @@ document.addEventListener("DOMContentLoaded", () => {
     // Buttons
     const nextBtnPersonalDetails = document.querySelector(".PersonalDetails .NextBtn");
     const backBtnEmailForm = document.querySelector(".EmailForm .backEmail");
-    const backOTPEmail = document.getElementById("backOTPEmail");
+    // const backOTPEmail = document.getElementById("backOTPEmail");
     const sendBtnEmailForm = document.getElementById("sendOTPButton");
 
     // Function to check required inputs
-    function checkRequiredInputs(form) {
-        const inputs = form.querySelectorAll("input[required]");
-        return Array.from(inputs).every((input) => input.value.trim() !== "");
-    }
+    // function checkRequiredInputs(form) {
+    //     const inputs = form.querySelectorAll("input[required]");
+    //     return Array.from(inputs).every((input) => input.value.trim() !== "");
+    // }
 
     // Personal Details Next Button Logic
     if (nextBtnPersonalDetails) {
-        nextBtnPersonalDetails.addEventListener("click", (e) => {
+        nextBtnPersonalDetails.addEventListener("click", async (e) => {
             e.preventDefault();
+    
+            let allFilled = true; // Flag to track form validity
+            let errors = new Set(); // Use a Set to avoid duplicate messages
 
-            const age = document.getElementById("age").value;
-            if (parseInt(age) < 18) {
-                showErrorNotification("You must be at least 18 years old.");
-                return;
+            const loadingIndicator = document.getElementById('loading-indicator');
+
+            //  Show loading indicator
+            loadingIndicator.style.setProperty('display', 'flex', 'important');
+    
+            // Clear previous error messages
+            document.querySelectorAll(".error-message").forEach(el => el.remove());
+    
+            //  Age Validation (Must be at least 18)
+            const age = document.getElementById("age");
+            if (age && age.value.trim() !== "" && parseInt(age.value) < 18) {
+                allFilled = false;
+                errors.add("You must be at least 18 years old.");
             }
 
+            // Phone Number Validation (Must be 11 digits, excluding +63)
             const phoneInput = document.getElementById("phonenum");
-            const phoneNumber = phoneInput.value.slice(3);
-            if (phoneNumber.length < 10) {
-                showErrorNotification("The phone number must be exactly 11 digits long.");
-                return;
+
+            let phoneValue = phoneInput.value.trim();
+
+            // Allow only numbers and ensure it's exactly 11 digits
+            if (!/^\d{11}$/.test(phoneValue)) {
+                allFilled = false;
+                errors.add("The phone number must be exactly 11 digits long.");
             }
 
-            if (checkRequiredInputs(personalDetailsForm)) {
+    
+            //  Check required inputs (Only adds one message per missing input)
+            const requiredInputs = personalDetailsForm.querySelectorAll('.SignUpInput[required]');
+            requiredInputs.forEach((input) => {
+                let labelText = "";
+                const label = document.querySelector(`label[for="${input.id}"]`);
+                if (label) {
+                    labelText = label.textContent.trim();
+                }
+    
+                if (input.value.trim() === "") {
+                    allFilled = false;
+                    if (labelText) {
+                        errors.add(`Please enter your ${labelText}.`);
+                    }
+                }
+            });
+    
+            //  Validate Dropdown (Sex Selection)
+            const genderDropdown = document.querySelector(".dropdown-button");
+            if (genderDropdown && !genderDropdown.dataset.value) {
+                allFilled = false;
+                errors.add("Please select your Gender.");
+            }
+    
+            //  Validate Required Fields (Prevent Duplicates)
+            const requiredFields = [
+                { id: "fname", message: "Please enter your First Name." },
+                { id: "lname", message: "Please enter your Last Name." },
+                { id: "dob", message: "Please enter your Birth Date." },
+                { id: "block", message: "Please enter your Block." },
+                { id: "lot", message: "Please enter your Lot." }
+            ];
+    
+            requiredFields.forEach((field) => {
+                const input = document.getElementById(field.id);
+                if (input && input.value.trim() === "") {
+                    allFilled = false;
+                    errors.add(field.message);
+                }
+            });
+    
+            //  Validate Checkbox Group (Disabilities)
+            const checkboxes = document.querySelectorAll('input[type="checkbox"][name="disabilities"]');
+            if (checkboxes.length > 0) {
+                const checked = Array.from(checkboxes).some((box) => box.checked);
+                if (!checked) {
+                    allFilled = false;
+                    errors.add("Please indicate if you have disabilities.");
+                }
+            }
+
+            //  Validate Block & Lot in Database
+            const block = document.getElementById("block").value.trim();
+            const lot = document.getElementById("lot").value.trim();
+
+            if (allFilled) {
+                try {
+                    const response = await fetch("PHPBackend/Verify_OTP.php", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                        body: new URLSearchParams({ action: "checkBlockLot", block, lot })
+                    });
+
+                    const result = await response.json();
+                    if (result.exists) {
+                        allFilled = false;
+                        errors.add("This household is already registered.");
+                    }
+                } catch (error) {
+                    console.error("Error checking Block & Lot:", error);
+                    allFilled = false;
+                    errors.add("An error occurred while checking the Block and Lot.");
+
+                }
+            }
+    
+            // ✅ Hide loading indicator after request completes (success or failure)
+            loadingIndicator.style.setProperty('display', 'none', 'important');
+    
+            //  Show ALL error messages (No duplicates)
+            if (!allFilled) {
+                errors.forEach(msg => showErrorNotification(msg));
+            } else {
                 personalDetailsForm.style.display = "none";
                 emailForm.style.display = "block";
-            } else {
-                showErrorNotification("Please complete all required fields.");
             }
         });
+    } else {
+        console.error("Next button for Personal Details not found!");
     }
+    
 
     // Email Form Back Button Logic
     if (backBtnEmailForm) {
@@ -736,13 +880,13 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    if (backOTPEmail) {
-        backOTPEmail.addEventListener("click", (e) => {
-            e.preventDefault();
-            otpForm.style.display = "none";
-            emailForm.style.display = "block";
-        });
-    }
+    // if (backOTPEmail) {
+    //     backOTPEmail.addEventListener("click", (e) => {
+    //         e.preventDefault();
+    //         otpForm.style.display = "none";
+    //         emailForm.style.display = "block";
+    //     });
+    // }
 
     // Send OTP Button Logic
     if (sendBtnEmailForm) {
@@ -782,15 +926,15 @@ document.addEventListener("DOMContentLoaded", () => {
                 return;
             }
 
-            // Validate phone number
-            const phoneInput = document.querySelector("#phonenum");
-            const phoneValue = phoneInput.value.trim();
-            const remainingNumber = phoneValue.slice(3);
+            // // Validate phone number
+            // const phoneInput = document.querySelector("#phonenum");
+            // const phoneValue = phoneInput.value.trim();
+            // const remainingNumber = phoneValue.slice(3);
 
-            if (remainingNumber.length !== 10 || isNaN(remainingNumber)) {
-                showErrorNotification("Phone number must have exactly 10 digits after +63.");
-                return;
-            }
+            // if (remainingNumber.length !== 10 || isNaN(remainingNumber)) {
+            //     showErrorNotification("Phone number must have exactly 10 digits after +63.");
+            //     return;
+            // }
 
             // Check required inputs
             if (!checkRequiredInputs(emailForm)) {
@@ -798,18 +942,17 @@ document.addEventListener("DOMContentLoaded", () => {
                 return;
             }
 
-            // Success Logic
-            console.log("All fields are valid. Proceeding to OTP...");
-            showSuccessNotification("All fields are valid! Redirecting to OTP form...");
+            // // Success Logic
+            // console.log("All fields are valid. Proceeding to OTP...");
+            // showSuccessNotification("All fields are valid! Redirecting to OTP form...");
 
-            // Hide the email form and show the OTP form
-            emailForm.style.display = "none";
-            otpForm.style.display = "block";
 
             // Setup OTP handlers
             setupOTPHandlers(() => {
                 console.log("OTP process completed.");
             });
+
+            submitFormData();  // Call the function that submits form data to the server
         });
     } else {
         console.error("Send button in Email Form not found!");
@@ -820,36 +963,30 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // Define the function
 function setupOTPHandlers() {
-    const personalDetailsForm = document.querySelector(".PersonalDetails");
-    const emailForm = document.querySelector(".EmailForm");
-    const OtpForm = document.querySelector(".OtpForm");
+    // const personalDetailsForm = document.querySelector(".PersonalDetails");
+    // const emailForm = document.querySelector(".EmailForm");
+    // const OtpForm = document.querySelector(".OtpForm");
 
-    const testBTN = document.getElementById("testBTN");
+    // const testBTN = document.getElementById("testBTN");
     const sendOTPButton = document.getElementById("sendOTP");
     const verifyOTPButton = document.getElementById("verifyOTP");
+
     const emailOTP = document.querySelector("#emailOTP");
+    const email = emailOTP?.value.trim();
+
     const otpInput = document.querySelector("#beripayOTP");
     const emailParag = document.querySelector(".OtpParagg");
     const sentEmailSpan = document.getElementById("sentEmail");
 
     // Function to show error notifications
-    function showErrorNotification(message) {
-        console.log(message); // Replace with a styled notification if needed
-    }
+    // function showErrorNotification(message) {
+    //     console.log(message); // Replace with a styled notification if needed
+    // }
 
-    // Function to show success notifications
-    function showSuccessNotification(message) {
-        console.log(message); // Replace with a styled notification if needed
-    }
-
-
-    if (testBTN) {
-        testBTN.addEventListener("click", () => {
-            submitFormData();
-        });
-    } else {
-        console.error(" button not found!");
-    }
+    // // Function to show success notifications
+    // function showSuccessNotification(message) {
+    //     console.log(message); // Replace with a styled notification if needed
+    // }
 
     // Send OTP logic
     if (sendOTPButton) {
@@ -857,11 +994,11 @@ function setupOTPHandlers() {
             const loadingIndicator = document.getElementById('loading-indicator');
                   loadingIndicator.style.setProperty('display', 'flex', 'important'); // Show loading indicator
 
-            const email = emailOTP?.value.trim();
-            if (!email) {
-                showErrorNotification("Please enter your email.");
-                return;
-            }
+            // const email = emailOTP?.value.trim();
+            // if (!email) {
+            //     showErrorNotification("Please enter your email.");
+            //     return;
+            // }
 
             // Send request to send OTP
             fetch("PHPBackend/Verify_OTP.php", {
@@ -876,16 +1013,18 @@ function setupOTPHandlers() {
                 .then(data => {
                     if (data.success) {
                         console.log("OTP sent successfully.");
-                        emailForm.style.display = "none";
-                        personalDetailsForm.style.display = "none";
-                        OtpForm.style.display = "block";
+                        // emailForm.style.display = "none";
+                        // personalDetailsForm.style.display = "none";
+                        // OtpForm.style.display = "block";
                         // Update and display the email paragraph
                         sentEmailSpan.textContent = email;
                         emailParag.style.display = "block";
-                        alert("OTP sent successfully.");
+                        // alert("OTP sent successfully.");
+                        console.log(data.message); 
                         showSuccessNotification(data.message);
                     } else {
                         showErrorNotification(data.message);
+                        throw new Error("OTP sending failed.");
                     }
                 })
                 .catch(error => {
@@ -916,6 +1055,7 @@ if (verifyOTPButton) {
         if (!otpPattern.test(otp)) {
             console.log("OTP failed regex check");
             showErrorNotification("Please enter a valid 6-digit OTP.");
+            loadingIndicator.style.setProperty('display', 'none', 'important');
             return;
         }
 
@@ -932,14 +1072,12 @@ if (verifyOTPButton) {
             .then((data) => {
                 console.log("Response from OTP verification:", data);
                 if (data.success) {
-                    alert("OTP verified successfully. Registration Complete");
 
-                    // alert("Sign-up successful! Reloading...");
-                    //     // Reload page only after notification is removed
-                    //     location.reload();
+                    showSuccessNotification2("OTP verified successfully. Registration Complete");
                     
                 } else {
                     showErrorNotification(data.message);
+                    throw new Error("OTP verification failed.");
                 }
             })
             .catch(error => {
@@ -952,15 +1090,19 @@ if (verifyOTPButton) {
         });
     });
 
-    if (performance.navigation.type === performance.navigation.TYPE_RELOAD) {
-        alert("Session has been cleared. Please request a new OTP.");
-    }
-} else {
+    // if (performance.navigation.type === performance.navigation.TYPE_RELOAD) {
+    //     alert("Session has been cleared. Please request a new OTP.");
+    // }
+    } else {
         console.error("Verify OTP button not found!");
     }
 }
 
 function submitFormData() {
+
+    const emailForm = document.querySelector(".EmailForm");
+    const OtpForm = document.querySelector(".OtpForm");
+
     const formData = new FormData();
 
     // Collect all the form data that you want to send to the server
@@ -974,11 +1116,11 @@ function submitFormData() {
 
     console.log("Selected gender:", selectedGender); // Debugging log
 
-    // If no gender is selected, alert and stop form submission
-    if (selectedGender === 'Select Option' || selectedGender === '') {
-        alert("Please select a gender.");
-        return; // Prevent form submission if no gender is selected
-    }
+    // // If no gender is selected, alert and stop form submission
+    // if (selectedGender === 'Select Option' || selectedGender === '') {
+    //     alert("Please select a gender.");
+    //     return; // Prevent form submission if no gender is selected
+    // }
 
     // Append the selected gender to formData
     formData.append('gender', selectedGender);
@@ -1016,10 +1158,13 @@ function submitFormData() {
     .then(response => response.json())
         .then(data => {
             if (data.success) {
-                alert(data.message);
-                // Proceed with further steps if needed
+                showSuccessNotification(data.message);
+                
+                emailForm.style.display = "none";
+                OtpForm.style.display = "block";
+                
             } else {
-                alert(data.message); // Display the error message from the backend
+                showErrorNotification(data.message); // Display the error message from the backend
             }
         })
     .catch(error => {

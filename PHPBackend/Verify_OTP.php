@@ -55,6 +55,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
         } else {
             echo json_encode(['success' => false, 'message' => 'Invalid OTP.']);
         }
+
+    } elseif ($action === 'checkBlockLot') {
+
+        $block = $_POST['block'];
+        $lot = $_POST['lot'];
+
+        $query = $conn->prepare("SELECT * FROM tblresident WHERE block = ? AND lot = ?");
+        $query->bind_param("ss", $block, $lot);
+        $query->execute();
+        $result = $query->get_result();
+
+        $response = ["exists" => $result->num_rows > 0];
+        echo json_encode($response);
+        exit();
     }
 }
 ?>

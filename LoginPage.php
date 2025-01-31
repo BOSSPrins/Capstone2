@@ -210,7 +210,7 @@ if (isset($_SESSION['role'])) {
                                         <div class="OneInputField">
                                             <label class="Labels" for="Contact Number">Contact No.</label>
                                             <span style="color:red"> &#42; </span>
-                                            <input class="SignUpInput" type="text" placeholder="Enter Your Phone Number" id="phonenum" name="phonenum" required maxlength="13" oninput="validatePhoneNumber(this)" value="+63">
+                                            <input class="SignUpInput" type="text" placeholder="Enter Your Phone Number" id="phonenum" name="phonenum" required maxlength="11" oninput="validatePhoneNumber(this)">
                                         </div>
 
 
@@ -325,7 +325,7 @@ if (isset($_SESSION['role'])) {
                                     <div class="OtpCon SignUpParehas" id="OtpInt">
                                         <!-- OTP input fields go here -->
                                         <h3> Verify Your Email </h3>
-                                        <div class="OtpParagg" hidden>
+                                        <div class="OtpParagg" style="display: none">
                                             <p class="EmailParag"> Please Enter The 6 Digit Code Sent To <span id="sentEmail"></span> </p>
                                             <!-- <input class="OtpInt" type="text" > -->
                                         </div> 
@@ -336,9 +336,8 @@ if (isset($_SESSION['role'])) {
             
                                         <div class="ButtonNextAndBack Bottom">
                                              
-                                            <button class="NextBtn" id="backOTPEmail" type="button"> Back </button>
-                                            <button class="NextBtn" id="testBTN" type="button"> Send OTP </button>
-                                            <!-- <button class="NextBtn" id="sendOTP" type="button"> Send OTP </button> -->
+                                            <!-- <button class="NextBtn" id="backOTPEmail" type="button"> Back </button> -->
+                                            <button class="NextBtn" id="sendOTP" type="button"> Send OTP </button>
                                             <button class="NextBtn" id="verifyOTP" type="button"> Verify </button>
                                         </div>
 
