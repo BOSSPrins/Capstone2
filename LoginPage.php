@@ -38,6 +38,10 @@ if (isset($_SESSION['role'])) {
 </head>
 <body>
 <div class="mainDashboardContainer">
+
+    <div class="errorNotifications"></div>
+    <div class="successNotifications"></div>
+
         <div id="loading-indicator">
             <div class="loader"></div>
         </div>
@@ -97,10 +101,12 @@ if (isset($_SESSION['role'])) {
                                 </div>
                         
                                 <span class="login-title">Login</span>
+                                <!-- <div class="errorNotifications"></div>
+                                <div class="successNotifications"></div> -->
                         
                                 <form class="LoginLaman lagin" method="POST">
-                                    <div class="iror"></div>
-                                    <div class="sakses"></div>
+                                    <!-- <div class="iror"></div>
+                                    <div class="sakses"></div> -->
                                     <div class="LoginInputField">
                                         <input class="inputLogin" type="text" name="email" required>
                                         <span class="SpanLogin">Email Address</span>
@@ -137,8 +143,8 @@ if (isset($_SESSION['role'])) {
                             </div>
         
                             <span class="login-title"> Sign Up </span>
-                            <div class="errorNotifications"></div>
-                            <div class="successNotifications"></div>
+                            <!-- <div class="errorNotifications"></div>
+                            <div class="successNotifications"></div> -->
         
                             <div class="SignUpForm" id="SignUpForm">
                                 
@@ -227,6 +233,12 @@ if (isset($_SESSION['role'])) {
                                                     <input class="checkBoxx" type="checkbox" id="checkNo" name="disabilities" value="No" required>
                                                 </div>
                                             </div>
+                                        </div>
+
+                                        <!-- PWD ID Upload Input (Initially Hidden) -->
+                                        <div id="pwdIdContainer" style="display: none; margin-top: 10px;">
+                                            <label class="Labels" for="pwdId">Upload PWD ID:</label>
+                                            <input type="file" id="pwdId" name="pwdId" accept="image/*" required>
                                         </div>
                                         
                                         <!-- DROPDOWN NA PWD KASO AYAW NI MASTER SIGE WAG NA 

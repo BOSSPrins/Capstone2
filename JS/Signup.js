@@ -374,24 +374,24 @@
 // // Initial validation check
 // validateInputs();
 
-document.addEventListener("DOMContentLoaded", () => {
-    const checkYes = document.getElementById('checkYes');
-    const checkNo = document.getElementById('checkNo');
+// document.addEventListener("DOMContentLoaded", () => {
+//     const checkYes = document.getElementById('checkYes');
+//     const checkNo = document.getElementById('checkNo');
 
-    // Event listener for the "Yes" checkbox
-    checkYes.addEventListener('change', () => {
-        if (checkYes.checked) {
-            checkNo.checked = false; // Uncheck "No" if "Yes" is checked
-        }
-    });
+//     // Event listener for the "Yes" checkbox
+//     checkYes.addEventListener('change', () => {
+//         if (checkYes.checked) {
+//             checkNo.checked = false; // Uncheck "No" if "Yes" is checked
+//         }
+//     });
 
-    // Event listener for the "No" checkbox
-    checkNo.addEventListener('change', () => {
-        if (checkNo.checked) {
-            checkYes.checked = false; // Uncheck "Yes" if "No" is checked
-        }
-    });
-});
+//     // Event listener for the "No" checkbox
+//     checkNo.addEventListener('change', () => {
+//         if (checkNo.checked) {
+//             checkYes.checked = false; // Uncheck "Yes" if "No" is checked
+//         }
+//     });
+// });
 
 
 // Function to show error notifications
@@ -486,7 +486,7 @@ function showSuccessNotification(message) {
     }, 5000); // Wait for 5 seconds before starting the fade-out
 }
 
-// Testing kung gagana
+// Bakit may 2? kasi pagnawala / hide tong success notif nagrerefresh ang page automatic
 function showSuccessNotification2(message) {
     const successNotifications = document.querySelector('.successNotifications');
 
@@ -591,120 +591,120 @@ function calculateAge() {
 
 
 // Function to check required inputs
-function checkRequiredInputs(form) {
-    const requiredInputs = form.querySelectorAll('.SignUpInput[required], .dropdown-button[required]');
-    allFilled = true;
+// function checkRequiredInputs(form) {
+//     const requiredInputs = form.querySelectorAll('.SignUpInput[required], .dropdown-button[required]');
+//     allFilled = true;
 
-    requiredInputs.forEach((input) => {
-        let errorMessage = "";
-        let labelText = "";
+//     requiredInputs.forEach((input) => {
+//         let errorMessage = "";
+//         let labelText = "";
 
-        // Get the label text
-        const label = form.querySelector(`label[for="${input.id}"]`);
-        if (label) {
-            labelText = label.textContent.trim();
-        }
+//         // Get the label text
+//         const label = form.querySelector(`label[for="${input.id}"]`);
+//         if (label) {
+//             labelText = label.textContent.trim();
+//         }
 
-        // Validate dropdown
-        if (input.classList.contains("dropdown-button")) {
-            const selectedValue = input.dataset.value; // Assuming `data-value` holds the selected option
-            if (!selectedValue) {
-                allFilled = false;
-                errorMessage = "Please select your Gender.";
-                showErrorNotification(errorMessage);
-            }
-        }
-    });
+//         // Validate dropdown
+//         if (input.classList.contains("dropdown-button")) {
+//             const selectedValue = input.dataset.value; // Assuming `data-value` holds the selected option
+//             if (!selectedValue) {
+//                 allFilled = false;
+//                 errorMessage = "Please select your Gender.";
+//                 showErrorNotification(errorMessage);
+//             }
+//         }
+//     });
 
-    const fname = document.getElementById("fname");
-    if (fname && fname.value.trim() === "") {
-        allFilled = false;
-        const errorMessage = "Please enter your First name.";
-        showErrorNotification(errorMessage);
-    }
-    const lname = document.getElementById("lname");
-    if (lname && lname.value.trim() === "") {
-        allFilled = false;
-        const errorMessage = "Please enter your Last name.";
-        showErrorNotification(errorMessage);
-    }
-    const dob = document.getElementById("dob");
-    if (dob && dob.value.trim() === "") {
-        allFilled = false;
-        const errorMessage = "Please enter your Birth date.";
-        showErrorNotification(errorMessage);
-    }
-    const age = document.getElementById("age");
-    if (age && age.value.trim() === "") {
-        allFilled = false;
-        const errorMessage = "Please enter your Age.";
-        showErrorNotification(errorMessage);
-    }
-    const block = document.getElementById("block");
-    if (block && block.value.trim() === "") {
-        allFilled = false;
-        const errorMessage = "Please enter your Block.";
-        showErrorNotification(errorMessage);
-    }
-    const lot = document.getElementById("lot");
-    if (lot && lot.value.trim() === "") {
-        allFilled = false;
-        const errorMessage = "Please enter your Lot.";
-        showErrorNotification(errorMessage);
-    }
-
-
-    // Validate checkbox groups
-    const checkboxes = form.querySelectorAll('input[type="checkbox"][name="disabilities"]');
-    if (checkboxes.length > 0) {
-        const checked = Array.from(checkboxes).some((box) => box.checked);
-        if (!checked) {
-            allFilled = false;
-            showErrorNotification("Please indicate if you have disabilities.");
-        }
-    }
-
-    // Check if email is valid (Gmail or Yahoo only)
-    const emailInput = form.querySelector('.emailed');
-    if (emailInput) {
-        const emailValue = emailInput.value.trim();
-        if (emailValue === "") {
-            allFilled = false;
-            showErrorNotification("Email is required.");
-        } else {
-            const emailPattern = /^[a-zA-Z0-9._%+-]+@(gmail\.com|yahoo\.com)$/;
-            if (!emailPattern.test(emailValue)) {
-                allFilled = false;
-                showErrorNotification("Please enter a valid email address (Gmail or Yahoo only).");
-            }
-        }
-    }
-
-    // Check if password fields are empty or do not match
-    const passwordInput = form.querySelector('#Pass');
-    const confirmPasswordInput = form.querySelector('#Pass2');
-    if (passwordInput) {
-        const passwordValue = passwordInput.value.trim();
-        if (passwordValue === "") {
-            allFilled = false;
-            showErrorNotification("Password is required.");
-        }
-    }
-
-    if (confirmPasswordInput) {
-        const confirmPasswordValue = confirmPasswordInput.value.trim();
-        if (confirmPasswordValue === "") {
-            allFilled = false;
-            showErrorNotification("Confirm Password is required.");
-        } else if (passwordInput && passwordInput.value !== confirmPasswordInput.value) {
-            allFilled = false;
-            showErrorNotification("Passwords do not match.");
-        }
-    }
+//     const fname = document.getElementById("fname");
+//     if (fname && fname.value.trim() === "") {
+//         allFilled = false;
+//         const errorMessage = "Please enter your First name.";
+//         showErrorNotification(errorMessage);
+//     }
+//     const lname = document.getElementById("lname");
+//     if (lname && lname.value.trim() === "") {
+//         allFilled = false;
+//         const errorMessage = "Please enter your Last name.";
+//         showErrorNotification(errorMessage);
+//     }
+//     const dob = document.getElementById("dob");
+//     if (dob && dob.value.trim() === "") {
+//         allFilled = false;
+//         const errorMessage = "Please enter your Birth date.";
+//         showErrorNotification(errorMessage);
+//     }
+//     const age = document.getElementById("age");
+//     if (age && age.value.trim() === "") {
+//         allFilled = false;
+//         const errorMessage = "Please enter your Age.";
+//         showErrorNotification(errorMessage);
+//     }
+//     const block = document.getElementById("block");
+//     if (block && block.value.trim() === "") {
+//         allFilled = false;
+//         const errorMessage = "Please enter your Block.";
+//         showErrorNotification(errorMessage);
+//     }
+//     const lot = document.getElementById("lot");
+//     if (lot && lot.value.trim() === "") {
+//         allFilled = false;
+//         const errorMessage = "Please enter your Lot.";
+//         showErrorNotification(errorMessage);
+//     }
 
 
-    return allFilled;
-}
+//     // Validate checkbox groups
+//     const checkboxes = form.querySelectorAll('input[type="checkbox"][name="disabilities"]');
+//     if (checkboxes.length > 0) {
+//         const checked = Array.from(checkboxes).some((box) => box.checked);
+//         if (!checked) {
+//             allFilled = false;
+//             showErrorNotification("Please indicate if you have disabilities.");
+//         }
+//     }
+
+//     // Check if email is valid (Gmail or Yahoo only)
+//     const emailInput = form.querySelector('.emailed');
+//     if (emailInput) {
+//         const emailValue = emailInput.value.trim();
+//         if (emailValue === "") {
+//             allFilled = false;
+//             showErrorNotification("Email is required.");
+//         } else {
+//             const emailPattern = /^[a-zA-Z0-9._%+-]+@(gmail\.com|yahoo\.com)$/;
+//             if (!emailPattern.test(emailValue)) {
+//                 allFilled = false;
+//                 showErrorNotification("Please enter a valid email address (Gmail or Yahoo only).");
+//             }
+//         }
+//     }
+
+//     // Check if password fields are empty or do not match
+//     const passwordInput = form.querySelector('#Pass');
+//     const confirmPasswordInput = form.querySelector('#Pass2');
+//     if (passwordInput) {
+//         const passwordValue = passwordInput.value.trim();
+//         if (passwordValue === "") {
+//             allFilled = false;
+//             showErrorNotification("Password is required.");
+//         }
+//     }
+
+//     if (confirmPasswordInput) {
+//         const confirmPasswordValue = confirmPasswordInput.value.trim();
+//         if (confirmPasswordValue === "") {
+//             allFilled = false;
+//             showErrorNotification("Confirm Password is required.");
+//         } else if (passwordInput && passwordInput.value !== confirmPasswordInput.value) {
+//             allFilled = false;
+//             showErrorNotification("Passwords do not match.");
+//         }
+//     }
+
+
+//     return allFilled;
+// }
 
 // Hide error notifications when focusing on inputs
 document.querySelectorAll('.SignUpInput').forEach(input => {
@@ -738,11 +738,56 @@ document.addEventListener("DOMContentLoaded", () => {
     // const backOTPEmail = document.getElementById("backOTPEmail");
     const sendBtnEmailForm = document.getElementById("sendOTPButton");
 
-    // Function to check required inputs
-    // function checkRequiredInputs(form) {
-    //     const inputs = form.querySelectorAll("input[required]");
-    //     return Array.from(inputs).every((input) => input.value.trim() !== "");
-    // }
+    // PWD Checkbox and ID Upload Logic
+    const checkYes = document.getElementById("checkYes");
+    const checkNo = document.getElementById("checkNo");
+    const pwdIdContainer = document.getElementById("pwdIdContainer");
+    const pwdIdInput = document.getElementById("pwdId");
+
+    function togglePwdId() {
+        if (checkYes.checked) {
+            pwdIdContainer.style.display = "block";
+            pwdIdInput.setAttribute("required", "required");
+            checkNo.checked = false; // Uncheck "No" if "Yes" is selected
+        } else {
+            pwdIdContainer.style.display = "none";
+            pwdIdInput.removeAttribute("required");
+        }
+
+        if (checkNo.checked) {
+            checkYes.checked = false; // Uncheck "Yes" if "No" is selected
+        }
+    }
+
+    // Ensure "Yes" and "No" are mutually exclusive
+    checkYes.addEventListener("change", () => {
+        if (checkYes.checked) {
+            pwdIdContainer.style.display = "block";
+            pwdIdInput.setAttribute("required", "required");
+            checkNo.checked = false; // Uncheck "No"
+        } else {
+            pwdIdContainer.style.display = "none";
+            pwdIdInput.removeAttribute("required");
+        }
+    });
+
+    checkNo.addEventListener("change", () => {
+        if (checkNo.checked) {
+            checkYes.checked = false; // Uncheck "Yes"
+            pwdIdContainer.style.display = "none";
+            pwdIdInput.removeAttribute("required");
+        }
+    });
+
+    pwdIdInput.addEventListener("change", (e) => {
+        const files = e.target.files;
+    
+        if (files.length > 1) {
+            // Show error notification instead of alert
+            showErrorNotification("You can only upload one image for your PWD ID.");
+            pwdIdInput.value = ""; // Clear the input to prevent multiple file selection
+        }
+    });
 
     // Personal Details Next Button Logic
     if (nextBtnPersonalDetails) {
@@ -752,13 +797,18 @@ document.addEventListener("DOMContentLoaded", () => {
             let allFilled = true; // Flag to track form validity
             let errors = new Set(); // Use a Set to avoid duplicate messages
 
-            const loadingIndicator = document.getElementById('loading-indicator');
-
             //  Show loading indicator
+            const loadingIndicator = document.getElementById('loading-indicator');
             loadingIndicator.style.setProperty('display', 'flex', 'important');
     
             // Clear previous error messages
             document.querySelectorAll(".error-message").forEach(el => el.remove());
+
+            // Pang check kung may laman yung pwd id
+            if (checkYes.checked && (!pwdIdInput.files || pwdIdInput.files.length === 0)) {
+                allFilled = false;
+                errors.add("Please upload your PWD ID.");
+            }
     
             //  Age Validation (Must be at least 18)
             const age = document.getElementById("age");
@@ -769,7 +819,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
             // Phone Number Validation (Must be 11 digits, excluding +63)
             const phoneInput = document.getElementById("phonenum");
-
             let phoneValue = phoneInput.value.trim();
 
             // Allow only numbers and ensure it's exactly 11 digits
@@ -937,10 +986,10 @@ document.addEventListener("DOMContentLoaded", () => {
             // }
 
             // Check required inputs
-            if (!checkRequiredInputs(emailForm)) {
-                showErrorNotification("Please complete all required fields before proceeding.");
-                return;
-            }
+            // if (!checkRequiredInputs(emailForm)) {
+            //     showErrorNotification("Please complete all required fields before proceeding.");
+            //     return;
+            // }
 
             // // Success Logic
             // console.log("All fields are valid. Proceeding to OTP...");
@@ -1116,12 +1165,6 @@ function submitFormData() {
 
     console.log("Selected gender:", selectedGender); // Debugging log
 
-    // // If no gender is selected, alert and stop form submission
-    // if (selectedGender === 'Select Option' || selectedGender === '') {
-    //     alert("Please select a gender.");
-    //     return; // Prevent form submission if no gender is selected
-    // }
-
     // Append the selected gender to formData
     formData.append('gender', selectedGender);
 
@@ -1134,7 +1177,7 @@ function submitFormData() {
     formData.append('email', document.querySelector('#emailOTP').value);
     formData.append('password', document.querySelector('#Pass').value);
 
-    // Handle disabilities checkbox (Yes or No)
+    // Handle disabilities checkbox (Yes or No) 
     const disabilitiesYes = document.querySelector('#checkYes').checked;
     const disabilitiesNo = document.querySelector('#checkNo').checked;
     
@@ -1147,6 +1190,14 @@ function submitFormData() {
         formData.append('disabilities', ''); // If neither checkbox is selected (shouldn't happen)
     }
 
+    // Append the PWD ID image to the FormData
+    const pwdIdInput = document.querySelector('#pwdId');
+    if (pwdIdInput.files.length > 0) {
+        formData.append('pwdId', pwdIdInput.files[0]);
+    } else {
+        // If no PWD ID image was selected, append a default value (or handle accordingly)
+        formData.append('pwdId', 'N/A');
+    }
 
     const loadingIndicator = document.getElementById('loading-indicator');
         loadingIndicator.style.setProperty('display', 'flex', 'important');

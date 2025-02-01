@@ -6,9 +6,9 @@ $conn = connection();
 $email = mysqli_real_escape_string($conn, $_POST['email']);
 $password = mysqli_real_escape_string($conn, $_POST['loginpassword']);
 
-function closeConnectionAndRespond($conn, $response) {
+function closeConnectionAndRespond($conn, $status, $message) {
     $conn->close();
-    echo json_encode($response);
+    echo json_encode(["status" => $status, "message" => $message]);
     exit();
 }
 
@@ -23,15 +23,14 @@ if (!empty($email) && !empty($password)) {
         $row = mysqli_fetch_assoc($sql);
         $enc_pass = $row['password'];
 
-        if ($row['otp'] != 'Verified') { // Assuming '1' indicates verified; adjust based on your database logic
-            echo "Verify your account first.";
-            exit();
+        if ($row['otp'] != 'Verified') {
+            closeConnectionAndRespond($conn, "error", "Verify your account first.");
         }
 
-        if ($row['access'] == 'Pending'){
-            echo "Please wait for your account confirmation";
-            exit();
+        if ($row['access'] == 'Pending') {
+            closeConnectionAndRespond($conn, "error", "Please wait for your account confirmation.");
         }
+
        
         if (md5($password) === $enc_pass) {
             $status = "Active now";
@@ -85,22 +84,22 @@ if (!empty($email) && !empty($password)) {
                     }
 
                     mysqli_commit($conn); // Commit transaction
-                    echo $row['role']; // Return only the session role
+                    closeConnectionAndRespond($conn, "success", $row['role']); // Send JSON response with role
+
                 } catch (Exception $e) {
                     mysqli_rollback($conn); // Rollback transaction
-                    echo "Error: " . $e->getMessage();
+                    closeConnectionAndRespond($conn, "error", "Error: " . $e->getMessage());
                 }
             } else {
-                echo "Something went wrong. Please try again!";
+                closeConnectionAndRespond($conn, "error", "Something went wrong. Please try again!");
             }
         } else {
-            echo "Password is Incorrect!";
+            closeConnectionAndRespond($conn, "error", "Password is Incorrect!");
         }
     } else {
-        echo "Please Signup First";
-        //"$email - This email does not exist!";
+        closeConnectionAndRespond($conn, "error", "Please Signup First.");
     }
 } else {
-    echo "All input fields are required!";
+    closeConnectionAndRespond($conn, "error", "All input fields are required!");
 }
 ?>

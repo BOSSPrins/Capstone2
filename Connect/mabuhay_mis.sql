@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 14, 2025 at 07:24 AM
+-- Generation Time: Feb 01, 2025 at 06:29 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -116,7 +116,8 @@ INSERT INTO `complaints` (`complaint_id`, `complaint_number`, `complaint_type`, 
 (37, 1395802853, 'Direct Complaint', 'Test lang ulet sa email', 'Parking Problems', 'Tricycle nya sa gate ko binangga', '[\"malupiton4.jpg\"]', '', '0000-00-00 00:00:00', '2024-11-28 20:51:53', 'vardump007@gmail.com', 1581632830, 'Wela A Magsino', 'Blk 9 Lot 18', 'Pending', '', '', '', '', '', '', '', '', '', '', ''),
 (38, 1604739286, 'Direct Complaint', 'Test sa notify', 'Property Maintenance', 'Kalat nya', '[\"malupiton4.jpg\"]', '', '0000-00-00 00:00:00', '2024-11-28 21:04:51', 'vardump007@gmail.com', 1581632830, 'Wela A Magsino', 'Blk 9 Lot 18', 'Pending', '', '', '', '', '', '', '', '', '', '', ''),
 (39, 1053648047, 'General Complaint', '', 'Noise Complaint', 'test nasira yung filed date', '[\"malupiton4.jpg\"]', '', '2024-11-28 22:15:27', '', '', 1581632830, 'Wela A Magsino', 'Blk 9 Lot 18', 'In-Process', '2024-11-30 13:10:55', '', '', '', '', '', '', '', '', '', ''),
-(40, 1430726902, 'Direct Complaint', 'Test sa notice', 'Parking Problems', 'cutie', '[\"malupiton2.png\"]', '', '2024-11-28 22:16:51', 'Blk 78 Lot 10', 'vardump007@gmail.com', 1581632830, 'Wela A Magsino', 'Blk 9 Lot 18', 'In-Process', '2024-11-30 13:14:59', 'Turn over na po di ko na kaya', 'admin', 'Escalated', '2024-11-29 06:42:20', '', '', '', '', '', '');
+(40, 1430726902, 'Direct Complaint', 'Test sa notice', 'Parking Problems', 'cutie', '[\"malupiton2.png\"]', '', '2024-11-28 22:16:51', 'Blk 78 Lot 10', 'vardump007@gmail.com', 1581632830, 'Wela A Magsino', 'Blk 9 Lot 18', 'In-Process', '2024-11-30 13:14:59', 'Turn over na po di ko na kaya', 'admin', 'Escalated', '2024-11-29 06:42:20', '', '', '', '', '', ''),
+(41, 349112476, 'General Complaint', '', 'Noise Complaint', 'Maingay', '[\"Penetration Testing.png\"]', '', '2025-01-24 15:38:13', '', '', 1486934929, 'Prince Cervantes', 'Blk 79 Lot 11', 'Resolved', '2025-01-24 23:39:17', 'Turn over na po di na namin kaya', 'admin', 'Escalated', '2025-01-24 23:40:57', 'Turn-Over-Letter-349112476.pdf', 'okay na po', 'barangay', 'Resolved', '2025-01-24 23:42:45', 'Settled-Letter-349112476.pdf');
 
 -- --------------------------------------------------------
 
@@ -269,7 +270,9 @@ INSERT INTO `messages` (`msg_id`, `incoming_msg_id`, `outgoing_msg_id`, `msg`, `
 (94, 1662732210, 1589571584, 'test', '2024-06-07 02:57:23'),
 (95, 1357825271, 1589571584, 'Test', '2024-07-01 06:11:02'),
 (96, 1589571584, 1357825271, 'Complaints \r\n', '2024-07-01 14:48:14'),
-(97, 1589571584, 1357825271, 'Concern', '2024-07-01 14:48:18');
+(97, 1589571584, 1357825271, 'Concern', '2024-07-01 14:48:18'),
+(98, 1486934929, 1589571584, 'Hilu Gudmurneng', '2025-01-24 15:44:36'),
+(99, 1589571584, 1486934929, 'Hilow', '2025-01-24 15:45:05');
 
 -- --------------------------------------------------------
 
@@ -426,8 +429,7 @@ INSERT INTO `tblaccounts` (`user_id`, `unique_id`, `email`, `password`, `img`, `
 (47, 939514278, 'vardump07@gmail.com', 'ceb232a461e38a2ed16aae9ab58671a8', 'Mabuhay_Logo.png', 'Offline now', 'user', 'Pending', '', 0),
 (48, 809272943, 'vardump0007@gmail.com', '202cb962ac59075b964b07152d234b70', 'Mabuhay_Logo.png', 'Offline now', 'user', 'Pending', '', 0),
 (50, 317446215, 'prnccrvnts@gmail.com', '9ea90f1142ff0bdf6b410d0a6b23aacb', 'Mabuhay_Logo.png', 'Offline now', 'user', 'Pending', 'Verified', 0),
-(57, 952944985, 'tnjrdlcr@gmail.com', 'c87a4d79950c2a243197daa635ed7e5f', 'default_Image.png', 'Offline now', 'user', 'Approved', 'Verified', 0),
-(58, 601042056, 'tnjrdlcrz@gmail.com', 'c87a4d79950c2a243197daa635ed7e5f', 'default_Image.png', 'Offline now', 'user', 'Pending', '', 0);
+(73, 1133085945, 'tnjrdlcrz@gmail.com', 'c87a4d79950c2a243197daa635ed7e5f', 'default_Image.png', 'Offline now', 'user', 'Pending', 'Verified', 0);
 
 -- --------------------------------------------------------
 
@@ -446,6 +448,7 @@ CREATE TABLE `tblresident` (
   `sex` varchar(20) NOT NULL,
   `age` int(11) NOT NULL,
   `pwd` varchar(255) NOT NULL,
+  `pwd_id` varchar(255) NOT NULL,
   `birthday` varchar(50) NOT NULL,
   `birthplace` varchar(150) NOT NULL,
   `citizenship` varchar(50) NOT NULL,
@@ -463,34 +466,33 @@ CREATE TABLE `tblresident` (
 -- Dumping data for table `tblresident`
 --
 
-INSERT INTO `tblresident` (`user_id`, `unique_id`, `access`, `first_name`, `middle_name`, `last_name`, `suffix`, `sex`, `age`, `pwd`, `birthday`, `birthplace`, `citizenship`, `block`, `lot`, `street_name`, `phone_number`, `ec_name`, `ec_phone_num`, `ec_relship`, `ec_address`) VALUES
-(3, '1589571584', 'Approved', 'Welacakes', 'Magsino', 'Cervantes', 'N/A', 'Female', 20, 'No', 'N/A', '', '', 3, 18, 'N/A', 9434763913, 'Prince Jefferson P. Cervantes', 9666676033, 'N/A', 'BLK 9 LOT 18 Ville de Palme Brgy. Santiago, General Trias, Cavite'),
-(4, '1357825271', 'Rejected', 'Wela', 'Aguilar', 'Magsino', '', 'Male', 21, '', '', '', '', 3, 23, '', 9434763913, 'Arlenin', 24357345745, 'Secret', 'Blk 9 Lot 18 Anahaw St.'),
-(19, '112466338', 'Approved', 'Prins', 'P', 'Cervs', '', 'Male', 23, '', '', '', '', 4, 3, '', 123, '', 0, '', ''),
-(21, '1017731196', 'Approved', 'bago', 'bago', 'bago', '', 'Rather not say', 123, '', '', '', '', 1, 2, '', 123123, '', 0, '', ''),
-(23, '1593518745', 'Pending', 'eae', 'eaeaea', 'eaeaawea', 'eaweae', 'male', 3, 'Yes', '2021-02-02', '', '', 2132, 131, 'aweaeaweaea', 1312131313131, '', 0, '', ''),
-(24, '1469021725', 'Pending', 'adwdad', 'daddaddwd', 'adadadad', 'eawdadadasd', 'male', 5, 'Yes', '2019-02-18', '', '', 123, 123, 'dadadadad', 31231331, '', 0, '', ''),
-(25, '1433443368', 'Pending', 'sakses', 'qew', 'qweqwe', 'qwe', 'female', 8, 'Yes', '2016-02-18', '', '', 213, 1231, 'wdadsdasd', 12131313, '', 0, '', ''),
-(26, '1095492376', 'Pending', 'eaaeaaea', 'aaeaaea', 'aeaeaaea', 'awe', 'male', 12, 'No', '2012-02-25', '', '', 132, 132, 'aweaeaa', 131213312, '', 0, '', ''),
-(27, '911851766', 'Pending', 'waedsdadadadwadadada', 'ddadadadada', 'dadadadadada', 'dadadaddada', 'male', 8, 'No', '2016-02-18', '', '', 123, 123, 'awdadadadasdada', 1231313123, '', 0, '', ''),
-(28, '509858760', 'Pending', 'New ', 'Bagong', 'Account', 'Wala', 'male', 29, 'Yes', '1995-02-20', '', '', 1, 1, 'Test', 123123123, '', 0, '', ''),
-(30, '1581632830', 'Approved', 'Wela', 'A', 'Magsino', 'N/A', 'female', 21, 'No', '2003-05-21', '', '', 9, 18, 'Mabolo', 9123412313, '', 0, '', ''),
-(31, '821155870', 'Approved', 'Jhonrenz', '', 'Berbano', '', 'Male', 1, 'Yes', '2023-07-24', '', '', 1, 1, '', 2131231, '', 0, '', ''),
-(32, '776313154', 'Approved', 'Patrick', 'B', 'Bayona', '', 'Male', 4, 'Yes', '2020-01-20', '', '', 2, 2, '', 12313133, '', 0, '', ''),
-(33, '1590469844', 'Approved', 'Paolo', 'M', 'Murillo', '', 'Male', 21, 'Yes', '2003-01-11', '', '', 3, 3, '', 123123123, '', 0, '', ''),
-(34, '1308040957', 'Approved', 'John', '', 'Doe', '', 'Male', 1, 'No', '2023-06-14', '', '', 4, 4, '', 1231231231, '', 0, '', ''),
-(35, '931588206', 'Approved', 'Jane', '', 'Doe', '', 'Female', 3, 'Yes', '2021-08-20', '', '', 5, 5, '', 112312313, '', 0, '', ''),
-(36, '662462528', 'Approved', 'Hev', '', 'Alvin', '', 'Male', 4, 'No', '2020-02-24', '', '', 6, 6, '', 1231312313, '', 0, '', ''),
-(37, '499733408', 'Approved', 'Ethan', '', 'Winters', '', 'Male', 7, 'Yes', '2017-02-24', '', '', 1, 1, '', 131132123, '', 0, '', ''),
-(38, '1434008263', 'Approved', 'Rose', '', 'Winters', '', 'Female', 3, 'No', '2021-02-25', '', '', 2, 2, '', 123123123, '', 0, '', ''),
-(39, '1195874011', 'Approved', 'Mia', '', 'Winters', '', 'Female', 5, 'Yes', '2019-03-01', '', '', 6, 6, 'Mold', 312313132313, '', 0, '', ''),
-(40, '724357114', 'Approved', 'N/A', 'N/A', 'N/A', 'N/A', 'Preferred not to say', 1, 'No', '2023-11-18', '', '', 0, 0, 'N/A', 0, '', 0, '', ''),
-(41, '916555761', 'Approved', 'Tanjiro', '', 'Dela Cruz', '', 'Male', 32, 'No', '1992-05-20', '', '', 78, 10, '', 909090909, '', 0, '', ''),
-(49, '939514278', 'Pending', '1', '1', '1', '', 'Male', 34, 'No', '1990-03-14', '', '', 1, 1, '', 132312313131313, '', 0, '', ''),
-(50, '809272943', 'Pending', '1', '1', '1', '', 'Male', 26, 'No', '1998-02-10', '', '', 1, 1, '', 12331123123123121, '', 0, '', ''),
-(52, '317446215', 'Pending', 'Prince', '1', '1', '1', 'Male', 43, 'No', '1981-11-25', '', '', 1232, 1, '', 111311, '', 0, '', ''),
-(59, '952944985', 'Approved', 'Prince', 'Jefferson P.', 'Cervantes', '', 'Male', 2005, 'Wela123!', '2005-07-06', '', '', 101, 20, 'BLK 9 LOT 18 Ville de Palme Brgy. Santiago, General Trias, Cavite', 634636564646, '', 0, '', ''),
-(60, '601042056', 'Pending', 'Flow', 'fgj', 'G', '', 'Male', 1993, 'Wela123!', '1993-11-09', '', '', 9, 9, '', 636445646456, '', 0, '', '');
+INSERT INTO `tblresident` (`user_id`, `unique_id`, `access`, `first_name`, `middle_name`, `last_name`, `suffix`, `sex`, `age`, `pwd`, `pwd_id`, `birthday`, `birthplace`, `citizenship`, `block`, `lot`, `street_name`, `phone_number`, `ec_name`, `ec_phone_num`, `ec_relship`, `ec_address`) VALUES
+(3, '1589571584', 'Approved', 'Welacakes', 'Magsino', 'Cervantes', 'N/A', 'Female', 20, 'No', '', 'N/A', '', '', 3, 18, 'N/A', 9434763913, 'Prince Jefferson P. Cervantes', 9666676033, 'N/A', 'BLK 9 LOT 18 Ville de Palme Brgy. Santiago, General Trias, Cavite'),
+(4, '1357825271', 'Rejected', 'Wela', 'Aguilar', 'Magsino', '', 'Male', 21, '', '', '', '', '', 3, 23, '', 9434763913, 'Arlenin', 24357345745, 'Secret', 'Blk 9 Lot 18 Anahaw St.'),
+(19, '112466338', 'Approved', 'Prins', 'P', 'Cervs', '', 'Male', 23, '', '', '', '', '', 4, 3, '', 123, '', 0, '', ''),
+(21, '1017731196', 'Approved', 'bago', 'bago', 'bago', '', 'Rather not say', 123, '', '', '', '', '', 1, 2, '', 123123, '', 0, '', ''),
+(23, '1593518745', 'Pending', 'eae', 'eaeaea', 'eaeaawea', 'eaweae', 'male', 3, 'Yes', '', '2021-02-02', '', '', 2132, 131, 'aweaeaweaea', 1312131313131, '', 0, '', ''),
+(24, '1469021725', 'Pending', 'adwdad', 'daddaddwd', 'adadadad', 'eawdadadasd', 'male', 5, 'Yes', '', '2019-02-18', '', '', 123, 123, 'dadadadad', 31231331, '', 0, '', ''),
+(25, '1433443368', 'Pending', 'sakses', 'qew', 'qweqwe', 'qwe', 'female', 8, 'Yes', '', '2016-02-18', '', '', 213, 1231, 'wdadsdasd', 12131313, '', 0, '', ''),
+(26, '1095492376', 'Pending', 'eaaeaaea', 'aaeaaea', 'aeaeaaea', 'awe', 'male', 12, 'No', '', '2012-02-25', '', '', 132, 132, 'aweaeaa', 131213312, '', 0, '', ''),
+(27, '911851766', 'Pending', 'waedsdadadadwadadada', 'ddadadadada', 'dadadadadada', 'dadadaddada', 'male', 8, 'No', '', '2016-02-18', '', '', 123, 123, 'awdadadadasdada', 1231313123, '', 0, '', ''),
+(28, '509858760', 'Pending', 'New ', 'Bagong', 'Account', 'Wala', 'male', 29, 'Yes', '', '1995-02-20', '', '', 1, 1, 'Test', 123123123, '', 0, '', ''),
+(30, '1581632830', 'Approved', 'Wela', 'A', 'Magsino', 'N/A', 'female', 21, 'No', '', '2003-05-21', '', '', 9, 18, 'Mabolo', 9123412313, '', 0, '', ''),
+(31, '821155870', 'Approved', 'Jhonrenz', '', 'Berbano', '', 'Male', 1, 'Yes', '', '2023-07-24', '', '', 1, 1, '', 2131231, '', 0, '', ''),
+(32, '776313154', 'Approved', 'Patrick', 'B', 'Bayona', '', 'Male', 4, 'Yes', '', '2020-01-20', '', '', 2, 2, '', 12313133, '', 0, '', ''),
+(33, '1590469844', 'Approved', 'Paolo', 'M', 'Murillo', '', 'Male', 21, 'Yes', '', '2003-01-11', '', '', 3, 3, '', 123123123, '', 0, '', ''),
+(34, '1308040957', 'Approved', 'John', '', 'Doe', '', 'Male', 1, 'No', '', '2023-06-14', '', '', 4, 4, '', 1231231231, '', 0, '', ''),
+(35, '931588206', 'Approved', 'Jane', '', 'Doe', '', 'Female', 3, 'Yes', '', '2021-08-20', '', '', 5, 5, '', 112312313, '', 0, '', ''),
+(36, '662462528', 'Approved', 'Hev', '', 'Alvin', '', 'Male', 4, 'No', '', '2020-02-24', '', '', 6, 6, '', 1231312313, '', 0, '', ''),
+(37, '499733408', 'Approved', 'Ethan', '', 'Winters', '', 'Male', 7, 'Yes', '', '2017-02-24', '', '', 1, 1, '', 131132123, '', 0, '', ''),
+(38, '1434008263', 'Approved', 'Rose', '', 'Winters', '', 'Female', 3, 'No', '', '2021-02-25', '', '', 2, 2, '', 123123123, '', 0, '', ''),
+(39, '1195874011', 'Approved', 'Mia', '', 'Winters', '', 'Female', 5, 'Yes', '', '2019-03-01', '', '', 6, 6, 'Mold', 312313132313, '', 0, '', ''),
+(40, '724357114', 'Approved', 'N/A', 'N/A', 'N/A', 'N/A', 'Preferred not to say', 1, 'No', '', '2023-11-18', '', '', 0, 0, 'N/A', 0, '', 0, '', ''),
+(41, '916555761', 'Approved', 'Tanjiro', '', 'Dela Cruz', '', 'Male', 32, 'No', '', '1992-05-20', '', '', 78, 10, '', 909090909, '', 0, '', ''),
+(49, '939514278', 'Pending', '1', '1', '1', '', 'Male', 34, 'No', '', '1990-03-14', '', '', 1, 1, '', 132312313131313, '', 0, '', ''),
+(50, '809272943', 'Pending', '1', '1', '1', '', 'Male', 26, 'No', '', '1998-02-10', '', '', 1, 1, '', 12331123123123121, '', 0, '', ''),
+(52, '317446215', 'Pending', 'Prince', '1', '1', '1', 'Male', 43, 'No', '', '1981-11-25', '', '', 1232, 1, '', 111311, '', 0, '', ''),
+(75, '1133085945', 'Pending', 'Prince', '', 'Cervantes', '', 'Male', 42, 'No', 'N/A', '1982-07-01', '', '', 1, 20, '', 12411511115, '', 0, '', '');
 
 -- --------------------------------------------------------
 
@@ -517,6 +519,7 @@ INSERT INTO `tbl_sessions` (`session_id`, `unique_id`, `last_activity`, `device_
 ('56htq7vh3dcstor8pubar342gh', 1581632830, '2024-11-25 07:55:33', '::1', 'inactive'),
 ('77u9luim9024hbt0k2k0oigjci', 1581632830, '2024-11-27 21:28:46', '::1', 'inactive'),
 ('806gfh10fgskgvdcr4bm69855o', 1589571584, '2024-11-26 02:26:15', '::1', 'inactive'),
+('aednmgjgvt25veqqc3sjfdkvn6', 1589571584, '2025-01-24 13:58:58', '::1', 'inactive'),
 ('avdlcnc21i5846mk7jg0dhpuoq', 724357114, '2024-11-26 20:12:26', '::1', 'inactive'),
 ('cvgvrrj20ab5uoa9u84i2cgv4f', 1589571584, '2024-12-10 05:31:13', '::1', 'inactive'),
 ('dckfggtj6q9qoothuat1pd9qce', 1589571584, '2024-12-23 09:47:50', '::1', 'inactive'),
@@ -526,6 +529,7 @@ INSERT INTO `tbl_sessions` (`session_id`, `unique_id`, `last_activity`, `device_
 ('hd8hrbllvtejbd453pdvqtd52q', 1589571584, '2024-12-09 16:53:26', '::1', 'inactive'),
 ('icj7dmhl3g0haj32bh1qk08cb3', 1589571584, '2024-11-29 12:09:35', '::1', 'inactive'),
 ('jrsdp4em90angoisbm694npi0b', 1581632830, '2024-11-25 07:57:10', '::1', 'inactive'),
+('k0l000115t4gtiqapaqh3l90h2', 715265493, '2025-02-01 08:18:17', '::1', 'inactive'),
 ('oniu1v844a1a2cgbjoul7sp34k', 1581632830, '2024-12-08 05:35:22', '::1', 'inactive'),
 ('p3g5la4sf4q1j2hdl7q8s92b6o', 1581632830, '2024-12-22 11:29:52', '::1', 'inactive'),
 ('q4bra76vjgujp2lnu7fk4ttc7l', 1589571584, '2025-01-10 17:16:10', '::1', 'inactive'),
@@ -556,7 +560,7 @@ CREATE TABLE `user_votes` (
 --
 
 INSERT INTO `user_votes` (`vote_id`, `unique_id`, `candidate`, `votes`, `status`, `won_date`, `fail_date`, `access`) VALUES
-(74, 776313154, 'Patrick B Bayona', 1, 'Failure', '', '2024-11-28 08:20:02', 'Declared'),
+(74, 776313154, 'Patrick B Bayona', 1, 'Winner', '2025-01-24 23:50:05', '2024-11-28 08:20:02', 'Declared'),
 (75, 1590469844, 'Paolo M Murillo', 2, 'Winner', '2024-11-28 08:20:02', '', 'Declared'),
 (76, 821155870, 'Jhonrenz  Berbano', 2, 'Winner', '2024-11-28 08:20:02', '', 'Declared'),
 (77, 1308040957, 'John  Doe', 2, 'Winner', '2024-11-28 08:20:02', '', 'Declared'),
@@ -565,7 +569,17 @@ INSERT INTO `user_votes` (`vote_id`, `unique_id`, `candidate`, `votes`, `status`
 (80, 1581632830, 'Wela A Magsino', 1, 'Winner', '2024-11-28 08:20:02', '', 'Declared'),
 (81, 499733408, 'Ethan  Winters', 3, 'Winner', '2024-11-28 08:20:02', '', 'Declared'),
 (82, 1434008263, 'Rose  Winters', 3, 'Winner', '2024-11-28 08:20:02', '', 'Declared'),
-(83, 1195874011, 'Mia  Winters', 3, 'Winner', '2024-11-28 08:20:02', '', 'Declared');
+(83, 1195874011, 'Mia  Winters', 3, 'Winner', '2024-11-28 08:20:02', '', 'Declared'),
+(84, 821155870, 'Jhonrenz  Berbano', 1, 'Winner', '2025-01-24 23:50:05', '', 'Declared'),
+(85, 1308040957, 'John  Doe', 1, 'Winner', '2025-01-24 23:50:05', '', 'Declared'),
+(86, 931588206, 'Jane  Doe', 1, 'Winner', '2025-01-24 23:50:05', '', 'Declared'),
+(87, 776313154, 'Patrick B Bayona', 1, 'Winner', '2025-01-24 23:50:05', '', 'Declared'),
+(88, 1590469844, 'Paolo M Murillo', 1, 'Winner', '2025-01-24 23:50:05', '', 'Declared'),
+(90, 499733408, 'Ethan  Winters', 1, 'Winner', '2025-01-24 23:50:05', '', 'Declared'),
+(91, 1434008263, 'Rose  Winters', 1, 'Winner', '2025-01-24 23:50:05', '', 'Declared'),
+(92, 1195874011, 'Mia  Winters', 1, 'Winner', '2025-01-24 23:50:05', '', 'Declared'),
+(93, 662462528, 'Hev  Alvin', 1, 'Winner', '2025-01-24 23:50:05', '', 'Declared'),
+(94, 1486934929, 'Prince  Cervantes', 0, 'Failure', '', '2025-01-24 23:50:05', 'Declared');
 
 -- --------------------------------------------------------
 
@@ -618,7 +632,7 @@ CREATE TABLE `voting` (
 --
 
 INSERT INTO `voting` (`vote_id`, `unique_id`, `candidate_name`, `img`, `position`, `add_date`, `status`, `won_date`, `fail_date`, `access`, `status2`) VALUES
-(95, 776313154, 'Patrick B Bayona', 'Mabuhay_Logo.png', '', '2024-11-28 07:15:38', 'Failure', '', '2024-11-28 08:20:02', 'Declared', ''),
+(95, 776313154, 'Patrick B Bayona', 'meow.jpg', 'Secretary', '2024-11-28 07:15:38', 'Failure', '', '2024-11-28 08:20:02', 'Declared', ''),
 (96, 1590469844, 'Paolo M Murillo', 'default_Image.png', 'Halimaw Ma inlove', '2024-11-28 07:15:40', 'Winner', '2024-11-28 08:20:02', '', 'Declared', ''),
 (97, 821155870, 'Jhonrenz  Berbano', 'default_Image.png', 'President', '2024-11-28 07:15:54', 'Winner', '2024-11-28 08:20:02', '', 'Declared', ''),
 (98, 1308040957, 'John  Doe', 'Mabuhay_Logo.png', '', '2024-11-28 07:15:56', 'Winner', '2024-11-28 08:20:02', '', 'Declared', ''),
@@ -627,7 +641,17 @@ INSERT INTO `voting` (`vote_id`, `unique_id`, `candidate_name`, `img`, `position
 (101, 1581632830, 'Wela A Magsino', 'Mabuhay_Logo.png', '', '2024-11-28 07:16:27', 'Winner', '2024-11-28 08:20:02', '', 'Declared', ''),
 (102, 499733408, 'Ethan  Winters', 'Mabuhay_Logo.png', '', '2024-11-28 07:16:36', 'Winner', '2024-11-28 08:20:02', '', 'Declared', ''),
 (103, 1434008263, 'Rose  Winters', 'Mabuhay_Logo.png', '', '2024-11-28 07:16:37', 'Winner', '2024-11-28 08:20:02', '', 'Declared', ''),
-(104, 1195874011, 'Mia  Winters', 'Mabuhay_Logo.png', '', '2024-11-28 07:16:39', 'Winner', '2024-11-28 08:20:02', '', 'Declared', '');
+(104, 1195874011, 'Mia  Winters', 'Mabuhay_Logo.png', '', '2024-11-28 07:16:39', 'Winner', '2024-11-28 08:20:02', '', 'Declared', ''),
+(105, 821155870, 'Jhonrenz  Berbano', 'Mabuhay_Logo.png', '', '2025-01-24 23:46:31', 'Winner', '2024-11-28 08:20:02', '', 'Declared', ''),
+(106, 1308040957, 'John  Doe', 'Mabuhay_Logo.png', '', '2025-01-24 23:46:34', 'Winner', '2024-11-28 08:20:02', '', 'Declared', ''),
+(107, 931588206, 'Jane  Doe', 'Mabuhay_Logo.png', '', '2025-01-24 23:46:36', 'Winner', '2024-11-28 08:20:02', '', 'Declared', ''),
+(108, 776313154, 'Patrick B Bayona', 'meow.jpg', 'Secretary', '2025-01-24 23:46:41', 'Winner', '2025-01-24 23:50:05', '', 'Declared', ''),
+(109, 1590469844, 'Paolo M Murillo', 'Mabuhay_Logo.png', '', '2025-01-24 23:46:44', 'Winner', '2024-11-28 08:20:02', '', 'Declared', ''),
+(111, 499733408, 'Ethan  Winters', 'Mabuhay_Logo.png', '', '2025-01-24 23:46:55', 'Winner', '2024-11-28 08:20:02', '', 'Declared', ''),
+(112, 1434008263, 'Rose  Winters', 'Mabuhay_Logo.png', '', '2025-01-24 23:46:57', 'Winner', '2024-11-28 08:20:02', '', 'Declared', ''),
+(113, 1195874011, 'Mia  Winters', 'Mabuhay_Logo.png', '', '2025-01-24 23:46:58', 'Winner', '2024-11-28 08:20:02', '', 'Declared', ''),
+(114, 662462528, 'Hev  Alvin', 'Mabuhay_Logo.png', '', '2025-01-24 23:47:16', 'Winner', '2025-01-24 23:50:05', '', 'Declared', ''),
+(115, 1486934929, 'Prince  Cervantes', 'default_Image.png', '', '2025-01-24 23:47:43', 'Failure', '', '2025-01-24 23:50:05', 'Declared', '');
 
 -- --------------------------------------------------------
 
@@ -650,7 +674,8 @@ CREATE TABLE `voting_countdown` (
 
 INSERT INTO `voting_countdown` (`countdown_id`, `start_id`, `start_time`, `end_id`, `end_time`, `voting_status`) VALUES
 (2, 0, '2024-09-08 10:00:00', 0, '2024-09-08 18:00:00', 'VotingEnded'),
-(120, 8712, '2024-11-28 08:19:22', 8712, '2024-11-28 08:20:00', 'VotingEnded');
+(120, 8712, '2024-11-28 08:19:22', 8712, '2024-11-28 08:20:00', 'VotingEnded'),
+(123, 6891, '2025-01-24 23:48:48', 6891, '2025-01-24 23:50:00', 'VotingEnded');
 
 -- --------------------------------------------------------
 
@@ -680,7 +705,8 @@ CREATE TABLE `voting_history` (
 
 INSERT INTO `voting_history` (`vote_id`, `unique_id`, `candidate1`, `candidate2`, `candidate3`, `candidate4`, `candidate5`, `candidate6`, `candidate7`, `candidate8`, `candidate9`, `vote_status`, `vote_date`) VALUES
 (57, 1581632830, 1195874011, 1434008263, 499733408, 916555761, 0, 0, 0, 0, 0, 'UnderVote', '2024-11-28 07:56:19'),
-(58, 776313154, 1195874011, 1434008263, 499733408, 1581632830, 821155870, 1308040957, 931588206, 916555761, 1590469844, 'Voted', '2024-11-28 07:56:46');
+(58, 776313154, 1195874011, 1434008263, 499733408, 1581632830, 821155870, 1308040957, 931588206, 916555761, 1590469844, 'Voted', '2024-11-28 07:56:46'),
+(59, 1486934929, 662462528, 1195874011, 1434008263, 499733408, 1308040957, 931588206, 1590469844, 821155870, 776313154, 'Voted', '2025-01-24 23:49:36');
 
 --
 -- Indexes for dumped tables
@@ -797,7 +823,7 @@ ALTER TABLE `announcements`
 -- AUTO_INCREMENT for table `complaints`
 --
 ALTER TABLE `complaints`
-  MODIFY `complaint_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `complaint_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT for table `forms`
@@ -809,7 +835,7 @@ ALTER TABLE `forms`
 -- AUTO_INCREMENT for table `messages`
 --
 ALTER TABLE `messages`
-  MODIFY `msg_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=98;
+  MODIFY `msg_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100;
 
 --
 -- AUTO_INCREMENT for table `officials`
@@ -839,19 +865,19 @@ ALTER TABLE `payment_history`
 -- AUTO_INCREMENT for table `tblaccounts`
 --
 ALTER TABLE `tblaccounts`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
 
 --
 -- AUTO_INCREMENT for table `tblresident`
 --
 ALTER TABLE `tblresident`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
 
 --
 -- AUTO_INCREMENT for table `user_votes`
 --
 ALTER TABLE `user_votes`
-  MODIFY `vote_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
+  MODIFY `vote_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=95;
 
 --
 -- AUTO_INCREMENT for table `verified_email`
@@ -863,19 +889,19 @@ ALTER TABLE `verified_email`
 -- AUTO_INCREMENT for table `voting`
 --
 ALTER TABLE `voting`
-  MODIFY `vote_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=105;
+  MODIFY `vote_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=116;
 
 --
 -- AUTO_INCREMENT for table `voting_countdown`
 --
 ALTER TABLE `voting_countdown`
-  MODIFY `countdown_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=123;
+  MODIFY `countdown_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=124;
 
 --
 -- AUTO_INCREMENT for table `voting_history`
 --
 ALTER TABLE `voting_history`
-  MODIFY `vote_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
+  MODIFY `vote_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

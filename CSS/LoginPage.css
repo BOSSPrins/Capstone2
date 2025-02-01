@@ -629,7 +629,7 @@ input[type="password"]::-ms-reveal {
 }
 
 /* DESIGN PARA SA IROR AT SA SAKSES */
-.iror{
+/* .iror{
     color: #721c24;
     padding: 8px 10px;
     text-align: center;
@@ -652,15 +652,15 @@ input[type="password"]::-ms-reveal {
     display: none;
 }
 .sakses {
-    color: #1c7224; /* Changed text color to a shade of green */
+    color: #1c7224; 
     padding: 8px 10px;
     text-align: center;
     border-radius: 5px;
-    background: #d7f8da; /* Changed background color to a light green */
-    border: 1px solid #c6f5cb; /* Changed border color to a light green */
+    background: #d7f8da; 
+    border: 1px solid #c6f5cb; 
     margin-bottom: 10px;
     display: none;
-}
+} */
 
 /* ETO YUNG SA PAGTAGO NG MGA FORM */
 .PersonalDetails {

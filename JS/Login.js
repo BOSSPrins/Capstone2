@@ -148,57 +148,152 @@ if (activeLink) {
 });
 
 
+function showSuccessNotification(message) {
+  const successNotifications = document.querySelector('.successNotifications');
+
+  const notification = document.createElement('div');
+  notification.classList.add('successNotification');
+
+  // Create the notification header with "Success" text and a close button (X)
+  const notificationHeader = document.createElement('div');
+  notificationHeader.classList.add('saksesnotificationHeader');
+  notificationHeader.innerHTML = "Success";
+  
+  const closeButton = document.createElement('span');
+  closeButton.classList.add('saksescloseButton');
+  closeButton.innerHTML = "&times;"; // "X" symbol for close
+
+  // Append close button to the header
+  notificationHeader.appendChild(closeButton);
+
+  // Append header and message to the notification
+  notification.appendChild(notificationHeader);
+  const messageContainer = document.createElement('div');
+  messageContainer.classList.add('saksesmessageContent');
+  messageContainer.innerHTML = message;
+  notification.appendChild(messageContainer);
+
+  // Append the new success notification to the container
+  successNotifications.appendChild(notification);
+
+  // Close notification on clicking the "X" button
+  closeButton.addEventListener('click', () => {
+      notification.classList.add('fadeOut');
+      setTimeout(() => {
+          notification.remove();
+      }, 1000); // Wait for the fade-out animation to complete
+  });
+
+  // After 3 seconds, fade out and remove the notification
+  setTimeout(() => {
+      notification.classList.add('fadeOut');
+      setTimeout(() => {
+          notification.remove();
+      }, 1000); // Wait for the fade-out animation to complete
+  }, 5000); // Wait for 5 seconds before starting the fade-out
+}
+
+// Function to show error notifications
+function showErrorNotification(message) {
+  const errorNotifications = document.querySelector('.errorNotifications');
+
+  const notification = document.createElement('div');
+  notification.classList.add('errorNotification');
+
+  // Create the notification header with "Notification" text and a close button (X)
+  const notificationHeader = document.createElement('div');
+  notificationHeader.classList.add('notificationHeader');
+  notificationHeader.innerHTML = "Notification";
+  
+  const closeButton = document.createElement('span');
+  closeButton.classList.add('closeButton');
+  closeButton.innerHTML = "&times;"; // "X" symbol for close
+
+  // Append close button to the header
+  notificationHeader.appendChild(closeButton);
+
+  // Append header and message to the notification
+  notification.appendChild(notificationHeader);
+  const messageContainer = document.createElement('div');
+  messageContainer.classList.add('messageContent');
+  messageContainer.innerHTML = message;
+  notification.appendChild(messageContainer);
+
+  // Append the new error notification to the container
+  errorNotifications.appendChild(notification);
+
+  // Close notification on clicking the "X" button
+  closeButton.addEventListener('click', () => {
+      notification.classList.add('fadeOut');
+      setTimeout(() => {
+          notification.remove();
+      }, 1000); // Wait for the fade-out animation to complete
+  });
+
+  // After 3 seconds, fade out and remove the notification
+  setTimeout(() => {
+      notification.classList.add('fadeOut');
+      setTimeout(() => {
+          notification.remove();
+      }, 1000); // Wait for the fade-out animation to complete
+  }, 5000); // Wait for 5 seconds before starting the fade-out
+}
+
 //FUNCTION NA PARA SA LOGIN
 document.addEventListener("DOMContentLoaded", () => {
+  
+  // const errorText = form.querySelector(".iror");
+  // const saksesText = form.querySelector(".sakses");
   const form = document.querySelector(".lagin");
-  const errorText = form.querySelector(".iror");
-  const saksesText = form.querySelector(".sakses");
   const LoginBtn = form.querySelector(".laginbtn");
+  const loadingIndicator = document.getElementById("loading-indicator");
 
   form.onsubmit = (e) => {
-    // Prevent the form from submitting normally
-    e.preventDefault();
+    e.preventDefault(); // Prevent default form submission
   };
 
   if (LoginBtn) {
     LoginBtn.onclick = () => {
       let xhr = new XMLHttpRequest();
       xhr.open("POST", "PHPBackend/Login.php", true);
+      xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest"); // Optional: Helps PHP recognize an AJAX request
+
+      // Show the loading indicator when the request starts
+      loadingIndicator.style.setProperty("display", "flex", "important");
+
       xhr.onload = () => {
-        if (xhr.readyState === XMLHttpRequest.DONE) {
-          if (xhr.status === 200) {
-            let data = xhr.response;
-            console.log(data);
 
-            if (data === "admin") {
-              window.location.href = "DashBoard.php";
-            } else if (data === "user") {
-              window.location.href = "UserVoting.php";
-            } else if (data === "barangay") {
-              window.location.href = "BarangayTable.php";
-            } else if (data === "Please wait for confirmation") {
-              // Display success message
-              saksesText.textContent = data;
-              saksesText.style.display = "block";
-              console.log(data);
-              
-              // Hide success text after 5 seconds
-              setTimeout(() => {
-                  saksesText.style.display = "none";
-              }, 5000);           
+         // Hide loading indicator after getting response (success or error)
+         loadingIndicator.style.setProperty("display", "none", "important");
 
+        if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+          try {
+            let response = JSON.parse(xhr.responseText); // Parse JSON response
+
+            if (response.status === "success") {
+              if (response.message === "admin") {
+                window.location.href = "DashBoard.php";
+              } else if (response.message === "user") {
+                window.location.href = "UserVoting.php";
+              } else if (response.message === "barangay") {
+                window.location.href = "BarangayTable.php";
+              } else {
+                showSuccessNotification(response.message);
+              }
             } else {
-              errorText.textContent = data;
-              errorText.style.display = "block";
-              console.log(data);
-
-
-              setTimeout(() => {
-                errorText.style.display = "none";
-            }, 3000);
+              showErrorNotification(response.message);
             }
+          } catch (error) {
+            console.error("Invalid JSON response:", xhr.responseText);
+            showErrorNotification("An unexpected error occurred.");
           }
         }
+      };
+
+      // Handle errors (e.g., network failure)
+      xhr.onerror = () => {
+        loadingIndicator.style.setProperty("display", "none", "important");
+        showErrorNotification("A network error occurred. Please try again.");
       };
 
       let formData = new FormData(form);
@@ -206,3 +301,4 @@ document.addEventListener("DOMContentLoaded", () => {
     };
   }
 });
+
