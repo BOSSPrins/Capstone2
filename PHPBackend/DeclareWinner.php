@@ -141,7 +141,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             ORDER BY votes DESC
                             LIMIT 9
                          ) AS TopCandidates
-                     ) AND (won_date = '' OR won_date IS NULL)";
+                     ) AND (won_date IS NULL OR won_date = '')";
     
             // Prepare and bind the timestamp value
             $stmt1 = $conn->prepare($sql1);
@@ -151,28 +151,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
             $stmt1->close();
     
-            // Second update query for winners in the voting table where won_date is empty or NULL
             $sql2 = "UPDATE voting v
                     JOIN user_votes uv ON v.unique_id = uv.unique_id
-                    SET v.status = uv.status, v.won_date = uv.won_date, v.access = CASE 
-                        WHEN v.access != 'Declared' THEN 'Declared' 
-                        ELSE v.access 
-                    END
-                    WHERE uv.status = 'Winner' AND (v.access != 'Declared' OR v.access IS NULL)";
+                    SET v.status = uv.status, 
+                        v.won_date = uv.won_date, 
+                        v.access = uv.access,
+                        v.votes = uv.votes
+                    WHERE uv.status = 'Winner'
+                    AND (v.access IS NULL OR v.access = '')
+                    AND uv.won_date >= (SELECT MAX(won_date) FROM user_votes WHERE status = 'Winner') - INTERVAL 1 SECOND;
+                    "; 
 
-    
             $stmt2 = $conn->prepare($sql2);
-
             if (!$stmt2->execute()) {
-                throw new Exception("Error updating winners in voting: " . $stmt2->error);
+            throw new Exception("Error updating winners in voting: " . $stmt2->error);
             }
             $stmt2->close();
     
-            // Update all candidates where access is empty to "Failure" in user_votes
+            // Step 3: Update failures in user_votes **ONLY IF THEY HAVEN’T FAILED BEFORE**
             $sql3 = "UPDATE user_votes
-                     SET status = 'Failure', access = 'Declared', fail_date = ?
-                     WHERE access IS NULL OR access = ''";
-    
+            SET status = 'Failure', access = 'Declared', fail_date = ?
+            WHERE (access IS NULL OR access = '') 
+            AND (fail_date IS NULL OR fail_date = '')";  // Prevents modifying past failures
+
             $stmt3 = $conn->prepare($sql3);
             $stmt3->bind_param("s", $timestamp);
             if (!$stmt3->execute()) {
@@ -180,20 +181,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
             $stmt3->close();
     
-            // Update all candidates where access is empty to "Failure" in voting
             $sql4 = "UPDATE voting v
                     JOIN user_votes uv ON v.unique_id = uv.unique_id
-                    SET v.status = uv.status, v.fail_date = uv.fail_date, v.access = CASE 
-                        WHEN v.access != 'Declared' THEN 'Declared' 
-                        ELSE v.access 
-                    END
-                    WHERE uv.status = 'Failure' AND (v.access != 'Declared' OR v.access IS NULL)";
+                    SET v.status = uv.status, 
+                        v.fail_date = uv.fail_date, 
+                        v.access = uv.access,
+                        v.votes = uv.votes
+                    WHERE uv.status = 'Failure'
+                    AND (v.access IS NULL OR v.access = '')
+                    AND uv.fail_date >= (SELECT MAX(fail_date) FROM user_votes WHERE status = 'Failure') - INTERVAL 1 SECOND;
+                    ";
 
-    
             $stmt4 = $conn->prepare($sql4);
-            
             if (!$stmt4->execute()) {
-                throw new Exception("Error updating failures in voting: " . $stmt4->error);
+            throw new Exception("Error updating failures in voting: " . $stmt4->error);
             }
             $stmt4->close();
     
@@ -282,12 +283,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             
             if ($row['voting_status'] === 'VotingEnded') {
                 // Query to fetch exactly 9 candidates marked as winners
-                $winners_sql = "SELECT candidate_name, img, won_date, position
-                                FROM voting 
-                                WHERE status = 'Winner' 
-                                AND status2 != 'Deleted'
-                                ORDER BY won_date DESC 
+                $winners_sql = "SELECT v.unique_id, v.candidate_name, v.img, v.won_date, v.position, v.votes
+                                FROM voting v
+                                WHERE v.status = 'Winner'
+                                AND v.status2 != 'Deleted'
+                                GROUP BY v.unique_id, v.candidate_name, v.img, v.won_date, v.position, v.votes
+                                ORDER BY v.won_date DESC
                                 LIMIT 9";
+
                 $winners_result = $conn->query($winners_sql);
                 $winners = [];
     
@@ -313,10 +316,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $pictures_dir = 'Pictures/';
 
-        $sql = "SELECT candidate_name, img, won_date 
+        $sql = "SELECT DISTINCT candidate_name, img, won_date 
                 FROM voting 
                 WHERE status = 'Winner' 
-                ORDER BY won_date DESC";
+                ORDER BY won_date DESC
+                LIMIT 9;
+                ";
         
         if ($result = $conn->query($sql)) {
             $winners = [];

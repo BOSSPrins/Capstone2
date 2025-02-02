@@ -470,6 +470,7 @@ function fetchOverlayMessage() {
 
             if (response.success && response.status === 'VotingEnded') {
                 console.log("Eto yung status:", response.success);
+                console.log("fetchWinners response:", data);
 
                 // Hide voting container and show overlay
                 var voteContainer = document.getElementById('FirstVotingContainer');
@@ -486,6 +487,8 @@ function fetchOverlayMessage() {
                     setTimeout(fetchOverlayMessage, 1000); // Retry after 1 second
                     return; // Stop further execution for this attempt
                 }
+                console.log("Winners received from server:", response.winners);
+
 
                 // Populate the overlay with winners
                 var overlayContent = overlay.querySelector('.TanginangOverlay');
@@ -497,18 +500,25 @@ function fetchOverlayMessage() {
 
                     response.winners.forEach(function(winner) {
                         // Check if position is empty and set it accordingly
-                        let positionText = winner.position ? `<p><strong>${winner.position}</strong></p>` : '';
+                        let positionText = winner.position ? `<p><strong>${winner.position}</strong></p>` : '<p><strong>Finalizing Roles</strong></p>';
+
+                        // Display "Recent voting count" if position is empty or "Finalizing Roles"
+                        let voteCountText = (winner.position === '' || winner.position === 'Finalizing Roles') 
+                        ? `<p>Recent voting count: ${winner.votes}</p>` 
+                        : ''; 
                         
                         winnersHtml += `
                             <div class="winner-item">
                                 <img src="Pictures/${winner.img}" alt="${winner.candidate_name}">
                                 <p>${winner.candidate_name}</p>
                                 ${positionText} <!-- Add position on the next line, bold if exists -->
+                                ${voteCountText} <!-- Display vote count only if position is "Finalizing Roles" -->                          
                             </div>
                         `;
                     });
 
                 winnersHtml += `</div>`; // Close the winner list div
+                overlayContent.innerHTML = ""; // Clear before appending new data
                 overlayContent.innerHTML = winnersHtml;
 
                 return;

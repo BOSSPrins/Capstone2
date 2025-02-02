@@ -66,9 +66,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } elseif ($action === 'fetchNewOfficials') {
         $winnerUID = $_POST['winnerUID'] ?? $jsonData['winnerUID'] ?? null;
 
+        // Update the query to fetch only the 9 most recent winners
         $query = "SELECT position, candidate_name, img, unique_id 
-                  FROM voting 
-                  WHERE unique_id = ?";
+          FROM voting 
+          WHERE status = 'Winner' 
+          AND unique_id = ? 
+          ORDER BY won_date DESC 
+          LIMIT 9";  // Limit the result to 9 most recent winners
+
         $stmt = $conn->prepare($query);
         $stmt->bind_param("s", $winnerUID);
         $stmt->execute();

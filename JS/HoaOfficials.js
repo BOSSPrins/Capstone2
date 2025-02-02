@@ -113,7 +113,7 @@ function generateTable(winners) {
         tableBody.appendChild(row);
     } else {
         winners.forEach(winner => {
-            const position = winner.position || "TBA"; // Default to TBA if position is empty
+            const position = winner.position || "Finalizing Roles"; // Default to Finalizing Roles if position is empty
             const imgSrc = winner.img ? `Pictures/${winner.img}` : 'Pictures/default.png';
 
             const row = document.createElement('tr');
@@ -171,7 +171,7 @@ function fetchNewOfficials(winnerUID) {
                     console.log("Data fetched successfully:", response.data);
 
                     // Use response.data instead of data
-                    document.getElementById('HoaPosition').value = response.data.position || "TBA";
+                    document.getElementById('HoaPosition').value = response.data.position || "Finalizing Roles";
                     document.getElementById('HoaName').value = response.data.candidate_name;
                     document.getElementById('HoaUID').value = response.data.unique_id;
 

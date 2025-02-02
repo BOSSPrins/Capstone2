@@ -1214,6 +1214,7 @@ document.addEventListener("DOMContentLoaded", function() {
         // Hide the modal when the close button is clicked
         closeBtn.addEventListener("click", function () {
             modal.style.display = "none"; // Hide the modal
+            location.reload();
         });
     
         // Hide the modal if the user clicks outside of it
@@ -1246,7 +1247,7 @@ document.addEventListener("DOMContentLoaded", function() {
                             console.log("Winners declared successfully.");
                             var element = document.querySelector("[name='suggestionInput']");
                                 element.hidden = false;
-                            location.reload();
+                            // location.reload();
                         } else {
                             console.error("Failed to declare winners: ", response.error);
                         }
@@ -1521,6 +1522,17 @@ function fetchWinners() {
     .then(response => response.json())
     .then(data => {
         if (data.success) {
+            // First clear the previous content from the modal
+            for (let i = 0; i < 9; i++) {
+                const candidateImg = document.getElementById(`CandidateIMG${i+1}`);
+                const candidateName = document.getElementById(`CandidateName${i+1}`);
+
+                // Clear the current content in the modal
+                candidateImg.style.backgroundImage = '';
+                candidateName.value = '';
+            }
+
+            // Now, populate the modal with the new winners
             for (let i = 0; i < data.data.length; i++) {
                 const candidate = data.data[i];
 

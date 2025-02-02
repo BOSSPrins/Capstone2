@@ -226,7 +226,7 @@ if (isset($_SESSION['unique_id'])) {
                                                 </div> 
                                                 <div class="Coonn">
                                                     <label class="LabelEd"> Name: </label>
-                                                    <input class="InputEd" type="text" id="HoaName">
+                                                    <input class="InputEd" type="text" id="HoaName" readonly>
                                                 </div>  
                                                 <div class="Coonn">                                                    
                                                     <input class="InputEd" type="hidden" id="HoaUID">
