@@ -368,7 +368,7 @@ input[type="password"]::-ms-reveal {
 .OneInputField {
     position: relative;
     width: 100%;
-    margin-top: 10px;
+    margin-top: 20px;
 }
 
 .SignUpInput {
@@ -402,7 +402,63 @@ input[type="password"]::-ms-reveal {
     column-gap: 15px;
 }
 
-/* DESIGN PARA SA DROPDOWN NG GENDER*/
+/* DROPDOWN PARA SA LOT AND BLOCK */
+.dropdownBL {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+/* Style the arrow icon */
+.arrow {
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 6px solid #aeaeae;
+    position: absolute;
+    right: 10px;  /* Position the arrow in the right corner */
+    top: 50%;
+    transform: translateY(-50%);  /* Center the arrow vertically */
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Style the dropdown content (hidden by default) */
+.dropdownContenttt {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    width: 100%;
+    height: 120px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+/* Style each dropdown item */
+.dropdown-itemss {
+    color: black;
+    padding: 12px 16px;
+    cursor: pointer;
+}
+
+/* Change color when you hover over an item */
+.dropdown-itemss:hover {
+    background-color: #ddd;
+}
+
+/* Show the dropdown content when the dropdown is active */
+.dropdownBL.open .dropdownContenttt {
+    display: block;
+}
+
+/* Rotate the arrow when the dropdown is active */
+.dropdownBL.open .arrow {
+    transform: rotate(180deg);
+}
+
+/* DESIGN PARA SA DROPDOWN NG GENDER */
 .dropdown-button {
     height: 35px;
     width: 100%;
@@ -416,8 +472,24 @@ input[type="password"]::-ms-reveal {
     color: #000;
     box-sizing: border-box;
     position: relative; /* Ensure it is positioned correctly */
+    display: flex;
+    justify-content: space-between; /* Space between text and the arrow */
+    align-items: center;
 }
 
+/* Arrow style (triangle) */
+.dropdown-button .arrow {
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 6px solid #aeaeae; /* Arrow color */
+    transition: transform 0.3s ease-in-out;
+    position: absolute;
+    right: 15px; /* Position the arrow on the right side */
+}
+
+/* Dropdown content */
 .dropdown-content {
     display: none;
     position: absolute;
@@ -447,6 +519,11 @@ input[type="password"]::-ms-reveal {
 
 .dropdown-content label:hover {
     background-color: #e1e1e1;
+}
+
+/* Rotate the arrow when dropdown is active */
+.dropdown-button.active .arrow {
+    transform: rotate(180deg);
 }
 
 /* DESIGN PARA SA BAGONG PWD (DROPDOWN) */
@@ -547,7 +624,12 @@ input[type="password"]::-ms-reveal {
     margin-top: 20px;
 }
 
-.EmailParag {
+.EmailParag{
+    margin-bottom: 20px;
+    font-style: italic;
+}
+
+.EmailParagg {
     text-align: center;
     margin-top: 10px;
     /* font-style: italic; */
@@ -671,9 +753,9 @@ input[type="password"]::-ms-reveal {
     display: none; /* Hide the other forms */
 }
 
-.SignUpInput.emailed {
+/* .SignUpInput.emailed {
     margin-bottom: 20px;
-}
+} */
 
 
 /* DESIGN NG BAGONG NOTIF */
@@ -859,7 +941,28 @@ input[type="password"]::-ms-reveal {
     }
 
     .RowInputFields {
-        flex-wrap: wrap;
+        flex-direction: column; /* Stack vertically on smaller screens */
+        width: 100%; /* Make sure the whole container takes full width */
+    }
+
+    .OneInputField {
+        width: 100%; /* Ensure inputs take full width on mobile */
+    }
+
+    .OneInputField label {
+        font-size: 16px; /* Larger label text for mobile */
+        margin-bottom: 12px; /* Add some more space between label and input */
+    }
+
+    .SignUpInput {
+        width: 100%; /* Ensure the input takes full width */
+        padding: 12px; /* Add some padding for better look */
+        font-size: 16px; /* Larger text for mobile */
+    }
+
+    /* Ensure the dropdown behaves properly */
+    .dropdownBL {
+        width: 100%;
     }
 
     .MainContainerAll {

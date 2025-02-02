@@ -181,17 +181,17 @@ if (isset($_SESSION['role'])) {
                                             <div class="OneInputField dropdown">
                                                 <label class="Labels" for="Gender"> Sex </label>
                                                 <span style="color:red"> &#42; </span>
-                                                <div class="dropdown-button" required>Select Option</div>
+                                                <div class="dropdown-button" required>
+                                                    Select Option
+                                                    <span class="arrow"></span>  <!-- Arrow added here -->
+                                                </div>
                                                 <div class="dropdown-content">
                                                     <label class="option" data-value="male" for="Gender">
                                                         <input class="Pili SignUpInput" type="radio" name="gender" value="Male" id="male" required> Male
                                                     </label>
                                                     <label class="option" data-value="female" for="Gender">
-                                                        <input class="Pili SignUpInput" type="radio" name="gender" value="Female" if="female" required> Female
+                                                        <input class="Pili SignUpInput" type="radio" name="gender" value="Female" id="female" required> Female
                                                     </label>
-                                                    <!-- <label class="option" data-value="other">
-                                                        <input class="Pili SignUpInput" type="radio" name="gender" value="Preferred not to say"> Preferred not to say
-                                                    </label> -->
                                                 </div>
                                             </div>
                                         </div>
@@ -221,26 +221,42 @@ if (isset($_SESSION['role'])) {
 
 
                                         <div class="OneInputField">
-                                            <label class="Labels" for="Disabilities"> Do you have disabilities? </label>
+                                            <label class="Labels" for="Disabilities">Do you have disabilities?</label>
                                             <div style="margin-top: 15px; margin-bottom: 15px;" class="radioButtonPwd">
                                                 <div class="check1">
-                                                    <span class="spanCheck"> Yes </span>
+                                                    <span class="spanCheck">Yes</span>
                                                     <input type="checkbox" id="checkYes" name="disabilities" value="Yes" required>
                                                 </div>
-        
+
                                                 <div class="check2">
-                                                    <span class="spanCheck"> No </span>
+                                                    <span class="spanCheck">No</span>
                                                     <input class="checkBoxx" type="checkbox" id="checkNo" name="disabilities" value="No" required>
                                                 </div>
                                             </div>
                                         </div>
 
                                         <!-- PWD ID Upload Input (Initially Hidden) -->
-                                        <div id="pwdIdContainer" style="display: none; margin-top: 10px;">
-                                            <label class="Labels" for="pwdId">Upload PWD ID:</label>
-                                            <input type="file" id="pwdId" name="pwdId" accept="image/*" required>
+                                        <div id="pwdIdContainer" style="display: none; margin-top: 10px; margin-bottom: 10px;">
+                                            <!-- <label class="Labels" for="pwdId">Upload PWD ID:</label> -->
+                                            
+                                            <!-- Div that will trigger file input -->
+                                            <div id="uploadTrigger" style="border: 2px dashed #000; padding: 10px; text-align: center; cursor: pointer;">
+                                                <span>Click here to upload PWD ID</span>
+                                                <img id="uploadedImage" style="display: none; max-width: 100%; max-height: 100%; object-fit: contain;" alt="Uploaded PWD ID" />
+                                            </div>
+                                            
+                                            <!-- Hidden file input -->
+                                            <input type="file" id="pwdId" name="pwdId" accept="image/*" style="display: none;" required>
                                         </div>
-                                        
+
+                                        <!-- Image Preview Modal -->
+                                        <div class="imageModal" style="display: none;">
+                                            <div class="modalContent">
+                                                <span class="closeModal" style="cursor: pointer; position: absolute; top: 10px; right: 10px; font-size: 24px;">&times;</span>
+                                                <img class="modalImage" src="" alt="Modal Preview" style="max-width: 100%; max-height: 80vh; object-fit: contain; display: block; margin: auto;" />
+                                            </div>
+                                        </div>
+
                                         <!-- DROPDOWN NA PWD KASO AYAW NI MASTER SIGE WAG NA 
                                         <div class="OneInputField dropdown">
                                             <label class="Labels"> Do you have disabilities? </label>
@@ -263,21 +279,37 @@ if (isset($_SESSION['role'])) {
                                             <div class="OneInputField">
                                                 <label class="Labels" for="Block"> Block </label>
                                                 <span style="color:red"> &#42; </span>
-                                                <input class="SignUpInput" type="text" id="block" name="block" required placeholder="Enter Your Block">
+                                                <div class="dropdownBL">
+                                                    <input class="SignUpInput" type="text" id="block" name="block" placeholder="Select Block" readonly>
+                                                    <div class="arrow"> </div>
+                                                    <div class="dropdownContenttt" id="blockDropdownContent">
+                                                        <div class="dropdown-itemss"> 1 </div>
+                                                        <div class="dropdown-itemss"> 2 </div>
+                                                        <div class="dropdown-itemss"> 3 </div>
+                                                    </div>
+                                                </div>
                                             </div>
-        
+
                                             <div class="OneInputField">
                                                 <label class="Labels" for="Lot"> Lot </label>
                                                 <span style="color:red"> &#42; </span>
-                                                <input class="SignUpInput" type="text" id="lot" name="lot" required placeholder="Enter Your Lot">
+                                                <div class="dropdownBL">
+                                                    <input class="SignUpInput" type="text" id="lot" name="lot" placeholder="Select Lot" readonly>
+                                                    <div class="arrow"> </div>
+                                                    <div class="dropdownContenttt" id="lotDropdownContent">
+                                                        <div class="dropdown-itemss"> 1 </div>
+                                                        <div class="dropdown-itemss"> 2 </div>
+                                                        <div class="dropdown-itemss"> 3 </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-        
+
                                         <div class="OneInputField">
                                             <label class="Labels"> Street </label>
                                             <input class="SignUpInput" type="text" id="street" name="street" placeholder="Enter Your Street Name">
                                         </div>
-        
+
                                         <div class="NextBtnCon">
                                             <button class="NextBtn" type="button"> Next </button>
                                         </div>
@@ -289,17 +321,18 @@ if (isset($_SESSION['role'])) {
                                     <div class="EmailCon SignUpParehas" id="EmailAdd">
                                         <!-- Email input fields go here -->
                                         <h3> Create Account </h3>
-                                        <p class="EmailParag"> Please enter a valid e-mail address <br> (Gmail or Yahoo only) </p>
-        
+
                                         <div class="OneInputField Middle">
                                             <label class="Labels"> Email </label>
                                             <span style="color:red"> &#42; </span>
                                             <input class="SignUpInput emailed" type="text" placeholder="Enter Your Email Address" id="emailOTP" name="email" required> 
                                         </div> 
+                                        <p class="EmailParag" style="color:red"> &#42; Please enter a valid e-mail address (Gmail or Yahoo only) </p>
+
                                         <div class="CreatePassCon SignUpParehas" id="CreatePassword">
                                         <!-- Create password fields go here -->
                                         <h3> Create Password </h3>
-                                        <p class="EmailParag"> Create a strong password by combining at least 8 characters,  
+                                        <p class="EmailParagg"> Create a strong password by combining at least 8 characters,  
                                             including uppercase and lowercase letters, numbers, 
                                             and special characters (e.g., !, @, #, $). <br> Avoid using weak password and 
                                             guessable information such as your name or birthdate!
