@@ -11,8 +11,9 @@ function showForms(formName) {
   }
 }
 
+// FUNCTION SA SEX DROPDOWN
 document.addEventListener('DOMContentLoaded', function () {
-// Dropdown elements
+  // Dropdown elements
   const dropdownButton = document.querySelector('.dropdown-button');
   const dropdownContent = document.querySelector('.dropdown-content');
   const options = dropdownContent.querySelectorAll('.option');
@@ -21,15 +22,24 @@ document.addEventListener('DOMContentLoaded', function () {
   dropdownButton.addEventListener('click', function (event) {
     event.stopPropagation(); // Prevent click event from bubbling up to document
     dropdownContent.classList.toggle('show');
+    
+    // Add or remove the "active" class to rotate the arrow when the dropdown is open/closed
+    dropdownButton.classList.toggle('active');
   });
 
   // Update dropdown button text when an option is selected
   options.forEach(option => {
     option.addEventListener('click', function () {
         const selectedValue = this.querySelector('input').value;
-        dropdownButton.textContent = this.textContent.trim();
+
+        // Update the dropdown button's text without removing the arrow
+        dropdownButton.childNodes[0].textContent = this.textContent.trim(); // Change text content, keeping the arrow
+
         dropdownButton.dataset.value = selectedValue;  // Set data-value attribute
+        
+        // Ensure the dropdown closes and the arrow rotates back to the default position
         dropdownContent.classList.remove('show');
+        dropdownButton.classList.remove('active'); // Remove active class to reset arrow rotation
     });
   });
 
@@ -37,6 +47,7 @@ document.addEventListener('DOMContentLoaded', function () {
   document.addEventListener('click', function (event) {
     if (!dropdownButton.contains(event.target) && !dropdownContent.contains(event.target)) {
       dropdownContent.classList.remove('show');
+      dropdownButton.classList.remove('active'); // Remove active class when closing the dropdown
     }
   });
 });
@@ -94,7 +105,7 @@ function toggleEye2(Kita2Id, Tago2Id) {
   Tago2Id.style.display = 'inline'; // Show the "hide" icon
 }
 
-// FUNCTION PARA SA HAMVURGER 
+// FUNCTION PARA SA HAMBURGER 
 function toggleNavbar() {
   const navbar = document.querySelector('.MhNavv');
   navbar.classList.toggle('active'); // Toggle the 'active' class to show/hide the navbar
@@ -300,5 +311,44 @@ document.addEventListener("DOMContentLoaded", () => {
       xhr.send(formData);
     };
   }
+});
+
+// FUNCTION PARA SA DROPSOWN NG BLOCK AND LOT 
+// JavaScript to toggle dropdown and rotate the arrow when the input is clicked
+document.getElementById('block').addEventListener('click', function() {
+  var blockDropdown = this.parentElement;
+  var lotDropdown = document.getElementById('lot').parentElement; // Get Lot dropdown
+
+  // Toggle the Block dropdown and close Lot dropdown
+  blockDropdown.classList.toggle('open');
+  lotDropdown.classList.remove('open');
+});
+
+document.getElementById('lot').addEventListener('click', function() {
+  var lotDropdown = this.parentElement;
+  var blockDropdown = document.getElementById('block').parentElement; // Get Block dropdown
+
+  // Toggle the Lot dropdown and close Block dropdown
+  lotDropdown.classList.toggle('open');
+  blockDropdown.classList.remove('open');
+});
+
+// Close dropdown if clicked outside
+window.addEventListener('click', function(event) {
+  if (!event.target.closest('.dropdownBL')) {
+      var dropdowns = document.querySelectorAll('.dropdownBL');
+      dropdowns.forEach(function(dropdown) {
+          dropdown.classList.remove('open');
+      });
+  }
+});
+
+// Handle selecting an item from the dropdown and setting it to the input
+document.querySelectorAll('.dropdown-itemss').forEach(function(item) {
+  item.addEventListener('click', function() {
+      var inputField = this.closest('.dropdownBL').querySelector('.SignUpInput');
+      inputField.value = this.textContent; // Set the input to the selected value
+      this.closest('.dropdownBL').classList.remove('open'); // Close the dropdown
+  });
 });
 

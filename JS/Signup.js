@@ -738,12 +738,35 @@ document.addEventListener("DOMContentLoaded", () => {
     // const backOTPEmail = document.getElementById("backOTPEmail");
     const sendBtnEmailForm = document.getElementById("sendOTPButton");
 
-    // PWD Checkbox and ID Upload Logic
     const checkYes = document.getElementById("checkYes");
     const checkNo = document.getElementById("checkNo");
     const pwdIdContainer = document.getElementById("pwdIdContainer");
     const pwdIdInput = document.getElementById("pwdId");
+    const uploadTrigger = document.getElementById("uploadTrigger");
+    const uploadedImage = document.getElementById("uploadedImage");
+    const uploadText = uploadTrigger.querySelector("span"); // Get the <span> element inside the div
 
+    // Create the close button for the uploaded image
+    const closeButton = document.createElement("button");
+    closeButton.innerHTML = "X";
+    closeButton.style.position = "absolute";
+    closeButton.style.top = "5px";
+    closeButton.style.right = "5px";
+    closeButton.style.fontSize = "16px";
+    closeButton.style.background = "rgba(0, 0, 0, 0.5)";
+    closeButton.style.color = "white";
+    closeButton.style.border = "none";
+    closeButton.style.borderRadius = "50%";
+    closeButton.style.width = "20px";
+    closeButton.style.height = "20px";
+    closeButton.style.cursor = "pointer";
+    closeButton.style.display = "none"; // Initially hidden
+
+    // Append the close button to the uploadedImage container
+    uploadedImage.parentElement.style.position = "relative";
+    uploadedImage.parentElement.appendChild(closeButton);
+
+    // Toggle PWD ID upload display based on "Yes" checkbox
     function togglePwdId() {
         if (checkYes.checked) {
             pwdIdContainer.style.display = "block";
@@ -759,34 +782,51 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // Ensure "Yes" and "No" are mutually exclusive
-    checkYes.addEventListener("change", () => {
-        if (checkYes.checked) {
-            pwdIdContainer.style.display = "block";
-            pwdIdInput.setAttribute("required", "required");
-            checkNo.checked = false; // Uncheck "No"
-        } else {
-            pwdIdContainer.style.display = "none";
-            pwdIdInput.removeAttribute("required");
-        }
-    });
-
+    checkYes.addEventListener("change", togglePwdId);
     checkNo.addEventListener("change", () => {
         if (checkNo.checked) {
-            checkYes.checked = false; // Uncheck "Yes"
+            checkYes.checked = false;
             pwdIdContainer.style.display = "none";
             pwdIdInput.removeAttribute("required");
         }
     });
 
-    pwdIdInput.addEventListener("change", (e) => {
-        const files = e.target.files;
-    
-        if (files.length > 1) {
-            // Show error notification instead of alert
-            showErrorNotification("You can only upload one image for your PWD ID.");
-            pwdIdInput.value = ""; // Clear the input to prevent multiple file selection
+    // Trigger the file input when the div is clicked, but only if image is not shown
+    uploadTrigger.addEventListener("click", () => {
+        if (uploadedImage.style.display === "none") {
+            pwdIdInput.click();  // This will open the file dialog only if the image is hidden
         }
+    });
+
+    // Handle file selection and show the image in the div
+    pwdIdInput.addEventListener("change", (e) => {
+        const file = e.target.files[0];
+
+        if (file) {
+            const reader = new FileReader();
+
+            reader.onload = function(event) {
+                // Show the uploaded image inside the div
+                uploadedImage.style.display = "block";
+                uploadedImage.src = event.target.result; // Set the image source to the uploaded file
+
+                // Hide the upload text once the image is selected
+                uploadText.style.display = "none";
+
+                // Show the close button
+                closeButton.style.display = "block";
+            };
+
+            reader.readAsDataURL(file); // Convert the image file to a base64 URL
+        }
+    });
+
+    // Hide the image and the close button when the close button is clicked
+    closeButton.addEventListener("click", () => {
+        uploadedImage.style.display = "none"; // Hide the image
+        closeButton.style.display = "none"; // Hide the close button
+        uploadText.style.display = "block"; // Show the upload text again
+        pwdIdInput.value = ""; // Clear the file input value
     });
 
     // Personal Details Next Button Logic
