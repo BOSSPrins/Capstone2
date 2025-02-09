@@ -36,32 +36,31 @@ while ($row = mysqli_fetch_assoc($sql)) {
         $encoded_id = urlencode($row['unique_id']);
         
         $output .= '<a href="MainChat.php?user_id='.$encoded_id.'">
-                    <img class="messagesImages" src="Pictures/'.$row['img'].'">
-                    <span class="conMessagesInfo">
-                        <span class="mesageName">'.$row['first_name'].' '.$row['last_name'].'</span>
-                        <span class="mesageText"> ';
+                <img class="messagesImages" src="Pictures/'.$row['img'].'">
+                <span class="conMessagesInfo">
+                    <span class="mesageName">'.$row['first_name'].' '.$row['last_name'].'</span>
+                    <span class="mesageText">';
 
-                                    
-                        // Check if outgoing_id does not match $row['outgoing-msg-id'], if so, make the text bold
-                        if ($row2 !== null && isset($row2['outgoing_msg_id']) && $row2['outgoing_msg_id'] !== $outgoing_id) {
-                            $output .= '<span class="bold">';
-                        }
-            
-                        // Append the message content
-                        $output .= $you . $msg;
-            
-                        // Close the <span> tag for bold text if necessary
-                        if ($row2 !== null && isset($row2['outgoing_msg_id']) && $row2['outgoing_msg_id'] !== $outgoing_id) {
-                            $output .= '</span>';
-                        }
-                       
-                    $output .= ' </span>
-                    <span class="messagesAtIbapa">
-                        <span class="mgaKausapStatus ' . $offline . ' ?>"></span>
-                        <!--<span class="messageUnread"> 2 </span> -->  
-                        <!-- <span class="messageTime"> 2 </span> -->
-                    </span>
-                    </a>';
+                    // Check if outgoing_id does not match $row['outgoing-msg-id'], if so, make the text bold
+                    if ($row2 !== null && isset($row2['outgoing_msg_id']) && $row2['outgoing_msg_id'] !== $outgoing_id) {
+                        $output .= '<span class="bold">';
+                    }
+
+                    // Append the message content
+                    $output .= $you . $msg;
+
+                    // Close the <span> tag for bold text if necessary
+                    if ($row2 !== null && isset($row2['outgoing_msg_id']) && $row2['outgoing_msg_id'] !== $outgoing_id) {
+                        $output .= '</span>';
+                    }
+
+                $output .= '</span>
+                </span>  <!-- Close conMessagesInfo -->
+                <span class="messagesAtIbapa">
+                    <span class="mgaKausapStatus ' . $offline . ' ?>"></span>
+                </span>
+            </a>';
+
     } else {
         // Handle the case where unique_id is empty or null
         $output .= '<div>Error: Missing or invalid unique_id</div>';

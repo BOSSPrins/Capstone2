@@ -527,107 +527,110 @@ function fetchComplaintDetails(complaintId) {
 }
 
 
-function submitComplaintUpdate(event) {
-    event.preventDefault();
+    function submitComplaintUpdate(event) {
+        event.preventDefault();
 
-    const complaintId = document.getElementById('ComplaintID').value;
-    const status = document.getElementById('NewStatus').value;
+        const complaintId = document.getElementById('ComplaintID').value;
+        const status = document.getElementById('NewStatus').value;
 
-    const complainantUID = document.getElementById('complainantUID').value;
-    const complaint_number = document.getElementById('complaint_number').value;
-    const Description = document.getElementById('Description').value;
-    
-    const ComplaineeEmail = document.getElementById('ComplaineeEmail').value;
-    const ComplaintType = document.getElementById('ComplaintType').value;
+        const complainantUID = document.getElementById('complainantUID').value;
+        const complaint_number = document.getElementById('complaint_number').value;
+        const Description = document.getElementById('Description').value;
+        
+        const ComplaineeEmail = document.getElementById('ComplaineeEmail').value;
+        const ComplaintType = document.getElementById('ComplaintType').value;
 
-    const loadingIndicator = document.getElementById('loading-indicator');
-    loadingIndicator.style.setProperty('display', 'flex', 'important'); // Show loading indicator
+        const loadingIndicator = document.getElementById('loading-indicator');
+        loadingIndicator.style.setProperty('display', 'flex', 'important'); // Show loading indicator
 
-    fetch('PHPBackend/Complaint.php', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
-        },
-        body: new URLSearchParams({
-            action: 'update_complaint',
-            complaint_id: complaintId,
-            status: status
-            
+        fetch('PHPBackend/Complaint.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: new URLSearchParams({
+                action: 'update_complaint',
+                complaint_id: complaintId,
+                status: status
+                
+            })
         })
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            
-            return Promise.all([
-            sendEmailToComplainee(ComplaineeEmail, ComplaintType),
-            sendEmailToComplainant(complainantUID, complaint_number, Description)
-            ]);
-        } else {
-            throw new Error(data.error); // Trigger catch block
-        }
-    })
-    .then(() => {
-        alert("Complaint updated and both parties are notified successfully!");
-        location.reload();
-    })
-    .catch(error => {
-        console.error("Error:", error);
-        alert("An error occurred: " + error.message);
-    })
-    .finally(() => {
-        loadingIndicator.style.setProperty('display', 'none', 'important'); // Hide loading indicator
-    });
-}
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                let emailPromises = [sendEmailToComplainant(complainantUID, complaint_number, Description)];
+    
+                // Only send an email to the complainee if their email is provided
+                if (ComplaineeEmail.trim() !== "") {
+                    emailPromises.push(sendEmailToComplainee(ComplaineeEmail, ComplaintType));
+                }
+    
+                return Promise.all(emailPromises);
+            } else {
+                throw new Error(data.error); // Trigger catch block
+            }
+        })
+        .then(() => {
+            alert("Complaint updated and notified successfully!");
+            location.reload();
+        })
+        .catch(error => {
+            console.error("Error:", error);
+            alert("An error occurred: " + error.message);
+        })
+        .finally(() => {
+            loadingIndicator.style.setProperty('display', 'none', 'important'); // Hide loading indicator
+        });
+    }
 
-function sendEmailToComplainant(complainantUID, complaint_number, Description) {
-    return fetch('Emailer/ComplaintsEmail.php', { // Return the promise
-        method: 'POST',
-        body: new URLSearchParams({
-            complainantUID: complainantUID,
-            complaint_number,
-            Description
-        }),
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log("Parsed response:", data);
-        if (data.success) {
-            console.log("Email sent successfully.");
-        } else {
-            console.error("Error:", data.error);
-            throw new Error('Email failed: ' + data.message); // Ensure failure propagates
-        }
-    })
-    .catch(error => {
-        console.error("AJAX error:", error);
-        throw error; // Ensure error propagates to Promise.all
-    });
-}
+    function sendEmailToComplainant(complainantUID, complaint_number, Description) {
+        return fetch('Emailer/ComplaintsEmail.php', { // Return the promise
+            method: 'POST',
+            body: new URLSearchParams({
+                complainantUID: complainantUID,
+                complaint_number,
+                Description
+            }),
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log("Parsed response:", data);
+            if (data.success) {
+                console.log("Email sent successfully.");
+            } else {
+                console.error("Error:", data.error);
+                throw new Error('Email failed: ' + data.message); // Ensure failure propagates
+            }
+        })
+        .catch(error => {
+            console.error("AJAX error:", error);
+            throw error; // Ensure error propagates to Promise.all
+        });
+    }
 
-function sendEmailToComplainee(ComplaineeEmail, ComplaintType) {
-    return fetch('Emailer/In-ProcessComplainee.php', { // Return the promise
-        method: 'POST',
-        body: new URLSearchParams({
-            ComplaineeEmail,
-            ComplaintType
-        }),
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log("Parsed response:", data);
-        if (data.success) {
-            console.log("Email sent successfully.");
-        } else {
-            console.error("Error:", data.error);
-            throw new Error('Email failed: ' + data.message); // Ensure failure propagates
-        }
-    })
-    .catch(error => {
-        console.error("AJAX error:", error);
-        throw error; // Ensure error propagates to Promise.all
-    });
-}
+    function sendEmailToComplainee(ComplaineeEmail, ComplaintType) {
+        return fetch('Emailer/In-ProcessComplainee.php', { // Return the promise
+            method: 'POST',
+            body: new URLSearchParams({
+                ComplaineeEmail,
+                ComplaintType
+            }),
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log("Parsed response:", data);
+            if (data.success) {
+                console.log("Email sent successfully.");
+            } else {
+                console.error("Error:", data.error);
+                throw new Error('Email failed: ' + data.message); // Ensure failure propagates
+            }
+        })
+        .catch(error => {
+            console.error("AJAX error:", error);
+            throw error; // Ensure error propagates to Promise.all
+        });
+    }
 
 
 

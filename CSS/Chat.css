@@ -765,11 +765,10 @@ overflow: hidden; /* Prevent scrollbars here */
 }
 
 .conMessagesInfo {
-  display: flex;  /* Change from grid to flex */
-  align-items: center;  /* Aligns text vertically */
-  gap: 5px;  /* Adds a small space between name and message */
-  margin-right: 12px;
-  width: 100%;
+  display: flex;
+  flex-direction: column; /* Stack elements vertically */
+  align-items: flex-start; /* Align items to the start */
+  gap: 2px; /* Adjust spacing */
 }
 
 .mesageName {
@@ -788,9 +787,9 @@ overflow: hidden; /* Prevent scrollbars here */
   min-width: 0;  /* Prevents overflow issues */
 }
 
-
 .bold {
-    font-weight: bold;  
+  font-weight: bold;
+  display: block; /* Makes it appear below the message */
 }
 
 .messagesAtIbapa{
