@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 02, 2025 at 08:53 PM
+-- Generation Time: Feb 09, 2025 at 08:13 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -272,7 +272,9 @@ INSERT INTO `messages` (`msg_id`, `incoming_msg_id`, `outgoing_msg_id`, `msg`, `
 (96, 1589571584, 1357825271, 'Complaints \r\n', '2024-07-01 14:48:14'),
 (97, 1589571584, 1357825271, 'Concern', '2024-07-01 14:48:18'),
 (98, 1486934929, 1589571584, 'Hilu Gudmurneng', '2025-01-24 15:44:36'),
-(99, 1589571584, 1486934929, 'Hilow', '2025-01-24 15:45:05');
+(99, 1589571584, 1486934929, 'Hilow', '2025-01-24 15:45:05'),
+(100, 1133085945, 1589571584, 'Testing', '2025-02-08 14:55:03'),
+(101, 1589571584, 1133085945, 'Test', '2025-02-08 15:09:10');
 
 -- --------------------------------------------------------
 
@@ -404,18 +406,18 @@ CREATE TABLE `tblaccounts` (
 --
 
 INSERT INTO `tblaccounts` (`user_id`, `unique_id`, `email`, `password`, `img`, `status`, `role`, `access`, `otp`, `naughty_list`) VALUES
-(2, 1589571584, 'admin@gmail.com', '21232f297a57a5a743894a0e4a801fc3', 'malupiton4.jpg', 'Offline now', 'admin', 'Approved', 'Verified', 0),
+(2, 1589571584, 'admin@gmail.com', '21232f297a57a5a743894a0e4a801fc3', 'malupiton4.jpg', 'Active now', 'admin', 'Approved', 'Verified', 0),
 (4, 1357825271, 'senpai@gmail.com', '1e5db03ce967cfef4e21ada16da09b06', '1715105349271713718_1999144396919159_608519389647854942_n.jpg', 'Offline now', 'user', 'Rejected', 'Verified', 0),
-(19, 112466338, 'Prins@gmail.com', '0a9e0db6e95c394ee792ecbc6e510791', '1717745936pitikvermo.jpg', 'Pending', 'user', 'Approved', '', 0),
-(21, 1017731196, 'tnjrdlcr@gmail.com', '202cb962ac59075b964b07152d234b70', '1717937589pitikvermo.jpg', 'Verified', 'user', 'Approved', 'Verified', 0),
-(22, 1593518745, 'aawafawf@gmail.com', '2310553235ab181ae0c551c242988734', 'Mabuhay_Logo.png', 'Pending', 'user', 'Pending', '', 0),
-(23, 1469021725, 'adadawda@gmail.com', '32db117b68ab7598389c18b68f721116', 'Mabuhay_Logo.png', 'Pending', 'user', 'Pending', '', 0),
-(24, 1433443368, 'waeaewea@gmail.com', '458e5a124f7ed72d143d837a9a3bd76e', 'Mabuhay_Logo.png', 'Pending', 'user', 'Pending', '', 0),
-(25, 1095492376, 'daadaaw@gmail.com', 'f2a85c6878e7978563609d089ee1173a', 'Mabuhay_Logo.png', 'Pending', 'user', 'Pending', '', 0),
-(26, 911851766, 'aSbkghjgsghj@gmail.com', '4e3b9566b4b9abfd8f6671f7b4e423a7', 'Mabuhay_Logo.png', 'Pending', 'user', 'Pending', '', 0),
-(27, 509858760, 'Tiklop@gmail.com', '9f4a66a0bac35d6f7f25b5fd931c7abe', 'Mabuhay_Logo.png', 'Pending', 'user', 'Pending', '', 0),
+(19, 112466338, 'Prins@gmail.com', '0a9e0db6e95c394ee792ecbc6e510791', '1717745936pitikvermo.jpg', 'Offline now', 'user', 'Approved', '', 0),
+(21, 1017731196, 'tnjrdlcr@gmail.com', '202cb962ac59075b964b07152d234b70', '1717937589pitikvermo.jpg', 'Offline now', 'user', 'Approved', 'Verified', 0),
+(22, 1593518745, 'aawafawf@gmail.com', '2310553235ab181ae0c551c242988734', 'Mabuhay_Logo.png', 'Offline now', 'user', 'Pending', '', 0),
+(23, 1469021725, 'adadawda@gmail.com', '32db117b68ab7598389c18b68f721116', 'Mabuhay_Logo.png', 'Offline now', 'user', 'Pending', '', 0),
+(24, 1433443368, 'waeaewea@gmail.com', '458e5a124f7ed72d143d837a9a3bd76e', 'Mabuhay_Logo.png', 'Offline now', 'user', 'Pending', '', 0),
+(25, 1095492376, 'daadaaw@gmail.com', 'f2a85c6878e7978563609d089ee1173a', 'Mabuhay_Logo.png', 'Offline now', 'user', 'Pending', '', 0),
+(26, 911851766, 'aSbkghjgsghj@gmail.com', '4e3b9566b4b9abfd8f6671f7b4e423a7', 'Mabuhay_Logo.png', 'Offline now', 'user', 'Pending', '', 0),
+(27, 509858760, 'Tiklop@gmail.com', '9f4a66a0bac35d6f7f25b5fd931c7abe', 'Mabuhay_Logo.png', 'Offline now', 'user', 'Pending', '', 0),
 (28, 1581632830, 'wela@gmail.com', 'f9395f741e6f4da0f873c08008ed5760', 'Mabuhay_Logo.png', 'Offline now', 'user', 'Approved', 'Verified', 0),
-(29, 821155870, 'Renz@gmail.com', 'b55dc472db84256de67972b96657e7b9', 'Mabuhay_Logo.png', 'Active now', 'user', 'Approved', 'Verified', 0),
+(29, 821155870, 'Renz@gmail.com', 'b55dc472db84256de67972b96657e7b9', 'Mabuhay_Logo.png', 'Offline now', 'user', 'Approved', 'Verified', 0),
 (30, 776313154, 'Pat@gmail.com', '532762fa5a5b7169aa4dd24717ba9df9', 'Mabuhay_Logo.png', 'Offline now', 'user', 'Approved', 'Verified', 0),
 (31, 1590469844, 'Pao@gmail.com', '1b6203e2e1b7e63e7b3677cdd932001f', 'Mabuhay_Logo.png', 'Offline now', 'user', 'Approved', 'Verified', 0),
 (32, 1308040957, 'John@gmail.com', '61409aa1fd47d4a5332de23cbf59a36f', 'Mabuhay_Logo.png', 'Offline now', 'user', 'Approved', 'Verified', 0),
@@ -517,6 +519,7 @@ INSERT INTO `tbl_sessions` (`session_id`, `unique_id`, `last_activity`, `device_
 ('1nde3b4afhrmb70ps0j21gg492', 1589571584, '2024-11-30 05:09:06', '::1', 'inactive'),
 ('49q5r4vdqbvm72gh5meb29tpsg', 1581632830, '2024-12-01 06:08:34', '::1', 'inactive'),
 ('56htq7vh3dcstor8pubar342gh', 1581632830, '2024-11-25 07:55:33', '::1', 'inactive'),
+('6ah1jt2t6mt8s732i5qkv2tgru', 1133085945, '2025-02-08 08:53:22', '::1', 'inactive'),
 ('77u9luim9024hbt0k2k0oigjci', 1581632830, '2024-11-27 21:28:46', '::1', 'inactive'),
 ('806gfh10fgskgvdcr4bm69855o', 1589571584, '2024-11-26 02:26:15', '::1', 'inactive'),
 ('aednmgjgvt25veqqc3sjfdkvn6', 1589571584, '2025-01-24 13:58:58', '::1', 'inactive'),
@@ -525,12 +528,15 @@ INSERT INTO `tbl_sessions` (`session_id`, `unique_id`, `last_activity`, `device_
 ('d6b5nvbh55qrvt2rdb6iiuf0ec', 1581632830, '2025-02-01 11:21:41', '::1', 'inactive'),
 ('dckfggtj6q9qoothuat1pd9qce', 1589571584, '2024-12-23 09:47:50', '::1', 'inactive'),
 ('e35bng9v3gnt04ndngrer6g8ec', 1589571584, '2024-11-27 22:08:25', '::1', 'inactive'),
+('e7c9deh2ro5nc0gqg525i24tkl', 1589571584, '2025-02-09 11:23:26', '::1', 'active'),
 ('fo1sqp561i2qu33pod063bt7tu', 1589571584, '2025-01-13 19:42:55', '::1', 'inactive'),
 ('fptp5hdvi6om2gjmjm2oju6af9', 1589571584, '2024-11-28 21:52:55', '::1', 'inactive'),
 ('hd8hrbllvtejbd453pdvqtd52q', 1589571584, '2024-12-09 16:53:26', '::1', 'inactive'),
 ('icj7dmhl3g0haj32bh1qk08cb3', 1589571584, '2024-11-29 12:09:35', '::1', 'inactive'),
 ('jrsdp4em90angoisbm694npi0b', 1581632830, '2024-11-25 07:57:10', '::1', 'inactive'),
 ('k0l000115t4gtiqapaqh3l90h2', 1589571584, '2025-02-01 08:18:17', '::1', 'inactive'),
+('ka47tdf26ea1r3edk7uf3sqcfk', 1133085945, '2025-02-09 11:17:18', '::1', 'inactive'),
+('mdcoqvn1bs9ootgfvrsh09ph95', 1589571584, '2025-02-08 07:33:43', '::1', 'inactive'),
 ('oniu1v844a1a2cgbjoul7sp34k', 1581632830, '2024-12-08 05:35:22', '::1', 'inactive'),
 ('p3g5la4sf4q1j2hdl7q8s92b6o', 1581632830, '2024-12-22 11:29:52', '::1', 'inactive'),
 ('q4bra76vjgujp2lnu7fk4ttc7l', 1589571584, '2025-01-10 17:16:10', '::1', 'inactive'),
@@ -600,16 +606,16 @@ INSERT INTO `user_votes` (`vote_id`, `unique_id`, `candidate`, `votes`, `status`
 (113, 931588206, 'Jane  Doe', 0, 'Winner', '2025-02-01 20:24:02', '', 'Declared'),
 (114, 662462528, 'Hev  Alvin', 0, 'Winner', '2025-02-01 20:24:02', '', 'Declared'),
 (116, 821155870, 'Jhonrenz  Berbano', 0, 'Winner', '2025-02-01 20:24:02', '', 'Declared'),
-(198, 821155870, 'Jhonrenz  Berbano', 0, 'Winner', '2025-02-02 02:37:01', '', 'Declared'),
-(199, 1308040957, 'John  Doe', 0, 'Winner', '2025-02-02 02:37:01', '', 'Declared'),
-(200, 931588206, 'Jane  Doe', 0, 'Winner', '2025-02-02 02:37:01', '', 'Declared'),
-(201, 776313154, 'Patrick B Bayona', 0, 'Winner', '2025-02-02 02:37:01', '', 'Declared'),
-(202, 1590469844, 'Paolo M Murillo', 0, 'Winner', '2025-02-02 02:37:01', '', 'Declared'),
-(203, 1133085945, 'Prince  Cervantes', 0, 'Winner', '2025-02-02 02:37:01', '', 'Declared'),
-(204, 499733408, 'Ethan  Winters', 0, 'Winner', '2025-02-02 02:37:01', '', 'Declared'),
-(205, 1434008263, 'Rose  Winters', 0, 'Winner', '2025-02-02 02:37:01', '', 'Declared'),
-(206, 1195874011, 'Mia  Winters', 0, 'Winner', '2025-02-02 02:37:01', '', 'Declared'),
-(207, 662462528, 'Hev  Alvin', 0, 'Failure', '', '2025-02-02 02:37:01', 'Declared');
+(208, 821155870, 'Jhonrenz  Berbano', 1, 'Winner', '2025-02-08 17:03:25', '', 'Declared'),
+(209, 1308040957, 'John  Doe', 1, 'Winner', '2025-02-08 17:03:25', '', 'Declared'),
+(210, 931588206, 'Jane  Doe', 1, 'Winner', '2025-02-08 17:03:25', '', 'Declared'),
+(211, 776313154, 'Patrick B Bayona', 1, 'Winner', '2025-02-08 17:03:25', '', 'Declared'),
+(212, 1590469844, 'Paolo M Murillo', 1, 'Winner', '2025-02-08 17:03:25', '', 'Declared'),
+(213, 1133085945, 'Prince  Cervantes', 0, 'Failure', '', '2025-02-08 17:03:25', 'Declared'),
+(214, 499733408, 'Ethan  Winters', 1, 'Winner', '2025-02-08 17:03:25', '', 'Declared'),
+(215, 1434008263, 'Rose  Winters', 1, 'Winner', '2025-02-08 17:03:25', '', 'Declared'),
+(216, 1195874011, 'Mia  Winters', 1, 'Winner', '2025-02-08 17:03:25', '', 'Declared'),
+(217, 662462528, 'Hev  Alvin', 1, 'Winner', '2025-02-08 17:03:25', '', 'Declared');
 
 -- --------------------------------------------------------
 
@@ -665,15 +671,15 @@ CREATE TABLE `voting` (
 INSERT INTO `voting` (`vote_id`, `unique_id`, `candidate_name`, `img`, `position`, `votes`, `add_date`, `status`, `won_date`, `fail_date`, `access`, `status2`) VALUES
 (95, 776313154, 'Patrick B Bayona', 'meow.jpg', 'Secretary', 0, '2024-11-28 07:15:38', 'Winner', '2025-01-24 23:50:05', '2024-11-28 08:20:02', 'Declared', ''),
 (96, 1590469844, 'Paolo M Murillo', 'default_Image.png', 'Halimaw Ma inlove', 0, '2024-11-28 07:15:40', 'Winner', '2024-11-28 08:20:02', '', 'Declared', ''),
-(97, 821155870, 'Jhonrenz  Berbano', 'default_Image.png', 'President', 0, '2024-11-28 07:15:54', 'Winner', '2024-11-28 08:20:02', '', 'Declared', ''),
-(98, 1308040957, 'John  Doe', 'Mabuhay_Logo.png', '', 0, '2024-11-28 07:15:56', 'Winner', '2024-11-28 08:20:02', '', 'Declared', ''),
+(97, 821155870, 'Jhonrenz  Berbano', 'default_Image.png', 'Peace in Order', 0, '2024-11-28 07:15:54', 'Winner', '2024-11-28 08:20:02', '', 'Declared', ''),
+(98, 1308040957, 'John  Doe', 'Mabuhay_Logo.png', 'Secretary', 0, '2024-11-28 07:15:56', 'Winner', '2024-11-28 08:20:02', '', 'Declared', ''),
 (99, 931588206, 'Jane  Doe', 'Mabuhay_Logo.png', '', 0, '2024-11-28 07:15:58', 'Winner', '2024-11-28 08:20:02', '', 'Declared', ''),
 (100, 916555761, 'Tanjiro  Dela Cruz', 'Mabuhay_Logo.png', '', 0, '2024-11-28 07:16:00', 'Winner', '2024-11-28 08:20:02', '', 'Declared', ''),
 (102, 499733408, 'Ethan  Winters', 'Mabuhay_Logo.png', '', 0, '2024-11-28 07:16:36', 'Winner', '2024-11-28 08:20:02', '2025-02-01 20:24:02', 'Declared', ''),
 (103, 1434008263, 'Rose  Winters', 'Mabuhay_Logo.png', '', 0, '2024-11-28 07:16:37', 'Winner', '2024-11-28 08:20:02', '', 'Declared', ''),
 (104, 1195874011, 'Mia  Winters', 'Logo-ni-bebecakes.png', 'Secretary', 0, '2024-11-28 07:16:39', 'Winner', '2024-11-28 08:20:02', '', 'Declared', ''),
-(105, 821155870, 'Jhonrenz  Berbano', 'Mabuhay_Logo.png', '', 0, '2025-01-24 23:46:31', 'Winner', '2024-11-28 08:20:02', '', 'Declared', ''),
-(106, 1308040957, 'John  Doe', 'Mabuhay_Logo.png', '', 0, '2025-01-24 23:46:34', 'Winner', '2024-11-28 08:20:02', '', 'Declared', ''),
+(105, 821155870, 'Jhonrenz  Berbano', 'default_Image.png', 'Peace in Order', 0, '2025-01-24 23:46:31', 'Winner', '2024-11-28 08:20:02', '', 'Declared', ''),
+(106, 1308040957, 'John  Doe', 'Mabuhay_Logo.png', 'Secretary', 0, '2025-01-24 23:46:34', 'Winner', '2024-11-28 08:20:02', '', 'Declared', ''),
 (107, 931588206, 'Jane  Doe', 'Mabuhay_Logo.png', '', 0, '2025-01-24 23:46:36', 'Winner', '2024-11-28 08:20:02', '', 'Declared', ''),
 (108, 776313154, 'Patrick B Bayona', 'meow.jpg', 'Secretary', 0, '2025-01-24 23:46:41', 'Winner', '2025-01-24 23:50:05', '', 'Declared', ''),
 (109, 1590469844, 'Paolo M Murillo', 'Mabuhay_Logo.png', '', 0, '2025-01-24 23:46:44', 'Winner', '2024-11-28 08:20:02', '', 'Declared', ''),
@@ -682,8 +688,8 @@ INSERT INTO `voting` (`vote_id`, `unique_id`, `candidate_name`, `img`, `position
 (113, 1195874011, 'Mia  Winters', 'Logo-ni-bebecakes.png', 'Secretary', 0, '2025-01-24 23:46:58', 'Winner', '2024-11-28 08:20:02', '', 'Declared', ''),
 (114, 662462528, 'Hev  Alvin', 'Mabuhay_Logo.png', '', 0, '2025-01-24 23:47:16', 'Failure', '2025-01-24 23:50:05', '2025-02-01 21:35:01', 'Declared', ''),
 (115, 1486934929, 'Prince  Cervantes', 'default_Image.png', '', 0, '2025-01-24 23:47:43', 'Failure', '', '2025-01-24 23:50:05', 'Declared', ''),
-(116, 821155870, 'Jhonrenz  Berbano', 'Mabuhay_Logo.png', '', 0, '2025-02-01 19:27:41', 'Winner', '2024-11-28 08:20:02', '', 'Declared', ''),
-(117, 1308040957, 'John  Doe', 'Mabuhay_Logo.png', '', 0, '2025-02-01 19:27:43', 'Winner', '2024-11-28 08:20:02', '', 'Declared', ''),
+(116, 821155870, 'Jhonrenz  Berbano', 'default_Image.png', 'Peace in Order', 0, '2025-02-01 19:27:41', 'Winner', '2024-11-28 08:20:02', '', 'Declared', ''),
+(117, 1308040957, 'John  Doe', 'Mabuhay_Logo.png', 'Secretary', 0, '2025-02-01 19:27:43', 'Winner', '2024-11-28 08:20:02', '', 'Declared', ''),
 (118, 662462528, 'Hev  Alvin', 'Mabuhay_Logo.png', '', 0, '2025-02-01 19:27:46', 'Failure', '2025-01-24 23:50:05', '2025-02-01 21:35:01', 'Declared', ''),
 (119, 499733408, 'Ethan  Winters', 'Mabuhay_Logo.png', '', 0, '2025-02-01 19:27:47', 'Winner', '2024-11-28 08:20:02', '2025-02-01 20:24:02', 'Declared', ''),
 (121, 1195874011, 'Mia  Winters', 'Logo-ni-bebecakes.png', 'Secretary', 0, '2025-02-01 19:28:03', 'Winner', '2024-11-28 08:20:02', '', 'Declared', ''),
@@ -698,20 +704,20 @@ INSERT INTO `voting` (`vote_id`, `unique_id`, `candidate_name`, `img`, `position
 (130, 1133085945, 'Prince  Cervantes', 'default_Image.png', 'President', 0, '2025-02-01 20:22:11', 'Winner', '2025-02-01 21:35:01', '2025-02-01 21:10:01', 'Declared', ''),
 (131, 1590469844, 'Paolo M Murillo', 'Mabuhay_Logo.png', '', 0, '2025-02-01 20:22:13', 'Winner', '2024-11-28 08:20:02', '', 'Declared', ''),
 (132, 776313154, 'Patrick B Bayona', 'Mabuhay_Logo.png', '', 0, '2025-02-01 20:22:14', 'Winner', '2025-01-24 23:50:05', '', 'Declared', ''),
-(133, 1308040957, 'John  Doe', 'Mabuhay_Logo.png', '', 0, '2025-02-01 20:22:21', 'Winner', '2024-11-28 08:20:02', '', 'Declared', ''),
+(133, 1308040957, 'John  Doe', 'Mabuhay_Logo.png', 'Secretary', 0, '2025-02-01 20:22:21', 'Winner', '2024-11-28 08:20:02', '', 'Declared', ''),
 (134, 931588206, 'Jane  Doe', 'Mabuhay_Logo.png', '', 0, '2025-02-01 20:22:23', 'Winner', '2024-11-28 08:20:02', '', 'Declared', ''),
 (135, 662462528, 'Hev  Alvin', 'Mabuhay_Logo.png', '', 0, '2025-02-01 20:22:31', 'Failure', '2025-01-24 23:50:05', '2025-02-01 21:35:01', 'Declared', ''),
-(137, 821155870, 'Jhonrenz  Berbano', 'Mabuhay_Logo.png', '', 0, '2025-02-01 20:23:05', 'Winner', '2024-11-28 08:20:02', '', 'Declared', ''),
-(219, 821155870, 'Jhonrenz  Berbano', 'Mabuhay_Logo.png', '', 0, '2025-02-02 02:36:10', 'Winner', '2025-02-02 02:37:01', '', 'Declared', ''),
-(220, 1308040957, 'John  Doe', 'Mabuhay_Logo.png', '', 0, '2025-02-02 02:36:12', 'Winner', '2025-02-02 02:37:01', '', 'Declared', ''),
-(221, 931588206, 'Jane  Doe', 'Mabuhay_Logo.png', '', 0, '2025-02-02 02:36:13', 'Winner', '2025-02-02 02:37:01', '', 'Declared', ''),
-(222, 776313154, 'Patrick B Bayona', 'Mabuhay_Logo.png', '', 0, '2025-02-02 02:36:18', 'Winner', '2025-02-02 02:37:01', '', 'Declared', ''),
-(223, 1590469844, 'Paolo M Murillo', 'Mabuhay_Logo.png', '', 0, '2025-02-02 02:36:21', 'Winner', '2025-02-02 02:37:01', '', 'Declared', ''),
-(224, 1133085945, 'Prince  Cervantes', 'default_Image.png', '', 0, '2025-02-02 02:36:22', 'Winner', '2025-02-02 02:37:01', '', 'Declared', ''),
-(225, 499733408, 'Ethan  Winters', 'Mabuhay_Logo.png', '', 0, '2025-02-02 02:36:31', 'Winner', '2025-02-02 02:37:01', '', 'Declared', ''),
-(226, 1434008263, 'Rose  Winters', 'Mabuhay_Logo.png', '', 0, '2025-02-02 02:36:32', 'Winner', '2025-02-02 02:37:01', '', 'Declared', ''),
-(227, 1195874011, 'Mia  Winters', 'Mabuhay_Logo.png', '', 0, '2025-02-02 02:36:34', 'Winner', '2025-02-02 02:37:01', '', 'Declared', ''),
-(228, 662462528, 'Hev  Alvin', 'Mabuhay_Logo.png', '', 0, '2025-02-02 02:36:39', 'Failure', '', '2025-02-02 02:37:01', 'Declared', '');
+(137, 821155870, 'Jhonrenz  Berbano', 'default_Image.png', 'Peace in Order', 0, '2025-02-01 20:23:05', 'Winner', '2024-11-28 08:20:02', '', 'Declared', ''),
+(229, 821155870, 'Jhonrenz  Berbano', 'default_Image.png', 'Peace in Order', 1, '2025-02-08 16:51:29', 'Winner', '2025-02-08 17:03:25', '', 'Declared', ''),
+(230, 1308040957, 'John  Doe', 'Mabuhay_Logo.png', 'Secretary', 1, '2025-02-08 16:51:31', 'Winner', '2025-02-08 17:03:25', '', 'Declared', ''),
+(231, 931588206, 'Jane  Doe', 'Mabuhay_Logo.png', '', 1, '2025-02-08 16:51:33', 'Winner', '2025-02-08 17:03:25', '', 'Declared', ''),
+(232, 776313154, 'Patrick B Bayona', 'Mabuhay_Logo.png', '', 1, '2025-02-08 16:52:25', 'Winner', '2025-02-08 17:03:25', '', 'Declared', ''),
+(233, 1590469844, 'Paolo M Murillo', 'Mabuhay_Logo.png', '', 1, '2025-02-08 16:52:27', 'Winner', '2025-02-08 17:03:25', '', 'Declared', ''),
+(234, 1133085945, 'Prince  Cervantes', 'default_Image.png', '', 0, '2025-02-08 16:52:29', 'Failure', '', '2025-02-08 17:03:25', 'Declared', ''),
+(235, 499733408, 'Ethan  Winters', 'Mabuhay_Logo.png', '', 1, '2025-02-08 16:52:36', 'Winner', '2025-02-08 17:03:25', '', 'Declared', ''),
+(236, 1434008263, 'Rose  Winters', 'Mabuhay_Logo.png', '', 1, '2025-02-08 16:52:37', 'Winner', '2025-02-08 17:03:25', '', 'Declared', ''),
+(237, 1195874011, 'Mia  Winters', 'Mabuhay_Logo.png', '', 1, '2025-02-08 16:52:39', 'Winner', '2025-02-08 17:03:25', '', 'Declared', ''),
+(238, 662462528, 'Hev  Alvin', 'Mabuhay_Logo.png', '', 1, '2025-02-08 16:52:43', 'Winner', '2025-02-08 17:03:25', '', 'Declared', '');
 
 -- --------------------------------------------------------
 
@@ -746,7 +752,8 @@ INSERT INTO `voting_countdown` (`countdown_id`, `start_id`, `start_time`, `end_i
 (131, 4576, '2025-02-01 23:12:54', 4576, '2025-02-01 23:13:00', 'VotingEnded'),
 (132, 5058, '2025-02-02 01:17:45', 5058, '2025-02-02 01:18:00', 'VotingEnded'),
 (133, 9966, '2025-02-02 01:21:28', 9966, '2025-02-02 01:24:00', 'VotingEnded'),
-(134, 6745, '2025-02-02 02:36:49', 6745, '2025-02-02 02:37:00', 'VotingEnded');
+(134, 6745, '2025-02-02 02:36:49', 6745, '2025-02-02 02:37:00', 'VotingEnded'),
+(135, 9535, '2025-02-08 16:59:35', 9535, '2025-02-08 17:03:00', 'VotingEnded');
 
 -- --------------------------------------------------------
 
@@ -778,7 +785,8 @@ INSERT INTO `voting_history` (`vote_id`, `unique_id`, `candidate1`, `candidate2`
 (57, 1581632830, 1195874011, 1434008263, 499733408, 916555761, 0, 0, 0, 0, 0, 'UnderVote', '2024-11-28 07:56:19'),
 (58, 776313154, 1195874011, 1434008263, 499733408, 1581632830, 821155870, 1308040957, 931588206, 916555761, 1590469844, 'Voted', '2024-11-28 07:56:46'),
 (59, 1486934929, 662462528, 1195874011, 1434008263, 499733408, 1308040957, 931588206, 1590469844, 821155870, 776313154, 'Voted', '2025-01-24 23:49:36'),
-(60, 1581632830, 776313154, 1590469844, 1195874011, 931588206, 1133085945, 662462528, 499733408, 1434008263, 821155870, 'Voted', '2025-02-02 01:21:43');
+(60, 1581632830, 776313154, 1590469844, 1195874011, 931588206, 1133085945, 662462528, 499733408, 1434008263, 821155870, 'Voted', '2025-02-02 01:21:43'),
+(61, 1133085945, 662462528, 1195874011, 1434008263, 1308040957, 931588206, 499733408, 776313154, 1590469844, 821155870, 'Voted', '2025-02-08 16:59:49');
 
 --
 -- Indexes for dumped tables
@@ -907,7 +915,7 @@ ALTER TABLE `forms`
 -- AUTO_INCREMENT for table `messages`
 --
 ALTER TABLE `messages`
-  MODIFY `msg_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100;
+  MODIFY `msg_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=102;
 
 --
 -- AUTO_INCREMENT for table `officials`
@@ -949,7 +957,7 @@ ALTER TABLE `tblresident`
 -- AUTO_INCREMENT for table `user_votes`
 --
 ALTER TABLE `user_votes`
-  MODIFY `vote_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=208;
+  MODIFY `vote_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=218;
 
 --
 -- AUTO_INCREMENT for table `verified_email`
@@ -961,19 +969,19 @@ ALTER TABLE `verified_email`
 -- AUTO_INCREMENT for table `voting`
 --
 ALTER TABLE `voting`
-  MODIFY `vote_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=229;
+  MODIFY `vote_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=239;
 
 --
 -- AUTO_INCREMENT for table `voting_countdown`
 --
 ALTER TABLE `voting_countdown`
-  MODIFY `countdown_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=135;
+  MODIFY `countdown_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=136;
 
 --
 -- AUTO_INCREMENT for table `voting_history`
 --
 ALTER TABLE `voting_history`
-  MODIFY `vote_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
+  MODIFY `vote_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
