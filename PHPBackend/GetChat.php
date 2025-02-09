@@ -25,7 +25,6 @@ if(isset($_SESSION['unique_id'])){
           if($row['outgoing_msg_id'] === $outgoing_id ){    //pagnag equal to sa kanya sender sya
               $output .= '<li class="chatItems tridot istap">
                             <div class="chatItemsGilid">
-                            <!-- <img class="chatItemsGimage" src="Pictures/sample_pic.png"> -->
                             </div>
                             <div class="ItemsConsts">
                                 <div class="ItemsWrapper">
@@ -64,7 +63,7 @@ if(isset($_SESSION['unique_id'])){
                             if ($row['role'] === 'user') {
                                 $output .= '<img class="chatItemsGimage" src="Pictures/' . $row['img'] . '">';
                               } else {
-                                $output .= '<img class="chatItemsGimage" src="Pictures/Dasma_City_Logo.png">';
+                                $output .= '<img class="chatItemsGimage" src="Pictures/' . $row['img'] . '">';
                               }
               $output .=  '</div>
                             <div class="ItemsConsts tridot">

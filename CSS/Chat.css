@@ -764,27 +764,30 @@ overflow: hidden; /* Prevent scrollbars here */
     margin-right: 12px;
 }
 
-.conMessagesInfo{
-    display: grid;
-    margin-right: 12px;
-    width: 100%;
+.conMessagesInfo {
+  display: flex;  /* Change from grid to flex */
+  align-items: center;  /* Aligns text vertically */
+  gap: 5px;  /* Adds a small space between name and message */
+  margin-right: 12px;
+  width: 100%;
 }
 
-.mesageName{
-    display: block;
-    font-size: 14px;
-    font-weight: 500;
-    margin-bottom: 2px;
+.mesageName {
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;  /* Prevents wrapping */
 }
 
-.mesageText{
-    font-size: 13px;
-    color: rgb(141, 140, 140);
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
-   
+.mesageText {
+  font-size: 13px;
+  color: rgb(141, 140, 140);
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  flex-grow: 1;  /* Allows it to take available space */
+  min-width: 0;  /* Prevents overflow issues */
 }
+
 
 .bold {
     font-weight: bold;  

@@ -470,7 +470,7 @@ function fetchOverlayMessage() {
 
             if (response.success && response.status === 'VotingEnded') {
                 console.log("Eto yung status:", response.success);
-                console.log("fetchWinners response:", data);
+                console.log("fetchWinners response:", response);
 
                 // Hide voting container and show overlay
                 var voteContainer = document.getElementById('FirstVotingContainer');

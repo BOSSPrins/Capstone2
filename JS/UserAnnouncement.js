@@ -102,3 +102,58 @@ window.onload = function() {
 //     toggleAnnounce(activeContainer || 'MainAnnouncements'); // Default to 'tableCon'
 // }
 
+// Fetch ng announcement
+document.addEventListener("DOMContentLoaded", function () {
+    fetch("PHPBackend/Announcements.php?action=get_all")
+        .then(response => response.json())
+        .then(data => {
+            console.log("Fetched data:", data); // Debugging log
+            let container = document.getElementById("MainAnnouncements");
+            container.innerHTML = ""; // Clear existing content
+
+            data.forEach(announcement => {
+                let card = document.createElement("div");
+                card.classList.add("ContainerCard");
+
+                card.innerHTML = `
+                    <div class="Cardss">
+                        <img class="AnnounceImg" src="Pictures/${announcement.images}" alt="Announcement Image">
+                        <div class="CardLaman">
+                            <div class="DateCon">
+                                <input class="title" type="text" value="${announcement.start_date}" readonly>
+                            </div>
+                            <div class="TitleCon">
+                                <input class="Araw" type="text" value="${announcement.title}" readonly>
+                            </div>
+                            <p>${announcement.description.substring(0, 100)}...</p>
+                            <button class="BtnReadMore" onclick="toggleAnnounce('ReadMorePage', '${announcement.news_id}')"> Read More </button>
+                        </div>
+                    </div>
+                `;
+
+                container.appendChild(card);
+            });
+        })
+        .catch(error => console.error("Error fetching announcements:", error));
+});
+
+
+// Function sa pagread more
+function toggleAnnounce(pageId, newsId = null) {
+    document.getElementById("MainAnnouncements").style.display = "none";
+    document.getElementById("ReadMorePage").style.display = "block";
+
+    if (newsId) {
+        fetch(`PHPBackend/Announcements.php?action=get_one&id=${newsId}`)
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("ReadMorePage").innerHTML = `
+                    <button class="BtnNgNameBack" onclick="toggleAnnounce('MainAnnouncements')"> &#60; </button>
+                    <h2>${data.title}</h2>
+                    <img src="${data.images}" alt="Announcement Image">
+                    <p>${data.description}</p>
+                `;
+            })
+            .catch(error => console.error("Error fetching announcement details:", error));
+    }
+}

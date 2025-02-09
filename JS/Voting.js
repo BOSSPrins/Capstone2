@@ -1243,8 +1243,14 @@ document.addEventListener("DOMContentLoaded", function() {
                         console.log("Winners declaration response:", response);
                         if (response.success) {
                             alert("Winners declared successfully.");
-                            showWinnerModal();
+                            fetchWinners();  // Fetch new winners before showing modal
+
+                            setTimeout(() => {
+                                showWinnerModal();
+                            }, 500); // Small delay to ensure data is updated
+
                             console.log("Winners declared successfully.");
+                            
                             var element = document.querySelector("[name='suggestionInput']");
                                 element.hidden = false;
                             // location.reload();
@@ -1656,7 +1662,7 @@ function closeWinnersModal() {
 
 window.addEventListener("load", function() {
     updateTimestamp();
-    fetchWinners();
+    // fetchWinners();
     fetchHistory();
 });
 

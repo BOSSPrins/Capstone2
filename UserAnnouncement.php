@@ -126,30 +126,17 @@
                     </div>
                 </div>
                 <div class="MainContainerForTables">
+                    <!-- Container where announcements will be dynamically inserted -->
                     <div class="AnnouncementCardss" id="MainAnnouncements">
-                        <div class="ContainerCard">
-                            <div class="Cardss">
-                                <img class="AnnounceImg" src="Pictures/Mabuhay_Logo.png">
-                                <div class="CardLaman">
-                                    <div class="DateCon">
-                                        <input class="title" type="text" placeholder="Dito yung date posted">
-                                    </div>
-                                    <div class="TitleCon">
-                                        <input class="Araw" type="text" placeholder="Dito yung title">
-                                    </div>
-                                    <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita 
-                                        voluptatibus ab est vero, magnam aliquid. Consectetur, aspernatur itaque,
-                                        et odit atque numquam ipsum nisi officia quia minima porro iure nihil!
-                                    </p>
-                                    <button class="BtnReadMore" onclick="toggleAnnounce('ReadMorePage')"> Read More </button>
-                                </div>
-                            </div>
-                        </div>
+                        <!-- JavaScript will insert announcement cards here -->
                     </div>
-                    <div class="AnnouncementCardss" id="ReadMorePage">
+
+                    <!-- Read More Page (Initially Hidden) -->
+                    <div class="AnnouncementCardss" id="ReadMorePage" style="display: none;">
                         <button class="BtnNgNameBack" onclick="toggleAnnounce('MainAnnouncements')"> &#60; </button>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>

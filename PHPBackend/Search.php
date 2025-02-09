@@ -10,12 +10,14 @@
                               INNER JOIN tblresident ON tblaccounts.unique_id = tblresident.unique_id
                               WHERE (tblresident.first_name LIKE '%{$searchTerm}%'
                               OR tblresident.last_name LIKE '%{$searchTerm}%')
-                              AND NOT tblaccounts.unique_id = {$outgoing_id}");
+                              AND tblaccounts.access = 'Approved'
+                              AND NOT tblaccounts.unique_id = {$outgoing_id}
+                              ORDER BY (tblaccounts.status = 'Active now') DESC, tblresident.first_name ASC");
                         
   if(mysqli_num_rows($sql) > 0){
     include "Data.php";
   } else {
-    $output .= "No user found related to your search term";
+    $output .= "No user found.";
   }
   echo $output;
 ?>

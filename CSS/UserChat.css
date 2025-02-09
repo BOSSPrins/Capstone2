@@ -489,6 +489,7 @@ overflow: hidden;
 .mgaKausapNames{
   font-weight: 500;
   font-size: 17px;
+  margin-bottom: 5px;
 }
 
 .mgaKausapStatus::after{
@@ -498,6 +499,7 @@ overflow: hidden;
    border-radius: 50%;
    vertical-align: middle;
    display: inline-block;
+   margin-left: 5px;
 }
 .mgaKausapStatus.offline::after{
   background: rgb(211, 211, 211); /* Offline color */

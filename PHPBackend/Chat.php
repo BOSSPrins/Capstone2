@@ -3,10 +3,13 @@
   include_once "../Connect/Connection.php";
   $outgoing_id = $_SESSION['unique_id'];
 
-  $sql = mysqli_query($conn, "SELECT tblaccounts.*, tblresident.first_name, tblresident.last_name
-                              FROM tblaccounts
-                              INNER JOIN tblresident ON tblaccounts.unique_id = tblresident.unique_id
-                              WHERE NOT tblaccounts.unique_id = {$outgoing_id} AND tblaccounts.access = 'Approved'");
+  $sql = mysqli_query($conn, "SELECT tblaccounts.*, tblresident.first_name, tblresident.last_name  
+                                            FROM tblaccounts
+                                            INNER JOIN tblresident ON tblaccounts.unique_id = tblresident.unique_id
+                                            WHERE NOT tblaccounts.unique_id = {$outgoing_id} 
+                                            AND tblaccounts.access = 'Approved'
+                                            ORDER BY (tblaccounts.status = 'Active now') DESC, tblresident.first_name ASC");
+
   $output = "";
 
   if(mysqli_num_rows($sql) == 1){

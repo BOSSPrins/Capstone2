@@ -817,10 +817,14 @@ input[type="datetime-local"] {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: rgb(229, 229, 229);
+    background: var(--color-primary);
     /* border-bottom: 1px solid gray; */
     padding: 20px;
     border-radius: 5px;
+}
+
+.headerForSummary h2{
+    color: white;
 }
 
 .LamanLoobSummary{
@@ -830,7 +834,7 @@ input[type="datetime-local"] {
 }
 
 .closeSummary{
-    color: #000000;
+    color: #ffffff;
     font-size: 22px;
     font-weight: bold;
     cursor: pointer;

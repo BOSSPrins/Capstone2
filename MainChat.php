@@ -18,7 +18,7 @@ if (isset($_SESSION['unique_id'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> Mabuhay Website </title>
-    <link rel="icon" type="image/x-icon" href="Pictures/Dasma_City_Icon.ico">
+    <link rel="icon" type="image/x-icon" href="Pictures/Mabuhay_Logo.ico">
     <link rel="stylesheet" href="CSS/Chat.css">
     <script src="jQuery/jquery.min.js"></script>
 </head>
@@ -178,7 +178,7 @@ if (isset($_SESSION['unique_id'])) {
                                             $user_id = mysqli_real_escape_string($conn, $_GET['user_id']);
                                             
                                             // Perform the query
-                                            $sql = mysqli_query($conn, "SELECT tblaccounts.unique_id, tblaccounts.img,  tblaccounts.status, 
+                                            $sql = mysqli_query($conn, "SELECT tblaccounts.unique_id, tblaccounts.img, tblaccounts.status, 
                                                                                 tblresident.first_name, tblresident.last_name
                                                                         FROM tblaccounts
                                                                         INNER JOIN tblresident ON tblaccounts.unique_id = tblresident.unique_id

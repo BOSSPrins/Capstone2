@@ -29,7 +29,7 @@ $encoded_id = urlencode($admin_unique_id);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> Mabuhay Website </title>
-    <link rel="icon" type="image/x-icon" href="Pictures/Dasma_City_Icon.ico">
+    <link rel="icon" type="image/x-icon" href="Pictures/Mabuhay_Logo.ico">
     <link rel="stylesheet" href="CSS/UserChat.css">
     <link rel="stylesheet" href="CSS/logout-modal.css">
     <script src="JS/logout-modal.js"></script>
@@ -161,7 +161,7 @@ $encoded_id = urlencode($admin_unique_id);
                                     $user_id = mysqli_real_escape_string($conn, $_GET['user_id']);
                                     
                                     // Perform the query
-                                    $sql = mysqli_query($conn, "SELECT tblaccounts.unique_id, tblaccounts.user_id, tblaccounts.status, tblaccounts.role
+                                    $sql = mysqli_query($conn, "SELECT tblaccounts.unique_id, tblaccounts.user_id, tblaccounts.status, tblaccounts.role, tblaccounts.img
                                     FROM tblaccounts
                                     INNER JOIN tblresident ON tblaccounts.unique_id = tblresident.unique_id
                                     WHERE tblaccounts.unique_id ='" . $user_id . "' AND tblaccounts.role = 'admin'");
@@ -184,7 +184,7 @@ $encoded_id = urlencode($admin_unique_id);
                                 <img class="img-kaliwa" src="Pictures/arrowLeft.png">
                             </button>
                             <div class="mgaKausap IntervalStats">
-                                <img class="mgaKausapImages" src="Pictures/Dasma_City_Logo.png">
+                                <img class="mgaKausapImages" src="Pictures/<?php echo $row['img']; ?>">
                                 <div>
                                     <div class="mgaKausapNames"> HOA Admin </div>
                                     <div class="mgaKausapStatus <?php echo $offline ?>"> <?php echo $row['status'] ?></div>

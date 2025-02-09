@@ -23,8 +23,8 @@ function closeConnectionAndRespond($conn, $response) {
     exit();
 }
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $action = $_POST['action'] ?? '';
+if ($_SERVER['REQUEST_METHOD'] === 'POST' || $_SERVER['REQUEST_METHOD'] === 'GET') {
+    $action = $_POST['action'] ?? $_GET['action'] ?? '';
 
     if (empty($action)) {
         $data = json_decode(file_get_contents('php://input'), true);
@@ -157,6 +157,33 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } else {
             closeConnectionAndRespond($conn, ['success' => false, 'error' => 'Failed to update announcement.']);
         }
+
+    } elseif ($action == "get_all") {
+        // Fetch all announcements
+        $query = "SELECT * FROM announcements ORDER BY start_date DESC";
+        $result = $conn->query($query);
+    
+        $announcements = [];
+        while ($row = $result->fetch_assoc()) {
+            $announcements[] = $row;
+        }
+    
+        echo json_encode($announcements);
+
+    } elseif ($action == "get_one" && isset($_GET['id'])) {
+        // Fetch a single announcement
+        $news_id = intval($_GET['id']);
+        $stmt = $conn->prepare("SELECT * FROM announcements WHERE news_id = ?");
+        $stmt->bind_param("i", $news_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+    
+        if ($row = $result->fetch_assoc()) {
+            echo json_encode($row);
+        } else {
+            echo json_encode(["error" => "Announcement not found"]);
+        }
+    
     } else {
         closeConnectionAndRespond($conn, ['success' => false, 'error' => 'Invalid action.']);
     }
